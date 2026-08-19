@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Control de Acceso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="gestion humana, control, acceso, control de acceso">
+<meta name="description" content="El módulo de acceso controla los ingresos del personal a las diferentes zonas de la empresa mediante una flexible configuración de scripts.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html" aria-current="page">Módulos</a>
+        <a href="lectores.html">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Módulo SquareNet</div>
+      <h1>Control de Acceso</h1>
+      <p>El módulo de acceso controla los ingresos del personal a las diferentes zonas de la empresa. Usted define las zonas, los relojes biométricos de acceso y las reglas de ingreso mediante fórmulas y scripts, permitiendo máxima flexibilidad. A su vez, los registros también sirven para Control de Asistencia.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/acceso.png" alt=""></figure>
+  </div>
+
+  <div class="wrap partners">
+    <span>SAP</span><span>Microsoft Dynamics AX</span><span>JD Edwards</span><span>Infor</span>
+  </div>
+  <div class="wrap"><p class="partners-note">Es el complemento ideal para el ERP de su empresa (SAP, Dynamics AX, JDEdwards, ínfor) u otro sistema Administrativo Financiero.</p></div>
+
+  <div class="wrap">
+    <section>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/iEA0SeOGxRs?rel=0" title="Video demo Control de Acceso" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section>
+      <h2>Información y Características</h2>
+      <ul class="list-check">
+        <li>La lógica de acceso no es realizada en el reloj biométrico, sino en un servidor mediante la ejecución en tiempo real de un script, brindando completa flexibilidad. Así, podrá definir hasta las más complejas reglas de acceso.</li>
+        <li>Definición de las zonas de su empresa de manera jerárquica.</li>
+        <li>Los perfiles de acceso se asignan según el centro de costo.</li>
+        <li>Se puede agregar excepciones por persona.</li>
+        <li>Compatible con relojes biométricos de ZK Teco.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Precios y Garantía</h2>
+      <p>Solicite <a href="contacto.html">información</a> y asesoría para una cotización.</p>
+    </section>
+
+    <section>
+      <h2>Reportes y Documentos</h2>
+      <div class="report-list">
+        <div class="report-item"><div><div class="report-item-title">Registro de Acceso</div><div class="report-item-desc">Detalle de todos los accesos en un rango de fechas.</div></div><a href="reportes/Acceso_Registro_Acceso.xls">Descargar (.xls)</a></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

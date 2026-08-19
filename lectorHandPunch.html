@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Lectores Hand Punch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="handpunch, lector biometrico, lector biométrico, reloj de asistencia">
+<meta name="description" content="El dispositivo HandPunch registra las entradas y salidas de su personal usando tecnología de geometría biométrica por la forma de su mano.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html">Módulos</a>
+        <a href="lectores.html" aria-current="page">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap" style="padding-top:var(--space-8)">
+    <div class="kicker">Lector Biométrico</div>
+    <h1>HandPunch</h1>
+  </div>
+
+  <div class="wrap">
+    <section>
+      <div class="media-row reverse">
+        <figure class="halftone media-row-media"><img src="img/lector_handpunch.jpg" alt="Lector HandPunch"></figure>
+        <div>
+          <p>El HandPunch de Recognition Systems usa la tecnología de geometría biométrica. La terminal captura una imagen tridimensional de la mano cada vez que el empleado marca, de la cual toma el tamaño y forma de los dedos (no las huellas digitales) para verificar la identidad de la persona con buena precisión.</p>
+          <p>Luces rojas y verdes le notifican al empleado de su estado cada vez que marca. Tiene un teclado para la programación y administración de los datos. Es un equipo muy robusto y confiable, recomendado para ambientes extremos y plantas industriales en general, lugares donde los empleados no siempre tienen las manos limpias.</p>
+          <p>Es un dispositivo solamente verificador: la persona primero debe digitar en el teclado su número de identificación y luego se verifica su identidad mediante la geometría de su mano. A diferencia de los dispositivos identificadores, donde la persona no debe ingresar ningún código y es identificada automáticamente con su huella digital.</p>
+          <p>SquareNet ha añadido completa compatibilidad para este equipo desde su módulo <a href="moduloca.html">Control de Asistencia</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Especificaciones Técnicas</h2>
+      <table class="table">
+        <tbody>
+          <tr><th>Tamaño (Ancho x Alto x Prof)</th><td>22,3 x 29,6 x 21,7 cm</td></tr>
+          <tr><th>Sistema Operativo Firmware</th><td>Propio del fabricante</td></tr>
+          <tr><th>Capacidad de Usuarios</th><td>512 plantillas (expandible comprando pack de extensión)</td></tr>
+          <tr><th>Capacidad de Marcaciones</th><td>5120 marcaciones</td></tr>
+          <tr><th>Registro</th><td>Solo 1 plantilla de la mano por usuario</td></tr>
+          <tr><th>Tiempo para Identificación</th><td>No permite modo identificación</td></tr>
+          <tr><th>Tiempo para Verificación</th><td>Menor a 1 segundo</td></tr>
+          <tr><th>Colocación de la Mano</th><td>Inamovible usando colocadores de mano</td></tr>
+          <tr><th>Tipo de Sensor</th><td>Óptico</td></tr>
+          <tr><th>Tipo de Registro</th><td>Código + mano</td></tr>
+          <tr><th>Luces LEDs</th><td>Rojo y verde</td></tr>
+          <tr><th>Pantalla</th><td>LCD de baja resolución (2 líneas de texto)</td></tr>
+          <tr><th>FAR</th><td>&lt; 0.1 %</td></tr>
+          <tr><th>FRR</th><td>&lt; 1 %</td></tr>
+          <tr><th>Ethernet</th><td>No (puede incluirse adaptador de serial a Ethernet)</td></tr>
+          <tr><th>Comunicación</th><td>Serial RS232</td></tr>
+          <tr><th>Descarga USB</th><td>No</td></tr>
+          <tr><th>Temperatura de Operación</th><td>0 - 45 grados</td></tr>
+          <tr><th>Humedad de Operación</th><td>20 - 80 %</td></tr>
+          <tr><th>Voltaje</th><td>DC 12V 2A</td></tr>
+          <tr><th>Idioma</th><td>Inglés</td></tr>
+          <tr><th>Voz Audible</th><td>No</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

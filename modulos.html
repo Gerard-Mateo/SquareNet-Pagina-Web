@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Módulos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="control de visitas, visitantes, Eficiencia, gestión humana, biometria, huella digital, huella dactilar, gestion humana, nómina, recursos humanos, control de asistencia, control de visitas, control de comedor">
+<meta name="description" content="SquareNet Software está compuesto por: Nómina, Recursos Humanos, Control de Asistencia, Control de Acceso, Control de Visitas, Control de Comedor, Control de Eficiencia, Autoservicio, SquareBridge">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html" aria-current="page">Módulos</a>
+        <a href="lectores.html">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Módulos SquareNet</div>
+      <h1>Nuestra especialidad es la gente</h1>
+      <p>Por ellos hemos creado una serie de módulos para gestión de personal, y de esa manera complementamos a su ERP. La facilidad de uso y aprendizaje, así como su agilidad de interfaz, distinguen a SquareNet de sus competidores.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/modulos.png" alt=""></figure>
+  </div>
+
+  <div class="wrap features">
+    <a class="card-link" href="modulono.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Nómina</h3>
+        <p class="card-body">Le ayudará a realizar todo lo concerniente al rol de pagos de sus empleados, mediante una fácil configuración de fórmulas.</p>
+      </div>
+    </a>
+    <a class="card-link" href="moduloca.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Control de Asistencia</h3>
+        <p class="card-body">Realiza el control del cumplimiento del horario de los empleados con amplias prestaciones, incluso para el sector industrial.</p>
+      </div>
+    </a>
+    <a class="card-link" href="modulorh.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Recursos Humanos</h3>
+        <p class="card-body">Todo lo relacionado a las fichas de sus empleados, contratos, acciones de personal, capacitación y estudios.</p>
+      </div>
+    </a>
+    <a class="card-link" href="moduloac.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Control de Acceso</h3>
+        <p class="card-body">Controla los ingresos del personal a las diferentes zonas de la empresa mediante relojes biométricos y reglas por fórmulas.</p>
+      </div>
+    </a>
+    <a class="card-link" href="modulocv.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Control de Visitas</h3>
+        <p class="card-body">Registra quién y de qué empresa visita sus instalaciones, y emite reportes sencillos de permanencia.</p>
+      </div>
+    </a>
+    <a class="card-link" href="modulocc.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Control de Comedor</h3>
+        <p class="card-body">Le ayudará a controlar las comidas en los comedores de su empresa y cruzar información con su proveedor externo.</p>
+      </div>
+    </a>
+    <a class="card-link" href="modulopr.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Control de Eficiencia</h3>
+        <p class="card-body">Mide la eficiencia del personal en sus puestos de trabajo, ingresando estándares por máquina versus lo realmente producido.</p>
+      </div>
+    </a>
+    <a class="card-link" href="moduloas.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">Autoservicio</h3>
+        <p class="card-body">Aplicativo web que permite al personal acceder a información de su Rol de Pagos desde un navegador web.</p>
+      </div>
+    </a>
+    <a class="card-link" href="squarebridge.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">SquareBridge</h3>
+        <p class="card-body">Utilitario que recoge datos desde dispositivos ZK Teco en varias localidades para centralizarlos en su matriz.</p>
+      </div>
+    </a>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

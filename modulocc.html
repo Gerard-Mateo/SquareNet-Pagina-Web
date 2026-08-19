@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Control de Comedor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="control, comedor, control de comedor, gestion comedor">
+<meta name="description" content="Este módulo le ayudará a controlar las comidas en los respectivos comedores de su empresa y así cruzar información con su proveedor externo.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html" aria-current="page">Módulos</a>
+        <a href="lectores.html">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Módulo SquareNet</div>
+      <h1>Control de Comedor</h1>
+      <p>Este módulo le ayudará a controlar las comidas en los respectivos comedores de su empresa y así cruzar información con su proveedor externo. Mediante fórmulas usted puede configurar las reglas de servicio: cuándo un empleado tiene derecho a comer, dónde y qué tipo de comida.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/comedor.png" alt=""></figure>
+  </div>
+
+  <div class="wrap partners">
+    <span>SAP</span><span>Microsoft Dynamics AX</span><span>JD Edwards</span><span>Infor</span>
+  </div>
+  <div class="wrap"><p class="partners-note">Es el complemento ideal para el ERP de su empresa (SAP, Dynamics AX, JDEdwards, ínfor) u otro sistema Administrativo Financiero.</p></div>
+
+  <div class="wrap">
+    <section>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/VVLmPvVC4wk?rel=0" title="Video demo Control de Comedor" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section>
+      <h2>Información y Características</h2>
+      <ul class="list-check">
+        <li>Cuenta con todas las bondades de la <a href="plataforma.html">Plataforma SquareNet (haga clic aquí para más información)</a>.</li>
+        <li>Trabaja como un kiosco de servicio donde el empleado se acerca y coloca su huella digital o su tarjeta, y se imprime un ticket con el cual se acerca a retirar su comida.</li>
+        <li>Puede definir varios tipos de comida con su correspondiente fórmula para máxima flexibilidad.</li>
+        <li>Se puede agregar excepciones para que el sistema otorgue comidas fuera de las reglas estándar.</li>
+        <li>Permite también eventos especiales donde no se controla por persona, sino solo por un número de comidas global.</li>
+        <li>Cuenta con varios reportes muy completos sobre eventos y comidas servidas para cruzar información con su proveedor de catering.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Precios y Garantía</h2>
+      <p>Solicite <a href="contacto.html">información</a> y asesoría para una cotización.</p>
+    </section>
+
+    <section>
+      <h2>Reportes y Documentos</h2>
+      <div class="report-list">
+        <div class="report-item"><div><div class="report-item-title">Consumo Detallado</div><div class="report-item-desc">Detalle de todos los consumos en un rango de fechas.</div></div><a href="reportes/Comedor_Consumo_Detallado.xls">Descargar (.xls)</a></div>
+        <div class="report-item"><div><div class="report-item-title">Consumo Resumido</div><div class="report-item-desc">Sumatoria de los consumos por tipo de comida en un rango de fechas.</div></div><a href="reportes/Comedor_Consumo_Resumido.xls">Descargar (.xls)</a></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

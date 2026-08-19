@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Square Bridge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="asistencia, marcaciones, timbradas, varias sucursales, multiples sucursales">
+<meta name="description" content="Utilitario que descarga automáticamente las marcaciones desde varios relojes biométricos para centralizarlos en su matriz.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html" aria-current="page">Módulos</a>
+        <a href="lectores.html">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Utilitario SquareNet</div>
+      <h1>SquareBridge</h1>
+      <p>Utilitario que descarga automáticamente las marcaciones desde varios relojes biométricos para centralizarlos en su matriz. Es un servicio que se instala en su servidor de datos y se conectará cada cierto tiempo, o a una hora específica, a todos los puntos configurados para descargar la memoria de los relojes.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/bridge.png" alt=""></figure>
+  </div>
+
+  <div class="wrap partners">
+    <span>SAP</span><span>Microsoft Dynamics AX</span><span>JD Edwards</span><span>Infor</span>
+  </div>
+  <div class="wrap"><p class="partners-note">Es el complemento ideal para el ERP de su empresa (SAP, Dynamics AX, JDEdwards, ínfor) u otro sistema Administrativo Financiero.</p></div>
+
+  <div class="wrap">
+    <section>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/9pRO4tobgag?rel=0" title="Video demo SquareBridge" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section>
+      <h2>Cómo funciona</h2>
+      <div class="media-row">
+        <figure class="halftone media-row-media"><img src="img/squarebridge_plan.jpg" alt="Esquema de funcionamiento de SquareBridge"></figure>
+        <div>
+          <p>La información recolectada pasa al <a href="moduloca.html">módulo de Control de Asistencia</a> para el respectivo procesamiento. Paralelamente, durante la descarga, SquareBridge carga los nombres de cada persona a la memoria del reloj para que sean visualizados cuando se realice una marcación.</p>
+          <p>Será su gran aliado para ambientes multi-sucursal donde cuenta con un dispositivo de marcación en cada local y desea que automáticamente se recolecte la asistencia a nivel nacional y se consoliden los datos en su matriz.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Información y Características</h2>
+      <ul class="list-check">
+        <li>Recolecta marcaciones desde varios dispositivos biométricos.</li>
+        <li>Puede trabajar a través de Internet. En la mayoría de los casos, incluso sin VPNs.</li>
+        <li>Es un servicio de Windows que se instala en uno de sus servidores.</li>
+        <li>Es 100% automático, de tal manera que nunca tendrá que preocuparse por recolectar la asistencia de forma manual.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Precios y Garantía</h2>
+      <p>Como complemento de <a href="moduloca.html">SquareNet Control de Asistencia</a>, solicite <a href="contacto.html">asesoría</a> y una cotización.</p>
+    </section>
+
+    <section>
+      <h2>Reportes y Documentos</h2>
+      <div class="report-list">
+        <div class="report-item"><div><div class="report-item-title">Registro de Asistencia</div><div class="report-item-desc">Lista lineal detallada de las marcaciones que el sistema ha recopilado en un rango de fechas.</div></div><a href="reportes/Asistencia_Registro.xls">Descargar (.xls)</a></div>
+        <div class="report-item"><div><div class="report-item-title">Registro de Asistencia Cruzado</div><div class="report-item-desc">Lista cruzada de las marcaciones (un día en una fila) que el sistema ha recopilado en un rango de fechas.</div></div><a href="reportes/Asistencia_Cruzado.xls">Descargar (.xls)</a></div>
+        <div class="report-item"><div><div class="report-item-title">Exportación de Marcaciones</div><div class="report-item-desc">Archivo de marcaciones exportado con el popular formato de HandPunch.</div></div><a href="reportes/SquareBridge_Quito_2009-03-23.txt">Descargar (.txt)</a></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

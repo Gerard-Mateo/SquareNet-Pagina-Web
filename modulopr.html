@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Control de Eficiencia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="produccion, eficiencia, gestion humana, empleados, personal, nómina">
+<meta name="description" content="Este módulo le ayudará a medir la eficiencia del personal en sus puestos de trabajo, ingresando estándares por máquina versus lo realmente producido.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html" aria-current="page">Módulos</a>
+        <a href="lectores.html">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Módulo SquareNet</div>
+      <h1>Control de Eficiencia</h1>
+      <p>Este módulo le ayudará a medir la eficiencia del personal en sus puestos de trabajo, ingresando estándares por máquina versus lo realmente producido. Dichos índices de efectividad pueden incidir en la nómina, por ejemplo pagando premios variables.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/produccion.png" alt=""></figure>
+  </div>
+
+  <div class="wrap partners">
+    <span>SAP</span><span>Microsoft Dynamics AX</span><span>JD Edwards</span><span>Infor</span>
+  </div>
+  <div class="wrap"><p class="partners-note">Es el complemento ideal para el ERP de su empresa (SAP, Dynamics AX, JDEdwards, ínfor) u otro sistema Administrativo Financiero.</p></div>
+
+  <div class="wrap">
+    <section>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/D_W5FlrAAq8?rel=0" title="Video demo Control de Eficiencia" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section>
+      <h2>Información y Características</h2>
+      <ul class="list-check">
+        <li>Cuenta con todas las bondades de la <a href="plataforma.html">Plataforma SquareNet (haga clic aquí para más información)</a>.</li>
+        <li>Está orientado sobre todo al sector industrial, en donde cada puesto de trabajo o máquina tiene un estándar de producción, y se compara versus la producción real para obtener índices de efectividad.</li>
+        <li>Usted define las medidas que quiere realizar, por ejemplo el conteo de unidades producidas y el conteo de unidades erróneas.</li>
+        <li>Se configuran las fórmulas matemáticas deseadas (factores) de producción mediante fórmulas o scripts, brindando máxima flexibilidad.</li>
+        <li>Existen 2 métodos de proceso: 1) medición por tareas realizadas y 2) medición por conteo.</li>
+        <li>Los estándares se ingresan por puesto de trabajo y permiten el ingreso de variaciones por temporada.</li>
+        <li>Permite el ingreso de eventos, los cuales también pueden variar los estándares. Por ejemplo: corte eléctrico.</li>
+        <li>Las notificaciones de producción se ingresan por pantalla de manera sencilla.</li>
+        <li>Una vez procesados los datos, obtendrá los índices de efectividad por persona y por puesto de trabajo.</li>
+        <li>Contiene completos reportes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Precios y Garantía</h2>
+      <p>Solicite <a href="contacto.html">información</a> y asesoría para una cotización.</p>
+    </section>
+
+    <section>
+      <h2>Reportes y Documentos</h2>
+      <div class="report-list">
+        <div class="report-item"><div><div class="report-item-title">Eficiencia por Puestos de Trabajo</div><div class="report-item-desc">Detalle de todos los valores calculados por puesto de trabajo en un rango de fechas.</div></div><a href="reportes/Eficiencia_Por_Puestos.xls">Descargar (.xls)</a></div>
+        <div class="report-item"><div><div class="report-item-title">Eficiencia por Persona</div><div class="report-item-desc">Detalle de todos los valores calculados por persona en un rango de fechas.</div></div><a href="reportes/Eficiencia_Por_Persona.xls">Descargar (.xls)</a></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

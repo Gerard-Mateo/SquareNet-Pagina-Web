@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Lectores ZK</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="reloj biometrico, reloj de asistencia, huella digital, reconocimiento facial, ZK Teco, ZK Software">
+<meta name="description" content="ZK Teco produce relojes biométricos de control de asistencia y acceso.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html">Módulos</a>
+        <a href="lectores.html" aria-current="page">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap" style="padding-top:var(--space-8)">
+    <div class="kicker">Lector Biométrico</div>
+    <h1>ZK Teco (ZK Software)</h1>
+  </div>
+
+  <div class="wrap">
+    <section>
+      <div class="media-row reverse">
+        <figure class="halftone media-row-media"><img src="img/lector_ZK.jpg" alt="Lector ZK Teco"></figure>
+        <div>
+          <p>Una de las marcas más reconocidas en el mercado de dispositivos biométricos es ZK Teco, anteriormente conocida como ZK Software. Desde 1998 se ha dedicado a desarrollar soluciones de sistemas de control de asistencia, accesos y producción, tanto en terminales de marcación como en software de gestión de tiempos y fabricación. Cuentan con una gran cantidad de modelos para Control de Acceso y Asistencia que trabajan con huella digital, reconocimiento facial, tarjetas RFID, biometría de las venas, etc., o incluso multibiométricos que combinan varias tecnologías al mismo tiempo brindando la máxima flexibilidad.</p>
+          <p><strong>SquareNet no distribuye hardware o equipos</strong>, pero cuenta con completa compatibilidad para todos los modelos ZK Teco e incluso puede descargar automáticamente los datos usando el software SquareBridge.</p>
+          <p>Para más información o para encontrar estos productos, puede seguir uno de los siguientes enlaces:</p>
+          <ul class="list-check">
+            <li><a href="http://www.zkteco.com">www.zkteco.com</a></li>
+            <li><a href="http://www.zktechnology.com">www.zktechnology.com</a></li>
+            <li><a href="http://www.idconsultants.us">www.idconsultants.us</a> en Ecuador</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Información General</h2>
+      <div class="media-row reverse">
+        <figure class="halftone media-row-media"><img src="img/lector_CA200_plan.jpg" alt="Plano lector CA200"></figure>
+        <ul class="list-check">
+          <li>Los usuarios no deben teclear ningún código para marcar, simplemente colocan su huella digital.</li>
+          <li>Los relojes identifican en menos de un segundo.</li>
+          <li>Muestra el nombre de la persona al marcar (los datos se suben automáticamente al equipo usando SquareBridge).</li>
+          <li>Notifica al usuario con voz en español sobre los eventos (acceso correcto, intente de nuevo por favor, etc.).</li>
+          <li>Menú e interfaz en español muy fácil de utilizar; los nuevos modelos cuentan con pantalla táctil a color.</li>
+          <li>Cuentan con puerto USB para insertar una memoria flash y descargar marcaciones o copiar usuarios a otros equipos.</li>
+          <li>Cuenta con protección por contraseña o huella digital para los usuarios administradores o supervisores, quienes son los únicos que podrán entrar al menú del equipo para enrolar, configurar, etc.</li>
+          <li>Pueden enrolar de manera opcional a usuarios con contraseña, para que marquen su asistencia digitando su código y contraseña. Otros modelos pueden enrolar con el rostro, huella o tarjeta. Toda la configuración se realiza en el equipo mediante el menú: dirección IP, máscara, gateway, etc.</li>
+          <li>Integración automática con SquareBridge para recolectar las marcaciones del personal.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Empresa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="quien es squarenet, squarenet, squarenet ecuador, ecuador">
+<meta name="description" content="SquareNet es un potente software para la gestión de personal de su empresa y el mejor aliado para el trabajo diario, con su facilidad de uso, flexibilidad, rapidez y la gran cantidad de herramientas prácticas de uso cotidiano">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+<style>
+  .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+  @media (max-width: 860px) { .mission-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html" aria-current="page">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html">Módulos</a>
+        <a href="lectores.html">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Quiénes Somos</div>
+      <h1>Empresa</h1>
+      <p>SquareNet Software es una empresa ecuatoriana fundada en el año 2002 por profesionales ingenieros pioneros en el desarrollo de aplicaciones informáticas, utilizando siempre la última tecnología en el mercado. Somos una propuesta diferente con una filosofía de trabajo renovada. Nuestro personal posee más de 30 años de experiencia conjunta con instituciones de tipo financiero, comercial, industrial y de servicios; gracias a ello, creamos soluciones óptimas con tecnología de punta e investigación continua.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/somos.png" alt=""></figure>
+  </div>
+
+  <div class="wrap">
+    <div class="mission-grid">
+      <div class="card elev-sm">
+        <h3 class="card-title">Misión</h3>
+        <p class="card-body">Apoyar a las organizaciones para que incrementen su competitividad, ahorrando dinero y optimizando recursos, mediante el empleo estratégico de la tecnología informática.</p>
+      </div>
+      <div class="card elev-sm">
+        <h3 class="card-title">Visión</h3>
+        <p class="card-body">Desarrollar productos y servicios reconocidos por su alta calidad, para todo el mercado latinoamericano.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>¿Por qué usar SquareNet?</h2>
+      <ul class="list-check">
+        <li>Experiencia y prestigio.</li>
+        <li>Filosofía de desarrollo y metodología.</li>
+        <li>Facilidad de aprendizaje.</li>
+        <li>Software de calidad, totalmente configurable y flexible mediante fórmulas.</li>
+        <li>Soporte inmediato vía TeamViewer o AnyDesk.</li>
+        <li>Actualizaciones continuas.</li>
+        <li>El mejor capital humano.</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>

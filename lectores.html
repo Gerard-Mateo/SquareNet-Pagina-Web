@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Lectores Biométricos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="lector biometrico, lector biométrico, reloj de asistencia, huella digital, lectores biometricos, lectores biométricos">
+<meta name="description" content="Los dispositivos de SquareNet para registrar las entradas y salidas de su personal le brindan la última tecnología en reconocimiento de huella digital.">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="plataforma.html">Plataforma SquareNet</a>
+        <a href="modulos.html">Módulos</a>
+        <a href="lectores.html" aria-current="page">Lectores Biométricos</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Lectores Biométricos</div>
+      <h1>Compatible con dispositivos biométricos</h1>
+      <p>Los dispositivos biométricos son usados en sistemas computarizados de alta gama, principalmente para identificar atributos físicos. Están diseñados para máximos estándares de seguridad y múltiples aplicaciones.</p>
+    </div>
+    <figure class="halftone hero-media"><img src="media/bridge.png" alt=""></figure>
+  </div>
+
+  <div class="wrap features" style="grid-template-columns:repeat(2,1fr)">
+    <a class="card-link" href="lectorZK.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">ZK Teco</h3>
+        <p class="card-body">Cuentan con una gran cantidad de modelos para Control de Acceso y Asistencia que trabajan con huella digital, reconocimiento facial, tarjetas RFID, etc., o incluso multibiométricos que combinan varias tecnologías al mismo tiempo brindando la máxima flexibilidad.</p>
+      </div>
+    </a>
+    <a class="card-link" href="lectorHandPunch.html">
+      <div class="card elev-sm">
+        <h3 class="card-title">HandPunch</h3>
+        <p class="card-body">Dispositivo de geometría de mano de Recognition Systems, robusto y confiable, recomendado para ambientes extremos y plantas industriales donde los empleados no siempre tienen las manos limpias.</p>
+      </div>
+    </a>
+  </div>
+
+  <footer class="site-footer">Powered by SquareNet © <span id="fecha"></span> www.squarenet.com.ec</footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+</body>
+</html>
