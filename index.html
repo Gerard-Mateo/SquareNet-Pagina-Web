@@ -8,6 +8,7 @@
 <meta name="description" content="SquareNet es un potente software para la gestión de personal de su empresa y el mejor aliado para el trabajo diario, con su facilidad de uso, flexibilidad, rapidez y la gran cantidad de herramientas prácticas de uso cotidiano">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
 <style>
   .hero h1{font-size:56px}
   .hero-copy .kicker,.hero-copy h1,.hero-copy p,.hero-copy .tag,.hero-copy .cta-row{
@@ -26,30 +27,33 @@
     .hero-copy .kicker,.hero-copy h1,.hero-copy p,.hero-copy .tag,.hero-copy .cta-row{animation:none}
   }
   .features{padding-bottom:var(--space-8)}
-  .erp-band{background:var(--color-accent-100);padding:calc(var(--space-8) * 1.6) 0}
+  .erp-band{background:var(--color-accent-100);padding:var(--space-8) 0 100px}
   .erp-band h2{text-align:center;font-size:34px;max-width:820px;margin:0 auto var(--space-3)}
   .erp-band h2 .accent{color:var(--color-accent-700)}
-  .erp-band p{text-align:center;max-width:740px;margin:0 auto var(--space-8);font-size:16px;opacity:.85}
+  .erp-band p{text-align:center;max-width:740px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
   .erp-band p strong{color:var(--color-text)}
   .erp-logos{display:flex;align-items:center;justify-content:center;gap:calc(var(--space-8) * 2);flex-wrap:wrap}
   .erp-logos img{height:38px;width:auto;object-fit:contain}
   @media (max-width:860px){ .erp-band h2{font-size:26px} }
   .feature-carousel{position:relative;overflow:hidden}
   .feature-carousel-track{display:flex;transition:transform .6s cubic-bezier(.65,0,.35,1)}
-  .feature-slide{position:relative;flex:0 0 100%;min-width:0;height:460px;overflow:hidden}
-  .feature-slide-bg{position:absolute;inset:-10px;background-size:cover;background-position:center;filter:blur(5px) saturate(1.05);transform:scale(1.02)}
-  .feature-slide-overlay{position:absolute;inset:0;background:linear-gradient(100deg,var(--color-accent-900) 0%,color-mix(in srgb, var(--color-accent-800) 82%, transparent) 42%,color-mix(in srgb, var(--color-accent-900) 20%, transparent) 78%)}
+  .feature-slide{position:relative;flex:0 0 100%;min-width:0;height:100svh;height:100vh;overflow:hidden}
+  .feature-slide-bg{position:absolute;inset:0}
+  .feature-slide-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,15,20,.55) 0%,rgba(10,15,20,.25) 45%,transparent 75%)}
   .feature-slide > .wrap{position:absolute;inset:0;display:flex;align-items:center;z-index:1}
-  .feature-slide-copy{color:#fff;max-width:600px}
-  .feature-slide-copy h2{font-size:48px;color:#fff;margin-bottom:var(--space-3)}
-  .feature-slide-copy p{font-size:20px;line-height:1.4;color:#fff;opacity:.92;margin:0;max-width:460px}
+  .feature-slide-copy{color:#fff;max-width:620px}
+  .feature-slide-kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:var(--space-3)}
+  .feature-slide-copy h2{font-size:52px;color:#fff;margin-bottom:var(--space-3)}
+  .feature-slide-copy p{font-size:20px;line-height:1.4;color:#fff;opacity:.92;margin:0;max-width:480px}
   .carousel-dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:8px;z-index:2}
   .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
   .carousel-dot[aria-current="true"]{background:#fff}
-  .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);backdrop-filter:blur(6px);color:#fff;cursor:pointer;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center}
-  .carousel-arrow:hover{background:rgba(255,255,255,.32)}
-  .carousel-arrow.prev{left:20px}
-  .carousel-arrow.next{right:20px}
+  .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:auto;height:auto;border-radius:0;border:none;background:none;backdrop-filter:none;color:#fff;cursor:pointer;font-size:64px;line-height:1;padding:var(--space-2);text-shadow:0 2px 12px rgba(0,0,0,.35);opacity:.8;transition:opacity .2s ease,transform .2s ease}
+  .carousel-arrow:hover{opacity:1}
+  .carousel-arrow.prev{left:var(--space-4)}
+  .carousel-arrow.prev:hover{transform:translateY(-50%) translateX(-4px)}
+  .carousel-arrow.next{right:var(--space-4)}
+  .carousel-arrow.next:hover{transform:translateY(-50%) translateX(4px)}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .9s ease,transform .9s ease}
   .reveal.in-view{opacity:1;transform:translateY(0)}
   .clients{padding:var(--space-6) 0}
@@ -58,12 +62,15 @@
   .modules-teaser h2{margin-bottom:var(--space-3)}
   .modules-teaser-intro{max-width:620px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
   .modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);text-align:left}
-  .modules-grid .card{position:relative;height:100%;padding-bottom:calc(var(--space-3) + 24px);transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
-  .modules-grid .card-title{transition:color .2s ease}
-  .modules-grid .card-link:hover .card{transform:translateY(-5px);box-shadow:var(--shadow-md);background:var(--color-bg)}
-  .modules-grid .card-link:hover .card-title{color:var(--color-accent-700)}
-  .module-arrow{position:absolute;right:var(--space-3);bottom:var(--space-3);font-family:var(--font-heading);font-size:18px;color:var(--color-accent);opacity:0;transform:translateX(-6px);transition:opacity .2s ease,transform .2s ease}
-  .modules-grid .card-link:hover .module-arrow{opacity:1;transform:translateX(0)}
+  .modules-grid .card{position:relative;height:100%;padding-bottom:calc(var(--space-3) + 24px);border:1px solid transparent;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,background .3s ease,border-color .3s ease}
+  .modules-grid .card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,var(--color-accent-100),transparent 60%);opacity:0;transition:opacity .3s ease}
+  .modules-grid .card-title,.modules-grid .card-body{position:relative;z-index:1}
+  .modules-grid .card-title{font-size:22px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
+  .modules-grid .card-link:hover .card{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg);background:var(--color-bg);border-color:var(--color-accent-300)}
+  .modules-grid .card-link:hover .card::before{opacity:1}
+  .modules-grid .card-link:hover .card-title{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+  .module-arrow{position:absolute;right:var(--space-3);bottom:var(--space-3);z-index:1;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--color-accent);opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease}
+  .modules-grid .card-link:hover .module-arrow{opacity:1;transform:translateX(0) scale(1.15)}
   .cta-band{display:block;text-align:center;text-decoration:none;padding:var(--space-8) var(--space-6);margin:var(--space-6) 0 var(--space-8);border-radius:var(--radius-lg);background:var(--color-accent-800)}
   .cta-band h2{color:#fff;margin-bottom:var(--space-2)}
   .cta-band p{color:#fff;opacity:.9;margin-bottom:var(--space-4)}
@@ -71,12 +78,11 @@
   .cta-band:hover .cta-band-btn{background:var(--color-accent-100)}
   @media (max-width:860px){
     .hero h1{font-size:36px}
-    .feature-slide{height:400px}
     .feature-slide-copy h2{font-size:32px}
     .feature-slide-copy p{font-size:16px}
-    .carousel-arrow{width:38px;height:38px;font-size:19px}
-    .carousel-arrow.prev{left:10px}
-    .carousel-arrow.next{right:10px}
+    .carousel-arrow{font-size:40px}
+    .carousel-arrow.prev{left:var(--space-2)}
+    .carousel-arrow.next{right:var(--space-2)}
     .modules-grid{grid-template-columns:1fr}
   }
 </style>
@@ -114,32 +120,46 @@
   <div class="feature-carousel reveal" id="featureCarousel">
     <div class="feature-carousel-track" id="featureTrack">
       <div class="feature-slide">
-        <div class="feature-slide-bg" style="background-image:url('media/plataforma.png')"></div>
+        <div class="feature-slide-bg" style="background:radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-accent-400) 38%, transparent) 0%, transparent 42%), radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--color-accent-2-500) 22%, transparent) 0%, transparent 48%), linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-900) 100%)"></div>
         <div class="feature-slide-overlay"></div>
         <div class="wrap">
           <div class="feature-slide-copy">
-            <h2>Filtros intuitivos</h2>
-            <p>Encuentra cualquier dato en segundos.</p>
+            <div class="feature-slide-kicker">Plataforma integral</div>
+            <h2>Todo tu equipo de RRHH, en un solo lugar</h2>
+            <p>Nómina, asistencia, recursos humanos y control de acceso, conectados entre sí. Sin hojas de cálculo sueltas ni sistemas que no se hablan.</p>
           </div>
         </div>
       </div>
       <div class="feature-slide">
-        <div class="feature-slide-bg" style="background-image:url('media/somos.png')"></div>
+        <div class="feature-slide-bg" style="background:repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 1px, transparent 1px, transparent 56px), repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 1px, transparent 1px, transparent 56px), linear-gradient(135deg, var(--color-accent-900) 0%, var(--color-neutral-900) 100%)"></div>
         <div class="feature-slide-overlay"></div>
         <div class="wrap">
           <div class="feature-slide-copy">
-            <h2>Soporte ilimitado</h2>
-            <p>Te acompañamos siempre.</p>
+            <div class="feature-slide-kicker">Siempre al día</div>
+            <h2>Cumple con la ley sin complicarte</h2>
+            <p>Actualizamos SquareNet con cada reforma laboral, del SRI y del IESS, para que tú no tengas que perseguirla.</p>
           </div>
         </div>
       </div>
       <div class="feature-slide">
-        <div class="feature-slide-bg" style="background-image:url('img/lector_ZK.jpg')"></div>
+        <div class="feature-slide-bg" style="background:radial-gradient(circle at 82% 25%, color-mix(in srgb, var(--color-accent-2-500) 24%, transparent) 0%, transparent 46%), radial-gradient(circle at 18% 78%, color-mix(in srgb, var(--color-accent-400) 30%, transparent) 0%, transparent 42%), linear-gradient(160deg, var(--color-accent-800) 0%, var(--color-accent-900) 100%)"></div>
         <div class="feature-slide-overlay"></div>
         <div class="wrap">
           <div class="feature-slide-copy">
-            <h2>Lectores biométricos</h2>
-            <p>Control de asistencia simple y confiable.</p>
+            <div class="feature-slide-kicker">Soporte</div>
+            <h2>Soporte ilimitado, de verdad</h2>
+            <p>Actualizaciones continuas y ayuda vía TeamViewer o AnyDesk.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-slide">
+        <div class="feature-slide-bg" style="background:radial-gradient(circle, rgba(255,255,255,.14) 1.5px, transparent 1.5px) 0 0/26px 26px, linear-gradient(135deg, var(--color-accent-800) 0%, var(--color-accent-900) 100%)"></div>
+        <div class="feature-slide-overlay"></div>
+        <div class="wrap">
+          <div class="feature-slide-copy">
+            <div class="feature-slide-kicker">Asistencia</div>
+            <h2>Lectores biométricos integrados</h2>
+            <p>Huella, rostro o tarjeta: la marcación de tu personal se sincroniza sola con el sistema.</p>
           </div>
         </div>
       </div>
@@ -168,7 +188,6 @@
     <div class="modules-grid">
       <a class="card-link" href="modulono.html">
         <div class="card elev-sm">
-          <div class="card-kicker">01</div>
           <h3 class="card-title">Nómina</h3>
           <p class="card-body">Calcula y paga sueldos sin fórmulas complicadas ni hojas de Excel.</p>
           <span class="module-arrow">→</span>
@@ -176,7 +195,6 @@
       </a>
       <a class="card-link" href="moduloca.html">
         <div class="card elev-sm">
-          <div class="card-kicker">02</div>
           <h3 class="card-title">Control de Asistencia</h3>
           <p class="card-body">Sabe quién llegó, a qué hora y cuánto trabajó cada día.</p>
           <span class="module-arrow">→</span>
@@ -184,7 +202,6 @@
       </a>
       <a class="card-link" href="modulorh.html">
         <div class="card elev-sm">
-          <div class="card-kicker">03</div>
           <h3 class="card-title">Recursos Humanos</h3>
           <p class="card-body">Contratos, vacaciones y documentos de tu gente, en un solo lugar.</p>
           <span class="module-arrow">→</span>
@@ -192,7 +209,6 @@
       </a>
       <a class="card-link" href="moduloac.html">
         <div class="card elev-sm">
-          <div class="card-kicker">04</div>
           <h3 class="card-title">Control de Acceso</h3>
           <p class="card-body">Decide quién entra, a qué zonas y en qué horario.</p>
           <span class="module-arrow">→</span>
@@ -200,7 +216,6 @@
       </a>
       <a class="card-link" href="modulocv.html">
         <div class="card elev-sm">
-          <div class="card-kicker">05</div>
           <h3 class="card-title">Control de Visitas</h3>
           <p class="card-body">Registra cada visita a tu empresa de forma simple y ordenada.</p>
           <span class="module-arrow">→</span>
@@ -208,7 +223,6 @@
       </a>
       <a class="card-link" href="modulocc.html">
         <div class="card elev-sm">
-          <div class="card-kicker">06</div>
           <h3 class="card-title">Control de Comedor</h3>
           <p class="card-body">Organiza quién come, cuándo y qué, sin papeleo.</p>
           <span class="module-arrow">→</span>
@@ -216,7 +230,6 @@
       </a>
       <a class="card-link" href="modulopr.html">
         <div class="card elev-sm">
-          <div class="card-kicker">07</div>
           <h3 class="card-title">Control de Eficiencia</h3>
           <p class="card-body">Mide qué tan productivo es tu equipo en planta.</p>
           <span class="module-arrow">→</span>
@@ -224,7 +237,6 @@
       </a>
       <a class="card-link" href="moduloas.html">
         <div class="card elev-sm">
-          <div class="card-kicker">08</div>
           <h3 class="card-title">Autoservicio</h3>
           <p class="card-body">Tu personal consulta su rol y vacaciones desde el celular.</p>
           <span class="module-arrow">→</span>
@@ -232,7 +244,6 @@
       </a>
       <a class="card-link" href="squarebridge.html">
         <div class="card elev-sm">
-          <div class="card-kicker">09</div>
           <h3 class="card-title">SquareBridge</h3>
           <p class="card-body">Conecta todas tus sucursales en un solo sistema, automáticamente.</p>
           <span class="module-arrow">→</span>
@@ -361,8 +372,7 @@
       });
       go(0);
 
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function start() { if (!reduceMotion) timer = setInterval(function () { go(index + 1); }, 4500); }
+      function start() { timer = setInterval(function () { go(index + 1); }, 7500); }
       function restart() { clearInterval(timer); start(); }
       start();
       carousel.addEventListener('mouseenter', function () { clearInterval(timer); });

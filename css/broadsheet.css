@@ -176,7 +176,7 @@ figcaption {
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee + .marquee { margin-top: var(--space-4); }
 .marquee-track img {
-  height: 82px; width: auto; max-width: none; object-fit: contain;
+  height: 96px; width: auto; max-width: none; object-fit: contain;
   filter: grayscale(1); opacity: 0.55; transition: filter 0.2s, opacity 0.2s;
   mix-blend-mode: multiply;
 }
