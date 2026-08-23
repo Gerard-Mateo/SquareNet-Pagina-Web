@@ -170,12 +170,15 @@ figcaption {
 }
 .marquee-track {
   display: flex; align-items: center; gap: var(--space-8); width: max-content;
-  animation: marquee-scroll 45s linear infinite;
+  animation: marquee-scroll 26s linear infinite;
 }
+.marquee-track.reverse { animation-direction: reverse; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee + .marquee { margin-top: var(--space-4); }
 .marquee-track img {
   height: 82px; width: auto; max-width: none; object-fit: contain;
   filter: grayscale(1); opacity: 0.55; transition: filter 0.2s, opacity 0.2s;
+  mix-blend-mode: multiply;
 }
 .marquee-track img:hover { filter: grayscale(0); opacity: 1; }
 @keyframes marquee-scroll {
@@ -254,7 +257,16 @@ figcaption {
 .wrap > section:last-of-type { padding-bottom: var(--space-8); }
 
 /* — footer — */
-footer.site-footer { padding: var(--space-4) 0 var(--space-6); text-align: center; font-size: 12px; color: var(--color-neutral-700); }
+footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-top: var(--space-8); }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: var(--space-6); padding: var(--space-8) 0 var(--space-6); }
+.footer-brand .wordmark { display: block; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 20px; color: #fff; margin-bottom: var(--space-3); }
+.footer-brand p { font-size: 13px; line-height: 1.6; color: rgba(255, 255, 255, 0.65); max-width: 280px; margin: 0; }
+.footer-col h6 { color: rgba(255, 255, 255, 0.5); margin-bottom: var(--space-3); }
+.footer-col a, .footer-col .footer-address { display: block; font-size: 13px; margin-bottom: var(--space-2); }
+.footer-col a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+.footer-col a:hover { color: var(--color-accent-300); }
+.footer-col .footer-address { color: rgba(255, 255, 255, 0.65); }
+.footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.12); padding: var(--space-4) 0; text-align: center; font-size: 12px; color: rgba(255, 255, 255, 0.55); }
 
 /* — responsive — */
 @media (max-width: 860px) {
@@ -274,4 +286,6 @@ footer.site-footer { padding: var(--space-4) 0 var(--space-6); text-align: cente
   .hero h1 { font-size: 32px; }
   .hero-copy { max-width: none; }
   .features { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
 }
