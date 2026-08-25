@@ -6,6 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="asistencia, marcaciones, timbradas, varias sucursales, multiples sucursales">
 <meta name="description" content="Utilitario que descarga automáticamente las marcaciones desde varios relojes biométricos para centralizarlos en su matriz.">
+<link rel="canonical" href="https://www.squarenet.com.ec/squarebridge.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SquareNet">
+<meta property="og:locale" content="es_EC">
+<meta property="og:url" content="https://www.squarenet.com.ec/squarebridge.html">
+<meta property="og:title" content="SquareNet Software - Square Bridge">
+<meta property="og:description" content="Utilitario que descarga automáticamente las marcaciones desde varios relojes biométricos para centralizarlos en su matriz.">
+<meta property="og:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SquareNet Software - Square Bridge">
+<meta name="twitter:description" content="Utilitario que descarga automáticamente las marcaciones desde varios relojes biométricos para centralizarlos en su matriz.">
+<meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 </head>
@@ -20,6 +32,7 @@
         <a href="plataforma.html">Plataforma SquareNet</a>
         <a href="modulos.html" aria-current="page">Módulos</a>
         <a href="lectores.html">Lectores Biométricos</a>
+        <a href="blog/index.html">Blog</a>
         <a href="contacto.html">Contactos</a>
       </div>
     </nav>
@@ -31,7 +44,7 @@
       <h1>SquareBridge</h1>
       <p>Utilitario que descarga automáticamente las marcaciones desde varios relojes biométricos para centralizarlos en su matriz. Es un servicio que se instala en su servidor de datos y se conectará cada cierto tiempo, o a una hora específica, a todos los puntos configurados para descargar la memoria de los relojes.</p>
     </div>
-    <figure class="halftone hero-media"><img src="media/bridge.png" alt=""></figure>
+    <figure class="halftone hero-media"><img src="media/bridge.png" alt="SquareBridge: utilitario de descarga automática de marcaciones biométricas"></figure>
   </div>
 
   <div class="wrap partners">
@@ -75,9 +88,9 @@
     <section>
       <h2>Reportes y Documentos</h2>
       <div class="report-list">
-        <div class="report-item"><div><div class="report-item-title">Registro de Asistencia</div><div class="report-item-desc">Lista lineal detallada de las marcaciones que el sistema ha recopilado en un rango de fechas.</div></div><a href="reportes/Asistencia_Registro.xls">Descargar (.xls)</a></div>
-        <div class="report-item"><div><div class="report-item-title">Registro de Asistencia Cruzado</div><div class="report-item-desc">Lista cruzada de las marcaciones (un día en una fila) que el sistema ha recopilado en un rango de fechas.</div></div><a href="reportes/Asistencia_Cruzado.xls">Descargar (.xls)</a></div>
-        <div class="report-item"><div><div class="report-item-title">Exportación de Marcaciones</div><div class="report-item-desc">Archivo de marcaciones exportado con el popular formato de HandPunch.</div></div><a href="reportes/SquareBridge_Quito_2009-03-23.txt">Descargar (.txt)</a></div>
+        <a class="report-item" href="reportes/Asistencia_Registro.xls" download><div class="report-item-text"><div class="report-item-title">Registro de Asistencia<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Lista lineal detallada de las marcaciones que el sistema ha recopilado en un rango de fechas.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        <a class="report-item" href="reportes/Asistencia_Cruzado.xls" download><div class="report-item-text"><div class="report-item-title">Registro de Asistencia Cruzado<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Lista cruzada de las marcaciones (un día en una fila) que el sistema ha recopilado en un rango de fechas.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
+        <a class="report-item" href="reportes/SquareBridge_Quito_2009-03-23.txt" download><div class="report-item-text"><div class="report-item-title">Exportación de Marcaciones<span class="report-item-ext">.txt</span></div><div class="report-item-desc">Archivo de marcaciones exportado con el popular formato de HandPunch.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
       </div>
     </section>
   </div>
@@ -115,7 +128,10 @@
         <span class="footer-address">San Rafael, Quito, Ecuador</span>
       </div>
     </div>
-    <div class="wrap footer-bottom">© <span id="fecha"></span> SquareNet · www.squarenet.com.ec · Todos los derechos reservados.</div>
+    <div class="wrap footer-bottom">
+      <span>© <span id="fecha"></span> SquareNet · www.squarenet.com.ec · Todos los derechos reservados.</span>
+      <img src="img/hechoenecuador.gif" alt="Sello Mucho Mejor si es Hecho en Ecuador" class="footer-badge">
+    </div>
   </footer>
 
   <script>
