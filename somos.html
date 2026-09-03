@@ -21,8 +21,43 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-  .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
-  @media (max-width: 860px) { .mission-grid { grid-template-columns: 1fr; } }
+  .about-intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--space-8);margin-top:var(--space-6)}
+  .about-intro p{max-width:62ch;font-size:17px}
+  .about-intro p+p{margin-top:var(--space-3);opacity:.85}
+  .ledger{border-left:3px solid var(--color-accent);padding-left:var(--space-4);display:flex;flex-direction:column;gap:var(--space-4)}
+  .ledger dl{margin:0}
+  .ledger dt{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:32px;font-variant-numeric:tabular-nums;color:var(--color-text)}
+  .ledger dd{margin:0;font-size:13px;color:var(--color-neutral-700)}
+  .ledger .sectors{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+
+  .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-8) 0; }
+
+  .why-head{margin-top:var(--space-8);display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3)}
+  .why-head h2{margin:0}
+  .why-head span{font-size:13px;color:var(--color-neutral-600);white-space:nowrap}
+  .why-grid{margin-top:var(--space-4);display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:var(--space-4)}
+  .why-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);box-shadow:var(--shadow-sm);transition:transform .18s ease,box-shadow .18s ease}
+  .why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .why-icon{width:26px;height:26px;color:var(--color-accent)}
+  .why-card h3{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;margin:0}
+  .why-card p{margin:0;font-size:14px;color:var(--color-neutral-700);line-height:1.55}
+  .formula-chip{margin-top:2px;font-size:13px;background:var(--color-accent-100);color:var(--color-accent-800);border-radius:var(--radius-sm);padding:8px 10px;display:flex;flex-direction:column;gap:2px;width:fit-content}
+  .formula-chip .f{font-family:"Courier New",Consolas,monospace;font-weight:700}
+  .formula-chip .cap{font-size:10px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+
+  .about-closing{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap}
+  .about-closing p{margin:0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:17px;max-width:46ch}
+  .about-closing .mark{font-size:13px;color:var(--color-neutral-600);white-space:nowrap}
+
+  @media (max-width: 860px) {
+    .mission-grid { grid-template-columns: 1fr; }
+    .about-intro{grid-template-columns:1fr;gap:var(--space-4)}
+    .ledger{border-left:none;border-top:3px solid var(--color-accent);padding-left:0;padding-top:var(--space-4);flex-direction:row;flex-wrap:wrap}
+    .ledger dl{min-width:40%}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .why-card{transition:none!important}
+  }
 </style>
 </head>
 <body>
@@ -42,16 +77,37 @@
     </nav>
   </div>
 
-  <div class="wrap hero">
-    <div class="hero-copy">
-      <div class="kicker">Quiénes Somos</div>
-      <h1>Empresa</h1>
-      <p>SquareNet Software es una empresa ecuatoriana fundada en el año 2002 por profesionales ingenieros pioneros en el desarrollo de aplicaciones informáticas, utilizando siempre la última tecnología en el mercado. Somos una propuesta diferente con una filosofía de trabajo renovada. Nuestro personal posee más de 30 años de experiencia conjunta con instituciones de tipo financiero, comercial, industrial y de servicios; gracias a ello, creamos soluciones óptimas con tecnología de punta e investigación continua.</p>
-    </div>
-    <figure class="halftone hero-media"><img src="media/somos.png" alt="Equipo de SquareNet Soluciones Informáticas"></figure>
-  </div>
-
   <div class="wrap">
+    <div class="kicker">Quiénes Somos</div>
+    <h1>Empresa</h1>
+
+    <div class="about-intro">
+      <div>
+        <p>SquareNet Software es una empresa ecuatoriana fundada en 2002 por ingenieros pioneros en el desarrollo de aplicaciones informáticas, siempre con la última tecnología del mercado. Somos una propuesta distinta, con una filosofía de trabajo renovada.</p>
+        <p>Nuestro equipo acumula más de 30 años de experiencia conjunta junto a instituciones financieras, comerciales, industriales y de servicios. De ahí nacen soluciones óptimas, con tecnología de punta e investigación continua.</p>
+      </div>
+      <div class="ledger">
+        <dl>
+          <dt data-count="2002">2002</dt>
+          <dd>Año de fundación</dd>
+        </dl>
+        <dl>
+          <dt data-count="24">24</dt>
+          <dd>Años en el mercado</dd>
+        </dl>
+        <dl>
+          <dt><span data-count="30">30</span>+</dt>
+          <dd>Años de experiencia conjunta del equipo</dd>
+        </dl>
+        <div class="sectors">
+          <span class="tag tag-accent">Financiero</span>
+          <span class="tag tag-accent">Comercial</span>
+          <span class="tag tag-accent">Industrial</span>
+          <span class="tag tag-accent">Servicios</span>
+        </div>
+      </div>
+    </div>
+
     <div class="mission-grid">
       <div class="card elev-sm">
         <h3 class="card-title">Misión</h3>
@@ -63,18 +119,86 @@
       </div>
     </div>
 
-    <section>
+    <div class="why-head">
       <h2>¿Por qué usar SquareNet?</h2>
-      <ul class="list-check">
-        <li>Experiencia y prestigio.</li>
-        <li>Filosofía de desarrollo y metodología.</li>
-        <li>Facilidad de aprendizaje.</li>
-        <li>Software de calidad, totalmente configurable y flexible mediante fórmulas.</li>
-        <li>Soporte inmediato vía TeamViewer o AnyDesk.</li>
-        <li>Actualizaciones continuas.</li>
-        <li>El mejor capital humano.</li>
-      </ul>
-    </section>
+      <span>7 razones</span>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="15" cy="11" r="7.5"/>
+          <path d="M10.5 17.5 8 26l7-3.5 7 3.5-2.5-8.5"/>
+        </svg>
+        <h3>Experiencia y prestigio</h3>
+        <p>Dos décadas construyendo software de nómina para empresas ecuatorianas, con la trayectoria que eso conlleva.</p>
+      </div>
+
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="6" width="20" height="4.5" rx="1"/>
+          <rect x="5" y="13" width="20" height="4.5" rx="1"/>
+          <rect x="5" y="20" width="20" height="4.5" rx="1"/>
+          <path d="M15 10.5v2.5M15 17.5v2.5"/>
+        </svg>
+        <h3>Filosofía de desarrollo y metodología</h3>
+        <p>Un proceso maduro, pensado para sostener implementaciones complejas sin perder de vista al usuario final.</p>
+      </div>
+
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="15" cy="15" r="9.5"/>
+          <path d="M18.5 11.5 12.8 12.8l-1.3 5.7 5.7-1.3 1.3-5.6Z" stroke-linejoin="round"/>
+        </svg>
+        <h3>Facilidad de aprendizaje</h3>
+        <p>Interfaces pensadas para que su equipo de RRHH trabaje con confianza desde el primer día.</p>
+      </div>
+
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 6h-2v18h2M19 6h2v18h-2"/>
+          <circle cx="15" cy="15" r="1.4" fill="currentColor" stroke="none"/>
+        </svg>
+        <h3>Configurable mediante fórmulas</h3>
+        <p>Cada rubro de nómina es una fórmula editable — usted define sus propias reglas de cálculo, sin depender de un desarrollador.</p>
+        <div class="formula-chip">
+          <span class="f">[0100] / 30 * [0180]</span>
+          <span class="cap">Sueldo Devengado</span>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="7" width="15" height="11" rx="1.5"/>
+          <rect x="11" y="12" width="15" height="11" rx="1.5"/>
+        </svg>
+        <h3>Soporte inmediato</h3>
+        <p>Vía TeamViewer o AnyDesk: cuando algo no cuadra en un rol de pagos, nos conectamos a su pantalla y lo resolvemos en vivo.</p>
+      </div>
+
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 11a8.5 8.5 0 1 0 1.5 6.5"/>
+          <path d="M24.5 6v6h-6"/>
+        </svg>
+        <h3>Actualizaciones continuas</h3>
+        <p>El sistema evoluciona junto con la normativa del IESS, el SRI y el Ministerio de Trabajo.</p>
+      </div>
+
+      <div class="why-card">
+        <svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11.5" cy="11" r="4"/>
+          <circle cx="20" cy="13" r="3.2"/>
+          <path d="M4.5 25c0-4.5 3-7.5 7-7.5s7 3 7 7.5M17 25c0-3.2 1.6-6.4 5-6.4s5.5 3 5.5 6.4"/>
+        </svg>
+        <h3>El mejor capital humano</h3>
+        <p>Detrás de cada implementación hay un equipo que entiende tanto de nómina ecuatoriana como de software.</p>
+      </div>
+    </div>
+
+    <div class="about-closing">
+      <p>Más de dos décadas calculando la nómina de Ecuador, un rubro a la vez.</p>
+      <span class="mark">SquareNet Software · Est. 2002</span>
+    </div>
   </div>
 
   <footer class="site-footer">
@@ -124,6 +248,24 @@
       mainNav.setAttribute('data-open', String(!open));
       navToggle.setAttribute('aria-expanded', String(!open));
     });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var counters = document.querySelectorAll('[data-count]');
+      Array.prototype.forEach.call(counters, function (el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var start = null;
+        var duration = 900;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(step);
+      });
+    }
   </script>
   <script src="js/fecha.js"></script>
 </body>

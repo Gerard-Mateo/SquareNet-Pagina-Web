@@ -84,15 +84,29 @@
   .erp-logos img{height:38px;width:auto;object-fit:contain}
   @media (max-width:860px){ .erp-band h2{font-size:26px} }
   .feature-carousel{position:relative;overflow:hidden}
-  .feature-carousel-track{display:flex;transition:transform .6s cubic-bezier(.65,0,.35,1)}
-  .feature-slide{position:relative;flex:0 0 100%;min-width:0;height:100svh;height:100vh;overflow:hidden}
-  .feature-slide-bg{position:absolute;inset:0}
+  .feature-carousel-track{position:relative;height:min(76vh,680px);min-height:460px}
+  .feature-slide{position:absolute;inset:0;overflow:hidden;opacity:0;pointer-events:none;z-index:0;transition:opacity 1s ease}
+  .feature-slide.is-active{opacity:1;pointer-events:auto;z-index:1}
+  .feature-slide-bg{position:absolute;inset:0;transform:scale(1.12);transition:transform 6s cubic-bezier(.16,1,.3,1)}
+  .feature-slide.is-active .feature-slide-bg{transform:scale(1)}
   .feature-slide-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,15,20,.55) 0%,rgba(10,15,20,.25) 45%,transparent 75%)}
   .feature-slide > .wrap{position:absolute;inset:0;display:flex;align-items:center;z-index:1}
   .feature-slide-copy{color:#fff;max-width:620px}
-  .feature-slide-kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:var(--space-3)}
-  .feature-slide-copy h2{font-size:52px;color:#fff;margin-bottom:var(--space-3)}
-  .feature-slide-copy p{font-size:20px;line-height:1.4;color:#fff;opacity:.92;margin:0;max-width:480px}
+  .feature-slide-kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:var(--space-3);opacity:0}
+  .feature-slide-copy h2{font-size:44px;color:#fff;margin-bottom:var(--space-3);opacity:0}
+  .feature-slide-copy .feature-slide-lead{font-size:19px;font-weight:600;line-height:1.4;color:#fff;opacity:0;margin:0 0 var(--space-2);max-width:480px}
+  .feature-slide-copy .feature-slide-body{font-size:15px;line-height:1.6;color:#fff;opacity:0;margin:0;max-width:540px}
+  @keyframes featureTextIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes featureBodyIn{from{opacity:0;transform:translateY(20px)}to{opacity:.85;transform:translateY(0)}}
+  .feature-slide.is-active .feature-slide-kicker{animation:featureTextIn .7s cubic-bezier(.22,.61,.36,1) both .15s}
+  .feature-slide.is-active .feature-slide-copy h2{animation:featureTextIn .7s cubic-bezier(.22,.61,.36,1) both .28s}
+  .feature-slide.is-active .feature-slide-copy .feature-slide-lead{animation:featureTextIn .7s cubic-bezier(.22,.61,.36,1) both .42s}
+  .feature-slide.is-active .feature-slide-copy .feature-slide-body{animation:featureBodyIn .7s cubic-bezier(.22,.61,.36,1) both .54s}
+  @media (prefers-reduced-motion:reduce){
+    .feature-slide,.feature-slide-bg,.feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead,.feature-slide-copy .feature-slide-body{animation:none!important;transition:none!important}
+    .feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead{opacity:1!important}
+    .feature-slide-copy .feature-slide-body{opacity:.85!important}
+  }
   .carousel-dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:8px;z-index:2}
   .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
   .carousel-dot[aria-current="true"]{background:#fff}
@@ -126,11 +140,11 @@
   .cta-band:hover .cta-band-btn{background:var(--color-accent-100)}
   @media (max-width:860px){
     .hero h1{font-size:36px}
-    .feature-slide-copy h2{font-size:32px}
-    .feature-slide-copy p{font-size:16px}
-    .carousel-arrow{font-size:40px}
-    .carousel-arrow.prev{left:var(--space-2)}
-    .carousel-arrow.next{right:var(--space-2)}
+    .feature-carousel-track{height:min(88vh,620px);min-height:520px}
+    .feature-slide-copy h2{font-size:28px}
+    .feature-slide-copy .feature-slide-lead{font-size:16px}
+    .feature-slide-copy .feature-slide-body{font-size:14px}
+    .carousel-arrow{display:none}
     .modules-grid{grid-template-columns:1fr}
   }
 </style>
@@ -170,14 +184,15 @@
 
   <div class="feature-carousel reveal" id="featureCarousel">
     <div class="feature-carousel-track" id="featureTrack">
-      <div class="feature-slide">
+      <div class="feature-slide is-active">
         <div class="feature-slide-bg" style="background:radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-accent-400) 38%, transparent) 0%, transparent 42%), radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--color-accent-2-500) 22%, transparent) 0%, transparent 48%), linear-gradient(135deg, var(--color-accent-700) 0%, var(--color-accent-900) 100%)"></div>
         <div class="feature-slide-overlay"></div>
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Plataforma integral</div>
             <h2>Todo tu equipo de RRHH, en un solo lugar</h2>
-            <p>Nómina, asistencia, recursos humanos y control de acceso, conectados entre sí. Sin hojas de cálculo sueltas ni sistemas que no se hablan.</p>
+            <p class="feature-slide-lead">Nómina, asistencia, recursos humanos y control de acceso, conectados entre sí — sin hojas de cálculo sueltas ni sistemas que no se hablan.</p>
+            <p class="feature-slide-body">Desde el ingreso de un nuevo colaborador hasta el pago de su rol, la información fluye por una sola base de datos: los horarios y marcaciones alimentan el cálculo de nómina, y cada novedad de RRHH se refleja al instante en el rol de pagos.</p>
           </div>
         </div>
       </div>
@@ -188,7 +203,8 @@
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Siempre al día</div>
             <h2>Cumple con la ley sin complicarte</h2>
-            <p>Actualizamos SquareNet con cada reforma laboral, del SRI y del IESS, para que tú no tengas que perseguirla.</p>
+            <p class="feature-slide-lead">Actualizamos SquareNet con cada reforma laboral, del SRI y del IESS, para que tú no tengas que perseguirla.</p>
+            <p class="feature-slide-body">Décimo tercero, décimo cuarto, fondos de reserva y utilidades se calculan según el procedimiento de ley. El sistema genera los archivos batch para el IESS y el Ministerio de Trabajo, además del anexo transaccional RDEP y el formulario 107 del SRI.</p>
           </div>
         </div>
       </div>
@@ -199,7 +215,8 @@
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Soporte</div>
             <h2>Soporte ilimitado, de verdad</h2>
-            <p>Actualizaciones continuas y ayuda vía TeamViewer o AnyDesk.</p>
+            <p class="feature-slide-lead">Actualizaciones continuas y ayuda vía TeamViewer o AnyDesk.</p>
+            <p class="feature-slide-body">Nuestro equipo conoce tu instalación y tu forma de trabajar, así que las consultas se resuelven rápido — sin tickets que se pierden ni respuestas genéricas.</p>
           </div>
         </div>
       </div>
@@ -210,7 +227,56 @@
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Asistencia</div>
             <h2>Lectores biométricos integrados</h2>
-            <p>Huella, rostro o tarjeta: la marcación de tu personal se sincroniza sola con el sistema.</p>
+            <p class="feature-slide-lead">Huella, rostro o tarjeta: la marcación de tu personal se sincroniza sola con el sistema.</p>
+            <p class="feature-slide-body">Cada marcación calcula automáticamente horas trabajadas, atrasos, horas extra y permisos, listos para pasar directo al rol de pagos sin digitar nada a mano.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-slide">
+        <div class="feature-slide-bg" style="background:radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--color-accent-400) 32%, transparent) 0%, transparent 45%), radial-gradient(circle at 85% 75%, color-mix(in srgb, var(--color-accent-2-500) 20%, transparent) 0%, transparent 45%), linear-gradient(145deg, var(--color-accent-900) 0%, var(--color-neutral-900) 100%)"></div>
+        <div class="feature-slide-overlay"></div>
+        <div class="wrap">
+          <div class="feature-slide-copy">
+            <div class="feature-slide-kicker">Configuración total</div>
+            <h2>Sus reglas de pago, no una plantilla genérica</h2>
+            <p class="feature-slide-lead">Cada empresa tiene sus propias reglas: recargos nocturnos, bonos por tipo de contrato, condiciones particulares de cada rubro.</p>
+            <p class="feature-slide-body">En SquareNet, usted mismo configura esas reglas exactas — sin depender de que un proveedor externo las programe por usted.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-slide">
+        <div class="feature-slide-bg" style="background:repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 1px, transparent 1px, transparent 48px), linear-gradient(160deg, var(--color-accent-800) 0%, var(--color-accent-900) 100%)"></div>
+        <div class="feature-slide-overlay"></div>
+        <div class="wrap">
+          <div class="feature-slide-copy">
+            <div class="feature-slide-kicker">Auditoría</div>
+            <h2>Trazabilidad total en cada cálculo</h2>
+            <p class="feature-slide-lead">Cada valor calculado en el rol de pagos se puede auditar: sabe exactamente qué fórmula lo generó y por qué.</p>
+            <p class="feature-slide-body">Respuestas claras y verificables para su equipo contable y para cualquier auditoría.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-slide">
+        <div class="feature-slide-bg" style="background:radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--color-accent-2-500) 26%, transparent) 0%, transparent 42%), radial-gradient(circle at 15% 82%, color-mix(in srgb, var(--color-accent-400) 26%, transparent) 0%, transparent 42%), linear-gradient(150deg, var(--color-accent-700) 0%, var(--color-accent-900) 100%)"></div>
+        <div class="feature-slide-overlay"></div>
+        <div class="wrap">
+          <div class="feature-slide-copy">
+            <div class="feature-slide-kicker">Automatización</div>
+            <h2>Automatización de procesos internos</h2>
+            <p class="feature-slide-lead">Notificaciones automáticas para aprobaciones, recordatorios y alertas configurables a su medida.</p>
+            <p class="feature-slide-body">Sin necesidad de que alguien esté pendiente de enviarlas manualmente.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-slide">
+        <div class="feature-slide-bg" style="background:radial-gradient(circle, rgba(255,255,255,.14) 1.5px, transparent 1.5px) 0 0/30px 30px, linear-gradient(155deg, var(--color-accent-900) 0%, var(--color-neutral-900) 100%)"></div>
+        <div class="feature-slide-overlay"></div>
+        <div class="wrap">
+          <div class="feature-slide-copy">
+            <div class="feature-slide-kicker">Escalabilidad</div>
+            <h2>Crece con su empresa</h2>
+            <p class="feature-slide-lead">Una sucursal o cincuenta, una sola estructura salarial o varias por departamento y tipo de contrato.</p>
+            <p class="feature-slide-body">SquareNet está diseñado para operaciones multi-sucursal y multi-empresa desde el primer día.</p>
           </div>
         </div>
       </div>
@@ -407,11 +473,14 @@
       var dotsWrap = document.getElementById('featureDots');
       var slides = track.children;
       var index = 0;
-      var timer;
 
       function go(i) {
-        index = (i + slides.length) % slides.length;
-        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        var newIndex = (i + slides.length) % slides.length;
+        if (newIndex === index) return;
+        index = newIndex;
+        Array.prototype.forEach.call(slides, function (slide, si) {
+          slide.classList.toggle('is-active', si === index);
+        });
         Array.prototype.forEach.call(dotsWrap.children, function (dot, di) {
           dot.setAttribute('aria-current', di === index ? 'true' : 'false');
         });
@@ -421,19 +490,28 @@
         var dot = document.createElement('button');
         dot.className = 'carousel-dot';
         dot.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1));
-        dot.addEventListener('click', function () { go(i); restart(); });
+        dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+        dot.addEventListener('click', function () { go(i); });
         dotsWrap.appendChild(dot);
       });
-      go(0);
 
-      function start() { timer = setInterval(function () { go(index + 1); }, 7500); }
-      function restart() { clearInterval(timer); start(); }
-      start();
-      carousel.addEventListener('mouseenter', function () { clearInterval(timer); });
-      carousel.addEventListener('mouseleave', start);
+      document.getElementById('featurePrev').addEventListener('click', function () { go(index - 1); });
+      document.getElementById('featureNext').addEventListener('click', function () { go(index + 1); });
 
-      document.getElementById('featurePrev').addEventListener('click', function () { go(index - 1); restart(); });
-      document.getElementById('featureNext').addEventListener('click', function () { go(index + 1); restart(); });
+      var touchStartX = null, touchStartY = null;
+      carousel.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+      }, { passive: true });
+      carousel.addEventListener('touchend', function (e) {
+        if (touchStartX === null) return;
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        touchStartX = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          go(dx < 0 ? index + 1 : index - 1);
+        }
+      }, { passive: true });
     })();
 
     Array.prototype.forEach.call(document.querySelectorAll('.marquee-track'), function (track) {
