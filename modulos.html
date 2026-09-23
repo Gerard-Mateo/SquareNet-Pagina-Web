@@ -20,6 +20,67 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<style>
+  .flow-intro{max-width:720px;margin:var(--space-8) 0 var(--space-6)}
+  .flow-intro h2{margin-bottom:var(--space-3)}
+  .flow-intro p{font-size:16px;opacity:.85;margin:0}
+  .flow-steps{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-4)}
+  .flow-steps span{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-700)}
+  .flow-steps i{flex:0 0 22px;height:1px;background:var(--color-divider);font-style:normal}
+
+  .act{margin-top:var(--space-8)}
+  .act-head{display:flex;align-items:flex-start;gap:var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider)}
+  .act-num{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:42px;line-height:.85;color:var(--color-accent);opacity:.38;font-variant-numeric:tabular-nums}
+  .act-head h2{font-size:26px;margin:0 0 4px}
+  .act-head p{margin:0;font-size:14px;opacity:.8;max-width:56ch}
+  .act-grid{margin-top:var(--space-4);display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:var(--space-4)}
+
+  .mod-card{position:relative;display:flex;flex-direction:column;gap:var(--space-2);
+    padding:var(--space-4) var(--space-4) calc(var(--space-4) + 14px);
+    background:var(--color-surface);border:1px solid transparent;border-radius:var(--radius-md);
+    text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);overflow:hidden;
+    transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,border-color .3s ease,background .3s ease}
+  .mod-card::before{content:"";position:absolute;inset:0;z-index:0;opacity:0;transition:opacity .3s ease;
+    background:linear-gradient(135deg,var(--color-accent-100),transparent 62%)}
+  .mod-card > *{position:relative;z-index:1}
+  .mod-icon{width:26px;height:26px;color:var(--color-accent);transition:transform .3s cubic-bezier(.2,.8,.3,1.4)}
+  .mod-card h3{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:18px;margin:0;
+    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
+  .mod-card p{margin:0;font-size:13.5px;line-height:1.55;color:var(--color-neutral-700)}
+  .mod-go{position:absolute;right:var(--space-4);bottom:var(--space-3);font-family:var(--font-heading);font-size:22px;
+    line-height:1;color:var(--color-accent);opacity:0;transform:translateX(-8px);transition:opacity .25s ease,transform .25s ease}
+  .mod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);background:var(--color-bg);border-color:var(--color-accent-300)}
+  .mod-card:hover::before{opacity:1}
+  .mod-card:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+  .mod-card:hover .mod-icon{transform:scale(1.12) rotate(-4deg)}
+  .mod-card:hover .mod-go{opacity:1;transform:translateX(0)}
+
+  .act-grid.wide{grid-template-columns:1fr}
+  .act-grid.wide .mod-card{flex-direction:row;align-items:flex-start;gap:var(--space-4);padding-bottom:var(--space-4)}
+  .act-grid.wide .mod-icon{flex:0 0 26px;margin-top:2px}
+  .act-grid.wide .mod-text{display:flex;flex-direction:column;gap:6px;max-width:70ch}
+  .act-grid.wide .mod-go{bottom:auto;top:50%;transform:translateY(-50%) translateX(-8px)}
+  .act-grid.wide .mod-card:hover .mod-go{transform:translateY(-50%) translateX(0)}
+
+  .modulos-cta{margin:var(--space-8) 0;padding:var(--space-8) var(--space-6);border-radius:var(--radius-lg);
+    background:var(--color-accent-800);text-align:center;text-decoration:none;display:block}
+  .modulos-cta h2{color:#fff;margin-bottom:var(--space-2)}
+  .modulos-cta p{color:#fff;opacity:.9;margin:0 auto var(--space-4);max-width:56ch}
+  .modulos-cta .btn{background:#fff;color:var(--color-accent-800)}
+  .modulos-cta:hover .btn{background:var(--color-accent-100)}
+
+  @media (max-width:860px){
+    .act-head{gap:var(--space-3)}
+    .act-num{font-size:32px}
+    .act-head h2{font-size:22px}
+    .act-grid.wide .mod-card{flex-direction:column}
+    .act-grid.wide .mod-go{top:auto;bottom:var(--space-3);transform:translateX(-8px)}
+    .act-grid.wide .mod-card:hover .mod-go{transform:translateX(0)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .mod-card,.mod-icon,.mod-go{transition:none!important}
+  }
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -47,60 +108,155 @@
     <figure class="halftone hero-media"><img src="media/modulos.png" alt="Módulos del software SquareNet: nómina, recursos humanos, asistencia y control de acceso"></figure>
   </div>
 
-  <div class="wrap features">
-    <a class="card-link" href="modulono.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Nómina</h3>
-        <p class="card-body">Le ayudará a realizar todo lo concerniente al rol de pagos de sus empleados, mediante una fácil configuración de fórmulas.</p>
+  <div class="wrap">
+    <div class="flow-intro" data-reveal>
+      <h2>Un módulo para cada momento del día de tu gente</h2>
+      <p>SquareNet se arma como un rompecabezas: empiezas con lo que tu empresa necesita hoy y sumas módulos cuando quieras. Todos comparten la misma base de datos, así que lo que pasa en uno se refleja en el siguiente.</p>
+      <div class="flow-steps">
+        <span>Ingresa</span><i></i><span>Marca</span><i></i><span>Opera</span><i></i><span>Cobra</span>
       </div>
-    </a>
-    <a class="card-link" href="moduloca.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Control de Asistencia</h3>
-        <p class="card-body">Realiza el control del cumplimiento del horario de los empleados con amplias prestaciones, incluso para el sector industrial.</p>
+    </div>
+
+    <section class="act">
+      <header class="act-head" data-reveal>
+        <span class="act-num">01</span>
+        <div>
+          <h2>Ingresa</h2>
+          <p>El colaborador entra a la empresa y toda su información queda en un solo lugar.</p>
+        </div>
+      </header>
+      <div class="act-grid wide">
+        <a class="mod-card" href="modulorh.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/>
+          </svg>
+          <span class="mod-text">
+            <h3>Recursos Humanos</h3>
+            <p>Fichas, contratos, acciones de personal, capacitación y estudios. Es el punto de partida: lo que se registra aquí alimenta la asistencia y el rol de pagos.</p>
+          </span>
+          <span class="mod-go">→</span>
+        </a>
       </div>
-    </a>
-    <a class="card-link" href="modulorh.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Recursos Humanos</h3>
-        <p class="card-body">Todo lo relacionado a las fichas de sus empleados, contratos, acciones de personal, capacitación y estudios.</p>
+    </section>
+
+    <section class="act">
+      <header class="act-head" data-reveal>
+        <span class="act-num">02</span>
+        <div>
+          <h2>Marca</h2>
+          <p>Quién entra, a qué hora y a qué zonas — incluidos los visitantes.</p>
+        </div>
+      </header>
+      <div class="act-grid">
+        <a class="mod-card" href="moduloca.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/>
+          </svg>
+          <h3>Control de Asistencia</h3>
+          <p>Controla el cumplimiento del horario con amplias prestaciones, incluso para el sector industrial: atrasos, horas extra y permisos calculados solos.</p>
+          <span class="mod-go">→</span>
+        </a>
+        <a class="mod-card" href="moduloac.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/>
+          </svg>
+          <h3>Control de Acceso</h3>
+          <p>Decide quién entra a cada zona de la empresa y en qué horario, con relojes biométricos y reglas configurables por fórmulas.</p>
+          <span class="mod-go">→</span>
+        </a>
+        <a class="mod-card" href="modulocv.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/>
+          </svg>
+          <h3>Control de Visitas</h3>
+          <p>Registra quién visita tus instalaciones y de qué empresa viene, con reportes sencillos de permanencia.</p>
+          <span class="mod-go">→</span>
+        </a>
       </div>
-    </a>
-    <a class="card-link" href="moduloac.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Control de Acceso</h3>
-        <p class="card-body">Controla los ingresos del personal a las diferentes zonas de la empresa mediante relojes biométricos y reglas por fórmulas.</p>
+    </section>
+
+    <section class="act">
+      <header class="act-head" data-reveal>
+        <span class="act-num">03</span>
+        <div>
+          <h2>Opera</h2>
+          <p>Lo que pasa durante la jornada también se mide y se cruza con el rol.</p>
+        </div>
+      </header>
+      <div class="act-grid">
+        <a class="mod-card" href="modulopr.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 16.5a8.5 8.5 0 1 1 16 0"/><path d="M12 16.5 16.2 10.6"/><circle cx="12" cy="16.5" r="1.3" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3>Control de Eficiencia</h3>
+          <p>Mide qué tan productivo es el personal en su puesto, comparando estándares por máquina contra lo realmente producido.</p>
+          <span class="mod-go">→</span>
+        </a>
+        <a class="mod-card" href="modulocc.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/>
+          </svg>
+          <h3>Control de Comedor</h3>
+          <p>Controla las comidas en los comedores de tu empresa y cruza la información con tu proveedor externo, sin papeleo.</p>
+          <span class="mod-go">→</span>
+        </a>
       </div>
-    </a>
-    <a class="card-link" href="modulocv.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Control de Visitas</h3>
-        <p class="card-body">Registra quién y de qué empresa visita sus instalaciones, y emite reportes sencillos de permanencia.</p>
+    </section>
+
+    <section class="act">
+      <header class="act-head" data-reveal>
+        <span class="act-num">04</span>
+        <div>
+          <h2>Cobra</h2>
+          <p>Todo lo anterior alimenta el rol de pagos — y tu gente lo consulta sola.</p>
+        </div>
+      </header>
+      <div class="act-grid">
+        <a class="mod-card" href="modulono.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/>
+          </svg>
+          <h3>Nómina</h3>
+          <p>Calcula el rol de pagos con fórmulas editables al estilo Excel, y genera los archivos batch para el IESS, el Ministerio de Trabajo y los formularios del SRI.</p>
+          <span class="mod-go">→</span>
+        </a>
+        <a class="mod-card" href="moduloas.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/>
+          </svg>
+          <h3>Autoservicio</h3>
+          <p>Tu personal consulta su rol de pagos y sus vacaciones desde el navegador o el celular, sin pasar por RRHH.</p>
+          <span class="mod-go">→</span>
+        </a>
       </div>
-    </a>
-    <a class="card-link" href="modulocc.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Control de Comedor</h3>
-        <p class="card-body">Le ayudará a controlar las comidas en los comedores de su empresa y cruzar información con su proveedor externo.</p>
+    </section>
+
+    <section class="act">
+      <header class="act-head" data-reveal>
+        <span class="act-num">+</span>
+        <div>
+          <h2>Y si tienes varias sucursales</h2>
+          <p>El conector que mantiene todo centralizado, sin que nadie tenga que mover archivos a mano.</p>
+        </div>
+      </header>
+      <div class="act-grid wide">
+        <a class="mod-card" href="squarebridge.html" data-reveal>
+          <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="5.5" cy="12" r="2.2"/><circle cx="18.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="17.5" r="2.2"/><path d="M7.6 11.1 16.4 7.4M7.6 12.9l8.8 3.7"/>
+          </svg>
+          <span class="mod-text">
+            <h3>SquareBridge</h3>
+            <p>Recoge automáticamente los datos de los dispositivos ZK Teco de cada localidad y los centraliza en la matriz. Una sucursal o cincuenta, la misma base de datos.</p>
+          </span>
+          <span class="mod-go">→</span>
+        </a>
       </div>
-    </a>
-    <a class="card-link" href="modulopr.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Control de Eficiencia</h3>
-        <p class="card-body">Mide la eficiencia del personal en sus puestos de trabajo, ingresando estándares por máquina versus lo realmente producido.</p>
-      </div>
-    </a>
-    <a class="card-link" href="moduloas.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">Autoservicio</h3>
-        <p class="card-body">Aplicativo web que permite al personal acceder a información de su Rol de Pagos desde un navegador web.</p>
-      </div>
-    </a>
-    <a class="card-link" href="squarebridge.html">
-      <div class="card elev-sm">
-        <h3 class="card-title">SquareBridge</h3>
-        <p class="card-body">Utilitario que recoge datos desde dispositivos ZK Teco en varias localidades para centralizarlos en su matriz.</p>
-      </div>
+    </section>
+
+    <a class="modulos-cta" href="contacto.html" data-reveal>
+      <h2>¿No sabes por dónde empezar?</h2>
+      <p>Cuéntanos cómo trabaja tu empresa hoy y te decimos con qué módulos conviene arrancar.</p>
+      <span class="btn btn-primary">Hablar con un asesor</span>
     </a>
   </div>
 
@@ -153,6 +309,7 @@
     });
   </script>
   <script src="js/fecha.js"></script>
+  <script src="js/reveal.js"></script>
   <a class="whatsapp-float" href="https://wa.me/squarenetec" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
   </a>

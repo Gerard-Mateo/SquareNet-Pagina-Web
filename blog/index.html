@@ -20,6 +20,51 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="../img/squarenet.ico" rel="shortcut icon">
 <link href="../css/broadsheet.css" rel="stylesheet">
+<style>
+  .blog-intro{margin-top:var(--space-6);max-width:720px}
+  .blog-intro p{font-size:16px;opacity:.85}
+
+  .post-meta{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;
+    font-size:12.5px;color:var(--color-neutral-600);margin-bottom:var(--space-3)}
+  .post-meta .dot{opacity:.5}
+
+  .post-lead{margin-top:var(--space-8);padding-top:var(--space-6);border-top:2px solid var(--color-text)}
+  .post-lead a{display:block;text-decoration:none;color:inherit}
+  .post-lead h2{font-size:38px;max-width:20ch;margin:0 0 var(--space-3);
+    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:5px;
+    transition:color .2s ease,text-decoration-color .2s ease}
+  .post-lead p{font-size:17px;line-height:1.6;max-width:58ch;color:var(--color-neutral-700);margin:0 0 var(--space-4)}
+  .post-lead a:hover h2{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+
+  .post-go{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:14px;
+    color:var(--color-accent);display:inline-flex;align-items:center;gap:6px}
+  .post-go i{font-style:normal;display:inline-block;transition:transform .25s ease}
+  a:hover .post-go i{transform:translateX(4px)}
+
+  .post-more{margin-top:var(--space-8)}
+  .post-more h6{color:var(--color-neutral-600);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-divider)}
+  .post-row{display:block;text-decoration:none;color:inherit;padding:var(--space-4) 0;
+    border-bottom:1px solid var(--color-divider);transition:background .2s ease,padding-left .25s ease}
+  .post-row h3{font-size:22px;margin:0 0 var(--space-2);max-width:36ch;
+    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;
+    transition:color .2s ease,text-decoration-color .2s ease}
+  .post-row p{margin:0 0 var(--space-3);font-size:14.5px;color:var(--color-neutral-700);max-width:60ch}
+  .post-row:hover{background:var(--color-surface);padding-left:var(--space-3)}
+  .post-row:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+
+  .blog-cta{margin:var(--space-8) 0;padding-top:var(--space-4);border-top:1px solid var(--color-divider);
+    display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
+  .blog-cta p{margin:0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:17px;max-width:46ch}
+
+  @media (max-width:860px){
+    .post-lead h2{font-size:27px}
+    .post-lead p{font-size:15.5px}
+    .post-row h3{font-size:19px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .post-row,.post-go i{transition:none!important}
+  }
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -44,21 +89,44 @@
     <p>Guías prácticas para equipos de Recursos Humanos y Nómina: cálculos de ley, cumplimiento IESS y SRI, y buenas prácticas de gestión de personal.</p>
   </div>
 
-  <div class="wrap features">
-    <a class="card-link" href="decimo-tercero-decimo-cuarto-ecuador.html">
-      <div class="card elev-sm">
-        <span class="card-kicker">Nómina<span class="card-date"> · Cumplimiento legal</span></span>
-        <h3 class="card-title">Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h3>
-        <p class="card-body">Qué son, cómo se calculan, las fechas límite de pago por región en 2026, y los errores más comunes al procesarlos.</p>
-      </div>
-    </a>
-    <a class="card-link" href="como-elegir-software-nomina-ecuador.html">
-      <div class="card elev-sm">
-        <span class="card-kicker">Recursos Humanos<span class="card-date"> · Guía de compra</span></span>
-        <h3 class="card-title">Cómo Elegir un Software de Nómina en Ecuador: 8 Criterios Clave para RRHH</h3>
-        <p class="card-body">Una checklist práctica para evaluar cumplimiento legal, velocidad, flexibilidad e integración antes de decidir.</p>
-      </div>
-    </a>
+  <div class="wrap">
+    <article class="post-lead" data-reveal>
+      <a href="decimo-tercero-decimo-cuarto-ecuador.html">
+        <div class="post-meta">
+          <span class="tag tag-accent">Nómina</span>
+          <span>Cumplimiento legal</span>
+          <span class="dot">·</span>
+          <time datetime="2026-08-24">24 ago 2026</time>
+          <span class="dot">·</span>
+          <span>4 min de lectura</span>
+        </div>
+        <h2>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h2>
+        <p>Qué son, cómo se calculan, las fechas límite de pago por región en 2026, y los errores más comunes al procesarlos.</p>
+        <span class="post-go">Leer artículo <i>→</i></span>
+      </a>
+    </article>
+
+    <div class="post-more">
+      <h6 data-reveal>Más artículos</h6>
+      <a class="post-row" href="como-elegir-software-nomina-ecuador.html" data-reveal>
+        <div class="post-meta">
+          <span class="tag tag-accent">Recursos Humanos</span>
+          <span>Guía de compra</span>
+          <span class="dot">·</span>
+          <time datetime="2026-08-24">24 ago 2026</time>
+          <span class="dot">·</span>
+          <span>3 min de lectura</span>
+        </div>
+        <h3>Cómo Elegir un Software de Nómina en Ecuador: 8 Criterios Clave para RRHH</h3>
+        <p>Una checklist práctica para evaluar cumplimiento legal, velocidad, flexibilidad e integración antes de decidir.</p>
+        <span class="post-go">Leer artículo <i>→</i></span>
+      </a>
+    </div>
+
+    <div class="blog-cta" data-reveal>
+      <p>¿Tienes una duda puntual sobre nómina o cumplimiento en Ecuador? Escríbenos, la respondemos sin compromiso.</p>
+      <a class="btn btn-primary" href="../contacto.html">Contactar un asesor</a>
+    </div>
   </div>
 
   <footer class="site-footer">
@@ -110,6 +178,7 @@
     });
   </script>
   <script src="../js/fecha.js"></script>
+  <script src="../js/reveal.js"></script>
   <a class="whatsapp-float" href="https://wa.me/squarenetec" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
   </a>
