@@ -31,6 +31,7 @@
   .act{margin-top:var(--space-8)}
   .act-head{display:flex;align-items:flex-start;gap:var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider)}
   .act-num{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:42px;line-height:.85;color:var(--color-accent);opacity:.38;font-variant-numeric:tabular-nums}
+  .act-head > div{flex:1;min-width:0}
   .act-head h2{font-size:26px;margin:0 0 4px}
   .act-head p{margin:0;font-size:14px;opacity:.8;max-width:56ch}
   .act-grid{margin-top:var(--space-4);display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:var(--space-4)}
@@ -59,8 +60,8 @@
   .act-grid.wide .mod-card{flex-direction:row;align-items:flex-start;gap:var(--space-4);padding-bottom:var(--space-4)}
   .act-grid.wide .mod-icon{flex:0 0 26px;margin-top:2px}
   .act-grid.wide .mod-text{display:flex;flex-direction:column;gap:6px;max-width:70ch}
-  .act-grid.wide .mod-go{bottom:auto;top:50%;transform:translateY(-50%) translateX(-8px)}
-  .act-grid.wide .mod-card:hover .mod-go{transform:translateY(-50%) translateX(0)}
+  .act-grid.wide .mod-go{bottom:auto;top:50%;opacity:.45;transform:translateY(-50%)}
+  .act-grid.wide .mod-card:hover .mod-go{opacity:1;transform:translateY(-50%) translateX(6px)}
 
   .modulos-cta{margin:var(--space-8) 0;padding:var(--space-8) var(--space-6);border-radius:var(--radius-lg);
     background:var(--color-accent-800);text-align:center;text-decoration:none;display:block}

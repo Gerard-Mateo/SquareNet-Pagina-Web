@@ -22,7 +22,14 @@ Cada página nueva o rediseñada debe reusar estos tokens/componentes en vez de 
   - **Sistema de animación**: los trazos con `data-draw` se dibujan solos — el JS mide `getTotalLength()`, setea `--len` y un `--d` escalonado, y recién ahí agrega `art-ready` al carrusel (sin esa clase no corre ninguna animación, así no parpadea antes de medir). `data-pop` = entrada con escala. Todas las animaciones están gateadas en `.is-active` para que solo anime el slide visible. Fallback: si el JS no corre, los sketches se ven estáticos y completos.
   - **Motion por ícono**: huella con haz de escaneo (rect con gradiente recortado por `clipPath` a la silueta), campana que repica, knobs del panel que se deslizan, cursor que viaja entre monitores, barras que crecen desde la base, líneas punteadas que "fluyen" (`stroke-dashoffset` infinito). Acento cian (`--color-accent-300`) + `drop-shadow` en un solo elemento focal por ícono.
   - Parallax suave del SVG con el mouse vía `--artPX`/`--artPY` seteadas en el carrusel (rAF-throttled). Todo respeta `prefers-reduced-motion`.
-- **`somos.html`**: reestructurada con intro+ledger (stats animados 2002/24/30+ con `requestAnimationFrame`), misión/visión, grid de 7 tarjetas "por qué SquareNet" con íconos SVG inline, cierre con línea de marca.
+- **`somos.html`**: reestructurada con intro+ledger (stats animados 2002/24/30+ con `requestAnimationFrame`, disparados por IntersectionObserver cuando el ledger entra en pantalla), misión/visión, grid de 7 tarjetas "por qué SquareNet" con íconos SVG inline en cajas con fondo accent, cierre con línea de marca.
+- **`modulos.html`**: los 9 módulos ya no son una grilla plana — están agrupados en un storyline de 4 actos (**Ingresa → Marca → Opera → Cobra**, + SquareBridge como conector), cada acto con número grande, descripción e íconos de línea propios. Los actos de un solo módulo usan `.act-grid.wide` (tarjeta horizontal).
+- **`lectores.html`**: banda oscura "Cómo funciona" (3 pasos: marca → sincroniza → calcula) con el sketch de huella y su haz de escaneo reutilizado del index, + tarjetas de dispositivo con fotos reales (`img/lector_ZK.jpg`, `img/lector_handpunch.jpg`) y tags de tecnología.
+- **`blog/index.html`**: portada editorial — artículo destacado a dos columnas (titular grande a la izquierda, bajada + CTA a la derecha) y el resto como filas. Metadata real: fecha de `datePublished` del post y tiempo de lectura calculado sobre el conteo de palabras.
+
+## Reveal on scroll compartido
+
+`js/reveal.js` + la regla `[data-reveal]` en `broadsheet.css`: cualquier elemento con `data-reveal` entra al hacerse visible, y los hermanos directos se escalonan solos vía `--rd`. Lo usan modulos, lectores, somos y blog. Si no hay IntersectionObserver o el usuario pidió `prefers-reduced-motion`, marca todo como visible de una. **Ojo**: igual que el `.reveal` viejo de `index.html`, depende de JS — sin JS el contenido queda en opacity 0.
 
 ## Cómo probar cambios visuales
 
