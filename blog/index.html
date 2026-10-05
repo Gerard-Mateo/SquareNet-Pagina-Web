@@ -21,52 +21,79 @@
 <link href="../img/squarenet.ico" rel="shortcut icon">
 <link href="../css/broadsheet.css" rel="stylesheet">
 <style>
+  [hidden]{display:none!important}
   .blog-intro{margin-top:var(--space-6);max-width:720px}
-  .blog-intro p{font-size:16px;opacity:.85}
+  .blog-intro p{font-size:17px;opacity:.85}
+
+  .blog-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-6)}
+  .chip{font:inherit;font-size:14px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;
+    color:var(--color-text);background:transparent;border:1px solid var(--color-divider);border-radius:var(--radius-md);
+    transition:background .2s ease,border-color .2s ease,color .2s ease}
+  .chip span{font-size:12px;color:var(--color-neutral-600);transition:color .2s ease}
+  .chip:hover{background:var(--color-accent-100);border-color:var(--color-accent-300)}
+  .chip.is-active{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .chip.is-active span{color:rgba(255,255,255,.82)}
 
   .post-meta{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap;
     font-size:12.5px;color:var(--color-neutral-600);margin-bottom:var(--space-3)}
   .post-meta .dot{opacity:.5}
-
-  .post-lead{margin-top:var(--space-8);padding-top:var(--space-6);border-top:2px solid var(--color-text)}
-  .post-lead a{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:var(--space-8);
-    align-items:start;text-decoration:none;color:inherit}
-  .post-lead h2{font-size:38px;margin:0;
-    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:5px;
-    transition:color .2s ease,text-decoration-color .2s ease}
-  .post-lead p{font-size:17px;line-height:1.6;color:var(--color-neutral-700);margin:0 0 var(--space-4)}
-  .post-lead .lead-side{padding-top:6px}
-  .post-lead a:hover h2{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
-
   .post-go{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:14px;
     color:var(--color-accent);display:inline-flex;align-items:center;gap:6px}
   .post-go i{font-style:normal;display:inline-block;transition:transform .25s ease}
   a:hover .post-go i{transform:translateX(4px)}
 
-  .post-more{margin-top:var(--space-8)}
-  .post-more h6{color:var(--color-neutral-600);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-divider)}
-  .post-row{display:block;text-decoration:none;color:inherit;padding:var(--space-4) 0;
-    border-bottom:1px solid var(--color-divider);transition:background .2s ease,padding-left .25s ease}
-  .post-row h3{font-size:22px;margin:0 0 var(--space-2);max-width:36ch;
-    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;
-    transition:color .2s ease,text-decoration-color .2s ease}
-  .post-row p{margin:0 0 var(--space-3);font-size:14.5px;color:var(--color-neutral-700);max-width:60ch}
-  .post-row:hover{background:var(--color-surface);padding-left:var(--space-3)}
-  .post-row:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+  /* artículo destacado: el más reciente */
+  .post-lead{margin-top:var(--space-6)}
+  .post-lead > a{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:stretch;text-decoration:none;color:inherit;
+    background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);
+    transition:box-shadow .3s ease,border-color .3s ease}
+  .post-lead > a:hover{box-shadow:var(--shadow-lg);border-color:var(--color-accent-300)}
+  .lead-cover{position:relative;min-height:330px;background:var(--color-accent-900);overflow:hidden}
+  .lead-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.8,.3,1)}
+  .post-lead > a:hover .lead-cover img{transform:scale(1.04)}
+  .lead-main{padding:var(--space-8);display:flex;flex-direction:column;justify-content:center}
+  .post-flag{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;margin-bottom:var(--space-3);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)}
+  .post-flag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--color-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--color-accent) 20%,transparent)}
+  .lead-main h2{font-size:34px;line-height:1.15;margin:0 0 var(--space-3);
+    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:5px;transition:color .2s ease,text-decoration-color .2s ease}
+  .post-lead > a:hover h2{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+  .lead-main p{font-size:17px;line-height:1.6;color:var(--color-neutral-700);margin:0 0 var(--space-4)}
+
+  /* resto de artículos: cuadrícula de tarjetas con portada */
+  .post-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-4)}
+  .post-card > a{display:flex;flex-direction:column;height:100%;text-decoration:none;color:inherit;
+    background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);
+    transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,border-color .3s ease}
+  .post-card > a:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--color-accent-300)}
+  .pc-cover{aspect-ratio:16/10;overflow:hidden;background:var(--color-accent-900)}
+  .pc-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.8,.3,1)}
+  .post-card > a:hover .pc-cover img{transform:scale(1.05)}
+  .pc-text{display:flex;flex-direction:column;flex:1;padding:var(--space-4)}
+  .pc-text .post-meta{margin-bottom:var(--space-2)}
+  .pc-text h3{font-size:20px;line-height:1.22;margin:0 0 var(--space-2);
+    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px;transition:color .2s ease,text-decoration-color .2s ease}
+  .post-card > a:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
+  .pc-text p{margin:0 0 var(--space-3);font-size:15px;line-height:1.55;color:var(--color-neutral-700);flex:1}
 
   .blog-cta{margin:var(--space-8) 0;padding-top:var(--space-4);border-top:1px solid var(--color-divider);
     display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
   .blog-cta p{margin:0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:17px;max-width:46ch}
 
+  @media (max-width:1000px){
+    .post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
   @media (max-width:860px){
-    .post-lead a{grid-template-columns:1fr;gap:var(--space-4)}
-    .post-lead .lead-side{padding-top:0}
-    .post-lead h2{font-size:27px}
-    .post-lead p{font-size:15.5px}
-    .post-row h3{font-size:19px}
+    .post-lead > a{grid-template-columns:1fr}
+    .lead-cover{min-height:0;aspect-ratio:16/10}
+    .lead-main{padding:var(--space-4)}
+    .lead-main h2{font-size:27px}
+    .lead-main p{font-size:15.5px}
+  }
+  @media (max-width:640px){
+    .post-grid{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
-    .post-row,.post-go i{transition:none!important}
+    .post-card > a,.post-go i,.lead-cover img,.pc-cover img,.chip{transition:none!important}
   }
 </style>
 </head>
@@ -87,48 +114,100 @@
     </nav>
   </div>
 
-  <div class="wrap blog-intro">
-    <div class="kicker">Blog SquareNet</div>
-    <h1>Nómina, RRHH y cumplimiento laboral en Ecuador</h1>
-    <p>Guías prácticas para equipos de Recursos Humanos y Nómina: cálculos de ley, cumplimiento IESS y SRI, y buenas prácticas de gestión de personal.</p>
-  </div>
-
   <div class="wrap">
-    <article class="post-lead" data-reveal>
-      <a href="decimo-tercero-decimo-cuarto-ecuador.html">
+    <div class="blog-intro">
+      <div class="kicker">Blog SquareNet</div>
+      <h1>Nómina, RRHH y cumplimiento laboral en Ecuador</h1>
+      <p>Guías prácticas para equipos de Recursos Humanos y Nómina: cálculos de ley, cumplimiento IESS y SRI, y buenas prácticas de gestión de personal.</p>
+    </div>
+
+    <div class="blog-filters" role="group" aria-label="Filtrar artículos por tema">
+      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todos <span>7</span></button>
+      <button type="button" class="chip" data-filter="Nómina" aria-pressed="false">Nómina <span>4</span></button>
+      <button type="button" class="chip" data-filter="Asistencia" aria-pressed="false">Asistencia <span>2</span></button>
+      <button type="button" class="chip" data-filter="Recursos Humanos" aria-pressed="false">Recursos Humanos <span>1</span></button>
+    </div>
+
+    <article class="post-lead" data-cat="Nómina" data-reveal>
+      <a href="utilidades-15-por-ciento-ecuador.html">
+        <div class="lead-cover"><img src="img/cover-utilidades.svg" alt="" width="320" height="200"></div>
         <div class="lead-main">
-          <div class="post-meta">
-            <span class="tag tag-accent">Nómina</span>
-            <span>Cumplimiento legal</span>
-            <span class="dot">·</span>
-            <time datetime="2026-08-24">24 ago 2026</time>
-            <span class="dot">·</span>
-            <span>4 min de lectura</span>
-          </div>
-          <h2>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h2>
-        </div>
-        <div class="lead-side">
-          <p>Qué son, cómo se calculan, las fechas límite de pago por región en 2026, y los errores más comunes al procesarlos.</p>
+          <span class="post-flag">Lo más reciente</span>
+          <div class="post-meta"><span class="tag tag-accent">Nómina</span><span>Cumplimiento legal</span><span class="dot">·</span><time datetime="2026-09-30">30 sep 2026</time><span class="dot">·</span><span>3 min de lectura</span></div>
+          <h2>Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores</h2>
+          <p>El 15 % de las utilidades se reparte entre todos los trabajadores: 10 % por días trabajados y 5 % por cargas familiares. Fórmulas, un ejemplo y los errores más frecuentes.</p>
           <span class="post-go">Leer artículo <i>→</i></span>
         </div>
       </a>
     </article>
 
-    <div class="post-more">
-      <h6 data-reveal>Más artículos</h6>
-      <a class="post-row" href="como-elegir-software-nomina-ecuador.html" data-reveal>
-        <div class="post-meta">
-          <span class="tag tag-accent">Recursos Humanos</span>
-          <span>Guía de compra</span>
-          <span class="dot">·</span>
-          <time datetime="2026-08-24">24 ago 2026</time>
-          <span class="dot">·</span>
-          <span>3 min de lectura</span>
-        </div>
-        <h3>Cómo Elegir un Software de Nómina en Ecuador: 8 Criterios Clave para RRHH</h3>
-        <p>Una checklist práctica para evaluar cumplimiento legal, velocidad, flexibilidad e integración antes de decidir.</p>
-        <span class="post-go">Leer artículo <i>→</i></span>
-      </a>
+    <div class="post-grid">
+      <article class="post-card" data-cat="Asistencia" data-reveal>
+        <a href="control-asistencia-biometrico-ecuador.html">
+          <div class="pc-cover"><img src="img/cover-biometrico.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Asistencia</span><time datetime="2026-09-23">23 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Control de Asistencia con Lectores Biométricos: Cómo Implementarlo Bien en tu Empresa</h3>
+            <p>Tipos de lector, cómo evitar las marcaciones por terceros y cómo llevar cada marcación hasta el rol de pagos, con una nota sobre datos personales.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Nómina" data-reveal>
+        <a href="fondos-de-reserva-ecuador.html">
+          <div class="pc-cover"><img src="img/cover-fondos-reserva.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-16">16 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Fondos de Reserva en Ecuador: Quién los Recibe, Cuánto Son y Cómo se Pagan</h3>
+            <p>Desde el mes 13 de trabajo se genera el 8,33 % de la remuneración. Cómo se calcula, cuándo se mensualiza y dónde se depositan los acumulados.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Nómina" data-reveal>
+        <a href="vacaciones-trabajadores-ecuador.html">
+          <div class="pc-cover"><img src="img/cover-vacaciones.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-09">9 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Vacaciones en Ecuador: Cuántos Días Corresponden, Cómo se Calculan y Cómo se Liquidan</h3>
+            <p>15 días por año, un día más desde el sexto año y un tope de 30. Cómo se acumulan, cuánto se paga si el trabajador sale y los errores más comunes.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Asistencia" data-reveal>
+        <a href="horas-extras-ecuador-recargos-calculo.html">
+          <div class="pc-cover"><img src="img/cover-horas-extras.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Asistencia</span><time datetime="2026-09-02">2 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Horas Extras en Ecuador: Recargos, Límites y Cómo Calcular su Pago</h3>
+            <p>Jornada de 8 horas, recargos del 50 % y 100 %, límites de 4 y 12 horas y un ejemplo de cálculo paso a paso para no equivocarte en el rol.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Nómina" data-reveal>
+        <a href="decimo-tercero-decimo-cuarto-ecuador.html">
+          <div class="pc-cover"><img src="img/cover-decimos.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>4 min</span></div>
+            <h3>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h3>
+            <p>Qué son, cómo se calculan, las fechas límite de pago por región en 2026, y los errores más comunes al procesarlos.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Recursos Humanos" data-reveal>
+        <a href="como-elegir-software-nomina-ecuador.html">
+          <div class="pc-cover"><img src="img/cover-software-nomina.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Recursos Humanos</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Cómo Elegir un Software de Nómina en Ecuador: 8 Criterios Clave para RRHH</h3>
+            <p>Una checklist práctica para evaluar cumplimiento legal, velocidad, flexibilidad e integración antes de decidir.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
     </div>
 
     <div class="blog-cta" data-reveal>
@@ -184,11 +263,28 @@
       mainNav.setAttribute('data-open', String(!open));
       navToggle.setAttribute('aria-expanded', String(!open));
     });
+
+    // Filtro por tema: oculta lo que no coincide (sin JS se ven todos los artículos).
+    (function () {
+      var chips = document.querySelectorAll('.chip[data-filter]');
+      var items = document.querySelectorAll('[data-cat]');
+      Array.prototype.forEach.call(chips, function (chip) {
+        chip.addEventListener('click', function () {
+          var cat = chip.getAttribute('data-filter');
+          Array.prototype.forEach.call(items, function (el) { el.hidden = !(cat === 'all' || el.getAttribute('data-cat') === cat); });
+          Array.prototype.forEach.call(chips, function (c) {
+            var on = c === chip;
+            c.classList.toggle('is-active', on);
+            c.setAttribute('aria-pressed', String(on));
+          });
+        });
+      });
+    })();
   </script>
   <script src="../js/fecha.js"></script>
   <script src="../js/reveal.js"></script>
   <a class="whatsapp-float" href="https://wa.me/squarenetec" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 </body>
 </html>

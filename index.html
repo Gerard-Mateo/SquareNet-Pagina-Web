@@ -148,12 +148,35 @@
   .art-ready .feature-slide.is-active .feature-slide-art .art-knob{animation:artKnob 5.5s ease-in-out infinite var(--kd, 1.2s)}
   .art-ready .feature-slide.is-active .feature-slide-art .art-cursor{animation:artCursor 5s ease-in-out infinite 1.3s}
   .art-ready .feature-slide.is-active .feature-slide-art .art-bar{transform-box:fill-box;transform-origin:bottom;animation:artBar .8s cubic-bezier(.16,1,.3,1) both var(--d, .3s)}
+  .feature-slide-art .art-fx{font-family:var(--font-heading);font-style:italic;font-weight:600;font-size:7.4px;fill:var(--color-accent-300);stroke:none}
+  .feature-slide-art .art-lens{transform:translate(126px,137px)}
+  .feature-slide-art .art-lens-inner{transform:translate(-201.6px,-219.2px) scale(1.6)}
+  .feature-slide-art .art-lens-rim,.feature-slide-art .art-card{opacity:0}
+  @keyframes artLensMove{
+    0%,6%{transform:translate(120px,100px);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    28%,52%{transform:translate(126px,137px);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    70%,76%{transform:translate(122px,158px);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    96%,100%{transform:translate(120px,100px)}
+  }
+  @keyframes artLensInner{
+    0%,6%{transform:translate(-192px,-160px) scale(1.6);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    28%,52%{transform:translate(-201.6px,-219.2px) scale(1.6);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    70%,76%{transform:translate(-195.2px,-252.8px) scale(1.6);animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    96%,100%{transform:translate(-192px,-160px) scale(1.6)}
+  }
+  @keyframes artLensRim{0%,32%{opacity:0}38%,50%{opacity:1}56%,100%{opacity:0}}
+  @keyframes artCard{0%,34%{opacity:0;transform:translate(8px,8px)}41%,52%{opacity:1;transform:translate(0,0)}58%,100%{opacity:0;transform:translate(8px,8px)}}
+  .art-ready .feature-slide.is-active .feature-slide-art .art-lens{animation:artLensMove 9s infinite 2.6s backwards}
+  .art-ready .feature-slide.is-active .feature-slide-art .art-lens-inner{animation:artLensInner 9s infinite 2.6s backwards}
+  .art-ready .feature-slide.is-active .feature-slide-art .art-lens-rim{animation:artLensRim 9s infinite 2.6s}
+  .art-ready .feature-slide.is-active .feature-slide-art .art-card{animation:artCard 9s infinite 2.6s}
   @media (prefers-reduced-motion:reduce){
     .feature-slide-art{animation:none!important;opacity:.92!important;transform:none!important}
     .feature-slide-art svg{transform:none!important;transition:none!important}
     .feature-slide-art *{animation:none!important}
     .feature-slide-art [data-draw]{stroke-dasharray:none!important;stroke-dashoffset:0!important}
     .feature-slide-art .art-scan{display:none}
+    .feature-slide-art .art-card,.feature-slide-art .art-lens-rim{opacity:1!important}
   }
   @media (max-width:1180px){ .feature-slide-art{width:min(22vw,240px);height:min(22vw,240px)} }
   @media (max-width:860px){ .feature-slide-art{display:none} }
@@ -417,18 +440,58 @@
                   <stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/>
                   <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
                 </radialGradient>
+                <radialGradient id="artLensGlass" cx="38%" cy="32%" r="78%">
+                  <stop offset="0" stop-color="#17657f" stop-opacity=".98"/>
+                  <stop offset="1" stop-color="#082a37" stop-opacity=".98"/>
+                </radialGradient>
+                <linearGradient id="artHandle" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#fff" stop-opacity=".34"/>
+                  <stop offset="1" stop-color="#fff" stop-opacity=".05"/>
+                </linearGradient>
+                <clipPath id="artLensClip"><circle cx="0" cy="0" r="32.6"/></clipPath>
               </defs>
               <circle class="art-halo" cx="122" cy="120" r="96" fill="url(#artHalo6)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <path class="art-main" data-draw d="M64 62 H128 L144 78 V162 C144 164.2 142.2 166 140 166 H64 C61.8 166 60 164.2 60 162 V66 C60 63.8 61.8 62 64 62 Z"/>
-              <path class="art-soft" data-draw d="M128 62 V78 H144"/>
-              <line class="art-soft" data-draw x1="72" y1="86" x2="132" y2="86"/>
-              <line class="art-soft" data-draw x1="72" y1="100" x2="132" y2="100"/>
-              <line class="art-soft" data-draw x1="72" y1="114" x2="118" y2="114"/>
-              <circle class="art-main" data-draw cx="164" cy="152" r="20"/>
-              <line class="art-main" data-draw x1="178" y1="166" x2="192" y2="180"/>
-              <path class="art-main art-accent art-glow" data-draw d="M156 152 L162 158 L173 145"/>
-              <path class="art-soft-dash art-accent" d="M118 114 C136 116 148 128 154 138"/>
+              <path class="art-main" data-draw d="M52 40 H128 L150 62 V182 a6 6 0 0 1 -6 6 H52 a6 6 0 0 1 -6 -6 V46 a6 6 0 0 1 6 -6 Z"/>
+              <path class="art-soft" data-draw d="M128 40 V56 a6 6 0 0 0 6 6 H150"/>
+              <path class="art-main" data-draw d="M58 58 H100"/>
+              <path class="art-soft" data-draw d="M58 68 H84"/>
+              <path class="art-soft" data-draw d="M58 92 H96"/><rect class="art-soft" data-draw x="114" y="87" width="24" height="10" rx="2.5"/>
+              <path class="art-soft" data-draw d="M58 114 H96"/><rect class="art-soft" data-draw x="114" y="109" width="24" height="10" rx="2.5"/>
+              <path class="art-soft" data-draw d="M58 136 H96"/><rect class="art-soft" data-draw x="114" y="131" width="24" height="10" rx="2.5"/>
+              <path class="art-soft" data-draw d="M58 158 H96"/><rect class="art-soft" data-draw x="114" y="153" width="24" height="10" rx="2.5"/>
+              <path class="art-main" data-draw d="M58 176 H98"/><rect class="art-main" data-draw x="114" y="171" width="24" height="10" rx="2.5"/>
+              <g class="art-card">
+                <rect class="art-soft" x="160" y="50" width="56" height="48" rx="4" fill="rgba(255,255,255,.06)"/>
+                <circle class="art-accent art-glow" cx="171" cy="62" r="5.6" stroke-width="1.1"/>
+                <text class="art-fx" x="171" y="64.2" text-anchor="middle" style="font-size:6.6px">fx</text>
+                <path class="art-soft" d="M168 78 H206 M168 86 H198 M168 94 H204"/>
+                <path class="art-accent" d="M148 112 L160 100" stroke-dasharray="2.5 3.5" stroke-width="1.2"/>
+              </g>
+              <g class="art-lens">
+                <g data-pop>
+                  <circle r="34" fill="url(#artLensGlass)"/>
+                  <g clip-path="url(#artLensClip)"><g class="art-lens-inner">
+                    <rect class="art-soft" x="114" y="87" width="24" height="10" rx="2.5"/>
+                    <rect class="art-soft" x="114" y="109" width="24" height="10" rx="2.5"/>
+                    <rect class="art-soft" x="114" y="153" width="24" height="10" rx="2.5"/>
+                    <rect class="art-main" x="114" y="171" width="24" height="10" rx="2.5"/>
+                    <g class="art-fx" text-anchor="middle">
+                      <text x="126" y="94.6">fx</text><text x="126" y="116.6">fx</text><text x="121" y="138.6">fx</text><text x="126" y="160.6">fx</text>
+                    </g>
+                    <rect class="art-accent" x="114" y="131" width="24" height="10" rx="2.5" fill="rgba(153,224,255,.24)"/>
+                    <path class="art-accent" d="M129.6 136.2 L132.2 138.8 L136.2 133.4" stroke-width="1.5"/>
+                  </g></g>
+                  <circle r="34" class="art-main" style="stroke-width:2.2px"/>
+                  <circle r="30.4" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+                  <circle r="34" class="art-accent art-glow art-lens-rim" style="stroke-width:2.2px"/>
+                  <path d="M-23.6 -11 A26 26 0 0 1 -8.9 -24.4" stroke="rgba(255,255,255,.78)" stroke-width="2.2"/>
+                  <g transform="rotate(-45)">
+                    <rect class="art-main" x="-4.2" y="35.5" width="8.4" height="31" rx="4.2" fill="url(#artHandle)"/>
+                    <path class="art-soft" d="M-4.2 45 H4.2"/>
+                  </g>
+                </g>
+              </g>
             </svg>
           </div>
         </div>
@@ -815,7 +878,7 @@
   </script>
   <script src="js/fecha.js"></script>
   <a class="whatsapp-float" href="https://wa.me/squarenetec" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 </body>
 </html>

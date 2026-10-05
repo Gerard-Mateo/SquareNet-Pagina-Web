@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<style>
+.m{stroke:#fff;stroke-opacity:.92;stroke-width:1.6}
+.s{stroke:#fff;stroke-opacity:.42;stroke-width:1.2}
+.f{stroke:#fff;stroke-opacity:.26;stroke-width:1}
+.a{stroke:#99e0ff;stroke-width:1.8}
+.af{fill:#99e0ff;stroke:none}
+.g{filter:url(#glow)}
+.scan{animation:scan 3.4s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(-4px)}50%{transform:translateY(76px)}}
+.dash{stroke-dasharray:3 6;animation:flow 2.6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-72}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs>
+<linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>
+<radialGradient id="r1" cx=".14" cy=".18" r=".46"><stop offset="0" stop-color="#62c5ee" stop-opacity=".28"/><stop offset="1" stop-color="#62c5ee" stop-opacity="0"/></radialGradient>
+<radialGradient id="r2" cx=".86" cy=".82" r=".48"><stop offset="0" stop-color="#ff458e" stop-opacity=".18"/><stop offset="1" stop-color="#ff458e" stop-opacity="0"/></radialGradient>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#99e0ff" stop-opacity=".16"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="fade" cx=".5" cy=".5" r=".6"><stop offset=".25" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+<mask id="mk"><rect width="320" height="200" fill="url(#fade)"/></mask>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r=".9" fill="#fff" fill-opacity=".14"/></pattern>
+<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="320" height="200" fill="url(#bg)"/>
+<rect width="320" height="200" fill="url(#r1)"/>
+<rect width="320" height="200" fill="url(#r2)"/>
+<rect width="320" height="200" fill="url(#dots)" mask="url(#mk)"/>
+<circle cx="160" cy="100" r="96" fill="url(#halo)"/>
+<path class="f" d="M14 36V14h22M284 14h22v22M306 164v22h-22M36 186H14v-22"/>
+<defs><clipPath id="fp"><ellipse cx="112" cy="100" rx="39" ry="47.6"/></clipPath>
+<linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#99e0ff" stop-opacity="0"/><stop offset=".45" stop-color="#99e0ff" stop-opacity=".6"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset=".55" stop-color="#99e0ff" stop-opacity=".6"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></linearGradient></defs>
+<path class="s" d="M108.3 106.5A6.5 7.9 0 1 1 115.7 106.5M131.4 97.9A19.5 23.8 0 0 1 113.7 123.7M98.2 116.8A19.5 23.8 0 0 1 123.2 80.5M128.3 65.7A32.5 39.7 0 0 1 143.5 90.4M138.9 122.2A32.5 39.7 0 0 1 89.8 129M79.7 95.2A32.5 39.7 0 0 1 106.4 61" style="stroke-width:1.5"/>
+<path class="m" d="M105.1 86.5A13 15.9 0 1 1 99 99.4M112 131.7A26 31.7 0 0 1 91.5 80.5M108.4 68.6A26 31.7 0 0 1 134.5 115.9M80.1 127.3A39 47.6 0 1 1 122.1 146" style="stroke-width:1.7"/>
+<g clip-path="url(#fp)"><rect class="scan" x="68" y="50" width="88" height="24" fill="url(#beam)"/></g>
+<circle class="af g" cx="112" cy="100" r="2.6"/>
+<path class="s dash" d="M164 100H206"/>
+<rect class="m" x="210" y="68" width="68" height="64" rx="7" fill="#0a303e" fill-opacity=".38"/>
+<path class="m" d="M220 80h22"/><path class="s" d="M220 88h14"/>
+<path class="s" d="M220 104h20M220 118h20"/>
+<rect class="s" x="247" y="99" width="20" height="10" rx="3"/>
+<rect class="a g" x="247" y="113" width="20" height="10" rx="3" fill="#99e0ff" fill-opacity=".22"/>
+<circle class="a g" cx="264" cy="81" r="5"/><path class="a" d="M261.6 81.2l1.9 1.9 3.3-3.6"/>
+</svg>

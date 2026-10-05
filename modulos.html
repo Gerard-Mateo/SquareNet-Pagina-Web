@@ -21,6 +21,17 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
+  .hero-art .mr-n{fill:var(--color-accent-300)}
+  .mr-glow{opacity:0}
+  .mr-pulse{stroke-dasharray:7 93;stroke-dashoffset:0;opacity:0}
+  .mr-breath{transform-origin:200px 150px}
+  @keyframes mrRun{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-100}}
+  @keyframes mrNode{0%{opacity:0}2.5%,9%{opacity:1}14%,100%{opacity:0}}
+  @keyframes mrBreath{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.14);opacity:1}}
+  .la.is-play .mr-pulse{opacity:1;animation:mrRun 12.6s linear infinite 1.8s}
+  .la.is-play .mr-glow{animation:mrNode 12.6s ease-in-out infinite var(--nd,1.8s)}
+  .la.is-play .mr-breath{animation:mrBreath 4.2s ease-in-out infinite 1s}
+
   .flow-intro{max-width:720px;margin:var(--space-8) 0 var(--space-6)}
   .flow-intro h2{margin-bottom:var(--space-3)}
   .flow-intro p{font-size:16px;opacity:.85;margin:0}
@@ -106,7 +117,111 @@
       <h1>Nuestra especialidad es la gente</h1>
       <p>Por ellos hemos creado una serie de módulos para gestión de personal, y de esa manera complementamos a su ERP. La facilidad de uso y aprendizaje, así como su agilidad de interfaz, distinguen a SquareNet de sus competidores.</p>
     </div>
-    <figure class="halftone hero-media"><img src="media/modulos.png" alt="Módulos del software SquareNet: nómina, recursos humanos, asistencia y control de acceso"></figure>
+    <figure class="hero-art band-dark la" data-delay=".15" role="img" aria-label="Diagrama: los nueve módulos de SquareNet conectados alrededor de una misma base de datos, en el ciclo Ingresa, Marca, Opera y Cobra">
+      <svg viewBox="0 0 400 300" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <defs>
+          <radialGradient id="mrHalo" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#99e0ff" stop-opacity=".2"/>
+            <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="mrCoreGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#99e0ff" stop-opacity=".42"/>
+            <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="200" cy="150" r="150" fill="url(#mrHalo)"/>
+        <path class="la-frame" data-draw d="M14 40 V14 H40 M360 14 H386 V40 M386 260 V286 H360 M40 286 H14 V260"/>
+        <circle class="mr-breath" cx="200" cy="150" r="46" fill="url(#mrCoreGlow)"/>
+        <circle class="la-dash" cx="200" cy="150" r="48"/>
+        <circle class="la-dash" cx="200" cy="150" r="64" style="opacity:.55"/>
+        <ellipse class="la-soft" data-draw cx="200" cy="150" rx="132" ry="92"/>
+        <path class="la-dash" d="M200 116 L200 80" style="opacity:.5"/>
+        <path class="la-dash" d="M226.2 128.3 L267.9 93.6" style="opacity:.5"/>
+        <path class="la-dash" d="M233.7 145.9 L308.2 136.7" style="opacity:.5"/>
+        <path class="la-dash" d="M231.5 162.7 L293.9 187.8" style="opacity:.5"/>
+        <path class="la-dash" d="M215.7 180.1 L235 217" style="opacity:.5"/>
+        <path class="la-dash" d="M184.3 180.1 L165 217" style="opacity:.5"/>
+        <path class="la-dash" d="M168.5 162.7 L106.1 187.8" style="opacity:.5"/>
+        <path class="la-dash" d="M166.3 145.9 L91.8 136.7" style="opacity:.5"/>
+        <path class="la-dash" d="M173.8 128.3 L132.1 93.6" style="opacity:.5"/>
+        <path class="la-acc la-glow mr-pulse" pathLength="100" d="M200 58 A132 92 0 1 1 200 242 A132 92 0 1 1 200 58" stroke-width="2.2"/>
+        <g data-fade style="--d:.5s">
+          <path d="M200 126 L220.8 138 L200 150 L179.2 138 Z" fill="rgba(153,224,255,.3)" stroke="none"/>
+          <path d="M179.2 138 L200 150 V174 L179.2 162 Z" fill="rgba(255,255,255,.07)" stroke="none"/>
+          <path d="M200 150 L220.8 138 V162 L200 174 Z" fill="rgba(255,255,255,.14)" stroke="none"/>
+          <path class="la-main la-glow" d="M200 126 L220.8 138 V162 L200 174 L179.2 162 V138 Z M200 150 L179.2 138 M200 150 L220.8 138 M200 150 V174"/>
+        </g>
+        <g transform="translate(200 58)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:13.37s"/>
+          </g>
+        </g>
+        <g transform="translate(284.8 79.5)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:2.34s"/>
+          </g>
+        </g>
+        <g transform="translate(330 134)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:3.63s"/>
+          </g>
+        </g>
+        <g transform="translate(314.3 196)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:4.81s"/>
+          </g>
+        </g>
+        <g transform="translate(245.1 236.5)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16.5a8.5 8.5 0 1 1 16 0"/><path d="M12 16.5 16.2 10.6"/><circle cx="12" cy="16.5" r="1.3" fill="rgba(255,255,255,.92)" stroke="none"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:6.26s"/>
+          </g>
+        </g>
+        <g transform="translate(154.9 236.5)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:7.88s"/>
+          </g>
+        </g>
+        <g transform="translate(85.7 196)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:9.32s"/>
+          </g>
+        </g>
+        <g transform="translate(70 134)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:10.50s"/>
+          </g>
+        </g>
+        <g transform="translate(115.2 79.5)">
+          <g data-fade>
+            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6" stroke-dasharray="3 3"/>
+            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="#99e0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="12" r="2.2"/><circle cx="18.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="17.5" r="2.2"/><path d="M7.6 11.1 16.4 7.4M7.6 12.9l8.8 3.7"/></g>
+            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:11.80s"/>
+          </g>
+        </g>
+        <text class="la-txt" x="200" y="22" text-anchor="middle" font-size="8.5"><tspan class="mr-n">01</tspan> Ingresa</text>
+        <text class="la-txt" x="358" y="125" font-size="8.5"><tspan class="mr-n">02</tspan></text>
+        <text class="la-txt" x="358" y="136" font-size="8.5">Marca</text>
+        <text class="la-txt" x="200" y="282" text-anchor="middle" font-size="8.5"><tspan class="mr-n">03</tspan> Opera</text>
+        <text class="la-txt" x="42" y="125" text-anchor="end" font-size="8.5"><tspan class="mr-n">04</tspan></text>
+        <text class="la-txt" x="42" y="136" text-anchor="end" font-size="8.5">Cobra</text>
+      </svg>
+    </figure>
   </div>
 
   <div class="wrap">
@@ -311,8 +426,9 @@
   </script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
+  <script src="js/art.js"></script>
   <a class="whatsapp-float" href="https://wa.me/squarenetec" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 </body>
 </html>

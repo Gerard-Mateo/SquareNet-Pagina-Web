@@ -21,44 +21,128 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-  .about-intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--space-8);margin-top:var(--space-6)}
-  .about-intro p{max-width:62ch;font-size:17px}
-  .about-intro p+p{margin-top:var(--space-3);opacity:.85}
-  .ledger{border-left:3px solid var(--color-accent);padding-left:var(--space-4);display:flex;flex-direction:column;gap:var(--space-4)}
-  .ledger dl{margin:0}
-  .ledger dt{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:32px;font-variant-numeric:tabular-nums;color:var(--color-text)}
-  .ledger dd{margin:0;font-size:13px;color:var(--color-neutral-700)}
-  .ledger .sectors{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .road-top{max-width:760px;margin-top:var(--space-2)}
+  .road-lede{font-size:19px;opacity:.85;margin:var(--space-3) 0 var(--space-4)}
+  .road-hint{display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.04em;color:var(--color-neutral-700)}
+  .road-hint svg{width:18px;height:18px;fill:none;stroke:var(--color-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:hintBob 1.6s ease-in-out infinite}
+  @keyframes hintBob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
 
-  .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-8) 0; }
+  /* — el camino: una línea que se llena al hacer scroll — */
+  .road{position:relative;margin:var(--space-8) 0 0}
+  .road-line,.road-fill{position:absolute;left:50%;top:var(--y0,26px);bottom:var(--yb,0px)}
+  .road-line{width:2px;margin-left:-1px;background:repeating-linear-gradient(to bottom,var(--color-neutral-400) 0 5px,transparent 5px 11px)}
+  .road-fill{width:4px;margin-left:-2px;border-radius:2px;transform-origin:top;transform:scaleY(var(--p,1));
+    background:linear-gradient(to bottom,var(--color-accent-400),var(--color-accent) 55%,var(--color-accent-700));
+    box-shadow:0 0 14px color-mix(in srgb,var(--color-accent-300) 75%,transparent)}
+  .road-rider{display:none;position:absolute;left:50%;z-index:1;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;
+    background:var(--color-accent);border:3px solid var(--color-bg);
+    box-shadow:0 0 0 1px var(--color-accent),0 0 20px color-mix(in srgb,var(--color-accent-300) 95%,transparent);
+    top:calc(var(--y0,26px) + (100% - var(--y0,26px) - var(--yb,0px)) * var(--p,1))}
+  .road.is-live .road-rider{display:block}
+  .road-rider::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid var(--color-accent-300);animation:riderPing 2.2s ease-out infinite}
+  @keyframes riderPing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.5);opacity:0}}
 
-  .why-head{margin-top:var(--space-8);display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3)}
-  .why-head h2{margin:0}
-  .why-head span{font-size:13px;color:var(--color-neutral-600);white-space:nowrap}
-  .why-grid{margin-top:var(--space-4);display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:var(--space-4)}
-  .why-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);box-shadow:var(--shadow-sm);transition:transform .25s cubic-bezier(.2,.8,.3,1.4),box-shadow .25s ease,border-color .25s ease}
-  .why-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--color-accent-300)}
-  .why-icon-box{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--color-accent-100);transition:background .25s ease}
-  .why-card:hover .why-icon-box{background:var(--color-accent-200)}
-  .why-icon{width:24px;height:24px;color:var(--color-accent-700)}
-  .why-card h3{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;margin:0}
-  .why-card p{margin:0;font-size:14px;color:var(--color-neutral-700);line-height:1.55}
-  .formula-chip{margin-top:2px;font-size:13px;background:var(--color-accent-100);color:var(--color-accent-800);border-radius:var(--radius-sm);padding:8px 10px;display:flex;flex-direction:column;gap:2px;width:fit-content}
+  .stop{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr);align-items:start;margin-bottom:calc(var(--space-8) * 2)}
+  .node{grid-column:2;grid-row:1;justify-self:center;position:relative;z-index:2;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--color-bg);border:2px solid var(--color-neutral-400);color:var(--color-neutral-600);
+    transition:background .4s ease,border-color .4s ease,color .4s ease,box-shadow .4s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+  .node svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .stop.is-on .node,.road:not(.is-live) .node{background:var(--color-accent);border-color:var(--color-accent);color:#fff;
+    box-shadow:0 0 0 8px color-mix(in srgb,var(--color-accent) 16%,transparent);transform:scale(1.08)}
+
+  .st-card{position:relative;grid-row:1;padding:var(--space-6);background-color:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+  .st-card::before{content:"";position:absolute;top:25px;width:22px;height:2px;background:var(--color-neutral-400);transition:background .4s ease}
+  .cl{grid-column:1;--sx:-48px}.cl::before{right:-23px}
+  .cr{grid-column:3;--sx:48px}.cr::before{left:-23px}
+  .stop.is-on .st-card::before,.road:not(.is-live) .st-card::before{background:var(--color-accent)}
+  .st-card .kicker{margin-bottom:var(--space-2)}
+  .st-card h2{font-size:32px;margin:0 0 var(--space-3)}
+  .st-card h3{font-size:23px;margin:0 0 var(--space-2)}
+  .st-card p{margin:0;font-size:17px;line-height:1.65;color:var(--color-neutral-800)}
+  .st-card p+p{margin-top:var(--space-3)}
+  .st-card .sectors{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--space-4)}
+  .st-card .sectors .tag{font-size:13px;padding:4px 10px}
+
+  /* cifras y números de fondo que se desplazan con el scroll */
+  .side-l,.side-r{grid-row:1;align-self:center}
+  .side-l{grid-column:1;padding-right:var(--space-6);text-align:right}
+  .side-r{grid-column:3;padding-left:var(--space-6)}
+  .st-ghost .g{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(84px,11vw,160px);line-height:.85;letter-spacing:-.03em;
+    color:color-mix(in srgb,var(--color-accent) 17%,transparent);user-select:none;transform:translateY(calc(var(--gp,0) * -64px))}
+  .st-ghost small{display:block;margin-top:var(--space-2);font-size:15px;color:var(--color-neutral-600)}
+  .st-stats{display:flex;flex-direction:column;gap:var(--space-4)}
+  .st-stats b{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(60px,7.5vw,108px);line-height:.95;color:var(--color-accent-700);font-variant-numeric:tabular-nums;transform:translateY(calc(var(--gp,0) * -26px))}
+  .st-stats span{font-size:16px;color:var(--color-neutral-700)}
+
+  /* misión y visión */
+  .st-card.band-dark{border:0;box-shadow:var(--shadow-md);overflow:hidden}
+  .st-card.band-dark p{color:rgba(255,255,255,.9)}
+  .st-card.band-dark .kicker{color:var(--color-accent-300)}
+  .st-art{position:absolute;right:18px;top:16px;width:92px;height:92px}
+  .st-art svg{display:block;width:100%;height:100%}
+  .stop.both .cr{transition-delay:.15s}
+
+  /* capítulo: ¿por qué usar SquareNet? */
+  .stop.chap{grid-template-columns:minmax(0,1fr);justify-items:center;margin-bottom:var(--space-6)}
+  .chap .node{grid-column:1}
+  .chap-label{grid-column:1;grid-row:2;position:relative;z-index:2;margin-top:var(--space-3);padding:var(--space-3) var(--space-8);background:var(--color-bg);text-align:center}
+  .chap-label .kicker{margin:0 0 6px}
+  .chap-label h2{font-size:42px;margin:0}
+
+  .stop.reason{margin-bottom:var(--space-8)}
+  .reason .st-card{padding:var(--space-4) var(--space-6)}
+  .reason .st-card .kicker{font-size:12px;margin-bottom:6px}
+  .reason .st-card p{font-size:16.5px}
+  .formula-chip{margin-top:var(--space-3);font-size:13px;background:var(--color-accent-100);color:var(--color-accent-800);border-radius:var(--radius-sm);padding:8px 10px;display:flex;flex-direction:column;gap:2px;width:fit-content}
   .formula-chip .f{font-family:"Courier New",Consolas,monospace;font-weight:700}
   .formula-chip .cap{font-size:10px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
 
-  .about-closing{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap}
-  .about-closing p{margin:0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:17px;max-width:46ch}
-  .about-closing .mark{font-size:13px;color:var(--color-neutral-600);white-space:nowrap}
+  /* cierre */
+  .stop.end{grid-template-columns:minmax(0,1fr);justify-items:center;margin-bottom:var(--space-8)}
+  .end .node{grid-column:1}
+  .end-card{grid-column:1;grid-row:2;position:relative;z-index:2;width:100%;max-width:860px;margin-top:var(--space-6);padding:var(--space-8) var(--space-6);border-radius:var(--radius-lg);text-align:center;box-shadow:var(--shadow-lg);--sx:0px;--sy:40px}
+  .end-card p{max-width:24ch;margin:0 auto var(--space-3);font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:34px;line-height:1.2;color:#fff}
+  .end-card .mark{margin-bottom:var(--space-4);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-300)}
+  .end-card .cta-row{justify-content:center;margin-top:0}
+  .end-card .btn-primary{background:#fff;color:var(--color-accent-800)}
+  .end-card .btn-primary:hover{background:var(--color-accent-100)}
+  .end-card .btn-secondary{color:#fff;border-color:rgba(255,255,255,.4)}
+  .end-card .btn-secondary:hover{background:rgba(255,255,255,.12)}
 
-  @media (max-width: 860px) {
-    .mission-grid { grid-template-columns: 1fr; }
-    .about-intro{grid-template-columns:1fr;gap:var(--space-4)}
-    .ledger{border-left:none;border-top:3px solid var(--color-accent);padding-left:0;padding-top:var(--space-4);flex-direction:row;flex-wrap:wrap}
-    .ledger dl{min-width:40%}
+  /* con JS: las tarjetas entran desde su lado cuando el camino llega a ellas */
+  .road.is-live .st-card,.road.is-live .end-card,.road.is-live .st-ghost,.road.is-live .st-stats{opacity:0;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .road.is-live .st-card,.road.is-live .end-card{transform:translate(var(--sx,0px),var(--sy,0px))}
+  .road.is-live .stop.is-seen .st-card,.road.is-live .stop.is-seen .end-card,.road.is-live .stop.is-seen .st-ghost,.road.is-live .stop.is-seen .st-stats{opacity:1;transform:none}
+  .road.is-live .stop.chap .chap-label{opacity:0;transition:opacity .9s ease}
+  .road.is-live .stop.chap.is-seen .chap-label{opacity:1}
+
+  @media (max-width:860px){
+    .road-line,.road-fill,.road-rider{left:26px}
+    .stop{grid-template-columns:52px minmax(0,1fr);column-gap:var(--space-3);margin-bottom:var(--space-8)}
+    .node{grid-column:1;justify-self:start;width:44px;height:44px;margin-left:4px}
+    .node svg{width:22px;height:22px}
+    .cl,.cr{grid-column:2;--sx:0px;--sy:28px}
+    .st-card,.reason .st-card{padding:var(--space-4)}
+    .st-card::before{display:none}
+    .st-card h2{font-size:26px}
+    .stop.both .cr{grid-row:2;margin-top:var(--space-3)}
+    .st-ghost{display:none}
+    .side-l,.side-r{grid-column:2;grid-row:2;padding:var(--space-4) 0 0;text-align:left}
+    .st-stats{flex-direction:row;gap:var(--space-6)}
+    .st-stats b{font-size:52px;transform:none}
+    .st-art{width:64px;height:64px;right:12px;top:12px}
+    .stop.chap{grid-template-columns:52px minmax(0,1fr);justify-items:start}
+    .chap-label{grid-column:2;grid-row:1;margin-top:0;padding:0;background:none;text-align:left}
+    .chap-label h2{font-size:30px}
+    .stop.end{grid-template-columns:52px minmax(0,1fr);justify-items:start}
+    .end-card{grid-column:2;grid-row:1;margin-top:0;padding:var(--space-6) var(--space-4);max-width:none;--sy:28px}
+    .end-card p{font-size:23px;max-width:none}
+    .end-card .mark{font-size:12px;letter-spacing:.08em}
   }
-  @media (prefers-reduced-motion: reduce){
-    .why-card{transition:none!important}
+  @media (prefers-reduced-motion:reduce){
+    .road-hint svg,.road-rider::after{animation:none}
+    .node{transition:none}
+    .road.is-live .st-card,.road.is-live .end-card,.road.is-live .st-ghost,.road.is-live .st-stats{transition:none}
   }
 </style>
 </head>
@@ -82,124 +166,171 @@
   <div class="wrap">
     <div class="kicker">Quiénes Somos</div>
     <h1>Empresa</h1>
+    <div class="road-top">
+      <p class="road-lede">Nuestra historia, de principio a fin: de dónde venimos, hacia dónde vamos y por qué elegir SquareNet.</p>
+      <div class="road-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>Desplázate para recorrerla</div>
+    </div>
 
-    <div class="about-intro">
-      <div>
-        <p>SquareNet Software es una empresa ecuatoriana fundada en 2002 por ingenieros pioneros en el desarrollo de aplicaciones informáticas, siempre con la última tecnología del mercado. Somos una propuesta distinta, con una filosofía de trabajo renovada.</p>
-        <p>Nuestro equipo acumula más de 30 años de experiencia conjunta junto a instituciones financieras, comerciales, industriales y de servicios. De ahí nacen soluciones óptimas, con tecnología de punta e investigación continua.</p>
-      </div>
-      <div class="ledger" data-reveal>
-        <dl>
-          <dt data-count="2002">2002</dt>
-          <dd>Año de fundación</dd>
-        </dl>
-        <dl>
-          <dt data-count="24">24</dt>
-          <dd>Años en el mercado</dd>
-        </dl>
-        <dl>
-          <dt><span data-count="30">30</span>+</dt>
-          <dd>Años de experiencia conjunta del equipo</dd>
-        </dl>
-        <div class="sectors">
-          <span class="tag tag-accent">Financiero</span>
-          <span class="tag tag-accent">Comercial</span>
-          <span class="tag tag-accent">Industrial</span>
-          <span class="tag tag-accent">Servicios</span>
+    <div class="road" id="road">
+      <div class="road-line" aria-hidden="true"></div>
+      <div class="road-fill" aria-hidden="true"></div>
+      <div class="road-rider" aria-hidden="true"></div>
+
+      <section class="stop" aria-labelledby="s-origen">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></div>
+        <div class="side-l st-ghost" aria-hidden="true"><span class="g">2002</span><small>Año de fundación</small></div>
+        <article class="st-card cr">
+          <div class="kicker">2002 · El origen</div>
+          <h2 id="s-origen">Ingenieros pioneros, una propuesta distinta</h2>
+          <p>SquareNet Software es una empresa ecuatoriana fundada en 2002 por ingenieros pioneros en el desarrollo de aplicaciones informáticas, siempre con la última tecnología del mercado. Somos una propuesta distinta, con una filosofía de trabajo renovada.</p>
+        </article>
+      </section>
+
+      <section class="stop" aria-labelledby="s-exp">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6M15 14.4c.7-.3 1.4-.4 2-.4 2.4 0 4 1.8 4 4.6"/></svg></div>
+        <article class="st-card cl">
+          <div class="kicker">Hoy · Una trayectoria que se nota</div>
+          <h2 id="s-exp">Experiencia que se nota</h2>
+          <p>Nuestro equipo acumula más de 30 años de experiencia conjunta junto a instituciones financieras, comerciales, industriales y de servicios. De ahí nacen soluciones óptimas, con tecnología de punta e investigación continua.</p>
+          <div class="sectors">
+            <span class="tag tag-accent">Financiero</span>
+            <span class="tag tag-accent">Comercial</span>
+            <span class="tag tag-accent">Industrial</span>
+            <span class="tag tag-accent">Servicios</span>
+          </div>
+        </article>
+        <div class="side-r st-stats">
+          <div><b data-count="24">24</b><span>años en el mercado</span></div>
+          <div><b data-count="30" data-suffix="+">30+</b><span>años de experiencia conjunta del equipo</span></div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="mission-grid">
-      <div class="card elev-sm" data-reveal>
-        <h3 class="card-title">Misión</h3>
-        <p class="card-body">Apoyar a las organizaciones para que incrementen su competitividad, ahorrando dinero y optimizando recursos, mediante el empleo estratégico de la tecnología informática.</p>
-      </div>
-      <div class="card elev-sm" data-reveal>
-        <h3 class="card-title">Visión</h3>
-        <p class="card-body">Desarrollar productos y servicios reconocidos por su alta calidad, para todo el mercado latinoamericano.</p>
-      </div>
-    </div>
+      <section class="stop both" aria-label="Misión y visión">
+        <article class="st-card cl band-dark">
+          <div class="st-art la" aria-hidden="true" data-delay=".35">
+            <svg viewBox="0 0 96 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path class="la-soft" data-draw d="M8 86 H88"/>
+              <rect class="la-main" data-draw x="14" y="62" width="14" height="24" rx="1.5"/>
+              <rect class="la-main" data-draw x="34" y="48" width="14" height="38" rx="1.5"/>
+              <rect class="la-main" data-draw x="54" y="32" width="14" height="54" rx="1.5"/>
+              <path class="la-acc la-glow" data-draw d="M12 44 L36 28 L50 36 L82 10"/>
+              <path class="la-acc la-glow" data-draw d="M68 10 H82 V24"/>
+            </svg>
+          </div>
+          <div class="kicker">Hoy · Lo que hacemos</div>
+          <h2>Misión</h2>
+          <p>Apoyar a las organizaciones para que incrementen su competitividad, ahorrando dinero y optimizando recursos, mediante el empleo estratégico de la tecnología informática.</p>
+        </article>
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r=".7" fill="currentColor"/></svg></div>
+        <article class="st-card cr band-dark">
+          <div class="st-art la" aria-hidden="true" data-delay=".5">
+            <svg viewBox="0 0 96 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path class="la-soft" data-draw d="M6 70 H90"/>
+              <path class="la-main" data-draw d="M24 70 A24 24 0 0 1 72 70"/>
+              <path class="la-soft" data-draw d="M48 36 V26 M27 44 L20 37 M69 44 L76 37 M14 58 L6 55 M82 58 L90 55"/>
+              <path class="la-acc la-glow" data-draw d="M80 14 V30 M72 22 H88"/>
+              <path class="la-soft" data-draw d="M32 80 H64"/>
+            </svg>
+          </div>
+          <div class="kicker">Mañana · A dónde vamos</div>
+          <h2>Visión</h2>
+          <p>Desarrollar productos y servicios reconocidos por su alta calidad, para todo el mercado latinoamericano.</p>
+        </article>
+      </section>
 
-    <div class="why-head" data-reveal>
-      <h2>¿Por qué usar SquareNet?</h2>
-      <span>7 razones</span>
-    </div>
-    <div class="why-grid">
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="15" cy="11" r="7.5"/>
-          <path d="M10.5 17.5 8 26l7-3.5 7 3.5-2.5-8.5"/>
-        </svg></span>
-        <h3>Experiencia y prestigio</h3>
-        <p>Dos décadas construyendo software de nómina para empresas ecuatorianas, con la trayectoria que eso conlleva.</p>
-      </div>
-
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="5" y="6" width="20" height="4.5" rx="1"/>
-          <rect x="5" y="13" width="20" height="4.5" rx="1"/>
-          <rect x="5" y="20" width="20" height="4.5" rx="1"/>
-          <path d="M15 10.5v2.5M15 17.5v2.5"/>
-        </svg></span>
-        <h3>Filosofía de desarrollo y metodología</h3>
-        <p>Un proceso maduro, pensado para sostener implementaciones complejas sin perder de vista al usuario final.</p>
-      </div>
-
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="15" cy="15" r="9.5"/>
-          <path d="M18.5 11.5 12.8 12.8l-1.3 5.7 5.7-1.3 1.3-5.6Z" stroke-linejoin="round"/>
-        </svg></span>
-        <h3>Facilidad de aprendizaje</h3>
-        <p>Interfaces pensadas para que su equipo de RRHH trabaje con confianza desde el primer día.</p>
-      </div>
-
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M11 6h-2v18h2M19 6h2v18h-2"/>
-          <circle cx="15" cy="15" r="1.4" fill="currentColor" stroke="none"/>
-        </svg></span>
-        <h3>Configurable mediante fórmulas</h3>
-        <p>Cada rubro de nómina es una fórmula editable — usted define sus propias reglas de cálculo, sin depender de un desarrollador.</p>
-        <div class="formula-chip">
-          <span class="f">[0100] / 30 * [0180]</span>
-          <span class="cap">Sueldo Devengado</span>
+      <section class="stop chap" aria-labelledby="s-why">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.6a2.8 2.8 0 1 1 4.4 2.3c-.9.6-1.7 1.2-1.7 2.4M12 17.2h.01"/></svg></div>
+        <div class="chap-label">
+          <div class="kicker">Siete razones</div>
+          <h2 id="s-why">¿Por qué usar SquareNet?</h2>
         </div>
-      </div>
+      </section>
 
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="7" width="15" height="11" rx="1.5"/>
-          <rect x="11" y="12" width="15" height="11" rx="1.5"/>
-        </svg></span>
-        <h3>Soporte inmediato</h3>
-        <p>Vía TeamViewer o AnyDesk: cuando algo no cuadra en un rol de pagos, nos conectamos a su pantalla y lo resolvemos en vivo.</p>
-      </div>
+      <section class="stop reason" aria-labelledby="r1">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="11" r="7.5"/><path d="M10.5 17.5 8 26l7-3.5 7 3.5-2.5-8.5"/></svg></div>
+        <div class="side-l st-ghost" aria-hidden="true"><span class="g">01</span></div>
+        <article class="st-card cr">
+          <div class="kicker">Razón 01</div>
+          <h3 id="r1">Experiencia y prestigio</h3>
+          <p>Dos décadas construyendo software de nómina para empresas ecuatorianas, con la trayectoria que eso conlleva.</p>
+        </article>
+      </section>
 
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M23 11a8.5 8.5 0 1 0 1.5 6.5"/>
-          <path d="M24.5 6v6h-6"/>
-        </svg></span>
-        <h3>Actualizaciones continuas</h3>
-        <p>El sistema evoluciona junto con la normativa del IESS, el SRI y el Ministerio de Trabajo.</p>
-      </div>
+      <section class="stop reason" aria-labelledby="r2">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="20" height="4.5" rx="1"/><rect x="5" y="13" width="20" height="4.5" rx="1"/><rect x="5" y="20" width="20" height="4.5" rx="1"/><path d="M15 10.5v2.5M15 17.5v2.5"/></svg></div>
+        <article class="st-card cl">
+          <div class="kicker">Razón 02</div>
+          <h3 id="r2">Filosofía de desarrollo y metodología</h3>
+          <p>Un proceso maduro, pensado para sostener implementaciones complejas sin perder de vista al usuario final.</p>
+        </article>
+        <div class="side-r st-ghost" aria-hidden="true"><span class="g">02</span></div>
+      </section>
 
-      <div class="why-card" data-reveal>
-        <span class="why-icon-box"><svg class="why-icon" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11.5" cy="11" r="4"/>
-          <circle cx="20" cy="13" r="3.2"/>
-          <path d="M4.5 25c0-4.5 3-7.5 7-7.5s7 3 7 7.5M17 25c0-3.2 1.6-6.4 5-6.4s5.5 3 5.5 6.4"/>
-        </svg></span>
-        <h3>El mejor capital humano</h3>
-        <p>Detrás de cada implementación hay un equipo que entiende tanto de nómina ecuatoriana como de software.</p>
-      </div>
-    </div>
+      <section class="stop reason" aria-labelledby="r3">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="15" r="9.5"/><path d="M18.5 11.5 12.8 12.8l-1.3 5.7 5.7-1.3 1.3-5.6Z"/></svg></div>
+        <div class="side-l st-ghost" aria-hidden="true"><span class="g">03</span></div>
+        <article class="st-card cr">
+          <div class="kicker">Razón 03</div>
+          <h3 id="r3">Facilidad de aprendizaje</h3>
+          <p>Interfaces pensadas para que su equipo de RRHH trabaje con confianza desde el primer día.</p>
+        </article>
+      </section>
 
-    <div class="about-closing" data-reveal>
-      <p>Más de dos décadas calculando la nómina de Ecuador, un rubro a la vez.</p>
-      <span class="mark">SquareNet Software · Est. 2002</span>
+      <section class="stop reason" aria-labelledby="r4">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6h-2v18h2M19 6h2v18h-2"/><circle cx="15" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></div>
+        <article class="st-card cl">
+          <div class="kicker">Razón 04</div>
+          <h3 id="r4">Configurable mediante fórmulas</h3>
+          <p>Cada rubro de nómina es una fórmula editable — usted define sus propias reglas de cálculo, sin depender de un desarrollador.</p>
+          <div class="formula-chip">
+            <span class="f">[0100] / 30 * [0180]</span>
+            <span class="cap">Sueldo Devengado</span>
+          </div>
+        </article>
+        <div class="side-r st-ghost" aria-hidden="true"><span class="g">04</span></div>
+      </section>
+
+      <section class="stop reason" aria-labelledby="r5">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="15" height="11" rx="1.5"/><rect x="11" y="12" width="15" height="11" rx="1.5"/></svg></div>
+        <div class="side-l st-ghost" aria-hidden="true"><span class="g">05</span></div>
+        <article class="st-card cr">
+          <div class="kicker">Razón 05</div>
+          <h3 id="r5">Soporte inmediato</h3>
+          <p>Vía TeamViewer o AnyDesk: cuando algo no cuadra en un rol de pagos, nos conectamos a su pantalla y lo resolvemos en vivo.</p>
+        </article>
+      </section>
+
+      <section class="stop reason" aria-labelledby="r6">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 11a8.5 8.5 0 1 0 1.5 6.5"/><path d="M24.5 6v6h-6"/></svg></div>
+        <article class="st-card cl">
+          <div class="kicker">Razón 06</div>
+          <h3 id="r6">Actualizaciones continuas</h3>
+          <p>El sistema evoluciona junto con la normativa del IESS, el SRI y el Ministerio de Trabajo.</p>
+        </article>
+        <div class="side-r st-ghost" aria-hidden="true"><span class="g">06</span></div>
+      </section>
+
+      <section class="stop reason" aria-labelledby="r7">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11.5" cy="11" r="4"/><circle cx="20" cy="13" r="3.2"/><path d="M4.5 25c0-4.5 3-7.5 7-7.5s7 3 7 7.5M17 25c0-3.2 1.6-6.4 5-6.4s5.5 3 5.5 6.4"/></svg></div>
+        <div class="side-l st-ghost" aria-hidden="true"><span class="g">07</span></div>
+        <article class="st-card cr">
+          <div class="kicker">Razón 07</div>
+          <h3 id="r7">El mejor capital humano</h3>
+          <p>Detrás de cada implementación hay un equipo que entiende tanto de nómina ecuatoriana como de software.</p>
+        </article>
+      </section>
+
+      <section class="stop end" aria-label="Cierre">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 5h11l-2.2 3.5L17 12H6"/></svg></div>
+        <div class="end-card band-dark">
+          <p>Más de dos décadas calculando la nómina de Ecuador, un rubro a la vez.</p>
+          <div class="mark">SquareNet Software · Est. 2002</div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="plataforma.html">Conocer la plataforma</a>
+            <a class="btn btn-secondary" href="contacto.html">Contactarnos</a>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -251,43 +382,78 @@
       navToggle.setAttribute('aria-expanded', String(!open));
     });
 
-    // Los contadores del ledger arrancan recién cuando entran en pantalla.
+    // El camino se llena con el scroll; cada parada se activa cuando la línea llega a su nodo.
+    // Sin JS (o con movimiento reducido) queda el camino completo y todo visible.
     (function () {
-      var ledger = document.querySelector('.ledger');
-      if (!ledger) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var road = document.getElementById('road');
+      if (!road) return;
+      var firstNode = road.querySelector('.node');
+      var lastNode = road.querySelector('.stop.end .node');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !firstNode || !lastNode) return;
 
-      function runCounters() {
-        Array.prototype.forEach.call(ledger.querySelectorAll('[data-count]'), function (el) {
-          var target = parseInt(el.getAttribute('data-count'), 10);
-          var start = null;
-          var duration = 1100;
-          function step(ts) {
-            if (!start) start = ts;
-            var p = Math.min((ts - start) / duration, 1);
-            var eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = Math.round(eased * target);
-            if (p < 1) requestAnimationFrame(step);
-            else el.textContent = target;
-          }
-          el.textContent = '0';
-          requestAnimationFrame(step);
-        });
+      var stops = Array.prototype.slice.call(road.querySelectorAll('.stop'));
+      var movers = Array.prototype.slice.call(road.querySelectorAll('.st-ghost .g, .st-stats b'));
+      var counters = Array.prototype.slice.call(road.querySelectorAll('[data-count]'));
+      var prev = {};
+      var queued = false;
+
+      function showCount(el, v) { el.textContent = Math.round(v) + (el.getAttribute('data-suffix') || ''); }
+      function count(el) {
+        var to = parseFloat(el.getAttribute('data-count')), t0 = null;
+        (function step(t) {
+          if (t0 === null) t0 = t;
+          var p = Math.min(1, (t - t0) / 1400);
+          showCount(el, to * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      }
+      function setVar(name, value) {
+        if (prev[name] === value) return;
+        prev[name] = value;
+        road.style.setProperty(name, value);
       }
 
-      if (!('IntersectionObserver' in window)) { runCounters(); return; }
-      var io = new IntersectionObserver(function (entries) {
-        if (!entries[0].isIntersecting) return;
-        io.disconnect();
-        runCounters();
-      }, { threshold: 0.35 });
-      io.observe(ledger);
+      function frame() {
+        queued = false;
+        var vh = window.innerHeight;
+        var rr = road.getBoundingClientRect();
+        var a = firstNode.getBoundingClientRect();
+        var b = lastNode.getBoundingClientRect();
+        var y0 = a.top + a.height / 2;
+        var y1 = b.top + b.height / 2;
+        var line = vh * 0.6;
+        setVar('--p', Math.max(0, Math.min(1, (line - y0) / (y1 - y0))).toFixed(4));
+        setVar('--y0', (y0 - rr.top).toFixed(1) + 'px');
+        setVar('--yb', (rr.bottom - y1).toFixed(1) + 'px');
+        stops.forEach(function (s) {
+          var n = s.querySelector('.node').getBoundingClientRect();
+          if (!s.classList.contains('is-seen') && n.top < vh * 0.88) {
+            s.classList.add('is-seen');
+            Array.prototype.forEach.call(s.querySelectorAll('[data-count]'), count);
+          }
+          s.classList.toggle('is-on', n.top + n.height / 2 <= line);
+        });
+        movers.forEach(function (m) {
+          var r = m.parentNode.getBoundingClientRect();
+          var g = (r.top + r.height / 2 - vh / 2) / vh;
+          m.style.setProperty('--gp', Math.max(-1.2, Math.min(1.2, g)).toFixed(3));
+        });
+      }
+      function queue() { if (!queued) { queued = true; requestAnimationFrame(frame); } }
+
+      counters.forEach(function (el) { showCount(el, 0); });
+      road.classList.add('is-live');
+      window.addEventListener('scroll', queue, { passive: true });
+      window.addEventListener('resize', queue);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(queue);
+      frame();
     })();
   </script>
   <script src="js/fecha.js"></script>
-  <script src="js/reveal.js"></script>
+  <script src="js/art.js"></script>
   <a class="whatsapp-float" href="https://wa.me/squarenetec" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 </body>
 </html>
