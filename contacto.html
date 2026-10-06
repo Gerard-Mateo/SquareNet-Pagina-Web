@@ -2,31 +2,93 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>SquareNet Software - Contactos</title>
+<title>Contacto | SquareNet — Nómina y RRHH en Ecuador</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="sistema, software, gestion humana, nomina, recursos humanos, control de asistencia, ecuador">
-<meta name="description" content="Datos de contacto de SquareNet Soluciones Informáticas">
+<meta name="description" content="Contacta a SquareNet: PBX (02) 450-7012 y correos de información y ventas. Oficinas en San Rafael Business Center, San Rafael, Quito.">
 <link rel="canonical" href="https://www.squarenet.com.ec/contacto.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SquareNet">
 <meta property="og:locale" content="es_EC">
 <meta property="og:url" content="https://www.squarenet.com.ec/contacto.html">
-<meta property="og:title" content="SquareNet Software - Contactos">
-<meta property="og:description" content="Datos de contacto de SquareNet Soluciones Informáticas">
+<meta property="og:title" content="Contacto | SquareNet — Nómina y RRHH en Ecuador">
+<meta property="og:description" content="Contacta a SquareNet: PBX (02) 450-7012 y correos de información y ventas. Oficinas en San Rafael Business Center, San Rafael, Quito.">
 <meta property="og:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SquareNet Software - Contactos">
-<meta name="twitter:description" content="Datos de contacto de SquareNet Soluciones Informáticas">
+<meta name="twitter:title" content="Contacto | SquareNet — Nómina y RRHH en Ecuador">
+<meta name="twitter:description" content="Contacta a SquareNet: PBX (02) 450-7012 y correos de información y ventas. Oficinas en San Rafael Business Center, San Rafael, Quito.">
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin: var(--space-6) 0; }
-  .contact-grid a { text-decoration: none; }
-  .contact-grid .card { text-align: center; align-items: center; }
-  .map-frame { aspect-ratio: 4/3; }
-  .map-frame iframe { width: 100%; height: 100%; border: 0; border-radius: var(--radius-sm); }
-  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+  /* — hero: copia directa + panel con todos los canales — */
+  .contact-hero .cta-row .btn svg{width:17px;height:17px;flex:none}
+  .reach{border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:var(--space-6) var(--space-6) var(--space-4)}
+  .reach-title{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:var(--space-2)}
+  .reach-list{list-style:none;margin:0;padding:0}
+  .reach-list a{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:var(--space-3);align-items:center;
+    padding:var(--space-3) 0;border-bottom:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none}
+  .reach-list li:last-child a{border-bottom:0}
+  .reach-ico{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);
+    background:rgba(153,224,255,.12);color:var(--color-accent-300);transition:background .25s ease}
+  .reach-ico svg{width:20px;height:20px}
+  .reach-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .reach-lab{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .reach-val{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:18px;color:#fff;overflow-wrap:anywhere}
+  .reach-go{font-family:var(--font-heading);font-size:20px;color:var(--color-accent-300);transition:transform .25s ease}
+  .reach-list a:hover .reach-ico{background:rgba(153,224,255,.24)}
+  .reach-list a:hover .reach-go{transform:translateX(4px)}
+
+  /* — áreas — */
+  .dept-head{margin-top:var(--space-8)}
+  .dept-head h2{margin-bottom:var(--space-2)}
+  .dept-head p{margin:0;opacity:.8;max-width:60ch}
+  .dept-grid{margin-top:var(--space-6);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+  .dept-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-6) var(--space-4) var(--space-4);
+    background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);
+    transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,border-color .3s ease}
+  .dept-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--color-accent-300)}
+  .dept-ico{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);
+    background:var(--color-accent-100);color:var(--color-accent-700);transition:background .25s ease}
+  .dept-card:hover .dept-ico{background:var(--color-accent-200)}
+  .dept-ico svg{width:24px;height:24px}
+  .dept-card h3{font-size:21px;margin:0}
+  .dept-card p{margin:0;font-size:14px;line-height:1.55;color:var(--color-neutral-700);flex:1}
+  .dept-links{display:flex;flex-direction:column;gap:6px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)}
+  .dept-links a{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-heading);font-weight:var(--font-heading-weight);
+    font-size:14.5px;color:var(--color-accent-700);text-decoration:none;width:fit-content}
+  .dept-links a svg{width:16px;height:16px;flex:none}
+  .dept-links a:hover{text-decoration:underline}
+  .dept-note{margin:0;font-size:13.5px;line-height:1.55;color:var(--color-neutral-700)}
+  .dept-note a{display:inline;font-size:inherit}
+
+  /* — visita — */
+  .visit{margin:var(--space-8) 0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-6);align-items:stretch}
+  .visit-info{display:flex;flex-direction:column;gap:var(--space-3)}
+  .visit-info h2{margin:0}
+  .visit-place{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:19px;margin:0}
+  .visit-addr{margin:0;color:var(--color-neutral-700);line-height:1.6}
+  .visit-btns{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+  .visit-btns .btn svg{width:16px;height:16px;flex:none}
+  .visit-photo{margin-top:auto;padding-top:var(--space-2);display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-2)}
+  .visit-photo img{width:100%;max-width:300px;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-md);
+    box-shadow:var(--shadow-md);border:4px solid #fff}
+  .visit-photo figcaption{font-size:12.5px;line-height:1.5;color:var(--color-neutral-600);margin:0}
+  .visit-map{position:relative;min-height:440px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);background:var(--color-neutral-200)}
+  .visit-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .map-open{position:absolute;top:var(--space-3);right:var(--space-3);z-index:1;background:#fff;color:var(--color-text);box-shadow:var(--shadow-md)}
+  .map-open:hover{background:var(--color-accent-100);color:var(--color-accent-800)}
+
+  @media (max-width:860px){
+    .dept-grid{grid-template-columns:1fr}
+    .visit{grid-template-columns:1fr}
+    .visit-map{min-height:340px}
+    .map-open{display:none}
+    .reach{padding:var(--space-4)}
+    .reach-val{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .dept-card,.reach-go,.reach-ico,.dept-ico{transition:none!important}
+  }
 </style>
 </head>
 <body>
@@ -46,56 +108,82 @@
     </nav>
   </div>
 
-  <div class="wrap hero">
-    <div class="hero-copy">
+  <div class="wrap hero contact-hero">
+    <div class="hero-copy" data-reveal>
       <div class="kicker">Contacto</div>
-      <h1>El mejor software para las mejores empresas</h1>
-      <p>Nuestro servicio de soporte es único y pionero en el mercado, pues incluye actualizaciones continuas y soporte ilimitado vía TeamViewer o AnyDesk.</p>
+      <h1>Hablemos</h1>
+      <p>Escríbenos, llámanos o visítanos en San Rafael, Quito. Para cotizaciones, escríbele directo a nuestro equipo de ventas.</p>
     </div>
-    <figure class="halftone hero-media"><img src="media/contacto.png" alt="Oficinas y equipo de soporte de SquareNet en Quito, Ecuador"></figure>
+    <div class="reach band-dark" data-reveal>
+      <span class="reach-title">Contacto directo</span>
+      <ul class="reach-list">
+        <li><a href="tel:+59324507012">
+          <span class="reach-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5l1.6 4.2-2.2 1.4a11 11 0 0 0 5.5 5.5l1.4-2.2L19 14.5V18a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>
+          <span class="reach-txt"><span class="reach-lab">Teléfono (PBX)</span><span class="reach-val">(02) 450-7012</span></span>
+          <span class="reach-go" aria-hidden="true">→</span></a></li>
+        <li><a href="tel:+593998242295">
+          <span class="reach-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 18.4h2.8"/></svg></span>
+          <span class="reach-txt"><span class="reach-lab">Celular</span><span class="reach-val">099 824 2295</span></span>
+          <span class="reach-go" aria-hidden="true">→</span></a></li>
+        <li><a href="mailto:info@squarenet.com.ec?subject=Consulta%20SquareNet">
+          <span class="reach-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></span>
+          <span class="reach-txt"><span class="reach-lab">Correo</span><span class="reach-val">info@squarenet.com.ec</span></span>
+          <span class="reach-go" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
   </div>
 
   <div class="wrap">
-    <div class="contact-grid">
-      <a href="mailto:info@squarenet.com.ec?subject=info%20SquareNet">
-        <div class="card elev-sm">
-          <h3 class="card-title">Información</h3>
-          <p class="card-body">Consultas generales sobre SquareNet.</p>
-        </div>
-      </a>
-      <a href="mailto:ventas@squarenet.com.ec?subject=ventas%20SquareNet">
-        <div class="card elev-sm">
-          <h3 class="card-title">Ventas</h3>
-          <p class="card-body">Cotizaciones y asesoría comercial.</p>
-        </div>
-      </a>
-      <a href="mailto:soporte@squarenet.com.ec?subject=soporte%20SquareNet">
-        <div class="card elev-sm">
-          <h3 class="card-title">Soporte</h3>
-          <p class="card-body">Soporte técnico para clientes.</p>
-        </div>
-      </a>
+    <div class="dept-head" data-reveal>
+      <h2>¿Con quién necesitas hablar?</h2>
+      <p>Información y Ventas tienen su propio correo, así tu mensaje le llega directo a quien lo puede resolver.</p>
     </div>
-
-    <section>
-      <div class="media-row reverse">
-        <figure class="halftone media-row-media"><img src="img/edificio.jpg" alt="Edificio San Rafael Business Center"></figure>
-        <div>
-          <h2>Dirección</h2>
-          <p>Av. San Luis s/n y 9na transversal, Edificio San Rafael Business Center, Oficina 5E, frente a Casabaca.<br>
-          San Rafael, Quito, Ecuador<br>
-          PBX: (593)-(02) 450-7012<br>
-          Celular: 0998242295</p>
-          <p>Las oficinas de SquareNet residen en San Rafael, Quito, Ecuador. A inicios de 2017 nos mudamos a un nuevo edificio innovador con las más altas prestaciones, mayor seguridad y más espacio, para mejor comodidad de nuestros clientes y de nuestro personal.</p>
+    <div class="dept-grid">
+      <div class="dept-card" data-reveal>
+        <span class="dept-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg></span>
+        <h3>Información</h3>
+        <p>Preguntas generales sobre SquareNet, sus módulos y cómo funciona la plataforma.</p>
+        <div class="dept-links">
+          <a href="mailto:info@squarenet.com.ec?subject=Informaci%C3%B3n%20SquareNet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>info@squarenet.com.ec</a>
         </div>
       </div>
-    </section>
+      <div class="dept-card" data-reveal>
+        <span class="dept-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><path d="M3 12.5h18"/><path d="M11 12.5v1.6h2v-1.6"/></svg></span>
+        <h3>Ventas</h3>
+        <p>Cotizaciones y asesoría comercial: te ayudamos a elegir los módulos que tu empresa necesita.</p>
+        <div class="dept-links">
+          <a href="mailto:ventas@squarenet.com.ec?subject=Cotizaci%C3%B3n%20SquareNet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>ventas@squarenet.com.ec</a>
+        </div>
+      </div>
+      <div class="dept-card" data-reveal>
+        <span class="dept-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19c0 1.4-1.6 2.5-4 2.5h-2"/></svg></span>
+        <h3>Soporte</h3>
+        <p>Soporte técnico para clientes, con atención remota vía TeamViewer o AnyDesk y actualizaciones continuas.</p>
+        <div class="dept-links">
+          <p class="dept-note">¿Ya eres cliente? Usa el canal de soporte que tienes asignado o llámanos al <a href="tel:+59324507012">(02) 450-7012</a>.</p>
+        </div>
+      </div>
+    </div>
 
-    <section>
-      <h2>Cómo llegar</h2>
-      <figure class="map-frame">
+    <section class="visit">
+      <div class="visit-info" data-reveal>
+        <div class="kicker">Oficinas</div>
+        <h2>Visítanos</h2>
+        <p class="visit-place">San Rafael Business Center · Oficina 5E</p>
+        <p class="visit-addr">Av. San Luis s/n y 9na transversal, frente a Casabaca<br>San Rafael, Quito, Ecuador</p>
+        <div class="visit-btns">
+          <a class="btn btn-primary" href="https://maps.google.com/?cid=15686918927343255722" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Abrir en Google Maps</a>
+          <a class="btn btn-secondary" href="https://waze.com/ul?ll=-0.304589,-78.453472&amp;navigate=yes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4 3.5 10.8l7 2.7 2.7 7Z"/></svg>Ir con Waze</a>
+        </div>
+        <figure class="visit-photo">
+          <img src="img/edificio.jpg" alt="Fachada del edificio San Rafael Business Center, donde están las oficinas de SquareNet" width="300" height="225" loading="lazy">
+          <figcaption>El San Rafael Business Center, nuestra oficina desde 2017.</figcaption>
+        </figure>
+      </div>
+      <div class="visit-map" data-reveal>
         <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m11!1m3!1d685.0671080572766!2d-78.45347187567852!3d-0.304589283630217!2m2!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5bdcf479ab56f%3A0xd9b321a6cca580aa!2sSquareNet%20Soluciones%20Inform%C3%A1ticas!5e1!3m2!1ses!2sec!4v1734385425864!5m2!1ses!2sec" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de SquareNet en el mapa"></iframe>
-      </figure>
+        <a class="btn map-open" href="https://maps.google.com/?cid=15686918927343255722" target="_blank" rel="noopener">Ver en Google Maps ↗</a>
+      </div>
     </section>
   </div>
 
@@ -148,8 +236,6 @@
     });
   </script>
   <script src="js/fecha.js"></script>
-  <a class="whatsapp-float" href="https://wa.me/593982204777" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-  </a>
+  <script src="js/reveal.js"></script>
 </body>
 </html>
