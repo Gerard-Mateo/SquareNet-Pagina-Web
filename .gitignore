@@ -1,3 +1,5 @@
 .claude/
 Thumbs.db
 .DS_Store
+# master del video del laptop (30 MB): fuente para regenerar media/squarenet-loop*.mp4, no se sirve
+squarenet-full-loop-v2.mp4
