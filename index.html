@@ -94,19 +94,15 @@
   .feature-slide > .wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);z-index:1;padding-right:calc(var(--space-6) + 64px)}
   .feature-slide-copy{color:#fff;max-width:620px}
   .feature-slide-kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:var(--space-3);opacity:0}
-  .feature-slide-copy h2{font-size:44px;color:#fff;margin-bottom:var(--space-3);opacity:0}
-  .feature-slide-copy .feature-slide-lead{font-size:19px;font-weight:600;line-height:1.4;color:#fff;opacity:0;margin:0 0 var(--space-2);max-width:480px}
-  .feature-slide-copy .feature-slide-body{font-size:15px;line-height:1.6;color:#fff;opacity:0;margin:0;max-width:540px}
+  .feature-slide-copy h2{font-size:56px;line-height:1.04;color:#fff;margin-bottom:var(--space-4);opacity:0;text-wrap:balance}
+  .feature-slide-copy .feature-slide-lead{font-size:20px;line-height:1.5;color:rgba(255,255,255,.9);opacity:0;margin:0;max-width:460px;text-wrap:pretty}
   @keyframes featureTextIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes featureBodyIn{from{opacity:0;transform:translateY(20px)}to{opacity:.85;transform:translateY(0)}}
   .feature-slide.is-active .feature-slide-kicker{animation:featureTextIn .7s cubic-bezier(.22,.61,.36,1) both .15s}
   .feature-slide.is-active .feature-slide-copy h2{animation:featureTextIn .7s cubic-bezier(.22,.61,.36,1) both .28s}
   .feature-slide.is-active .feature-slide-copy .feature-slide-lead{animation:featureTextIn .7s cubic-bezier(.22,.61,.36,1) both .42s}
-  .feature-slide.is-active .feature-slide-copy .feature-slide-body{animation:featureBodyIn .7s cubic-bezier(.22,.61,.36,1) both .54s}
   @media (prefers-reduced-motion:reduce){
-    .feature-slide,.feature-slide-bg,.feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead,.feature-slide-copy .feature-slide-body{animation:none!important;transition:none!important}
+    .feature-slide,.feature-slide-bg,.feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead{animation:none!important;transition:none!important}
     .feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead{opacity:1!important}
-    .feature-slide-copy .feature-slide-body{opacity:.85!important}
   }
   .carousel-dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:8px;z-index:2}
   .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
@@ -138,216 +134,31 @@
   .art-ready .feature-slide.is-active .feature-slide-art [data-pop]{transform-box:fill-box;transform-origin:center;animation:artPop .55s cubic-bezier(.34,1.56,.64,1) both var(--d, 1s)}
   .art-ready .feature-slide.is-active .feature-slide-art .art-soft-dash{animation:artFade .7s ease both var(--d, .4s),artDashFlow 2.6s linear infinite}
   .art-ready .feature-slide.is-active .feature-slide-art .art-halo{animation:artFade 1.6s ease both .1s}
-  .feature-slide-art .art-fx{font-family:var(--font-heading);font-style:italic;font-weight:600;font-size:7.4px;fill:var(--color-accent-300);stroke:none}
-  .feature-slide-art .art-lens{transform:translate(126px,137px)}
-  .feature-slide-art .art-lens-inner{transform:translate(-201.6px,-219.2px) scale(1.6)}
-  .feature-slide-art .art-lens-rim,.feature-slide-art .art-card{opacity:0}
-  @keyframes artLensMove{
-    0%,6%{transform:translate(120px,100px);animation-timing-function:cubic-bezier(.45,0,.2,1)}
-    28%,52%{transform:translate(126px,137px);animation-timing-function:cubic-bezier(.45,0,.2,1)}
-    70%,76%{transform:translate(122px,158px);animation-timing-function:cubic-bezier(.45,0,.2,1)}
-    96%,100%{transform:translate(120px,100px)}
-  }
-  @keyframes artLensInner{
-    0%,6%{transform:translate(-192px,-160px) scale(1.6);animation-timing-function:cubic-bezier(.45,0,.2,1)}
-    28%,52%{transform:translate(-201.6px,-219.2px) scale(1.6);animation-timing-function:cubic-bezier(.45,0,.2,1)}
-    70%,76%{transform:translate(-195.2px,-252.8px) scale(1.6);animation-timing-function:cubic-bezier(.45,0,.2,1)}
-    96%,100%{transform:translate(-192px,-160px) scale(1.6)}
-  }
-  @keyframes artLensRim{0%,32%{opacity:0}38%,50%{opacity:1}56%,100%{opacity:0}}
-  @keyframes artCard{0%,34%{opacity:0;transform:translate(8px,8px)}41%,52%{opacity:1;transform:translate(0,0)}58%,100%{opacity:0;transform:translate(8px,8px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .art-lens{animation:artLensMove 9s infinite 2.6s backwards}
-  .art-ready .feature-slide.is-active .feature-slide-art .art-lens-inner{animation:artLensInner 9s infinite 2.6s backwards}
-  .art-ready .feature-slide.is-active .feature-slide-art .art-lens-rim{animation:artLensRim 9s infinite 2.6s}
-  .art-ready .feature-slide.is-active .feature-slide-art .art-card{animation:artCard 9s infinite 2.6s}
-  /* art-scenes:start (generado por build_art.py) */
-  .feature-slide-art .art-t{font-family:var(--font-heading);font-size:6.4px;fill:rgba(255,255,255,.78);stroke:none}
-  .feature-slide-art .art-mono{font-family:Consolas,"Courier New",monospace}
-  .feature-slide-art .art-cap{font-size:5.6px;letter-spacing:.09em;fill:rgba(255,255,255,.55)}
-  .art-ready .feature-slide.is-active .feature-slide-art [data-fade]{animation:artFade .7s ease both var(--d, .25s)}
-  .feature-slide-art .s1-rim,.feature-slide-art .s1-pk,.feature-slide-art .s1-ping{opacity:0}
-  .feature-slide-art .s1-ping,.feature-slide-art .s1-badge{transform-box:fill-box;transform-origin:center}
-  @keyframes s1K1{0%,4%{opacity:0;transform:translate(50px,75px)}5%{opacity:1;transform:translate(50px,75px)}9%{transform:translate(50px,100px)}14%{opacity:1;transform:translate(84px,100px)}15.5%,100%{opacity:0;transform:translate(84px,100px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-k1{animation:s1K1 10s linear 2.8s infinite backwards}
-  @keyframes s1P1{0%,3.5%{opacity:0;transform:scale(1)}4%{opacity:.9;transform:scale(1)}11%,100%{opacity:0;transform:scale(1.75)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-p1{animation:s1P1 10s ease-out 2.8s infinite backwards}
-  @keyframes s1L1{0%,14.5%{opacity:0}16.0%,88%{opacity:1}91%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-l1{animation:s1L1 10s ease 2.8s infinite backwards}
-  @keyframes s1K2{0%,18%{opacity:0;transform:translate(190px,75px)}19%{opacity:1;transform:translate(190px,75px)}23%{transform:translate(190px,100px)}28%{opacity:1;transform:translate(156px,100px)}29.5%,100%{opacity:0;transform:translate(156px,100px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-k2{animation:s1K2 10s linear 2.8s infinite backwards}
-  @keyframes s1P2{0%,17.5%{opacity:0;transform:scale(1)}18%{opacity:.9;transform:scale(1)}25%,100%{opacity:0;transform:scale(1.75)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-p2{animation:s1P2 10s ease-out 2.8s infinite backwards}
-  @keyframes s1L2{0%,28.5%{opacity:0}30.0%,88%{opacity:1}91%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-l2{animation:s1L2 10s ease 2.8s infinite backwards}
-  @keyframes s1K3{0%,32%{opacity:0;transform:translate(50px,165px)}33%{opacity:1;transform:translate(50px,165px)}37%{transform:translate(50px,140px)}42%{opacity:1;transform:translate(84px,140px)}43.5%,100%{opacity:0;transform:translate(84px,140px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-k3{animation:s1K3 10s linear 2.8s infinite backwards}
-  @keyframes s1P3{0%,31.5%{opacity:0;transform:scale(1)}32%{opacity:.9;transform:scale(1)}39%,100%{opacity:0;transform:scale(1.75)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-p3{animation:s1P3 10s ease-out 2.8s infinite backwards}
-  @keyframes s1L3{0%,42.5%{opacity:0}44.0%,88%{opacity:1}91%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-l3{animation:s1L3 10s ease 2.8s infinite backwards}
-  @keyframes s1K4{0%,46%{opacity:0;transform:translate(190px,165px)}47%{opacity:1;transform:translate(190px,165px)}51%{transform:translate(190px,140px)}56%{opacity:1;transform:translate(156px,140px)}57.5%,100%{opacity:0;transform:translate(156px,140px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-k4{animation:s1K4 10s linear 2.8s infinite backwards}
-  @keyframes s1P4{0%,45.5%{opacity:0;transform:scale(1)}46%{opacity:.9;transform:scale(1)}53%,100%{opacity:0;transform:scale(1.75)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-p4{animation:s1P4 10s ease-out 2.8s infinite backwards}
-  @keyframes s1L4{0%,56.5%{opacity:0}58.0%,88%{opacity:1}91%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-l4{animation:s1L4 10s ease 2.8s infinite backwards}
-  @keyframes s1Badge{0%,59%{opacity:0;transform:scale(.3)}62.5%{opacity:1;transform:scale(1.12)}64.5%,88%{opacity:1;transform:scale(1)}91%,100%{opacity:0;transform:scale(.6)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-badge{animation:s1Badge 10s ease 2.8s infinite backwards}
-  @keyframes s1Rim{0%,59%{opacity:0}63%{opacity:1}80%{opacity:.3}88%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s1-rim{animation:s1Rim 10s ease 2.8s infinite backwards}
-  .feature-slide-art .s2-h,.feature-slide-art .s2-rip{opacity:0}
-  .feature-slide-art .s2-seal,.feature-slide-art .s2-rip,.feature-slide-art .s2-ok{transform-box:fill-box;transform-origin:center}
-  @keyframes s2DA{0%,5%{transform:translateY(0)}9%,15%{transform:translateY(-7px)}19%,100%{transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-dA{animation:s2DA 10s cubic-bezier(.45,0,.2,1) 2.8s infinite backwards}
-  @keyframes s2HA{0%,5%{opacity:0}9%,15%{opacity:1}19%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-hA{animation:s2HA 10s ease 2.8s infinite backwards}
-  @keyframes s2DC{0%,17%{transform:translateY(0)}21%,27%{transform:translateY(-7px)}31%,100%{transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-dC{animation:s2DC 10s cubic-bezier(.45,0,.2,1) 2.8s infinite backwards}
-  @keyframes s2HC{0%,17%{opacity:0}21%,27%{opacity:1}31%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-hC{animation:s2HC 10s ease 2.8s infinite backwards}
-  @keyframes s2DB{0%,29%{transform:translateY(0)}33%,44%{transform:translateY(-7px)}48%,100%{transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-dB{animation:s2DB 10s cubic-bezier(.45,0,.2,1) 2.8s infinite backwards}
-  @keyframes s2HB{0%,29%{opacity:0}33%,44%{opacity:1}48%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-hB{animation:s2HB 10s ease 2.8s infinite backwards}
-  @keyframes s2Seal{0%,45%{opacity:0;transform:scale(1.75)}48.5%{opacity:1;transform:scale(.93)}51%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(1)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-seal{animation:s2Seal 10s cubic-bezier(.45,0,.2,1) 2.8s infinite backwards}
-  @keyframes s2Rip{0%,48%{opacity:0;transform:scale(1)}49%{opacity:.9;transform:scale(1)}58%,100%{opacity:0;transform:scale(1.9)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-rip{animation:s2Rip 10s ease-out 2.8s infinite backwards}
-  @keyframes s2Ok{0%,52%{opacity:0;transform:scale(.3)}55.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.6)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s2-ok{animation:s2Ok 10s ease 2.8s infinite backwards}
-  .feature-slide-art .s3-warn,.feature-slide-art .s3-tot,.feature-slide-art .s3-rip{opacity:0}
-  .feature-slide-art .s3-cur{transform:translate(170px,134px)}
-  .feature-slide-art .s3-rip{transform-box:fill-box;transform-origin:center}
-  @keyframes s3Cur{0%,4%{opacity:0;transform:translate(64px,36px)}7%{opacity:1;transform:translate(66px,40px);animation-timing-function:cubic-bezier(.45,0,.2,1)}22%,29%{opacity:1;transform:translate(152px,117px);animation-timing-function:cubic-bezier(.45,0,.2,1)}42%,68%{opacity:1;transform:translate(170px,134px)}74%,100%{opacity:0;transform:translate(170px,134px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-cur{animation:s3Cur 10s linear 2.8s infinite backwards}
-  @keyframes s3Warn{0%,26%{opacity:1}27.5%,88%{opacity:0}92%,100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-warn{animation:s3Warn 10s ease 2.8s infinite backwards}
-  @keyframes s3Fix{0%,26.5%{opacity:0}28%,88%{opacity:1}92%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-fix{animation:s3Fix 10s ease 2.8s infinite backwards}
-  @keyframes s3Rip{0%,25.5%{opacity:0;transform:scale(1)}26%{opacity:1;transform:scale(1)}33%,100%{opacity:0;transform:scale(3.4)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-rip{animation:s3Rip 10s ease-out 2.8s infinite backwards}
-  @keyframes s3Toast{0%,30%{opacity:0;transform:translateY(-5px)}34%,72%{opacity:1;transform:translateY(0)}77%,100%{opacity:0;transform:translateY(-5px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-toast{animation:s3Toast 10s ease 2.8s infinite backwards}
-  @keyframes s3Tot{0%,33%{opacity:0}36%{opacity:1}58%{opacity:.45}66%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-tot{animation:s3Tot 10s ease 2.8s infinite backwards}
-  @keyframes s3Live{0%,100%{opacity:1}50%{opacity:.3}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s3-live{animation:s3Live 1.6s ease-in-out infinite}
-  .feature-slide-art .s4-idle,.feature-slide-art .s4-glow,.feature-slide-art .s4-scan,.feature-slide-art .s4-pk{opacity:0}
-  @keyframes s4Scan{0%,5%{opacity:0;transform:translateY(0)}7%{opacity:1;transform:translateY(0)}19%{opacity:1;transform:translateY(58px)}21%,100%{opacity:0;transform:translateY(58px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-scan{animation:s4Scan 10s cubic-bezier(.4,0,.6,1) 2.8s infinite backwards}
-  @keyframes s4Glow{0%,17%{opacity:0}21%{opacity:1}34%{opacity:.35}40%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-glow{animation:s4Glow 10s ease 2.8s infinite backwards}
-  @keyframes s4Led{0%,21%{opacity:0}23%,84%{opacity:1}88%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-led{animation:s4Led 10s ease 2.8s infinite backwards}
-  @keyframes s4Idle{0%,22%{opacity:1}24%,86%{opacity:0}90%,100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-idle{animation:s4Idle 10s ease 2.8s infinite backwards}
-  @keyframes s4Ok{0%,22.5%{opacity:0}25%,86%{opacity:1}89%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-ok{animation:s4Ok 10s ease 2.8s infinite backwards}
-  @keyframes s4Pk{0%,27%{opacity:0;transform:translate(112px,74px)}28%{opacity:1;transform:translate(112px,74px)}33%{transform:translate(120px,109.5px)}38%{opacity:1;transform:translate(128px,145px)}39.5%,100%{opacity:0;transform:translate(128px,145px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-pk{animation:s4Pk 10s linear 2.8s infinite backwards}
-  @keyframes s4New{0%,38%{opacity:0;transform:translateX(6px)}42%,86%{opacity:1;transform:translateX(0)}90%,100%{opacity:0;transform:translateX(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s4-new{animation:s4New 10s ease 2.8s infinite backwards}
-  .feature-slide-art .s5-caret{transform:translateX(166px)}
-  .feature-slide-art .s5-ph{opacity:0}
-  .feature-slide-art .s5-btn{transform-box:fill-box;transform-origin:center}
-  @keyframes s5T1{0%,6%{opacity:0;transform:translateY(3px)}8%,88%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-t1{animation:s5T1 10s ease 2.8s infinite backwards}
-  @keyframes s5T2{0%,11%{opacity:0;transform:translateY(3px)}13%,88%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-t2{animation:s5T2 10s ease 2.8s infinite backwards}
-  @keyframes s5T3{0%,15%{opacity:0;transform:translateY(3px)}17%,88%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-t3{animation:s5T3 10s ease 2.8s infinite backwards}
-  @keyframes s5T4{0%,19%{opacity:0;transform:translateY(3px)}21%,88%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-t4{animation:s5T4 10s ease 2.8s infinite backwards}
-  @keyframes s5T5{0%,24%{opacity:0;transform:translateY(3px)}26%,88%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-t5{animation:s5T5 10s ease 2.8s infinite backwards}
-  @keyframes s5Caret{0%{opacity:1;transform:translateX(68px)}6.9%{transform:translateX(68px)}7%{transform:translateX(99.5px)}11.9%{transform:translateX(99.5px)}12%{transform:translateX(108.5px)}15.9%{transform:translateX(108.5px)}16%{transform:translateX(121px)}19.9%{transform:translateX(121px)}20%{transform:translateX(130px)}24.9%{transform:translateX(130px)}25%{transform:translateX(166px)}58%{opacity:1;transform:translateX(166px)}60%,100%{opacity:0;transform:translateX(166px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-caret{animation:s5Caret 10s linear 2.8s infinite backwards}
-  @keyframes s5Blink{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-blink{animation:s5Blink 1s steps(1) infinite}
-  @keyframes s5V1{0%,32%{opacity:0;transform:translateX(-4px)}34.5%,88%{opacity:1;transform:translateX(0)}91%,100%{opacity:0;transform:translateX(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-v1{animation:s5V1 10s ease 2.8s infinite backwards}
-  @keyframes s5Ph1{0%,32%{opacity:1}33.5%,89%{opacity:0}92%,100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-ph1{animation:s5Ph1 10s ease 2.8s infinite backwards}
-  @keyframes s5V2{0%,36%{opacity:0;transform:translateX(-4px)}38.5%,88%{opacity:1;transform:translateX(0)}91%,100%{opacity:0;transform:translateX(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-v2{animation:s5V2 10s ease 2.8s infinite backwards}
-  @keyframes s5Ph2{0%,36%{opacity:1}37.5%,89%{opacity:0}92%,100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-ph2{animation:s5Ph2 10s ease 2.8s infinite backwards}
-  @keyframes s5V3{0%,40%{opacity:0;transform:translateX(-4px)}42.5%,88%{opacity:1;transform:translateX(0)}91%,100%{opacity:0;transform:translateX(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-v3{animation:s5V3 10s ease 2.8s infinite backwards}
-  @keyframes s5Ph3{0%,40%{opacity:1}41.5%,89%{opacity:0}92%,100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-ph3{animation:s5Ph3 10s ease 2.8s infinite backwards}
-  @keyframes s5Btn{0%,60%{transform:scale(1)}61.5%{transform:scale(.9)}63.5%,100%{transform:scale(1)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-btn{animation:s5Btn 10s ease 2.8s infinite backwards}
-  @keyframes s5Saved{0%,63%{opacity:0;transform:translateY(3px)}66%,88%{opacity:1;transform:translateY(0)}91%,100%{opacity:0;transform:translateY(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s5-saved{animation:s5Saved 10s ease 2.8s infinite backwards}
-  .feature-slide-art .s7-pk,.feature-slide-art .s7-c1,.feature-slide-art .s7-c2{opacity:0}
-  .feature-slide-art .s7-badge,.feature-slide-art .s7-ok{transform-box:fill-box;transform-origin:center}
-  @keyframes s7Gear{to{transform:rotate(360deg)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-gear{transform-origin:58px 120px;animation:s7Gear 9s linear infinite}
-  @keyframes s7K1{0%,6%{opacity:0;transform:translate(78px,120px)}7%{opacity:1;transform:translate(78px,120px)}9%{transform:translate(93.75px,108px)}11%{opacity:1;transform:translate(108px,96px)}12%,100%{opacity:0;transform:translate(108px,96px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-k1{animation:s7K1 10s linear 2.8s infinite backwards}
-  @keyframes s7N1{0%,11%{opacity:0;transform:translateY(-7px)}14%,88%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(-3px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-n1{animation:s7N1 10s cubic-bezier(.2,.8,.3,1.2) 2.8s infinite backwards}
-  @keyframes s7K2{0%,26%{opacity:0;transform:translate(78px,120px)}27%{opacity:1;transform:translate(78px,120px)}29%{transform:translate(93.75px,108px)}31%{opacity:1;transform:translate(108px,96px)}32%,100%{opacity:0;transform:translate(108px,96px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-k2{animation:s7K2 10s linear 2.8s infinite backwards}
-  @keyframes s7N2{0%,31%{opacity:0;transform:translateY(-7px)}34%,88%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(-3px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-n2{animation:s7N2 10s cubic-bezier(.2,.8,.3,1.2) 2.8s infinite backwards}
-  @keyframes s7K3{0%,46%{opacity:0;transform:translate(78px,120px)}47%{opacity:1;transform:translate(78px,120px)}49%{transform:translate(93.75px,108px)}51%{opacity:1;transform:translate(108px,96px)}52%,100%{opacity:0;transform:translate(108px,96px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-k3{animation:s7K3 10s linear 2.8s infinite backwards}
-  @keyframes s7N3{0%,51%{opacity:0;transform:translateY(-7px)}54%,88%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(-3px)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-n3{animation:s7N3 10s cubic-bezier(.2,.8,.3,1.2) 2.8s infinite backwards}
-  @keyframes s7C1{0%,10.5%{opacity:0}11.5%,30.5%{opacity:1}31.5%,100%{opacity:0}}
-  @keyframes s7C2{0%,30.5%{opacity:0}31.5%,50.5%{opacity:1}51.5%,100%{opacity:0}}
-  @keyframes s7C3{0%,50.5%{opacity:0}51.5%,88%{opacity:1}91%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-c1{animation:s7C1 10s steps(1) 2.8s infinite backwards}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-c2{animation:s7C2 10s steps(1) 2.8s infinite backwards}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-c3{animation:s7C3 10s steps(1) 2.8s infinite backwards}
-  @keyframes s7Badge{0%,10%{opacity:0;transform:scale(.4)}12.5%{opacity:1;transform:scale(1.2)}14%,88%{opacity:1;transform:scale(1)}91%,100%{opacity:0;transform:scale(.4)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-badge{animation:s7Badge 10s ease 2.8s infinite backwards}
-  @keyframes s7Bell{0%{transform:rotate(0)}11%{transform:rotate(0)}12%{transform:rotate(14deg)}13%{transform:rotate(-11deg)}14%{transform:rotate(6deg)}15%{transform:rotate(0)}31%{transform:rotate(0)}32%{transform:rotate(14deg)}33%{transform:rotate(-11deg)}34%{transform:rotate(6deg)}35%{transform:rotate(0)}51%{transform:rotate(0)}52%{transform:rotate(14deg)}53%{transform:rotate(-11deg)}54%{transform:rotate(6deg)}55%{transform:rotate(0)}100%{transform:rotate(0)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-bell{transform-origin:181px 51.6px;animation:s7Bell 10s ease-in-out 2.8s infinite backwards}
-  @keyframes s7Ok{0%,65%{opacity:0;transform:scale(.3)}68.5%{opacity:1;transform:scale(1.15)}70.5%,88%{opacity:1;transform:scale(1)}91%,100%{opacity:0;transform:scale(.4)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s7-ok{animation:s7Ok 10s ease 2.8s infinite backwards}
-  .feature-slide-art .s8-c0{opacity:0}
-  .feature-slide-art .s8-c1{opacity:0}
-  .feature-slide-art .s8-c2{opacity:0}
-  .feature-slide-art .s8-c3{opacity:0}
-  .feature-slide-art .s8-c4{opacity:0}
-  .feature-slide-art .s8-c5{opacity:0}
-  .feature-slide-art .s8-b rect,.feature-slide-art .s8-b{transform-box:fill-box;transform-origin:center}
-  @keyframes s8B1{0%,8%{opacity:0;transform:scale(.5)}11%{opacity:1;transform:scale(1.08)}12.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-b1{animation:s8B1 10s ease 2.8s infinite backwards}
-  @keyframes s8B2{0%,16%{opacity:0;transform:scale(.5)}19%{opacity:1;transform:scale(1.08)}20.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-b2{animation:s8B2 10s ease 2.8s infinite backwards}
-  @keyframes s8B3{0%,24%{opacity:0;transform:scale(.5)}27%{opacity:1;transform:scale(1.08)}28.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-b3{animation:s8B3 10s ease 2.8s infinite backwards}
-  @keyframes s8B4{0%,32%{opacity:0;transform:scale(.5)}35%{opacity:1;transform:scale(1.08)}36.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-b4{animation:s8B4 10s ease 2.8s infinite backwards}
-  @keyframes s8B5{0%,40%{opacity:0;transform:scale(.5)}43%{opacity:1;transform:scale(1.08)}44.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-b5{animation:s8B5 10s ease 2.8s infinite backwards}
-  @keyframes s8B6{0%,48%{opacity:0;transform:scale(.5)}51%{opacity:1;transform:scale(1.08)}52.5%,88%{opacity:1;transform:scale(1)}92%,100%{opacity:0;transform:scale(.8)}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-b6{animation:s8B6 10s ease 2.8s infinite backwards}
-  @keyframes s8C0{0%{opacity:1}9%{opacity:1}9.5%,88%{opacity:0}92%,100%{opacity:1}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c0{animation:s8C0 10s steps(1) 2.8s infinite backwards}
-  @keyframes s8C1{0%,9%{opacity:0}9.5%,17%{opacity:1}17.5%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c1{animation:s8C1 10s steps(1) 2.8s infinite backwards}
-  @keyframes s8C2{0%,17%{opacity:0}17.5%,25%{opacity:1}25.5%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c2{animation:s8C2 10s steps(1) 2.8s infinite backwards}
-  @keyframes s8C3{0%,25%{opacity:0}25.5%,33%{opacity:1}33.5%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c3{animation:s8C3 10s steps(1) 2.8s infinite backwards}
-  @keyframes s8C4{0%,33%{opacity:0}33.5%,41%{opacity:1}41.5%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c4{animation:s8C4 10s steps(1) 2.8s infinite backwards}
-  @keyframes s8C5{0%,41%{opacity:0}41.5%,49%{opacity:1}49.5%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c5{animation:s8C5 10s steps(1) 2.8s infinite backwards}
-  @keyframes s8C6{0%,49%{opacity:0}49.5%,88%{opacity:1}91%,100%{opacity:0}}
-  .art-ready .feature-slide.is-active .feature-slide-art .s8-c6{animation:s8C6 10s steps(1) 2.8s infinite backwards}
-  /* art-scenes:end */
+  /* íconos simples del carrusel: trazo blanco grueso + un solo acento cian; solo 3 se mueven (huella, engranaje, edificios) */
+  .feature-slide-art .ic{stroke:rgba(255,255,255,.94);stroke-width:2.6}
+  .feature-slide-art .ic-soft{stroke:rgba(255,255,255,.45);stroke-width:2}
+  .feature-slide-art .ic-acc{stroke:var(--color-accent-300)}
+  .feature-slide-art .ic-glow{filter:drop-shadow(0 0 7px color-mix(in srgb, var(--color-accent-300) 60%, transparent))}
+  .feature-slide-art .ic-txt{font-family:var(--font-heading);font-weight:600;fill:#fff;stroke:none}
+  .feature-slide-art .ic-cap{font-family:var(--font-heading);font-weight:600;font-size:8px;letter-spacing:.14em;fill:rgba(255,255,255,.55);stroke:none}
+  .feature-slide-art .ic-fx{font-family:var(--font-heading);font-style:italic;font-weight:600;fill:var(--color-accent-300);stroke:none}
+  .feature-slide-art .ic-mono{font-family:Consolas,"Courier New",monospace;fill:rgba(255,255,255,.88);stroke:none}
+  .feature-slide-art .fp{stroke:rgba(255,255,255,.94);stroke-width:.44}
+  .feature-slide-art .fp-acc{stroke:var(--color-accent-300)}
+  .feature-slide-art .ic-scan{opacity:0}
+  @keyframes icScan{0%{transform:translateY(0);opacity:0}12%,85%{opacity:1}100%{transform:translateY(140px);opacity:0}}
+  @keyframes icSpin{to{transform:rotate(360deg)}}
+  @keyframes icRise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  .art-ready .feature-slide.is-active .feature-slide-art [data-fade]{animation:artFade .7s ease both var(--d, .3s)}
+  .art-ready .feature-slide.is-active .feature-slide-art .ic-scan{animation:icScan 3.6s cubic-bezier(.4,0,.6,1) 1.4s infinite}
+  .art-ready .feature-slide.is-active .feature-slide-art .ic-spin{transform-origin:120px 120px;animation:icSpin 24s linear infinite}
+  .art-ready .feature-slide.is-active .feature-slide-art .ic-rise{transform-box:fill-box;transform-origin:50% 100%;animation:icRise .9s cubic-bezier(.16,1,.3,1) both var(--d, .3s)}
   @media (prefers-reduced-motion:reduce){
     .feature-slide-art{animation:none!important;opacity:.92!important;transform:none!important}
     .feature-slide-art svg{transform:none!important;transition:none!important}
     .feature-slide-art *{animation:none!important}
     .feature-slide-art [data-draw]{stroke-dasharray:none!important;stroke-dashoffset:0!important}
-    .feature-slide-art .art-card,.feature-slide-art .art-lens-rim{opacity:1!important}
+    .feature-slide-art .ic-scan{display:none}
   }
   @media (max-width:1180px){ .feature-slide-art{width:min(22vw,240px);height:min(22vw,240px)} }
   @media (max-width:860px){ .feature-slide-art{display:none} }
@@ -390,11 +201,21 @@
   .laptop.is-paused .laptop-toggle .i-play{display:block}
   .laptop.is-paused .laptop-toggle .i-pause{display:none}
   @media (hover:none){ .laptop-toggle{opacity:.9} }
-  /* la tapa se abre al entrar en pantalla (solo con JS y sin prefers-reduced-motion) */
-  .laptop.anim .laptop-lid{transform:perspective(160cqw) rotateX(82deg);opacity:.15}
-  .laptop.anim.is-open .laptop-lid{transform:perspective(160cqw) rotateX(0);opacity:1;transition:transform 1.5s cubic-bezier(.22,.82,.24,1),opacity .5s ease}
-  .laptop.anim::before,.laptop.anim .laptop-floor{opacity:0}
-  .laptop.anim.is-open::before,.laptop.anim.is-open .laptop-floor{opacity:1;transition:opacity 1.6s ease .15s}
+  /* la tapa empieza cerrada, se abre al entrar en pantalla y se cierra siguiendo el scroll al pasar el laptop
+     (solo con JS y sin prefers-reduced-motion). Gira hacia adelante (ángulo negativo), como un laptop real; la
+     perspectiva está calculada para que, cerrada, el borde de la tapa quede del ancho de la base. Cerrada, la
+     pantalla se ve del color de la tapa: una tapa sólida apoyada sobre la base. */
+  .laptop.anim .laptop-lid{transform:perspective(500cqw) rotateX(-84deg)}
+  .laptop.anim .laptop-screen::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;
+    background:linear-gradient(180deg,#2b3239 0%,#121518 100%)}
+  .laptop.anim.is-open .laptop-lid{transform:perspective(500cqw) rotateX(0);transition:transform 1.5s cubic-bezier(.22,.82,.24,1)}
+  .laptop.anim.is-open .laptop-screen::after{opacity:0;transition:opacity .9s ease .25s}
+  .laptop.anim::before{opacity:0}
+  .laptop.anim.is-open::before{opacity:1;transition:opacity 1.6s ease .15s}
+  /* ya abierta, el ángulo lo maneja el scroll: --lid 0 = abierta, 1 = cerrada */
+  .laptop.anim.is-linked .laptop-lid{transform:perspective(500cqw) rotateX(calc(var(--lid,0) * -84deg));transition:transform .2s ease-out}
+  .laptop.anim.is-linked .laptop-screen::after{opacity:clamp(0, (var(--lid,0) - .2) * 1.5, 1);transition:opacity .2s ease-out}
+  .laptop.anim.is-linked::before{opacity:calc(1 - var(--lid,0));transition:opacity .2s ease-out}
   .showcase-copy{max-width:980px;margin:calc(var(--space-8) + var(--space-4)) auto 0;text-align:center}
   .showcase-copy h2{font-size:clamp(30px,4.4vw,52px);line-height:1.08;margin:0}
   .showcase-copy h2 .num{color:var(--color-accent-700);font-variant-numeric:tabular-nums}
@@ -444,9 +265,8 @@
   @media (max-width:860px){
     .hero h1{font-size:36px}
     .feature-carousel-track{height:min(88vh,620px);min-height:520px}
-    .feature-slide-copy h2{font-size:28px}
-    .feature-slide-copy .feature-slide-lead{font-size:16px}
-    .feature-slide-copy .feature-slide-body{font-size:14px}
+    .feature-slide-copy h2{font-size:36px}
+    .feature-slide-copy .feature-slide-lead{font-size:17px}
     .carousel-arrow{display:none}
     .modules-grid{grid-template-columns:1fr}
   }
@@ -528,70 +348,17 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Plataforma integral</div>
-            <h2>Todo tu equipo de RRHH, en un solo lugar</h2>
-            <p class="feature-slide-lead">Nómina, asistencia, recursos humanos y control de acceso, conectados entre sí — sin hojas de cálculo sueltas ni sistemas que no se hablan.</p>
-            <p class="feature-slide-body">Desde el ingreso de un nuevo colaborador hasta el pago de su rol, la información fluye por una sola base de datos: los horarios y marcaciones alimentan el cálculo de nómina, y cada novedad de RRHH se refleja al instante en el rol de pagos.</p>
+            <h2>Tu gente, en un solo lugar</h2>
+            <p class="feature-slide-lead">Nómina, asistencia, RRHH y control de acceso conectados. Se acabaron los Excel sueltos.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s1Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s1Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".5"/><stop offset="1" stop-color="#062430" stop-opacity=".82"/></linearGradient><radialGradient id="s1Orb" cx="38%" cy="32%" r="78%"><stop offset="0" stop-color="#17657f" stop-opacity=".95"/><stop offset="1" stop-color="#082a37" stop-opacity=".95"/></radialGradient></defs>
-              <circle class="art-halo" cx="120" cy="122" r="100" fill="url(#s1Halo)"/>
+              <defs><radialGradient id="artHalo1" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="120" cy="120" r="98" fill="url(#artHalo1)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <path class="art-soft" data-draw d="M50 75 V94 Q50 100 56 100 H84"/>
-              <path class="art-soft" data-draw d="M190 75 V94 Q190 100 184 100 H156"/>
-              <path class="art-soft" data-draw d="M50 165 V146 Q50 140 56 140 H84"/>
-              <path class="art-soft" data-draw d="M190 165 V146 Q190 140 184 140 H156"/>
-              <rect data-fade x="84" y="66" width="72" height="112" rx="6" fill="url(#s1Glass)"/>
-              <rect class="art-main" data-draw x="84" y="66" width="72" height="112" rx="6"/>
-              <rect class="s1-rim art-accent art-glow" x="84" y="66" width="72" height="112" rx="6" stroke-width="1.6"/>
-              <circle data-fade cx="120" cy="90" r="11" fill="rgba(153,224,255,.12)"/>
-              <circle class="art-main art-accent" data-draw cx="120" cy="90" r="11"/>
-              <circle class="art-soft" data-draw cx="120" cy="87" r="3.8"/>
-              <path class="art-soft" data-draw d="M113 98.4 C114.2 94.6 116.8 93.2 120 93.2 C123.2 93.2 125.8 94.6 127 98.4"/>
-              <path class="art-main" data-draw d="M104 111 H136"/>
-              <path class="art-soft" data-draw d="M110 118 H130"/>
-              <path data-fade d="M92 125.5 H148" stroke="rgba(255,255,255,.16)"/>
-              <circle class="art-soft" data-draw cx="93" cy="135" r="2.4"/>
-              <path class="art-soft" data-draw d="M100 135 H124"/>
-              <rect class="art-soft" data-draw x="130" y="131.5" width="20" height="7" rx="2.4"/>
-              <circle class="art-soft" data-draw cx="93" cy="146" r="2.4"/>
-              <path class="art-soft" data-draw d="M100 146 H117"/>
-              <rect class="art-soft" data-draw x="130" y="142.5" width="20" height="7" rx="2.4"/>
-              <circle class="art-soft" data-draw cx="93" cy="157" r="2.4"/>
-              <path class="art-soft" data-draw d="M100 157 H126"/>
-              <rect class="art-soft" data-draw x="130" y="153.5" width="20" height="7" rx="2.4"/>
-              <circle class="art-soft" data-draw cx="93" cy="168" r="2.4"/>
-              <path class="art-soft" data-draw d="M100 168 H112"/>
-              <rect class="art-soft" data-draw x="130" y="164.5" width="20" height="7" rx="2.4"/>
-              <g class="s1-lit s1-l1"><circle class="art-accent-fill art-glow" cx="93" cy="135" r="2.7"/><rect class="art-accent" x="130" y="131.5" width="20" height="7" rx="2.4" fill="rgba(153,224,255,.24)" stroke-width="1.2"/></g>
-              <g class="s1-lit s1-l2"><circle class="art-accent-fill art-glow" cx="93" cy="146" r="2.7"/><rect class="art-accent" x="130" y="142.5" width="20" height="7" rx="2.4" fill="rgba(153,224,255,.24)" stroke-width="1.2"/></g>
-              <g class="s1-lit s1-l3"><circle class="art-accent-fill art-glow" cx="93" cy="157" r="2.7"/><rect class="art-accent" x="130" y="153.5" width="20" height="7" rx="2.4" fill="rgba(153,224,255,.24)" stroke-width="1.2"/></g>
-              <g class="s1-lit s1-l4"><circle class="art-accent-fill art-glow" cx="93" cy="168" r="2.7"/><rect class="art-accent" x="130" y="164.5" width="20" height="7" rx="2.4" fill="rgba(153,224,255,.24)" stroke-width="1.2"/></g>
-              <g class="s1-badge"><circle class="art-accent-fill art-glow" cx="129" cy="99" r="4.8"/><path d="M126.7 99.1 L128.4 100.8 L131.4 97.4" stroke="#0a303e" stroke-width="1.4"/></g>
-              <circle data-fade cx="50" cy="62" r="13" fill="url(#s1Orb)"/>
-              <circle class="art-main" data-draw cx="50" cy="62" r="13"/>
-              <circle class="s1-ping s1-p1 art-accent" cx="50" cy="62" r="13" stroke-width="1.3"/>
-              <circle class="art-main" data-draw cx="50" cy="62" r="6.4"/><path class="art-main" data-draw d="M50 58.3 V62 L52.7 63.7"/>
-              <text class="art-t art-cap" data-fade style="--d:1.2s" x="50" y="42" text-anchor="middle">ASISTENCIA</text>
-              <circle data-fade cx="190" cy="62" r="13" fill="url(#s1Orb)"/>
-              <circle class="art-main" data-draw cx="190" cy="62" r="13"/>
-              <circle class="s1-ping s1-p2 art-accent" cx="190" cy="62" r="13" stroke-width="1.3"/>
-              <path class="art-main" data-draw d="M188.4 55.4 H195 V68.6 H188.4"/><path class="art-main art-accent" data-draw d="M183.4 62 H191 M188.3 59.3 L191 62 L188.3 64.7"/>
-              <text class="art-t art-cap" data-fade style="--d:1.2s" x="190" y="42" text-anchor="middle">ACCESO</text>
-              <circle data-fade cx="50" cy="178" r="13" fill="url(#s1Orb)"/>
-              <circle class="art-main" data-draw cx="50" cy="178" r="13"/>
-              <circle class="s1-ping s1-p3 art-accent" cx="50" cy="178" r="13" stroke-width="1.3"/>
-              <path class="art-main" data-draw d="M45.4 171.2 H51.6 L55 174.6 V184.8 H45.4 Z"/><path class="art-soft" data-draw d="M48 178.2 H52.4 M48 181.4 H51"/>
-              <text class="art-t art-cap" data-fade style="--d:1.2s" x="50" y="203.5" text-anchor="middle">RRHH</text>
-              <circle data-fade cx="190" cy="178" r="13" fill="url(#s1Orb)"/>
-              <circle class="art-main" data-draw cx="190" cy="178" r="13"/>
-              <circle class="s1-ping s1-p4 art-accent" cx="190" cy="178" r="13" stroke-width="1.3"/>
-              <text class="art-t" x="190" y="182.6" text-anchor="middle" style="font-size:12.5px;font-weight:600;fill:#fff">$</text>
-              <text class="art-t art-cap" data-fade style="--d:1.2s" x="190" y="203.5" text-anchor="middle">NÓMINA</text>
-              <circle class="s1-pk s1-k1 art-accent-fill art-glow" r="2.9"/>
-              <circle class="s1-pk s1-k2 art-accent-fill art-glow" r="2.9"/>
-              <circle class="s1-pk s1-k3 art-accent-fill art-glow" r="2.9"/>
-              <circle class="s1-pk s1-k4 art-accent-fill art-glow" r="2.9"/>
+              <circle class="ic ic-acc ic-glow" data-draw cx="120" cy="120" r="64"/>
+              <circle class="ic" data-draw cx="120" cy="99" r="22"/>
+              <path class="ic" data-draw d="M72.6 163 C80 143 98 133 120 133 C142 133 160 143 167.4 163"/>
             </svg>
           </div>
         </div>
@@ -602,75 +369,21 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Siempre al día</div>
-            <h2>Cumple con la ley sin complicarte</h2>
-            <p class="feature-slide-lead">Actualizamos SquareNet con cada reforma laboral, del SRI y del IESS, para que tú no tengas que perseguirla.</p>
-            <p class="feature-slide-body">Décimo tercero, décimo cuarto, fondos de reserva y utilidades se calculan según el procedimiento de ley. El sistema genera los archivos batch para el IESS y el Ministerio de Trabajo, además del anexo transaccional RDEP y el formulario 107 del SRI.</p>
+            <h2>La ley cambia. Tú no.</h2>
+            <p class="feature-slide-lead">Actualizamos SquareNet con cada reforma: décimos, utilidades, IESS, RDEP y formulario 107, siempre al día.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s2Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s2Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".55"/><stop offset="1" stop-color="#062430" stop-opacity=".88"/></linearGradient><linearGradient id="s2Front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#155a70" stop-opacity=".98"/><stop offset="1" stop-color="#072531" stop-opacity=".99"/></linearGradient></defs>
-              <circle class="art-halo" cx="120" cy="130" r="100" fill="url(#s2Halo)"/>
+              <defs><radialGradient id="artHalo2" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="122" cy="118" r="98" fill="url(#artHalo2)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <g transform="translate(0 16)">
-                <g transform="rotate(-9 74.0 110.0)"><g class="s2-d s2-dA"><rect data-fade x="41" y="66" width="66" height="88" rx="5" fill="url(#s2Glass)"/><rect class="art-soft" data-draw x="41" y="66" width="66" height="88" rx="5"/><path data-fade d="M41 82 H107" stroke="rgba(255,255,255,.2)"/><text class="art-t" data-fade style="--d:.9s;font-size:7.2px;font-weight:600" x="49" y="77.4">IESS</text><path class="art-soft" data-draw d="M49 94 H93"/><path class="art-soft" data-draw d="M49 104 H83"/><path class="art-soft" data-draw d="M49 114 H97"/><path class="art-soft" data-draw d="M49 124 H77"/><path class="art-soft" data-draw d="M49 134 H89"/><rect class="s2-h s2-hA art-accent art-glow" x="41" y="66" width="66" height="88" rx="5" fill="rgba(153,224,255,.07)" stroke-width="1.5"/></g></g>
-                <g transform="rotate(9 166.0 110.0)"><g class="s2-d s2-dC"><rect data-fade x="133" y="66" width="66" height="88" rx="5" fill="url(#s2Glass)"/><rect class="art-soft" data-draw x="133" y="66" width="66" height="88" rx="5"/><path data-fade d="M133 82 H199" stroke="rgba(255,255,255,.2)"/><text class="art-t" data-fade style="--d:.9s;font-size:7.2px;font-weight:600" x="191" y="77.4" text-anchor="end">SRI 107</text><path class="art-soft" data-draw d="M149 94 H191"/><path class="art-soft" data-draw d="M149 104 H185"/><path class="art-soft" data-draw d="M149 114 H179"/><path class="art-soft" data-draw d="M149 124 H189"/><path class="art-soft" data-draw d="M149 134 H183"/><rect class="s2-h s2-hC art-accent art-glow" x="133" y="66" width="66" height="88" rx="5" fill="rgba(153,224,255,.07)" stroke-width="1.5"/></g></g>
-                <g class="s2-d s2-dB"><rect data-fade x="87" y="52" width="66" height="94" rx="5" fill="url(#s2Front)"/><rect class="art-main" data-draw x="87" y="52" width="66" height="94" rx="5"/><path data-fade d="M87 68 H153" stroke="rgba(255,255,255,.2)"/><text class="art-t" data-fade style="--d:.9s;font-size:7.2px;font-weight:600" x="95" y="63.4">RDEP</text><path class="art-soft" data-draw d="M95 80 H118"/><rect class="art-soft" data-draw x="127" y="76.5" width="18" height="7" rx="2.4"/><path class="art-soft" data-draw d="M95 92 H112"/><rect class="art-soft" data-draw x="127" y="88.5" width="18" height="7" rx="2.4"/><path class="art-soft" data-draw d="M95 104 H120"/><rect class="art-soft" data-draw x="127" y="100.5" width="18" height="7" rx="2.4"/><path class="art-soft" data-draw d="M95 116 H110"/><rect class="art-soft" data-draw x="127" y="112.5" width="18" height="7" rx="2.4"/><path class="art-main" data-draw d="M95 131 H113"/><rect class="art-main" data-draw x="127" y="127.5" width="18" height="7" rx="2.4"/><rect class="s2-h s2-hB art-accent art-glow" x="87" y="52" width="66" height="94" rx="5" fill="rgba(153,224,255,.07)" stroke-width="1.5"/></g>
-                <circle class="s2-rip art-accent" cx="152" cy="142" r="19" stroke-width="1.2"/>
-                <g class="s2-seal"><circle cx="152" cy="142" r="19" fill="#0b3644" stroke="#99e0ff" stroke-width="1.7" class="art-glow"/><circle cx="152" cy="142" r="14.6" stroke="#99e0ff" stroke-opacity=".75" stroke-width=".9" stroke-dasharray="2 2.4"/><path d="M144.2 141.6 L149.6 147 L159.4 136.4" stroke="#99e0ff" stroke-width="2.2"/></g>
-                <g data-fade style="--d:1s"><rect x="72" y="24" width="96" height="15" rx="7.5" fill="rgba(153,224,255,.1)" stroke="rgba(153,224,255,.5)"/><text class="art-t" x="91" y="34.1" style="font-size:6.3px">Actualizado a la ley</text></g>
-                <g class="s2-ok"><circle class="art-accent-fill" cx="82.5" cy="31.5" r="3.7"/><path d="M80.9 31.6 L82.1 32.8 L84.3 30.3" stroke="#0a303e" stroke-width="1.1"/></g>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="feature-slide">
-        <div class="feature-slide-bg" style="background:radial-gradient(circle at 82% 25%, color-mix(in srgb, var(--color-accent-2-500) 24%, transparent) 0%, transparent 46%), radial-gradient(circle at 18% 78%, color-mix(in srgb, var(--color-accent-400) 30%, transparent) 0%, transparent 42%), linear-gradient(160deg, var(--color-accent-800) 0%, var(--color-accent-900) 100%)"></div>
-        <div class="feature-slide-overlay"></div>
-        <div class="wrap">
-          <div class="feature-slide-copy">
-            <div class="feature-slide-kicker">Soporte</div>
-            <h2>Soporte ilimitado, de verdad</h2>
-            <p class="feature-slide-lead">Actualizaciones continuas y ayuda vía TeamViewer o AnyDesk.</p>
-            <p class="feature-slide-body">Nuestro equipo conoce tu instalación y tu forma de trabajar, así que las consultas se resuelven rápido — sin tickets que se pierden ni respuestas genéricas.</p>
-          </div>
-          <div class="feature-slide-art" aria-hidden="true">
-            <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s3Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s3Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".55"/><stop offset="1" stop-color="#062430" stop-opacity=".9"/></linearGradient></defs>
-              <circle class="art-halo" cx="120" cy="124" r="100" fill="url(#s3Halo)"/>
-              <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <g transform="translate(0 14)">
-                <rect data-fade x="34" y="52" width="152" height="100" rx="6" fill="url(#s3Glass)"/>
-                <rect class="art-main" data-draw x="34" y="52" width="152" height="100" rx="6"/>
-                <path data-fade d="M34 64 H186" stroke="rgba(255,255,255,.2)"/>
-                <g data-fade style="--d:.6s"><circle cx="43" cy="58" r="1.8" fill="rgba(255,255,255,.4)"/><circle cx="50" cy="58" r="1.8" fill="rgba(255,255,255,.4)"/><circle cx="57" cy="58" r="1.8" fill="rgba(255,255,255,.4)"/><text class="art-t" x="66" y="60.3" style="font-size:6px;fill:rgba(255,255,255,.6)">Rol de pagos</text></g>
-                <path class="art-main" data-draw d="M110 152 V163"/>
-                <path class="art-main" data-draw d="M92 165 H128"/>
-                <path data-fade d="M46 75.5 H70 M128 75.5 H150" stroke="rgba(255,255,255,.3)"/>
-                <path class="art-soft" data-draw d="M46 89 H84"/>
-                <rect class="art-soft" data-draw x="126" y="84.5" width="46" height="9" rx="3"/>
-                <path data-fade style="--d:1s" d="M132 89 H150" stroke="rgba(255,255,255,.4)" stroke-width="1.6"/>
-                <path class="art-soft" data-draw d="M46 103 H76"/>
-                <rect class="art-soft" data-draw x="126" y="98.5" width="46" height="9" rx="3"/>
-                <path data-fade style="--d:1s" d="M132 103 H146" stroke="rgba(255,255,255,.4)" stroke-width="1.6"/>
-                <path class="art-soft" data-draw d="M46 117 H90"/>
-                <rect class="art-soft" data-draw x="126" y="112.5" width="46" height="9" rx="3"/>
-                <path data-fade style="--d:1s" d="M132 117 H152" stroke="rgba(255,255,255,.4)" stroke-width="1.6"/>
-                <path class="art-soft" data-draw d="M46 131 H80"/>
-                <rect class="art-soft" data-draw x="126" y="126.5" width="46" height="9" rx="3"/>
-                <path data-fade style="--d:1s" d="M132 131 H144" stroke="rgba(255,255,255,.4)" stroke-width="1.6"/>
-                <path class="art-main" data-draw d="M46 145 H70"/>
-                <rect class="art-main" data-draw x="126" y="140.5" width="46" height="9" rx="3"/>
-                <path data-fade style="--d:1s" d="M132 145 H154" stroke="rgba(255,255,255,.75)" stroke-width="1.8"/>
-                <g class="s3-warn"><rect x="126" y="112.5" width="46" height="9" rx="3" stroke="#ff90b1" stroke-width="1.3" fill="rgba(255,69,142,.16)"/><text class="art-t" x="165.5" y="119.8" style="font-size:7.4px;font-weight:700;fill:#ff90b1">!</text></g>
-                <g class="s3-fix"><rect class="art-accent" x="126" y="112.5" width="46" height="9" rx="3" stroke-width="1.3" fill="rgba(153,224,255,.22)"/><path class="art-accent" d="M160.4 117.2 L162.9 119.6 L167 114.6" stroke-width="1.5"/></g>
-                <rect class="s3-tot art-accent art-glow" x="126" y="140.5" width="46" height="9" rx="3" stroke-width="1.4" fill="rgba(153,224,255,.18)"/>
-                <circle class="s3-rip art-accent" cx="152" cy="117" r="4" stroke-width="1.3"/>
-                <g class="s3-toast"><rect x="120" y="67.5" width="59" height="14" rx="4" fill="#0c3d4d" stroke="rgba(153,224,255,.8)"/><circle class="art-accent-fill" cx="128.6" cy="74.5" r="3.8"/><path d="M126.9 74.6 L128.2 75.9 L130.5 73.2" stroke="#0a303e" stroke-width="1.15"/><text class="art-t" x="135" y="76.8" style="font-size:6.2px;fill:#fff">Corregido</text></g>
-                <g data-fade style="--d:1.1s"><rect x="64" y="28" width="112" height="15" rx="7.5" fill="rgba(153,224,255,.1)" stroke="rgba(153,224,255,.5)"/><text class="art-t" x="83" y="38.1" style="font-size:6.3px">Soporte en línea · ilimitado</text></g>
-                <circle class="s3-live art-accent-fill art-glow" cx="74.5" cy="35.5" r="2.6"/>
-                <g class="s3-cur"><path d="M0 0 V15.6 L3.9 12 L6.7 18 L9.2 16.9 L6.5 11.1 H11.8 Z" fill="#fff" stroke="#0a303e" stroke-width="1"/><rect x="10.5" y="17.5" width="30" height="10" rx="3" fill="#99e0ff"/><text class="art-t" x="25.5" y="24.4" text-anchor="middle" style="font-size:5.8px;font-weight:600;fill:#0a303e">Soporte</text></g>
-              </g>
+              <path class="ic" data-draw d="M84 48 H140 L164 72 V174 a6 6 0 0 1 -6 6 H84 a6 6 0 0 1 -6 -6 V54 a6 6 0 0 1 6 -6 Z"/>
+              <path class="ic-soft" data-draw d="M140 48 V66 a6 6 0 0 0 6 6 H164"/>
+              <text class="ic-cap" data-fade x="92" y="80">FORMULARIO</text>
+              <text class="ic-txt" data-fade x="91" y="102" style="font-size:19px">SRI 107</text>
+              <path class="ic-soft" data-draw d="M92 122 H150 M92 137 H142 M92 152 H128"/>
+              <g data-pop style="--d:.9s"><circle cx="160" cy="172" r="23" fill="#0b3644" stroke="#99e0ff" stroke-width="2.6" class="ic-glow"/></g>
+              <path class="ic ic-acc" data-draw style="--d:1.15s" d="M149.5 172 L157 179.5 L171.5 164"/>
             </svg>
           </div>
         </div>
@@ -681,49 +394,26 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Asistencia</div>
-            <h2>Lectores biométricos integrados</h2>
-            <p class="feature-slide-lead">Huella, rostro o tarjeta: la marcación de tu personal se sincroniza sola con el sistema.</p>
-            <p class="feature-slide-body">Cada marcación calcula automáticamente horas trabajadas, atrasos, horas extra y permisos, listos para pasar directo al rol de pagos sin digitar nada a mano.</p>
+            <h2>Una huella. Cero digitación.</h2>
+            <p class="feature-slide-lead">Huella, rostro o tarjeta: atrasos, horas extra y permisos pasan solos al rol de pagos.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s4Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".2"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s4Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".55"/><stop offset="1" stop-color="#062430" stop-opacity=".9"/></linearGradient><linearGradient id="s4Scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#99e0ff" stop-opacity="0"/><stop offset=".5" stop-color="#d6f3ff" stop-opacity=".8"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></linearGradient><clipPath id="s4Clip"><rect x="56" y="114" width="40" height="62" rx="14"/></clipPath></defs>
-              <circle class="art-halo" cx="118" cy="120" r="100" fill="url(#s4Halo)"/>
+              <defs><radialGradient id="artHalo3" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="icScanGrad" gradientUnits="userSpaceOnUse" x1="44" y1="0" x2="196" y2="0"><stop offset="0" stop-color="#99e0ff" stop-opacity="0"/><stop offset=".22" stop-color="#bdeeff" stop-opacity=".95"/><stop offset=".78" stop-color="#bdeeff" stop-opacity=".95"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></linearGradient></defs>
+              <circle class="art-halo" cx="120" cy="120" r="98" fill="url(#artHalo3)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <rect data-fade x="40" y="44" width="72" height="148" rx="11" fill="url(#s4Glass)"/>
-              <rect class="art-main" data-draw x="40" y="44" width="72" height="148" rx="11"/>
-              <rect data-fade x="50" y="56" width="52" height="38" rx="4" fill="#06222d" fill-opacity=".9"/>
-              <rect class="art-soft" data-draw x="50" y="56" width="52" height="38" rx="4"/>
-              <g class="s4-idle"><text class="art-t art-mono" x="76" y="78" text-anchor="middle" style="font-size:11px;fill:rgba(255,255,255,.45)">--:--</text><text class="art-t" x="76" y="88" text-anchor="middle" style="font-size:5.6px;fill:rgba(255,255,255,.5)">Marque</text></g>
-              <g class="s4-ok"><text class="art-t art-mono" x="76" y="78" text-anchor="middle" style="font-size:11px;fill:#fff">08:02</text><path class="art-accent" d="M60.6 85.6 L62.6 87.6 L65.8 83.8" stroke-width="1.3"/><text class="art-t" x="68.5" y="88" style="font-size:5.6px;fill:#99e0ff">Registrado</text></g>
-              <circle cx="76" cy="104" r="2.2" fill="rgba(255,255,255,.25)"/>
-              <circle class="s4-led art-accent-fill art-glow" cx="76" cy="104" r="2.4"/>
-              <rect data-fade x="56" y="114" width="40" height="62" rx="14" fill="rgba(0,0,0,.2)"/>
-              <rect class="art-soft" data-draw x="56" y="114" width="40" height="62" rx="14"/>
-              <path class="art-soft" data-draw d="M74.1 149.2 A3 4.2 0 1 1 77.9 149.2"/>
-              <path class="art-main" data-draw d="M71.5 151.7 A6.2 8.4 0 0 1 77.1 137.7 M80.7 140.6 A6.2 8.4 0 0 1 74.6 154.2"/>
-              <path class="art-soft" data-draw d="M81.7 156.1 A9.4 12.6 0 0 1 67.1 141.9 M70.1 136.2 A9.4 12.6 0 0 1 84.4 151.7"/>
-              <path class="art-main" data-draw d="M70.7 161.2 A12.6 16.8 0 0 1 76.0 129.2 M82.3 131.5 A12.6 16.8 0 0 1 79.3 162.2"/>
-              <path class="art-soft" data-draw d="M80.0 166.3 A15.6 21 0 0 1 64.0 159.5 M61.3 153.2 A15.6 21 0 0 1 64.4 131.9 M70.2 126.5 A15.6 21 0 0 1 87.0 160.8"/>
-              <g class="s4-glow"><path class="art-accent art-glow" d="M74.1 149.2 A3 4.2 0 1 1 77.9 149.2" stroke-width="1.5"/><path class="art-accent art-glow" d="M71.5 151.7 A6.2 8.4 0 0 1 77.1 137.7 M80.7 140.6 A6.2 8.4 0 0 1 74.6 154.2" stroke-width="1.5"/><path class="art-accent art-glow" d="M81.7 156.1 A9.4 12.6 0 0 1 67.1 141.9 M70.1 136.2 A9.4 12.6 0 0 1 84.4 151.7" stroke-width="1.5"/><path class="art-accent art-glow" d="M70.7 161.2 A12.6 16.8 0 0 1 76.0 129.2 M82.3 131.5 A12.6 16.8 0 0 1 79.3 162.2" stroke-width="1.5"/><path class="art-accent art-glow" d="M80.0 166.3 A15.6 21 0 0 1 64.0 159.5 M61.3 153.2 A15.6 21 0 0 1 64.4 131.9 M70.2 126.5 A15.6 21 0 0 1 87.0 160.8" stroke-width="1.5"/></g>
-              <g clip-path="url(#s4Clip)"><rect class="s4-scan" x="56" y="106" width="40" height="14" fill="url(#s4Scan)"/></g>
-              <path class="art-soft-dash" d="M112 74 C121 74 119 145 128 145"/>
-              <rect data-fade x="128" y="70" width="78" height="106" rx="6" fill="url(#s4Glass)"/>
-              <rect class="art-main" data-draw x="128" y="70" width="78" height="106" rx="6"/>
-              <g data-fade style="--d:1s"><text class="art-t" x="136" y="83.6" style="font-size:6.6px;font-weight:600">Asistencia</text><text class="art-t" x="198" y="83.6" text-anchor="end" style="font-size:5.6px;fill:rgba(255,255,255,.5)">Hoy</text></g>
-              <path data-fade d="M128 90.5 H206" stroke="rgba(255,255,255,.2)"/>
-              <circle class="art-soft" data-draw cx="139" cy="103" r="3.4"/>
-              <path class="art-soft" data-draw d="M147 103 H167"/>
-              <text class="art-t art-mono" data-fade style="--d:1.1s;font-size:6.1px;fill:rgba(255,255,255,.7)" x="199" y="105.2" text-anchor="end">07:54</text>
-              <circle class="art-soft" data-draw cx="139" cy="117" r="3.4"/>
-              <path class="art-soft" data-draw d="M147 117 H173"/>
-              <text class="art-t art-mono" data-fade style="--d:1.1s;font-size:6.1px;fill:rgba(255,255,255,.7)" x="199" y="119.2" text-anchor="end">07:58</text>
-              <circle class="art-soft" data-draw cx="139" cy="131" r="3.4"/>
-              <path class="art-soft" data-draw d="M147 131 H165"/>
-              <text class="art-t art-mono" data-fade style="--d:1.1s;font-size:6.1px;fill:rgba(255,255,255,.7)" x="199" y="133.2" text-anchor="end">08:01</text>
-              <g class="s4-new"><rect x="132" y="138.5" width="70" height="13" rx="3" fill="rgba(153,224,255,.14)"/><circle class="art-accent" cx="139" cy="145" r="3.4" stroke-width="1.3"/><path class="art-accent" d="M147 145 H169" stroke-width="1.3"/><text class="art-t art-mono" x="199" y="147.2" text-anchor="end" style="font-size:6.1px;font-weight:700;fill:#99e0ff">08:02</text></g>
-              <path data-fade d="M136 162 H162" stroke="rgba(255,255,255,.22)"/>
-              <circle class="s4-pk art-accent-fill art-glow" r="2.9"/>
+              <g transform="translate(48 48) scale(6)">
+                <path class="fp fp-acc" data-draw d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+                <path class="fp" data-draw d="M14 13.12c0 2.38 0 6.38-1 8.88"/>
+                <path class="fp" data-draw d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/>
+                <path class="fp" data-draw d="M2 12a10 10 0 0 1 18-6"/>
+                <path class="fp" data-draw d="M2 16h.01"/>
+                <path class="fp" data-draw d="M21.8 16c.2-2 .131-5.354 0-6"/>
+                <path class="fp" data-draw d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/>
+                <path class="fp" data-draw d="M8.65 22c.21-.66.45-1.32.57-2"/>
+                <path class="fp" data-draw d="M9 6.8a6 6 0 0 1 9 5.2v2"/>
+              </g>
+              <path class="ic-scan ic-glow" d="M44 50 H196" stroke="url(#icScanGrad)" stroke-width="2.4"/>
             </svg>
           </div>
         </div>
@@ -734,44 +424,19 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Configuración total</div>
-            <h2>Sus reglas de pago, no una plantilla genérica</h2>
-            <p class="feature-slide-lead">Cada empresa tiene sus propias reglas: recargos nocturnos, bonos por tipo de contrato, condiciones particulares de cada rubro.</p>
-            <p class="feature-slide-body">En SquareNet, usted mismo configura esas reglas exactas — sin depender de que un proveedor externo las programe por usted.</p>
+            <h2>Tus reglas, tu fórmula</h2>
+            <p class="feature-slide-lead">Recargos nocturnos, bonos, condiciones por contrato: escríbelos tú mismo, como en Excel, sin esperar a un programador.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s5Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s5Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".55"/><stop offset="1" stop-color="#062430" stop-opacity=".9"/></linearGradient></defs>
-              <circle class="art-halo" cx="120" cy="118" r="100" fill="url(#s5Halo)"/>
+              <defs><radialGradient id="artHalo4" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="120" cy="120" r="98" fill="url(#artHalo4)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <rect data-fade x="36" y="46" width="168" height="144" rx="6" fill="url(#s5Glass)"/>
-              <rect class="art-main" data-draw x="36" y="46" width="168" height="144" rx="6"/>
-              <path data-fade d="M36 60 H204" stroke="rgba(255,255,255,.2)"/>
-              <g data-fade style="--d:.6s"><circle cx="45" cy="53" r="1.8" fill="rgba(255,255,255,.4)"/><circle cx="52" cy="53" r="1.8" fill="rgba(255,255,255,.4)"/><circle cx="59" cy="53" r="1.8" fill="rgba(255,255,255,.4)"/><text class="art-t" x="68" y="55.4" style="font-size:6px;fill:rgba(255,255,255,.6)">Rubro · Sueldo devengado</text></g>
-              <rect data-fade x="46" y="70" width="148" height="20" rx="5" fill="rgba(0,0,0,.2)"/>
-              <rect class="art-soft art-accent" data-draw x="46" y="70" width="148" height="20" rx="5" stroke-opacity=".55"/>
-              <circle class="art-accent art-glow" data-draw cx="57" cy="80" r="6.4" stroke-width="1.2"/>
-              <text class="art-fx" data-fade style="--d:.8s;font-size:7.4px" x="57" y="82.5" text-anchor="middle">fx</text>
-              <g class="s5-t s5-t1"><rect x="68" y="74.5" width="30" height="11" rx="3" fill="rgba(153,224,255,.16)" stroke="rgba(153,224,255,.7)" stroke-width=".9"/><text class="art-t art-mono" x="83" y="82.6" text-anchor="middle" style="font-size:7.2px;fill:#dff6ff">[0100]</text></g>
-              <g class="s5-t s5-t2"><text class="art-t art-mono" x="104" y="82.6" style="font-size:7.4px;fill:#fff">/</text></g>
-              <g class="s5-t s5-t3"><text class="art-t art-mono" x="111.5" y="82.6" style="font-size:7.4px;fill:#fff">30</text></g>
-              <g class="s5-t s5-t4"><text class="art-t art-mono" x="125" y="82.6" style="font-size:7.4px;fill:#fff">*</text></g>
-              <g class="s5-t s5-t5"><rect x="133" y="74.5" width="30" height="11" rx="3" fill="rgba(153,224,255,.16)" stroke="rgba(153,224,255,.7)" stroke-width=".9"/><text class="art-t art-mono" x="148" y="82.6" text-anchor="middle" style="font-size:7.2px;fill:#dff6ff">[0180]</text></g>
-              <g class="s5-caret"><path class="s5-blink" d="M0 75 V86" stroke="#99e0ff" stroke-width="1.2"/></g>
-              <text class="art-t art-cap" data-fade style="--d:1s" x="46" y="105">VISTA PREVIA</text>
-              <circle class="art-soft" data-draw cx="51" cy="117" r="3.4"/>
-              <path class="art-soft" data-draw d="M59 117 H93"/>
-              <path class="s5-ph s5-ph1" d="M158 117 H194" stroke="rgba(255,255,255,.2)" stroke-dasharray="2 3"/>
-              <text class="s5-v s5-v1 art-t art-mono" x="194" y="119.3" text-anchor="end" style="font-size:6.6px;fill:#dff6ff">$ 812,40</text>
-              <circle class="art-soft" data-draw cx="51" cy="131" r="3.4"/>
-              <path class="art-soft" data-draw d="M59 131 H85"/>
-              <path class="s5-ph s5-ph2" d="M158 131 H194" stroke="rgba(255,255,255,.2)" stroke-dasharray="2 3"/>
-              <text class="s5-v s5-v2 art-t art-mono" x="194" y="133.3" text-anchor="end" style="font-size:6.6px;fill:#dff6ff">$ 1.064,00</text>
-              <circle class="art-soft" data-draw cx="51" cy="145" r="3.4"/>
-              <path class="art-soft" data-draw d="M59 145 H97"/>
-              <path class="s5-ph s5-ph3" d="M158 145 H194" stroke="rgba(255,255,255,.2)" stroke-dasharray="2 3"/>
-              <text class="s5-v s5-v3 art-t art-mono" x="194" y="147.3" text-anchor="end" style="font-size:6.6px;fill:#dff6ff">$ 645,90</text>
-              <g class="s5-btn"><rect x="140" y="164" width="54" height="15" rx="4" fill="#99e0ff"/><text class="art-t" x="167" y="174" text-anchor="middle" style="font-size:6.4px;font-weight:600;fill:#0a303e">Guardar regla</text></g>
-              <g class="s5-saved"><circle class="art-accent-fill art-glow" cx="51" cy="171.5" r="3.8"/><path d="M49.3 171.6 L50.6 172.9 L52.9 170.2" stroke="#0a303e" stroke-width="1.15"/><text class="art-t" x="58" y="173.8" style="font-size:6.1px;fill:#99e0ff">Regla guardada</text></g>
+              <circle class="ic ic-acc ic-glow" data-draw cx="120" cy="82" r="32"/>
+              <text class="ic-fx" data-fade x="119" y="94" text-anchor="middle" style="font-size:34px">fx</text>
+              <text class="ic-mono" data-fade style="--d:.7s;font-size:13.5px" x="120" y="146" text-anchor="middle">[0100] / 30 * [0180]</text>
+              <path class="ic-soft" data-draw d="M64 160 H176"/>
+              <text class="ic-txt" data-pop style="--d:1.05s;font-size:22px;fill:#99e0ff" x="120" y="189" text-anchor="middle">= $ 812,40</text>
             </svg>
           </div>
         </div>
@@ -782,69 +447,18 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Auditoría</div>
-            <h2>Trazabilidad total en cada cálculo</h2>
-            <p class="feature-slide-lead">Cada valor calculado en el rol de pagos se puede auditar: sabe exactamente qué fórmula lo generó y por qué.</p>
-            <p class="feature-slide-body">Respuestas claras y verificables para su equipo contable y para cualquier auditoría.</p>
+            <h2>Cada centavo, explicado</h2>
+            <p class="feature-slide-lead">Abre cualquier valor del rol de pagos y mira qué fórmula lo calculó. Sin cajas negras.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs>
-                <radialGradient id="artHalo6" cx="50%" cy="50%" r="50%">
-                  <stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/>
-                  <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="artLensGlass" cx="38%" cy="32%" r="78%">
-                  <stop offset="0" stop-color="#17657f" stop-opacity=".98"/>
-                  <stop offset="1" stop-color="#082a37" stop-opacity=".98"/>
-                </radialGradient>
-                <linearGradient id="artHandle" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="#fff" stop-opacity=".34"/>
-                  <stop offset="1" stop-color="#fff" stop-opacity=".05"/>
-                </linearGradient>
-                <clipPath id="artLensClip"><circle cx="0" cy="0" r="32.6"/></clipPath>
-              </defs>
-              <circle class="art-halo" cx="122" cy="120" r="96" fill="url(#artHalo6)"/>
+              <defs><radialGradient id="artHalo5" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="114" cy="112" r="98" fill="url(#artHalo5)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <path class="art-main" data-draw d="M52 40 H128 L150 62 V182 a6 6 0 0 1 -6 6 H52 a6 6 0 0 1 -6 -6 V46 a6 6 0 0 1 6 -6 Z"/>
-              <path class="art-soft" data-draw d="M128 40 V56 a6 6 0 0 0 6 6 H150"/>
-              <path class="art-main" data-draw d="M58 58 H100"/>
-              <path class="art-soft" data-draw d="M58 68 H84"/>
-              <path class="art-soft" data-draw d="M58 92 H96"/><rect class="art-soft" data-draw x="114" y="87" width="24" height="10" rx="2.5"/>
-              <path class="art-soft" data-draw d="M58 114 H96"/><rect class="art-soft" data-draw x="114" y="109" width="24" height="10" rx="2.5"/>
-              <path class="art-soft" data-draw d="M58 136 H96"/><rect class="art-soft" data-draw x="114" y="131" width="24" height="10" rx="2.5"/>
-              <path class="art-soft" data-draw d="M58 158 H96"/><rect class="art-soft" data-draw x="114" y="153" width="24" height="10" rx="2.5"/>
-              <path class="art-main" data-draw d="M58 176 H98"/><rect class="art-main" data-draw x="114" y="171" width="24" height="10" rx="2.5"/>
-              <g class="art-card">
-                <rect class="art-soft" x="160" y="50" width="56" height="48" rx="4" fill="rgba(255,255,255,.06)"/>
-                <circle class="art-accent art-glow" cx="171" cy="62" r="5.6" stroke-width="1.1"/>
-                <text class="art-fx" x="171" y="64.2" text-anchor="middle" style="font-size:6.6px">fx</text>
-                <path class="art-soft" d="M168 78 H206 M168 86 H198 M168 94 H204"/>
-                <path class="art-accent" d="M148 112 L160 100" stroke-dasharray="2.5 3.5" stroke-width="1.2"/>
-              </g>
-              <g class="art-lens">
-                <g data-pop>
-                  <circle r="34" fill="url(#artLensGlass)"/>
-                  <g clip-path="url(#artLensClip)"><g class="art-lens-inner">
-                    <rect class="art-soft" x="114" y="87" width="24" height="10" rx="2.5"/>
-                    <rect class="art-soft" x="114" y="109" width="24" height="10" rx="2.5"/>
-                    <rect class="art-soft" x="114" y="153" width="24" height="10" rx="2.5"/>
-                    <rect class="art-main" x="114" y="171" width="24" height="10" rx="2.5"/>
-                    <g class="art-fx" text-anchor="middle">
-                      <text x="126" y="94.6">fx</text><text x="126" y="116.6">fx</text><text x="121" y="138.6">fx</text><text x="126" y="160.6">fx</text>
-                    </g>
-                    <rect class="art-accent" x="114" y="131" width="24" height="10" rx="2.5" fill="rgba(153,224,255,.24)"/>
-                    <path class="art-accent" d="M129.6 136.2 L132.2 138.8 L136.2 133.4" stroke-width="1.5"/>
-                  </g></g>
-                  <circle r="34" class="art-main" style="stroke-width:2.2px"/>
-                  <circle r="30.4" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
-                  <circle r="34" class="art-accent art-glow art-lens-rim" style="stroke-width:2.2px"/>
-                  <path d="M-23.6 -11 A26 26 0 0 1 -8.9 -24.4" stroke="rgba(255,255,255,.78)" stroke-width="2.2"/>
-                  <g transform="rotate(-45)">
-                    <rect class="art-main" x="-4.2" y="35.5" width="8.4" height="31" rx="4.2" fill="url(#artHandle)"/>
-                    <path class="art-soft" d="M-4.2 45 H4.2"/>
-                  </g>
-                </g>
-              </g>
+              <circle class="ic" data-draw cx="106" cy="104" r="50"/>
+              <path class="ic-soft" data-draw d="M73 90 A36 36 0 0 1 92 70"/>
+              <path class="ic" data-draw style="stroke-width:11" d="M144 142 L180 178"/>
+              <text class="ic-fx" data-pop style="--d:.95s;font-size:44px" x="104" y="119" text-anchor="middle">fx</text>
             </svg>
           </div>
         </div>
@@ -855,32 +469,18 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Automatización</div>
-            <h2>Automatización de procesos internos</h2>
-            <p class="feature-slide-lead">Notificaciones automáticas para aprobaciones, recordatorios y alertas configurables a su medida.</p>
-            <p class="feature-slide-body">Sin necesidad de que alguien esté pendiente de enviarlas manualmente.</p>
+            <h2>Avisos que se envían solos</h2>
+            <p class="feature-slide-lead">Aprobaciones, recordatorios y alertas salen a tiempo, configurados a tu medida. Nadie tiene que acordarse.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s7Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s7Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".55"/><stop offset="1" stop-color="#062430" stop-opacity=".9"/></linearGradient><radialGradient id="s7Orb" cx="38%" cy="32%" r="78%"><stop offset="0" stop-color="#17657f" stop-opacity=".95"/><stop offset="1" stop-color="#082a37" stop-opacity=".95"/></radialGradient></defs>
-              <circle class="art-halo" cx="122" cy="120" r="100" fill="url(#s7Halo)"/>
+              <defs><radialGradient id="artHalo6" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="120" cy="120" r="98" fill="url(#artHalo6)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <path class="art-soft-dash" d="M78 120 C92 120 96 96 108 96"/>
-              <g class="s7-gear"><path data-fade d="M72.3 117.1 L76.9 118.0 L76.9 122.0 L72.3 122.9 L71.3 126.0 L74.5 129.5 L72.1 132.7 L67.9 130.8 L65.2 132.7 L65.8 137.3 L61.9 138.6 L59.6 134.5 L56.4 134.5 L54.1 138.6 L50.2 137.3 L50.8 132.7 L48.1 130.8 L43.9 132.7 L41.5 129.5 L44.7 126.0 L43.7 122.9 L39.1 122.0 L39.1 118.0 L43.7 117.1 L44.7 114.0 L41.5 110.5 L43.9 107.3 L48.1 109.2 L50.8 107.3 L50.2 102.7 L54.1 101.4 L56.4 105.5 L59.6 105.5 L61.9 101.4 L65.8 102.7 L65.2 107.3 L67.9 109.2 L72.1 107.3 L74.5 110.5 L71.3 114.0 Z" fill="url(#s7Orb)"/><path class="art-main" data-draw d="M72.3 117.1 L76.9 118.0 L76.9 122.0 L72.3 122.9 L71.3 126.0 L74.5 129.5 L72.1 132.7 L67.9 130.8 L65.2 132.7 L65.8 137.3 L61.9 138.6 L59.6 134.5 L56.4 134.5 L54.1 138.6 L50.2 137.3 L50.8 132.7 L48.1 130.8 L43.9 132.7 L41.5 129.5 L44.7 126.0 L43.7 122.9 L39.1 122.0 L39.1 118.0 L43.7 117.1 L44.7 114.0 L41.5 110.5 L43.9 107.3 L48.1 109.2 L50.8 107.3 L50.2 102.7 L54.1 101.4 L56.4 105.5 L59.6 105.5 L61.9 101.4 L65.8 102.7 L65.2 107.3 L67.9 109.2 L72.1 107.3 L74.5 110.5 L71.3 114.0 Z"/><circle class="art-main art-accent art-glow" data-draw cx="58" cy="120" r="6.2"/></g>
-              <text class="art-t art-cap" data-fade style="--d:1.1s" x="58" y="156" text-anchor="middle">AUTOMÁTICO</text>
-              <rect data-fade x="108" y="38" width="84" height="164" rx="14" fill="url(#s7Glass)"/>
-              <rect class="art-main" data-draw x="108" y="38" width="84" height="164" rx="14"/>
-              <path class="art-soft" data-draw d="M141 45.5 H159"/>
-              <text class="art-t art-mono" data-fade style="--d:.9s;font-size:5.6px;fill:rgba(255,255,255,.6)" x="118" y="60">09:00</text>
-              <g class="s7-bell"><path class="art-main" data-draw d="M176 61.5 H186 C184.5 60 184 58.6 184 57 V55.4 C184 53 182.6 51.6 181 51.6 C179.4 51.6 178 53 178 55.4 V57 C178 58.6 177.5 60 176 61.5 Z"/><path class="art-main" data-draw d="M179.8 63.6 H182.2"/></g>
-              <g class="s7-badge"><circle class="art-accent-fill art-glow" cx="186" cy="51" r="4"/><text class="s7-c s7-c1 art-t" x="186" y="52.9" text-anchor="middle" style="font-size:5.4px;font-weight:700;fill:#0a303e">1</text><text class="s7-c s7-c2 art-t" x="186" y="52.9" text-anchor="middle" style="font-size:5.4px;font-weight:700;fill:#0a303e">2</text><text class="s7-c s7-c3 art-t" x="186" y="52.9" text-anchor="middle" style="font-size:5.4px;font-weight:700;fill:#0a303e">3</text></g>
-              <g class="s7-n s7-n1"><rect x="116" y="70" width="68" height="24" rx="4.5" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.3)"/><circle cx="128" cy="82" r="6" fill="rgba(153,224,255,.14)" stroke="rgba(153,224,255,.7)" stroke-width=".9"/><rect x="124.2" y="78.6" width="7.6" height="7" rx="1" stroke="#99e0ff" stroke-width="1"/><path d="M124.2 80.8 H131.8" stroke="#99e0ff" stroke-width="1"/><text class="art-t" x="138" y="80.4" style="font-size:6.2px;fill:#fff">Vacaciones</text><path d="M138 86.6 H164" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/></g>
-              <g class="s7-n s7-n2"><rect x="116" y="100" width="68" height="24" rx="4.5" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.3)"/><circle cx="128" cy="112" r="6" fill="rgba(153,224,255,.14)" stroke="rgba(153,224,255,.7)" stroke-width=".9"/><path d="M125.2 107.6 H129.2 L131 109.4 V116.4 H125.2 Z" stroke="#99e0ff" stroke-width="1"/><text class="art-t" x="138" y="110.4" style="font-size:6.2px;fill:#fff">Contrato</text><path d="M138 116.6 H166" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/></g>
-              <g class="s7-n s7-n3"><rect x="116" y="130" width="68" height="24" rx="4.5" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.3)"/><circle cx="128" cy="142" r="6" fill="rgba(153,224,255,.14)" stroke="rgba(153,224,255,.7)" stroke-width=".9"/><text class="art-t" x="128" y="144.6" text-anchor="middle" style="font-size:7.6px;font-weight:700;fill:#99e0ff">$</text><text class="art-t" x="138" y="140.4" style="font-size:6.2px;fill:#fff">Rol de pagos</text><path d="M138 146.6 H176" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/></g>
-              <g class="s7-ok"><circle class="art-accent-fill art-glow" cx="175.6" cy="86.6" r="4.3"/><path d="M173.7 86.7 L175.2 88.2 L177.8 85.2" stroke="#0a303e" stroke-width="1.25"/></g>
-              <circle class="s7-pk s7-k1 art-accent-fill art-glow" r="2.8"/>
-              <circle class="s7-pk s7-k2 art-accent-fill art-glow" r="2.8"/>
-              <circle class="s7-pk s7-k3 art-accent-fill art-glow" r="2.8"/>
-              <path class="art-soft" data-draw d="M138 186 H162"/>
+              <g class="ic-spin">
+                <path class="ic" data-draw d="M107.9 69.4 L111.7 54.5 L128.3 54.5 L132.1 69.4 L147.2 75.7 L160.5 67.8 L172.2 79.5 L164.3 92.8 L170.6 107.9 L185.5 111.7 L185.5 128.3 L170.6 132.1 L164.3 147.2 L172.2 160.5 L160.5 172.2 L147.2 164.3 L132.1 170.6 L128.3 185.5 L111.7 185.5 L107.9 170.6 L92.8 164.3 L79.5 172.2 L67.8 160.5 L75.7 147.2 L69.4 132.1 L54.5 128.3 L54.5 111.7 L69.4 107.9 L75.7 92.8 L67.8 79.5 L79.5 67.8 L92.8 75.7 Z"/>
+                <circle class="ic ic-acc ic-glow" data-draw cx="120" cy="120" r="22"/>
+              </g>
             </svg>
           </div>
         </div>
@@ -891,35 +491,41 @@
         <div class="wrap">
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Escalabilidad</div>
-            <h2>Crece con su empresa</h2>
-            <p class="feature-slide-lead">Una sucursal o cincuenta, una sola estructura salarial o varias por departamento y tipo de contrato.</p>
-            <p class="feature-slide-body">SquareNet está diseñado para operaciones multi-sucursal y multi-empresa desde el primer día.</p>
+            <h2>Crece con tu empresa</h2>
+            <p class="feature-slide-lead">Una sucursal o cincuenta, una empresa o varias: la misma plataforma desde el primer día.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <defs><radialGradient id="s8Halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient><linearGradient id="s8Glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a6f8a" stop-opacity=".55"/><stop offset="1" stop-color="#062430" stop-opacity=".9"/></linearGradient></defs>
-              <circle class="art-halo" cx="120" cy="116" r="100" fill="url(#s8Halo)"/>
+              <defs><radialGradient id="artHalo7" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="124" cy="128" r="98" fill="url(#artHalo7)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <g class="s8-b s8-b1"><path class="art-soft-dash art-accent" d="M48 92 L102 104"/><rect x="33" y="84" width="14" height="17" rx="1.6" fill="url(#s8Glass)" stroke="rgba(255,255,255,.85)" stroke-width="1.3"/><path d="M30 101 H50" stroke="rgba(255,255,255,.45)" stroke-width="1.1"/><rect x="36" y="87.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="41" y="87.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="38.5" y="94.5" width="3" height="6.5" fill="rgba(255,255,255,.5)"/></g>
-              <g class="s8-b s8-b2"><path class="art-soft-dash art-accent" d="M48 150 L102 140"/><rect x="33" y="142" width="14" height="17" rx="1.6" fill="url(#s8Glass)" stroke="rgba(255,255,255,.85)" stroke-width="1.3"/><path d="M30 159 H50" stroke="rgba(255,255,255,.45)" stroke-width="1.1"/><rect x="36" y="145.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="41" y="145.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="38.5" y="152.5" width="3" height="6.5" fill="rgba(255,255,255,.5)"/></g>
-              <g class="s8-b s8-b3"><path class="art-soft-dash art-accent" d="M192 92 L138 104"/><rect x="193" y="84" width="14" height="17" rx="1.6" fill="url(#s8Glass)" stroke="rgba(255,255,255,.85)" stroke-width="1.3"/><path d="M190 101 H210" stroke="rgba(255,255,255,.45)" stroke-width="1.1"/><rect x="196" y="87.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="201" y="87.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="198.5" y="94.5" width="3" height="6.5" fill="rgba(255,255,255,.5)"/></g>
-              <g class="s8-b s8-b4"><path class="art-soft-dash art-accent" d="M192 150 L138 140"/><rect x="193" y="142" width="14" height="17" rx="1.6" fill="url(#s8Glass)" stroke="rgba(255,255,255,.85)" stroke-width="1.3"/><path d="M190 159 H210" stroke="rgba(255,255,255,.45)" stroke-width="1.1"/><rect x="196" y="145.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="201" y="145.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="198.5" y="152.5" width="3" height="6.5" fill="rgba(255,255,255,.5)"/></g>
-              <g class="s8-b s8-b5"><path class="art-soft-dash art-accent" d="M86 56 L110 84"/><rect x="71" y="38" width="14" height="17" rx="1.6" fill="url(#s8Glass)" stroke="rgba(255,255,255,.85)" stroke-width="1.3"/><path d="M68 55 H88" stroke="rgba(255,255,255,.45)" stroke-width="1.1"/><rect x="74" y="41.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="79" y="41.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="76.5" y="48.5" width="3" height="6.5" fill="rgba(255,255,255,.5)"/></g>
-              <g class="s8-b s8-b6"><path class="art-soft-dash art-accent" d="M154 56 L130 84"/><rect x="155" y="38" width="14" height="17" rx="1.6" fill="url(#s8Glass)" stroke="rgba(255,255,255,.85)" stroke-width="1.3"/><path d="M152 55 H172" stroke="rgba(255,255,255,.45)" stroke-width="1.1"/><rect x="158" y="41.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="163" y="41.5" width="3" height="3" fill="rgba(153,224,255,.85)"/><rect x="160.5" y="48.5" width="3" height="6.5" fill="rgba(255,255,255,.5)"/></g>
-              <rect data-fade x="102" y="84" width="36" height="70" rx="2" fill="url(#s8Glass)"/>
-              <rect class="art-main" data-draw x="102" y="84" width="36" height="70" rx="2"/>
-              <path class="art-soft" data-draw d="M92 154 H148"/>
-              <path class="art-main" data-draw d="M120 84 V71"/>
-              <path class="art-accent-fill art-glow" data-pop d="M120 71 H131 L128 74.6 L131 78.2 H120 Z"/>
-              <g data-fade style="--d:1s"><rect x="108" y="93" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="117.5" y="93" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="127" y="93" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="108" y="104" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="117.5" y="104" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="127" y="104" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="108" y="115" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="117.5" y="115" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="127" y="115" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="108" y="126" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="117.5" y="126" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="127" y="126" width="5" height="6" rx=".6" fill="rgba(153,224,255,.55)"/><rect x="115" y="140" width="10" height="14" rx="1" stroke="rgba(255,255,255,.7)"/></g>
-              <g data-fade style="--d:1.2s"><rect x="80" y="172" width="80" height="15" rx="7.5" fill="rgba(153,224,255,.1)" stroke="rgba(153,224,255,.5)"/></g>
-              <text class="s8-c s8-c0 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">1 sucursal</text>
-              <text class="s8-c s8-c1 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">2 sucursales</text>
-              <text class="s8-c s8-c2 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">3 sucursales</text>
-              <text class="s8-c s8-c3 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">4 sucursales</text>
-              <text class="s8-c s8-c4 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">5 sucursales</text>
-              <text class="s8-c s8-c5 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">6 sucursales</text>
-              <text class="s8-c s8-c6 art-t" x="120" y="182" text-anchor="middle" style="font-size:6.4px;fill:#fff">7 sucursales</text>
+              <path class="ic-soft" data-draw d="M34 192 H206"/>
+              <g class="ic-rise" style="--d:0.3s"><rect class="ic" x="46" y="140" width="40" height="52" rx="2"/><rect x="55.0" y="152" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="70.0" y="152" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="60.0" y="176" width="12" height="16" rx="1.5" stroke="rgba(255,255,255,.75)" stroke-width="2"/></g>
+              <g class="ic-rise" style="--d:0.5s"><rect class="ic" x="98" y="106" width="44" height="86" rx="2"/><rect x="107.0" y="118" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="126.0" y="118" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="107.0" y="133" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="126.0" y="133" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="107.0" y="148" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="126.0" y="148" width="7" height="8" rx="1" fill="rgba(255,255,255,.5)"/><rect x="114.0" y="176" width="12" height="16" rx="1.5" stroke="rgba(255,255,255,.75)" stroke-width="2"/></g>
+              <g class="ic-rise" style="--d:0.7s"><rect class="ic ic-acc ic-glow" x="154" y="62" width="48" height="130" rx="2"/><rect x="163.0" y="74" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="174.5" y="74" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="186.0" y="74" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="163.0" y="89" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="174.5" y="89" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="186.0" y="89" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="163.0" y="104" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="174.5" y="104" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="186.0" y="104" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="163.0" y="119" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="174.5" y="119" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="186.0" y="119" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="163.0" y="134" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="174.5" y="134" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="186.0" y="134" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="163.0" y="149" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="174.5" y="149" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="186.0" y="149" width="7" height="8" rx="1" fill="rgba(153,224,255,.85)"/><rect x="172.0" y="176" width="12" height="16" rx="1.5" stroke="rgba(255,255,255,.75)" stroke-width="2"/></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="feature-slide">
+        <div class="feature-slide-bg" style="background:radial-gradient(circle at 82% 25%, color-mix(in srgb, var(--color-accent-2-500) 24%, transparent) 0%, transparent 46%), radial-gradient(circle at 18% 78%, color-mix(in srgb, var(--color-accent-400) 30%, transparent) 0%, transparent 42%), linear-gradient(160deg, var(--color-accent-800) 0%, var(--color-accent-900) 100%)"></div>
+        <div class="feature-slide-overlay"></div>
+        <div class="wrap">
+          <div class="feature-slide-copy">
+            <div class="feature-slide-kicker">Soporte</div>
+            <h2>Soporte instantáneo. De verdad.</h2>
+            <p class="feature-slide-lead">Un equipo que ya conoce tu instalación te atiende en remoto, sin tickets perdidos ni respuestas genéricas.</p>
+          </div>
+          <div class="feature-slide-art" aria-hidden="true">
+            <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <defs><radialGradient id="artHalo8" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
+              <circle class="art-halo" cx="120" cy="128" r="98" fill="url(#artHalo8)"/>
+              <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
+              <path class="ic" data-draw d="M66 132 V118 A54 54 0 0 1 174 118 V132"/>
+              <rect class="ic" data-draw x="52" y="118" width="26" height="48" rx="11"/>
+              <rect class="ic" data-draw x="162" y="118" width="26" height="48" rx="11"/>
+              <path class="ic" data-draw d="M175 166 C175 186 160 196 140 196"/>
+              <g data-pop style="--d:1s"><rect x="116" y="189" width="26" height="14" rx="7" fill="#99e0ff" class="ic-glow"/></g>
             </svg>
           </div>
         </div>
@@ -1173,7 +779,7 @@
           try { len = el.getTotalLength(); } catch (e) { len = 0; }
           if (!len) return;
           el.style.setProperty('--len', len.toFixed(1));
-          el.style.setProperty('--d', (0.15 + step * gap).toFixed(3) + 's');
+          if (!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (0.15 + step * gap).toFixed(3) + 's');
           step++;
         });
         var tail = 0.15 + step * gap;
@@ -1254,6 +860,7 @@
       var noAuto = reduce || saveData; // sin autoplay ni descarga hasta que el usuario pulse play
       var hasIO = 'IntersectionObserver' in window;
       var loaded = false, inView = false, userPaused = noAuto, opened = reduce || !hasIO;
+      var linked = false, closed = false, ticking = false;
 
       function setPaused(paused) {
         laptop.classList.toggle('is-paused', paused);
@@ -1269,12 +876,40 @@
       }
       function sync() {
         if (!loaded) return;
-        if (inView && opened && !userPaused && !document.hidden) {
+        if (inView && opened && !closed && !userPaused && !document.hidden) {
           var p = video.play();
           if (p && p.catch) p.catch(function () { userPaused = true; setPaused(true); });
         } else {
           video.pause();
         }
+      }
+
+      // Cierre de la tapa guiado por el scroll: empieza cuando el laptop comienza a salir por arriba
+      // y termina tras recorrer el 70% de su alto (la bisagra sigue a la vista mientras cierra).
+      // Relativo al alto del laptop para que se sienta igual en celular y en escritorio.
+      function lidProgress() {
+        var r = laptop.getBoundingClientRect();
+        var p = Math.max(0, Math.min(1, (window.innerHeight * 0.04 - r.top) / (r.height * 0.7)));
+        return p * p * (3 - 2 * p);
+      }
+      function onScroll() {
+        if (!linked || ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          var p = lidProgress();
+          laptop.style.setProperty('--lid', p.toFixed(3));
+          var c = p > 0.65;
+          if (c !== closed) { closed = c; sync(); }
+        });
+      }
+      function link() {
+        if (linked) return;
+        linked = true;
+        laptop.classList.add('is-linked');
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
       }
 
       video.addEventListener('playing', function () { laptop.classList.add('is-playing'); });
@@ -1298,7 +933,14 @@
         inView = entries[0].isIntersecting;
         if (inView && !opened) {
           laptop.classList.add('is-open');
-          setTimeout(function () { opened = true; sync(); }, 800);
+          if (lidProgress() > 0.05) {
+            // entra desde arriba (subiendo con el scroll): el scroll maneja la tapa desde ya
+            opened = true;
+            link();
+          } else {
+            setTimeout(function () { opened = true; sync(); }, 800);
+            setTimeout(link, 1500); // al terminar la animación de apertura
+          }
         }
         sync();
       }, { threshold: 0.3 }).observe(laptop);
