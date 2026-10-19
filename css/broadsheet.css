@@ -508,3 +508,4 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 @media (prefers-reduced-motion: reduce) {
   .related-cover img { transition: none; }
 }
+

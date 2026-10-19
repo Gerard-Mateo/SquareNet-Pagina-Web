@@ -177,7 +177,7 @@
     box-shadow:inset 0 0 0 .11cqw rgba(255,255,255,.1),inset 0 .12cqw 0 rgba(255,255,255,.2),0 3.2cqw 6.5cqw rgba(8,34,46,.3),0 .7cqw 1.8cqw rgba(0,0,0,.22)}
   .laptop-cam{position:absolute;left:50%;top:.52cqw;width:.5cqw;height:.5cqw;margin-left:-.25cqw;border-radius:50%;
     background:radial-gradient(circle at 35% 35%,#41525f,#06090c 70%);box-shadow:0 0 0 .1cqw #04060a}
-  .laptop-screen{position:relative;aspect-ratio:16/10;border-radius:.45cqw;overflow:hidden;background:#0a0c0e;isolation:isolate}
+  .laptop-screen{position:relative;aspect-ratio:16/9;border-radius:.45cqw;overflow:hidden;background:#0a0c0e;isolation:isolate}
   .laptop-video,.laptop-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .laptop-poster{z-index:1;transition:opacity .45s ease}
   .laptop.is-playing .laptop-poster{opacity:0}
@@ -310,9 +310,9 @@
           <div class="laptop-lid">
             <span class="laptop-cam" aria-hidden="true"></span>
             <div class="laptop-screen">
-              <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1280" height="800"
-                     data-src="media/squarenet-loop.mp4" data-src-sm="media/squarenet-loop-sm.mp4"></video>
-              <img class="laptop-poster" src="media/squarenet-loop-poster.jpg" alt="Pantalla de roles de pago del sistema SquareNet" width="1280" height="800" loading="lazy" decoding="async">
+              <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1280" height="720"
+                     data-src="media/squarenet-recorrido.mp4" data-src-sm="media/squarenet-recorrido-sm.mp4"></video>
+              <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Menú de reportes del sistema SquareNet: rol de pago, formularios del SRI y más" width="1280" height="720" loading="lazy" decoding="async">
               <span class="laptop-gloss" aria-hidden="true"></span>
               <button class="laptop-toggle" id="laptopToggle" type="button" aria-label="Pausar la animación">
                 <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
@@ -539,7 +539,7 @@
   <div class="erp-band">
     <div class="wrap">
       <h2><span class="accent">Integra</span> SquareNet con tu <span class="accent">ecosistema empresarial</span></h2>
-      <p>SquareNet se conecta con los <strong>sistemas ERP más usados</strong>, para que la información de <strong>nómina, asistencia y recursos humanos</strong> fluya de forma automática hacia SAP, Microsoft Dynamics AX, JD Edwards e Infor. <strong>Menos reprocesos, más consistencia en tus datos.</strong></p>
+      <p>SquareNet se conecta con los <strong>sistemas ERP más usados.</strong> Menos reprocesos, más consistencia en tus datos.</p>
       <div class="erp-logos">
         <img src="img/sap-logo.svg" alt="SAP">
         <img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365">
