@@ -21,7 +21,6 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-  .list-check img { display: block; max-width: 340px; margin-top: var(--space-2); border-radius: var(--radius-sm); }
 </style>
 </head>
 <body>
@@ -41,98 +40,132 @@
     </nav>
   </div>
 
-  <div class="wrap hero">
-    <div class="hero-copy">
-      <div class="kicker">Módulo SquareNet</div>
+  <main class="wrap">
+    <header class="mod-hero" data-reveal>
+      <a class="mod-crumb" href="modulos.html">Módulos <b>· 04 Cobra</b></a>
       <h1>Software de Nómina en Ecuador con Cumplimiento IESS y SRI</h1>
-      <p>Este módulo lo ayudará a realizar todo lo concerniente al Rol de pagos de sus empleados, mediante una fácil configuración de fórmulas o scripts, al estilo de una hoja de cálculo como Microsoft Excel. Genera por ejemplo: archivos de acreditación bancaria, archivos batch para el IESS, archivos batch para el Ministerio de Relaciones Laborales, formularios y archivos del SRI, contratos, liquidaciones, envío de rol por email, etc.</p>
-    </div>
-    <figure class="halftone hero-media"><img src="media/nomina.png" alt="Módulo de nómina SquareNet"></figure>
-  </div>
-
-  <div class="wrap partners">
-    <span>SAP</span><span>Microsoft Dynamics AX</span><span>JD Edwards</span><span>Infor</span>
-  </div>
-  <div class="wrap"><p class="partners-note">Es el complemento ideal para el ERP de su empresa (SAP, Dynamics AX, JDEdwards, ínfor) u otro sistema Administrativo Financiero.</p></div>
-
-  <div class="wrap">
-    <section>
-      <div class="video-embed">
-        <iframe src="https://www.youtube-nocookie.com/embed/eu6IcZ9M9iQ?rel=0" title="Video demo Nómina" allowfullscreen></iframe>
+      <p>Calcula el rol de pagos con fórmulas que tú mismo editas, como en Excel, y genera los archivos del IESS, el Ministerio de Trabajo y el SRI sin salir del sistema.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="contacto.html">Solicitar una demo</a>
+        <a class="btn btn-secondary" href="modulos.html">Ver todos los módulos</a>
       </div>
+    </header>
+
+    <div class="mod-media">
+        <div class="mod-video" data-reveal>
+          <div class="mod-window">
+            <div class="mod-bar" aria-hidden="true"><i></i><i></i><i></i><span>SquareNet · Nómina</span><em>Grabación real</em></div>
+            <div class="mod-screen" title="Ver en pantalla completa">
+              <video muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1" width="1280" height="720" data-src="media/clip-nomina.mp4"></video>
+              <img class="mod-poster" src="media/clip-nomina.jpg" alt="Pantalla de rol de pagos del módulo de Nómina de SquareNet" width="1280" height="720" loading="lazy" decoding="async">
+              <span class="mod-progress" aria-hidden="true"><b></b></span>
+              <button class="mod-toggle" type="button" aria-label="Pausar el video">
+                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+              </button>
+            </div>
+          </div>
+          <p class="mod-caption"><span>Pantallas reales del módulo Nómina de SquareNet.</span><span>Clic en el video para verlo en pantalla completa.</span></p>
+        </div>
+    </div>
+
+    <section class="mod-sec" aria-labelledby="ess-title">
+      <h2 id="ess-title" data-reveal>Lo esencial</h2>
+      <div class="mod-feats n6">
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><span class="fx">fx</span></span><h3>Fórmulas al estilo Excel</h3><p>Cada rubro es una fórmula editable. Creas, cambias o eliminas rubros sin afectar los roles pasados.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><h3>100 empleados en ~20 segundos</h3><p>El procesamiento de rol más rápido del mercado, frente a 30–45 minutos en otros sistemas.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.4 3 7.9 7 9 4-1.1 7-4.6 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>IESS, SRI y Ministerio de Trabajo</h3><p>Archivos batch del IESS, anexo RDEP en XML, formulario 107 y archivos de décimos, utilidades y finiquitos.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="m9 15 6-6"/><circle cx="9.5" cy="9.5" r="1"/><circle cx="14.5" cy="14.5" r="1"/></svg></span><h3>Impuesto a la renta proyectado</h3><p>Calcula el impuesto pronosticando cuánto ganará cada persona en el año, con gastos personales incluidos.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9 12 4l9 5"/><path d="M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/></svg></span><h3>Pago al banco</h3><p>Archivos de acreditación con plantillas configurables, quincenas, pagos por partes y por centro de costo.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg></span><h3>Depurador de fórmulas</h3><p>Muestra paso a paso cómo se calculó cada valor del rol. Ideal para auditorías.</p></article>
+      </div>
+      <details class="mod-all">
+        <summary>Todas las funciones (35)</summary>
+          <ul class="list-check">
+          <li>Cuenta con todas las bondades de la <a href="plataforma.html">Plataforma SquareNet (haga clic aquí para más información)</a>.</li>
+          <li>Filtros intuitivos tipo Excel, diseño amigable para una mejor experiencia de usuario: busca, ordena, clasifica.
+          <img src="img/no_filtros.png" alt="Filtros tipo Excel"></li>
+          <li>Herramienta de depuración incluida para mostrar de manera visual el proceso de cálculo de sus fórmulas.
+          <img src="img/no_depurador.png" alt="Herramienta de depuración"></li>
+          <li>Herramienta de graficación de Nómina que le permite analizar datos comparando centros de costo versus tiempo.
+          <img src="img/no_graficos.png" alt="Herramienta de graficación"></li>
+          <li>Procesamiento de rol más rápido del mercado: 20 segundos por cada 100 empleados aproximadamente. Incomparable con otros sistemas con tiempos mayores a 30–45 minutos de procesamiento.</li>
+          <li>Puede consultar y navegar en los datos de meses anteriores.</li>
+          <li>Flexibilidad en el manejo de sus rubros, permitiéndole crear nuevos, cambiarlos o eliminarlos sin afectar a roles pasados.</li>
+          <li>Fácil personalización de cálculos en los rubros mediante fórmulas o scripts al estilo de Microsoft Excel. Sea completamente independiente y autosuficiente.</li>
+          <li>Manejo de diferentes tipos de rol, para separar a sus empleados en diferentes grupos.</li>
+          <li>Importación de archivos desde Excel o texto, para cargar valores directamente al Rol.</li>
+          <li>Puede ingresar valores digitándolos manualmente por medio de listas, si es que no tuviera la información en archivo.</li>
+          <li>Completamente integrado con SquareNet <a href="moduloca.html">Control de Asistencia</a> y <a href="modulorh.html">Recursos Humanos</a> para extraer información de horas o desde contratos.</li>
+          <li>Manejo de nómina por centros de costo, los cuales pueden ser definidos como una estructura jerárquica.</li>
+          <li>Puede definir diferentes plantillas de rubros según cambie la ley vigente. Por ejemplo: relación laboral, pago por horas, pago por servicios, etc.</li>
+          <li>Control automático de cuotas por fechas, muy útil para descuentos por préstamos o bonos programados.</li>
+          <li>Asignación de rubros fijos para valores recurrentes: descuento caja de ahorros, seguros médicos, servicios, etc.</li>
+          <li>Cálculo automático del impuesto a la renta, pronosticando de manera certera cuánto ganará en el año.</li>
+          <li>Repartición automática de utilidades según procedimiento de ley.</li>
+          <li>Cálculo de décimos mensuales o acumulados según preferencia del empleado.</li>
+          <li>Fácil control y cálculo automático de las provisiones para Décimo Tercero, Décimo Cuarto y Vacaciones.</li>
+          <li>Control de pagos, para que pueda acreditar los valores a pagar por partes o por centros de costo.</li>
+          <li>Bloqueo de valores por persona o por rubro para evitar modificaciones accidentales en sus datos.</li>
+          <li>Soporte para pagos en quincenas.</li>
+          <li>Generación de archivos para acreditación en bancos mediante plantillas configurables.</li>
+          <li>Completos reportes: rol de pagos, resúmenes, cruces, décimos, provisiones, préstamos, etc.</li>
+          <li>Emisión de archivos batch para el IESS para carga en lote de avisos de entrada, salida, modificación de sueldo, variación de sueldo por extras, etc.</li>
+          <li>Generación del anexo transaccional RDEP para el SRI del impuesto a la renta en relación de dependencia en formato XML.</li>
+          <li>Impresión automática de formularios del SRI 107 para impuesto a la renta.</li>
+          <li>Generación automática de liquidación de haberes, configurables por plantillas en Word.</li>
+          <li>Generación de archivos batch para el Ministerio de Trabajo: décimos, utilidades y finiquitos.</li>
+          <li>Reportes personalizables por el usuario: usted escoge la información que desea.</li>
+          <li>Soporte para distribución contable de costos del empleado a diferentes centros de costo, ya sea asignando porcentajes de manera fija o automáticamente por el movimiento del personal.</li>
+          <li>Soporte para gastos personales y ley de equidad tributaria.</li>
+          <li>Varios modelos y formatos de impresión de Rol de Pago personalizables.</li>
+          <li>Interfaz contable abierta para exportación de asientos contables configurables. Ideal para integrarlo a su ERP como SAP, Dynamics AX, JDEdwards, ínfor, etc.</li>
+          </ul>
+      </details>
     </section>
 
-    <section>
-      <h2>Información y Características</h2>
-      <ul class="list-check">
-        <li>Cuenta con todas las bondades de la <a href="plataforma.html">Plataforma SquareNet (haga clic aquí para más información)</a>.</li>
-        <li>Filtros intuitivos tipo Excel, diseño amigable para una mejor experiencia de usuario: busca, ordena, clasifica.
-          <img src="img/no_filtros.png" alt="Filtros tipo Excel"></li>
-        <li>Herramienta de depuración incluida para mostrar de manera visual el proceso de cálculo de sus fórmulas.
-          <img src="img/no_depurador.png" alt="Herramienta de depuración"></li>
-        <li>Herramienta de graficación de Nómina que le permite analizar datos comparando centros de costo versus tiempo.
-          <img src="img/no_graficos.png" alt="Herramienta de graficación"></li>
-        <li>Procesamiento de rol más rápido del mercado: 20 segundos por cada 100 empleados aproximadamente. Incomparable con otros sistemas con tiempos mayores a 30–45 minutos de procesamiento.</li>
-        <li>Puede consultar y navegar en los datos de meses anteriores.</li>
-        <li>Flexibilidad en el manejo de sus rubros, permitiéndole crear nuevos, cambiarlos o eliminarlos sin afectar a roles pasados.</li>
-        <li>Fácil personalización de cálculos en los rubros mediante fórmulas o scripts al estilo de Microsoft Excel. Sea completamente independiente y autosuficiente.</li>
-        <li>Manejo de diferentes tipos de rol, para separar a sus empleados en diferentes grupos.</li>
-        <li>Importación de archivos desde Excel o texto, para cargar valores directamente al Rol.</li>
-        <li>Puede ingresar valores digitándolos manualmente por medio de listas, si es que no tuviera la información en archivo.</li>
-        <li>Completamente integrado con SquareNet <a href="moduloca.html">Control de Asistencia</a> y <a href="modulorh.html">Recursos Humanos</a> para extraer información de horas o desde contratos.</li>
-        <li>Manejo de nómina por centros de costo, los cuales pueden ser definidos como una estructura jerárquica.</li>
-        <li>Puede definir diferentes plantillas de rubros según cambie la ley vigente. Por ejemplo: relación laboral, pago por horas, pago por servicios, etc.</li>
-        <li>Control automático de cuotas por fechas, muy útil para descuentos por préstamos o bonos programados.</li>
-        <li>Asignación de rubros fijos para valores recurrentes: descuento caja de ahorros, seguros médicos, servicios, etc.</li>
-        <li>Cálculo automático del impuesto a la renta, pronosticando de manera certera cuánto ganará en el año.</li>
-        <li>Repartición automática de utilidades según procedimiento de ley.</li>
-        <li>Cálculo de décimos mensuales o acumulados según preferencia del empleado.</li>
-        <li>Fácil control y cálculo automático de las provisiones para Décimo Tercero, Décimo Cuarto y Vacaciones.</li>
-        <li>Control de pagos, para que pueda acreditar los valores a pagar por partes o por centros de costo.</li>
-        <li>Bloqueo de valores por persona o por rubro para evitar modificaciones accidentales en sus datos.</li>
-        <li>Soporte para pagos en quincenas.</li>
-        <li>Generación de archivos para acreditación en bancos mediante plantillas configurables.</li>
-        <li>Completos reportes: rol de pagos, resúmenes, cruces, décimos, provisiones, préstamos, etc.</li>
-        <li>Emisión de archivos batch para el IESS para carga en lote de avisos de entrada, salida, modificación de sueldo, variación de sueldo por extras, etc.</li>
-        <li>Generación del anexo transaccional RDEP para el SRI del impuesto a la renta en relación de dependencia en formato XML.</li>
-        <li>Impresión automática de formularios del SRI 107 para impuesto a la renta.</li>
-        <li>Generación automática de liquidación de haberes, configurables por plantillas en Word.</li>
-        <li>Generación de archivos batch para el Ministerio de Trabajo: décimos, utilidades y finiquitos.</li>
-        <li>Reportes personalizables por el usuario: usted escoge la información que desea.</li>
-        <li>Soporte para distribución contable de costos del empleado a diferentes centros de costo, ya sea asignando porcentajes de manera fija o automáticamente por el movimiento del personal.</li>
-        <li>Soporte para gastos personales y ley de equidad tributaria.</li>
-        <li>Varios modelos y formatos de impresión de Rol de Pago personalizables.</li>
-        <li>Interfaz contable abierta para exportación de asientos contables configurables. Ideal para integrarlo a su ERP como SAP, Dynamics AX, JDEdwards, ínfor, etc.</li>
+    <section class="mod-sec" aria-labelledby="rep-title">
+      <h2 id="rep-title" data-reveal>Reportes incluidos</h2>
+      <p class="lead" data-reveal>16 reportes listos para usar, exportables a Excel o PDF desde el sistema.</p>
+      <ul class="mod-reports">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Rol de Pagos</b><span>Impresión del rol de pago para el empleado en formato troquelado (mitad de carta).</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Cruce Completo</b><span>Impresión detallada del Rol de Pagos por centros de costo.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Cruce Simple</b><span>Impresión de uno o más rubros seleccionables del Rol.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Acta de Finiquito</b><span>Impresión detallada del Rol de Pagos por centros de costo.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>SRI 107</b><span>Impresión automática del Formulario 107 del SRI.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>SRI Anexo transaccional XML</b><span>Archivo XML que se entrega al SRI como anexo transaccional.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Acreditación Bancaria</b><span>Impresión de respaldo para su acreditación bancaria.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Archivo para el Banco</b><span>Archivo para acreditación de los sueldos en su banco. Ejemplo Banco Pichincha.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Décimos</b><span>Impresión de Décimos para ser legalizado en el Ministerio de Trabajo. Ejemplo Décimo Tercero.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Resumen del Rol</b><span>Resumen del total a pagar por persona de todo el Rol.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Cuotas</b><span>Impresión del rol de pago para el empleado en formato troquelado.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Rubros Fijos</b><span>Resumen de las cuotas por pagar del personal a una fecha de corte.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>MultiRol Personal</b><span>Detalle completo de varios meses de todos los rubros de una persona.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>MultiRol Desglosado por Meses</b><span>Detalle completo de varios meses desglosados en rubros para los empleados escogidos.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>MultiRol Desglosado por Rubros</b><span>Detalle completo de varios rubros desglosados en meses para los empleados escogidos.</span></div></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Gastos Personales</b><span>Lista de los Gastos Personales de los empleados de un año específico.</span></div></li>
       </ul>
     </section>
 
-    <section>
-      <h2>Precios y Garantía</h2>
-      <p>Solicite <a href="contacto.html">información</a> y asesoría para una cotización.</p>
+    <section class="mod-sec" aria-labelledby="rel-title">
+      <h2 id="rel-title" data-reveal>Funciona mejor junto a</h2>
+      <div class="mod-related" data-reveal>
+        <a href="moduloca.html">Control de Asistencia <i>→</i></a>
+        <a href="modulorh.html">Recursos Humanos <i>→</i></a>
+        <a href="moduloas.html">Autoservicio <i>→</i></a>
+        <a href="plataforma.html">Plataforma SquareNet <i>→</i></a>
+      </div>
+      <p class="mod-erp">Complemento ideal para el ERP de tu empresa: SAP, Microsoft Dynamics AX, JD Edwards, Infor u otro sistema administrativo financiero.</p>
     </section>
 
-    <section>
-      <h2>Reportes y Documentos</h2>
-      <div class="report-list">
-        <a class="report-item" href="reportes/Nomina_Roles.pdf" download><div class="report-item-text"><div class="report-item-title">Rol de Pagos<span class="report-item-ext">.pdf</span></div><div class="report-item-desc">Impresión del rol de pago para el empleado en formato troquelado (mitad de carta).</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Cruce_Completo.xls" download><div class="report-item-text"><div class="report-item-title">Cruce Completo<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Impresión detallada del Rol de Pagos por centros de costo.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Cruce_Simple.xls" download><div class="report-item-text"><div class="report-item-title">Cruce Simple<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Impresión de uno o más rubros seleccionables del Rol.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Finiquito.doc" download><div class="report-item-text"><div class="report-item-title">Acta de Finiquito<span class="report-item-ext">.doc</span></div><div class="report-item-desc">Impresión detallada del Rol de Pagos por centros de costo.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_SRI_107.pdf" download><div class="report-item-text"><div class="report-item-title">SRI 107<span class="report-item-ext">.pdf</span></div><div class="report-item-desc">Impresión automática del Formulario 107 del SRI.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_SRI_XML.xls" download><div class="report-item-text"><div class="report-item-title">SRI Anexo transaccional XML<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Archivo XML que se entrega al SRI como anexo transaccional.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Acreditacion_Bancaria.xls" download><div class="report-item-text"><div class="report-item-title">Acreditación Bancaria<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Impresión de respaldo para su acreditación bancaria.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Acreditacion_Bancaria_Archivo.txt" download><div class="report-item-text"><div class="report-item-title">Archivo para el Banco<span class="report-item-ext">.txt</span></div><div class="report-item-desc">Archivo para acreditación de los sueldos en su banco. Ejemplo Banco Pichincha.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Decimo.xls" download><div class="report-item-text"><div class="report-item-title">Décimos<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Impresión de Décimos para ser legalizado en el Ministerio de Trabajo. Ejemplo Décimo Tercero.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Resumen.xls" download><div class="report-item-text"><div class="report-item-title">Resumen del Rol<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Resumen del total a pagar por persona de todo el Rol.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Cuotas.xls" download><div class="report-item-text"><div class="report-item-title">Cuotas<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Impresión del rol de pago para el empleado en formato troquelado.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Rubros_Fijos.xls" download><div class="report-item-text"><div class="report-item-title">Rubros Fijos<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Resumen de las cuotas por pagar del personal a una fecha de corte.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Multirol_Personal.xls" download><div class="report-item-text"><div class="report-item-title">MultiRol Personal<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Detalle completo de varios meses de todos los rubros de una persona.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Multirol_Desglose_Mes.xls" download><div class="report-item-text"><div class="report-item-title">MultiRol Desglosado por Meses<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Detalle completo de varios meses desglosados en rubros para los empleados escogidos.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Multirol_Desglose_Rubro.xls" download><div class="report-item-text"><div class="report-item-title">MultiRol Desglosado por Rubros<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Detalle completo de varios rubros desglosados en meses para los empleados escogidos.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
-        <a class="report-item" href="reportes/Nomina_Gastos_Personales.xls" download><div class="report-item-text"><div class="report-item-title">Gastos Personales<span class="report-item-ext">.xls</span></div><div class="report-item-desc">Lista de los Gastos Personales de los empleados de un año específico.</div></div><svg class="report-item-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></a>
+    <section class="mod-cta band-dark" data-reveal>
+      <div>
+        <h2>Míralo con los datos de tu empresa</h2>
+        <p>Te mostramos Nómina en una demo y te asesoramos para la cotización.</p>
       </div>
+      <a class="btn" href="contacto.html">Solicitar una demo</a>
     </section>
-  </div>
+  </main>
 
   <footer class="site-footer">
     <div class="wrap footer-grid">
@@ -184,6 +217,8 @@
     });
   </script>
   <script src="js/fecha.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/module-player.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/consent.js"></script>
 </body>

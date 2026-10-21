@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <title>Blog SquareNet | Nómina, RRHH y Cumplimiento Laboral en Ecuador</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="blog nómina ecuador, recursos humanos ecuador, IESS, SRI, décimo tercero, décimo cuarto, software de nómina">
-<meta name="description" content="Guías prácticas sobre nómina, recursos humanos y cumplimiento laboral en Ecuador: cálculos de ley, IESS, SRI y buenas prácticas de gestión de personal.">
+<meta name="keywords" content="blog nómina ecuador, calculadora décimo tercero, calculadora décimo cuarto, calculadora fondos de reserva, calculadora utilidades, calculadora impuesto a la renta 2026, IESS, SRI, software de nómina">
+<meta name="description" content="Guías prácticas y calculadoras gratuitas de nómina en Ecuador: décimo tercero y cuarto, fondos de reserva, utilidades e impuesto a la renta 2026.">
 <link rel="canonical" href="https://www.squarenet.com.ec/blog/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SquareNet">
 <meta property="og:locale" content="es_EC">
 <meta property="og:url" content="https://www.squarenet.com.ec/blog/">
 <meta property="og:title" content="Blog SquareNet | Nómina, RRHH y Cumplimiento Laboral en Ecuador">
-<meta property="og:description" content="Guías prácticas sobre nómina, recursos humanos y cumplimiento laboral en Ecuador: cálculos de ley, IESS, SRI y buenas prácticas de gestión de personal.">
+<meta property="og:description" content="Guías prácticas y calculadoras gratuitas de nómina en Ecuador: décimo tercero y cuarto, fondos de reserva, utilidades e impuesto a la renta 2026.">
 <meta property="og:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Blog SquareNet | Nómina, RRHH y Cumplimiento Laboral en Ecuador">
-<meta name="twitter:description" content="Guías prácticas sobre nómina, recursos humanos y cumplimiento laboral en Ecuador: cálculos de ley, IESS, SRI y buenas prácticas de gestión de personal.">
+<meta name="twitter:description" content="Guías prácticas y calculadoras gratuitas de nómina en Ecuador: décimo tercero y cuarto, fondos de reserva, utilidades e impuesto a la renta 2026.">
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="../img/squarenet.ico" rel="shortcut icon">
 <link href="../css/broadsheet.css" rel="stylesheet">
@@ -75,10 +75,45 @@
   .post-card > a:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
   .pc-text p{margin:0 0 var(--space-3);font-size:15px;line-height:1.55;color:var(--color-neutral-700);flex:1}
 
+  /* calculadoras: acceso directo a las 5 */
+  .calc-strip{position:relative;overflow:hidden;margin-top:var(--space-6);padding:var(--space-6);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);
+    display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:var(--space-6);align-items:center}
+  .calc-strip::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle,rgba(255,255,255,.13) 1px,transparent 1.4px) 0 0/18px 18px;
+    -webkit-mask-image:linear-gradient(100deg,transparent 10%,#000 60%);mask-image:linear-gradient(100deg,transparent 10%,#000 60%)}
+  .calc-strip > *{position:relative}
+  .calc-strip .calc-badge{color:var(--color-accent-300)}
+  .calc-strip .calc-badge::before{background:var(--color-accent-300)}
+  .cs-head h2{font-size:30px;line-height:1.12;margin:0 0 var(--space-2)}
+  .cs-head p{margin:0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.76)}
+  .cs-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-2)}
+  .cs-tile{position:relative;display:flex;flex-direction:column;min-height:168px;padding:var(--space-3);text-decoration:none;color:#fff;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-md);
+    transition:transform .3s cubic-bezier(.2,.8,.3,1.4),background .25s ease,border-color .25s ease}
+  .cs-tile b{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:36px;line-height:1;letter-spacing:-.01em;
+    color:var(--color-accent-300);margin-bottom:auto;padding-bottom:var(--space-3);transition:text-shadow .3s ease}
+  .cs-tile strong{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;line-height:1.2}
+  .cs-tile span{margin-top:4px;padding-right:22px;font-size:13px;line-height:1.4;color:rgba(255,255,255,.66)}
+  .cs-tile i{position:absolute;right:var(--space-3);bottom:var(--space-3);font-style:normal;color:var(--color-accent-300);transition:transform .25s ease}
+  .cs-tile:hover,.cs-tile:focus-visible{transform:translateY(-4px);background:rgba(255,255,255,.1);border-color:var(--color-accent-300)}
+  .cs-tile:hover b,.cs-tile:focus-visible b{text-shadow:0 0 18px color-mix(in srgb,var(--color-accent-300) 60%,transparent)}
+  .cs-tile:hover i,.cs-tile:focus-visible i{transform:translateX(4px)}
+
+  /* marca "Calculadora" sobre la portada de los artículos que la tienen */
+  .pc-cover,.lead-cover{position:relative}
+  .has-calc{position:absolute;left:12px;top:12px;z-index:1;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(10,48,62,.78);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(153,224,255,.35);border-radius:var(--radius-sm)}
+  .has-calc::before{content:"";width:6px;height:6px;border-radius:50%;background:#99e0ff;box-shadow:0 0 8px #99e0ff}
+
   .blog-cta{margin:var(--space-8) 0;padding-top:var(--space-4);border-top:1px solid var(--color-divider);
     display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
   .blog-cta p{margin:0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:17px;max-width:46ch}
 
+  @media (max-width:1100px){
+    .calc-strip{grid-template-columns:1fr;gap:var(--space-4)}
+    .cs-head{max-width:560px}
+  }
   @media (max-width:1000px){
     .post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
@@ -89,11 +124,19 @@
     .lead-main h2{font-size:27px}
     .lead-main p{font-size:15.5px}
   }
+  @media (max-width:760px){
+    .calc-strip{padding:var(--space-4)}
+    .cs-head h2{font-size:25px}
+    .cs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .cs-tile{min-height:0}
+    .cs-tile:last-child{grid-column:1 / -1}
+    .cs-tile b{font-size:30px}
+  }
   @media (max-width:640px){
     .post-grid{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
-    .post-card > a,.post-go i,.lead-cover img,.pc-cover img,.chip{transition:none!important}
+    .post-card > a,.post-go i,.lead-cover img,.pc-cover img,.chip,.cs-tile,.cs-tile b,.cs-tile i{transition:none!important}
   }
 </style>
 </head>
@@ -118,30 +161,56 @@
     <div class="blog-intro">
       <div class="kicker">Blog SquareNet</div>
       <h1>Nómina, RRHH y cumplimiento laboral en Ecuador</h1>
-      <p>Guías prácticas para equipos de Recursos Humanos y Nómina: cálculos de ley, cumplimiento IESS y SRI, y buenas prácticas de gestión de personal.</p>
+      <p>Guías prácticas y calculadoras gratuitas para equipos de Recursos Humanos y Nómina: cálculos de ley, cumplimiento IESS y SRI, y buenas prácticas de gestión de personal.</p>
     </div>
 
+    <section class="calc-strip band-dark" aria-labelledby="cs-h" data-reveal>
+      <div class="cs-head">
+        <span class="calc-badge">Calculadoras 2026</span>
+        <h2 id="cs-h">Saca tus números en segundos</h2>
+        <p>Gratis, sin registro y con los valores de ley de este año. Cambias un dato y el resultado se actualiza al instante.</p>
+      </div>
+      <div class="cs-grid">
+        <a class="cs-tile" href="decimo-tercero-decimo-cuarto-ecuador.html#calc-13"><b>13.º</b><strong>Décimo tercero</strong><span>Lo ganado en el año ÷ 12</span><i aria-hidden="true">→</i></a>
+        <a class="cs-tile" href="decimo-tercero-decimo-cuarto-ecuador.html#calc-14"><b>14.º</b><strong>Décimo cuarto</strong><span>Un salario básico por región</span><i aria-hidden="true">→</i></a>
+        <a class="cs-tile" href="fondos-de-reserva-ecuador.html#calculadora"><b>8,33 %</b><strong>Fondos de reserva</strong><span>Cuánto y desde cuándo</span><i aria-hidden="true">→</i></a>
+        <a class="cs-tile" href="utilidades-15-por-ciento-ecuador.html#calculadora"><b>15 %</b><strong>Utilidades</strong><span>Reparto por días y cargas</span><i aria-hidden="true">→</i></a>
+        <a class="cs-tile" href="impuesto-renta-relacion-dependencia-ecuador.html#calculadora"><b>IR</b><strong>Impuesto a la renta</strong><span>Tabla del SRI y retención mensual</span><i aria-hidden="true">→</i></a>
+      </div>
+    </section>
+
     <div class="blog-filters" role="group" aria-label="Filtrar artículos por tema">
-      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todos <span>7</span></button>
-      <button type="button" class="chip" data-filter="Nómina" aria-pressed="false">Nómina <span>4</span></button>
+      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todos <span>8</span></button>
+      <button type="button" class="chip" data-filter="Nómina" aria-pressed="false">Nómina <span>5</span></button>
       <button type="button" class="chip" data-filter="Asistencia" aria-pressed="false">Asistencia <span>2</span></button>
       <button type="button" class="chip" data-filter="Recursos Humanos" aria-pressed="false">Recursos Humanos <span>1</span></button>
     </div>
 
     <article class="post-lead" data-cat="Nómina" data-reveal>
-      <a href="utilidades-15-por-ciento-ecuador.html">
-        <div class="lead-cover"><img src="img/cover-utilidades.svg" alt="" width="320" height="200"></div>
+      <a href="impuesto-renta-relacion-dependencia-ecuador.html">
+        <div class="lead-cover"><span class="has-calc">Calculadora</span><img src="img/cover-impuesto-renta.svg" alt="" width="320" height="200"></div>
         <div class="lead-main">
           <span class="post-flag">Lo más reciente</span>
-          <div class="post-meta"><span class="tag tag-accent">Nómina</span><span>Cumplimiento legal</span><span class="dot">·</span><time datetime="2026-09-30">30 sep 2026</time><span class="dot">·</span><span>3 min de lectura</span></div>
-          <h2>Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores</h2>
-          <p>El 15 % de las utilidades se reparte entre todos los trabajadores: 10 % por días trabajados y 5 % por cargas familiares. Fórmulas, un ejemplo y los errores más frecuentes.</p>
+          <div class="post-meta"><span class="tag tag-accent">Nómina</span><span>SRI</span><span class="dot">·</span><time datetime="2026-10-21">21 oct 2026</time><span class="dot">·</span><span>5 min de lectura</span></div>
+          <h2>Impuesto a la Renta 2026 en Relación de Dependencia: Cómo se Calcula, con Calculadora</h2>
+          <p>La tabla del SRI 2026, el aporte al IESS, la rebaja por gastos personales y cuánto te retienen al mes. Con un ejemplo paso a paso y una calculadora para sacar tu número.</p>
           <span class="post-go">Leer artículo <i>→</i></span>
         </div>
       </a>
     </article>
 
     <div class="post-grid">
+      <article class="post-card" data-cat="Nómina" data-reveal>
+        <a href="utilidades-15-por-ciento-ecuador.html">
+          <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-utilidades.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-30">30 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores</h3>
+            <p>El 15 % se reparte entre todos los trabajadores: 10 % por días trabajados y 5 % por cargas familiares. Fórmulas, un ejemplo y los errores más frecuentes.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
       <article class="post-card" data-cat="Asistencia" data-reveal>
         <a href="control-asistencia-biometrico-ecuador.html">
           <div class="pc-cover"><img src="img/cover-biometrico.svg" alt="" loading="lazy" width="320" height="200"></div>
@@ -155,7 +224,7 @@
       </article>
       <article class="post-card" data-cat="Nómina" data-reveal>
         <a href="fondos-de-reserva-ecuador.html">
-          <div class="pc-cover"><img src="img/cover-fondos-reserva.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-fondos-reserva.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
             <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-16">16 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
             <h3>Fondos de Reserva en Ecuador: Quién los Recibe, Cuánto Son y Cómo se Pagan</h3>
@@ -188,7 +257,7 @@
       </article>
       <article class="post-card" data-cat="Nómina" data-reveal>
         <a href="decimo-tercero-decimo-cuarto-ecuador.html">
-          <div class="pc-cover"><img src="img/cover-decimos.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-decimos.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
             <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>4 min</span></div>
             <h3>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h3>

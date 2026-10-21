@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<style>
+.m{stroke:#fff;stroke-opacity:.92;stroke-width:1.6}
+.s{stroke:#fff;stroke-opacity:.42;stroke-width:1.2}
+.f{stroke:#fff;stroke-opacity:.26;stroke-width:1}
+.a{stroke:#99e0ff;stroke-width:1.8}
+.af{fill:#99e0ff;stroke:none}
+.g{filter:url(#glow)}
+.t{font-family:Georgia,'Source Serif 4',serif;font-weight:600;fill:#fff;stroke:none}
+</style>
+<defs>
+<linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>
+<radialGradient id="r1" cx=".14" cy=".18" r=".46"><stop offset="0" stop-color="#62c5ee" stop-opacity=".28"/><stop offset="1" stop-color="#62c5ee" stop-opacity="0"/></radialGradient>
+<radialGradient id="r2" cx=".86" cy=".82" r=".48"><stop offset="0" stop-color="#ff458e" stop-opacity=".18"/><stop offset="1" stop-color="#ff458e" stop-opacity="0"/></radialGradient>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#99e0ff" stop-opacity=".16"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="fade" cx=".5" cy=".5" r=".6"><stop offset=".25" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+<mask id="mk"><rect width="320" height="200" fill="url(#fade)"/></mask>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r=".9" fill="#fff" fill-opacity=".14"/></pattern>
+<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="320" height="200" fill="url(#bg)"/>
+<rect width="320" height="200" fill="url(#r1)"/>
+<rect width="320" height="200" fill="url(#r2)"/>
+<rect width="320" height="200" fill="url(#dots)" mask="url(#mk)"/>
+<circle cx="150" cy="104" r="96" fill="url(#halo)"/>
+<path class="f" d="M14 36V14h22M284 14h22v22M306 164v22h-22M36 186H14v-22"/>
+<path class="s" d="M52 160H204"/>
+<rect class="s" x="58" y="148" width="11" height="12" rx="1.5"/>
+<rect class="s" x="74" y="142" width="11" height="18" rx="1.5"/>
+<rect class="s" x="90" y="134" width="11" height="26" rx="1.5"/>
+<rect class="s" x="106" y="124" width="11" height="36" rx="1.5"/>
+<rect class="m" x="122" y="112" width="11" height="48" rx="1.5" fill="#99e0ff" fill-opacity=".22"/>
+<rect class="m a g" x="138" y="98" width="11" height="62" rx="1.5" fill="#99e0ff" fill-opacity=".35"/>
+<rect class="s" x="154" y="84" width="11" height="76" rx="1.5"/>
+<rect class="s" x="170" y="68" width="11" height="92" rx="1.5"/>
+<rect class="s" x="186" y="52" width="11" height="108" rx="1.5"/>
+<path class="a" d="M143.5 92V76" stroke-dasharray="2 3"/>
+<circle class="af g" cx="143.5" cy="72" r="3.2"/>
+<rect class="m" x="214" y="44" width="62" height="80" rx="5" fill="#0a303e" fill-opacity=".72"/>
+<path class="s" d="M214 60H276"/>
+<text class="t" x="222" y="55" font-size="8.5">SRI · 107</text>
+<path class="s" d="M224 72H266M224 82H258M224 92H262M224 102H250"/>
+<circle class="m" cx="252" cy="136" r="17" fill="#0a303e" fill-opacity=".85"/>
+<circle class="a g" cx="252" cy="136" r="12.5"/>
+<text class="t" x="252" y="141" font-size="13.5" text-anchor="middle" fill="#99e0ff" style="fill:#99e0ff">%</text>
+</svg>

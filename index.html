@@ -234,6 +234,11 @@
     .showcase-copy{margin-top:var(--space-8)}
     .screens{grid-template-columns:repeat(3,minmax(0,1fr))}
   }
+  /* en celular no va el laptop: el video del sistema es ilegible a ese tamaño. Queda el título + íconos. */
+  @media (max-width:700px){
+    .showcase-stage{display:none}
+    .showcase-copy{margin-top:0}
+  }
   @media (max-width:520px){
     .screens{grid-template-columns:repeat(2,minmax(0,1fr))}
     .screens li{font-size:15px}
@@ -311,7 +316,7 @@
             <span class="laptop-cam" aria-hidden="true"></span>
             <div class="laptop-screen">
               <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1280" height="720"
-                     data-src="media/squarenet-recorrido.mp4" data-src-sm="media/squarenet-recorrido-sm.mp4"></video>
+                     data-src="media/squarenet-recorrido.mp4"></video>
               <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Menú de reportes del sistema SquareNet: rol de pago, formularios del SRI y más" width="1280" height="720" loading="lazy" decoding="async">
               <span class="laptop-gloss" aria-hidden="true"></span>
               <button class="laptop-toggle" id="laptopToggle" type="button" aria-label="Pausar la animación">
@@ -869,8 +874,7 @@
       function load() {
         if (loaded) return;
         loaded = true;
-        var small = window.matchMedia && window.matchMedia('(max-width: 700px)').matches;
-        video.src = video.getAttribute(small ? 'data-src-sm' : 'data-src');
+        video.src = video.getAttribute('data-src');
         video.preload = 'auto';
         video.load();
       }
