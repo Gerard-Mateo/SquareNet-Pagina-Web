@@ -15,6 +15,8 @@ Todo el sitio usa `css/broadsheet.css` — un design system "editorial broadshee
 - Estilos específicos de cada página viven en un `<style>` inline en el `<head>` de esa página (no se tocan los estilos de otras páginas). Excepción: los componentes de artículo del blog (`.article*`, `.article-cover/.article-facts/.article-callout`, `.related*`) viven en `broadsheet.css` porque los usan los 7 posts.
 - **Canales de soporte NO son públicos** (decisión del cliente, por riesgo de phishing/ransomware): no publicar `soporte@squarenet.com.ec` ni el WhatsApp de soporte (+593 98 220 4777) en ninguna página. El botón flotante de WhatsApp (`.whatsapp-float`) se quitó de las 26 páginas; su CSS sigue en `broadsheet.css` por si algún día hay un número de **ventas** para usarlo (con el glifo oficial de WhatsApp, no el ícono de teléfono). Canales públicos: PBX (02) 450-7012, celular 099 824 2295, info@ y ventas@.
 
+- **Nav flotante** (todas las páginas): el `.wrap` que contiene `#mainNav` es `position:sticky` (seleccionado con `.wrap:has(> .nav)`, sin cambiar el HTML). `js/nav.js` (después de `fecha.js`) pone `html.nav-scrolled` al bajar 12 px: la barra se vuelve una píldora translúcida con blur y el logo baja de 57 a 36 px (idea tomada de deepseek.com, pedida por el cliente; es la única pieza redondeada del sitio, a propósito). El contenedor conserva `min-height:89px` y `pointer-events:none` para que el contenido no salte ni se bloqueen clics. Por esto nunca poner `overflow:hidden` en `html`/`body` (rompe el sticky); usar `overflow-x:clip`.
+
 Cada página nueva o rediseñada debe reusar estos tokens/componentes en vez de inventar un sistema paralelo.
 
 ## Páginas rediseñadas recientemente (contexto, no reinventar desde cero)

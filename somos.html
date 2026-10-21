@@ -81,6 +81,7 @@
   .st-art{position:absolute;right:18px;top:16px;width:92px;height:92px}
   .st-art svg{display:block;width:100%;height:100%}
   .stop.both .cr{transition-delay:.15s}
+  .stop.both .st-card{align-self:stretch}
 
   /* capítulo: ¿por qué usar SquareNet? */
   .stop.chap{grid-template-columns:minmax(0,1fr);justify-items:center;margin-bottom:var(--space-6)}
@@ -93,9 +94,6 @@
   .reason .st-card{padding:var(--space-4) var(--space-6)}
   .reason .st-card .kicker{font-size:12px;margin-bottom:6px}
   .reason .st-card p{font-size:16.5px}
-  .formula-chip{margin-top:var(--space-3);font-size:13px;background:var(--color-accent-100);color:var(--color-accent-800);border-radius:var(--radius-sm);padding:8px 10px;display:flex;flex-direction:column;gap:2px;width:fit-content}
-  .formula-chip .f{font-family:"Courier New",Consolas,monospace;font-weight:700}
-  .formula-chip .cap{font-size:10px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
 
   /* cierre */
   .stop.end{grid-template-columns:minmax(0,1fr);justify-items:center;margin-bottom:var(--space-8)}
@@ -282,10 +280,6 @@
           <div class="kicker">Razón 04</div>
           <h3 id="r4">Configurable mediante fórmulas</h3>
           <p>Cada rubro de nómina es una fórmula editable — usted define sus propias reglas de cálculo, sin depender de un desarrollador.</p>
-          <div class="formula-chip">
-            <span class="f">[0100] / 30 * [0180]</span>
-            <span class="cap">Sueldo Devengado</span>
-          </div>
         </article>
         <div class="side-r st-ghost" aria-hidden="true"><span class="g">04</span></div>
       </section>
@@ -452,6 +446,7 @@
     })();
   </script>
   <script src="js/fecha.js"></script>
+  <script src="js/nav.js"></script>
   <script src="js/consent.js"></script>
   <script src="js/art.js"></script>
 </body>
