@@ -24,7 +24,7 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores",
+  "headline": "Utilidades: cómo se reparte el 15 % y cuánto te toca",
   "description": "Cómo se calcula y reparte la participación de trabajadores en utilidades en Ecuador: el 15 % de las utilidades, el 10 % por tiempo trabajado, el 5 % por cargas familiares y la fecha límite de pago.",
   "author": { "@type": "Organization", "name": "SquareNet" },
   "publisher": {
@@ -60,40 +60,84 @@
   <div class="wrap">
     <article class="article">
       <a class="article-back" href="index.html">← Volver al blog</a>
-      <div class="kicker">Nómina · Cumplimiento legal</div>
-      <h1>Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores</h1>
-      <div class="article-meta">Equipo SquareNet · Actualizado 21 de octubre de 2026 · 3 min de lectura</div>
+      <div class="kicker">Nómina · Beneficios de ley</div>
+      <h1>Utilidades: cómo se reparte el 15 % y cuánto te toca</h1>
+      <div class="article-meta">Equipo SquareNet · Actualizado 21 de octubre de 2026 · 2 min de lectura</div>
       <figure class="article-cover"><img src="img/cover-utilidades.svg" alt="" width="320" height="200"></figure>
-      <p class="article-lede">Cada año, entre marzo y abril, miles de empresas ecuatorianas repiten la misma operación: repartir una parte de sus utilidades entre los trabajadores. Esto es cómo se calcula, quién participa y dónde suelen fallar los equipos de nómina.</p>
-      <div class="article-facts">
-        <div><b>15 %</b><span>de las utilidades se reparte entre los trabajadores</span></div>
-        <div><b>10 % + 5 %</b><span>por días trabajados y por cargas familiares</span></div>
-        <div><b>15 de abril</b><span>fecha límite de pago</span></div>
-      </div>
+      <p class="article-lede">Si la empresa donde trabajaste tuvo ganancias el año pasado, una parte es tuya. Te contamos cómo se reparte y qué te pueden descontar.</p>
+      <aside class="article-tldr" aria-label="En corto">
+        <p class="tldr-k">En corto</p>
+        <ul>
+          <li>Se reparte el <strong>15 %</strong> de la utilidad de la empresa entre todos los trabajadores.</li>
+          <li>El <strong>10 %</strong> va según los días que trabajaste y el <strong>5 %</strong> según tus cargas familiares.</li>
+          <li>Se pagan hasta el <strong>15 de abril</strong>.</li>
+        </ul>
+      </aside>
 
       <section class="calc" id="calculadora" data-calc="utilidades" aria-labelledby="calc-title">
         <div class="calc-head">
           <span class="calc-badge">Calculadora 2026</span>
-          <h2 id="calc-title">Calcula el reparto de utilidades</h2>
-          <p>Ingresa la utilidad de la empresa y a tu equipo. Agrega o quita personas: el reparto se recalcula solo.</p>
+          <h2 id="calc-title">Calcula cuánto te toca de utilidades</h2>
+          <p>Con el tamaño de tu empresa, tus días y tus cargas te decimos cuánto te toca, y cuánto te llega después de descuentos.</p>
         </div>
         <div class="calc-shell">
         <form class="calc-form" novalidate>
+          <p class="cf-sec">Tu empresa</p>
           <div class="cf">
             <label class="cf-label" for="u-util">Utilidad del ejercicio</label>
-            <p class="cf-hint">Utilidad contable del año, antes de impuestos. El 15 % de este valor se reparte.</p>
-            <div class="cf-money"><span>$</span><input id="u-util" name="utilidad" type="number" inputmode="decimal" min="0" step="0.01" value="100000"></div>
-            <input class="cf-range" type="range" data-for="utilidad" min="0" max="1000000" step="1000" tabindex="-1" aria-hidden="true">
+            <p class="cf-hint">Utilidad contable del año, antes de impuestos. El 15&nbsp;% se reparte entre todos los trabajadores.</p>
+            <div class="cf-money"><span>$</span><input id="u-util" name="utilidad" type="number" inputmode="decimal" min="0" step="0.01" value="500000"></div>
+            <input class="cf-range" type="range" data-for="utilidad" min="0" max="2000000" step="5000" tabindex="-1" aria-hidden="true">
           </div>
           <div class="cf">
-            <span class="cf-label">Trabajadores del año</span>
-            <p class="cf-hint">Incluye a quienes ya salieron. Cargas: cónyuge o conviviente, hijos menores de 18 años e hijos con discapacidad.</p>
-            <div class="cf-team">
-              <div class="ct-head" aria-hidden="true"><span>Nombre</span><span>Días</span><span>Cargas</span><span></span></div>
-              <div class="ct-row"><input data-f="nombre" type="text" value="Ana" aria-label="Nombre"><input data-f="dias" type="number" min="0" max="360" value="360" aria-label="Días trabajados"><input data-f="cargas" type="number" min="0" max="30" value="2" aria-label="Cargas familiares"><button class="ct-del" type="button" aria-label="Quitar">×</button></div>
-              <div class="ct-row"><input data-f="nombre" type="text" value="Luis" aria-label="Nombre"><input data-f="dias" type="number" min="0" max="360" value="180" aria-label="Días trabajados"><input data-f="cargas" type="number" min="0" max="30" value="0" aria-label="Cargas familiares"><button class="ct-del" type="button" aria-label="Quitar">×</button></div>
-              <button class="ct-add" type="button">+ Agregar trabajador</button>
+            <div class="cf-row">
+              <div class="cf">
+                <label class="cf-label" for="u-trab">Trabajadores</label>
+                <div class="cf-money"><input id="u-trab" name="trab" type="number" inputmode="numeric" min="1" step="1" value="50"><span class="cf-suf">personas</span></div>
+              </div>
+              <div class="cf">
+                <label class="cf-label" for="u-tcargas">Cargas de todos</label>
+                <div class="cf-money"><input id="u-tcargas" name="tcargas" type="number" inputmode="numeric" min="0" step="1" value="40"><span class="cf-suf">cargas</span></div>
+              </div>
             </div>
+            <p class="cf-hint">Cuenta a todos los que trabajaron en el año, también a los que ya salieron. El total de cargas familiares lo tiene Recursos Humanos.</p>
+          </div>
+          <p class="cf-sec">Tú</p>
+          <div class="cf">
+            <div class="cf-row">
+              <div class="cf">
+                <label class="cf-label" for="u-dias">Días que trabajaste</label>
+                <div class="cf-money"><input id="u-dias" name="dias" type="number" inputmode="numeric" min="0" max="360" step="1" value="360"><span class="cf-suf">de 360</span></div>
+              </div>
+              <div class="cf">
+                <label class="cf-label" for="u-cargas">Tus cargas</label>
+                <div class="cf-step"><button type="button" data-step="-1" aria-label="Una carga menos">−</button><input id="u-cargas" name="cargas" type="number" inputmode="numeric" min="0" max="20" step="1" value="2"><button type="button" data-step="1" aria-label="Una carga más">+</button></div>
+              </div>
+            </div>
+            <p class="cf-hint">Cargas: cónyuge o conviviente, hijos menores de 18 años e hijos con discapacidad de cualquier edad.</p>
+          </div>
+          <p class="cf-sec">Descuentos</p>
+          <div class="cf">
+            <label class="cf-check"><input type="checkbox" name="ir" checked> Descontar impuesto a la renta</label>
+          </div>
+          <div class="cf" data-if="ir">
+            <label class="cf-label" for="u-sueldo">Tu sueldo mensual</label>
+            <p class="cf-hint">Con él estimamos cuánto impuesto extra suman tus utilidades a tu año.</p>
+            <div class="cf-money"><span>$</span><input id="u-sueldo" name="sueldo" type="number" inputmode="decimal" min="0" step="0.01" value="1500"></div>
+            <input class="cf-range" type="range" data-for="sueldo" min="0" max="10000" step="50" tabindex="-1" aria-hidden="true">
+          </div>
+          <div class="cf">
+            <div class="cf-row">
+              <div class="cf">
+                <label class="cf-label" for="u-jud">Retención judicial</label>
+                <div class="cf-money"><span>$</span><input id="u-jud" name="judicial" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div>
+              </div>
+              <div class="cf">
+                <label class="cf-label" for="u-otros">Anticipos y otros</label>
+                <div class="cf-money"><span>$</span><input id="u-otros" name="otros" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div>
+              </div>
+            </div>
+            <p class="cf-hint">Retención judicial: lo que un juez ordenó retener, por ejemplo por pensión alimenticia. Anticipos: lo que ya te adelantaron de utilidades.</p>
           </div>
         </form>
         <div class="calc-out band-dark">
@@ -109,47 +153,34 @@
           <p class="calc-sr" aria-live="polite" data-o="live"></p>
         </div>
         </div>
-        <p class="calc-note">Cálculo referencial según el Código del Trabajo: 10 % por días trabajados y 5 % por cargas familiares × días. Desde 2018 no hay tope por trabajador (la Corte Constitucional anuló el límite de 24 salarios básicos).</p>
+        <p class="calc-note">Cálculo referencial según el Código del Trabajo: 10 % por días trabajados y 5 % por cargas familiares × días. Supone que tus compañeros trabajaron el año completo. Desde 2018 no hay tope por trabajador (la Corte Constitucional anuló el límite de 24 salarios básicos). El impuesto a la renta es una estimación sin la rebaja por gastos personales.</p>
       </section>
 
-      <h2>¿Qué son las utilidades de los trabajadores?</h2>
-      <p>La participación en utilidades es un derecho que reconoce el Código del Trabajo: el empleador entrega a sus trabajadores el <strong>15 % de las utilidades líquidas</strong> del ejercicio fiscal anterior, es decir, del año que cerró el 31 de diciembre. Participan todos los trabajadores que tuvieron relación de dependencia durante ese año, incluso quienes ya salieron de la empresa, en proporción al tiempo que trabajaron.</p>
+      <h2>¿Quién recibe utilidades?</h2>
+      <p>Todos los que trabajaron en relación de dependencia durante el año, incluso si ya salieron de la empresa. Cada uno recibe según el tiempo que trabajó.</p>
 
-      <h2>¿Cómo se reparte el 15 %?</h2>
-      <p>El porcentaje se divide en dos partes con criterios distintos:</p>
+      <h2>¿Cómo se reparte?</h2>
+      <p>El 15 % se parte en dos bolsas. La del 10 % se reparte por días trabajados, sin importar el sueldo: si trabajaste todo el año, recibes lo mismo que tu jefe. La del 5 % se reparte por cargas familiares multiplicadas por los días trabajados. Cuentan como cargas tu cónyuge o conviviente, tus hijos menores de 18 años y tus hijos con discapacidad.</p>
+
+      <div class="article-callout"><strong>Un ejemplo.</strong> La empresa ganó USD 100.000, así que hay USD 10.000 en la bolsa del 10 % y USD 5.000 en la del 5 %. Ana trabajó todo el año y tiene 2 cargas. Luis trabajó medio año y no tiene cargas. De los USD 10.000, Ana se lleva dos tercios (USD 6.666,67) y Luis un tercio (USD 3.333,33). Como solo Ana tiene cargas, también se lleva los USD 5.000. <strong>Total: Ana USD 11.666,67 y Luis USD 3.333,33.</strong></div>
+
+      <h2>¿Qué te pueden descontar?</h2>
+      <p>Aporte al IESS no: las utilidades te llegan sin el 9,45 %. Impuesto a la renta sí puede haber, porque el SRI las suma a lo que ganaste en el año. Si con ellas pasas de USD 12.208, te retienen lo que corresponda (puedes sacarlo con la <a href="impuesto-renta-relacion-dependencia-ecuador.html">calculadora de impuesto a la renta</a>).</p>
+      <p>También te pueden descontar una retención judicial, si un juez la ordenó, y los anticipos de utilidades que ya te hayan dado. Los décimos y los fondos de reserva no se tocan: van por separado.</p>
+
+      <h2>Ojo con esto</h2>
       <ul>
-        <li><strong>10 %</strong> para todos los trabajadores, en proporción a los <strong>días trabajados</strong> en el año, sin importar cuánto ganen.</li>
-        <li><strong>5 %</strong> en proporción a las <strong>cargas familiares</strong> de cada trabajador: cónyuge o conviviente, hijos menores de 18 años e hijos con discapacidad de cualquier edad.</li>
+        <li>Olvidarse de los que salieron durante el año. También les toca.</li>
+        <li>Usar cargas desactualizadas. Un hijo que nació o que cumplió 18 cambia el reparto.</li>
+        <li>Dejarlo para la última semana de abril, que es cuando más errores se cometen.</li>
       </ul>
 
-      <h2>Cómo se calcula cada parte</h2>
-      <p>Con las dos bolsas definidas (el 10 % y el 5 % de las utilidades), el cálculo por trabajador es una regla de tres:</p>
-      <ul>
-        <li><strong>Parte del 10 %</strong> = valor de la bolsa del 10 % × (días trabajados del empleado ÷ suma de los días trabajados de todos los empleados).</li>
-        <li><strong>Parte del 5 %</strong> = valor de la bolsa del 5 % × (cargas × días trabajados del empleado ÷ suma de ese mismo producto en toda la plantilla).</li>
-      </ul>
-      <div class="article-callout"><strong>Ejemplo.</strong> Una empresa con USD 100.000 de utilidades destina USD 10.000 a la bolsa del 10 % y USD 5.000 a la del 5 %. Ana trabajó 360 días y tiene 2 cargas; Luis trabajó 180 días y no tiene cargas. Del 10 %: Ana recibe 10.000 × 360 ÷ 540 = USD 6.666,67 y Luis USD 3.333,33. Del 5 %: solo Ana tiene cargas, así que recibe los USD 5.000 completos. <strong>Total: Ana USD 11.666,67 · Luis USD 3.333,33.</strong></div>
-
-      <h2>¿Cuándo se pagan?</h2>
-      <p>Las utilidades se pagan hasta el <strong>15 de abril</strong> de cada año. La empresa debe además informar el reparto al Ministerio del Trabajo a través de su plataforma en línea. Pagar tarde expone a la empresa a sanciones y a reclamos de los trabajadores.</p>
-
-      <h2>Errores comunes en el cálculo</h2>
-      <ul>
-        <li><strong>Olvidar a quienes ya salieron</strong> durante el año: tienen derecho a su parte proporcional.</li>
-        <li><strong>No actualizar las cargas familiares:</strong> nacimientos, hijos que cumplen 18 años o cambios de estado civil modifican el reparto del 5 %.</li>
-        <li><strong>Contar mal los días trabajados</strong>, por ejemplo mezclando bases de 360 y 365 días entre empleados.</li>
-        <li><strong>Calcularlo todo en hojas de cálculo,</strong> donde un solo empleado mal ingresado desbalancea el reparto de toda la plantilla.</li>
-        <li><strong>Dejarlo para el final:</strong> el cálculo de fines de abril, con prisa, es donde más se cometen errores.</li>
-      </ul>
-
-      <h2>Cómo un software de nómina simplifica el reparto</h2>
-      <p>El <a href="../modulono.html">módulo de Nómina de SquareNet</a> hace la repartición automática de utilidades según el procedimiento de ley y toma el número de cargas activas a una fecha desde el <a href="../modulorh.html">módulo de Recursos Humanos</a>. Además genera los archivos batch para cargar las utilidades en el Ministerio del Trabajo, de modo que el cálculo, el pago y el reporte salen de la misma fuente de datos.</p>
-
-      <p class="article-disclaimer">Esta guía es informativa y se basa en las disposiciones del Código del Trabajo vigentes al momento de su publicación. Verifique siempre porcentajes, definición de cargas familiares, fechas y procedimientos con el Ministerio del Trabajo antes de procesar el reparto.</p>
+      <p class="article-disclaimer">Guía informativa basada en el Código del Trabajo. Antes del reparto, confirma porcentajes, cargas y fechas con el Ministerio del Trabajo.</p>
 
       <div class="article-cta">
-        <h3>¿Quiere automatizar el reparto de utilidades?</h3>
-        <div class="cta-row" style="justify-content:center">
+        <h3>¿Tienes que repartir las utilidades de tu empresa?</h3>
+        <p>SquareNet hace el reparto con las cargas que ya tienes en Recursos Humanos y genera el archivo para subirlo al Ministerio del Trabajo.</p>
+        <div class="cta-row">
           <a href="../modulono.html" class="btn btn-primary">Ver módulo de Nómina</a>
           <a href="../contacto.html" class="btn btn-secondary">Contactarnos</a>
         </div>
@@ -160,11 +191,11 @@
         <div class="related-grid">
           <a href="impuesto-renta-relacion-dependencia-ecuador.html">
             <div class="related-cover"><img src="img/cover-impuesto-renta.svg" alt="" loading="lazy" width="320" height="200"></div>
-            <h3>Impuesto a la Renta 2026 en Relación de Dependencia: Cómo se Calcula, con Calculadora</h3>
+            <h3>Impuesto a la renta 2026: cuánto te retienen del sueldo</h3>
           </a>
           <a href="decimo-tercero-decimo-cuarto-ecuador.html">
             <div class="related-cover"><img src="img/cover-decimos.svg" alt="" loading="lazy" width="320" height="200"></div>
-            <h3>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h3>
+            <h3>Décimo tercero y décimo cuarto: cuánto te toca y cuándo te pagan</h3>
           </a>
         </div>
       </aside>

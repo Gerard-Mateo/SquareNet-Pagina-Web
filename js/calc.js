@@ -29,7 +29,6 @@
   }
   function pct(r) { return (r * 100).toFixed(2).replace('.', ',').replace(/,00$/, '') + ' %'; }
   function fdate(d) { return d.getDate() + ' de ' + MESES[d.getMonth()] + ' de ' + d.getFullYear(); }
-  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function lines(rows) {
     return rows.map(function (r) {
       return '<div' + (r[2] ? ' class="' + r[2] + '"' : '') + '><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>';
@@ -37,10 +36,18 @@
   }
 
   // ---------- fechas ----------
+  // Acepta DD/MM/AAAA (lo que escribe el usuario) o AAAA-MM-DD (lo que devuelve el calendario nativo).
   function parseDate(v) {
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || '');
-    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+    var m, y, mo, d;
+    if ((m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''))) { y = +m[1]; mo = +m[2]; d = +m[3]; }
+    else if ((m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(v || ''))) { d = +m[1]; mo = +m[2]; y = +m[3]; }
+    else return null;
+    var r = new Date(y, mo - 1, d);
+    return y >= 1900 && y <= 2100 && r.getMonth() === mo - 1 && r.getDate() === d ? r : null;
   }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function dmy(d) { return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear(); }
+  function iso(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
   function isLastDay(d) { return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate() === d.getDate(); }
   // Días entre dos fechas (incluidas) en base 360: meses de 30 días, como se computan los décimos.
   function days360(a, b) {
@@ -197,43 +204,60 @@
       return mensual;
     },
 
+    // Para una persona: la empresa (utilidad, trabajadores, cargas de todos) y tú (días, cargas, descuentos).
+    // Supuesto: tus compañeros trabajaron el año completo; tú cuentas con tus días reales.
     utilidades: function (root) {
-      var U = num(root, 'utilidad', 0);
+      var U = num(root, 'utilidad', 0), N = Math.max(1, Math.round(num(root, 'trab', 1)));
+      var d = num(root, 'dias', 0, 360), c = Math.round(num(root, 'cargas', 0, 20));
+      var TC = Math.round(num(root, 'tcargas', 0)), cc = Math.max(TC, c);
       var p10 = U * 0.10, p5 = U * 0.05;
-      var people = Array.prototype.map.call(root.querySelectorAll('.ct-row'), function (row, i) {
-        var n = row.querySelector('[data-f="nombre"]').value.trim() || ('Trabajador ' + (i + 1));
-        var d = Math.max(0, Math.min(360, parseFloat(row.querySelector('[data-f="dias"]').value) || 0));
-        var c = Math.max(0, Math.min(30, Math.floor(parseFloat(row.querySelector('[data-f="cargas"]').value) || 0)));
-        return { n: n, d: d, c: c };
-      });
-      var sd = 0, sdc = 0;
-      people.forEach(function (p) { sd += p.d; sdc += p.d * p.c; });
-      var max = 0;
-      people.forEach(function (p) {
-        p.a = sd ? p10 * p.d / sd : 0;
-        p.b = sdc ? p5 * p.d * p.c / sdc : 0;
-        p.t = p.a + p.b; max = Math.max(max, p.t);
-      });
-      out(root, 'k', 'Total a repartir (15 %)');
-      setBig(q(root, '[data-o="big"]'), U * 0.15);
-      out(root, 'sub', '<b>$ ' + money(p10) + '</b> por días trabajados (10 %) y <b>$ ' + money(p5) + '</b> por cargas familiares (5 %).');
-      out(root, 'viz', '<div class="cv-key"><span>Parte del 10 %</span><span>Parte del 5 %</span></div><div class="cv-people">' +
-        people.map(function (p) {
-          var w = max ? 100 / max : 0;
-          return '<div class="cv-person"><div class="cv-label"><b>' + esc(p.n) + '</b><span>$ ' + money(p.t) + '</span></div>' +
-            '<div class="cv-stack"><i class="p10" style="width:' + (p.a * w).toFixed(2) + '%"></i><i class="p5" style="width:' + (p.b * w).toFixed(2) + '%"></i></div></div>';
-        }).join('') + '</div>');
-      out(root, 'lines', lines([
-        ['Utilidad del ejercicio', '$ ' + money(U)],
-        ['Suma de días trabajados', money(sd, 0)],
-        ['Suma de días × cargas', money(sdc, 0)]]));
-      var f = people[0];
-      out(root, 'fx', f ? esc(f.n) + ': ' + money(p10) + ' × ' + money(f.d, 0) + ' ÷ ' + money(sd, 0) +
-        (sdc ? ' + ' + money(p5) + ' × ' + money(f.d * f.c, 0) + ' ÷ ' + money(sdc, 0) : '') + ' = ' + money(f.t) : '');
-      var warn = !sd ? 'Ingresa los días trabajados de cada persona.'
-        : (!sdc && p5 > 0 ? 'Nadie en la lista tiene cargas familiares, así que el 5 % no tiene a quién repartirse por cargas. Consulta con el Ministerio del Trabajo cómo distribuirlo.' : '');
+      var sd = (N - 1) * 360 + d, sdc = (cc - c) * 360 + d * c;
+      var a = sd ? p10 * d / sd : 0, b = sdc ? p5 * d * c / sdc : 0, bruto = a + b;
+      // Descuentos, en orden y sin pasar de lo que te toca. Utilidades no aportan al IESS, pero el SRI
+      // las suma a los ingresos gravados: el impuesto estimado es lo que suben sobre tu sueldo del año.
+      var conIR = !!(q(root, '[name="ir"]') || {}).checked;
+      var baseS = num(root, 'sueldo', 0) * 12 * (1 - P.iess);
+      var irW = conIR ? Math.max(0, irCausado(baseS + bruto) - irCausado(baseS)) : 0;
+      var judW = num(root, 'judicial', 0), otrW = num(root, 'otros', 0);
+      var ir = Math.min(irW, bruto), jud = Math.min(judW, bruto - ir), otr = Math.min(otrW, bruto - ir - jud);
+      var neto = bruto - ir - jud - otr;
+
+      out(root, 'k', 'Te llega en utilidades');
+      setBig(q(root, '[data-o="big"]'), neto);
+      out(root, 'sub', 'Se pagan hasta el <b>15 de abril de ' + (P.year + 1) + '</b>. Tu empresa reparte <b>$ ' + money(U * 0.15) +
+        '</b> entre ' + money(N, 0) + (N === 1 ? ' persona.' : ' personas.'));
+      function flow(title, total, segs) {
+        var bar = '', keys = '';
+        segs.forEach(function (s) {
+          if (s[2] <= 0) return;
+          bar += '<i class="' + s[0] + '" style="width:' + (total ? s[2] / total * 100 : 0).toFixed(2) + '%"></i>';
+          keys += '<span class="' + s[0] + '">' + s[1] + ' <b>$ ' + money(s[2]) + '</b></span>';
+        });
+        return '<div class="cv-flow"><div class="cv-label"><span>' + title + '</span><span>$ ' + money(total) + '</span></div>' +
+          '<div class="cv-seg">' + bar + '</div><div class="cv-keys">' + keys + '</div></div>';
+      }
+      out(root, 'viz', flow('De dónde sale', bruto, [['k-a', 'Por días', a], ['k-b', 'Por cargas', b]]) +
+        (ir + jud + otr > 0 ? flow('A dónde va', bruto, [['k-net', 'Te llega', neto], ['k-ir', 'Impuesto', ir], ['k-jud', 'Retención judicial', jud], ['k-otr', 'Anticipos', otr]]) : ''));
+      var rows = [
+        ['Tu parte del 10 % (por días)', '$ ' + money(a)],
+        ['Tu parte del 5 % (por cargas)', '$ ' + money(b)],
+        ['= Utilidades brutas', '$ ' + money(bruto)]];
+      if (conIR) rows.push(['− Impuesto a la renta (estimado)', '$ ' + money(ir)]);
+      if (jud) rows.push(['− Retención judicial', '$ ' + money(jud)]);
+      if (otr) rows.push(['− Anticipos y otros descuentos', '$ ' + money(otr)]);
+      rows.push(['= Te llega', '$ ' + money(neto), 'is-total']);
+      out(root, 'lines', lines(rows));
+      out(root, 'fx', money(p10) + ' × ' + money(d, 0) + ' ÷ ' + money(sd, 0) +
+        (c && sdc ? ' + ' + money(p5) + ' × ' + money(d * c, 0) + ' ÷ ' + money(sdc, 0) : '') + ' = ' + money(bruto));
+      out(root, 'tip', 'Las utilidades no pagan aporte al IESS, pero el SRI las suma a tus ingresos del año: si con ellas pasas la fracción exenta (USD ' +
+        money(P.tabla[1][0], 0) + '), generan impuesto a la renta. Los décimos no se tocan: son pagos aparte.');
+      show(root, 'tip', true);
+      var warn = !d ? 'Ingresa los días que trabajaste en el año.'
+        : TC < c ? 'El total de cargas de la empresa no puede ser menor que las tuyas: se usó ' + c + '.'
+        : (!sdc && p5 > 0 ? 'Nadie tiene cargas familiares, así que el 5 % no tiene a quién repartirse por cargas. Consulta con el Ministerio del Trabajo cómo distribuirlo.'
+        : (irW + judW + otrW > bruto + 0.005 ? 'Los descuentos superan lo que te toca: no te llega nada este año.' : ''));
       out(root, 'warn', warn); show(root, 'warn', !!warn);
-      return U * 0.15;
+      return neto;
     },
 
     renta: function (root) {
@@ -288,6 +312,48 @@
       r.value = box.value; paintRange(r);
     });
   }
+  // Campo de fecha DD/MM/AAAA: el <input type="date"> nativo muestra el formato del idioma del
+  // navegador (mm/dd/aaaa en inglés), así que se escribe en texto con las barras automáticas y
+  // el botón abre el calendario nativo escondido (.cf-pick) solo para elegir.
+  function maskDate(el) {
+    var v = el.value, pos = el.selectionStart == null ? v.length : el.selectionStart;
+    var atEnd = pos >= v.length, before = v.slice(0, pos).replace(/\D/g, '').length;
+    var isoM = /^\s*(\d{4})-(\d{1,2})-(\d{1,2})\s*$/.exec(v);
+    if (isoM) v = isoM[3] + '/' + isoM[2] + '/' + isoM[1];
+    var parts = v.replace(/[-.\s]/g, '/').replace(/[^\d\/]/g, '').split('/'), d = '';
+    parts.forEach(function (p, i) { d += (i < 2 && i < parts.length - 1 && p.length === 1) ? '0' + p : p; });
+    d = d.slice(0, 8);
+    var f = d.slice(0, 2) + (d.length > 2 ? '/' + d.slice(2, 4) : '') + (d.length > 4 ? '/' + d.slice(4) : '');
+    if (f === el.value) return;
+    el.value = f;
+    if (document.activeElement !== el) return;
+    var c = f.length;
+    if (!atEnd && !isoM) { c = 0; for (var n = 0; c < f.length && n < before; c++) if (/\d/.test(f[c])) n++; }
+    el.setSelectionRange(c, c);
+  }
+  function bindDates(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('.cf-date'), function (box) {
+      var txt = q(box, 'input:not(.cf-pick)'), pick = q(box, '.cf-pick'), btn = q(box, '.cf-cal');
+      function mark(strict) {
+        var v = txt.value, bad = v !== '' && (strict || v.length >= 10) && !parseDate(v);
+        box.classList.toggle('is-bad', bad);
+        txt.setAttribute('aria-invalid', String(bad));
+      }
+      txt.addEventListener('input', function () { maskDate(txt); mark(false); });
+      txt.addEventListener('blur', function () { mark(true); });
+      if (!pick || !btn || typeof pick.showPicker !== 'function') return;
+      btn.hidden = false;
+      btn.addEventListener('click', function () {
+        var d = parseDate(txt.value);
+        pick.value = d ? iso(d) : '';
+        try { pick.showPicker(); } catch (e) { txt.focus(); }
+      });
+      // corre antes que el listener del <section>, así el cálculo ya lee la fecha nueva
+      function fromPick() { var d = parseDate(pick.value); if (d) { txt.value = dmy(d); mark(true); } }
+      pick.addEventListener('input', fromPick);
+      pick.addEventListener('change', fromPick);
+    });
+  }
   function syncIf(root) {
     // [data-if="nombre=valor"]: visible solo si ese radio/checkbox está activo.
     // [data-mode-only="13|14"]: visible solo en esa pestaña. Si tiene ambos, deben cumplirse los dos.
@@ -313,6 +379,7 @@
       if (live) { clearTimeout(timer); timer = setTimeout(function () { live.textContent = 'Resultado: ' + money(v) + ' dólares.'; }, 700); }
     }
     bindRanges(root);
+    bindDates(root);
     root.addEventListener('input', run);
     root.addEventListener('change', run);
     root.addEventListener('submit', function (e) { e.preventDefault(); });
@@ -338,21 +405,15 @@
       setTimeout(function () { root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, 60);
     }
 
-    // filas de trabajadores (utilidades)
-    var team = q(root, '.cf-team');
-    if (team) {
-      team.addEventListener('click', function (e) {
-        var del = e.target.closest('.ct-del');
-        if (del && team.querySelectorAll('.ct-row').length > 1) { del.closest('.ct-row').remove(); run(); }
-        if (e.target.closest('.ct-add')) {
-          var rows = team.querySelectorAll('.ct-row'), last = rows[rows.length - 1], c = last.cloneNode(true);
-          c.querySelector('[data-f="nombre"]').value = '';
-          c.querySelector('[data-f="dias"]').value = '360';
-          c.querySelector('[data-f="cargas"]').value = '0';
-          last.after(c); c.querySelector('[data-f="nombre"]').focus(); run();
-        }
-      });
-    }
+    // botones − / + (.cf-step)
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.cf-step [data-step]');
+      if (!b) return;
+      var inp = b.parentNode.querySelector('input'), min = parseFloat(inp.min), max = parseFloat(inp.max);
+      var v = (parseInt(inp.value, 10) || 0) + parseInt(b.getAttribute('data-step'), 10);
+      inp.value = Math.max(isFinite(min) ? min : 0, Math.min(isFinite(max) ? max : 99, v));
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+    });
     run();
   }
 
