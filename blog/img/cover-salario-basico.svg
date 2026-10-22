@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<style>
+.m{stroke:#fff;stroke-opacity:.92;stroke-width:1.6}
+.s{stroke:#fff;stroke-opacity:.42;stroke-width:1.2}
+.f{stroke:#fff;stroke-opacity:.26;stroke-width:1}
+.a{stroke:#99e0ff;stroke-width:1.8}
+.af{fill:#99e0ff;stroke:none}
+.g{filter:url(#glow)}
+.t{font-family:Georgia,'Source Serif 4',serif;font-weight:600;fill:#fff;stroke:none}
+</style>
+<defs>
+<linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>
+<radialGradient id="r1" cx=".14" cy=".18" r=".46"><stop offset="0" stop-color="#62c5ee" stop-opacity=".28"/><stop offset="1" stop-color="#62c5ee" stop-opacity="0"/></radialGradient>
+<radialGradient id="r2" cx=".86" cy=".82" r=".48"><stop offset="0" stop-color="#ff458e" stop-opacity=".18"/><stop offset="1" stop-color="#ff458e" stop-opacity="0"/></radialGradient>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#99e0ff" stop-opacity=".16"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="fade" cx=".5" cy=".5" r=".6"><stop offset=".25" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+<mask id="mk"><rect width="320" height="200" fill="url(#fade)"/></mask>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r=".9" fill="#fff" fill-opacity=".14"/></pattern>
+<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="320" height="200" fill="url(#bg)"/>
+<rect width="320" height="200" fill="url(#r1)"/>
+<rect width="320" height="200" fill="url(#r2)"/>
+<rect width="320" height="200" fill="url(#dots)" mask="url(#mk)"/>
+<circle cx="160" cy="100" r="96" fill="url(#halo)"/>
+<path class="f" d="M14 36V14h22M284 14h22v22M306 164v22h-22M36 186H14v-22"/>
+<path class="s" d="M70 160h180"/>
+<rect class="m" x="92" y="98" width="34" height="62" rx="2" fill="#99e0ff" fill-opacity=".14"/>
+<rect class="m a g" x="144" y="86" width="34" height="74" rx="2" fill="#99e0ff" fill-opacity=".32"/>
+<path class="s" d="M196 70v6M196 84v6M196 98v6M196 112v6M196 126v6M196 140v6M196 154v6M230 70v6M230 84v6M230 98v6M230 112v6M230 126v6M230 140v6M230 154v6M196 70h8M214 70h8M222 70h8"/>
+<text class="t" x="109" y="176" font-size="9" text-anchor="middle">2025</text>
+<text class="t" x="161" y="176" font-size="9" text-anchor="middle" style="fill:#99e0ff">2026</text>
+<text class="t" x="213" y="176" font-size="9" text-anchor="middle">2027</text>
+<text class="t" x="213" y="62" font-size="13" text-anchor="middle">?</text>
+<text class="t" x="161" y="76" font-size="11" text-anchor="middle" style="fill:#99e0ff">SBU</text>
+</svg>

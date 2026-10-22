@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<style>
+.m{stroke:#fff;stroke-opacity:.92;stroke-width:1.6}
+.s{stroke:#fff;stroke-opacity:.42;stroke-width:1.2}
+.f{stroke:#fff;stroke-opacity:.26;stroke-width:1}
+.a{stroke:#99e0ff;stroke-width:1.8}
+.af{fill:#99e0ff;stroke:none}
+.g{filter:url(#glow)}
+.t{font-family:Georgia,'Source Serif 4',serif;font-weight:600;fill:#fff;stroke:none}
+</style>
+<defs>
+<linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>
+<radialGradient id="r1" cx=".14" cy=".18" r=".46"><stop offset="0" stop-color="#62c5ee" stop-opacity=".28"/><stop offset="1" stop-color="#62c5ee" stop-opacity="0"/></radialGradient>
+<radialGradient id="r2" cx=".86" cy=".82" r=".48"><stop offset="0" stop-color="#ff458e" stop-opacity=".18"/><stop offset="1" stop-color="#ff458e" stop-opacity="0"/></radialGradient>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#99e0ff" stop-opacity=".16"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="fade" cx=".5" cy=".5" r=".6"><stop offset=".25" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+<mask id="mk"><rect width="320" height="200" fill="url(#fade)"/></mask>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r=".9" fill="#fff" fill-opacity=".14"/></pattern>
+<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="320" height="200" fill="url(#bg)"/>
+<rect width="320" height="200" fill="url(#r1)"/>
+<rect width="320" height="200" fill="url(#r2)"/>
+<rect width="320" height="200" fill="url(#dots)" mask="url(#mk)"/>
+<circle cx="160" cy="100" r="96" fill="url(#halo)"/>
+<path class="f" d="M14 36V14h22M284 14h22v22M306 164v22h-22M36 186H14v-22"/>
+<rect class="m" x="92" y="36" width="96" height="128" rx="6" fill="#0a303e" fill-opacity=".72"/>
+<path class="s" d="M92 56h96"/>
+<text class="t" x="102" y="50" font-size="9">FINIQUITO</text>
+<path class="a g" d="M104 74l5 5 9-10"/><path class="s" d="M126 74h50"/>
+<path class="a g" d="M104 96l5 5 9-10"/><path class="s" d="M126 96h44"/>
+<path class="s" d="M105 115l10 10M115 115l-10 10"/><path class="f" d="M126 120h38"/>
+<path class="a g" d="M104 140l5 5 9-10"/><path class="s" d="M126 140h48"/>
+<circle class="m" cx="222" cy="122" r="26" fill="#0a303e" fill-opacity=".85"/>
+<circle class="a g" cx="222" cy="122" r="19"/>
+<text class="t" x="222" y="130" font-size="22" text-anchor="middle" style="fill:#99e0ff">$</text>
+</svg>

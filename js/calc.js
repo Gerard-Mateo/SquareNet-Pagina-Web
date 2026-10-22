@@ -1,4 +1,5 @@
-// Calculadoras del blog: décimo tercero y cuarto, fondos de reserva, utilidades e impuesto a la renta.
+// Calculadoras del blog: décimos, fondos de reserva, utilidades, impuesto a la renta, liquidación, gastos personales,
+// sueldo neto y pago por feriado.
 // Cada calculadora es un <section data-calc="..."> con su formulario; el resultado se recalcula al escribir.
 // VALORES LEGALES: todos están en P. Actualizarlos cada enero (SBU, tabla del SRI, canasta familiar básica).
 (function () {
@@ -22,6 +23,10 @@
   // Enfermedad catastrófica, rara o huérfana (del contribuyente o de una carga, certificada): el tope de gastos
   // personales sube a 100 canastas, sin importar el número de cargas. La rebaja sigue siendo el 18 %.
   P.catastrofica = 100;
+  // Salario Básico Unificado por año (Ministerio del Trabajo). 2025: MDT-2024-301 · 2026: MDT-2025-195 (R.O. Supl. 187, 15-12-2025).
+  // 2027: pendiente de publicación oficial; agregarlo aquí cuando salga (los décimos y la liquidación lo usan solos).
+  P.sbuAnio = { 2025: 470, 2026: 482 };
+  P.iessPatronal = 0.1115;   // aporte patronal IESS, sector privado (relación de dependencia)
 
   var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   var MES3 = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -77,6 +82,140 @@
     return Math.max(0, r[1] + (base - r[0]) * r[2]);
   }
 
+  // ---------- núcleos de cálculo (sin DOM: los usan las calculadoras y las pruebas de tests/calc.test.js) ----------
+  function r2(x) { return Math.round((x + (x >= 0 ? 1e-9 : -1e-9)) * 100) / 100; }   // redondeo a centavos
+  function sbuDe(y) { return P.sbuAnio[y] != null ? { v: P.sbuAnio[y], ok: true } : { v: P.sbu, ok: false }; }
+  function addDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  function monthEnd(d) { return new Date(d.getFullYear(), d.getMonth() + 1, 0); }
+
+  // Impuesto a la renta del año para un asalariado. o: { ingresos, aporte, gastos, cargas, especial, ipceg, year }
+  function irAnual(o) {
+    var Y = P.renta[o.year] || P.renta[P.year], T = Y.tabla;
+    var base = Math.max(0, (o.ingresos || 0) - (o.aporte || 0));
+    var causado = irCausado(base, T);
+    var canastas = o.especial ? P.catastrofica : P.canastas[Math.min(5, Math.max(0, o.cargas || 0))];
+    var tope = canastas * Y.cfb * (o.ipceg || 1);
+    var potencial = Math.min(o.gastos || 0, tope) * P.rebaja;
+    var rebaja = Math.min(potencial, causado);
+    return { year: Y === P.renta[o.year] ? o.year : P.year, base: base, tramo: tramo(base, T), causado: r2(causado), canastas: canastas,
+             cfb: Y.cfb, tope: r2(tope), potencial: r2(potencial), rebaja: r2(rebaja), impuesto: r2(causado - rebaja) };
+  }
+
+  // Décimo tercero (art. 111): la doceava parte de lo percibido del 1 de diciembre al 30 de noviembre; se paga hasta el 24 de diciembre
+  // si se acumula, o mes a mes (la regla general desde 2015). o: { y (año del pago), sueldo, variable, ingreso?, meses?[12] }
+  // meses[i] = lo que realmente cobró ese mes (opcional); si falta, se usa sueldo + variable por la parte trabajada del mes.
+  function decimo13(o) {
+    var start = new Date(o.y - 1, 11, 1), end = new Date(o.y, 10, 30), base = (o.sueldo || 0) + (o.variable || 0);
+    var desde = o.ingreso && o.ingreso > start ? o.ingreso : start, months = [], suma = 0, dias = 0;
+    for (var i = 0; i < 12; i++) {
+      var ms = new Date(o.y - 1, 11 + i, 1), me = monthEnd(ms);
+      var f = desde > me ? 0 : (desde > ms ? days360(desde, me) / 30 : 1);
+      var dato = o.meses && o.meses[i] != null;
+      var monto = dato ? o.meses[i] : base * f;
+      months.push({ inicio: ms, fraccion: f, monto: r2(monto), dato: dato });
+      suma += monto; dias += f * 30;
+    }
+    return { inicio: start, fin: end, pago: new Date(o.y, 11, 24), dias: Math.round(dias), meses: months,
+             remuneraciones: r2(suma), total: r2(suma / 12), sinPeriodo: !!(o.ingreso && o.ingreso > end) };
+  }
+
+  // Décimo cuarto (art. 113): un SBU por período completo, proporcional a los días y a la jornada.
+  // Sierra/Amazonía: 1 ago – 31 jul, pago hasta el 15 ago · Costa/Galápagos: 1 mar – fin de feb, pago hasta el 15 mar.
+  // Acumulado: SBU vigente al pagar. Mensualizado: SBU/12 de cada mes. Si falta el SBU de un año, queda «pendiente».
+  // o: { y (año del pago), region: 'sierra'|'costa', ingreso?, horas (semanales, 40 = completa) }
+  function decimo14(o) {
+    var mi = o.region === 'costa' ? 2 : 7;
+    var start = new Date(o.y - 1, mi, 1), end = new Date(o.y, mi, 0), pago = new Date(o.y, mi, 15);
+    var f = Math.min(1, Math.max(0, (o.horas || 40) / 40)), desde = o.ingreso && o.ingreso > start ? o.ingreso : start;
+    var dias = o.ingreso && o.ingreso > end ? 0 : Math.min(360, days360(desde, end));
+    var sp = sbuDe(o.y), mensual = 0, pendMes = false, months = [];
+    for (var i = 0; i < 12; i++) {
+      var ms = new Date(o.y - 1, mi + i, 1), me = monthEnd(ms), s = sbuDe(ms.getFullYear());
+      var fr = desde > me ? 0 : (desde > ms ? days360(desde, me) / 30 : 1);
+      var monto = s.v / 12 * fr * f;
+      if (!s.ok && fr) pendMes = true;
+      months.push({ inicio: ms, fraccion: fr, sbu: s.v, sbuOk: s.ok, monto: r2(monto) });
+      mensual += monto;
+    }
+    return { inicio: start, fin: end, pago: pago, dias: dias, jornada: f, sbu: sp.v, sbuOk: sp.ok,
+             acumulado: r2(sp.v * dias / 360 * f), mensualizado: r2(mensual), pendienteMes: pendMes, meses: months };
+  }
+
+  // Liquidación (Código del Trabajo). Cada causal tiene efectos distintos: nunca una fórmula universal.
+  // o: { ingreso, salida, sueldo, variable, causal, diasPend, vacPend, d13: 'mensual'|'acum', d14: 'mensual'|'acum', region,
+  //      horas, fondosPend (meses), otros, descuentos }
+  var CAUSALES = {
+    renuncia: { n: 'Renuncia voluntaria con desahucio', desahucio: true, indem: false },
+    acuerdo: { n: 'Terminación por acuerdo entre las partes', desahucio: true, indem: false },
+    despido: { n: 'Despido intempestivo', desahucio: true, indem: true },
+    vb_trabajador: { n: 'Visto bueno pedido por el trabajador', desahucio: true, indem: true },
+    vb_empleador: { n: 'Visto bueno pedido por el empleador', desahucio: false, indem: false },
+    prueba: { n: 'Terminación en el período de prueba', desahucio: false, indem: false },
+    obra: { n: 'Fin de la obra, contrato eventual o de temporada', desahucio: false, indem: false }
+  };
+  function liquidacion(o) {
+    var c = CAUSALES[o.causal] || CAUSALES.renuncia, base = (o.sueldo || 0) + (o.variable || 0);
+    if (!o.ingreso || !o.salida || o.salida < o.ingreso) return { error: 'Revisa las fechas: la salida debe ser posterior al ingreso.' };
+    var dias = days360(o.ingreso, o.salida), completos = Math.floor(dias / 360), dia = base / 30, rubros = [];
+    function add(k, label, monto, aplica, por) { rubros.push({ k: k, label: label, monto: r2(aplica ? monto : 0), aplica: aplica, por: por }); }
+    // remuneración pendiente: días del último mes que aún no se pagaron
+    var dp = Math.min(31, o.diasPend || 0);
+    add('rem', 'Remuneración pendiente', dia * dp, dp > 0, dp ? dp + ' días × ' + money(dia) + ' (sueldo ÷ 30)' : 'No indicaste días del último mes por pagar.');
+    // décimo tercero proporcional: desde el 1 de diciembre (o el ingreso) hasta la salida
+    var s13 = o.salida.getMonth() === 11 ? new Date(o.salida.getFullYear(), 11, 1) : new Date(o.salida.getFullYear() - 1, 11, 1);
+    var d13d = days360(o.ingreso > s13 ? o.ingreso : s13, o.salida);
+    add('d13', 'Décimo tercero proporcional', base * d13d / 360, o.d13 === 'acum',
+      o.d13 === 'acum' ? d13d + ' días desde el ' + fdate(o.ingreso > s13 ? o.ingreso : s13) + ' × remuneración ÷ 360' : 'Mensualizado: ya lo cobraste en cada rol.');
+    // décimo cuarto proporcional (SBU del año de salida; jornada parcial en proporción)
+    var mi = o.region === 'costa' ? 2 : 7, s14 = o.salida.getMonth() >= mi ? new Date(o.salida.getFullYear(), mi, 1) : new Date(o.salida.getFullYear() - 1, mi, 1);
+    var d14d = days360(o.ingreso > s14 ? o.ingreso : s14, o.salida), sb = sbuDe(o.salida.getFullYear()), jf = Math.min(1, (o.horas || 40) / 40);
+    add('d14', 'Décimo cuarto proporcional', sb.v * d14d / 360 * jf, o.d14 === 'acum',
+      o.d14 === 'acum' ? d14d + ' días × SBU ' + o.salida.getFullYear() + ' (' + money(sb.v) + (sb.ok ? '' : ', pendiente de publicación oficial') + ') ÷ 360' + (jf < 1 ? ' × jornada ' + money(jf * 40, 0) + '/40' : '') : 'Mensualizado: ya lo cobraste en cada rol.');
+    // vacaciones: lo pendiente de años anteriores + la parte del año de servicio en curso (15 días, +1 por año desde el sexto, tope 30)
+    var aniv = new Date(o.ingreso.getFullYear() + completos, o.ingreso.getMonth(), o.ingreso.getDate());
+    var enCurso = days360(aniv, o.salida), diasAnio = Math.min(30, 15 + Math.max(0, completos + 1 - 5));
+    var vacProp = diasAnio * Math.min(360, enCurso) / 360, vacPend = Math.max(0, o.vacPend || 0);
+    add('vac', 'Vacaciones no gozadas', dia * (vacProp + vacPend), vacProp + vacPend > 0,
+      (vacPend ? vacPend + ' días pendientes + ' : '') + money(vacProp, 2) + ' días proporcionales del año en curso (' + diasAnio + ' días por año) × ' + money(dia) + ' por día');
+    // fondos de reserva pendientes (solo después del primer año)
+    var fp = Math.max(0, o.fondosPend || 0);
+    add('fr', 'Fondos de reserva pendientes', base * P.fondo * fp, fp > 0 && dias > 360,
+      dias <= 360 ? 'Todavía no cumplías un año: no se generan.' : (fp ? fp + ' meses × ' + pct(P.fondo) + ' de la remuneración' : 'Si los cobrabas cada mes o están en el IESS, no queda nada pendiente.'));
+    // bonificación por desahucio (art. 185): 25 % de la última remuneración por año de servicio
+    add('desahucio', 'Bonificación por desahucio', base * 0.25 * completos, c.desahucio && completos > 0,
+      !c.desahucio ? 'No aplica en esta causal.' : (completos ? '25 % × ' + money(base) + ' × ' + completos + (completos === 1 ? ' año' : ' años') + ' completos (art. 185)' : 'Aplica, pero aún no cumples un año completo de servicio.'));
+    // indemnización por despido intempestivo (art. 188): 3 meses hasta 3 años; desde ahí, un mes por año (la fracción cuenta como año), tope 25
+    var mesesInd = dias <= 1080 ? 3 : Math.min(25, Math.ceil(dias / 360));
+    add('indem', 'Indemnización por despido', base * mesesInd, c.indem,
+      c.indem ? mesesInd + ' meses × ' + money(base) + (dias <= 1080 ? ' (hasta 3 años de servicio)' : ' (un mes por año; la fracción cuenta como año, tope 25)') + ' · art. 188' : 'Solo procede en despido intempestivo o visto bueno pedido por el trabajador.');
+    var ot = Math.max(0, o.otros || 0);
+    add('otros', 'Otros valores pendientes', ot, ot > 0, ot ? 'Valores que indicaste (horas extra, comisiones, bonos pendientes).' : 'Ninguno indicado.');
+    var bruto = rubros.reduce(function (a, r) { return a + r.monto; }, 0);
+    var iess = r2(rubros[0].monto * P.iess), desc = r2(Math.max(0, o.descuentos || 0));
+    return { causal: c, dias: dias, anios: dias / 360, completos: completos, base: base, rubros: rubros,
+             bruto: r2(bruto), iess: iess, descuentos: desc, total: r2(Math.max(0, bruto - iess - desc)), periodoPrueba: dias <= 90 };
+  }
+
+  // Trabajo en feriado o día de descanso obligatorio (art. 55): cada hora con 100 % de recargo. El sueldo mensual ya paga
+  // el feriado como descanso, así que no se vuelve a sumar: lo que se agrega son las horas trabajadas con su recargo.
+  // o: { sueldo, horasDia (jornada diaria, 8 = completa), horas }
+  function feriado(o) {
+    var hd = Math.max(1, Math.min(8, o.horasDia || 8)), hora = (o.sueldo || 0) / (30 * hd), h = Math.max(0, o.horas || 0);
+    return { valorHora: r2(hora), diaIncluido: r2((o.sueldo || 0) / 30), ordinaria: r2(hora * h), recargo: r2(hora * h), total: r2(hora * h * 2) };
+  }
+
+  // Sueldo neto en relación de dependencia (sector privado). o: { sueldo, descuentos, ir, gastos, cargas, decimos, fondos, year }
+  function neto(o) {
+    var s = o.sueldo || 0, aporte = r2(s * P.iess), irm = 0, ir = null;
+    if (o.ir) { ir = irAnual({ ingresos: s * 12, aporte: s * 12 * P.iess, gastos: o.gastos, cargas: o.cargas, year: o.year }); irm = r2(ir.impuesto / 12); }
+    var d13 = o.decimos ? r2(s / 12) : 0, d14 = o.decimos ? r2(P.sbu / 12) : 0, fr = o.fondos ? r2(s * P.fondo) : 0, desc = r2(o.descuentos || 0);
+    var trasIess = r2(s - aporte);
+    var patronal = r2(s * P.iessPatronal), vac = r2(s / 24);
+    return { sueldo: s, aporte: aporte, trasIess: trasIess, irMes: irm, ir: ir, d13: d13, d14: d14, fondos: fr, descuentos: desc,
+             neto: r2(trasIess - irm - desc + d13 + d14 + fr), patronal: patronal, vacaciones: vac,
+             costo: r2(s + patronal + r2(s / 12) + r2(P.sbu / 12) + (o.fondos ? r2(s * P.fondo) : 0) + vac) };
+  }
+
   // ---------- animación del número grande ----------
   function setBig(el, value) {
     if (!el) return;
@@ -130,64 +269,83 @@
 
   // ---------- calculadoras ----------
   var CALCS = {
+    // Décimos: pestaña 13 (bono navideño) o 14 (bono escolar). Por ley se pagan mes a mes; acumulado solo si el trabajador lo pidió.
     decimos: function (root) {
       var mode = root.getAttribute('data-mode') || '13';
-      var todo = radio(root, 'periodo') !== 'despues';
       var ingreso = parseDate((q(root, '[name="ingreso"]') || {}).value);
-      var mensual = radio(root, 'modalidad') === 'mensual';
-      var Y, start, end, pay, regionTxt = '';
-      if (mode === '13') {
-        Y = today > new Date(today.getFullYear(), 11, 24) ? today.getFullYear() + 1 : today.getFullYear();
-        start = new Date(Y - 1, 11, 1); end = new Date(Y, 10, 30); pay = new Date(Y, 11, 24);
-      } else {
-        var costa = radio(root, 'region') === 'costa';
-        var m = costa ? 2 : 7;  // marzo o agosto
-        Y = today > new Date(today.getFullYear(), m, 15) ? today.getFullYear() + 1 : today.getFullYear();
-        start = new Date(Y - 1, m, 1); end = new Date(Y, m, 0); pay = new Date(Y, m, 15);
-        regionTxt = costa ? ' (Costa y Galápagos)' : ' (Sierra y Amazonía)';
+      var acum = radio(root, 'modalidad') === 'acumulado';
+      var cicloSel = q(root, 'select[name="ciclo"]'), region = radio(root, 'region') || 'sierra';
+      // ciclos: el que se paga después de hoy y el anterior
+      var mi = mode === '13' ? 11 : (region === 'costa' ? 2 : 7), dd = mode === '13' ? 24 : 15;
+      var yNext = today > new Date(today.getFullYear(), mi, dd) ? today.getFullYear() + 1 : today.getFullYear();
+      if (cicloSel) {
+        var key = mode + region;
+        if (cicloSel._key !== key) {
+          var cur = cicloSel._key ? cicloSel.selectedIndex : 0;
+          cicloSel.innerHTML = [yNext, yNext - 1].map(function (y, k) {
+            var ini = mode === '13' ? new Date(y - 1, 11, 1) : new Date(y - 1, mi, 1), fin = mode === '13' ? new Date(y, 10, 30) : new Date(y, mi, 0);
+            return '<option value="' + y + '">' + MES3[ini.getMonth()] + ' ' + ini.getFullYear() + ' – ' + MES3[fin.getMonth()] + ' ' + fin.getFullYear() +
+              (k ? ' (ya vencido)' : ' (se paga en ' + y + ')') + '</option>';
+          }).join('');
+          cicloSel.selectedIndex = Math.min(cur, 1); cicloSel._key = key;
+        }
       }
-      var days = 360, warn = '';
-      if (!todo && ingreso) {
-        if (ingreso > end) { days = 0; warn = 'La fecha de ingreso es posterior al período: todavía no se genera este décimo.'; }
-        else days = Math.min(360, days360(ingreso > start ? ingreso : start, end));
-      }
-      var periodo = 'del ' + fdate(start) + ' al ' + fdate(end);
-      var total, perMonth, rows, fx, k;
+      var y = cicloSel ? +cicloSel.value : yNext, R, big, k, sub, rows = [], fx, warn = '', tip = '', viz;
       if (mode === '13') {
-        var monthly = num(root, 'sueldo', 0) + num(root, 'variable', 0);
-        var remun = monthly * days / 30;
-        total = remun / 12; perMonth = monthly / 12;
-        k = mensual ? 'Décimo tercero cada mes' : 'Décimo tercero a recibir';
-        rows = [['Remuneración mensual (sueldo + variables)', '$ ' + money(monthly)],
-                ['Días computados', days + ' de 360'],
-                ['Remuneraciones del período', '$ ' + money(remun)],
-                [mensual ? 'Cada mes (÷ 12)' : 'Décimo tercero (÷ 12)', '$ ' + money(mensual ? perMonth : total), 'is-total']];
-        fx = mensual ? money(monthly) + ' ÷ 12 = ' + money(perMonth) : 'Σ ' + money(remun) + ' ÷ 12 = ' + money(total);
+        var vals = [], grid = root.querySelectorAll('[data-mes]');
+        for (var i = 0; i < 12; i++) vals.push(grid[i] && String(grid[i].value).trim() !== '' ? Math.max(0, parseFloat(String(grid[i].value).replace(',', '.')) || 0) : null);
+        R = decimo13({ y: y, sueldo: num(root, 'sueldo', 0), variable: num(root, 'variable', 0), ingreso: ingreso, meses: vals });
+        // los campos mes a mes muestran su mes y lo que se asumiría si quedan vacíos
+        Array.prototype.forEach.call(grid, function (inp, j) {
+          var lab = inp.parentNode.parentNode.querySelector('label');
+          var mm = R.meses[j].inicio;
+          if (lab) lab.textContent = MES3[mm.getMonth()] + ' ' + mm.getFullYear();
+          inp.placeholder = money((num(root, 'sueldo', 0) + num(root, 'variable', 0)) * R.meses[j].fraccion);
+        });
+        var esteMes = R.meses.filter(function (m) { return m.inicio.getFullYear() === today.getFullYear() && m.inicio.getMonth() === today.getMonth(); })[0];
+        var mensual = esteMes ? r2(esteMes.monto / 12) : R.total;
+        big = acum ? R.total : mensual;
+        k = acum ? '¿Cuánto te toca de bono navideño?' : (esteMes ? 'Décimo tercero de este mes' : 'Décimo tercero mensualizado del período');
+        sub = acum ? 'A pagar hasta el <b>' + fdate(R.pago) + '</b>, por lo ganado del ' + fdate(R.inicio) + ' al ' + fdate(R.fin) + '.'
+                   : 'Se suma a tu rol cada mes (es la regla general). En todo el período: <b>$ ' + money(R.total) + '</b>.';
+        rows = [['Remuneraciones del período<small>' + (vals.some(function (v) { return v != null; }) ? 'con los meses que ingresaste' : 'sueldo + variables por la parte trabajada de cada mes') + '</small>', '$ ' + money(R.remuneraciones)],
+                ['Días computados', R.dias + ' de 360'],
+                ['Décimo tercero (÷ 12)', '$ ' + money(R.total), acum ? 'is-total' : 'is-sum']];
+        if (!acum && esteMes) rows.push(['Este mes (lo de este mes ÷ 12)', '$ ' + money(mensual), 'is-total']);
+        fx = 'Σ ' + money(R.remuneraciones) + ' ÷ 12 = ' + money(R.total);
+        viz = '<div class="cv-label"><span>Mes a mes</span><span>' + R.dias + ' de 360 días</span></div><div class="cv-mlist">' + R.meses.map(function (m) {
+          return '<span class="' + (m.monto ? '' : 'is-off') + '"><em>' + MES3[m.inicio.getMonth()] + '</em><b>' + money(m.monto, 0) + '</b><i>' + money(m.monto / 12) + '</i></span>';
+        }).join('') + '</div>';
+        if (R.sinPeriodo) warn = 'Tu fecha de ingreso es posterior a este período: todavía no se genera este décimo.';
       } else {
         var parcial = !!(q(root, '[name="parcial"]') || {}).checked;
-        var horas = parcial ? num(root, 'horas', 1, 40) : 40, f = horas / 40;
-        total = P.sbu * days / 360 * f; perMonth = P.sbu / 12 * f;
-        k = mensual ? 'Décimo cuarto cada mes' : 'Décimo cuarto a recibir';
-        rows = [['Salario Básico Unificado ' + P.year, '$ ' + money(P.sbu)],
-                ['Días computados', days + ' de 360'],
-                ['Jornada', parcial ? 'Parcial: ' + money(horas, 0) + ' de 40 h' : 'Completa'],
-                [mensual ? 'Cada mes (÷ 12)' : 'Décimo cuarto', '$ ' + money(mensual ? perMonth : total), 'is-total']];
-        fx = mensual ? money(P.sbu) + ' ÷ 12' + (parcial ? ' × ' + money(horas, 0) + '/40' : '') + ' = ' + money(perMonth)
-                     : money(P.sbu) + ' × ' + days + ' ÷ 360' + (parcial ? ' × ' + money(horas, 0) + '/40' : '') + ' = ' + money(total);
+        R = decimo14({ y: y, region: region, ingreso: ingreso, horas: parcial ? num(root, 'horas', 1, 40) : 40 });
+        var mes14 = R.meses.filter(function (m) { return m.inicio.getFullYear() === today.getFullYear() && m.inicio.getMonth() === today.getMonth(); })[0];
+        big = acum ? R.acumulado : (mes14 ? mes14.monto : R.mensualizado);
+        k = acum ? '¿Cuánto voy a cobrar de décimo cuarto?' : (mes14 ? 'Décimo cuarto de este mes' : 'Décimo cuarto mensualizado del período');
+        sub = acum ? 'A pagar hasta el <b>' + fdate(R.pago) + '</b> (' + (region === 'costa' ? 'Costa y Galápagos' : 'Sierra y Amazonía') + '), por el período del ' + fdate(R.inicio) + ' al ' + fdate(R.fin) + '.'
+                   : 'Se suma a tu rol cada mes: un salario básico ÷ 12. En todo el período: <b>$ ' + money(R.mensualizado) + '</b>.';
+        rows = [['Salario básico para el pago de ' + y, R.sbuOk ? '$ ' + money(R.sbu) : 'Pendiente'],
+                ['Días computados', R.dias + ' de 360'],
+                ['Jornada', R.jornada < 1 ? 'Parcial: ' + money(R.jornada * 40, 0) + ' de 40 h' : 'Completa'],
+                [acum ? 'Décimo cuarto acumulado' : 'En todo el período, mes a mes', '$ ' + money(acum ? R.acumulado : R.mensualizado), 'is-total']];
+        fx = acum ? money(R.sbu) + ' × ' + R.dias + ' ÷ 360' + (R.jornada < 1 ? ' × ' + money(R.jornada * 40, 0) + '/40' : '') + ' = ' + money(R.acumulado)
+                  : 'Σ SBU de cada mes ÷ 12' + (R.jornada < 1 ? ' × ' + money(R.jornada * 40, 0) + '/40' : '') + ' = ' + money(R.mensualizado);
+        viz = monthsStrip(R.inicio, R.dias);
+        if ((acum && !R.sbuOk) || (!acum && R.pendienteMes)) {
+          warn = 'El salario básico de ' + (acum ? y : 'los meses de ' + (R.inicio.getFullYear() + 1)) + ' está pendiente de publicación oficial. Este valor es provisional: usa el SBU ' + P.year + ' (USD ' + money(P.sbu) + ') y cambiará cuando el Ministerio del Trabajo fije el nuevo.';
+        }
+        if (ingreso && ingreso > R.fin) warn = 'Tu fecha de ingreso es posterior a este período: todavía no se genera este décimo.';
       }
       out(root, 'k', k);
-      setBig(q(root, '[data-o="big"]'), mensual ? perMonth : total);
-      out(root, 'sub', mensual
-        ? 'Se suma a tu rol de pagos cada mes, en lugar del pago único. En el año: <b>$ ' + money(perMonth * 12) + '</b>.'
-        : 'A pagar hasta el <b>' + fdate(pay) + '</b>' + regionTxt + ', por el período ' + periodo + '.');
-      out(root, 'viz', monthsStrip(start, days));
+      setBig(q(root, '[data-o="big"]'), big);
+      out(root, 'sub', sub);
+      out(root, 'viz', viz);
       out(root, 'lines', lines(rows));
       out(root, 'fx', fx);
       out(root, 'warn', warn); show(root, 'warn', !!warn);
-      var tip = mode === '14' && pay.getFullYear() > P.year
-        ? 'Calculado con el SBU ' + P.year + ' (USD ' + P.sbu + '). El pago de ' + pay.getFullYear() + ' usará el salario básico que fije el Ministerio del Trabajo para ese año.' : '';
       out(root, 'tip', tip); show(root, 'tip', !!tip);
-      return mensual ? perMonth : total;
+      return big;
     },
 
     fondos: function (root) {
@@ -360,6 +518,120 @@
         canastas + ' canastas básicas de enero de ' + yr + ' (USD ' + money(Y.cfb) + ') = USD ' + money(tope) + '.');
       show(root, 'tip', true);
       return anual;
+    },
+
+    // Liquidación: cada rubro dice si aplica o no y por qué, según la causal.
+    liquidacion: function (root) {
+      var R = liquidacion({
+        ingreso: parseDate((q(root, '[name="ingreso"]') || {}).value), salida: parseDate((q(root, '[name="salida"]') || {}).value),
+        sueldo: num(root, 'sueldo', 0), variable: num(root, 'variable', 0), causal: (q(root, '[name="causal"]') || {}).value,
+        diasPend: num(root, 'diasPend', 0, 31), vacPend: num(root, 'vacPend', 0, 90), d13: radio(root, 'd13') || 'mensual', d14: radio(root, 'd14') || 'mensual',
+        region: radio(root, 'region') || 'sierra', fondosPend: num(root, 'fondosPend', 0, 600), otros: num(root, 'otros', 0), descuentos: num(root, 'descuentos', 0)
+      });
+      out(root, 'k', 'Liquidación estimada');
+      if (R.error) {
+        setBig(q(root, '[data-o="big"]'), 0);
+        out(root, 'sub', ''); out(root, 'lines', '');
+        out(root, 'warn', R.error); show(root, 'warn', true);
+        return 0;
+      }
+      setBig(q(root, '[data-o="big"]'), R.total);
+      var anios = Math.floor(R.dias / 360), meses = Math.floor((R.dias % 360) / 30);
+      out(root, 'sub', R.causal.n + ' · ' + (anios ? anios + (anios === 1 ? ' año' : ' años') + (meses ? ' y ' : '') : '') + (meses || !anios ? meses + (meses === 1 ? ' mes' : ' meses') : '') + ' de servicio.');
+      var rows = R.rubros.map(function (r) {
+        return [r.label + '<small>' + r.por + '</small>', r.aplica ? '$ ' + money(r.monto) : '<span class="na">No aplica</span>', r.aplica ? '' : 'is-na'];
+      });
+      rows.push(['= Total bruto', '$ ' + money(R.bruto), 'is-sum']);
+      if (R.iess) rows.push(['− Aporte personal IESS<small>9,45 % de la remuneración pendiente</small>', '$ ' + money(R.iess)]);
+      if (R.descuentos) rows.push(['− Anticipos y préstamos', '$ ' + money(R.descuentos)]);
+      rows.push(['= Te deben pagar', '$ ' + money(R.total), 'is-total']);
+      out(root, 'lines', lines(rows));
+      var c = (q(root, '[name="causal"]') || {}).value, warn = '';
+      if (c === 'renuncia') warn = 'La bonificación por desahucio supone que avisaste por escrito con al menos 15 días de anticipación. Si te retiras para jubilarte, la Corte Nacional (enero de 2025) resolvió que no procede.';
+      if (c === 'vb_empleador') warn = 'Si el visto bueno no fue aprobado por un inspector del trabajo, la salida puede considerarse despido intempestivo.';
+      if (c === 'prueba' && !R.periodoPrueba) warn = 'El período de prueba dura como máximo 90 días; con más tiempo trabajado, revisa la causal.';
+      if (c === 'obra') warn = 'Revisa tu contrato: según el tipo (obra cierta, eventual, de temporada) pueden aplicar reglas propias.';
+      out(root, 'warn', warn); show(root, 'warn', !!warn);
+      return R.total;
+    },
+
+    // Gastos personales: tope por canastas, rebaja del 18 % y el impuesto antes y después.
+    gastos: function (root) {
+      var cats = ['viv', 'ali', 'ves', 'sal', 'edu', 'tur'], nombres = ['Vivienda', 'Alimentación', 'Vestimenta', 'Salud', 'Educación, arte y cultura', 'Turismo'];
+      var total = 0, det = [];
+      cats.forEach(function (k, i) { var v = num(root, k, 0); total += v; if (v) det.push(nombres[i] + ' ' + money(v, 0)); });
+      var cargas = Math.min(5, parseInt(radio(root, 'cargas') || '0', 10)), especial = !!(q(root, '[name="especial"]') || {}).checked;
+      var gal = !!(q(root, '[name="galapagos"]') || {}).checked, ipceg = gal ? opt(root, 'ipceg') : null;
+      var sueldo = num(root, 'sueldo', 0), otros = num(root, 'otros', 0), ingresos = sueldo * 12 + otros;
+      var R = irAnual({ ingresos: ingresos, aporte: ingresos * P.iess, gastos: total, cargas: cargas, especial: especial, ipceg: ipceg, year: P.year });
+      var sobra = r2(R.potencial - R.rebaja);
+      Array.prototype.forEach.call(document.querySelectorAll('[data-topes] tbody tr'), function (tr, j) { tr.classList.toggle('is-on', j === (especial ? P.canastas.length : cargas)); });
+      out(root, 'k', 'Te bajan del impuesto');
+      setBig(q(root, '[data-o="big"]'), R.rebaja);
+      out(root, 'sub', R.causado > 0
+        ? 'Tu impuesto del año pasa de <b>$ ' + money(R.causado) + '</b> a <b>$ ' + money(R.impuesto) + '</b>.'
+        : 'Con estos ingresos no pagas impuesto a la renta, así que la rebaja no se usa.');
+      var lleno = R.tope ? Math.min(100, total / R.tope * 100) : 0;
+      out(root, 'viz', '<div class="cv-label"><span>Tus gastos frente al tope</span><span>' + money(total, 0) + ' de ' + money(R.tope, 0) + '</span></div>' +
+        '<div class="cv-bar"><b style="width:' + lleno.toFixed(1) + '%"></b></div>');
+      out(root, 'lines', lines([
+        ['Gastos personales del año' + (det.length ? '<small>' + det.join(' · ') + '</small>' : ''), '$ ' + money(total)],
+        ['Tope<small>' + R.canastas + ' canastas × ' + money(R.cfb) + (gal && ipceg ? ' × IPCEG ' + money(ipceg, 4) : '') + (especial ? ' (discapacidad o enfermedad catastrófica)' : ' (' + cargas + (cargas === 5 ? ' o más' : '') + (cargas === 1 ? ' carga)' : ' cargas)')) + '</small>', '$ ' + money(R.tope)],
+        ['Rebaja posible<small>18 % de ' + money(Math.min(total, R.tope)) + '</small>', '$ ' + money(R.potencial)],
+        ['Impuesto del año sin rebaja', '$ ' + money(R.causado)],
+        ['− Rebaja que se aprovecha', '$ ' + money(R.rebaja)],
+        ['= Impuesto del año', '$ ' + money(R.impuesto), 'is-total']]));
+      var warn = gal && ipceg == null ? 'Para Galápagos el tope se multiplica por el Índice de Precios al Consumidor Espacial de Galápagos (IPCEG). Ingresa el índice vigente para aplicarlo; sin él, el cálculo usa el tope continental.'
+        : (sobra > 0.005 && R.causado > 0 ? 'Tu rebaja cubre todo el impuesto: $ ' + money(sobra) + ' de rebaja no se aprovechan (no se devuelven).' : '');
+      out(root, 'warn', warn); show(root, 'warn', !!warn);
+      return R.rebaja;
+    },
+
+    // Sueldo neto: lo que queda después del IESS, el impuesto y otros descuentos, y lo que cuesta al empleador.
+    neto: function (root) {
+      var ir = !!(q(root, '[name="ir"]') || {}).checked, R = neto({
+        sueldo: num(root, 'sueldo', 0), descuentos: num(root, 'descuentos', 0), ir: ir, gastos: num(root, 'gastos', 0),
+        cargas: Math.min(5, parseInt(radio(root, 'cargas') || '0', 10)), decimos: radio(root, 'decimos') !== 'acumulado',
+        fondos: !!(q(root, '[name="fondos"]') || {}).checked, year: P.year });
+      out(root, 'k', 'Esto recibirías después del IESS');
+      setBig(q(root, '[data-o="big"]'), R.trasIess);
+      out(root, 'sub', 'Con impuesto, descuentos y beneficios mensualizados, cada mes te llegan <b>$ ' + money(R.neto) + '</b> (parámetros ' + P.year + ').');
+      var rows = [['Sueldo bruto', '$ ' + money(R.sueldo)],
+                  ['− Aporte personal IESS (' + pct(P.iess) + ')', '$ ' + money(R.aporte)],
+                  ['= Después del IESS', '$ ' + money(R.trasIess), 'is-sum']];
+      if (ir) rows.push(['− Impuesto a la renta del mes<small>' + (R.irMes ? 'impuesto del año ' + money(R.ir.impuesto) + ' ÷ 12' : 'no pasas la fracción exenta') + '</small>', '$ ' + money(R.irMes)]);
+      if (R.descuentos) rows.push(['− Otros descuentos', '$ ' + money(R.descuentos)]);
+      if (R.d13) rows.push(['+ Décimo tercero mensualizado<small>sueldo ÷ 12</small>', '$ ' + money(R.d13)]);
+      if (R.d14) rows.push(['+ Décimo cuarto mensualizado<small>SBU ' + P.year + ' ÷ 12</small>', '$ ' + money(R.d14)]);
+      if (R.fondos) rows.push(['+ Fondos de reserva<small>8,33 %, desde el mes 13</small>', '$ ' + money(R.fondos)]);
+      rows.push(['= Te llega al mes', '$ ' + money(R.neto), 'is-total']);
+      out(root, 'lines', lines(rows));
+      out(root, 'emp', '<p class="calc-k">Vista del empleador</p><dl class="calc-lines">' + lines([
+        ['Sueldo', '$ ' + money(R.sueldo)],
+        ['+ Aporte patronal IESS (' + pct(P.iessPatronal) + ')', '$ ' + money(R.patronal)],
+        ['+ Décimo tercero (provisión mensual)', '$ ' + money(r2(R.sueldo / 12))],
+        ['+ Décimo cuarto (provisión mensual)', '$ ' + money(r2(P.sbu / 12))],
+        ['+ Fondos de reserva', '$ ' + money(R.fondos ? R.fondos : 0)],
+        ['+ Vacaciones (provisión: sueldo ÷ 24)', '$ ' + money(R.vacaciones)],
+        ['= Costo laboral mensual', '$ ' + money(R.costo), 'is-total']]) + '</dl>');
+      var warn = R.sueldo > 0 && R.sueldo < P.sbu ? 'Con jornada completa nadie puede ganar menos del salario básico (USD ' + money(P.sbu, 0) + ' en ' + P.year + '). Si trabajas a tiempo parcial, es proporcional.' : '';
+      out(root, 'warn', warn); show(root, 'warn', !!warn);
+      return R.trasIess;
+    },
+
+    // Feriado trabajado: horas con 100 % de recargo, sin volver a sumar el día que el sueldo ya paga.
+    feriado: function (root) {
+      var R = feriado({ sueldo: num(root, 'sueldo', 0), horasDia: num(root, 'horasDia', 1, 8) || 8, horas: num(root, 'horas', 0, 24) });
+      out(root, 'k', 'Te pagan adicional por el feriado');
+      setBig(q(root, '[data-o="big"]'), R.total);
+      out(root, 'sub', 'Se suma a tu sueldo del mes. El día de descanso ya está pagado en tu sueldo ($ ' + money(R.diaIncluido) + '): no se cuenta dos veces.');
+      out(root, 'lines', lines([
+        ['Valor de tu hora<small>sueldo ÷ (30 × horas de tu jornada)</small>', '$ ' + money(R.valorHora)],
+        ['Horas trabajadas × valor hora', '$ ' + money(R.ordinaria)],
+        ['+ Recargo del 100 %', '$ ' + money(R.recargo)],
+        ['= Pago adicional por el feriado', '$ ' + money(R.total), 'is-total']]));
+      out(root, 'fx', num(root, 'horas', 0, 24) + ' h × ' + money(R.valorHora) + ' × 2 = ' + money(R.total));
+      return R.total;
     }
   };
 
@@ -589,6 +861,28 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeHl(card, true); });
   }
 
+  // «Copiar resultado»: el resultado principal y el desglose en texto, con el enlace de la página.
+  function copyText(text) {
+    var cb = navigator.clipboard;
+    if (cb && window.isSecureContext) return cb.writeText(text);
+    var ta = document.createElement('textarea'), ok = false;
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok ? Promise.resolve() : Promise.reject();
+  }
+  function resultText(root) {
+    function txt(el) { if (!el) return ''; var c = el.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('small'), function (s) { s.textContent = ' (' + s.textContent + ')'; }); return c.textContent.replace(/\s+/g, ' ').trim(); }
+    var big = (q(root, '[data-o="big"]') || {}).textContent || '';
+    var t = [txt(q(root, '[data-o="k"]')) + ': ' + big.replace(/\s+/g, '').replace('$', '$ '), txt(q(root, '[data-o="sub"]'))];
+    Array.prototype.forEach.call(root.querySelectorAll('.calc-out [data-o="lines"] > div, .calc-out [data-o="emp"] .calc-lines > div'), function (d) {
+      t.push(txt(d.querySelector('dt')) + ': ' + txt(d.querySelector('dd')));
+    });
+    var can = document.querySelector('link[rel="canonical"]');
+    t.push('', 'Calculado en ' + (can ? can.href : location.href.split('#')[0]) + ' (referencial)');
+    return t.filter(function (x, i) { return x || i > 1; }).join('\n');
+  }
   function init(root) {
     var fn = CALCS[root.getAttribute('data-calc')];
     if (!fn) return;
@@ -631,7 +925,12 @@
       setTimeout(function () { root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, 60);
     }
 
-    // botones − / + (.cf-step)
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.calc-copy');
+      if (!b) return;
+      copyText(resultText(root)).then(function () { flash(b, 'Copiado'); }, function () { flash(b, 'No se pudo copiar'); });
+    });
+        // botones − / + (.cf-step)
     root.addEventListener('click', function (e) {
       var b = e.target.closest('.cf-step [data-step]');
       if (!b) return;
@@ -644,5 +943,6 @@
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-calc]'), init);
-  window.SquareNetCalc = { P: P, irCausado: irCausado, days360: days360, money: money };
+  window.SquareNetCalc = { P: P, irCausado: irCausado, irAnual: irAnual, days360: days360, money: money, r2: r2, parseDate: parseDate,
+    decimo13: decimo13, decimo14: decimo14, liquidacion: liquidacion, feriado: feriado, neto: neto };
 })();

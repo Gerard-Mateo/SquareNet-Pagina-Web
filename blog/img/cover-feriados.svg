@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<style>
+.m{stroke:#fff;stroke-opacity:.92;stroke-width:1.6}
+.s{stroke:#fff;stroke-opacity:.42;stroke-width:1.2}
+.f{stroke:#fff;stroke-opacity:.26;stroke-width:1}
+.a{stroke:#99e0ff;stroke-width:1.8}
+.af{fill:#99e0ff;stroke:none}
+.g{filter:url(#glow)}
+.t{font-family:Georgia,'Source Serif 4',serif;font-weight:600;fill:#fff;stroke:none}
+</style>
+<defs>
+<linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>
+<radialGradient id="r1" cx=".14" cy=".18" r=".46"><stop offset="0" stop-color="#62c5ee" stop-opacity=".28"/><stop offset="1" stop-color="#62c5ee" stop-opacity="0"/></radialGradient>
+<radialGradient id="r2" cx=".86" cy=".82" r=".48"><stop offset="0" stop-color="#ff458e" stop-opacity=".18"/><stop offset="1" stop-color="#ff458e" stop-opacity="0"/></radialGradient>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#99e0ff" stop-opacity=".16"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="fade" cx=".5" cy=".5" r=".6"><stop offset=".25" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+<mask id="mk"><rect width="320" height="200" fill="url(#fade)"/></mask>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r=".9" fill="#fff" fill-opacity=".14"/></pattern>
+<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="320" height="200" fill="url(#bg)"/>
+<rect width="320" height="200" fill="url(#r1)"/>
+<rect width="320" height="200" fill="url(#r2)"/>
+<rect width="320" height="200" fill="url(#dots)" mask="url(#mk)"/>
+<circle cx="160" cy="100" r="96" fill="url(#halo)"/>
+<path class="f" d="M14 36V14h22M284 14h22v22M306 164v22h-22M36 186H14v-22"/>
+<rect class="m" x="86" y="40" width="148" height="122" rx="6" fill="#0a303e" fill-opacity=".72"/>
+<path class="s" d="M86 62h148"/>
+<path class="m" d="M112 32v16M208 32v16"/>
+<text class="t" x="160" y="56" font-size="9" text-anchor="middle">2027</text>
+<g class="s"><rect x="98" y="72" width="16" height="14" rx="2"/><rect x="118" y="72" width="16" height="14" rx="2"/><rect x="138" y="72" width="16" height="14" rx="2"/><rect x="158" y="72" width="16" height="14" rx="2"/><rect x="198" y="72" width="16" height="14" rx="2"/>
+<rect x="98" y="92" width="16" height="14" rx="2"/><rect x="118" y="92" width="16" height="14" rx="2"/><rect x="158" y="92" width="16" height="14" rx="2"/><rect x="178" y="92" width="16" height="14" rx="2"/><rect x="198" y="92" width="16" height="14" rx="2"/>
+<rect x="118" y="112" width="16" height="14" rx="2"/><rect x="138" y="112" width="16" height="14" rx="2"/><rect x="158" y="112" width="16" height="14" rx="2"/><rect x="178" y="112" width="16" height="14" rx="2"/><rect x="198" y="112" width="16" height="14" rx="2"/>
+<rect x="98" y="132" width="16" height="14" rx="2"/><rect x="118" y="132" width="16" height="14" rx="2"/><rect x="138" y="132" width="16" height="14" rx="2"/><rect x="158" y="132" width="16" height="14" rx="2"/></g>
+<rect class="a g" x="178" y="72" width="16" height="14" rx="2" fill="#99e0ff" fill-opacity=".45"/>
+<rect class="a g" x="138" y="92" width="16" height="14" rx="2" fill="#99e0ff" fill-opacity=".45"/>
+<rect class="a g" x="98" y="112" width="16" height="14" rx="2" fill="#99e0ff" fill-opacity=".45"/>
+<rect class="a" x="178" y="132" width="36" height="14" rx="2" fill="#99e0ff" fill-opacity=".18"/>
+</svg>

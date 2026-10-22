@@ -810,6 +810,33 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .cf-money input::placeholder { color: var(--color-neutral-400); font-weight: 400; }
 .calc-lines dt small { display: block; margin-top: 2px; font-size: 11.5px; line-height: 1.4; color: rgba(255,255,255,.5); font-variant-numeric: tabular-nums; }
 .calc-lines div.is-sum dt, .calc-lines div.is-sum dd { color: #fff; font-weight: 600; }
+/* piezas de las calculadoras nuevas: copiar resultado, rubros que no aplican, mes a mes, empleador */
+.calc-copy { align-self: flex-start; display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; font: inherit; font-size: 13px; font-weight: 600; color: #fff; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.28); border-radius: var(--radius-md); cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+.calc-copy svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.calc-copy:hover, .calc-copy:focus-visible { background: rgba(255,255,255,.14); border-color: var(--color-accent-300); }
+.calc-copy.is-done { background: var(--color-accent); border-color: var(--color-accent); }
+.calc-fx:has(code:empty) { display: none; }
+.calc-lines div.is-na dt { color: rgba(255,255,255,.5); }
+.calc-lines .na { font-family: var(--font-body); font-weight: 600; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+.calc-emp { padding-top: var(--space-3); border-top: 1px dashed rgba(255,255,255,.25); }
+.calc-emp .calc-k { display: block; margin-bottom: 8px; }
+.cv-mlist { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
+.cv-mlist span { display: flex; flex-direction: column; gap: 1px; padding: 5px 4px; text-align: center; background: rgba(255,255,255,.07); border-radius: 2px; font-variant-numeric: tabular-nums; }
+.cv-mlist em { font-style: normal; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.55); }
+.cv-mlist b { font-family: var(--font-heading); font-size: 13px; color: #fff; }
+.cv-mlist i { font-style: normal; font-size: 10.5px; color: var(--color-accent-300); }
+.cv-mlist span.is-off { opacity: .4; }
+.cf-grid12 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.cf-mini { gap: 4px; }
+.cf-mini .cf-label { font-family: var(--font-body); font-weight: 600; font-size: 12px; text-transform: capitalize; color: var(--color-neutral-700); }
+.cf-mini .cf-money { height: 40px; padding: 0 10px; }
+.cf-mini .cf-money input { font-size: 15px; }
+.art-pending { margin: 0 0 var(--space-4); padding: var(--space-3) var(--space-4); font-size: 15.5px; line-height: 1.6; background: var(--color-accent-2-100); border-left: 3px solid var(--color-accent-2-500); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+.article > .art-pending { font-size: 16px; }
+@media (max-width: 640px) {
+  .cv-mlist { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cf-grid12 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .cf-check { display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; }
 .cf-check input { width: 18px; height: 18px; accent-color: var(--color-accent); margin: 0; }
 .calc-out [hidden] { display: none !important; }
