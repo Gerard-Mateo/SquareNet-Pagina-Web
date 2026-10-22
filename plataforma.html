@@ -117,53 +117,52 @@
   @keyframes st1{0%,44%{opacity:1}48%,93%{opacity:0}97%,100%{opacity:1}}
   @keyframes st2{0%,44%{opacity:0}50%,93%{opacity:1}97%,100%{opacity:0}}
 
-  /* ventana 2 · fórmulas */
-  .mc-body{display:grid;grid-template-columns:1fr 14.5em;min-height:24.5em}
-  .mc-editor{display:flex;flex-direction:column;border-right:1px solid var(--color-divider)}
-  .mc-top{display:flex;align-items:center;gap:.8em;padding:.8em 1em;border-bottom:1px solid var(--color-divider);font-size:.95em}
-  .mc-top span{color:var(--color-neutral-600);text-transform:uppercase;letter-spacing:.07em;font-size:.85em}
-  .mc-code{flex:1;padding:1.2em .6em 1em 0;font-family:ui-monospace,"SFMono-Regular",Consolas,"Courier New",monospace;font-size:1.04em;line-height:2.1;background:#fbfbfb}
-  .ln{display:flex;align-items:center;white-space:pre}
-  .ln .no{flex:0 0 2.6em;text-align:right;padding-right:1em;color:var(--color-neutral-400);user-select:none}
-  .ln .t{display:inline-block;overflow:hidden;width:0;white-space:pre}
-  .mc-code .fn{color:var(--color-accent-700);font-weight:700}.mc-code .rb{color:var(--color-accent-2-700)}
-  .caret{display:inline-block;flex:none;width:.14em;height:1.15em;margin-left:.1em;background:var(--color-accent);opacity:0}
-  .mc-foot{display:flex;align-items:center;justify-content:space-between;gap:1em;padding:.8em 1em;border-top:1px solid var(--color-divider);background:#fff}
-  .mc-status{position:relative;height:1.4em;flex:1;font-size:.95em}
-  .mc-status span{position:absolute;left:0;top:0;white-space:nowrap}
-  .mc-status .s1{color:var(--color-neutral-500)}
-  .mc-status .s2{color:var(--color-accent-800);font-weight:600;opacity:0}
-  .mc-btn{padding:.4em 1.1em;border-radius:.2em;font-size:.95em;background:var(--color-accent);color:#fff}
-  .mc-side{padding:.8em 1em;background:var(--color-neutral-100)}
+  /* ventana 2 · depurador de fórmulas: el estado base es el final (rastro completo); los keyframes lo esconden antes */
+  .dg-top{display:flex;align-items:center;gap:.8em;padding:.75em 1em;border-bottom:1px solid var(--color-divider);font-size:.95em}
+  .dg-top span{color:var(--color-neutral-600);text-transform:uppercase;letter-spacing:.07em;font-size:.85em}
+  .dg-top span:nth-of-type(2){margin-left:auto}
+  .dg-code{padding:.9em .8em .9em 0;overflow:hidden;background:#fff;color:#1f1f1f;font-family:Consolas,"SFMono-Regular",ui-monospace,"Courier New",monospace;font-size:.7em;line-height:1.7}
+  .ln{display:flex;align-items:center;white-space:pre;min-height:1.7em}
+  .ln .no{flex:0 0 3.4em;text-align:right;padding-right:1.2em;color:#a3a3a3;user-select:none}
+  .ln .tx{display:inline-block;white-space:pre}
+  .dg-code .cm{color:#2e8a2e}
+  .dg-code .kw{color:#1f3fcc;font-weight:700}
+  .dg-code .vl{color:#a326b4}
+  .iv{display:inline-block;vertical-align:top;overflow:hidden;white-space:pre}
+  .dg-foot{display:flex;align-items:center;justify-content:space-between;gap:1em;padding:.75em 1em;border-top:1px solid var(--color-divider);background:var(--color-neutral-100)}
+  .dg-status{position:relative;height:1.4em;flex:1;font-size:.95em}
+  .dg-status span{position:absolute;left:0;top:0;white-space:nowrap}
+  .dg-status .s1,.dg-status .s3{color:var(--color-neutral-500);opacity:0}
+  .dg-status .s2{color:var(--color-accent-800);font-weight:600}
+  .dg-btn{display:inline-flex;align-items:center;gap:.5em;padding:.4em 1.1em;border-radius:.2em;font-size:.95em;background:var(--color-accent);color:#fff}
+  .dg-btn svg{width:.75em;height:.75em;fill:currentColor}
   .mc-h{font-size:.82em;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin:.2em 0 .6em}
-  .mc-r{display:flex;justify-content:space-between;gap:.8em;padding:.45em .6em;border-radius:.2em;font-size:.95em;background:transparent}
-  .mc-r b{font-family:ui-monospace,Consolas,monospace;font-weight:600;color:var(--color-accent-2-700);font-size:.95em}
-  .mc-r span{color:var(--color-neutral-700);font-variant-numeric:tabular-nums}
-  .mc-fns{display:flex;flex-wrap:wrap;gap:.45em;margin-top:.2em}
-  .mc-fns code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;padding:.3em .6em;background:#fff;border:1px solid var(--color-divider);border-radius:.2em;color:var(--color-neutral-800)}
 
-  .is-in .mc-code{animation:codeFade 10s ease infinite}
-  .is-in .t1{animation:type1 10s infinite}.is-in .t2{animation:type2 10s infinite}.is-in .t3{animation:type3 10s infinite}
-  .is-in .c1{animation:caret1 10s infinite,blink 1s steps(1) infinite}
-  .is-in .c2{animation:caret2 10s infinite,blink 1s steps(1) infinite}
-  .is-in .c3{animation:caret3 10s infinite,blink 1s steps(1) infinite}
-  .is-in .mc-btn{animation:btnPress2 10s ease infinite}
-  .is-in .mc-status .s1{animation:st1b 10s ease infinite}.is-in .mc-status .s2{animation:st2b 10s ease infinite}
-  .is-in .mc-r.h1{animation:rbHiA 10s ease infinite}.is-in .mc-r.h2{animation:rbHiB 10s ease infinite}
+  .is-in .dg-code{animation:dgFade 10s ease infinite}
+  .is-in .tr1{animation:dgL1 10s linear infinite}.is-in .tr2{animation:dgL2 10s linear infinite}.is-in .tr3{animation:dgL3 10s linear infinite}.is-in .tr4{animation:dgL4 10s linear infinite}.is-in .tr5{animation:dgL5 10s linear infinite}.is-in .tr6{animation:dgL6 10s linear infinite}.is-in .tr7{animation:dgL7 10s linear infinite}.is-in .tr8{animation:dgL8 10s linear infinite}.is-in .tr9{animation:dgL9 10s linear infinite}.is-in .tr10{animation:dgL10 10s linear infinite}.is-in .tr11{animation:dgL11 10s linear infinite}.is-in .tr12{animation:dgL12 10s linear infinite}
+  .is-in .iv.va{animation:dgIvA 10s ease infinite}.is-in .iv.vb{animation:dgIvB 10s ease infinite}
+  .is-in .dg-btn{animation:dgPress 10s ease infinite}
+  .is-in .dg-status .s1{animation:dgS1 10s ease infinite}.is-in .dg-status .s3{animation:dgS3 10s ease infinite}.is-in .dg-status .s2{animation:dgS2 10s ease infinite}
   .is-in .cur.k2{animation:curC 10s cubic-bezier(.45,0,.2,1) infinite}
-  @keyframes codeFade{0%,92%{opacity:1}94%,95.5%{opacity:0}97.5%,100%{opacity:1}}
-  @keyframes type1{0%,4%{width:0;animation-timing-function:steps(24,end)}13%,94%{width:24ch}95%,100%{width:0}}
-  @keyframes type2{0%,16%{width:0;animation-timing-function:steps(38,end)}34%,94%{width:38ch}95%,100%{width:0}}
-  @keyframes type3{0%,37%{width:0;animation-timing-function:steps(29,end)}50%,94%{width:29ch}95%,100%{width:0}}
-  @keyframes caret1{0%,1%{opacity:1}14%,100%{opacity:0}}
-  @keyframes caret2{0%,14%{opacity:0}15%,35%{opacity:1}36%,100%{opacity:0}}
-  @keyframes caret3{0%,35%{opacity:0}36%,54%{opacity:1}55%,100%{opacity:0}}
-  @keyframes blink{50%{visibility:hidden}}
-  @keyframes btnPress2{0%,58%{transform:scale(1);filter:none}59.5%{transform:scale(.9);filter:brightness(.88)}62%,100%{transform:scale(1);filter:none}}
-  @keyframes st1b{0%,60%{opacity:1}63%,93%{opacity:0}96%,100%{opacity:1}}
-  @keyframes st2b{0%,60%{opacity:0}65%,93%{opacity:1}96%,100%{opacity:0}}
-  @keyframes rbHiA{0%,4%{background:transparent}6%,13%{background:var(--color-accent-200)}16%,100%{background:transparent}}
-  @keyframes rbHiB{0%,16%{background:transparent}19%,34%{background:var(--color-accent-200)}37%,100%{background:transparent}}
+  @keyframes dgFade{0%,92%{opacity:1}94%,96%{opacity:0}98%,100%{opacity:1}}
+  @keyframes dgL1{0%,17%{clip-path:inset(0 100% 0 0)}19.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL2{0%,20%{clip-path:inset(0 100% 0 0)}22.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL3{0%,23%{clip-path:inset(0 100% 0 0)}25.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL4{0%,26%{clip-path:inset(0 100% 0 0)}28.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL5{0%,29%{clip-path:inset(0 100% 0 0)}31.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL6{0%,32%{clip-path:inset(0 100% 0 0)}34.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL7{0%,35%{clip-path:inset(0 100% 0 0)}37.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL8{0%,38%{clip-path:inset(0 100% 0 0)}40.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL9{0%,41%{clip-path:inset(0 100% 0 0)}43.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL10{0%,44%{clip-path:inset(0 100% 0 0)}46.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL11{0%,47%{clip-path:inset(0 100% 0 0)}49.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL12{0%,50%{clip-path:inset(0 100% 0 0)}52.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgIvA{0%,53%{width:0}54.5%,94%{width:var(--w)}95%,100%{width:0}}
+  @keyframes dgIvB{0%,55.5%{width:0}57%,94%{width:var(--w)}95%,100%{width:0}}
+  @keyframes dgPress{0%,12.8%{transform:scale(1);filter:none}13.6%{transform:scale(.9);filter:brightness(.88)}15.5%,100%{transform:scale(1);filter:none}}
+  @keyframes dgS1{0%,14%{opacity:1}15.5%,95%{opacity:0}97%,100%{opacity:1}}
+  @keyframes dgS3{0%,14.5%{opacity:0}16%,55%{opacity:1}57%,100%{opacity:0}}
+  @keyframes dgS2{0%,56%{opacity:0}59%,92%{opacity:1}94%,100%{opacity:0}}
 
   /* ventana 3 · diseñador de reportes */
   .md-tabs{display:flex;gap:.2em;padding:.5em 1em 0;background:var(--color-neutral-100);border-bottom:1px solid var(--color-divider);font-size:.92em}
@@ -245,16 +244,16 @@
     100%{opacity:0;transform:translate(40em,27.5em) scale(1)}
   }
   @keyframes curC{
-    0%{opacity:0;transform:translate(40em,19em) scale(1)}
-    50%{opacity:0;transform:translate(40em,19em) scale(1)}
-    51.5%{opacity:1;transform:translate(40em,19em) scale(1)}
-    57.5%{opacity:1;transform:translate(27.7em,25.4em) scale(1)}
-    58.4%{opacity:1;transform:translate(27.7em,25.4em) scale(1)}
-    58.8%{opacity:1;transform:translate(27.7em,25.4em) scale(0.78)}
-    59.6%{opacity:1;transform:translate(27.7em,25.4em) scale(1)}
-    62%{opacity:1;transform:translate(27.7em,25.4em) scale(1)}
-    68%{opacity:0;transform:translate(31em,27.2em) scale(1)}
-    100%{opacity:0;transform:translate(40em,19em) scale(1)}
+    0%{opacity:0;transform:translate(44em,20em) scale(1)}
+    3%{opacity:0;transform:translate(44em,20em) scale(1)}
+    5%{opacity:1;transform:translate(44em,20em) scale(1)}
+    11.5%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    13%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    13.5%{opacity:1;transform:translate(41.1em,30.1em) scale(0.78)}
+    14.3%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    16%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    22%{opacity:0;transform:translate(43.2em,32.5em) scale(1)}
+    100%{opacity:0;transform:translate(44em,20em) scale(1)}
   }
   @keyframes curD{
     0%{opacity:0;transform:translate(28em,12em) scale(1)}
@@ -364,7 +363,6 @@
   }
   @media (prefers-reduced-motion:reduce){
     .win *,.win *::after,.show-chip,.feat,.req-meter i{animation:none!important;transition:none!important}
-    .win .t{width:auto}.win .mc-status .s1{opacity:0}.win .mc-status .s2{opacity:1}
     .req-meter i{opacity:1;transform:none}
   }
 </style>
@@ -379,7 +377,6 @@
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html" aria-current="page">Plataforma SquareNet</a>
         <a href="modulos.html">Módulos</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="blog/index.html">Blog</a>
         <a href="contacto.html">Contactos</a>
       </div>
@@ -523,29 +520,32 @@
         </ul>
       </div>
       <div class="show-media" data-reveal>
-        <div class="win" role="img" aria-label="Ilustración de un editor de fórmulas: se escribe una expresión y se ejecuta al instante, sin recompilar">
-          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Fórmulas · Bono de ventas</span></div>
-          <div class="mc-body">
-            <div class="mc-editor">
-              <div class="mc-top"><span>Concepto</span><b>Bono de ventas</b></div>
-              <div class="mc-code">
-                <div class="ln"><span class="no">1</span><span class="t t1">aporte = sueldo * <span class="rb">0.0945</span></span><i class="caret c1"></i></div>
-                <div class="ln"><span class="no">2</span><span class="t t2">bono = <span class="fn">si</span>(ventas&gt;meta, ventas*<span class="rb">0.02</span>, <span class="rb">0</span>)</span><i class="caret c2"></i></div>
-                <div class="ln"><span class="no">3</span><span class="t t3">neto = sueldo - aporte + bono</span><i class="caret c3"></i></div>
-              </div>
-              <div class="mc-foot">
-                <div class="mc-status"><span class="s1">Escribe una fórmula…</span><span class="s2">✓ neto = 1.327,88 · sin recompilar</span></div>
-                <span class="mc-btn">Probar</span>
-              </div>
-            </div>
-            <aside class="mc-side">
-              <div class="mc-h">Variables</div>
-              <div class="mc-r h1"><b>sueldo</b><span>1.250,00</span></div>
-              <div class="mc-r h2"><b>ventas</b><span>9.800,00</span></div>
-              <div class="mc-r h2"><b>meta</b><span>8.000,00</span></div>
-              <div class="mc-h" style="margin-top:1.3em">Funciones</div>
-              <div class="mc-fns"><code>si()</code><code>suma()</code><code>redondear()</code><code>fecha()</code></div>
-            </aside>
+        <div class="win" role="img" aria-label="Ilustración del depurador de fórmulas: al ejecutar la fórmula del impuesto a la renta, el sistema escribe paso a paso de dónde sale cada valor hasta llegar al impuesto del mes">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Fórmulas · Impuesto a la renta</span></div>
+          <div class="dg-top"><span>Concepto</span><b>Impuesto a la renta</b><span>Rol</span><b>Octubre 2026</b></div>
+          <div class="dg-code">
+                <div class="ln"><span class="no">1</span><span class="tx cm tr1">// Impuesto a la Renta</span></div>
+                <div class="ln"><span class="no">2</span><span class="tx cm tr2">//    + Sueldo: anterior: 31500.00 + este mes: 3500.00 + pronóstico: 3500.00 * 2 meses = 42000.00</span></div>
+                <div class="ln"><span class="no">3</span><span class="tx cm tr3">//    + SobreSueldo: anterior: 1240.50 + este mes: 185.00 + pronóstico pers.: 0.00 * 2 meses = 1425.50</span></div>
+                <div class="ln"><span class="no">4</span><span class="tx cm tr4">//    + Ingreso No aportable: anterior: 0.00 + este mes: 0 + pronóstico: 0 * 2 meses = 0.00</span></div>
+                <div class="ln"><span class="no">5</span><span class="tx cm tr5">//    + Utilidades: 612.40</span></div>
+                <div class="ln"><span class="no">6</span><span class="tx cm tr6">//    - Aporte Personal: anterior: 3093.98 + este mes: 348.23 + pronóstico: 330.75 * 2 meses = 4103.71</span></div>
+                <div class="ln"><span class="no">7</span><span class="tx cm tr7">//  = BASE IMPONIBLE NETA: 39934.19</span></div>
+                <div class="ln"><span class="no">8</span><span class="tx cm tr8">//    Cálculo Impuesto Anual: 3637.64</span></div>
+                <div class="ln"><span class="no">9</span><span class="tx cm tr9">//    - Gastos Personales 9200.00 (limitado a 7396.20, 1 carga, 9 cb) * 18% = 1331.32</span></div>
+                <div class="ln"><span class="no">10</span><span class="tx cm tr10">//    - Retenido meses anteriores: 1702.35</span></div>
+                <div class="ln"><span class="no">11</span><span class="tx cm tr11">//    = Impuesto Faltante: 603.97 / 3 meses</span></div>
+                <div class="ln"><span class="no">12</span><span class="tx cm tr12">//  IMPUESTO A LA RENTA DEL MES: 201.32</span></div>
+                <div class="ln"><span class="no">13</span></div>
+                <div class="ln"><span class="no">14</span><span class="tx"><b class="kw">if</b>( FECHA_ROL_INICIAL( )<span class="iv va" style="--w:11ch"> <span class="vl">01/10/2026</span></span>.Month == 1 )<span class="iv vb" style="--w:9ch"> <span class="cm">// Falso</span></span></span></div>
+                <div class="ln"><span class="no">15</span><span class="tx">{</span></div>
+                <div class="ln"><span class="no">16</span><span class="tx">}</span></div>
+                <div class="ln"><span class="no">17</span></div>
+                <div class="ln"><span class="no">18</span><span class="tx"><b class="kw">return</b> IMPUESTO_RENTA()<span class="iv va" style="--w:7ch"> <span class="vl">201.32</span></span>;<span class="iv vb" style="--w:19ch"> <span class="cm">// 201.32 = 201.32</span></span></span></div>
+          </div>
+          <div class="dg-foot">
+            <div class="dg-status"><span class="s1">Listo para depurar</span><span class="s3">Depurando…</span><span class="s2">✓ Impuesto a la renta del mes: 201,32</span></div>
+            <span class="dg-btn"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1.2v7.6L8.6 5Z"/></svg>Depurar</span>
           </div>
           <svg class="cur k2" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
         </div>
@@ -621,10 +621,10 @@
           <div class="feat-chips"><small>Permisos por</small><span class="tag tag-accent">Empresa</span><span class="tag tag-accent">Sucursal</span><span class="tag tag-accent">Pantalla</span><span class="tag tag-accent">Proceso</span><span class="tag tag-accent">Reporte</span><span class="tag tag-accent">Tabla</span><span class="tag tag-accent">Campo</span></div>
         </article>
         <article class="feat" data-reveal>
-          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="M9.5 15.5h5M12.5 13l2.5 2.5-2.5 2.5"/></svg></div>
-          <h3>Reportes que viajan</h3>
-          <p>Exporta todos los reportes y envíalos por mail directo, usando tu perfil de Outlook.</p>
-          <div class="feat-chips"><small>Exporta a</small><span class="tag tag-accent">Excel</span><span class="tag tag-accent">Word</span><span class="tag tag-accent">HTML</span><span class="tag tag-accent">PDF</span><span class="tag tag-accent">Texto</span></div>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11"/><path d="M10 10V4.5a1.5 1.5 0 0 1 3 0V10"/><path d="M13 10V5.5a1.5 1.5 0 0 1 3 0V13"/><path d="M7 11v1.5c0 4 2 7.5 6 7.5s5-3 5-6.5V12"/></svg></div>
+          <h3>Integración directa con lectores biométricos</h3>
+          <p>Las marcaciones viajan solas del reloj al sistema: nadie descarga archivos ni pasa datos a mano.</p>
+          <div class="feat-chips"><small>Lectores</small><span class="tag tag-accent">ZK Teco</span><span class="tag tag-accent">HandPunch</span></div>
         </article>
         <article class="feat" data-reveal>
           <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 8h8M8 12h8"/><path d="M8 17c1.2-2 2.2-2 3 0s1.8 1.4 2.6-.4"/></svg></div>
@@ -706,7 +706,6 @@
         <a href="index.html">Home</a>
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="contacto.html">Contactos</a>
       </div>
       <div class="footer-col">

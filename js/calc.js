@@ -14,6 +14,14 @@
     tabla: [[0, 0, 0], [12208, 0, .05], [15549, 167, .10], [20188, 631, .12], [26700, 1412, .15],
             [35136, 2678, .20], [46575, 4965, .25], [62005, 8823, .30], [82679, 15025, .35], [109956, 24572, .37]]
   };
+  // Años que calcula la de renta: el vigente y el nuevo, para comparar (pedido del cliente: no más años viejos).
+  // Hoy solo 2026. Cuando el SRI publique la tabla 2027 (fines de diciembre), agregarla aquí con la canasta de enero 2027.
+  P.renta = {
+    2026: { cfb: P.cfb, tabla: P.tabla }
+  };
+  // Enfermedad catastrófica, rara o huérfana (del contribuyente o de una carga, certificada): el tope de gastos
+  // personales sube a 100 canastas, sin importar el número de cargas. La rebaja sigue siendo el 18 %.
+  P.catastrofica = 100;
 
   var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   var MES3 = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -27,7 +35,7 @@
     s[0] = s[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return (neg ? '−' : '') + s.join(',');
   }
-  function pct(r) { return (r * 100).toFixed(2).replace('.', ',').replace(/,00$/, '') + ' %'; }
+  function pct(r) { return (r * 100).toFixed(2).replace('.', ',').replace(/,00$/, '') + ' %'; }
   function fdate(d) { return d.getDate() + ' de ' + MESES[d.getMonth()] + ' de ' + d.getFullYear(); }
   function lines(rows) {
     return rows.map(function (r) {
@@ -57,13 +65,15 @@
   }
 
   // ---------- impuesto a la renta ----------
-  function tramo(base) {
-    var t = P.tabla, i = t.length - 1;
+  function tramo(base, t) {
+    t = t || P.tabla;
+    var i = t.length - 1;
     while (i > 0 && base <= t[i][0]) i--;
     return i;
   }
-  function irCausado(base) {
-    var i = tramo(base), r = P.tabla[i];
+  function irCausado(base, t) {
+    t = t || P.tabla;
+    var r = t[tramo(base, t)];
     return Math.max(0, r[1] + (base - r[0]) * r[2]);
   }
 
@@ -94,6 +104,12 @@
     if (min != null) v = Math.max(min, v);
     if (max != null) v = Math.min(max, v);
     return v;
+  }
+  function opt(root, name) {
+    var el = q(root, '[name="' + name + '"]:not([type="range"])');
+    if (!el || String(el.value).trim() === '') return null;
+    var v = parseFloat(String(el.value).replace(',', '.'));
+    return isFinite(v) ? Math.max(0, v) : null;
   }
   function radio(root, name) { var el = q(root, '[name="' + name + '"]:checked'); return el ? el.value : null; }
   function out(root, key, html) { var el = q(root, '[data-o="' + key + '"]'); if (el) el.innerHTML = html; return el; }
@@ -260,41 +276,90 @@
       return neto;
     },
 
+    // Igual que el depurador de SquareNet: lo cobrado en los meses anteriores + este mes + el pronóstico de los que faltan,
+    // aporte IESS por cada tramo, impuesto del año, rebaja, lo ya retenido y lo que falta ÷ los meses que quedan.
+    // Todo lo de «Afinar el cálculo» es opcional: vacío = se calcula con el sueldo actual.
     renta: function (root) {
-      var sueldo = num(root, 'sueldo', 0), otros = num(root, 'otros', 0), gastos = num(root, 'gastos', 0);
+      var yr = +root.getAttribute('data-year') || P.year, Y = P.renta[yr] || P.renta[P.year], T = Y.tabla;
+      var S = num(root, 'sueldo', 0), E = num(root, 'extras', 0), gastos = num(root, 'gastos', 0);
+      // sin campo de mes: se usa el mes actual (o diciembre si la tabla no es del año en curso)
+      var m = yr === today.getFullYear() ? today.getMonth() + 1 : 12, ant = m - 1, pron = 12 - m, quedan = pron + 1;
+      var cob = ant ? opt(root, 'cobrado') : null, ret = ant ? opt(root, 'retenido') : null;
+      var noap = num(root, 'noaport', 0), util = num(root, 'utilidades', 0);
       var cargas = Math.min(5, parseInt(radio(root, 'cargas') || '0', 10));
-      var ingresos = sueldo * 12 + otros, aporte = ingresos * P.iess, base = Math.max(0, ingresos - aporte);
-      var i = tramo(base), r = P.tabla[i], causado = irCausado(base);
-      var tope = P.canastas[cargas] * P.cfb, rebaja = Math.min(Math.min(gastos, tope) * P.rebaja, causado);
-      var pagar = Math.max(0, causado - rebaja);
-      out(root, 'k', 'Impuesto a la renta ' + P.year);
-      setBig(q(root, '[data-o="big"]'), pagar);
-      out(root, 'sub', pagar > 0
-        ? '≈ <b>$ ' + money(pagar / 12) + '</b> retenidos cada mes · tasa efectiva <b>' + pct(ingresos ? pagar / ingresos : 0) + '</b> de tus ingresos.'
-        : (i === 0 ? 'Tu base imponible no supera la fracción exenta de USD ' + money(P.tabla[1][0], 0) + ': <b>no pagas impuesto a la renta</b>.'
+      var cat = !!(q(root, '[name="cat"]') || {}).checked, canastas = cat ? P.catastrofica : P.canastas[cargas];
+      var mesN = MESES[m - 1], antN = ant ? (ant === 1 ? 'enero' : 'enero a ' + MESES[m - 2]) : '';
+      var antAport = cob == null ? (S + E) * ant : cob, mesAport = S + E;
+      var ingresos = antAport + mesAport * quedan + noap + util;
+      var apAnt = antAport * P.iess, apMes = mesAport * P.iess, aporte = apAnt + apMes * quedan;
+      var base = Math.max(0, ingresos - aporte);
+      var i = tramo(base, T), r = T[i], causado = irCausado(base, T);
+      var tope = canastas * Y.cfb, rebaja = Math.min(Math.min(gastos, tope) * P.rebaja, causado);
+      var anual = Math.max(0, causado - rebaja);
+      var retV = ret == null ? anual * ant / 12 : ret, falta = anual - retV, mesRet = Math.max(0, falta / quedan);
+
+      out(root, 'k', 'Te descuentan en ' + mesN);
+      setBig(q(root, '[data-o="big"]'), mesRet);
+      out(root, 'sub', anual > 0
+        ? 'Impuesto del año: <b>$ ' + money(anual) + '</b> · tasa efectiva <b>' + pct(ingresos ? anual / ingresos : 0) + '</b> de tus ingresos (tabla ' + yr + ').'
+        : (i === 0 ? 'Tu base imponible no supera la fracción exenta de USD ' + money(T[1][0], 0) + ': <b>no pagas impuesto a la renta</b>.'
                    : 'La rebaja por gastos personales cubre todo el impuesto causado: <b>no pagas impuesto a la renta</b>.'));
       var bars = '', labels = '';
-      P.tabla.forEach(function (t, j) {
+      T.forEach(function (t, j) {
         var h = 14 + t[2] / 0.37 * 86;
         bars += '<span class="' + (j === i ? 'is-on' : (j < i ? 'is-past' : '')) + '" style="height:' + h.toFixed(0) + '%"></span>';
         labels += '<span class="' + (j === i ? 'is-on' : '') + '">' + Math.round(t[2] * 100) + '%</span>';
       });
-      out(root, 'viz', '<div class="cv-label"><span>Tabla del SRI ' + P.year + '</span><span>' +
+      out(root, 'viz', '<div class="cv-label"><span>Tabla del SRI ' + yr + '</span><span>' +
         (i === 0 ? 'Fracción exenta' : 'Tu tramo: ' + pct(r[2]) + ' sobre lo que pasa de ' + money(r[0], 0)) + '</span></div>' +
         '<div class="cv-brackets">' + bars + '</div><div class="cv-blabels">' + labels + '</div>');
-      out(root, 'lines', lines([
-        ['Ingresos gravados del año', '$ ' + money(ingresos)],
-        ['− Aporte personal IESS (' + pct(P.iess) + ')', '$ ' + money(aporte)],
-        ['= Base imponible', '$ ' + money(base)],
-        ['Impuesto causado', '$ ' + money(causado)],
-        ['− Rebaja por gastos personales (18 % de ' + money(Math.min(gastos, tope)) + ')', '$ ' + money(rebaja)],
-        ['= Impuesto a pagar', '$ ' + money(pagar), 'is-total']]));
-      out(root, 'fx', i === 0 ? money(base) + ' ≤ ' + money(P.tabla[1][0]) + ' → 0,00'
+      var next = T[i + 1];
+      syncIrTable(root, yr, i, next ? (base - r[0]) / (next[0] - r[0]) : 1,
+        'Tu base imponible: <b>USD ' + money(base) + '</b> · ' + (i === 0 ? 'fracción exenta, no pagas impuesto.' : 'tramo del ' + pct(r[2]) + ', desde USD ' + money(r[0], 0) + '.'), cat ? P.canastas.length : cargas);
+
+      // «anterior + este mes + pronóstico × n meses», sin los tramos que no aplican (enero no tiene anterior; diciembre, pronóstico)
+      function trio(a, x) {
+        var p = [];
+        if (a != null) p.push('anterior ' + money(a));
+        p.push('este mes ' + money(x));
+        if (pron) p.push('pronóstico ' + money(x) + ' × ' + pron + (pron === 1 ? ' mes' : ' meses'));
+        return '<small>' + p.join(' + ') + '</small>';
+      }
+      var rows = [];
+      if (cob != null) rows.push(['+ Ya cobrado, ' + antN + '<small>sueldo y extras de los meses anteriores</small>', '$ ' + money(cob)]);
+      rows.push(['+ Sueldo' + trio(cob == null && ant ? S * ant : null, S), '$ ' + money(S * (cob == null ? 12 : quedan))]);
+      if (E) rows.push(['+ Horas extra, comisiones y bonos' + trio(cob == null && ant ? E * ant : null, E), '$ ' + money(E * (cob == null ? 12 : quedan))]);
+      if (noap) rows.push(['+ Ingresos no aportables', '$ ' + money(noap)]);
+      if (util) rows.push(['+ Utilidades', '$ ' + money(util)]);
+      rows.push(['− Aporte personal IESS (' + pct(P.iess) + ')' + trio(ant ? apAnt : null, apMes), '$ ' + money(aporte)]);
+      rows.push(['= Base imponible neta', '$ ' + money(base), 'is-sum']);
+      rows.push(['Impuesto del año según la tabla', '$ ' + money(causado)]);
+      rows.push(['− Gastos personales<small>' + money(gastos) + (gastos > tope ? ' (limitado a ' : ' (tope ') + money(tope) + ', ' +
+        (cat ? 'enfermedad catastrófica, ' : cargas + (cargas === 5 ? ' o más cargas, ' : (cargas === 1 ? ' carga, ' : ' cargas, '))) + canastas + ' canastas) × 18' + ' %</small>', '$ ' + money(rebaja)]);
+      rows.push(['= Impuesto a pagar en el año', '$ ' + money(anual), 'is-sum']);
+      if (ant) rows.push(['− Ya retenido, ' + antN + (ret == null ? '<small>estimado con tu sueldo actual</small>' : ''), '$ ' + money(retV)]);
+      rows.push(['= Falta por retener<small>' + money(Math.max(0, falta)) + ' ÷ ' + quedan + (quedan === 1 ? ' mes' : ' meses') + '</small>', '$ ' + money(Math.max(0, falta))]);
+      rows.push(['Retención de ' + mesN, '$ ' + money(mesRet), 'is-total']);
+      // Menos ruido: arriba solo lo esencial; el paso a paso completo queda plegado.
+      var more = q(root, '[data-o="more"]');
+      if (more) {
+        out(root, 'lines', lines([
+          ['Base imponible', '$ ' + money(base)],
+          ['Impuesto según la tabla', '$ ' + money(causado)],
+          ['− Rebaja por gastos personales', '$ ' + money(rebaja)],
+          ['Impuesto del año', '$ ' + money(anual), 'is-sum'],
+          ['Retención de ' + mesN, '$ ' + money(mesRet), 'is-total']]));
+        var open = more.querySelector('details') && more.querySelector('details').open;
+        more.innerHTML = '<details class="calc-more"' + (open ? ' open' : '') + '><summary>Ver el cálculo paso a paso</summary><dl class="calc-lines">' + lines(rows) + '</dl></details>';
+      } else out(root, 'lines', lines(rows));
+      out(root, 'fx', i === 0 ? money(base) + ' ≤ ' + money(T[1][0]) + ' → 0,00'
         : money(r[1]) + ' + ' + pct(r[2]) + ' × (' + money(base) + ' − ' + money(r[0]) + ') = ' + money(causado));
-      out(root, 'tip', 'Tope de gastos personales con ' + cargas + (cargas === 5 ? ' o más' : '') + (cargas === 1 ? ' carga' : ' cargas') + ': ' +
-        P.canastas[cargas] + ' canastas básicas = USD ' + money(tope) + '.');
+      var warn = falta < -0.005 ? 'Ya te retuvieron $ ' + money(-falta) + ' más de lo que te toca en el año: no deberían retenerte nada más.' : '';
+      out(root, 'warn', warn); show(root, 'warn', !!warn);
+      out(root, 'tip', 'Tope de gastos personales ' + (cat ? 'por enfermedad catastrófica, rara o huérfana' : 'con ' + cargas + (cargas === 5 ? ' o más' : '') + (cargas === 1 ? ' carga' : ' cargas')) + ': ' +
+        canastas + ' canastas básicas de enero de ' + yr + ' (USD ' + money(Y.cfb) + ') = USD ' + money(tope) + '.');
       show(root, 'tip', true);
-      return pagar;
+      return anual;
     }
   };
 
@@ -369,6 +434,161 @@
     });
   }
 
+  // ---------- tabla del SRI junto a la calculadora de renta (.ir-card) ----------
+  // Pestañas por año (.ir-tab), un panel por año (.ir-panel) con su tabla, la franja que marca
+  // el tramo (.ir-hl, se desliza a la fila) y los botones Copiar / Excel (.ir-act).
+  function syncIrTable(root, yr, i, pos, live, cargas) {
+    var card = q(root, '.ir-card');
+    if (card) {
+      var show = card.getAttribute('data-show'), panel = q(card, '.ir-panel[data-year="' + show + '"]');
+      var rows = panel ? panel.querySelectorAll('tbody tr') : [], on = String(yr) === show && rows.length > i;
+      Array.prototype.forEach.call(card.querySelectorAll('tbody tr.is-on'), function (tr) { tr.classList.remove('is-on'); });
+      if (on) rows[i].classList.add('is-on');
+      card._hl = on ? { row: rows[i], pos: Math.max(0, Math.min(1, pos)) } : null;
+      placeHl(card);
+      var lv = q(card, '.ir-live');
+      if (lv) lv.innerHTML = on ? live : (panel && panel.hasAttribute('data-soon') ? ''
+        : 'Tabla de consulta: la calculadora usa las tablas de ' + Object.keys(P.renta).join(', ').replace(/, (\d+)$/, ' y $1') + '.');
+    }
+    // la fila de tus cargas en la tabla de topes de gastos personales
+    Array.prototype.forEach.call(document.querySelectorAll('[data-topes] tbody tr'), function (tr, j) { tr.classList.toggle('is-on', j === cargas); });
+  }
+  function placeHl(card, instant) {
+    var hl = q(card, '.ir-hl'), s = card._hl;
+    if (!hl) return;
+    if (!s || !s.row.offsetParent) { hl.classList.remove('is-on'); return; }
+    var first = instant || !hl.classList.contains('is-on');
+    if (first) hl.classList.add('no-anim');
+    var wr = hl.parentNode.getBoundingClientRect(), rr = s.row.getBoundingClientRect();
+    hl.style.transform = 'translateY(' + (rr.top - wr.top).toFixed(1) + 'px)';
+    hl.style.height = rr.height.toFixed(1) + 'px';
+    hl.style.setProperty('--pos', (s.pos * 100).toFixed(1) + '%');
+    hl.classList.add('is-on');
+    if (first) { void hl.offsetHeight; requestAnimationFrame(function () { hl.classList.remove('no-anim'); }); }
+  }
+  function tableRows(panel) {
+    return Array.prototype.map.call(panel.querySelectorAll('thead tr, tbody tr'), function (tr) {
+      return Array.prototype.map.call(tr.children, function (c) { return { t: c.textContent.trim(), v: c.getAttribute('data-v') }; });
+    });
+  }
+  var PAGE_URL = 'https://www.squarenet.com.ec/blog/impuesto-renta-relacion-dependencia-ecuador.html';
+  function copyTable(panel) {
+    var rows = tableRows(panel), src = (q(panel, '.ir-src') || {}).textContent || '';
+    // «5 %» con espacio duro no lo reconoce Excel como porcentaje: se copia «5%»
+    var tsv = rows.map(function (r) { return r.map(function (c) { return c.t.replace(/\s%$/, '%'); }).join('\t'); }).join('\n') + '\n\nFuente: ' + src.trim() + '\nTabla y calculadora: ' + PAGE_URL;
+    var html = '<table>' + rows.map(function (r, k) {
+      return '<tr>' + r.map(function (c) { var tg = k ? 'td' : 'th'; return '<' + tg + '>' + c.t + '</' + tg + '>'; }).join('') + '</tr>';
+    }).join('') + '</table><p>Fuente: ' + src.trim() + '</p><p>Tabla y calculadora: <a href="' + PAGE_URL + '">' + PAGE_URL + '</a></p>';
+    var cb = navigator.clipboard;
+    if (cb && window.isSecureContext) {
+      if (window.ClipboardItem) {
+        return cb.write([new ClipboardItem({ 'text/plain': new Blob([tsv], { type: 'text/plain' }), 'text/html': new Blob([html], { type: 'text/html' }) })])
+          .catch(function () { return cb.writeText(tsv); });
+      }
+      return cb.writeText(tsv);
+    }
+    var ta = document.createElement('textarea'), ok = false;
+    ta.value = tsv; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok ? Promise.resolve() : Promise.reject();
+  }
+  // Excel: .xlsx de verdad (celdas numéricas con formato) con SheetJS, que se carga recién al pulsar.
+  // Si la librería no carga, se baja un CSV.
+  var XLSX_URL = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+  function exportTable(panel, yr) {
+    var rows = tableRows(panel), src = ((q(panel, '.ir-src') || {}).textContent || '').trim(), dec = panel.hasAttribute('data-dec');
+    var name = 'tabla-impuesto-renta-' + yr + '-sri', title = 'Tabla del impuesto a la renta ' + yr + ' · personas naturales (USD)';
+    var body = rows.slice(1).map(function (r) { return r.map(function (c) { return c.v ? +c.v : c.t; }); });
+    function save(blob, file) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = file;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    }
+    function xlsx() {
+      var X = window.XLSX, aoa = [[title], [], rows[0].map(function (c) { return c.t; })].concat(body, [[], ['Fuente: ' + src], ['Tabla y calculadora: ' + PAGE_URL]]);
+      var ws = X.utils.aoa_to_sheet(aoa);
+      body.forEach(function (r, k) {
+        r.forEach(function (v, c) {
+          var cell = ws[X.utils.encode_cell({ r: k + 3, c: c })];
+          if (cell && cell.t === 'n') cell.z = c === r.length - 1 ? '0%' : (dec ? '#,##0.00' : '#,##0');
+        });
+      });
+      ws['!cols'] = [{ wch: 16 }, { wch: 16 }, { wch: 24 }, { wch: 22 }];
+      ws['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 3 } }];
+      var wb = X.utils.book_new();
+      X.utils.book_append_sheet(wb, ws, 'IR ' + yr);
+      X.writeFile(wb, name + '.xlsx');
+    }
+    function csv() {
+      var lines = [[title], rows[0].map(function (c) { return c.t; })].concat(body, [[], ['Fuente: ' + src], ['Tabla y calculadora: ' + PAGE_URL]]);
+      save(new Blob(['﻿' + lines.map(function (r) {
+        return r.map(function (v) { return typeof v === 'number' ? String(v) : '"' + String(v).replace(/"/g, '""') + '"'; }).join(';');
+      }).join('\r\n')], { type: 'text/csv;charset=utf-8' }), name + '.csv');
+    }
+    if (window.XLSX) { xlsx(); return; }
+    var s = document.createElement('script');
+    s.src = XLSX_URL; s.async = true;
+    s.onload = function () { if (window.XLSX) xlsx(); else csv(); };
+    s.onerror = csv;
+    document.head.appendChild(s);
+  }
+  function flash(btn, txt) {
+    var lab = q(btn, 'span'), old = btn._lab || (btn._lab = lab.textContent);
+    lab.textContent = txt; btn.classList.add('is-done');
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function () { lab.textContent = old; btn.classList.remove('is-done'); }, 1800);
+  }
+  function bindIrCard(root, run) {
+    var card = q(root, '.ir-card');
+    if (!card) return;
+    var tabs = card.querySelectorAll('.ir-tab');
+    function select(y, focus) {
+      card.setAttribute('data-show', y);
+      Array.prototype.forEach.call(tabs, function (t) {
+        var on = t.getAttribute('data-year') === y;
+        t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+        if (on && focus) t.focus({ preventScroll: true });
+        // en celular la tira de años se desplaza: que la pestaña elegida quede a la vista
+        var bar = t.parentNode;
+        if (on && (t.offsetLeft < bar.scrollLeft || t.offsetLeft + t.offsetWidth > bar.scrollLeft + bar.clientWidth)) {
+          bar.scrollLeft = t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2;
+        }
+      });
+      Array.prototype.forEach.call(card.querySelectorAll('.ir-panel'), function (p) { p.hidden = p.getAttribute('data-year') !== y; });
+      var soon = !!q(card, '.ir-panel[data-year="' + y + '"][data-soon]');
+      Array.prototype.forEach.call(card.querySelectorAll('.ir-act'), function (b) { b.disabled = soon; });
+      if (P.renta[y]) root.setAttribute('data-year', y);
+      run();
+    }
+    Array.prototype.forEach.call(tabs, function (t) {
+      t.addEventListener('click', function () { select(t.getAttribute('data-year')); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var list = Array.prototype.slice.call(tabs), k = list.indexOf(t) + (e.key === 'ArrowRight' ? 1 : -1);
+        select(list[(k + list.length) % list.length].getAttribute('data-year'), true);
+      });
+    });
+    card.addEventListener('click', function (e) {
+      var b = e.target.closest('.ir-act');
+      if (!b || b.disabled) return;
+      var y = card.getAttribute('data-show'), panel = q(card, '.ir-panel[data-year="' + y + '"]');
+      if (b.getAttribute('data-act') === 'copy') {
+        copyTable(panel).then(function () { flash(b, 'Copiada'); }, function () { flash(b, 'No se pudo copiar'); });
+      } else {
+        exportTable(panel, y); flash(b, 'Descargando');
+      }
+    });
+    var raf = 0;
+    window.addEventListener('resize', function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () { placeHl(card, true); });
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeHl(card, true); });
+  }
+
   function init(root) {
     var fn = CALCS[root.getAttribute('data-calc')];
     if (!fn) return;
@@ -380,6 +600,12 @@
     }
     bindRanges(root);
     bindDates(root);
+    bindIrCard(root, run);
+    // GA4 (solo si el visitante aceptó cookies y hay gtag): inicio de cálculo y clic al software
+    var started = false;
+    function track(ev) { if (window.gtag) window.gtag('event', ev, { calculadora: root.getAttribute('data-calc') }); }
+    root.addEventListener('input', function () { if (!started) { started = true; track('calc_inicio'); } });
+    root.addEventListener('click', function (e) { if (e.target.closest('.calc-go')) track('calc_clic_software'); });
     root.addEventListener('input', run);
     root.addEventListener('change', run);
     root.addEventListener('submit', function (e) { e.preventDefault(); });

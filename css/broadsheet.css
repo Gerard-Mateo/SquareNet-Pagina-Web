@@ -5,6 +5,7 @@
    and no page here uses them). Extend this file, don't fork it, as more
    pages move to this system. */
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 :root {
   --color-bg: #f3f2f2;
@@ -157,6 +158,7 @@ figcaption {
 .nav-brand img { height: 57px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: var(--space-4); }
 .nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav-links a { font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; font-weight: 400; letter-spacing: .05em; font-size: 21px; }
 .nav-links a:hover, .nav-links a[aria-current='page'] { color: var(--color-accent); }
 .nav-toggle {
   display: none; background: none; border: 1px solid var(--color-divider);
@@ -209,6 +211,11 @@ figcaption {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
 }
+
+/* — espacio para anuncios de Google AdSense: js/consent.js lo llena solo si hay ID y el visitante aceptó — */
+.ad-slot { margin: var(--space-6) 0; padding: var(--space-2) 0 var(--space-3); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); text-align: center; }
+.ad-slot::before { content: "Publicidad"; display: block; margin-bottom: var(--space-2); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-neutral-500); }
+.ad-slot[hidden], .ad-slot:has(ins[data-ad-status="unfilled"]) { display: none; }
 
 /* — tables — */
 .table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -787,6 +794,22 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .calc-tip { margin: 0; font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,.62); }
 .calc-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .cf legend { float: none; margin-bottom: 9px; }
+/* campos opcionales, selector y sección desplegable «Afinar el cálculo» */
+.cf-opt { margin-left: 6px; padding: 2px 7px; font-family: var(--font-body); font-weight: 600; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; vertical-align: 2px; color: var(--color-accent-700); background: var(--color-accent-100); border-radius: var(--radius-sm); }
+.cf-select { position: relative; }
+.cf-select select { width: 100%; height: 48px; padding: 0 40px 0 14px; font: inherit; font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-text); background: #fff; border: 1px solid var(--color-divider); border-radius: var(--radius-md); -webkit-appearance: none; appearance: none; cursor: pointer; }
+.cf-select select:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.cf-select::after { content: ""; position: absolute; right: 16px; top: 50%; width: 8px; height: 8px; margin-top: -6px; border: solid var(--color-accent-700); border-width: 0 2px 2px 0; transform: rotate(45deg); pointer-events: none; }
+.cf-more { border-top: 1px solid var(--color-divider); padding-top: var(--space-3); }
+.cf-more summary { display: flex; align-items: center; gap: 4px; font-family: var(--font-heading); font-weight: 600; font-size: 15.5px; color: var(--color-accent-800); cursor: pointer; list-style: none; }
+.cf-more summary::-webkit-details-marker { display: none; }
+.cf-more summary::before { content: ""; width: 7px; height: 7px; margin: 0 8px 0 2px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(-45deg); transition: transform .2s ease; }
+.cf-more[open] summary::before { transform: rotate(45deg); }
+.cf-more summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.cf-more-body { display: flex; flex-direction: column; gap: 22px; margin-top: var(--space-3); }
+.cf-money input::placeholder { color: var(--color-neutral-400); font-weight: 400; }
+.calc-lines dt small { display: block; margin-top: 2px; font-size: 11.5px; line-height: 1.4; color: rgba(255,255,255,.5); font-variant-numeric: tabular-nums; }
+.calc-lines div.is-sum dt, .calc-lines div.is-sum dd { color: #fff; font-weight: 600; }
 .cf-check { display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; }
 .cf-check input { width: 18px; height: 18px; accent-color: var(--color-accent); margin: 0; }
 .calc-out [hidden] { display: none !important; }
@@ -794,7 +817,7 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .calc-note { max-width: 700px; margin: var(--space-3) auto 0; font-size: 12.5px; line-height: 1.55; color: var(--color-neutral-600); }
 
 /* gráficos del resultado */
-.cv-label { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.62); margin-bottom: 7px; }
+.cv-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; font-size: 12px; color: rgba(255,255,255,.62); margin-bottom: 7px; }
 .cv-months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
 .cv-months span { height: 26px; border-radius: 2px; background: rgba(255,255,255,.1); position: relative; overflow: hidden; }
 .cv-months span b { position: absolute; inset: 0; width: 0; background: var(--color-accent-300); box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent-300) 40%, transparent); transition: width .5s cubic-bezier(.2,.8,.3,1); }

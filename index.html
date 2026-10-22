@@ -219,8 +219,10 @@
   .showcase-copy{max-width:980px;margin:calc(var(--space-8) + var(--space-4)) auto 0;text-align:center}
   .showcase-copy h2{font-size:clamp(30px,4.4vw,52px);line-height:1.08;margin:0}
   .showcase-copy h2 .num{color:var(--color-accent-700);font-variant-numeric:tabular-nums}
-  .screens{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--space-4) var(--space-2)}
+  .screens{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6) var(--space-4)}
   .screens li{display:flex;flex-direction:column;align-items:center;gap:var(--space-2);font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;line-height:1.25}
+  .screens strong{font-weight:var(--font-heading-weight)}
+  .screens .desc{font-family:var(--font-body);font-weight:400;font-size:14px;line-height:1.4;opacity:.75;max-width:24ch}
   .screens .ico{display:grid;place-items:center;width:54px;height:54px;border-radius:var(--radius-md);background:var(--color-accent-100);color:var(--color-accent-700);
     transition:background .25s ease,transform .3s cubic-bezier(.2,.8,.3,1.4)}
   .screens li:hover .ico{background:var(--color-accent-200);transform:translateY(-3px)}
@@ -232,7 +234,7 @@
   @media (max-width:860px){
     .showcase{padding-bottom:var(--space-6)}
     .showcase-copy{margin-top:var(--space-8)}
-    .screens{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .screens{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
   /* en celular no va el laptop: el video del sistema es ilegible a ese tamaño. Queda el título + íconos. */
   @media (max-width:700px){
@@ -240,7 +242,7 @@
     .showcase-copy{margin-top:0}
   }
   @media (max-width:520px){
-    .screens{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .screens{grid-template-columns:minmax(0,1fr)}
     .screens li{font-size:15px}
   }
   @media (prefers-reduced-motion:reduce){
@@ -287,7 +289,6 @@
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
         <a href="modulos.html">Módulos</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="blog/index.html">Blog</a>
         <a href="contacto.html">Contactos</a>
       </div>
@@ -331,14 +332,16 @@
       </div>
 
       <div class="showcase-copy reveal" id="showcaseCopy">
-        <h2 id="pantallas-title">Más de <span class="num" data-count="40">40</span> pantallas en un solo sistema</h2>
+        <h2 id="pantallas-title">Más de <span class="num" data-count="300">300</span> funcionalidades en un solo sistema</h2>
         <ul class="screens">
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span>Roles de pago</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>Resúmenes de horario</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="m10 13.2 4 4M14 13.2l-4 4"/></svg></span>Ausentismos</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6M15 14.4c.7-.3 1.4-.4 2-.4 2.4 0 4 1.8 4 4.6"/></svg></span>Personal</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="M9 12.5h6"/><path d="M9 17c1-1.7 2-1.7 2.7 0s1.6 1.2 2.5-.3"/></svg></span>Contratos</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span>…y muchas más</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><strong>Nómina en un clic</strong><span class="desc">Roles, quincenas, décimos, utilidades, liquidaciones e impuesto a la renta.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><strong>Asistencia con biométricos</strong><span class="desc">Integración con relojes, resumen diario y aprobación de horas extra.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="m9.5 14.5 2 2 3.5-4"/></svg></span><strong>Archivos legales listos</strong><span class="desc">Banco, IESS, Ministerio de Trabajo (MRL) y formulario 107.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><strong>Autoservicio para colaboradores</strong><span class="desc">Roles, vacaciones, permisos y marcación web desde el celular.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.1 8 7.5 9.5 4.4-1.5 7.5-5 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></span><strong>Cada cambio auditado</strong><span class="desc">Quién, cuándo y el valor anterior, más el bloqueo de períodos cerrados.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5Z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><strong>Contabilidad sin digitar</strong><span class="desc">Asientos automáticos hacia tu sistema contable.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3.2" height="8" rx=".6"/><rect x="10.4" y="7" width="3.2" height="13" rx=".6"/><rect x="15.3" y="3.5" width="3.2" height="16.5" rx=".6"/></svg></span><strong>Reportes a tu medida</strong><span class="desc">Tus propias columnas y rubros, configurados una vez y usados cada mes. Más de 90 reportes listos y exportación a Excel en un clic.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span><strong>Y más</strong><span class="desc">Explora todos los módulos y funciones.</span></li>
         </ul>
         <a class="showcase-more" href="modulos.html">Explorar los módulos <i>→</i></a>
       </div>
@@ -685,7 +688,6 @@
         <a href="index.html">Home</a>
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="contacto.html">Contactos</a>
       </div>
       <div class="footer-col">
