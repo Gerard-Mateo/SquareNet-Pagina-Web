@@ -35,10 +35,29 @@
   .ir-lab .calc-form,.ir-lab .calc-out{padding:var(--space-6) var(--space-4)}
   .ir-lab .calc-big{font-size:clamp(40px,3.8vw,58px)}
 
+  /* primero la tabla; la calculadora empieza escondida y se abre con el botón */
+  .ir-lab:not(.is-calc) .calc-shell{display:none}
+  .ir-lab:not(.is-calc) .ir-grid{grid-template-columns:minmax(0,860px);justify-content:center}
+  .ir-lab:not(.is-calc) .ir-card{position:relative;top:auto}
+  .ir-lab:not(.is-calc) .ir-hl{display:none}
+  .ir-lab:not(.is-calc) .ir-table tr.is-on td{color:inherit;font-weight:inherit}
+  .ir-toggle{display:inline-flex;align-items:center;gap:10px;margin-top:var(--space-4);padding:12px 20px;font:inherit;font-size:16px;font-weight:600;color:#fff;
+    background:var(--color-accent);border:0;border-radius:var(--radius-md);cursor:pointer;box-shadow:var(--shadow-md);transition:background .2s ease,transform .2s ease}
+  .ir-toggle:hover{background:var(--color-accent-700);transform:translateY(-2px)}
+  .ir-toggle:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+  .ir-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ir-toggle .off,.ir-lab.is-calc .ir-toggle .on{display:none}
+  .ir-lab.is-calc .ir-toggle .off{display:inline}
+  .ir-lab.is-calc .ir-toggle{background:#fff;color:var(--color-accent-800);border:1px solid var(--color-divider);box-shadow:none}
+  .ir-lab.is-calc .calc-shell{animation:irOpen .45s cubic-bezier(.2,.8,.3,1)}
+  @keyframes irOpen{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.ir-lab.is-calc .calc-shell{animation:none}.ir-toggle{transition:none}}
   .ir-card{position:sticky;top:96px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden}
   .ir-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-3);padding:var(--space-4) var(--space-4) var(--space-3)}
-  .ir-title{margin:0;font-size:19px;line-height:1.2}
-  .ir-lab .ir-sub{margin-top:4px;font-size:13px;color:var(--color-neutral-600)}
+  .ir-lab .ir-title{margin:0;font-size:clamp(24px,2.6vw,34px);line-height:1.15;letter-spacing:-.01em;color:var(--color-text)}
+  .ir-lab.is-calc .ir-title{font-size:24px}
+  .ir-title::after{content:"";display:block;width:48px;height:3px;margin-top:10px;background:var(--color-accent)}
+  .ir-lab .ir-sub{margin-top:8px;font-size:15px;color:var(--color-neutral-600)}
   .ir-acts{display:flex;gap:6px;flex:none}
   .ir-act{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;font:inherit;font-size:13px;font-weight:600;color:var(--color-accent-800);
     background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease}
@@ -50,9 +69,9 @@
 
   .ir-tabs{display:flex;gap:2px;padding:0 var(--space-3);border-bottom:1px solid var(--color-divider);overflow-x:auto;scrollbar-width:none}
   .ir-tabs::-webkit-scrollbar{display:none}
-  .ir-tab{position:relative;flex:none;display:inline-flex;align-items:baseline;gap:5px;padding:10px 10px 12px;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:15px;
+  .ir-tab{position:relative;flex:none;display:inline-flex;align-items:baseline;gap:5px;padding:10px 10px 12px;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:17px;
     font-variant-numeric:tabular-nums;color:var(--color-neutral-600);background:none;border:0;cursor:pointer;transition:color .2s ease}
-  .ir-tab small{font-family:var(--font-body);font-weight:600;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-2-600)}
+  .ir-tab small{align-self:center;padding:3px 7px 2px;font-family:var(--font-body);font-weight:700;font-size:10px;line-height:1;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--color-accent-2-600);border-radius:var(--radius-sm)}
   .ir-tab::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:var(--color-accent);transform:scaleX(0);transition:transform .25s ease}
   .ir-tab:hover,.ir-tab[aria-selected="true"]{color:var(--color-text)}
   .ir-tab[aria-selected="true"]::after{transform:scaleX(1)}
@@ -85,10 +104,10 @@
   .ir-lab .ir-foot{margin:var(--space-2) calc(-1 * var(--space-3)) 0;padding:var(--space-3) var(--space-4);font-size:12px;line-height:1.5;color:var(--color-neutral-600);border-top:1px solid var(--color-divider);background:var(--color-surface)}
   .ir-foot a{font-weight:600;white-space:nowrap}
 
-  .ir-soon{padding:var(--space-6) var(--space-4) var(--space-6);text-align:center}
-  .ir-soon-ic{width:40px;height:40px;margin:0 auto var(--space-2);fill:none;stroke:var(--color-accent-700);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-  .ir-lab .ir-soon .ir-soon-h{font-family:var(--font-heading);font-weight:600;font-size:19px;color:var(--color-text);margin-bottom:var(--space-2)}
-  .ir-lab .ir-soon p{max-width:40ch;margin-left:auto;margin-right:auto;font-size:14.5px;color:var(--color-neutral-700)}
+  .ir-soon{margin:var(--space-4);padding:var(--space-8) var(--space-6);text-align:center;border:1.5px dashed var(--color-accent-300);border-radius:var(--radius-lg);background:linear-gradient(180deg,var(--color-accent-100),transparent)}
+  .ir-soon-ic{width:52px;height:52px;margin:0 auto var(--space-2);fill:none;stroke:var(--color-accent-700);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .ir-lab .ir-soon .ir-soon-h{font-family:var(--font-heading);font-weight:600;font-size:clamp(22px,2.4vw,28px);color:var(--color-text);margin-bottom:var(--space-2)}
+  .ir-lab .ir-soon p{max-width:40ch;margin-left:auto;margin-right:auto;font-size:16px;color:var(--color-neutral-700)}
   .ir-lab .ir-soon .ir-soon-n{margin-top:var(--space-3);font-size:13px;color:var(--color-accent-800)}
 
   /* topes de gastos personales: la fila de tus cargas */
@@ -164,7 +183,8 @@
         <div class="calc-head">
           <span class="calc-badge">Calculadora gratuita · Ecuador</span>
           <h2 id="calc-title">¿Cuánto te descontarán del sueldo?</h2>
-          <p>Ingresa tu sueldo, tus gastos personales y tus cargas: te decimos cuánto impuesto a la renta pagas al mes y al año. Usa la tabla 2026 hasta que el SRI publique la de 2027.</p>
+          <p>Abajo tienes la tabla oficial del SRI. Si quieres saber cuánto te toca a ti, abre la calculadora: ingresas tu sueldo, tus gastos personales y tus cargas, y te decimos cuánto pagas al mes y al año (con la tabla 2026 hasta que el SRI publique la de 2027).</p>
+          <button class="ir-toggle" type="button" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M8 6.5h8v3.5H8zM8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01"/></svg><span class="on">Calcular cuánto me descuentan</span><span class="off">Ocultar la calculadora</span></button>
         </div>
         <div class="ir-grid">
         <div class="calc-shell">
@@ -194,6 +214,15 @@
           <div class="cf">
             <label class="cf-check"><input type="checkbox" name="cat"> Tú o una de tus cargas tiene una enfermedad catastrófica, rara o huérfana</label>
             <p class="cf-hint">Certificada por la autoridad de salud. El tope de gastos personales sube a 100 canastas (USD 82.180 en 2026), sin importar cuántas cargas tengas.</p>
+          </div>
+          <div class="cf">
+            <label class="cf-check"><input type="checkbox" name="adulto"> Tengo 65 años o más</label>
+            <p class="cf-hint">Se resta una fracción básica (USD 12.208 en 2026) de tu base imponible.</p>
+          </div>
+          <div class="cf">
+            <label class="cf-label" for="r-disc">Discapacidad (tuya, según tu carné)</label>
+            <div class="cf-select"><select id="r-disc" name="disc"><option value="0" selected>Ninguna</option><option value="0.6">40 % a 49 %</option><option value="0.7">50 % a 74 %</option><option value="0.8">75 % a 84 %</option><option value="1">85 % o más</option></select></div>
+            <p class="cf-hint">Se resta el doble de la fracción básica multiplicado por el porcentaje de tu grado (60, 70, 80 o 100 %).</p>
           </div>
           <details class="cf-more">
             <summary>Afinar el cálculo <span class="cf-opt">todo opcional</span></summary>
@@ -236,36 +265,37 @@
           <div data-o="more"></div>
           <div class="calc-fx"><i aria-hidden="true">fx</i><code data-o="fx"></code></div>
           <p class="calc-tip" data-o="tip" hidden></p>
+          <button class="calc-copy" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.2"/><path d="M10.5 5.5V3.7a1.2 1.2 0 0 0-1.2-1.2H3.7a1.2 1.2 0 0 0-1.2 1.2v5.6a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg><span>Copiar resultado</span></button>
           <a class="calc-go" href="../modulono.html">¿Calculas el IR de varios empleados? Automatízalo con SquareNet <i>→</i></a>
           <p class="calc-sr" aria-live="polite" data-o="live"></p>
         </div>
         </div>
-        <div class="ir-card" data-show="2026">
+        <div class="ir-card" data-show="2027">
           <div class="ir-top">
             <div>
               <h3 class="ir-title">Tabla del impuesto a la renta</h3>
               <p class="ir-sub">Personas naturales · en dólares</p>
             </div>
             <div class="ir-acts">
-              <button class="ir-act" type="button" data-act="copy"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.2"/><path d="M10.5 5.5V3.7a1.2 1.2 0 0 0-1.2-1.2H3.7a1.2 1.2 0 0 0-1.2 1.2v5.6a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg><span>Copiar</span></button>
-              <button class="ir-act" type="button" data-act="xlsx"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v7.6M4.8 7.1 8 10.3l3.2-3.2M3 13.5h10"/></svg><span>Excel</span></button>
+              <button class="ir-act" type="button" data-act="copy" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.2"/><path d="M10.5 5.5V3.7a1.2 1.2 0 0 0-1.2-1.2H3.7a1.2 1.2 0 0 0-1.2 1.2v5.6a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg><span>Copiar</span></button>
+              <button class="ir-act" type="button" data-act="xlsx" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v7.6M4.8 7.1 8 10.3l3.2-3.2M3 13.5h10"/></svg><span>Excel</span></button>
             </div>
           </div>
           <div class="ir-tabs" role="tablist" aria-label="Año fiscal">
-          <button class="ir-tab is-soon" type="button" role="tab" id="ir-t2027" aria-controls="ir-p2027" data-year="2027" aria-selected="false" tabindex="-1">2027<small>pronto</small></button>
-          <button class="ir-tab" type="button" role="tab" id="ir-t2026" aria-controls="ir-p2026" data-year="2026" aria-selected="true">2026</button>
+          <button class="ir-tab is-soon" type="button" role="tab" id="ir-t2027" aria-controls="ir-p2027" data-year="2027" aria-selected="true">2027<small>NUEVO</small></button>
+          <button class="ir-tab" type="button" role="tab" id="ir-t2026" aria-controls="ir-p2026" data-year="2026" aria-selected="false" tabindex="-1">2026</button>
           </div>
           <p class="ir-live" aria-live="polite"></p>
           <div class="ir-body">
             <div class="ir-hl" aria-hidden="true"><i></i></div>
-          <div class="ir-panel ir-soon" id="ir-p2027" role="tabpanel" aria-labelledby="ir-t2027" data-year="2027" data-soon hidden>
+          <div class="ir-panel ir-soon" id="ir-p2027" role="tabpanel" aria-labelledby="ir-t2027" data-year="2027" data-soon>
             <svg class="ir-soon-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.2v3.6M10.2 15h3.6"/></svg>
             <p class="ir-soon-h">La tabla 2027 todavía no sale</p>
             <p>El SRI la publica a fines de diciembre, ajustada a la inflación. La de 2026 salió el 30 de diciembre de 2025. Apenas se publique la verás aquí, lista para copiar o bajar en Excel.</p>
             <p class="ir-soon-n">Lo que ganes en 2026 se calcula con la tabla 2026.</p>
             <p class="ir-soon-n">Canasta básica de enero de 2027 (define el tope de gastos personales): <strong>por publicar</strong> por el INEC a inicios de febrero de 2027. La de enero de 2026 fue USD 821,80.</p>
           </div>
-          <div class="ir-panel" id="ir-p2026" role="tabpanel" aria-labelledby="ir-t2026" data-year="2026">
+          <div class="ir-panel" id="ir-p2026" role="tabpanel" aria-labelledby="ir-t2026" data-year="2026" hidden>
             <table class="ir-table">
               <caption class="calc-sr">Tabla del impuesto a la renta 2026 para personas naturales, en dólares</caption>
               <thead><tr><th scope="col">Fracción básica</th><th scope="col">Exceso hasta</th><th scope="col">Impuesto fracción básica</th><th scope="col">% fracción excedente</th></tr></thead>
@@ -287,7 +317,7 @@
           </div>
         </div>
         </div>
-        <p class="calc-note">Cálculo referencial para trabajadores en relación de dependencia, con la misma proyección que hace un sistema de nómina (lo cobrado + este mes + el pronóstico de los meses que faltan), con la tabla del SRI 2026, el aporte personal al IESS de 9,45 % y la canasta básica de enero de 2026 (USD 821,80). Incluye el tope de 100 canastas por enfermedad catastrófica; no incluye las exoneraciones de adultos mayores y personas con discapacidad ni ingresos de otras fuentes.</p>
+        <p class="calc-note">Cálculo referencial para trabajadores en relación de dependencia, con la misma proyección que hace un sistema de nómina (lo cobrado + este mes + el pronóstico de los meses que faltan), con la tabla del SRI 2026, el aporte personal al IESS de 9,45 % y la canasta básica de enero de 2026 (USD 821,80). Incluye el tope de 100 canastas por enfermedad catastrófica; incluye las exoneraciones por 65 años o más y por discapacidad, pero no ingresos de otras fuentes.</p>
       </section>
 
       <h2>Tres ejemplos rápidos</h2>
@@ -351,8 +381,6 @@
       </div>
       <p>Cuentan como cargas tus padres, tu cónyuge o pareja y tus hijos de hasta 21 años (o con discapacidad, a cualquier edad), siempre que dependan de ti y no ganen más de un salario básico.</p>
       <p>Si tú o una de tus cargas tiene una <strong>enfermedad catastrófica, rara o huérfana</strong> certificada, el tope sube a 100 canastas: hasta USD 82.180 de gastos y una rebaja de hasta USD 14.792,40. Marca la casilla en la calculadora para usarlo.</p>
-      <p>¿Quieres ver tu rebaja categoría por categoría? Usa la <a href="gastos-personales-ecuador.html">calculadora de gastos personales</a>, que comparte los mismos valores que esta.</p>
-
       <div class="article-callout"><strong>Un ejemplo.</strong> Ganas USD 2.500 al mes, tienes una carga y gastas USD 5.000 al año en gastos personales. En el año son USD 30.000; menos USD 2.835 del IESS, tu base es USD 27.165. Eso cae en la fila del 15 %: USD 1.481,75 de impuesto. Tu rebaja es el 18 % de 5.000, o sea USD 900. <strong>Pagas USD 581,75 en el año, unos USD 48,48 al mes.</strong></div>
 
       <h2>¿Tengo que declarar?</h2>
@@ -378,7 +406,7 @@
         <li><a href="https://www.bloomberglinea.com/latinoamerica/ecuador/para-que-sirve-el-formulario-107-y-108-en-la-presentacion-de-la-renta-en-ecuador/" target="_blank" rel="noopener">Bloomberg Línea: para qué sirve el formulario 107</a></li>
       </ul>
 
-      <p class="article-disclaimer">Guía y calculadora informativas. Las tablas son las publicadas por el SRI para cada año. Hay casos con reglas propias que la calculadora no incluye (adultos mayores, personas con discapacidad, ingresos de otras fuentes). Antes de declarar o retener, confirma con el SRI.</p>
+      <p class="article-disclaimer">Guía y calculadora informativas. Las tablas son las publicadas por el SRI para cada año. Hay casos con reglas propias que la calculadora no incluye (por ejemplo, ingresos de otras fuentes). Antes de declarar o retener, confirma con el SRI.</p>
 
       <div class="article-cta">
         <h3>¿Llevas las retenciones de toda la nómina?</h3>
@@ -421,14 +449,14 @@
       <div class="footer-col">
         <h6>Módulos</h6>
         <a href="../modulono.html">Nómina</a>
-        <a href="../moduloca.html">Control de Asistencia</a>
+        <a href="../moduloca.html">Asistencia</a>
         <a href="../modulorh.html">Recursos Humanos</a>
-        <a href="../moduloac.html">Control de Acceso</a>
-        <a href="../modulocv.html">Control de Visitas</a>
-        <a href="../modulocc.html">Control de Comedor</a>
-        <a href="../modulopr.html">Control de Eficiencia</a>
+        <a href="../moduloac.html">Acceso</a>
+        <a href="../modulocv.html">Visitas</a>
+        <a href="../modulocc.html">Comedor</a>
+        <a href="../contacto.html">Evaluaciones</a>
         <a href="../moduloas.html">Autoservicio</a>
-        <a href="../squarebridge.html">SquareBridge</a>
+        <a href="../contacto.html">Trabajo Social</a>
       </div>
       <div class="footer-col">
         <h6>Contacto</h6>
@@ -455,6 +483,25 @@
   </script>
   <script src="../js/fecha.js"></script>
   <script src="../js/calc.js"></script>
+  <script>
+    // la tabla va primero; la calculadora siempre empieza escondida y se abre con el botón
+    (function () {
+      var lab = document.querySelector('.ir-lab'), btn = lab && lab.querySelector('.ir-toggle');
+      if (!btn) return;
+      function set(open, go) {
+        lab.classList.toggle('is-calc', open);
+        btn.setAttribute('aria-expanded', String(open));
+        // la tabla cambió de ancho: que el JS vuelva a ubicar la franja del tramo
+        var inp = lab.querySelector('.calc-form input');
+        // la calculadora usa la tabla 2026 mientras no salga la 2027: mostrarla para que se marque el tramo
+        var t26 = lab.querySelector('#ir-t2026');
+        if (open && t26 && t26.getAttribute('aria-selected') !== 'true') t26.click();
+        if (open && inp) requestAnimationFrame(function () { inp.dispatchEvent(new Event('input', { bubbles: true })); window.dispatchEvent(new Event('resize')); });
+        if (open && go) { var f = lab.querySelector('.calc-form input'); if (f) f.focus({ preventScroll: true }); }
+      }
+      btn.addEventListener('click', function () { set(!lab.classList.contains('is-calc'), true); });
+    })();
+  </script>
   <script src="../js/nav.js"></script>
   <script src="../js/consent.js"></script>
 </body>

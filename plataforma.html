@@ -168,7 +168,22 @@
   .md-tabs{display:flex;gap:.2em;padding:.5em 1em 0;background:var(--color-neutral-100);border-bottom:1px solid var(--color-divider);font-size:.92em}
   .md-tabs span{padding:.45em 1.1em;border:1px solid transparent;border-bottom:0;border-radius:.25em .25em 0 0;color:var(--color-neutral-600)}
   .md-tabs .on{background:#fff;border-color:var(--color-divider);color:var(--color-text);position:relative;top:1px}
-  .md-body{display:grid;grid-template-columns:1fr 15em;min-height:25em}
+  .md-body{display:grid;grid-template-columns:1fr 21em;min-height:25em}
+  .md-code{padding:.8em 0;background:#14232b;color:#d7e3e8;border-left:1px solid var(--color-divider);overflow:hidden}
+  .md-code .mc-h{padding:0 1em;color:#8fb3c2}
+  .md-code pre{margin:.4em 0 0;font:.9em/1.8 ui-monospace,Consolas,monospace;white-space:pre}
+  .md-code .ln{display:block;padding:0 1em;border-left:.2em solid transparent}
+  .md-code b{font-weight:400;color:#7fd4f5}.md-code i{font-style:normal;color:#f29cc2}.md-code u{text-decoration:none;color:#c7e89b}
+  .md-code .c{font-style:normal}.md-code .c::after{content:"#0f7fa6"}
+  .md-code .l-a{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}
+  .is-in .md-code .l-a{animation:lnA 10s infinite}.is-in .md-code .l-b{animation:lnB 10s infinite}.is-in .md-code .l-c{animation:lnC 10s infinite}
+  .is-in .md-code .l-band{animation:lnBand 10s infinite}
+  .is-in .md-code .c::after{animation:cHex 10s infinite}
+  @keyframes lnA{0%,29%,96%,100%{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}31%,94%{background:transparent;border-left-color:transparent}}
+  @keyframes lnB{0%,32%,60%,100%{background:transparent;border-left-color:transparent}34%,58%{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}}
+  @keyframes lnC{0%,62%,94%,100%{background:transparent;border-left-color:transparent}64%,92%{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}}
+  @keyframes lnBand{0%,12%,18%,43%,49%,95%,100%{background:transparent}14%,16%,45%,47%{background:rgba(242,156,194,.18)}}
+  @keyframes cHex{0%,14.9%{content:"#0f7fa6"}15%,45.9%{content:"#c2185b"}46%,95.9%{content:"#08485e"}96%,100%{content:"#0f7fa6"}}
   .md-canvas{position:relative;display:flex;align-items:center;justify-content:center;padding:1.2em;
     background:radial-gradient(circle,var(--color-neutral-300) 1px,transparent 1px) 0 0/1.1em 1.1em,var(--color-neutral-100)}
   .md-card{position:relative;width:15em;height:21em;background:#fff;border-radius:.5em;box-shadow:0 .6em 1.6em rgba(0,0,0,.14);overflow:hidden}
@@ -303,7 +318,7 @@
   .feat-chips small{align-self:center;margin-right:2px;font-size:13.5px;color:var(--color-neutral-700)}
 
   /* — requerimientos — */
-  .req-band{margin-top:var(--space-8);padding:calc(var(--space-8) * 1.6) 0}
+  .req-band{margin-top:var(--space-8);padding:var(--space-6) 0 calc(var(--space-8) * 1.6)}
   .req-band + .site-footer{margin-top:0}
   .req-top{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap;margin-bottom:var(--space-6)}
   .req-top h2{font-size:42px;max-width:18ch;margin:0}
@@ -332,6 +347,25 @@
   .req-stat span{font-size:15px;opacity:.75}
   .req-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-4)}
   .req-chips span{font-size:14px;padding:5px 12px;border:1px solid rgba(255,255,255,.28);border-radius:2px;background:rgba(255,255,255,.06)}
+  /* PCs cliente: al entrar se tacha con una X y queda el mensaje de que basta una computadora */
+  .req-cards.cross{position:relative}
+  .req-x{overflow:visible;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+  .req-x path{fill:none;stroke:var(--color-accent-2-500);stroke-width:.7;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+  .req-x{transition:opacity .4s ease 1s}.req-cards.cross.is-in .req-x{opacity:.3}
+  .req-free{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:var(--space-2);padding:var(--space-6);opacity:0;transform:translateY(12px)}
+  .req-free strong{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(34px,4.6vw,64px);line-height:1.05;max-width:18ch;text-shadow:0 2px 18px rgba(0,30,40,.6)}
+  .req-free span{font-size:18px;max-width:30ch;text-shadow:0 2px 14px rgba(0,30,40,.6)}
+  .req-cards.cross > :not(.req-x):not(.req-free){transition:opacity .4s ease .7s}
+  .req-cards.cross.is-in > :not(.req-x):not(.req-free){opacity:.14}
+  .req-cards.cross.is-in .req-x path{animation:xDraw .5s cubic-bezier(.6,0,.3,1) forwards .3s}
+  .req-cards.cross.is-in .req-x path + path{animation-delay:.55s}
+  .req-cards.cross.is-in .req-free{transition:opacity .4s ease .9s,transform .4s ease .9s;opacity:1;transform:none}
+  @keyframes xDraw{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion:reduce){
+    .req-cards.cross > :not(.req-x):not(.req-free){opacity:.14;transition:none}
+    .req-x path{stroke-dashoffset:0!important;animation:none!important}
+    .req-free{opacity:1;transform:none;transition:none!important}
+  }
   .req-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8);padding-top:var(--space-6);border-top:1px solid rgba(255,255,255,.16)}
   .req-cta p{margin:0;font-size:20px;max-width:46ch}
   .req-cta .btn{background:#fff;color:var(--color-accent-800)}
@@ -582,17 +616,11 @@
                 </div>
               </div>
             </div>
-            <aside class="md-props">
-              <div class="mc-h">Propiedades</div>
-              <div class="md-prow"><label>Campo</label><span class="inp">nombre</span></div>
-              <div class="md-prow"><label>Fuente</label><span class="inp">Source Serif</span></div>
-              <div class="md-prow"><label>Tamaño</label><span class="inp">11 pt</span></div>
-              <div class="md-toggles"><span class="on">N</span><span>K</span><span>S</span></div>
-              <div class="mc-h">Color del encabezado</div>
-              <div class="md-sw"><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i></div>
+            <aside class="md-code" aria-hidden="true">
+              <div class="mc-h">credencial.html</div>
+              <pre><span class="ln"><b>&lt;div</b> <i>class</i>=<u>"credencial"</u><b>&gt;</b></span><span class="ln l-band">  <b>&lt;header</b> <i>style</i>=<u>"background:<em class="c"></em>"</u><b>&gt;</b></span><span class="ln">  <b>&lt;img</b> <i>src</i>=<u>"{foto}"</u><b>&gt;</b></span><span class="ln l-a">  <b>&lt;h3&gt;</b>{nombre}<b>&lt;/h3&gt;</b></span><span class="ln">  <b>&lt;p&gt;</b>{cargo}<b>&lt;/p&gt;</b></span><span class="ln l-b">  <b>&lt;p&gt;</b>{departamento}<b>&lt;/p&gt;</b></span><span class="ln l-c">  <b>&lt;img</b> <i>class</i>=<u>"qr"</u> <i>src</i>=<u>"{qr}"</u><b>&gt;</b></span><span class="ln">  <b>&lt;img</b> <i>src</i>=<u>"logo.png"</u><b>&gt;</b></span><span class="ln"><b>&lt;/div&gt;</b></span></pre>
             </aside>
           </div>
-          <svg class="cur k3" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
         </div>
         <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7.2" width="9" height="6.3" rx="1.2"/><path d="M5.5 7.2V5.2a2.5 2.5 0 0 1 4.9-.7"/></svg>Sin depender de tu proveedor</span>
       </div>
@@ -652,7 +680,9 @@
         <p>Lo mínimo que necesitan el servidor de datos y los equipos de tus usuarios. Sin hardware especial.</p>
       </div>
 
-      <div class="req-cards">
+      <div class="req-cards cross" data-reveal>
+        <svg class="req-x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 4 97 96"/><path pathLength="1" d="M97 4 3 96"/></svg>
+        <div class="req-free"><strong>Solo necesitas una computadora</strong><span>Funciona en cualquier plataforma y en cualquier navegador.</span></div>
         <article class="req-card" data-reveal>
           <div class="req-head">
             <div class="req-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="6.5" rx="1.2"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.2"/><path d="M7 7.25h.01M7 16.75h.01"/><path d="M11 7.25h6M11 16.75h6"/></svg></div>
@@ -711,14 +741,14 @@
       <div class="footer-col">
         <h6>Módulos</h6>
         <a href="modulono.html">Nómina</a>
-        <a href="moduloca.html">Control de Asistencia</a>
+        <a href="moduloca.html">Asistencia</a>
         <a href="modulorh.html">Recursos Humanos</a>
-        <a href="moduloac.html">Control de Acceso</a>
-        <a href="modulocv.html">Control de Visitas</a>
-        <a href="modulocc.html">Control de Comedor</a>
-        <a href="modulopr.html">Control de Eficiencia</a>
+        <a href="moduloac.html">Acceso</a>
+        <a href="modulocv.html">Visitas</a>
+        <a href="modulocc.html">Comedor</a>
+        <a href="contacto.html">Evaluaciones</a>
         <a href="moduloas.html">Autoservicio</a>
-        <a href="squarebridge.html">SquareBridge</a>
+        <a href="contacto.html">Trabajo Social</a>
       </div>
       <div class="footer-col">
         <h6>Contacto</h6>

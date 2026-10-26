@@ -78,18 +78,14 @@ eq('Liq: fondos pendientes antes del primer año = 0', rub(L({ causal: 'renuncia
 eq('Liq: fechas invertidas → error', !!L({ causal: 'renuncia', ingreso: D('01/01/2026'), salida: D('01/01/2025') }).error, true);
 eq('Liq: sin fechas → error', !!L({ causal: 'renuncia' }).error, true);
 
-// ---------- feriado trabajado ----------
-eq('Feriado: SBU, 8 horas', C.feriado({ sueldo: 482, horasDia: 8, horas: 8 }).total, 32.13);
-eq('Feriado: no suma de nuevo el día pagado (recargo = ordinaria)', C.feriado({ sueldo: 1200, horasDia: 8, horas: 4 }).recargo, 20);
-eq('Feriado: jornada parcial de 4 horas diarias', C.feriado({ sueldo: 482, horasDia: 4, horas: 4 }).total, 32.13);
-eq('Feriado: cero horas', C.feriado({ sueldo: 900, horas: 0 }).total, 0);
 
 // ---------- sueldo neto ----------
 eq('Neto: salario básico después del IESS', C.neto({ sueldo: 482 }).trasIess, 436.45);
 eq('Neto: salario básico sin impuesto', C.neto({ sueldo: 482, ir: true, year: 2026 }).irMes, 0);
 eq('Neto: 2.500 con impuesto (sin gastos)', C.neto({ sueldo: 2500, ir: true, year: 2026 }).irMes, 123.48);
 eq('Neto: décimos mensualizados se suman', C.neto({ sueldo: 1200, decimos: true }).neto, 1226.77);   // 1200 − 113,40 + 100 + 40,17
-eq('Neto: costo laboral sin fondos', C.neto({ sueldo: 1000 }).costo, 1276.67);
+eq('Neto: costo laboral sin fondos', C.neto({ sueldo: 1000 }).costo, 1286.67);
+eq('Neto: costo con fondos de reserva (ejemplo del cliente: sueldo 1.000)', C.neto({ sueldo: 1000, fondos: true }).costo, 1369.97);
 
 console.log((fail ? '✗ ' : '✓ ') + ok + ' pruebas pasaron' + (fail ? ', ' + fail + ' fallaron' : ''));
 process.exit(fail ? 1 : 0);

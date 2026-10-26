@@ -1,5 +1,4 @@
-// Calculadoras del blog: décimos, fondos de reserva, utilidades, impuesto a la renta, liquidación, gastos personales,
-// sueldo neto y pago por feriado.
+// Calculadoras del blog: décimos, fondos de reserva, utilidades, impuesto a la renta, liquidación y sueldo neto.
 // Cada calculadora es un <section data-calc="..."> con su formulario; el resultado se recalcula al escribir.
 // VALORES LEGALES: todos están en P. Actualizarlos cada enero (SBU, tabla del SRI, canasta familiar básica).
 (function () {
@@ -26,7 +25,7 @@
   // Salario Básico Unificado por año (Ministerio del Trabajo). 2025: MDT-2024-301 · 2026: MDT-2025-195 (R.O. Supl. 187, 15-12-2025).
   // 2027: pendiente de publicación oficial; agregarlo aquí cuando salga (los décimos y la liquidación lo usan solos).
   P.sbuAnio = { 2025: 470, 2026: 482 };
-  P.iessPatronal = 0.1115;   // aporte patronal IESS, sector privado (relación de dependencia)
+  P.iessPatronal = 0.1215;   // aporte patronal, sector privado: 11,15 % IESS + 1 % IECE/SECAP (pasa a 12,15 % en total)
 
   var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   var MES3 = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -194,14 +193,6 @@
     var iess = r2(rubros[0].monto * P.iess), desc = r2(Math.max(0, o.descuentos || 0));
     return { causal: c, dias: dias, anios: dias / 360, completos: completos, base: base, rubros: rubros,
              bruto: r2(bruto), iess: iess, descuentos: desc, total: r2(Math.max(0, bruto - iess - desc)), periodoPrueba: dias <= 90 };
-  }
-
-  // Trabajo en feriado o día de descanso obligatorio (art. 55): cada hora con 100 % de recargo. El sueldo mensual ya paga
-  // el feriado como descanso, así que no se vuelve a sumar: lo que se agrega son las horas trabajadas con su recargo.
-  // o: { sueldo, horasDia (jornada diaria, 8 = completa), horas }
-  function feriado(o) {
-    var hd = Math.max(1, Math.min(8, o.horasDia || 8)), hora = (o.sueldo || 0) / (30 * hd), h = Math.max(0, o.horas || 0);
-    return { valorHora: r2(hora), diaIncluido: r2((o.sueldo || 0) / 30), ordinaria: r2(hora * h), recargo: r2(hora * h), total: r2(hora * h * 2) };
   }
 
   // Sueldo neto en relación de dependencia (sector privado). o: { sueldo, descuentos, ir, gastos, cargas, decimos, fondos, year }
@@ -450,7 +441,10 @@
       var antAport = cob == null ? (S + E) * ant : cob, mesAport = S + E;
       var ingresos = antAport + mesAport * quedan + noap + util;
       var apAnt = antAport * P.iess, apMes = mesAport * P.iess, aporte = apAnt + apMes * quedan;
-      var base = Math.max(0, ingresos - aporte);
+      // Exoneraciones: 65 años o más = 1 fracción básica; discapacidad = 2 fracciones básicas × el porcentaje del grado.
+      var adulto = !!(q(root, '[name="adulto"]') || {}).checked, discP = parseFloat((q(root, '[name="disc"]') || {}).value) || 0;
+      var exAdulto = adulto ? T[1][0] : 0, exDisc = 2 * T[1][0] * discP;
+      var base = Math.max(0, ingresos - aporte - exAdulto - exDisc);
       var i = tramo(base, T), r = T[i], causado = irCausado(base, T);
       var tope = canastas * Y.cfb, rebaja = Math.min(Math.min(gastos, tope) * P.rebaja, causado);
       var anual = Math.max(0, causado - rebaja);
@@ -490,6 +484,8 @@
       if (noap) rows.push(['+ Ingresos no aportables', '$ ' + money(noap)]);
       if (util) rows.push(['+ Utilidades', '$ ' + money(util)]);
       rows.push(['− Aporte personal IESS (' + pct(P.iess) + ')' + trio(ant ? apAnt : null, apMes), '$ ' + money(aporte)]);
+      if (exAdulto) rows.push(['− Exoneración por 65 años o más<small>1 fracción básica</small>', '$ ' + money(exAdulto)]);
+      if (exDisc) rows.push(['− Exoneración por discapacidad<small>2 fracciones básicas × ' + Math.round(discP * 100) + ' %</small>', '$ ' + money(exDisc)]);
       rows.push(['= Base imponible neta', '$ ' + money(base), 'is-sum']);
       rows.push(['Impuesto del año según la tabla', '$ ' + money(causado)]);
       rows.push(['− Gastos personales<small>' + money(gastos) + (gastos > tope ? ' (limitado a ' : ' (tope ') + money(tope) + ', ' +
@@ -555,38 +551,6 @@
       return R.total;
     },
 
-    // Gastos personales: tope por canastas, rebaja del 18 % y el impuesto antes y después.
-    gastos: function (root) {
-      var cats = ['viv', 'ali', 'ves', 'sal', 'edu', 'tur'], nombres = ['Vivienda', 'Alimentación', 'Vestimenta', 'Salud', 'Educación, arte y cultura', 'Turismo'];
-      var total = 0, det = [];
-      cats.forEach(function (k, i) { var v = num(root, k, 0); total += v; if (v) det.push(nombres[i] + ' ' + money(v, 0)); });
-      var cargas = Math.min(5, parseInt(radio(root, 'cargas') || '0', 10)), especial = !!(q(root, '[name="especial"]') || {}).checked;
-      var gal = !!(q(root, '[name="galapagos"]') || {}).checked, ipceg = gal ? opt(root, 'ipceg') : null;
-      var sueldo = num(root, 'sueldo', 0), otros = num(root, 'otros', 0), ingresos = sueldo * 12 + otros;
-      var R = irAnual({ ingresos: ingresos, aporte: ingresos * P.iess, gastos: total, cargas: cargas, especial: especial, ipceg: ipceg, year: P.year });
-      var sobra = r2(R.potencial - R.rebaja);
-      Array.prototype.forEach.call(document.querySelectorAll('[data-topes] tbody tr'), function (tr, j) { tr.classList.toggle('is-on', j === (especial ? P.canastas.length : cargas)); });
-      out(root, 'k', 'Te bajan del impuesto');
-      setBig(q(root, '[data-o="big"]'), R.rebaja);
-      out(root, 'sub', R.causado > 0
-        ? 'Tu impuesto del año pasa de <b>$ ' + money(R.causado) + '</b> a <b>$ ' + money(R.impuesto) + '</b>.'
-        : 'Con estos ingresos no pagas impuesto a la renta, así que la rebaja no se usa.');
-      var lleno = R.tope ? Math.min(100, total / R.tope * 100) : 0;
-      out(root, 'viz', '<div class="cv-label"><span>Tus gastos frente al tope</span><span>' + money(total, 0) + ' de ' + money(R.tope, 0) + '</span></div>' +
-        '<div class="cv-bar"><b style="width:' + lleno.toFixed(1) + '%"></b></div>');
-      out(root, 'lines', lines([
-        ['Gastos personales del año' + (det.length ? '<small>' + det.join(' · ') + '</small>' : ''), '$ ' + money(total)],
-        ['Tope<small>' + R.canastas + ' canastas × ' + money(R.cfb) + (gal && ipceg ? ' × IPCEG ' + money(ipceg, 4) : '') + (especial ? ' (discapacidad o enfermedad catastrófica)' : ' (' + cargas + (cargas === 5 ? ' o más' : '') + (cargas === 1 ? ' carga)' : ' cargas)')) + '</small>', '$ ' + money(R.tope)],
-        ['Rebaja posible<small>18 % de ' + money(Math.min(total, R.tope)) + '</small>', '$ ' + money(R.potencial)],
-        ['Impuesto del año sin rebaja', '$ ' + money(R.causado)],
-        ['− Rebaja que se aprovecha', '$ ' + money(R.rebaja)],
-        ['= Impuesto del año', '$ ' + money(R.impuesto), 'is-total']]));
-      var warn = gal && ipceg == null ? 'Para Galápagos el tope se multiplica por el Índice de Precios al Consumidor Espacial de Galápagos (IPCEG). Ingresa el índice vigente para aplicarlo; sin él, el cálculo usa el tope continental.'
-        : (sobra > 0.005 && R.causado > 0 ? 'Tu rebaja cubre todo el impuesto: $ ' + money(sobra) + ' de rebaja no se aprovechan (no se devuelven).' : '');
-      out(root, 'warn', warn); show(root, 'warn', !!warn);
-      return R.rebaja;
-    },
-
     // Sueldo neto: lo que queda después del IESS, el impuesto y otros descuentos, y lo que cuesta al empleador.
     neto: function (root) {
       var ir = !!(q(root, '[name="ir"]') || {}).checked, R = neto({
@@ -616,22 +580,9 @@
         ['= Costo laboral mensual', '$ ' + money(R.costo), 'is-total']]) + '</dl>');
       var warn = R.sueldo > 0 && R.sueldo < P.sbu ? 'Con jornada completa nadie puede ganar menos del salario básico (USD ' + money(P.sbu, 0) + ' en ' + P.year + '). Si trabajas a tiempo parcial, es proporcional.' : '';
       out(root, 'warn', warn); show(root, 'warn', !!warn);
+      var esBasico = R.sueldo === P.sbu;
+      out(root, 'tip', esBasico ? 'Ese es el salario básico ' + P.year + ' (USD ' + money(P.sbu, 0) + '): el mínimo que se paga con jornada completa.' : ''); show(root, 'tip', esBasico);
       return R.trasIess;
-    },
-
-    // Feriado trabajado: horas con 100 % de recargo, sin volver a sumar el día que el sueldo ya paga.
-    feriado: function (root) {
-      var R = feriado({ sueldo: num(root, 'sueldo', 0), horasDia: num(root, 'horasDia', 1, 8) || 8, horas: num(root, 'horas', 0, 24) });
-      out(root, 'k', 'Te pagan adicional por el feriado');
-      setBig(q(root, '[data-o="big"]'), R.total);
-      out(root, 'sub', 'Se suma a tu sueldo del mes. El día de descanso ya está pagado en tu sueldo ($ ' + money(R.diaIncluido) + '): no se cuenta dos veces.');
-      out(root, 'lines', lines([
-        ['Valor de tu hora<small>sueldo ÷ (30 × horas de tu jornada)</small>', '$ ' + money(R.valorHora)],
-        ['Horas trabajadas × valor hora', '$ ' + money(R.ordinaria)],
-        ['+ Recargo del 100 %', '$ ' + money(R.recargo)],
-        ['= Pago adicional por el feriado', '$ ' + money(R.total), 'is-total']]));
-      out(root, 'fx', num(root, 'horas', 0, 24) + ' h × ' + money(R.valorHora) + ' × 2 = ' + money(R.total));
-      return R.total;
     }
   };
 
@@ -944,5 +895,5 @@
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-calc]'), init);
   window.SquareNetCalc = { P: P, irCausado: irCausado, irAnual: irAnual, days360: days360, money: money, r2: r2, parseDate: parseDate,
-    decimo13: decimo13, decimo14: decimo14, liquidacion: liquidacion, feriado: feriado, neto: neto };
+    decimo13: decimo13, decimo14: decimo14, liquidacion: liquidacion, neto: neto };
 })();

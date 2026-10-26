@@ -203,7 +203,14 @@ figcaption {
   filter: grayscale(1); opacity: 0.55; transition: filter 0.2s, opacity 0.2s;
   mix-blend-mode: multiply;
 }
-.marquee-track img:hover { filter: grayscale(0); opacity: 1; }
+.marquee-track img:hover, .marquee-track a:focus-visible img { filter: grayscale(0); opacity: 1; }
+.marquee-track a { display: block; flex: none; line-height: 0; }
+.marquee-track a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+.marquee-track .mq-big img { height: 112px; }   /* EY: primero en la fila de abajo, un poco más grande */
+.marquee-track .mq-named { display: flex; align-items: center; height: 96px; padding-right: 18px; background: #fff; text-decoration: none; opacity: .55; filter: grayscale(1); mix-blend-mode: multiply; transition: opacity .2s, filter .2s; }   /* logo sin nombre: el texto va dentro del mismo recuadro blanco */
+.marquee-track .mq-named img { opacity: 1; filter: none; }
+.marquee-track .mq-named span { font-family: var(--font-heading); font-weight: 600; font-size: 22px; line-height: 1; color: #555; }
+.marquee-track .mq-named:hover, .marquee-track .mq-named:focus-visible { opacity: 1; filter: none; }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }

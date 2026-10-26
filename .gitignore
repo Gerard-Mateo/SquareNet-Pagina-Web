@@ -5,3 +5,5 @@ Thumbs.db
 squarenet-full-loop-v2.mp4
 # master del nuevo video del laptop (70 MB): fuente para regenerar media/squarenet-recorrido*.mp4, no se sirve
 completo_7_modulos.mp4
+# master del video corto del laptop (~21 MB, ~67 s): fuente para regenerar media/squarenet-recorrido.mp4, no se sirve
+video_corto (*).mp4
