@@ -2,30 +2,145 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Calculadora de Impuesto a la Renta 2026 en Relación de Dependencia | SquareNet</title>
+<title>Tabla Impuesto a la Renta 2027: próxima publicación del SRI + calculadora | SquareNet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="impuesto a la renta 2026 ecuador, tabla impuesto a la renta 2026, calculadora impuesto a la renta, relación de dependencia, gastos personales, retención en la fuente, formulario 107">
-<meta name="description" content="Calcula gratis tu impuesto a la renta 2026 en Ecuador: tabla del SRI (fracción exenta USD 12.208), aporte al IESS, rebaja por gastos personales y retención mensual.">
+<meta name="keywords" content="impuesto a la renta 2027, tabla impuesto a la renta 2027, impuesto a la renta 2026, tabla impuesto a la renta 2026 ecuador, calculadora impuesto a la renta, tabla SRI personas naturales, fracción básica exenta, gastos personales 2026">
+<meta name="description" content="La tabla del SRI 2027 se publica a fines de diciembre. Mientras tanto, calcula cuánto impuesto a la renta te descontarán al mes y al año con la tabla 2026. Gratis.">
 <link rel="canonical" href="https://www.squarenet.com.ec/blog/impuesto-renta-relacion-dependencia-ecuador.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="SquareNet">
 <meta property="og:locale" content="es_EC">
 <meta property="og:url" content="https://www.squarenet.com.ec/blog/impuesto-renta-relacion-dependencia-ecuador.html">
-<meta property="og:title" content="Calculadora de Impuesto a la Renta 2026 en Relación de Dependencia">
-<meta property="og:description" content="Calcula gratis tu impuesto a la renta 2026 en Ecuador: tabla del SRI (fracción exenta USD 12.208), aporte al IESS, rebaja por gastos personales y retención mensual.">
+<meta property="og:title" content="Tabla Impuesto a la Renta 2027: próxima publicación del SRI + calculadora">
+<meta property="og:description" content="La tabla del SRI 2027 se publica a fines de diciembre. Mientras tanto, calcula cuánto impuesto a la renta te descontarán al mes y al año con la tabla 2026. Gratis.">
 <meta property="og:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Calculadora de Impuesto a la Renta 2026 en Relación de Dependencia">
-<meta name="twitter:description" content="Calcula gratis tu impuesto a la renta 2026 en Ecuador: tabla del SRI (fracción exenta USD 12.208), aporte al IESS, rebaja por gastos personales y retención mensual.">
+<meta name="twitter:title" content="Tabla Impuesto a la Renta 2027: próxima publicación del SRI + calculadora">
+<meta name="twitter:description" content="La tabla del SRI 2027 se publica a fines de diciembre. Mientras tanto, calcula cuánto impuesto a la renta te descontarán al mes y al año con la tabla 2026. Gratis.">
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="../img/squarenet.ico" rel="shortcut icon">
 <link href="../css/broadsheet.css" rel="stylesheet">
+<style>
+  /* menos ruido: sin barras ni fórmula ni tira repetida; el detalle va plegado */
+  .ir-lab [data-o="viz"],.ir-lab .calc-fx,.ir-lab [data-o="tip"],.ir-lab .ir-live{display:none!important}
+  .calc-more summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--color-accent-300);list-style:none}
+  .calc-more summary::-webkit-details-marker{display:none}
+  .calc-more summary::before{content:"+ "}
+  .calc-more[open] summary::before{content:"− "}
+  .calc-more .calc-lines{margin-top:10px}
+  /* calculadora + tabla del SRI lado a lado (js/calc.js: syncIrTable / bindIrCard) */
+  .ir-lab{--cw:min(1320px,calc(100vw - 2 * var(--space-6)));margin-top:var(--space-6)}
+  .ir-lab .calc-head{max-width:760px}
+  .ir-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:var(--space-4);align-items:start}
+  .ir-lab .calc-form,.ir-lab .calc-out{padding:var(--space-6) var(--space-4)}
+  .ir-lab .calc-big{font-size:clamp(40px,3.8vw,58px)}
+
+  /* primero la tabla; la calculadora empieza escondida y se abre con el botón */
+  .ir-lab:not(.is-calc) .calc-shell{display:none}
+  .ir-lab:not(.is-calc) .ir-grid{grid-template-columns:minmax(0,860px);justify-content:center}
+  .ir-lab:not(.is-calc) .ir-card{position:relative;top:auto}
+  .ir-lab:not(.is-calc) .ir-hl{display:none}
+  .ir-lab:not(.is-calc) .ir-table tr.is-on td{color:inherit;font-weight:inherit}
+  .ir-toggle{display:inline-flex;align-items:center;gap:10px;margin-top:var(--space-4);padding:12px 20px;font:inherit;font-size:16px;font-weight:600;color:#fff;
+    background:var(--color-accent);border:0;border-radius:var(--radius-md);cursor:pointer;box-shadow:var(--shadow-md);transition:background .2s ease,transform .2s ease}
+  .ir-toggle:hover{background:var(--color-accent-700);transform:translateY(-2px)}
+  .ir-toggle:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+  .ir-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ir-toggle .off,.ir-lab.is-calc .ir-toggle .on{display:none}
+  .ir-lab.is-calc .ir-toggle .off{display:inline}
+  .ir-lab.is-calc .ir-toggle{background:#fff;color:var(--color-accent-800);border:1px solid var(--color-divider);box-shadow:none}
+  .ir-lab.is-calc .calc-shell{animation:irOpen .45s cubic-bezier(.2,.8,.3,1)}
+  @keyframes irOpen{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.ir-lab.is-calc .calc-shell{animation:none}.ir-toggle{transition:none}}
+  .ir-card{position:sticky;top:96px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden}
+  .ir-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-3);padding:var(--space-4) var(--space-4) var(--space-3)}
+  .ir-lab .ir-title{margin:0;font-size:clamp(24px,2.6vw,34px);line-height:1.15;letter-spacing:-.01em;color:var(--color-text)}
+  .ir-lab.is-calc .ir-title{font-size:24px}
+  .ir-title::after{content:"";display:block;width:48px;height:3px;margin-top:10px;background:var(--color-accent)}
+  .ir-lab .ir-sub{margin-top:8px;font-size:15px;color:var(--color-neutral-600)}
+  .ir-acts{display:flex;gap:6px;flex:none}
+  .ir-act{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;font:inherit;font-size:13px;font-weight:600;color:var(--color-accent-800);
+    background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease}
+  .ir-act svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ir-act:hover{background:var(--color-accent-100);border-color:var(--color-accent-300)}
+  .ir-act:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+  .ir-act.is-done{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .ir-act:disabled{opacity:.4;cursor:default;background:#fff;border-color:var(--color-divider)}
+
+  .ir-tabs{display:flex;gap:2px;padding:0 var(--space-3);border-bottom:1px solid var(--color-divider);overflow-x:auto;scrollbar-width:none}
+  .ir-tabs::-webkit-scrollbar{display:none}
+  .ir-tab{position:relative;flex:none;display:inline-flex;align-items:baseline;gap:5px;padding:10px 10px 12px;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:17px;
+    font-variant-numeric:tabular-nums;color:var(--color-neutral-600);background:none;border:0;cursor:pointer;transition:color .2s ease}
+  .ir-tab small{align-self:center;padding:3px 7px 2px;font-family:var(--font-body);font-weight:700;font-size:10px;line-height:1;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--color-accent-2-600);border-radius:var(--radius-sm)}
+  .ir-tab::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:var(--color-accent);transform:scaleX(0);transition:transform .25s ease}
+  .ir-tab:hover,.ir-tab[aria-selected="true"]{color:var(--color-text)}
+  .ir-tab[aria-selected="true"]::after{transform:scaleX(1)}
+  .ir-tab:focus-visible{outline:2px solid var(--color-accent);outline-offset:-2px}
+
+  .ir-lab .ir-live{min-height:42px;padding:11px var(--space-4) 9px;font-size:13.5px;line-height:1.5;color:var(--color-neutral-700);background:var(--color-surface);border-bottom:1px solid var(--color-divider)}
+  .ir-live:empty{display:none}
+  .ir-live b{color:var(--color-accent-800);font-variant-numeric:tabular-nums}
+
+  .ir-body{position:relative;padding:var(--space-2) var(--space-3) 0}
+  .ir-table{position:relative;z-index:1;width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  .ir-table th{padding:8px 10px;font-size:10.5px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--color-neutral-600);text-align:right;vertical-align:bottom;border-bottom:1px solid var(--color-divider)}
+  .ir-table td{padding:9px 10px;font-size:15px;line-height:1.3;text-align:right;border-bottom:1px solid color-mix(in srgb,var(--color-text) 7%,transparent);transition:color .3s ease}
+  .ir-table td{white-space:nowrap}
+  .ir-table th:first-child,.ir-table td:first-child{text-align:left;padding-left:28px}
+  .ir-table tbody tr:last-child td{border-bottom-color:transparent}
+  .ir-table tr.is-on td{color:var(--color-accent-900);font-weight:700;border-bottom-color:transparent}
+
+  /* la franja: se desliza a la fila de tu tramo; la barra de abajo es dónde cae tu base dentro del tramo */
+  .ir-hl{position:absolute;z-index:0;left:var(--space-3);right:var(--space-3);top:0;height:0;opacity:0;pointer-events:none;border-radius:var(--radius-md);
+    background:linear-gradient(90deg,color-mix(in srgb,var(--color-accent-300) 60%,#fff),color-mix(in srgb,var(--color-accent-300) 24%,#fff));
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--color-accent) 45%,transparent),0 10px 26px -6px color-mix(in srgb,var(--color-accent) 45%,transparent);
+    transition:transform .55s cubic-bezier(.2,.9,.25,1),height .55s cubic-bezier(.2,.9,.25,1),opacity .3s ease}
+  .ir-hl.is-on{opacity:1}
+  .ir-hl.no-anim{transition:opacity .3s ease}
+  .ir-hl::before{content:"";position:absolute;left:10px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--color-accent);
+    box-shadow:0 0 0 4px color-mix(in srgb,var(--color-accent) 22%,transparent),0 0 12px var(--color-accent)}
+  .ir-hl i{position:absolute;left:0;bottom:0;height:3px;width:var(--pos,0%);border-radius:0 2px 2px var(--radius-md);background:var(--color-accent);transition:width .55s cubic-bezier(.2,.9,.25,1)}
+
+  .ir-lab .ir-foot{margin:var(--space-2) calc(-1 * var(--space-3)) 0;padding:var(--space-3) var(--space-4);font-size:12px;line-height:1.5;color:var(--color-neutral-600);border-top:1px solid var(--color-divider);background:var(--color-surface)}
+  .ir-foot a{font-weight:600;white-space:nowrap}
+
+  .ir-soon{margin:var(--space-4);padding:var(--space-8) var(--space-6);text-align:center;border:1.5px dashed var(--color-accent-300);border-radius:var(--radius-lg);background:linear-gradient(180deg,var(--color-accent-100),transparent)}
+  .ir-soon-ic{width:52px;height:52px;margin:0 auto var(--space-2);fill:none;stroke:var(--color-accent-700);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .ir-lab .ir-soon .ir-soon-h{font-family:var(--font-heading);font-weight:600;font-size:clamp(22px,2.4vw,28px);color:var(--color-text);margin-bottom:var(--space-2)}
+  .ir-lab .ir-soon p{max-width:40ch;margin-left:auto;margin-right:auto;font-size:16px;color:var(--color-neutral-700)}
+  .ir-lab .ir-soon .ir-soon-n{margin-top:var(--space-3);font-size:13px;color:var(--color-accent-800)}
+
+  /* topes de gastos personales: la fila de tus cargas */
+  [data-topes] tbody tr td{transition:background .3s ease,color .3s ease}
+  [data-topes] tbody tr.is-on td{background:var(--color-accent-100);color:var(--color-accent-900);font-weight:600}
+  .article-sources{font-size:15px}
+  .article-sources li{margin-bottom:var(--space-1)}
+
+  @media (max-width:1240px){
+    .ir-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .ir-lab .calc-shell{grid-template-columns:1fr}
+  }
+  @media (max-width:860px){
+    .ir-lab{--cw:calc(100vw - 2 * var(--space-4))}
+    .ir-grid{grid-template-columns:1fr}
+    .ir-card{position:relative;top:auto}
+    .ir-top{flex-direction:column;gap:var(--space-2);padding:var(--space-3) var(--space-3) var(--space-2)}
+    .ir-table th{padding:8px 5px;font-size:9.5px;letter-spacing:.04em}
+    .ir-table td{padding:8px 5px;font-size:14px}
+    .ir-panel[data-dec] .ir-table td{font-size:12.5px;padding:8px 3px}
+    .ir-table th:first-child,.ir-table td:first-child{padding-left:24px}
+    .ir-hl::before{left:8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ir-hl,.ir-hl i,.ir-tab::after,.ir-table td{transition:none}
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Impuesto a la Renta 2026 en Relación de Dependencia: Cómo se Calcula, con Calculadora",
-  "description": "Calcula gratis tu impuesto a la renta 2026 en Ecuador: tabla del SRI (fracción exenta USD 12.208), aporte al IESS, rebaja por gastos personales y retención mensual.",
+  "headline": "Tabla de impuesto a la renta 2027 en Ecuador",
+  "description": "La tabla del SRI 2027 se publica a fines de diciembre. Mientras tanto, calcula cuánto impuesto a la renta te descontarán al mes y al año con la tabla 2026. Gratis.",
   "author": { "@type": "Organization", "name": "SquareNet" },
   "publisher": {
     "@type": "Organization",
@@ -33,10 +148,11 @@
     "logo": { "@type": "ImageObject", "url": "https://www.squarenet.com.ec/img/logosq.png" }
   },
   "datePublished": "2026-10-21",
-  "dateModified": "2026-10-21",
+  "dateModified": "2026-10-22",
   "mainEntityOfPage": "https://www.squarenet.com.ec/blog/impuesto-renta-relacion-dependencia-ecuador.html",
   "image": "https://www.squarenet.com.ec/img/squarenet_logo_hero.png",
-  "inLanguage": "es-EC"
+  "inLanguage": "es-EC",
+  "keywords": "impuesto a la renta 2027, tabla impuesto a la renta 2026, calculadora impuesto a la renta Ecuador, tabla SRI"
 }
 </script>
 </head>
@@ -50,7 +166,6 @@
         <a href="../somos.html">Quiénes Somos</a>
         <a href="../plataforma.html">Plataforma SquareNet</a>
         <a href="../modulos.html">Módulos</a>
-        <a href="../lectores.html">Lectores Biométricos</a>
         <a href="index.html" aria-current="page">Blog</a>
         <a href="../contacto.html">Contactos</a>
       </div>
@@ -60,23 +175,18 @@
   <div class="wrap">
     <article class="article">
       <a class="article-back" href="index.html">← Volver al blog</a>
-      <div class="kicker">Nómina · SRI</div>
-      <h1>Impuesto a la Renta 2026 en Relación de Dependencia: Cómo se Calcula, con Calculadora</h1>
-      <div class="article-meta">Equipo SquareNet · Actualizado 21 de octubre de 2026 · 5 min de lectura</div>
-      <figure class="article-cover"><img src="img/cover-impuesto-renta.svg" alt="" width="320" height="200"></figure>
-      <p class="article-lede">Si tu sueldo supera cierto monto, tu empleador te retiene impuesto a la renta cada mes. Aquí está cómo se calcula con la tabla del SRI 2026, cuánto baja con tus gastos personales y una calculadora para sacar tu número en segundos.</p>
-      <div class="article-facts">
-        <div><b>USD 12.208</b><span>fracción básica exenta 2026</span></div>
-        <div><b>9,45 %</b><span>aporte al IESS, se resta antes de aplicar la tabla</span></div>
-        <div><b>18 %</b><span>rebaja por gastos personales, hasta un tope</span></div>
-      </div>
-
-      <section class="calc" id="calculadora" data-calc="renta" aria-labelledby="calc-title">
+      <div class="kicker">Nómina · SRI · Se actualiza cada año</div>
+      <h1>Tabla de impuesto a la renta 2027 en Ecuador</h1>
+      <div class="article-meta">Equipo SquareNet · Actualizado 22 de octubre de 2026 · 4 min de lectura</div>
+      
+      <section class="calc ir-lab" id="calculadora" data-calc="renta" data-year="2026" aria-labelledby="calc-title">
         <div class="calc-head">
-          <span class="calc-badge">Calculadora 2026</span>
-          <h2 id="calc-title">Calcula tu impuesto a la renta 2026</h2>
-          <p>Para trabajadores en relación de dependencia. Usa la tabla del SRI 2026 y la rebaja por gastos personales.</p>
+          <span class="calc-badge">Calculadora gratuita · Ecuador</span>
+          <h2 id="calc-title">¿Cuánto te descontarán del sueldo?</h2>
+          <p>Abajo tienes la tabla oficial del SRI. Si quieres saber cuánto te toca a ti, abre la calculadora: ingresas tu sueldo, tus gastos personales y tus cargas, y te decimos cuánto pagas al mes y al año (con la tabla 2026 hasta que el SRI publique la de 2027).</p>
+          <button class="ir-toggle" type="button" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M8 6.5h8v3.5H8zM8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01"/></svg><span class="on">Calcular cuánto me descuentan</span><span class="off">Ocultar la calculadora</span></button>
         </div>
+        <div class="ir-grid">
         <div class="calc-shell">
         <form class="calc-form" novalidate>
           <div class="cf">
@@ -85,13 +195,7 @@
             <input class="cf-range" type="range" data-for="sueldo" min="0" max="10000" step="50" tabindex="-1" aria-hidden="true">
           </div>
           <div class="cf">
-            <label class="cf-label" for="r-otros">Horas extra, comisiones y bonos del año</label>
-            <p class="cf-hint">Total del año. Los décimos y los fondos de reserva no se suman: son exentos.</p>
-            <div class="cf-money"><span>$</span><input id="r-otros" name="otros" type="number" inputmode="decimal" min="0" step="0.01" value="0"></div>
-            <input class="cf-range" type="range" data-for="otros" min="0" max="30000" step="100" tabindex="-1" aria-hidden="true">
-          </div>
-          <div class="cf">
-            <label class="cf-label" for="r-gastos">Gastos personales del año</label>
+            <label class="cf-label" for="r-gastos">Gastos personales del año <span class="cf-opt">opcional</span></label>
             <p class="cf-hint">Vivienda, salud, educación, alimentación, vestimenta y turismo.</p>
             <div class="cf-money"><span>$</span><input id="r-gastos" name="gastos" type="number" inputmode="decimal" min="0" step="0.01" value="5000"></div>
             <input class="cf-range" type="range" data-for="gastos" min="0" max="20000" step="100" tabindex="-1" aria-hidden="true">
@@ -107,6 +211,49 @@
               <label><input type="radio" name="cargas" value="5">5+</label>
             </div>
           </fieldset>
+          <div class="cf">
+            <label class="cf-check"><input type="checkbox" name="cat"> Tú o una de tus cargas tiene una enfermedad catastrófica, rara o huérfana</label>
+            <p class="cf-hint">Certificada por la autoridad de salud. El tope de gastos personales sube a 100 canastas (USD 82.180 en 2026), sin importar cuántas cargas tengas.</p>
+          </div>
+          <div class="cf">
+            <label class="cf-check"><input type="checkbox" name="adulto"> Tengo 65 años o más</label>
+            <p class="cf-hint">Se resta una fracción básica (USD 12.208 en 2026) de tu base imponible.</p>
+          </div>
+          <div class="cf">
+            <label class="cf-label" for="r-disc">Discapacidad (tuya, según tu carné)</label>
+            <div class="cf-select"><select id="r-disc" name="disc"><option value="0" selected>Ninguna</option><option value="0.6">40 % a 49 %</option><option value="0.7">50 % a 74 %</option><option value="0.8">75 % a 84 %</option><option value="1">85 % o más</option></select></div>
+            <p class="cf-hint">Se resta el doble de la fracción básica multiplicado por el porcentaje de tu grado (60, 70, 80 o 100 %).</p>
+          </div>
+          <details class="cf-more">
+            <summary>Afinar el cálculo <span class="cf-opt">todo opcional</span></summary>
+            <div class="cf-more-body">
+              <p class="cf-hint">Llena solo lo que sepas. Lo que dejes vacío se calcula con tu sueldo actual.</p>
+          <div class="cf">
+            <label class="cf-label" for="r-extras">Horas extra, comisiones y bonos al mes</label>
+            <p class="cf-hint">Lo de este mes. Se proyecta igual para los meses que faltan.</p>
+            <div class="cf-money"><span>$</span><input id="r-extras" name="extras" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></div>
+          </div>
+          <div class="cf">
+            <label class="cf-label" for="r-cobrado">Ya cobrado en los meses anteriores</label>
+            <p class="cf-hint">Sueldo y extras desde enero hasta el mes pasado (está en tus roles).</p>
+            <div class="cf-money"><span>$</span><input id="r-cobrado" name="cobrado" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Se calcula solo"></div>
+          </div>
+          <div class="cf">
+            <label class="cf-label" for="r-noaport">Ingresos que no aportan al IESS, en el año</label>
+            <p class="cf-hint">Pagan impuesto, pero no el 9,45 % del IESS.</p>
+            <div class="cf-money"><span>$</span><input id="r-noaport" name="noaport" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></div>
+          </div>
+          <div class="cf">
+            <label class="cf-label" for="r-util">Utilidades recibidas este año</label>
+            <div class="cf-money"><span>$</span><input id="r-util" name="utilidades" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></div>
+          </div>
+          <div class="cf">
+            <label class="cf-label" for="r-ret">Impuesto ya retenido en los meses anteriores</label>
+            <p class="cf-hint">La suma de lo que te descontaron por impuesto a la renta desde enero.</p>
+            <div class="cf-money"><span>$</span><input id="r-ret" name="retenido" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Se estima solo"></div>
+          </div>
+            </div>
+          </details>
         </form>
         <div class="calc-out band-dark">
           <span class="calc-k" data-o="k"></span>
@@ -115,50 +262,110 @@
           <p class="calc-warn" data-o="warn" hidden></p>
           <div data-o="viz"></div>
           <dl class="calc-lines" data-o="lines"></dl>
+          <div data-o="more"></div>
           <div class="calc-fx"><i aria-hidden="true">fx</i><code data-o="fx"></code></div>
           <p class="calc-tip" data-o="tip" hidden></p>
-          <a class="calc-go" href="../modulono.html">SquareNet lo calcula solo para toda tu nómina <i>→</i></a>
+          <button class="calc-copy" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.2"/><path d="M10.5 5.5V3.7a1.2 1.2 0 0 0-1.2-1.2H3.7a1.2 1.2 0 0 0-1.2 1.2v5.6a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg><span>Copiar resultado</span></button>
+          <a class="calc-go" href="../modulono.html">¿Calculas el IR de varios empleados? Automatízalo con SquareNet <i>→</i></a>
           <p class="calc-sr" aria-live="polite" data-o="live"></p>
         </div>
         </div>
-        <p class="calc-note">Cálculo referencial: tabla del SRI 2026 (Res. NAC-DGERCGC25-00000043), aporte personal IESS 9,45 % y canasta familiar básica USD 821,80. No considera exoneraciones especiales (adultos mayores, discapacidad, enfermedades catastróficas) ni ingresos de otras fuentes.</p>
+        <div class="ir-card" data-show="2027">
+          <div class="ir-top">
+            <div>
+              <h3 class="ir-title">Tabla del impuesto a la renta</h3>
+              <p class="ir-sub">Personas naturales · en dólares</p>
+            </div>
+            <div class="ir-acts">
+              <button class="ir-act" type="button" data-act="copy" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.2"/><path d="M10.5 5.5V3.7a1.2 1.2 0 0 0-1.2-1.2H3.7a1.2 1.2 0 0 0-1.2 1.2v5.6a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg><span>Copiar</span></button>
+              <button class="ir-act" type="button" data-act="xlsx" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v7.6M4.8 7.1 8 10.3l3.2-3.2M3 13.5h10"/></svg><span>Excel</span></button>
+            </div>
+          </div>
+          <div class="ir-tabs" role="tablist" aria-label="Año fiscal">
+          <button class="ir-tab is-soon" type="button" role="tab" id="ir-t2027" aria-controls="ir-p2027" data-year="2027" aria-selected="true">2027<small>NUEVO</small></button>
+          <button class="ir-tab" type="button" role="tab" id="ir-t2026" aria-controls="ir-p2026" data-year="2026" aria-selected="false" tabindex="-1">2026</button>
+          </div>
+          <p class="ir-live" aria-live="polite"></p>
+          <div class="ir-body">
+            <div class="ir-hl" aria-hidden="true"><i></i></div>
+          <div class="ir-panel ir-soon" id="ir-p2027" role="tabpanel" aria-labelledby="ir-t2027" data-year="2027" data-soon>
+            <svg class="ir-soon-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.2v3.6M10.2 15h3.6"/></svg>
+            <p class="ir-soon-h">La tabla 2027 todavía no sale</p>
+            <p>El SRI la publica a fines de diciembre, ajustada a la inflación. La de 2026 salió el 30 de diciembre de 2025. Apenas se publique la verás aquí, lista para copiar o bajar en Excel.</p>
+            <p class="ir-soon-n">Lo que ganes en 2026 se calcula con la tabla 2026.</p>
+            <p class="ir-soon-n">Canasta básica de enero de 2027 (define el tope de gastos personales): <strong>por publicar</strong> por el INEC a inicios de febrero de 2027. La de enero de 2026 fue USD 821,80.</p>
+          </div>
+          <div class="ir-panel" id="ir-p2026" role="tabpanel" aria-labelledby="ir-t2026" data-year="2026" hidden>
+            <table class="ir-table">
+              <caption class="calc-sr">Tabla del impuesto a la renta 2026 para personas naturales, en dólares</caption>
+              <thead><tr><th scope="col">Fracción básica</th><th scope="col">Exceso hasta</th><th scope="col">Impuesto fracción básica</th><th scope="col">% fracción excedente</th></tr></thead>
+              <tbody>
+                <tr><td data-v="0">0</td><td data-v="12208">12.208</td><td data-v="0">0</td><td data-v="0">0 %</td></tr>
+                <tr><td data-v="12208">12.208</td><td data-v="15549">15.549</td><td data-v="0">0</td><td data-v="0.05">5 %</td></tr>
+                <tr><td data-v="15549">15.549</td><td data-v="20188">20.188</td><td data-v="167">167</td><td data-v="0.1">10 %</td></tr>
+                <tr><td data-v="20188">20.188</td><td data-v="26700">26.700</td><td data-v="631">631</td><td data-v="0.12">12 %</td></tr>
+                <tr><td data-v="26700">26.700</td><td data-v="35136">35.136</td><td data-v="1412">1.412</td><td data-v="0.15">15 %</td></tr>
+                <tr><td data-v="35136">35.136</td><td data-v="46575">46.575</td><td data-v="2678">2.678</td><td data-v="0.2">20 %</td></tr>
+                <tr><td data-v="46575">46.575</td><td data-v="62005">62.005</td><td data-v="4965">4.965</td><td data-v="0.25">25 %</td></tr>
+                <tr><td data-v="62005">62.005</td><td data-v="82679">82.679</td><td data-v="8823">8.823</td><td data-v="0.3">30 %</td></tr>
+                <tr><td data-v="82679">82.679</td><td data-v="109956">109.956</td><td data-v="15025">15.025</td><td data-v="0.35">35 %</td></tr>
+                <tr><td data-v="109956">109.956</td><td data-v="">En adelante</td><td data-v="24572">24.572</td><td data-v="0.37">37 %</td></tr>
+              </tbody>
+            </table>
+            <p class="ir-foot"><span class="ir-src">Resolución NAC-DGERCGC25-00000043, Segundo Suplemento del Registro Oficial No. 194, 30 de diciembre de 2025.</span> <a href="https://www.sri.gob.ec/o/sri-portlet-biblioteca-alfresco-internet/descargar?id=bb7aac3c-251d-4243-9477-10a3ba8e7355&amp;nombre=NAC-DGERCGC25-00000043.pdf" target="_blank" rel="noopener">Documento del SRI ↗</a></p>
+          </div>
+          </div>
+        </div>
+        </div>
+        <p class="calc-note">Cálculo referencial para trabajadores en relación de dependencia, con la misma proyección que hace un sistema de nómina (lo cobrado + este mes + el pronóstico de los meses que faltan), con la tabla del SRI 2026, el aporte personal al IESS de 9,45 % y la canasta básica de enero de 2026 (USD 821,80). Incluye el tope de 100 canastas por enfermedad catastrófica; incluye las exoneraciones por 65 años o más y por discapacidad, pero no ingresos de otras fuentes.</p>
       </section>
 
-      <h2>¿Quién paga impuesto a la renta en relación de dependencia?</h2>
-      <p>Todo trabajador cuya <strong>base imponible anual</strong> —sus ingresos gravados menos el aporte personal al IESS— supere la <strong>fracción básica exenta: USD 12.208 en 2026</strong>. Por debajo de ese valor el impuesto es cero. Por encima, el empleador calcula el impuesto proyectado del año y lo <strong>retiene cada mes</strong> del rol de pagos; al cierre del año entrega al trabajador el <strong>formulario 107</strong> con lo retenido.</p>
-
-      <h2>Cómo se calcula, paso a paso</h2>
-      <ol>
-        <li><strong>Suma los ingresos gravados del año:</strong> sueldo, horas extra, comisiones y bonos. El décimo tercero, el décimo cuarto y los fondos de reserva <strong>no se suman</strong>: son ingresos exentos.</li>
-        <li><strong>Resta el aporte personal al IESS</strong> (9,45 %). El resultado es la <strong>base imponible</strong>.</li>
-        <li><strong>Ubica la base en la tabla del SRI</strong> y aplica la fórmula: impuesto de la fracción básica + porcentaje del tramo × lo que pasa del inicio del tramo. Ese es el <strong>impuesto causado</strong>.</li>
-        <li><strong>Resta la rebaja por gastos personales:</strong> el 18 % de tus gastos proyectados, hasta un tope que depende de tus cargas familiares.</li>
-        <li><strong>Divide para los meses del año</strong> para obtener la retención mensual. Si tu sueldo cambia a mitad de año, la retención se recalcula con los meses que quedan.</li>
-      </ol>
-
-      <h2>Tabla del impuesto a la renta 2026</h2>
-      <p>Vigente para los ingresos de 2026, según la Resolución NAC-DGERCGC25-00000043 del SRI. Valores en dólares.</p>
+      <h2>Tres ejemplos rápidos</h2>
+      <p>Con la tabla 2026, sin horas extra, sin cargas y sin gastos personales (con gastos, el impuesto baja).</p>
       <div class="table-scroll">
         <table class="table">
-          <thead><tr><th>Desde</th><th>Hasta</th><th>Fracción básica</th><th>% excedente</th></tr></thead>
+          <thead><tr><th>Sueldo mensual</th><th>Retención al mes</th><th>Impuesto del año</th></tr></thead>
           <tbody>
-            <tr><td>0</td><td>12.208</td><td>0</td><td>0 %</td></tr>
-            <tr><td>12.208</td><td>15.549</td><td>0</td><td>5 %</td></tr>
-            <tr><td>15.549</td><td>20.188</td><td>167</td><td>10 %</td></tr>
-            <tr><td>20.188</td><td>26.700</td><td>631</td><td>12 %</td></tr>
-            <tr><td>26.700</td><td>35.136</td><td>1.412</td><td>15 %</td></tr>
-            <tr><td>35.136</td><td>46.575</td><td>2.678</td><td>20 %</td></tr>
-            <tr><td>46.575</td><td>62.005</td><td>4.965</td><td>25 %</td></tr>
-            <tr><td>62.005</td><td>82.679</td><td>8.823</td><td>30 %</td></tr>
-            <tr><td>82.679</td><td>109.956</td><td>15.025</td><td>35 %</td></tr>
-            <tr><td>109.956</td><td>En adelante</td><td>24.572</td><td>37 %</td></tr>
+            <tr><td>1.000</td><td>0,00</td><td>0,00</td></tr>
+            <tr><td>1.500</td><td>20,17</td><td>242,00</td></tr>
+            <tr><td>2.500</td><td>123,48</td><td>1.481,75</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h2>La rebaja por gastos personales</h2>
-      <p>Los gastos de <strong>vivienda, salud, educación, alimentación, vestimenta y turismo</strong> no se restan de la base: reducen el impuesto en un <strong>18 %</strong> de su valor, hasta un tope medido en canastas familiares básicas (USD 821,80 en 2026). Para que tu empleador lo considere en las retenciones, entrégale al inicio del año tu proyección de gastos personales. Valores en dólares.</p>
-      <div class="table-scroll">
+      <aside class="article-tldr" aria-label="En corto">
+        <p class="tldr-k">En corto</p>
+        <ul>
+          <li>Si lo que ganas en el año, menos el IESS, no pasa de <strong>USD 12.208</strong>, no pagas nada en 2026.</li>
+          <li>La tabla <strong>2027</strong> sale a fines de diciembre. Apenas se publique, la ponemos aquí.</li>
+          <li>Tus gastos personales te bajan el impuesto: el <strong>18 %</strong> de lo que gastaste, con un tope.</li>
+        </ul>
+      </aside>
+
+      <aside class="ad-slot" data-ad-slot="" aria-label="Publicidad" hidden></aside>
+
+      <h2>¿Cuándo sale la tabla 2027?</h2>
+      <p>El SRI la publica a fines de diciembre, ajustada a la inflación del año, como pide el artículo 36 de la Ley de Régimen Tributario Interno. La de 2026 salió el 30 de diciembre de 2025 y la de 2025, el 20 de diciembre de 2024. Apenas salga la de 2027, la verás en la tabla de arriba junto a la de 2026, para comparar, y la calculadora la usará.</p>
+      <div class="article-callout"><strong>Dato clave para 2027.</strong> El tope de gastos personales se mide en canastas básicas de enero de cada año. La canasta de <strong>enero de 2027</strong> la publica el INEC a inicios de febrero de 2027 (la de enero de 2026 fue USD 821,80). Cuando salga, se actualizan aquí los topes: 7 canastas sin cargas, hasta 20 con cinco o más, y 100 por enfermedad catastrófica.</div>
+      <p>Mientras tanto, todo lo que ganes en 2026 se calcula con la tabla 2026, y esa declaración se presenta en marzo de 2027.</p>
+
+      <h2>¿Cómo se lee la tabla?</h2>
+      <p>Busca la fila donde cae tu base imponible, que es lo que ganas en el año menos tu aporte al IESS. Tu impuesto es el valor de «Impuesto fracción básica» de esa fila, más el porcentaje de la última columna aplicado a lo que tu base pasa de la «Fracción básica».</p>
+      <p>Con una base de USD 27.165 en 2026, por ejemplo: 1.412 + 15 % × (27.165 − 26.700) = USD 1.481,75.</p>
+
+      <h2>¿Cómo se calcula, paso a paso?</h2>
+      <ol>
+        <li>Suma lo que ganas en el año: sueldo, horas extra, comisiones y bonos. Los décimos y los fondos de reserva no entran.</li>
+        <li>Réstale tu aporte al IESS, el 9,45 %. Lo que queda es tu base imponible.</li>
+        <li>Busca tu base en la tabla y saca el impuesto.</li>
+        <li>Réstale la rebaja por gastos personales. Eso es tu impuesto del año.</li>
+        <li>Para la retención del mes, réstale lo que ya te retuvieron y divide lo que falta para los meses que quedan, contando el actual.</li>
+      </ol>
+      <p>Durante el año, tu empresa no sabe todavía cuánto vas a ganar, así que proyecta: suma lo que ya cobraste, lo de este mes y un pronóstico de los meses que faltan. La calculadora hace lo mismo; en «Afinar el cálculo» puedes poner tus valores reales.</p>
+
+      <h2>Tus gastos personales sí cuentan</h2>
+      <p>Vivienda, salud, educación, alimentación, vestimenta y turismo. El 18 % de lo que gastes en eso se resta de tu impuesto, hasta un tope que sube con tus cargas familiares. Para que tu empresa lo tome en cuenta, entrégale tu proyección de gastos a inicio de año. Estos son los topes de 2026, con la canasta básica de enero (USD 821,80); la fila de tus cargas se marca sola.</p>
+      <div class="table-scroll" data-topes>
         <table class="table">
           <thead><tr><th>Cargas</th><th>Canastas</th><th>Tope de gastos</th><th>Rebaja máxima</th></tr></thead>
           <tbody>
@@ -168,33 +375,43 @@
             <tr><td>3</td><td>14</td><td>11.505,20</td><td>2.070,94</td></tr>
             <tr><td>4</td><td>17</td><td>13.970,60</td><td>2.514,71</td></tr>
             <tr><td>5 o más</td><td>20</td><td>16.436,00</td><td>2.958,48</td></tr>
+            <tr><td>Enfermedad catastrófica, rara o huérfana</td><td>100</td><td>82.180,00</td><td>14.792,40</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Para esta rebaja cuentan como cargas los padres, el cónyuge o pareja en unión de hecho y los hijos de hasta 21 años (o con discapacidad, sin límite de edad) que dependan económicamente de ti y no reciban ingresos mayores a un salario básico.</p>
+      <p>Cuentan como cargas tus padres, tu cónyuge o pareja y tus hijos de hasta 21 años (o con discapacidad, a cualquier edad), siempre que dependan de ti y no ganen más de un salario básico.</p>
+      <p>Si tú o una de tus cargas tiene una <strong>enfermedad catastrófica, rara o huérfana</strong> certificada, el tope sube a 100 canastas: hasta USD 82.180 de gastos y una rebaja de hasta USD 14.792,40. Marca la casilla en la calculadora para usarlo.</p>
+      <div class="article-callout"><strong>Un ejemplo.</strong> Ganas USD 2.500 al mes, tienes una carga y gastas USD 5.000 al año en gastos personales. En el año son USD 30.000; menos USD 2.835 del IESS, tu base es USD 27.165. Eso cae en la fila del 15 %: USD 1.481,75 de impuesto. Tu rebaja es el 18 % de 5.000, o sea USD 900. <strong>Pagas USD 581,75 en el año, unos USD 48,48 al mes.</strong></div>
 
-      <div class="article-callout">
-        <p><strong>Ejemplo.</strong> Sueldo de USD 2.500 al mes, sin otros ingresos, una carga familiar y USD 5.000 de gastos personales al año.</p>
-        <p>Ingresos: 2.500 × 12 = USD 30.000. Aporte al IESS: 30.000 × 9,45 % = USD 2.835. Base imponible: USD 27.165, que cae en el tramo del 15 %: 1.412 + 15 % × (27.165 − 26.700) = <strong>USD 1.481,75</strong> de impuesto causado. Rebaja: 5.000 × 18 % = USD 900 (por debajo del tope de USD 7.396,20). <strong>Impuesto del año: USD 581,75, unos USD 48,48 retenidos al mes.</strong></p>
-      </div>
+      <h2>¿Tengo que declarar?</h2>
+      <p>Si en el año trabajaste solo en relación de dependencia y con un solo empleador, el formulario 107 que te entrega tu empresa en enero hace de declaración, siempre que no tengas gastos personales por reliquidar. Si tuviste dos o más empleadores, u otros ingresos que juntos pasan la fracción exenta, te toca declarar.</p>
+      <p>Las personas naturales declaran en marzo del año siguiente, y el día depende del noveno dígito de la cédula o del RUC. Confirma tu fecha en el SRI.</p>
 
-      <h2>Errores comunes</h2>
+      <h2>Ojo con esto</h2>
       <ul>
-        <li><strong>No proyectar los ingresos variables:</strong> si las horas extra o comisiones crecen a fin de año, la retención se queda corta y el ajuste cae de golpe en diciembre.</li>
-        <li><strong>Sumar los décimos o los fondos de reserva</strong> como ingreso gravado. Son exentos.</li>
-        <li><strong>Olvidar la proyección de gastos personales</strong> o no actualizarla cuando cambian las cargas: el trabajador termina pagando de más durante el año.</li>
-        <li><strong>Usar la tabla o la canasta del año anterior.</strong> Ambas cambian cada año.</li>
-        <li><strong>No recalcular tras un aumento de sueldo,</strong> repartiendo el nuevo impuesto solo en los meses que quedan.</li>
+        <li>Si tus horas extra o comisiones suben a fin de año y nadie las proyectó, el ajuste te cae de golpe en diciembre.</li>
+        <li>La tabla y la canasta básica cambian cada año. Con las del año pasado sale otro número.</li>
+        <li>Si no entregas tu proyección de gastos personales, te retienen de más todo el año.</li>
       </ul>
 
-      <h2>Cómo lo resuelve un software de nómina</h2>
-      <p>El <a href="../modulono.html">módulo de Nómina de SquareNet</a> proyecta el impuesto de cada persona mes a mes —lo ganado hasta la fecha, lo de este mes y el pronóstico de los meses que faltan—, aplica la tabla vigente y la rebaja por gastos personales, y calcula la retención exacta. Con el depurador de fórmulas se ve paso a paso de dónde sale cada valor, y al cierre del año genera el anexo RDEP y los formularios 107.</p>
+      <h2>Fuentes</h2>
+      <ul class="article-sources">
+        <li><a href="https://www.sri.gob.ec/o/sri-portlet-biblioteca-alfresco-internet/descargar/58a7f4f6-ab51-48b6-b9ff-a8e97e1a28ef/Tablas%20de%20c%C3%A1lculo%20de%20Impuesto%20a%20la%20Renta.pdf" target="_blank" rel="noopener">SRI: Tablas de cálculo de impuesto a la renta, personas naturales (PDF)</a></li>
+        <li><a href="https://www.sri.gob.ec/o/sri-portlet-biblioteca-alfresco-internet/descargar?id=bb7aac3c-251d-4243-9477-10a3ba8e7355&amp;nombre=NAC-DGERCGC25-00000043.pdf" target="_blank" rel="noopener">SRI: Resolución NAC-DGERCGC25-00000043, tabla 2026 (PDF)</a></li>
+        <li><a href="https://www.ecija.com/actualidad-insights/sri-publica-nuevas-tablas-para-liquidar-el-impuesto-a-la-renta-2026/" target="_blank" rel="noopener">ECIJA: SRI publica nuevas tablas para liquidar el impuesto a la renta 2026</a></li>
+        <li><a href="https://nmslaw.com.ec/blog/2026/01/05/tablas-impuesto-renta-2026-ecuador/" target="_blank" rel="noopener">NMS Law: Tablas del impuesto a la renta para 2026 en Ecuador</a></li>
+        <li><a href="https://www.primicias.ec/economia/tabla-decuento-gastos-personales-impuesto-renta-canastas-basicas-sri-115251/" target="_blank" rel="noopener">Primicias: lo que podrá descontar como gastos personales en 2026 (incluye el tope por enfermedades catastróficas)</a></li>
+        <li><a href="https://www.hlbecuador.com/gastos-personales-2026-el-limite-que-define-la-rebaja-del-impuesto-a-la-renta/" target="_blank" rel="noopener">HLB Ecuador: gastos personales 2026, el límite que define la rebaja</a></li>
+        <li><a href="https://www.siigo.com/ec/blog/obligaciones-fiscales/gastos-personales-ecuador/" target="_blank" rel="noopener">Siigo: Gastos personales en Ecuador</a></li>
+        <li><a href="https://www.bloomberglinea.com/latinoamerica/ecuador/para-que-sirve-el-formulario-107-y-108-en-la-presentacion-de-la-renta-en-ecuador/" target="_blank" rel="noopener">Bloomberg Línea: para qué sirve el formulario 107</a></li>
+      </ul>
 
-      <p class="article-disclaimer">Esta guía y la calculadora son informativas y se basan en la tabla del SRI para 2026, el aporte personal al IESS del 9,45 % y la canasta familiar básica de USD 821,80. Existen casos especiales (adultos mayores, personas con discapacidad, enfermedades catastróficas, ingresos de otras fuentes) con reglas adicionales. Verifique siempre con el SRI antes de declarar o retener.</p>
+      <p class="article-disclaimer">Guía y calculadora informativas. Las tablas son las publicadas por el SRI para cada año. Hay casos con reglas propias que la calculadora no incluye (por ejemplo, ingresos de otras fuentes). Antes de declarar o retener, confirma con el SRI.</p>
 
       <div class="article-cta">
-        <h3>¿Quiere que las retenciones de toda su nómina se calculen solas?</h3>
-        <div class="cta-row" style="justify-content:center">
+        <h3>¿Llevas las retenciones de toda la nómina?</h3>
+        <p>SquareNet proyecta el impuesto de cada persona mes a mes, te muestra de dónde sale cada valor y al cierre del año genera el RDEP y los formularios 107.</p>
+        <div class="cta-row">
           <a href="../modulono.html" class="btn btn-primary">Ver módulo de Nómina</a>
           <a href="../contacto.html" class="btn btn-secondary">Contactarnos</a>
         </div>
@@ -205,11 +422,11 @@
         <div class="related-grid">
           <a href="decimo-tercero-decimo-cuarto-ecuador.html">
             <div class="related-cover"><img src="img/cover-decimos.svg" alt="" loading="lazy" width="320" height="200"></div>
-            <h3>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h3>
+            <h3>Décimo tercero y décimo cuarto: cuánto te toca y cuándo te pagan</h3>
           </a>
           <a href="utilidades-15-por-ciento-ecuador.html">
             <div class="related-cover"><img src="img/cover-utilidades.svg" alt="" loading="lazy" width="320" height="200"></div>
-            <h3>Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores</h3>
+            <h3>Utilidades: cómo se reparte el 15 % y cuánto te toca</h3>
           </a>
         </div>
       </aside>
@@ -227,20 +444,19 @@
         <a href="../index.html">Home</a>
         <a href="../somos.html">Quiénes Somos</a>
         <a href="../plataforma.html">Plataforma SquareNet</a>
-        <a href="../lectores.html">Lectores Biométricos</a>
         <a href="../contacto.html">Contactos</a>
       </div>
       <div class="footer-col">
         <h6>Módulos</h6>
         <a href="../modulono.html">Nómina</a>
-        <a href="../moduloca.html">Control de Asistencia</a>
+        <a href="../moduloca.html">Asistencia</a>
         <a href="../modulorh.html">Recursos Humanos</a>
-        <a href="../moduloac.html">Control de Acceso</a>
-        <a href="../modulocv.html">Control de Visitas</a>
-        <a href="../modulocc.html">Control de Comedor</a>
-        <a href="../modulopr.html">Control de Eficiencia</a>
+        <a href="../moduloac.html">Acceso</a>
+        <a href="../modulocv.html">Visitas</a>
+        <a href="../modulocc.html">Comedor</a>
+        <a href="../contacto.html">Evaluaciones</a>
         <a href="../moduloas.html">Autoservicio</a>
-        <a href="../squarebridge.html">SquareBridge</a>
+        <a href="../contacto.html">Trabajo Social</a>
       </div>
       <div class="footer-col">
         <h6>Contacto</h6>
@@ -267,6 +483,25 @@
   </script>
   <script src="../js/fecha.js"></script>
   <script src="../js/calc.js"></script>
+  <script>
+    // la tabla va primero; la calculadora siempre empieza escondida y se abre con el botón
+    (function () {
+      var lab = document.querySelector('.ir-lab'), btn = lab && lab.querySelector('.ir-toggle');
+      if (!btn) return;
+      function set(open, go) {
+        lab.classList.toggle('is-calc', open);
+        btn.setAttribute('aria-expanded', String(open));
+        // la tabla cambió de ancho: que el JS vuelva a ubicar la franja del tramo
+        var inp = lab.querySelector('.calc-form input');
+        // la calculadora usa la tabla 2026 mientras no salga la 2027: mostrarla para que se marque el tramo
+        var t26 = lab.querySelector('#ir-t2026');
+        if (open && t26 && t26.getAttribute('aria-selected') !== 'true') t26.click();
+        if (open && inp) requestAnimationFrame(function () { inp.dispatchEvent(new Event('input', { bubbles: true })); window.dispatchEvent(new Event('resize')); });
+        if (open && go) { var f = lab.querySelector('.calc-form input'); if (f) f.focus({ preventScroll: true }); }
+      }
+      btn.addEventListener('click', function () { set(!lab.classList.contains('is-calc'), true); });
+    })();
+  </script>
   <script src="../js/nav.js"></script>
   <script src="../js/consent.js"></script>
 </body>

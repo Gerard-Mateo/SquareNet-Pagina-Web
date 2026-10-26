@@ -75,29 +75,23 @@
   .post-card > a:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
   .pc-text p{margin:0 0 var(--space-3);font-size:15px;line-height:1.55;color:var(--color-neutral-700);flex:1}
 
-  /* calculadoras: acceso directo a las 5 */
-  .calc-strip{position:relative;overflow:hidden;margin-top:var(--space-6);padding:var(--space-6);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);
-    display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:var(--space-6);align-items:center}
-  .calc-strip::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(circle,rgba(255,255,255,.13) 1px,transparent 1.4px) 0 0/18px 18px;
-    -webkit-mask-image:linear-gradient(100deg,transparent 10%,#000 60%);mask-image:linear-gradient(100deg,transparent 10%,#000 60%)}
-  .calc-strip > *{position:relative}
-  .calc-strip .calc-badge{color:var(--color-accent-300)}
-  .calc-strip .calc-badge::before{background:var(--color-accent-300)}
-  .cs-head h2{font-size:30px;line-height:1.12;margin:0 0 var(--space-2)}
-  .cs-head p{margin:0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.76)}
-  .cs-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--space-2)}
-  .cs-tile{position:relative;display:flex;flex-direction:column;min-height:168px;padding:var(--space-3);text-decoration:none;color:#fff;
-    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-md);
-    transition:transform .3s cubic-bezier(.2,.8,.3,1.4),background .25s ease,border-color .25s ease}
-  .cs-tile b{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:36px;line-height:1;letter-spacing:-.01em;
-    color:var(--color-accent-300);margin-bottom:auto;padding-bottom:var(--space-3);transition:text-shadow .3s ease}
-  .cs-tile strong{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;line-height:1.2}
-  .cs-tile span{margin-top:4px;padding-right:22px;font-size:13px;line-height:1.4;color:rgba(255,255,255,.66)}
-  .cs-tile i{position:absolute;right:var(--space-3);bottom:var(--space-3);font-style:normal;color:var(--color-accent-300);transition:transform .25s ease}
-  .cs-tile:hover,.cs-tile:focus-visible{transform:translateY(-4px);background:rgba(255,255,255,.1);border-color:var(--color-accent-300)}
-  .cs-tile:hover b,.cs-tile:focus-visible b{text-shadow:0 0 18px color-mix(in srgb,var(--color-accent-300) 60%,transparent)}
-  .cs-tile:hover i,.cs-tile:focus-visible i{transform:translateX(4px)}
+  /* calculadoras: título grande + lista de todo lo que se puede calcular */
+  .tools{margin-top:var(--space-8);padding-top:var(--space-6);border-top:3px solid var(--color-text)}
+  .tools-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-4) var(--space-8);align-items:end;margin-bottom:var(--space-4)}
+  .tools-head h2{margin:0;font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:-.02em}
+  .tools-head .kicker{grid-column:1/-1;margin:0}
+  .tools-sub{margin:0;font-size:17px;line-height:1.55;color:var(--color-neutral-700);max-width:46ch}
+  .tools-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--space-6);border-top:1px solid var(--color-divider)}
+  .tools-list li{border-bottom:1px solid var(--color-divider)}
+  .tools-list a{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-2);text-decoration:none;color:inherit;transition:background .2s ease}
+  .tl-n{font-family:var(--font-heading);font-weight:600;font-size:26px;color:var(--color-accent-300);font-variant-numeric:tabular-nums}
+  .tl-b strong{display:block;font-family:var(--font-heading);font-weight:600;font-size:22px;line-height:1.2}
+  .tl-b span{display:block;margin-top:3px;font-size:15px;line-height:1.45;color:var(--color-neutral-700)}
+  .tl-b em{display:inline-block;margin-left:8px;padding:1px 7px;font-style:normal;font-family:var(--font-body);font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;vertical-align:4px;color:var(--color-accent-2-700);background:var(--color-accent-2-100);border-radius:var(--radius-sm)}
+  .tools-list i{font-style:normal;font-size:20px;color:var(--color-accent-700);transition:transform .25s ease}
+  .tools-list a:hover,.tools-list a:focus-visible{background:var(--color-accent-100)}
+  .tools-list a:hover strong{color:var(--color-accent-800)}
+  .tools-list a:hover i,.tools-list a:focus-visible i{transform:translateX(4px)}
 
   /* marca "Calculadora" sobre la portada de los artículos que la tienen */
   .pc-cover,.lead-cover{position:relative}
@@ -110,10 +104,6 @@
     display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
   .blog-cta p{margin:0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:17px;max-width:46ch}
 
-  @media (max-width:1100px){
-    .calc-strip{grid-template-columns:1fr;gap:var(--space-4)}
-    .cs-head{max-width:560px}
-  }
   @media (max-width:1000px){
     .post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
@@ -125,18 +115,16 @@
     .lead-main p{font-size:15.5px}
   }
   @media (max-width:760px){
-    .calc-strip{padding:var(--space-4)}
-    .cs-head h2{font-size:25px}
-    .cs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .cs-tile{min-height:0}
-    .cs-tile:last-child{grid-column:1 / -1}
-    .cs-tile b{font-size:30px}
+    .tools-head{grid-template-columns:1fr}
+    .tools-list{grid-template-columns:1fr}
+    .tools-list a{grid-template-columns:40px minmax(0,1fr) auto;padding:var(--space-3) 0}
+    .tl-b strong{font-size:19px}
   }
   @media (max-width:640px){
     .post-grid{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
-    .post-card > a,.post-go i,.lead-cover img,.pc-cover img,.chip,.cs-tile,.cs-tile b,.cs-tile i{transition:none!important}
+    .post-card > a,.post-go i,.lead-cover img,.pc-cover img,.chip,.tools-list a,.tools-list i{transition:none!important}
   }
 </style>
 </head>
@@ -150,7 +138,6 @@
         <a href="../somos.html">Quiénes Somos</a>
         <a href="../plataforma.html">Plataforma SquareNet</a>
         <a href="../modulos.html">Módulos</a>
-        <a href="../lectores.html">Lectores Biométricos</a>
         <a href="index.html" aria-current="page">Blog</a>
         <a href="../contacto.html">Contactos</a>
       </div>
@@ -164,122 +151,146 @@
       <p>Guías prácticas y calculadoras gratuitas para equipos de Recursos Humanos y Nómina: cálculos de ley, cumplimiento IESS y SRI, y buenas prácticas de gestión de personal.</p>
     </div>
 
-    <section class="calc-strip band-dark" aria-labelledby="cs-h" data-reveal>
-      <div class="cs-head">
-        <span class="calc-badge">Calculadoras 2026</span>
-        <h2 id="cs-h">Saca tus números en segundos</h2>
-        <p>Gratis, sin registro y con los valores de ley de este año. Cambias un dato y el resultado se actualiza al instante.</p>
+    <section class="tools" aria-labelledby="tools-h">
+      <div class="tools-head">
+        <p class="kicker">Gratis · Sin registro · Valores de ley de Ecuador</p>
+        <h2 id="tools-h">Calculadoras</h2>
+        <p class="tools-sub">Todo lo que puedes calcular aquí. Cambias un dato y el resultado se actualiza al instante, con el detalle de cada valor.</p>
       </div>
-      <div class="cs-grid">
-        <a class="cs-tile" href="decimo-tercero-decimo-cuarto-ecuador.html#calc-13"><b>13.º</b><strong>Décimo tercero</strong><span>Lo ganado en el año ÷ 12</span><i aria-hidden="true">→</i></a>
-        <a class="cs-tile" href="decimo-tercero-decimo-cuarto-ecuador.html#calc-14"><b>14.º</b><strong>Décimo cuarto</strong><span>Un salario básico por región</span><i aria-hidden="true">→</i></a>
-        <a class="cs-tile" href="fondos-de-reserva-ecuador.html#calculadora"><b>8,33 %</b><strong>Fondos de reserva</strong><span>Cuánto y desde cuándo</span><i aria-hidden="true">→</i></a>
-        <a class="cs-tile" href="utilidades-15-por-ciento-ecuador.html#calculadora"><b>15 %</b><strong>Utilidades</strong><span>Reparto por días y cargas</span><i aria-hidden="true">→</i></a>
-        <a class="cs-tile" href="impuesto-renta-relacion-dependencia-ecuador.html#calculadora"><b>IR</b><strong>Impuesto a la renta</strong><span>Tabla del SRI y retención mensual</span><i aria-hidden="true">→</i></a>
-      </div>
+      <ol class="tools-list">
+      <li><a href="impuesto-renta-relacion-dependencia-ecuador.html#calculadora"><span class="tl-n">01</span><span class="tl-b"><strong>Impuesto a la renta</strong><span>Cuánto te descuentan del sueldo cada mes, con la tabla oficial del SRI al lado.</span></span><i aria-hidden="true">→</i></a></li>
+      <li><a href="salario-basico-ecuador.html#calculadora"><span class="tl-n">02</span><span class="tl-b"><strong>Sueldo neto y salario básico<em>Nuevo</em></strong><span>Lo que te queda después del IESS y lo que cuestas a tu empresa.</span></span><i aria-hidden="true">→</i></a></li>
+      <li><a href="decimo-tercero-decimo-cuarto-ecuador.html#calc-13"><span class="tl-n">03</span><span class="tl-b"><strong>Décimo tercero</strong><span>Cuánto te toca de bono navideño, con tus ingresos mes a mes.</span></span><i aria-hidden="true">→</i></a></li>
+      <li><a href="decimo-tercero-decimo-cuarto-ecuador.html#calc-14"><span class="tl-n">04</span><span class="tl-b"><strong>Décimo cuarto</strong><span>Cuánto vas a cobrar según tu región y tu fecha de ingreso.</span></span><i aria-hidden="true">→</i></a></li>
+      <li><a href="liquidacion-laboral-ecuador.html#calculadora"><span class="tl-n">05</span><span class="tl-b"><strong>Liquidación<em>Nuevo</em></strong><span>Qué te toca si renuncias, te despiden o terminas por acuerdo, rubro por rubro.</span></span><i aria-hidden="true">→</i></a></li>
+      <li><a href="fondos-de-reserva-ecuador.html#calculadora"><span class="tl-n">06</span><span class="tl-b"><strong>Fondos de reserva</strong><span>Cuánto generas al mes y desde cuándo te toca.</span></span><i aria-hidden="true">→</i></a></li>
+      <li><a href="utilidades-15-por-ciento-ecuador.html#calculadora"><span class="tl-n">07</span><span class="tl-b"><strong>Utilidades</strong><span>Cuánto te toca del 15 % y cuánto te llega después de descuentos.</span></span><i aria-hidden="true">→</i></a></li>
+      </ol>
     </section>
 
     <div class="blog-filters" role="group" aria-label="Filtrar artículos por tema">
-      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todos <span>8</span></button>
-      <button type="button" class="chip" data-filter="Nómina" aria-pressed="false">Nómina <span>5</span></button>
-      <button type="button" class="chip" data-filter="Asistencia" aria-pressed="false">Asistencia <span>2</span></button>
+      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todos <span>12</span></button>
+      <button type="button" class="chip" data-filter="Nómina" aria-pressed="false">Nómina <span>8</span></button>
+      <button type="button" class="chip" data-filter="Asistencia" aria-pressed="false">Asistencia <span>3</span></button>
       <button type="button" class="chip" data-filter="Recursos Humanos" aria-pressed="false">Recursos Humanos <span>1</span></button>
     </div>
 
-    <article class="post-lead" data-cat="Nómina" data-reveal>
+    <article class="post-lead" data-cat="Nómina">
       <a href="impuesto-renta-relacion-dependencia-ecuador.html">
         <div class="lead-cover"><span class="has-calc">Calculadora</span><img src="img/cover-impuesto-renta.svg" alt="" width="320" height="200"></div>
         <div class="lead-main">
           <span class="post-flag">Lo más reciente</span>
-          <div class="post-meta"><span class="tag tag-accent">Nómina</span><span>SRI</span><span class="dot">·</span><time datetime="2026-10-21">21 oct 2026</time><span class="dot">·</span><span>5 min de lectura</span></div>
-          <h2>Impuesto a la Renta 2026 en Relación de Dependencia: Cómo se Calcula, con Calculadora</h2>
-          <p>La tabla del SRI 2026, el aporte al IESS, la rebaja por gastos personales y cuánto te retienen al mes. Con un ejemplo paso a paso y una calculadora para sacar tu número.</p>
+          <div class="post-meta"><span class="tag tag-accent">Nómina</span><span>SRI</span><span class="dot">·</span><time datetime="2026-10-22">22 oct 2026</time><span class="dot">·</span><span>4 min de lectura</span></div>
+          <h2>Tabla de impuesto a la renta 2027 en Ecuador</h2>
+          <p>La tabla oficial del SRI 2026 con una calculadora que marca tu tramo, para copiar o bajar en Excel. La de 2027 la subimos apenas salga, para comparar.</p>
           <span class="post-go">Leer artículo <i>→</i></span>
         </div>
       </a>
     </article>
 
     <div class="post-grid">
-      <article class="post-card" data-cat="Nómina" data-reveal>
+      <article class="post-card" data-cat="Nómina">
+        <a href="liquidacion-laboral-ecuador.html">
+          <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-liquidacion.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-10-22">22 oct 2026</time><span class="dot">·</span><span>5 min</span></div>
+            <h3>Calculadora de liquidación laboral en Ecuador: cuánto te toca si renuncias o te despiden</h3>
+            <p>Renuncia, despido, visto bueno o acuerdo: cada causal paga distinto. Rubro por rubro, con lo que aplica y lo que no.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Nómina">
+        <a href="salario-basico-ecuador.html">
+          <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-salario-basico.svg" alt="" loading="lazy" width="320" height="200"></div>
+          <div class="pc-text">
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-10-22">22 oct 2026</time><span class="dot">·</span><span>3 min</span></div>
+            <h3>Salario básico Ecuador 2027</h3>
+            <p>El de 2026 es USD 482 y el de 2027 está pendiente. Calcula cuánto te queda después del IESS y cuánto cuestas a tu empresa.</p>
+            <span class="post-go">Leer artículo <i>→</i></span>
+          </div>
+        </a>
+      </article>
+      <article class="post-card" data-cat="Nómina">
         <a href="utilidades-15-por-ciento-ecuador.html">
           <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-utilidades.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-30">30 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
-            <h3>Utilidades en Ecuador: Cómo se Calcula y Reparte el 15 % entre los Trabajadores</h3>
-            <p>El 15 % se reparte entre todos los trabajadores: 10 % por días trabajados y 5 % por cargas familiares. Fórmulas, un ejemplo y los errores más frecuentes.</p>
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-30">30 sep 2026</time><span class="dot">·</span><span>2 min</span></div>
+            <h3>Utilidades: cómo se reparte el 15 % y cuánto te toca</h3>
+            <p>Cómo se reparte el 15 %, qué te pueden descontar y cuánto te toca. Con calculadora.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
-      <article class="post-card" data-cat="Asistencia" data-reveal>
+      <article class="post-card" data-cat="Asistencia">
         <a href="control-asistencia-biometrico-ecuador.html">
           <div class="pc-cover"><img src="img/cover-biometrico.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Asistencia</span><time datetime="2026-09-23">23 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
-            <h3>Control de Asistencia con Lectores Biométricos: Cómo Implementarlo Bien en tu Empresa</h3>
-            <p>Tipos de lector, cómo evitar las marcaciones por terceros y cómo llevar cada marcación hasta el rol de pagos, con una nota sobre datos personales.</p>
+            <div class="post-meta"><span class="tag tag-accent">Asistencia</span><time datetime="2026-09-23">23 sep 2026</time><span class="dot">·</span><span>2 min</span></div>
+            <h3>Lectores biométricos: cómo controlar la asistencia sin dolores de cabeza</h3>
+            <p>Qué lector conviene, cómo llegan las marcaciones al rol y qué hacer con los datos de las huellas.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
-      <article class="post-card" data-cat="Nómina" data-reveal>
+      <article class="post-card" data-cat="Nómina">
         <a href="fondos-de-reserva-ecuador.html">
           <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-fondos-reserva.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-16">16 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
-            <h3>Fondos de Reserva en Ecuador: Quién los Recibe, Cuánto Son y Cómo se Pagan</h3>
-            <p>Desde el mes 13 de trabajo se genera el 8,33 % de la remuneración. Cómo se calcula, cuándo se mensualiza y dónde se depositan los acumulados.</p>
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-16">16 sep 2026</time><span class="dot">·</span><span>1 min</span></div>
+            <h3>Fondos de reserva: qué son, cuánto te toca y cómo cobrarlos</h3>
+            <p>Desde el mes 13 ganas un 8,33 % extra. Cuánto es y cómo cobrarlo en el rol o en el IESS. Con calculadora.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
-      <article class="post-card" data-cat="Nómina" data-reveal>
+      <article class="post-card" data-cat="Nómina">
         <a href="vacaciones-trabajadores-ecuador.html">
           <div class="pc-cover"><img src="img/cover-vacaciones.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-09">9 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
-            <h3>Vacaciones en Ecuador: Cuántos Días Corresponden, Cómo se Calculan y Cómo se Liquidan</h3>
-            <p>15 días por año, un día más desde el sexto año y un tope de 30. Cómo se acumulan, cuánto se paga si el trabajador sale y los errores más comunes.</p>
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-09-09">9 sep 2026</time><span class="dot">·</span><span>2 min</span></div>
+            <h3>Vacaciones en Ecuador: cuántos días te tocan y cómo se pagan</h3>
+            <p>15 días al año, uno más desde el sexto y cómo te las pagan si te vas.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
-      <article class="post-card" data-cat="Asistencia" data-reveal>
+      <article class="post-card" data-cat="Asistencia">
         <a href="horas-extras-ecuador-recargos-calculo.html">
           <div class="pc-cover"><img src="img/cover-horas-extras.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Asistencia</span><time datetime="2026-09-02">2 sep 2026</time><span class="dot">·</span><span>3 min</span></div>
-            <h3>Horas Extras en Ecuador: Recargos, Límites y Cómo Calcular su Pago</h3>
-            <p>Jornada de 8 horas, recargos del 50 % y 100 %, límites de 4 y 12 horas y un ejemplo de cálculo paso a paso para no equivocarte en el rol.</p>
+            <div class="post-meta"><span class="tag tag-accent">Asistencia</span><time datetime="2026-09-02">2 sep 2026</time><span class="dot">·</span><span>2 min</span></div>
+            <h3>Horas extras en Ecuador: cuánto se pagan y cómo calcularlas</h3>
+            <p>Recargos del 50 % y del 100 %, topes por día y por semana, y un ejemplo para sacar la cuenta.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
-      <article class="post-card" data-cat="Nómina" data-reveal>
+      <article class="post-card" data-cat="Nómina">
         <a href="decimo-tercero-decimo-cuarto-ecuador.html">
           <div class="pc-cover"><span class="has-calc">Calculadora</span><img src="img/cover-decimos.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>4 min</span></div>
-            <h3>Décimo Tercero y Décimo Cuarto Sueldo en Ecuador: Cálculo, Fechas y Cómo Automatizarlo</h3>
-            <p>Qué son, cómo se calculan, las fechas límite de pago por región en 2026, y los errores más comunes al procesarlos.</p>
+            <div class="post-meta"><span class="tag tag-accent">Nómina</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>2 min</span></div>
+            <h3>Décimo tercero y décimo cuarto: cuánto te toca y cuándo te pagan</h3>
+            <p>Cuánto te toca de cada uno y hasta cuándo te lo tienen que pagar. Con calculadora.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
-      <article class="post-card" data-cat="Recursos Humanos" data-reveal>
+      <article class="post-card" data-cat="Recursos Humanos">
         <a href="como-elegir-software-nomina-ecuador.html">
           <div class="pc-cover"><img src="img/cover-software-nomina.svg" alt="" loading="lazy" width="320" height="200"></div>
           <div class="pc-text">
-            <div class="post-meta"><span class="tag tag-accent">Recursos Humanos</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>3 min</span></div>
-            <h3>Cómo Elegir un Software de Nómina en Ecuador: 8 Criterios Clave para RRHH</h3>
-            <p>Una checklist práctica para evaluar cumplimiento legal, velocidad, flexibilidad e integración antes de decidir.</p>
+            <div class="post-meta"><span class="tag tag-accent">Recursos Humanos</span><time datetime="2026-08-24">24 ago 2026</time><span class="dot">·</span><span>2 min</span></div>
+            <h3>Cómo elegir un software de nómina en Ecuador: 8 preguntas para el proveedor</h3>
+            <p>8 preguntas para hacerle a cualquier proveedor antes de firmar.</p>
             <span class="post-go">Leer artículo <i>→</i></span>
           </div>
         </a>
       </article>
     </div>
 
-    <div class="blog-cta" data-reveal>
+    <div class="blog-cta">
       <p>¿Tienes una duda puntual sobre nómina o cumplimiento en Ecuador? Escríbenos, la respondemos sin compromiso.</p>
       <a class="btn btn-primary" href="../contacto.html">Contactar un asesor</a>
     </div>
@@ -296,20 +307,19 @@
         <a href="../index.html">Home</a>
         <a href="../somos.html">Quiénes Somos</a>
         <a href="../plataforma.html">Plataforma SquareNet</a>
-        <a href="../lectores.html">Lectores Biométricos</a>
         <a href="../contacto.html">Contactos</a>
       </div>
       <div class="footer-col">
         <h6>Módulos</h6>
         <a href="../modulono.html">Nómina</a>
-        <a href="../moduloca.html">Control de Asistencia</a>
+        <a href="../moduloca.html">Asistencia</a>
         <a href="../modulorh.html">Recursos Humanos</a>
-        <a href="../moduloac.html">Control de Acceso</a>
-        <a href="../modulocv.html">Control de Visitas</a>
-        <a href="../modulocc.html">Control de Comedor</a>
-        <a href="../modulopr.html">Control de Eficiencia</a>
+        <a href="../moduloac.html">Acceso</a>
+        <a href="../modulocv.html">Visitas</a>
+        <a href="../modulocc.html">Comedor</a>
+        <a href="../contacto.html">Evaluaciones</a>
         <a href="../moduloas.html">Autoservicio</a>
-        <a href="../squarebridge.html">SquareBridge</a>
+        <a href="../contacto.html">Trabajo Social</a>
       </div>
       <div class="footer-col">
         <h6>Contacto</h6>
@@ -354,6 +364,5 @@
   <script src="../js/fecha.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/consent.js"></script>
-  <script src="../js/reveal.js"></script>
 </body>
 </html>

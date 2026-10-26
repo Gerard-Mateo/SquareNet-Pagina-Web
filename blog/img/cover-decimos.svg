@@ -7,7 +7,6 @@
 .af{fill:#99e0ff;stroke:none}
 .g{filter:url(#glow)}
 
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <defs>
 <linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>

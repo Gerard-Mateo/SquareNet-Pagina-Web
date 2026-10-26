@@ -8,25 +8,37 @@
   </url>
   <url>
     <loc>https://www.squarenet.com.ec/blog/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.squarenet.com.ec/blog/liquidacion-laboral-ecuador.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.squarenet.com.ec/blog/salario-basico-ecuador.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.squarenet.com.ec/blog/impuesto-renta-relacion-dependencia-ecuador.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.squarenet.com.ec/blog/decimo-tercero-decimo-cuarto-ecuador.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.squarenet.com.ec/blog/como-elegir-software-nomina-ecuador.html</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -38,25 +50,25 @@
   </url>
   <url>
     <loc>https://www.squarenet.com.ec/blog/control-asistencia-biometrico-ecuador.html</loc>
-    <lastmod>2026-09-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.squarenet.com.ec/blog/fondos-de-reserva-ecuador.html</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.squarenet.com.ec/blog/fondos-de-reserva-ecuador.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.squarenet.com.ec/blog/vacaciones-trabajadores-ecuador.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.squarenet.com.ec/blog/horas-extras-ecuador-recargos-calculo.html</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -97,12 +109,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.squarenet.com.ec/modulopr.html</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.squarenet.com.ec/modulocv.html</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
@@ -121,12 +127,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.squarenet.com.ec/lectores.html</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.squarenet.com.ec/lectorZK.html</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
@@ -134,12 +134,6 @@
   </url>
   <url>
     <loc>https://www.squarenet.com.ec/lectorHandPunch.html</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.squarenet.com.ec/squarebridge.html</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

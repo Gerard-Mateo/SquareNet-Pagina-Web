@@ -86,6 +86,32 @@
     .reach{padding:var(--space-4)}
     .reach-val{font-size:16px}
   }
+  /* — formulario de ventas (diálogo) — */
+  .dept-btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:14.5px;color:var(--color-accent);background:none;border:0;padding:0;cursor:pointer;text-align:left}
+  .dept-btn:hover{text-decoration:underline}
+  .dept-btn svg{width:16px;height:16px;flex:none}
+  .lead-dlg{border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:0;width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--color-bg);color:var(--color-text);box-shadow:var(--shadow-lg)}
+  .lead-dlg::backdrop{background:rgba(8,28,36,.55)}
+  .lead-form{display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-6)}
+  .lead-head{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-3)}
+  .lead-head h2{font-size:26px;margin:0}
+  .lead-head p{margin:6px 0 0;font-size:14px;opacity:.8}
+  .lead-x{flex:none;width:36px;height:36px;border:1px solid var(--color-divider);border-radius:var(--radius-md);background:none;font-size:20px;line-height:1;cursor:pointer;color:inherit}
+  .lead-x:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent)}
+  .lead-f{display:flex;flex-direction:column;gap:8px;border:0;margin:0;padding:0;min-width:0}
+  .lead-f label,.lead-f legend{font-family:var(--font-heading);font-weight:600;font-size:15px;padding:0}
+  .lead-f input[type=text]{height:46px;padding:0 12px;font:inherit;font-size:16px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
+  .lead-f input[type=text]:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
+  .lead-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .lead-opts label{position:relative;font-family:var(--font-body);font-weight:400;font-size:14.5px}
+  .lead-opts input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .lead-opts span{display:inline-block;padding:9px 14px;border:1px solid var(--color-divider);border-radius:var(--radius-md);background:#fff;transition:background .2s,border-color .2s,color .2s}
+  .lead-opts input:checked+span{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-800);font-weight:600}
+  .lead-opts input:focus-visible+span{outline:2px solid var(--color-accent);outline-offset:2px}
+  .lead-err{margin:0;font-size:13px;color:#b3261e}
+  .lead-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center}
+  .lead-note{margin:0;font-size:12.5px;opacity:.7}
+  @media (max-width:520px){.lead-form{padding:var(--space-4)}}
   @media (prefers-reduced-motion:reduce){
     .dept-card,.reach-go,.reach-ico,.dept-ico{transition:none!important}
   }
@@ -101,7 +127,6 @@
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
         <a href="modulos.html">Módulos</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="blog/index.html">Blog</a>
         <a href="contacto.html" aria-current="page">Contactos</a>
       </div>
@@ -152,6 +177,7 @@
         <h3>Ventas</h3>
         <p>Cotizaciones y asesoría comercial: te ayudamos a elegir los módulos que tu empresa necesita.</p>
         <div class="dept-links">
+          <button type="button" class="dept-btn" data-lead-open><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9.5h8M8 12.5h5"/></svg>Solicitar cotización</button>
           <a href="mailto:ventas@squarenet.com.ec?subject=Cotizaci%C3%B3n%20SquareNet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>ventas@squarenet.com.ec</a>
         </div>
       </div>
@@ -198,20 +224,19 @@
         <a href="index.html">Home</a>
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="contacto.html">Contactos</a>
       </div>
       <div class="footer-col">
         <h6>Módulos</h6>
         <a href="modulono.html">Nómina</a>
-        <a href="moduloca.html">Control de Asistencia</a>
+        <a href="moduloca.html">Asistencia</a>
         <a href="modulorh.html">Recursos Humanos</a>
-        <a href="moduloac.html">Control de Acceso</a>
-        <a href="modulocv.html">Control de Visitas</a>
-        <a href="modulocc.html">Control de Comedor</a>
-        <a href="modulopr.html">Control de Eficiencia</a>
+        <a href="moduloac.html">Acceso</a>
+        <a href="modulocv.html">Visitas</a>
+        <a href="modulocc.html">Comedor</a>
+        <a href="contacto.html">Evaluaciones</a>
         <a href="moduloas.html">Autoservicio</a>
-        <a href="squarebridge.html">SquareBridge</a>
+        <a href="contacto.html">Trabajo Social</a>
       </div>
       <div class="footer-col">
         <h6>Contacto</h6>
@@ -235,6 +260,49 @@
       mainNav.setAttribute('data-open', String(!open));
       navToggle.setAttribute('aria-expanded', String(!open));
     });
+  </script>
+  <dialog class="lead-dlg" id="leadDlg" aria-labelledby="leadTitle">
+    <form class="lead-form" id="leadForm" novalidate>
+      <div class="lead-head">
+        <div>
+          <h2 id="leadTitle">Cotiza con ventas</h2>
+          <p>Cuéntanos de tu empresa y llegamos a la llamada con la demo lista.</p>
+        </div>
+        <button type="button" class="lead-x" data-lead-close aria-label="Cerrar">×</button>
+      </div>
+      <div class="lead-f"><label for="lf-name">Nombre y cargo</label><input type="text" id="lf-name" name="name" autocomplete="name" placeholder="Ej.: Ana Pérez, Jefa de RRHH" required></div>
+      <div class="lead-f"><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company" autocomplete="organization" required></div>
+      <div class="lead-f"><label for="lf-contact">Correo o WhatsApp</label><input type="text" id="lf-contact" name="contact" autocomplete="email" required></div>
+      <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?</legend><div class="lead-opts"><label><input type="radio" name="size" value="1–50"><span>1–50</span></label><label><input type="radio" name="size" value="51–200"><span>51–200</span></label><label><input type="radio" name="size" value="201–500"><span>201–500</span></label><label><input type="radio" name="size" value="Más de 500"><span>Más de 500</span></label></div></fieldset>
+      <fieldset class="lead-f"><legend>¿Qué le gustaría mejorar?</legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia y relojes"><span>Asistencia y relojes</span></label><label><input type="checkbox" name="need" value="Vacaciones y permisos"><span>Vacaciones y permisos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div></fieldset>
+      <p class="lead-err" id="leadErr" role="alert" hidden></p>
+      <div class="lead-actions">
+        <button type="submit" class="btn btn-primary">Enviar a ventas</button>
+        <button type="button" class="btn btn-secondary" data-lead-close>Cancelar</button>
+      </div>
+      <p class="lead-note">Se abrirá tu programa de correo con los datos listos para enviar a ventas@squarenet.com.ec.</p>
+    </form>
+  </dialog>
+  <script>
+    (function () {
+      var dlg = document.getElementById('leadDlg'), form = document.getElementById('leadForm'), err = document.getElementById('leadErr');
+      if (!dlg || typeof dlg.showModal !== 'function') return;
+      document.querySelectorAll('[data-lead-open]').forEach(function (b) { b.addEventListener('click', function () { dlg.showModal(); }); });
+      dlg.querySelectorAll('[data-lead-close]').forEach(function (b) { b.addEventListener('click', function () { dlg.close(); }); });
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
+        if (!v('name') || !v('company') || !v('contact')) { err.textContent = 'Completa nombre y cargo, empresa y un correo o WhatsApp.'; err.hidden = false; return; }
+        err.hidden = true;
+        var size = (form.querySelector('input[name=size]:checked') || {}).value || 'No indicado';
+        var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) { return c.value; }).join(', ') || 'No indicado';
+        var body = 'Nombre y cargo: ' + v('name') + '\nEmpresa: ' + v('company') + '\nCorreo o WhatsApp: ' + v('contact') +
+          '\nColaboradores: ' + size + '\nLe gustaría mejorar: ' + needs;
+        location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
+        dlg.close();
+      });
+    })();
   </script>
   <script src="js/fecha.js"></script>
   <script src="js/nav.js"></script>

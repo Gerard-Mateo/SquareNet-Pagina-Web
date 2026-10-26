@@ -220,8 +220,10 @@
   .showcase-copy{max-width:980px;margin:calc(var(--space-8) + var(--space-4)) auto 0;text-align:center}
   .showcase-copy h2{font-size:clamp(30px,4.4vw,52px);line-height:1.08;margin:0}
   .showcase-copy h2 .num{color:var(--color-accent-700);font-variant-numeric:tabular-nums}
-  .screens{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--space-4) var(--space-2)}
+  .screens{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6) var(--space-4)}
   .screens li{display:flex;flex-direction:column;align-items:center;gap:var(--space-2);font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;line-height:1.25}
+  .screens strong{font-weight:var(--font-heading-weight)}
+  .screens .desc{font-family:var(--font-body);font-weight:400;font-size:14px;line-height:1.4;opacity:.75;max-width:24ch}
   .screens .ico{display:grid;place-items:center;width:54px;height:54px;border-radius:var(--radius-md);background:var(--color-accent-100);color:var(--color-accent-700);
     transition:background .25s ease,transform .3s cubic-bezier(.2,.8,.3,1.4)}
   .screens li:hover .ico{background:var(--color-accent-200);transform:translateY(-3px)}
@@ -233,7 +235,7 @@
   @media (max-width:860px){
     .showcase{padding-bottom:var(--space-6)}
     .showcase-copy{margin-top:var(--space-8)}
-    .screens{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .screens{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
   /* en celular no va el laptop: el video del sistema es ilegible a ese tamaño. Queda el título + íconos. */
   @media (max-width:700px){
@@ -241,7 +243,7 @@
     .showcase-copy{margin-top:0}
   }
   @media (max-width:520px){
-    .screens{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .screens{grid-template-columns:minmax(0,1fr)}
     .screens li{font-size:15px}
   }
   @media (prefers-reduced-motion:reduce){
@@ -289,7 +291,6 @@
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
         <a href="modulos.html">Módulos</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="blog/index.html">Blog</a>
         <a href="contacto.html">Contactos</a>
       </div>
@@ -319,7 +320,7 @@
             <div class="laptop-screen">
               <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1280" height="720"
                      data-src="media/squarenet-recorrido.mp4"></video>
-              <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Menú de reportes del sistema SquareNet: rol de pago, formularios del SRI y más" width="1280" height="720" loading="lazy" decoding="async">
+              <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Rol de pagos en el sistema SquareNet: horas extra, décimos, fondos de reserva, aporte al IESS e impuesto a la renta" width="1280" height="720" loading="lazy" decoding="async">
               <span class="laptop-gloss" aria-hidden="true"></span>
               <button class="laptop-toggle" id="laptopToggle" type="button" aria-label="Pausar la animación">
                 <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
@@ -333,14 +334,16 @@
       </div>
 
       <div class="showcase-copy reveal" id="showcaseCopy">
-        <h2 id="pantallas-title">Más de <span class="num" data-count="40">40</span> pantallas en un solo sistema</h2>
+        <h2 id="pantallas-title">Más de <span class="num" data-count="300">300</span> funcionalidades en un solo sistema</h2>
         <ul class="screens">
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span>Roles de pago</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>Resúmenes de horario</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="m10 13.2 4 4M14 13.2l-4 4"/></svg></span>Ausentismos</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6M15 14.4c.7-.3 1.4-.4 2-.4 2.4 0 4 1.8 4 4.6"/></svg></span>Personal</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="M9 12.5h6"/><path d="M9 17c1-1.7 2-1.7 2.7 0s1.6 1.2 2.5-.3"/></svg></span>Contratos</li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span>…y muchas más</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><strong>Nómina en un clic</strong><span class="desc">Roles, quincenas, décimos, utilidades, liquidaciones e impuesto a la renta.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><strong>Asistencia con biométricos</strong><span class="desc">Integración con relojes, resumen diario y aprobación de horas extra.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="m9.5 14.5 2 2 3.5-4"/></svg></span><strong>Archivos legales listos</strong><span class="desc">Banco, IESS, Ministerio de Trabajo (MRL) y formulario 107.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><strong>Autoservicio para colaboradores</strong><span class="desc">Roles, vacaciones, permisos y marcación web desde el celular.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.1 8 7.5 9.5 4.4-1.5 7.5-5 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></span><strong>Cada cambio auditado</strong><span class="desc">Quién, cuándo y el valor anterior, más el bloqueo de períodos cerrados.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5Z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><strong>Contabilidad sin digitar</strong><span class="desc">Asientos automáticos hacia tu sistema contable.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3.2" height="8" rx=".6"/><rect x="10.4" y="7" width="3.2" height="13" rx=".6"/><rect x="15.3" y="3.5" width="3.2" height="16.5" rx=".6"/></svg></span><strong>Reportes a tu medida</strong><span class="desc">Tus propias columnas y rubros, configurados una vez y usados cada mes. Más de 90 reportes listos y exportación a Excel en un clic.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span><strong>Y más</strong><span class="desc">Explora todos los módulos y funciones.</span></li>
         </ul>
         <a class="showcase-more" href="modulos.html">Explorar los módulos <i>→</i></a>
       </div>
@@ -432,18 +435,19 @@
           <div class="feature-slide-copy">
             <div class="feature-slide-kicker">Configuración total</div>
             <h2>Tus reglas, tu fórmula</h2>
-            <p class="feature-slide-lead">Recargos nocturnos, bonos, condiciones por contrato: escríbelos tú mismo, como en Excel, sin esperar a un programador.</p>
+            <p class="feature-slide-lead">Bonos, recargos, horarios rotativos, permisos y políticas de vacaciones: SquareNet se adapta a cómo trabaja tu empresa, no al revés.</p>
           </div>
           <div class="feature-slide-art" aria-hidden="true">
             <svg viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <defs><radialGradient id="artHalo4" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#99e0ff" stop-opacity=".18"/><stop offset="1" stop-color="#99e0ff" stop-opacity="0"/></radialGradient></defs>
               <circle class="art-halo" cx="120" cy="120" r="98" fill="url(#artHalo4)"/>
               <path class="art-frame" data-draw d="M14 34 V14 H34 M206 14 H226 V34 M226 206 V226 H206 M34 226 H14 V206"/>
-              <circle class="ic ic-acc ic-glow" data-draw cx="120" cy="82" r="32"/>
-              <text class="ic-fx" data-fade x="119" y="94" text-anchor="middle" style="font-size:34px">fx</text>
-              <text class="ic-mono" data-fade style="--d:.7s;font-size:13.5px" x="120" y="146" text-anchor="middle">[0100] / 30 * [0180]</text>
-              <path class="ic-soft" data-draw d="M64 160 H176"/>
-              <text class="ic-txt" data-pop style="--d:1.05s;font-size:22px;fill:#99e0ff" x="120" y="189" text-anchor="middle">= $ 812,40</text>
+              <circle class="ic ic-acc ic-glow" data-draw cx="120" cy="72" r="28"/>
+              <text class="ic-fx" data-fade x="119" y="83" text-anchor="middle" style="font-size:30px">fx</text>
+              <text class="ic-mono" data-fade style="--d:.6s;font-size:13px;fill:#99e0ff" x="120" y="132" text-anchor="middle">si( [0350] &gt; 0 ;</text>
+              <text class="ic-mono" data-fade style="--d:.8s;font-size:13px" x="120" y="152" text-anchor="middle">[0100] / 30 * [0180] )</text>
+              <path class="ic-soft" data-draw d="M64 166 H176"/>
+              <text class="ic-txt" data-pop style="--d:1.05s;font-size:22px;fill:#99e0ff" x="120" y="195" text-anchor="middle">= $ 812,40</text>
             </svg>
           </div>
         </div>
@@ -569,7 +573,7 @@
       </a>
       <a class="card-link" href="moduloca.html">
         <div class="card elev-sm">
-          <h3 class="card-title">Control de Asistencia</h3>
+          <h3 class="card-title">Asistencia</h3>
           <p class="card-body">Sabe quién llegó, a qué hora y cuánto trabajó cada día.</p>
           <span class="module-arrow">→</span>
         </div>
@@ -583,29 +587,29 @@
       </a>
       <a class="card-link" href="moduloac.html">
         <div class="card elev-sm">
-          <h3 class="card-title">Control de Acceso</h3>
+          <h3 class="card-title">Acceso</h3>
           <p class="card-body">Decide quién entra, a qué zonas y en qué horario.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
       <a class="card-link" href="modulocv.html">
         <div class="card elev-sm">
-          <h3 class="card-title">Control de Visitas</h3>
+          <h3 class="card-title">Visitas</h3>
           <p class="card-body">Registra cada visita a tu empresa de forma simple y ordenada.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
       <a class="card-link" href="modulocc.html">
         <div class="card elev-sm">
-          <h3 class="card-title">Control de Comedor</h3>
+          <h3 class="card-title">Comedor</h3>
           <p class="card-body">Organiza quién come, cuándo y qué, sin papeleo.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="modulopr.html">
+      <a class="card-link" href="contacto.html">
         <div class="card elev-sm">
-          <h3 class="card-title">Control de Eficiencia</h3>
-          <p class="card-body">Mide qué tan productivo es tu equipo en planta.</p>
+          <h3 class="card-title">Evaluaciones</h3>
+          <p class="card-body">Mide el desempeño de tu gente y sigue su evolución.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
@@ -616,10 +620,10 @@
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="squarebridge.html">
+      <a class="card-link" href="contacto.html">
         <div class="card elev-sm">
-          <h3 class="card-title">SquareBridge</h3>
-          <p class="card-body">Conecta todas tus sucursales en un solo sistema, automáticamente.</p>
+          <h3 class="card-title">Trabajo Social</h3>
+          <p class="card-body">Fichas socioeconómicas y seguimiento de casos de tu gente.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
@@ -630,41 +634,45 @@
     <h6>Confían en nosotros</h6>
     <div class="marquee">
       <div class="marquee-track" id="marqueeTrack1">
-        <img src="img/Plasticaucho.jpg" alt="Plasticaucho Industrial" loading="lazy">
-        <img src="img/Tablita_del_tartaro.jpg" alt="Tablita del Tártaro" loading="lazy">
-        <img src="img/Multicines.png" alt="Multicines" loading="lazy">
-        <img src="img/Marbelize.jpg" alt="Marbelize" loading="lazy">
-        <img src="img/PuntoNet.jpg" alt="PuntoNet" loading="lazy">
-        <img src="img/Sertecpet.jpg" alt="Sertecpet" loading="lazy">
-        <img src="img/GateGourmet.jpg" alt="Gate Gourmet" loading="lazy">
-        <img src="img/Servifreno.jpg" alt="Servifreno" loading="lazy">
-        <img src="img/Pasteurizadora_Quito.jpg" alt="Pasteurizadora Quito" loading="lazy">
-        <img src="img/Jaboneria_Willson.jpg" alt="Jabonería Willson" loading="lazy">
-        <img src="img/Deltex.jpg" alt="Deltex" loading="lazy">
-        <img src="img/Recamier.png" alt="Recamier" loading="lazy">
+        <a href="https://www.linkedin.com/company/sheraton-guayaquil-hotel/" target="_blank" rel="noopener" aria-label="Sheraton en LinkedIn"><img src="img/Sheraton.jpg" alt="Sheraton" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/ufinet/" target="_blank" rel="noopener" aria-label="Ufinet en LinkedIn"><img src="img/Ufinet.jpg" alt="Ufinet" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/laboratorios-recamier-ltda/" target="_blank" rel="noopener" aria-label="Recamier en LinkedIn"><img src="img/Recamier.png" alt="Recamier" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/gate-gourmet/" target="_blank" rel="noopener" aria-label="Gate Gourmet en LinkedIn"><img src="img/GateGourmet.jpg" alt="Gate Gourmet" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/molinos-champion/" target="_blank" rel="noopener" aria-label="Molinos Champion en LinkedIn"><img src="img/Molinos_Champion.jpg" alt="Molinos Champion" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/sertecpet/" target="_blank" rel="noopener" aria-label="Sertecpet en LinkedIn"><img src="img/Sertecpet.jpg" alt="Sertecpet" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/marbelize/" target="_blank" rel="noopener" aria-label="Marbelize en LinkedIn"><img src="img/Marbelize.jpg" alt="Marbelize" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/jaboneriawilson/" target="_blank" rel="noopener" aria-label="Jabonería Willson en LinkedIn"><img src="img/Jaboneria_Willson.jpg" alt="Jabonería Willson" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/la-reforma-s-a-papeles-absorbentes/" target="_blank" rel="noopener" aria-label="La Reforma en LinkedIn"><img src="img/La_Reforma.jpg" alt="La Reforma" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/automotorescarloslarrea/" target="_blank" rel="noopener" aria-label="Carlar en LinkedIn"><img src="img/Carlar.jpg" alt="Carlar" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/plasticaucho/" target="_blank" rel="noopener" aria-label="Plasticaucho Industrial en LinkedIn"><img src="img/Plasticaucho.jpg" alt="Plasticaucho Industrial" loading="lazy"></a>
         <img src="img/Pesdel.png" alt="Pesdel" loading="lazy">
-        <img src="img/Envasur.png" alt="Envasur" loading="lazy">
-        <img src="img/Teimsa.jpg" alt="Teimsa" loading="lazy">
+        <a href="https://www.linkedin.com/company/servifreno/" target="_blank" rel="noopener" aria-label="Servifreno en LinkedIn"><img src="img/Servifreno.jpg" alt="Servifreno" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/envasursa/" target="_blank" rel="noopener" aria-label="Envasur en LinkedIn"><img src="img/Envasur.png" alt="Envasur" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/enkador-s-a-/" target="_blank" rel="noopener" aria-label="Enkador en LinkedIn"><img src="img/Enkador.jpg" alt="Enkador" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/quimicaariston/" target="_blank" rel="noopener" aria-label="Química Ariston en LinkedIn"><img src="img/Quimica_Ariston.jpg" alt="Química Ariston" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/finca-los-nonnos/" target="_blank" rel="noopener" aria-label="Finca Los Ñoños en LinkedIn"><img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy"></a>
       </div>
     </div>
     <div class="marquee">
       <div class="marquee-track reverse" id="marqueeTrack2">
-        <img src="img/Sheraton.jpg" alt="Sheraton" loading="lazy">
+        <a class="mq-big" href="https://www.linkedin.com/company/ernstandyoung/" target="_blank" rel="noopener" aria-label="EY en LinkedIn"><img src="img/EY.jpg" alt="EY (Ernst &amp; Young)" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/curtiduria-tungurahua/" target="_blank" rel="noopener" aria-label="Curtiduría Tungurahua en LinkedIn"><img src="img/Curtiduria_Tungurahua.jpg" alt="Curtiduría Tungurahua" loading="lazy"></a>
         <img src="img/Caves.jpg" alt="Caves" loading="lazy">
-        <img src="img/Incubandina.jpg" alt="Incubandina" loading="lazy">
-        <img src="img/Quimica_Ariston.jpg" alt="Química Ariston" loading="lazy">
-        <img src="img/Inverneg.jpg" alt="Inverneg" loading="lazy">
-        <img src="img/Curtiduria_Tungurahua.jpg" alt="Curtiduría Tungurahua" loading="lazy">
-        <img src="img/Aldeas_Infantiles.jpg" alt="Aldeas Infantiles" loading="lazy">
-        <img src="img/Molinos_Champion.jpg" alt="Molinos Champion" loading="lazy">
-        <img src="img/dk.jpg" alt="DK" loading="lazy">
-        <img src="img/Ekron.jpg" alt="Ekron" loading="lazy">
-        <img src="img/Enkador.jpg" alt="Enkador" loading="lazy">
-        <img src="img/Carlar.jpg" alt="Carlar" loading="lazy">
-        <img src="img/Assa.jpg" alt="Assa" loading="lazy">
-        <img src="img/Ecuatran.png" alt="Ecuatran" loading="lazy">
-        <img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy">
-        <a href="https://www.linkedin.com/company/wok-to-walk-ec/" target="_blank" rel="noopener"><img src="img/WokToWalk.png" alt="Wok to Walk Ecuador" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/multicines-ecuador/" target="_blank" rel="noopener" aria-label="Multicines en LinkedIn"><img src="img/Multicines.png" alt="Multicines" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/incubandina/" target="_blank" rel="noopener" aria-label="Incubandina en LinkedIn"><img src="img/Incubandina.jpg" alt="Incubandina" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/ecuatran-s-a/" target="_blank" rel="noopener" aria-label="Ecuatran en LinkedIn"><img src="img/Ecuatran.png" alt="Ecuatran" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/ecuador-vita/" target="_blank" rel="noopener" aria-label="Pasteurizadora Quito en LinkedIn"><img src="img/Pasteurizadora_Quito.jpg" alt="Pasteurizadora Quito" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/delltex-s-a/" target="_blank" rel="noopener" aria-label="Deltex en LinkedIn"><img src="img/Deltex.jpg" alt="Deltex" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/assaecuador/" target="_blank" rel="noopener" aria-label="Assa en LinkedIn"><img src="img/Assa.jpg" alt="Assa" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/la-tablita-group/" target="_blank" rel="noopener" aria-label="Tablita del Tártaro en LinkedIn"><img src="img/Tablita_del_tartaro.jpg" alt="Tablita del Tártaro" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/teimsa/" target="_blank" rel="noopener" aria-label="Teimsa en LinkedIn"><img src="img/Teimsa.jpg" alt="Teimsa" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/ekronac/" target="_blank" rel="noopener" aria-label="Ekron en LinkedIn"><img src="img/Ekron.jpg" alt="Ekron" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/puntonet-s.a./" target="_blank" rel="noopener" aria-label="PuntoNet en LinkedIn"><img src="img/PuntoNet.jpg" alt="PuntoNet" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/inverneg-sa/" target="_blank" rel="noopener" aria-label="Inverneg en LinkedIn"><img src="img/Inverneg.jpg" alt="Inverneg" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/bioalimentarec/" target="_blank" rel="noopener" aria-label="Bioalimentar en LinkedIn"><img src="img/Bioalimentar.jpg" alt="Bioalimentar" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/mueblefacil/" target="_blank" rel="noopener" class="mq-named" aria-label="Mueblefácil en LinkedIn"><img src="img/Mueblefacil.jpg" alt="" loading="lazy"><span>Mueblefácil</span></a>
+        <a href="https://www.linkedin.com/company/dk-management-services/" target="_blank" rel="noopener" aria-label="DK en LinkedIn"><img src="img/dk.jpg" alt="DK" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/wok-to-walk-ec/" target="_blank" rel="noopener" aria-label="Wok to Walk Ecuador en LinkedIn"><img src="img/WokToWalk.png" alt="Wok to Walk Ecuador" loading="lazy"></a>
       </div>
     </div>
   </div>
@@ -688,20 +696,19 @@
         <a href="index.html">Home</a>
         <a href="somos.html">Quiénes Somos</a>
         <a href="plataforma.html">Plataforma SquareNet</a>
-        <a href="lectores.html">Lectores Biométricos</a>
         <a href="contacto.html">Contactos</a>
       </div>
       <div class="footer-col">
         <h6>Módulos</h6>
         <a href="modulono.html">Nómina</a>
-        <a href="moduloca.html">Control de Asistencia</a>
+        <a href="moduloca.html">Asistencia</a>
         <a href="modulorh.html">Recursos Humanos</a>
-        <a href="moduloac.html">Control de Acceso</a>
-        <a href="modulocv.html">Control de Visitas</a>
-        <a href="modulocc.html">Control de Comedor</a>
-        <a href="modulopr.html">Control de Eficiencia</a>
+        <a href="moduloac.html">Acceso</a>
+        <a href="modulocv.html">Visitas</a>
+        <a href="modulocc.html">Comedor</a>
+        <a href="contacto.html">Evaluaciones</a>
         <a href="moduloas.html">Autoservicio</a>
-        <a href="squarebridge.html">SquareBridge</a>
+        <a href="contacto.html">Trabajo Social</a>
       </div>
       <div class="footer-col">
         <h6>Contacto</h6>
@@ -828,6 +835,7 @@
 
     Array.prototype.forEach.call(document.querySelectorAll('.marquee-track'), function (track) {
       track.insertAdjacentHTML('beforeend', track.innerHTML);
+      // la copia (para el loop) no se lee ni recibe foco: los enlaces a LinkedIn quedan una sola vez
       Array.prototype.forEach.call(track.children, function (el, i) {
         if (i < track.children.length / 2) return;
         el.setAttribute('aria-hidden', 'true');
