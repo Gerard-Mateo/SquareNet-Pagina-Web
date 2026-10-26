@@ -49,6 +49,20 @@
   .lead-opts input:checked+span{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-800);font-weight:600}
   .lead-opts input:focus-visible+span{outline:2px solid var(--color-accent);outline-offset:2px}
   .lead-err{margin:0;font-size:13px;color:#b3261e}
+  /* correo o teléfono: si escribe un número aparece el selector de país */
+  .lead-ct{display:flex;gap:8px}
+  .lead-ct input{flex:1;min-width:0}
+  .lead-f input.is-bad{border-color:#b3261e}
+  .lead-cc{position:relative;flex:none;display:flex;align-items:center;height:46px;padding:0 30px 0 12px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .lead-cc[hidden]{display:none}
+  .lead-cc::after{content:"";position:absolute;right:12px;top:50%;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-70%) rotate(45deg);opacity:.55;pointer-events:none}
+  .lead-cc select{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;font-size:16px}
+  .lead-cc:focus-within{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
+  .lead-msg{margin:0;font-size:13px;line-height:1.5}
+  .lead-msg[hidden]{display:none}
+  .lead-msg.is-err{color:#b3261e}
+  .lead-msg.is-tip{color:var(--color-neutral-700);padding:8px 10px;background:color-mix(in srgb,var(--color-accent) 7%,#fff);border-left:2px solid var(--color-accent-300)}
+  .lead-msg button{font:inherit;font-weight:600;color:var(--color-accent);background:none;border:0;padding:0;margin-left:4px;text-decoration:underline;cursor:pointer}
   .lead-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center}
   .lead-note{margin:0;font-size:12.5px;opacity:.7}
 
@@ -125,7 +139,13 @@
           <div class="lead-f"><label for="lf-name">Nombre y cargo</label><input type="text" id="lf-name" name="name" autocomplete="name" placeholder="Ej.: Ana Pérez, Jefa de RRHH" required></div>
           <div class="lead-f"><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company" autocomplete="organization" required></div>
         </div>
-        <div class="lead-f"><label for="lf-contact">Correo o teléfono</label><input type="text" id="lf-contact" name="contact" autocomplete="email" required></div>
+        <div class="lead-f"><label for="lf-contact">Correo o teléfono</label>
+          <div class="lead-ct">
+            <span class="lead-cc" id="lf-cc-wrap" hidden><span id="lf-cc-show" aria-hidden="true">EC +593</span><select id="lf-cc" aria-label="País del teléfono"></select></span>
+            <input type="text" id="lf-contact" name="contact" autocomplete="email" placeholder="nombre@tuempresa.com o 099 123 4567" aria-describedby="lf-contact-msg" required>
+          </div>
+          <p class="lead-msg" id="lf-contact-msg" aria-live="polite" hidden></p>
+        </div>
         <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?</legend><div class="lead-opts"><label><input type="radio" name="size" value="1–50"><span>1–50</span></label><label><input type="radio" name="size" value="51–200"><span>51–200</span></label><label><input type="radio" name="size" value="201–500"><span>201–500</span></label><label><input type="radio" name="size" value="Más de 500"><span>Más de 500</span></label></div></fieldset>
         <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia y relojes"><span>Asistencia y relojes</span></label><label><input type="checkbox" name="need" value="Vacaciones y permisos"><span>Vacaciones y permisos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div><div class="lead-other" id="lf-other-wrap" hidden><label for="lf-other">¿Qué le gustaría mejorar?</label><input type="text" id="lf-other" name="other" maxlength="200" placeholder="Ej.: control de horas extras"></div></fieldset>
         <div class="lead-f"><label for="lf-msg">Comentarios <small>(opcional)</small></label><textarea id="lf-msg" name="msg" rows="3" maxlength="600" placeholder="Cualquier cosa que quieras contarnos"></textarea></div>
@@ -237,16 +257,101 @@
         otherWrap.hidden = !otro.checked;
         if (otro.checked) form.elements.other.focus();
       });
+
+      // — correo o teléfono —
+      // Teléfonos: Ecuador primero (validación exacta), luego Latinoamérica y EE. UU. con largo del número nacional [mín, máx].
+      var COUNTRIES = [['EC', 'Ecuador', '593'], ['AR', 'Argentina', '54', 10, 11], ['BO', 'Bolivia', '591', 8, 8], ['BR', 'Brasil', '55', 10, 11],
+        ['CL', 'Chile', '56', 9, 9], ['CO', 'Colombia', '57', 10, 10], ['CR', 'Costa Rica', '506', 8, 8], ['CU', 'Cuba', '53', 8, 8],
+        ['SV', 'El Salvador', '503', 8, 8], ['US', 'Estados Unidos', '1', 10, 10], ['GT', 'Guatemala', '502', 8, 8], ['HN', 'Honduras', '504', 8, 8],
+        ['MX', 'México', '52', 10, 10], ['NI', 'Nicaragua', '505', 8, 8], ['PA', 'Panamá', '507', 7, 8], ['PY', 'Paraguay', '595', 9, 9],
+        ['PE', 'Perú', '51', 8, 9], ['DO', 'República Dominicana', '1', 10, 10], ['UY', 'Uruguay', '598', 8, 8], ['VE', 'Venezuela', '58', 10, 10]];
+      // Correos personales: se aceptan, pero sugerimos el de la empresa.
+      var FREE = /^(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|aol|protonmail|proton)\.[a-z.]+$/;
+      var TYPOS = { 'gmial.com': 'gmail.com', 'gmal.com': 'gmail.com', 'gmai.com': 'gmail.com', 'gamil.com': 'gmail.com', 'gnail.com': 'gmail.com',
+        'gmail.co': 'gmail.com', 'gmail.cm': 'gmail.com', 'gmail.om': 'gmail.com', 'gmail.com.ec': 'gmail.com', 'hotmial.com': 'hotmail.com',
+        'hotmal.com': 'hotmail.com', 'hotmai.com': 'hotmail.com', 'hotmil.com': 'hotmail.com', 'hotmail.co': 'hotmail.com', 'outlok.com': 'outlook.com',
+        'outllok.com': 'outlook.com', 'yaho.com': 'yahoo.com', 'yahooo.com': 'yahoo.com' };
+      var ct = document.getElementById('lf-contact'), msg = document.getElementById('lf-contact-msg');
+      var ccWrap = document.getElementById('lf-cc-wrap'), cc = document.getElementById('lf-cc'), ccShow = document.getElementById('lf-cc-show');
+      COUNTRIES.forEach(function (c, i) { cc.add(new Option(c[1] + ' (+' + c[2] + ')', i)); });
+      var country = function () { return COUNTRIES[+cc.value]; };
+      var looksPhone = function (t) { return /^[+(\d]/.test(t) && !/[a-z@]/i.test(t); };
+
+      function say(kind, html) {
+        msg.hidden = !kind; msg.className = 'lead-msg' + (kind ? ' is-' + kind : ''); msg.innerHTML = html || '';
+        ct.classList.toggle('is-bad', kind === 'err'); ct.setAttribute('aria-invalid', kind === 'err' ? 'true' : 'false');
+      }
+      function esc(t) { return t.replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
+
+      // Revisa el campo y, si show, muestra error o sugerencia. Devuelve la línea para el correo o null si no es válido.
+      function check(show) {
+        var t = ct.value.trim();
+        if (!t) { if (show) say(); return null; }
+        if (looksPhone(t)) {
+          var c = country(), d = t.replace(/\D/g, ''), n;
+          if (c[0] === 'EC') {
+            if (d.indexOf('593') === 0 && d.length >= 11) d = d.slice(3);
+            n = d.replace(/^0/, '');
+            var cel = /^9\d{8}$/.test(n), fijo = /^[2-7]\d{7}$/.test(n);
+            if (!cel && !fijo) { if (show) say('err', 'Revisa el número: en Ecuador un celular tiene 10 dígitos (09…) y un fijo 9, con el código de provincia (02…).'); return null; }
+            n = cel ? n.replace(/^(\d{2})(\d{3})(\d{4})$/, '$1 $2 $3') : n.replace(/^(\d)(\d{3})(\d{4})$/, '$1 $2 $3');
+          } else {
+            if (d.indexOf(c[2]) === 0 && d.length - c[2].length >= c[3]) d = d.slice(c[2].length);
+            n = d.replace(/^0+/, '');  // el 0 de marcación nacional no cuenta
+            if (n.length < c[3] || n.length > c[4]) {
+              if (show) say('err', 'Revisa el número: en ' + c[1] + ' tiene ' + c[3] + (c[4] > c[3] ? ' u ' + c[4] : '') + ' dígitos, sin el código de país.');
+              return null;
+            }
+          }
+          if (show) say();
+          return 'Teléfono: +' + c[2] + ' ' + n + (c[0] === 'EC' ? '' : ' (' + c[1] + ')');
+        }
+        var m = t.toLowerCase().match(/^([^\s@]+)@([^\s@]+)$/);
+        if (!m) { if (show) say('err', 'Revisa el correo: debería verse como nombre@tuempresa.com.'); return null; }
+        var dom = m[2], fix = TYPOS[dom] || (/\.(con|cmo|comm|cpm|vom|xom)$/.test(dom) ? dom.replace(/\.[a-z]+$/, '.com') : null);
+        if (fix) {
+          if (show) say('err', '¿Quisiste decir <b>' + esc(m[1] + '@' + fix) + '</b>?<button type="button" data-fix="' + esc(m[1] + '@' + fix) + '">Corregir</button>');
+          return null;
+        }
+        if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(dom) || /^-|-\.|\.-/.test(dom)) { if (show) say('err', 'Revisa el correo: la parte después de la @ no parece un dominio válido.'); return null; }
+        var free = FREE.test(dom);
+        if (show) say(free ? 'tip' : '', free ? 'Puedes enviarlo así, pero si tienes un correo de tu empresa (nombre@tuempresa.com) úsalo: con él identificamos tu solicitud y te atendemos más rápido.' : '');
+        return 'Correo: ' + t + (free ? ' (correo personal)' : '');
+      }
+
+      function syncMode() {
+        var t = ct.value.trim(), phone = !!t && looksPhone(t);
+        if (phone && t.charAt(0) === '+') {  // "+57…" → Colombia; con +1 se respeta EE. UU. o Rep. Dominicana si ya estaba elegido
+          var d = t.replace(/\D/g, ''), best = -1;
+          COUNTRIES.forEach(function (c, i) { if (d.indexOf(c[2]) === 0 && (best < 0 || c[2].length > COUNTRIES[best][2].length)) best = i; });
+          if (best >= 0 && COUNTRIES[best][2] !== country()[2]) cc.value = best;
+        }
+        ccWrap.hidden = !phone;
+        ct.setAttribute('autocomplete', phone ? 'tel-national' : 'email');
+        ccShow.textContent = country()[0] + ' +' + country()[2];
+      }
+      ct.addEventListener('input', function () { syncMode(); if (ct.classList.contains('is-bad')) check(true); else if (!msg.hidden) say(); });
+      // se revisa un momento después de salir del campo: si el aviso apareciera de inmediato, empujaría el botón
+      // «Enviar» justo mientras lo pulsan y el clic se perdería
+      ct.addEventListener('blur', function () { setTimeout(function () { check(true); }, 250); });
+      cc.addEventListener('change', function () { syncMode(); if (ct.value.trim()) check(true); });
+      msg.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-fix]'); if (!b) return;
+        ct.value = b.getAttribute('data-fix'); syncMode(); check(true); ct.focus();
+      });
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
         if (!v('name') || !v('company') || !v('contact')) { err.textContent = 'Completa nombre y cargo, empresa y un correo o teléfono.'; err.hidden = false; return; }
+        var contact = check(true);
+        if (!contact) { err.hidden = true; ct.focus(); return; }
         err.hidden = true;
         var size = (form.querySelector('input[name=size]:checked') || {}).value || 'No indicado';
         var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) {
           return c === otro && v('other') ? 'Otro: ' + v('other') : c.value;
         }).join(', ') || 'No indicado';
-        var body = 'Nombre y cargo: ' + v('name') + '\nEmpresa: ' + v('company') + '\nCorreo o teléfono: ' + v('contact') +
+        var body = 'Nombre y cargo: ' + v('name') + '\nEmpresa: ' + v('company') + '\n' + contact +
           '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
           (v('msg') ? '\n\nComentarios:\n' + v('msg') : '');
         location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
