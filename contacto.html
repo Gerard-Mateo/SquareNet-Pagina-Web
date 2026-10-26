@@ -34,6 +34,12 @@
   .lead-f{display:flex;flex-direction:column;gap:8px;border:0;margin:0;padding:0;min-width:0}
   .lead-f label,.lead-f legend{font-family:var(--font-heading);font-weight:600;font-size:15px;padding:0}
   .lead-f legend small{font-weight:400;opacity:.65}
+  .lead-f textarea{min-height:96px;padding:10px 12px;font:inherit;font-size:16px;line-height:1.5;resize:vertical;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
+  .lead-f textarea:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
+  .lead-f label small{font-weight:400;opacity:.65}
+  .lead-other{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .lead-other[hidden]{display:none}
+  .lead-other label{font-family:var(--font-body);font-weight:400;font-size:14px;opacity:.8}
   .lead-f input[type=text]{height:46px;padding:0 12px;font:inherit;font-size:16px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
   .lead-f input[type=text]:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
   .lead-opts{display:flex;flex-wrap:wrap;gap:8px}
@@ -121,7 +127,8 @@
         </div>
         <div class="lead-f"><label for="lf-contact">Correo o teléfono</label><input type="text" id="lf-contact" name="contact" autocomplete="email" required></div>
         <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?</legend><div class="lead-opts"><label><input type="radio" name="size" value="1–50"><span>1–50</span></label><label><input type="radio" name="size" value="51–200"><span>51–200</span></label><label><input type="radio" name="size" value="201–500"><span>201–500</span></label><label><input type="radio" name="size" value="Más de 500"><span>Más de 500</span></label></div></fieldset>
-        <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia y relojes"><span>Asistencia y relojes</span></label><label><input type="checkbox" name="need" value="Vacaciones y permisos"><span>Vacaciones y permisos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div></fieldset>
+        <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia y relojes"><span>Asistencia y relojes</span></label><label><input type="checkbox" name="need" value="Vacaciones y permisos"><span>Vacaciones y permisos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div><div class="lead-other" id="lf-other-wrap" hidden><label for="lf-other">¿Qué le gustaría mejorar?</label><input type="text" id="lf-other" name="other" maxlength="200" placeholder="Ej.: control de horas extras"></div></fieldset>
+        <div class="lead-f"><label for="lf-msg">Comentarios <small>(opcional)</small></label><textarea id="lf-msg" name="msg" rows="3" maxlength="600" placeholder="Cualquier cosa que quieras contarnos"></textarea></div>
         <p class="lead-err" id="leadErr" role="alert" hidden></p>
         <div class="lead-actions">
           <button type="submit" class="btn btn-primary">Enviar a ventas</button>
@@ -225,15 +232,23 @@
   <script>
     (function () {
       var form = document.getElementById('leadForm'), err = document.getElementById('leadErr');
+      var otro = form.querySelector('input[name=need][value=Otro]'), otherWrap = document.getElementById('lf-other-wrap');
+      otro.addEventListener('change', function () {
+        otherWrap.hidden = !otro.checked;
+        if (otro.checked) form.elements.other.focus();
+      });
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
         if (!v('name') || !v('company') || !v('contact')) { err.textContent = 'Completa nombre y cargo, empresa y un correo o teléfono.'; err.hidden = false; return; }
         err.hidden = true;
         var size = (form.querySelector('input[name=size]:checked') || {}).value || 'No indicado';
-        var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) { return c.value; }).join(', ') || 'No indicado';
+        var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) {
+          return c === otro && v('other') ? 'Otro: ' + v('other') : c.value;
+        }).join(', ') || 'No indicado';
         var body = 'Nombre y cargo: ' + v('name') + '\nEmpresa: ' + v('company') + '\nCorreo o teléfono: ' + v('contact') +
-          '\nColaboradores: ' + size + '\nLe interesa: ' + needs;
+          '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
+          (v('msg') ? '\n\nComentarios:\n' + v('msg') : '');
         location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
       });
     })();
