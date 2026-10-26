@@ -242,9 +242,13 @@
     .showcase-stage{display:none}
     .showcase-copy{margin-top:0}
   }
+  /* celular: 2 columnas compactas (ícono + título); la descripción larga solo en pantallas más grandes */
   @media (max-width:520px){
-    .screens{grid-template-columns:minmax(0,1fr)}
-    .screens li{font-size:15px}
+    .screens{gap:var(--space-6) var(--space-3)}
+    .screens li{font-size:14.5px;text-align:center}
+    .screens .ico{width:46px;height:46px}
+    .screens svg{width:23px;height:23px}
+    .screens .desc{display:none}
   }
   @media (prefers-reduced-motion:reduce){
     .laptop.anim .laptop-lid,.laptop.anim.is-open .laptop-lid{transform:none;opacity:1;transition:none}
@@ -272,7 +276,12 @@
   .cta-band:hover .cta-band-btn{background:var(--color-accent-100)}
   @media (max-width:860px){
     .hero h1{font-size:36px}
-    .feature-carousel-track{height:min(88vh,620px);min-height:520px}
+    /* en celular: carrusel con scroll horizontal nativo (sigue al dedo, sin capas apiladas, sin zoom ni fundidos) */
+    .feature-carousel-track{display:flex;height:auto;min-height:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+    .feature-carousel-track::-webkit-scrollbar{display:none}
+    .feature-slide{position:relative;inset:auto;flex:0 0 100%;height:min(70vh,480px);min-height:400px;opacity:1;pointer-events:auto;transition:none;scroll-snap-align:start;scroll-snap-stop:always}
+    .feature-slide-bg{transform:none!important;transition:none!important}
+    .feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead{opacity:1!important;animation:none!important}
     .feature-slide-copy h2{font-size:36px}
     .feature-slide-copy .feature-slide-lead{font-size:17px}
     .carousel-arrow{display:none}
@@ -741,11 +750,12 @@
       var dotsWrap = document.getElementById('featureDots');
       var slides = track.children;
       var index = 0;
+      // ≤860 px el carrusel es un scroll horizontal nativo (ver CSS): el índice sale del scroll
+      var native = window.matchMedia('(max-width:860px)');
 
-      function go(i) {
-        var newIndex = (i + slides.length) % slides.length;
-        if (newIndex === index) return;
-        index = newIndex;
+      function setActive(i) {
+        if (i === index) return;
+        index = i;
         Array.prototype.forEach.call(slides, function (slide, si) {
           slide.classList.toggle('is-active', si === index);
         });
@@ -753,6 +763,23 @@
           dot.setAttribute('aria-current', di === index ? 'true' : 'false');
         });
       }
+
+      function go(i) {
+        var newIndex = (i + slides.length) % slides.length;
+        if (native.matches) { track.scrollTo({ left: newIndex * track.clientWidth, behavior: 'smooth' }); return; }
+        setActive(newIndex);
+      }
+
+      var scrollPending = null;
+      track.addEventListener('scroll', function () {
+        if (!native.matches || scrollPending) return;
+        scrollPending = requestAnimationFrame(function () {
+          scrollPending = null;
+          setActive(Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / track.clientWidth))));
+        });
+      }, { passive: true });
+      // al pasar de celular a escritorio (rotar una tablet) el scroll horizontal queda en 0
+      native.addEventListener && native.addEventListener('change', function () { track.scrollLeft = 0; setActive(0); });
 
       Array.prototype.forEach.call(slides, function (_, i) {
         var dot = document.createElement('button');
@@ -768,6 +795,7 @@
 
       var touchStartX = null, touchStartY = null;
       carousel.addEventListener('touchstart', function (e) {
+        if (native.matches) { touchStartX = null; return; }
         touchStartX = e.changedTouches[0].clientX;
         touchStartY = e.changedTouches[0].clientY;
       }, { passive: true });
