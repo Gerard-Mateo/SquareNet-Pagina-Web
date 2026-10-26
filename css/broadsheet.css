@@ -202,6 +202,8 @@ figcaption {
   mix-blend-mode: multiply;
 }
 .marquee-track img:hover { filter: grayscale(0); opacity: 1; }
+.marquee-track a { display: block; line-height: 0; }
+.marquee-track a:hover img, .marquee-track a:focus-visible img { filter: grayscale(0); opacity: 1; }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }

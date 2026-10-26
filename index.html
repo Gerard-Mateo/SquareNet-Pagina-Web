@@ -664,6 +664,7 @@
         <img src="img/Assa.jpg" alt="Assa" loading="lazy">
         <img src="img/Ecuatran.png" alt="Ecuatran" loading="lazy">
         <img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy">
+        <a href="https://www.linkedin.com/company/wok-to-walk-ec/" target="_blank" rel="noopener"><img src="img/WokToWalk.png" alt="Wok to Walk Ecuador" loading="lazy"></a>
       </div>
     </div>
   </div>
@@ -827,8 +828,10 @@
 
     Array.prototype.forEach.call(document.querySelectorAll('.marquee-track'), function (track) {
       track.insertAdjacentHTML('beforeend', track.innerHTML);
-      Array.prototype.forEach.call(track.querySelectorAll('img'), function (img, i) {
-        if (i >= track.children.length / 2) img.setAttribute('aria-hidden', 'true');
+      Array.prototype.forEach.call(track.children, function (el, i) {
+        if (i < track.children.length / 2) return;
+        el.setAttribute('aria-hidden', 'true');
+        if (el.tagName === 'A') el.tabIndex = -1;
       });
     });
 
