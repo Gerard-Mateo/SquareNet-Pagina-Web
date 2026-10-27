@@ -259,10 +259,14 @@
     .showcase-copy{margin-top:var(--space-8)}
     .screens{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
-  /* en celular no va el laptop: el video del sistema es ilegible a ese tamaño. Queda el título + íconos. */
+  /* celular: logos de clientes más chicos */
   @media (max-width:700px){
-    .showcase-stage{display:none}
-    .showcase-copy{margin-top:0}
+    .clients-band .marquee-track{gap:var(--space-6)}
+    .clients-band .marquee-track img{height:58px}
+    .clients-band .marquee-track .mq-big img,.clients-band .marquee-track .mq-named.mq-big{height:66px}
+    .clients-band .marquee-track .mq-named{height:58px;padding-right:12px}
+    .clients-band .marquee-track .mq-named.mq-big{gap:12px;padding-right:14px}
+    .clients-band .marquee-track .mq-named span{font-size:15px}
   }
   /* celular: 2 columnas compactas (ícono + título); la descripción larga solo en pantallas más grandes */
   @media (max-width:520px){
@@ -354,7 +358,7 @@
         <figure class="laptop" id="laptop" aria-label="Recorrido en video por las pantallas del sistema SquareNet">
             <div class="laptop-screen">
               <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1920" height="1080"
-                     data-src="media/squarenet-recorrido.mp4" data-src-av1="media/squarenet-recorrido-av1.mp4"></video>
+                     data-src="media/squarenet-recorrido.mp4" data-src-sm="media/squarenet-recorrido-sm.mp4" data-src-av1="media/squarenet-recorrido-av1.mp4"></video>
               <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Rol de pagos en el sistema SquareNet: horas extra, décimos, fondos de reserva, aporte al IESS e impuesto a la renta" width="1280" height="720" loading="lazy" decoding="async">
               <button class="laptop-full" id="laptopFull" type="button" aria-label="Ver el video en pantalla completa" title="Ver en pantalla completa">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
@@ -947,6 +951,8 @@
       // hardware; si no, H.264, que casi cualquier tarjeta de video decodifica sin cargar al procesador.
       function pickSrc(cb) {
         var h264 = video.getAttribute('data-src'), av1 = video.getAttribute('data-src-av1'), mc = navigator.mediaCapabilities;
+        // celular: versión 720p (5 MB), suficiente para esa pantalla
+        if (window.matchMedia('(max-width:700px)').matches && video.getAttribute('data-src-sm')) return cb(video.getAttribute('data-src-sm'));
         if (!av1 || !mc || !mc.decodingInfo) return cb(h264);
         mc.decodingInfo({ type: 'file', video: { contentType: 'video/mp4; codecs="av01.0.08M.08"', width: 1920, height: 1080, bitrate: 720000, framerate: 30 } })
           .then(function (r) { cb(r.supported && r.smooth && r.powerEfficient ? av1 : h264); }, function () { cb(h264); });
