@@ -211,6 +211,14 @@
   .laptop.is-paused .laptop-toggle .i-play{display:block}
   .laptop.is-paused .laptop-toggle .i-pause{display:none}
   @media (hover:none){ .laptop-toggle{opacity:.9} }
+  /* pantalla completa: en laptops chicas el video se ve pequeño; un clic en la pantalla o en este botón lo agranda */
+  .laptop-screen{cursor:zoom-in}
+  .laptop-full{position:absolute;z-index:3;right:calc(1.4cqw + max(3.4cqw,34px) + .8cqw);bottom:1.4cqw;display:grid;place-items:center;width:max(3.4cqw,34px);height:max(3.4cqw,34px);padding:0;
+    border:1px solid rgba(255,255,255,.45);border-radius:50%;background:rgba(8,28,38,.55);color:#fff;cursor:pointer;opacity:0;transition:opacity .25s ease,background .2s ease}
+  .laptop:hover .laptop-full,.laptop-full:focus-visible{opacity:1}
+  .laptop-full:hover{background:rgba(8,28,38,.8)}
+  .laptop-full svg{width:46%;height:46%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  @media (hover:none){ .laptop-full{opacity:.9} }
   /* la tapa empieza cerrada, se abre al entrar en pantalla y se cierra siguiendo el scroll al pasar el laptop
      (solo con JS y sin prefers-reduced-motion). Gira hacia adelante (ángulo negativo), como un laptop real; la
      perspectiva está calculada para que, cerrada, el borde de la tapa quede del ancho de la base. Cerrada, la
@@ -341,6 +349,9 @@
                      data-src="media/squarenet-recorrido.mp4"></video>
               <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Rol de pagos en el sistema SquareNet: horas extra, décimos, fondos de reserva, aporte al IESS e impuesto a la renta" width="1280" height="720" loading="lazy" decoding="async">
               <span class="laptop-gloss" aria-hidden="true"></span>
+              <button class="laptop-full" id="laptopFull" type="button" aria-label="Ver el video en pantalla completa" title="Ver en pantalla completa">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+              </button>
               <button class="laptop-toggle" id="laptopToggle" type="button" aria-label="Pausar la animación">
                 <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
                 <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
@@ -918,7 +929,11 @@
       var noAuto = reduce || saveData; // sin autoplay ni descarga hasta que el usuario pulse play
       var hasIO = 'IntersectionObserver' in window;
       var loaded = false, inView = false, userPaused = noAuto, opened = reduce || !hasIO;
-      var linked = false, closed = false, ticking = false;
+      var linked = false, closed = false, ticking = false, lite = false;
+      var full = document.getElementById('laptopFull'), screen = laptop.querySelector('.laptop-screen');
+      // Equipos con poca memoria: tapa abierta y quieta desde el inicio (el video igual se reproduce).
+      if (navigator.deviceMemory && navigator.deviceMemory <= 2) lite = true;
+      function isFull() { return document.fullscreenElement === video || document.webkitFullscreenElement === video || video.webkitDisplayingFullscreen; }
 
       function setPaused(paused) {
         laptop.classList.toggle('is-paused', paused);
@@ -933,7 +948,7 @@
       }
       function sync() {
         if (!loaded) return;
-        if (inView && opened && !closed && !userPaused && !document.hidden) {
+        if (isFull() || (inView && opened && !closed && !userPaused && !document.hidden)) {
           var p = video.play();
           if (p && p.catch) p.catch(function () { userPaused = true; setPaused(true); });
         } else {
@@ -956,12 +971,14 @@
           ticking = false;
           var p = lidProgress();
           laptop.style.setProperty('--lid', p.toFixed(3));
-          var c = p > 0.65;
+          // el video se pausa apenas la tapa empieza a cerrar: girar en 3D un video que se reproduce es lo
+          // que más le cuesta a una PC lenta (medido con la CPU 4× más lenta: 31 % de frames lentos → 7 %)
+          var c = p > 0.02;
           if (c !== closed) { closed = c; sync(); }
         });
       }
       function link() {
-        if (linked) return;
+        if (linked || lite) return;
         linked = true;
         laptop.classList.add('is-linked');
         onScroll();
@@ -976,20 +993,51 @@
         if (!userPaused) { load(); opened = true; }
         sync();
       });
+      function goFull(e) {
+        if (e) e.stopPropagation();
+        var fs = video.requestFullscreen || video.webkitRequestFullscreen || video.webkitEnterFullscreen;
+        if (!fs) return;
+        load(); opened = true; userPaused = false; setPaused(false);
+        video.controls = true;  // en grande sí conviene poder pausar y adelantar
+        var r = fs.call(video);
+        if (r && r.catch) r.catch(function () { video.controls = false; });
+        sync();
+      }
+      function onFullChange() { if (!isFull()) video.controls = false; sync(); }
+      full.addEventListener('click', goFull);
+      screen.addEventListener('click', function (e) { if (!e.target.closest('button')) goFull(e); });
+      document.addEventListener('fullscreenchange', onFullChange);
+      document.addEventListener('webkitfullscreenchange', onFullChange);
+      video.addEventListener('webkitendfullscreen', onFullChange);
       document.addEventListener('visibilitychange', sync);
       setPaused(noAuto);
 
       if (!hasIO) { inView = true; if (!noAuto) load(); sync(); return; }
       if (!reduce) laptop.classList.add('anim');
 
+      // el video (3,5 MB) se descarga cuando ya cargó el resto de la página, no compitiendo con ella
+      var pageReady = document.readyState === 'complete', near = false;
+      if (!pageReady) window.addEventListener('load', function () { pageReady = true; if (near && !noAuto) { load(); sync(); } });
       new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting && !noAuto) load();
+        near = entries[0].isIntersecting;
+        if (near && pageReady && !noAuto) load();
       }, { rootMargin: '900px 0px' }).observe(laptop);
 
       new IntersectionObserver(function (entries) {
         inView = entries[0].isIntersecting;
         if (inView && !opened) {
           laptop.classList.add('is-open');
+          // Modo liviano: mientras la tapa se abre se miden los frames; si la PC no llega a ~30 fps,
+          // la tapa queda abierta y quieta en vez de seguir el scroll.
+          if (!lite) (function () {
+            var t0 = performance.now(), last = t0, n = 0, slow = 0;
+            requestAnimationFrame(function f(t) {
+              if (t - last > 34) slow++;
+              n++; last = t;
+              if (t - t0 < 1200) requestAnimationFrame(f);
+              else if (n < 30 || slow / n > 0.3) lite = true;
+            });
+          })();
           if (lidProgress() > 0.05) {
             // entra desde arriba (subiendo con el scroll): el scroll maneja la tapa desde ya
             opened = true;
