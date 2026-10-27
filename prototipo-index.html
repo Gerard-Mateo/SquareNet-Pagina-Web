@@ -38,10 +38,6 @@
   .proto-tag button{font:inherit;border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:transparent;color:#fff}
   .proto-tag button[aria-pressed="true"]{background:#fff;color:#16181b}
   .proto-tag a{color:#99e0ff;padding:0 8px}
-  /* prueba: clientes justo debajo del hero, sobre una franja de color */
-  .proto-clients{background:var(--color-accent-100);border-block:1px solid color-mix(in srgb,var(--color-accent) 14%,transparent)}
-  .proto-clients .clients{padding:var(--space-6) var(--space-6) var(--space-4)}
-  .proto-clients .clients h6{color:var(--color-accent-800)}
 </style>
 <script>
   // aplica la letra antes de pintar, para que no parpadee
@@ -346,7 +342,42 @@
     </div>
   </div>
 
-  <section class="proto-clients" aria-label="Clientes">
+  <section class="showcase" id="pantallas" aria-labelledby="pantallas-title">
+    <div class="wrap">
+      <div class="showcase-stage reveal">
+        <figure class="laptop" id="laptop" aria-label="Recorrido en video por las pantallas del sistema SquareNet">
+            <div class="laptop-screen">
+              <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1920" height="1080"
+                     data-src="media/squarenet-recorrido.mp4" data-src-av1="media/squarenet-recorrido-av1.mp4"></video>
+              <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Rol de pagos en el sistema SquareNet: horas extra, décimos, fondos de reserva, aporte al IESS e impuesto a la renta" width="1280" height="720" loading="lazy" decoding="async">
+              <button class="laptop-full" id="laptopFull" type="button" aria-label="Ver el video en pantalla completa" title="Ver en pantalla completa">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+              </button>
+              <button class="laptop-toggle" id="laptopToggle" type="button" aria-label="Pausar la animación">
+                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+              </button>
+            </div>
+        </figure>
+      </div>
+
+      <div class="showcase-copy reveal" id="showcaseCopy">
+        <h2 id="pantallas-title">Más de <span class="num" data-count="300">300</span> funcionalidades en un solo sistema</h2>
+        <ul class="screens">
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><strong>Nómina en un clic</strong><span class="desc">Roles, quincenas, décimos, utilidades, liquidaciones e impuesto a la renta.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><strong>Asistencia con biométricos</strong><span class="desc">Integración con relojes, resumen diario y aprobación de horas extra.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="m9.5 14.5 2 2 3.5-4"/></svg></span><strong>Archivos legales listos</strong><span class="desc">Banco, IESS, Ministerio de Trabajo (MRL) y formulario 107.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><strong>Autoservicio para colaboradores</strong><span class="desc">Roles, vacaciones, permisos y marcación web desde el celular.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.1 8 7.5 9.5 4.4-1.5 7.5-5 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></span><strong>Cada cambio auditado</strong><span class="desc">Quién, cuándo y el valor anterior, más el bloqueo de períodos cerrados.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5Z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><strong>Contabilidad sin digitar</strong><span class="desc">Asientos automáticos hacia tu sistema contable.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3.2" height="8" rx=".6"/><rect x="10.4" y="7" width="3.2" height="13" rx=".6"/><rect x="15.3" y="3.5" width="3.2" height="16.5" rx=".6"/></svg></span><strong>Reportes a tu medida</strong><span class="desc">Tus propias columnas y rubros, configurados una vez y usados cada mes. Más de 90 reportes listos y exportación a Excel en un clic.</span></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span><strong>Y más</strong><span class="desc">Explora todos los módulos y funciones.</span></li>
+        </ul>
+        <a class="showcase-more" href="modulos.html">Explorar los módulos <i>→</i></a>
+      </div>
+    </div>
+  </section>
+
   <div class="wrap clients reveal">
     <h6>Confían en nosotros</h6>
     <div class="marquee">
@@ -395,43 +426,6 @@
       </div>
     </div>
   </div>
-  </section>
-
-  <section class="showcase" id="pantallas" aria-labelledby="pantallas-title">
-    <div class="wrap">
-      <div class="showcase-stage reveal">
-        <figure class="laptop" id="laptop" aria-label="Recorrido en video por las pantallas del sistema SquareNet">
-            <div class="laptop-screen">
-              <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1920" height="1080"
-                     data-src="media/squarenet-recorrido.mp4" data-src-av1="media/squarenet-recorrido-av1.mp4"></video>
-              <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Rol de pagos en el sistema SquareNet: horas extra, décimos, fondos de reserva, aporte al IESS e impuesto a la renta" width="1280" height="720" loading="lazy" decoding="async">
-              <button class="laptop-full" id="laptopFull" type="button" aria-label="Ver el video en pantalla completa" title="Ver en pantalla completa">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
-              </button>
-              <button class="laptop-toggle" id="laptopToggle" type="button" aria-label="Pausar la animación">
-                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
-                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
-              </button>
-            </div>
-        </figure>
-      </div>
-
-      <div class="showcase-copy reveal" id="showcaseCopy">
-        <h2 id="pantallas-title">Más de <span class="num" data-count="300">300</span> funcionalidades en un solo sistema</h2>
-        <ul class="screens">
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><strong>Nómina en un clic</strong><span class="desc">Roles, quincenas, décimos, utilidades, liquidaciones e impuesto a la renta.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><strong>Asistencia con biométricos</strong><span class="desc">Integración con relojes, resumen diario y aprobación de horas extra.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="m9.5 14.5 2 2 3.5-4"/></svg></span><strong>Archivos legales listos</strong><span class="desc">Banco, IESS, Ministerio de Trabajo (MRL) y formulario 107.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><strong>Autoservicio para colaboradores</strong><span class="desc">Roles, vacaciones, permisos y marcación web desde el celular.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.1 8 7.5 9.5 4.4-1.5 7.5-5 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></span><strong>Cada cambio auditado</strong><span class="desc">Quién, cuándo y el valor anterior, más el bloqueo de períodos cerrados.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5Z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><strong>Contabilidad sin digitar</strong><span class="desc">Asientos automáticos hacia tu sistema contable.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3.2" height="8" rx=".6"/><rect x="10.4" y="7" width="3.2" height="13" rx=".6"/><rect x="15.3" y="3.5" width="3.2" height="16.5" rx=".6"/></svg></span><strong>Reportes a tu medida</strong><span class="desc">Tus propias columnas y rubros, configurados una vez y usados cada mes. Más de 90 reportes listos y exportación a Excel en un clic.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span><strong>Y más</strong><span class="desc">Explora todos los módulos y funciones.</span></li>
-        </ul>
-        <a class="showcase-more" href="modulos.html">Explorar los módulos <i>→</i></a>
-      </div>
-    </div>
-  </section>
 
   <div class="feature-carousel reveal" id="featureCarousel">
     <div class="feature-carousel-track" id="featureTrack">
