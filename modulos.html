@@ -21,6 +21,8 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
+  /* hero sin ilustración (pedido del cliente): una sola columna */
+  .hero{grid-template-columns:1fr}.hero-copy{max-width:760px}
   .mr-glow{opacity:0}
   .mr-pulse{stroke-dasharray:7 93;stroke-dashoffset:0;opacity:0}
   .mr-breath{transform-origin:200px 150px}
@@ -118,105 +120,6 @@
       <h1>Nuestra especialidad es la gente</h1>
       <p>Por ellos hemos creado una serie de módulos para gestión de personal, y de esa manera complementamos a su ERP. La facilidad de uso y aprendizaje, así como su agilidad de interfaz, distinguen a SquareNet de sus competidores.</p>
     </div>
-    <figure class="hero-art band-dark la" data-delay=".15" role="img" aria-label="Diagrama: los nueve módulos de SquareNet conectados alrededor de una misma base de datos">
-      <svg viewBox="0 0 400 300" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <defs>
-          <radialGradient id="mrHalo" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#99e0ff" stop-opacity=".2"/>
-            <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="mrCoreGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#99e0ff" stop-opacity=".42"/>
-            <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="200" cy="150" r="150" fill="url(#mrHalo)"/>
-        <path class="la-frame" data-draw d="M14 40 V14 H40 M360 14 H386 V40 M386 260 V286 H360 M40 286 H14 V260"/>
-        <circle class="mr-breath" cx="200" cy="150" r="46" fill="url(#mrCoreGlow)"/>
-        <circle class="la-dash" cx="200" cy="150" r="48"/>
-        <circle class="la-dash" cx="200" cy="150" r="64" style="opacity:.55"/>
-        <ellipse class="la-soft" data-draw cx="200" cy="150" rx="132" ry="92"/>
-        <path class="la-dash" d="M200 116 L200 80" style="opacity:.5"/>
-        <path class="la-dash" d="M226.2 128.3 L267.9 93.6" style="opacity:.5"/>
-        <path class="la-dash" d="M233.7 145.9 L308.2 136.7" style="opacity:.5"/>
-        <path class="la-dash" d="M231.5 162.7 L293.9 187.8" style="opacity:.5"/>
-        <path class="la-dash" d="M215.7 180.1 L235 217" style="opacity:.5"/>
-        <path class="la-dash" d="M184.3 180.1 L165 217" style="opacity:.5"/>
-        <path class="la-dash" d="M168.5 162.7 L106.1 187.8" style="opacity:.5"/>
-        <path class="la-dash" d="M166.3 145.9 L91.8 136.7" style="opacity:.5"/>
-        <path class="la-dash" d="M173.8 128.3 L132.1 93.6" style="opacity:.5"/>
-        <path class="la-acc la-glow mr-pulse" pathLength="100" d="M200 58 A132 92 0 1 1 200 242 A132 92 0 1 1 200 58" stroke-width="2.2"/>
-        <g data-fade style="--d:.5s">
-          <path d="M200 126 L220.8 138 L200 150 L179.2 138 Z" fill="rgba(153,224,255,.3)" stroke="none"/>
-          <path d="M179.2 138 L200 150 V174 L179.2 162 Z" fill="rgba(255,255,255,.07)" stroke="none"/>
-          <path d="M200 150 L220.8 138 V162 L200 174 Z" fill="rgba(255,255,255,.14)" stroke="none"/>
-          <path class="la-main la-glow" d="M200 126 L220.8 138 V162 L200 174 L179.2 162 V138 Z M200 150 L179.2 138 M200 150 L220.8 138 M200 150 V174"/>
-        </g>
-        <g transform="translate(200 58)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:13.37s"/>
-          </g>
-        </g>
-        <g transform="translate(284.8 79.5)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:2.34s"/>
-          </g>
-        </g>
-        <g transform="translate(330 134)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:3.63s"/>
-          </g>
-        </g>
-        <g transform="translate(314.3 196)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:4.81s"/>
-          </g>
-        </g>
-        <g transform="translate(245.1 236.5)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M12 17.2s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:6.26s"/>
-          </g>
-        </g>
-        <g transform="translate(154.9 236.5)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:7.88s"/>
-          </g>
-        </g>
-        <g transform="translate(85.7 196)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:9.32s"/>
-          </g>
-        </g>
-        <g transform="translate(70 134)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:10.50s"/>
-          </g>
-        </g>
-        <g transform="translate(115.2 79.5)">
-          <g data-fade>
-            <rect class="la-chip" x="-16" y="-16" width="32" height="32" rx="6"/>
-            <g transform="translate(-9 -9) scale(.75)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="M8.5 16v-3M12 16v-6M15.5 16v-4.5"/></g>
-            <rect class="la-acc la-glow mr-glow" x="-16" y="-16" width="32" height="32" rx="6" fill="rgba(153,224,255,.2)" stroke-width="1.5" style="--nd:11.80s"/>
-          </g>
-        </g>
-      </svg>
-    </figure>
   </div>
 
   <div class="wrap">

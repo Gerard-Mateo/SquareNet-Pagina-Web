@@ -445,6 +445,7 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 /* — responsive — */
 @media (max-width: 860px) {
   .wrap { padding: 0 var(--space-4); }
+  .wrap.footer-grid { padding: var(--space-8) var(--space-4) var(--space-6); }   /* el padding de .wrap le quitaba el aire de arriba al pie */
   h1 { font-size: 32px; }
   .nav { flex-wrap: wrap; }
   .nav-toggle { display: block; }

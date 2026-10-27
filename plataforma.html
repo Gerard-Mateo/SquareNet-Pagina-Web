@@ -21,6 +21,8 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
+  /* hero sin ilustración (pedido del cliente): una sola columna */
+  .hero{grid-template-columns:1fr}.hero-copy{max-width:760px}
   .hero-art .ly-sub{font-family:var(--font-heading);font-size:7.6px;fill:rgba(255,255,255,.55);stroke:none}
   .ly-dot{opacity:0}
   @keyframes lyDown{0%{transform:translateY(0);opacity:0}15%,85%{opacity:1}100%{transform:translateY(57px);opacity:0}}
@@ -352,7 +354,7 @@
   .req-x{overflow:visible;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
   .req-x path{fill:none;stroke:var(--color-accent-2-500);stroke-width:.7;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1}
   .req-x{transition:opacity .4s ease 1s}.req-cards.cross.is-in .req-x{opacity:.3}
-  .req-free{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:var(--space-2);padding:var(--space-6);opacity:0;transform:translateY(12px)}
+  .req-free{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-2);padding:var(--space-8) var(--space-4)}
   .req-free strong{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(34px,4.6vw,64px);line-height:1.05;max-width:18ch;text-shadow:0 2px 18px rgba(0,30,40,.6)}
   .req-free span{font-size:18px;max-width:30ch;text-shadow:0 2px 14px rgba(0,30,40,.6)}
   .req-cards.cross > :not(.req-x):not(.req-free){transition:opacity .4s ease .7s}
@@ -427,74 +429,6 @@
         <a class="btn btn-secondary" href="modulos.html">Ver los módulos</a>
       </div>
     </div>
-    <figure class="hero-art band-dark la" data-delay=".15" role="img" aria-label="Ilustración: la plataforma SquareNet en tres capas: interfaz, fórmulas y scripts, y base de datos">
-      <svg viewBox="0 0 400 300" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <defs>
-          <radialGradient id="lyHalo" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#99e0ff" stop-opacity=".2"/>
-            <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="190" cy="150" r="150" fill="url(#lyHalo)"/>
-        <path class="la-frame" data-draw d="M14 40 V14 H40 M360 14 H386 V40 M386 260 V286 H360 M40 286 H14 V260"/>
-        <g data-fade style="--d:0.20s">
-          <path d="M80 210 L168 254 V261 L80 217 Z" fill="rgba(255,255,255,.06)" class="la-soft"/>
-          <path d="M168 254 L256 210 V217 L168 261 Z" fill="rgba(255,255,255,.13)" class="la-soft"/>
-          <path d="M168 166 L256 210 L168 254 L80 210 Z" fill="#10526a" fill-opacity=".96" class="la-main"/>
-        </g>
-          <ellipse cx="168" cy="232" rx="26" ry="8" fill="rgba(0,0,0,.28)"/>
-          <g fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M151 196 V224 C151 232 185 232 185 224 V196" fill="rgba(153,224,255,.14)"/>
-            <ellipse cx="168" cy="196" rx="17" ry="6.2" fill="rgba(153,224,255,.28)"/>
-            <path d="M151 208 C151 214.2 185 214.2 185 208" stroke="rgba(255,255,255,.5)"/>
-            <path d="M151 219 C151 225.2 185 225.2 185 219" stroke="rgba(255,255,255,.5)"/>
-          </g>
-        <path class="la-dash la-acc" d="M80 153 V210"/><path class="la-dash la-acc" d="M256 153 V210"/>
-        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="153" r="2.4" style="--rd:0.5s"/>
-        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="153" r="2.4" style="--rd:1.8s"/>
-        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="210" r="2.4" style="--rd:1.2s"/>
-        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="210" r="2.4" style="--rd:2.5s"/>
-        <g data-fade style="--d:0.45s">
-          <path d="M80 146 L168 190 V197 L80 153 Z" fill="rgba(255,255,255,.06)" class="la-soft"/>
-          <path d="M168 190 L256 146 V153 L168 197 Z" fill="rgba(255,255,255,.13)" class="la-soft"/>
-          <path d="M168 102 L256 146 L168 190 L80 146 Z" fill="#156079" fill-opacity=".96" class="la-main"/>
-        </g>
-          <g transform="matrix(0.88 0.44 -0.88 0.44 168 146)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="ly-code">
-            <path d="M-13 -19 Q-22 -19 -22 -10 V-5 Q-22 0 -30 0 Q-22 0 -22 5 V10 Q-22 19 -13 19"/>
-            <path d="M13 -19 Q22 -19 22 -10 V-5 Q22 0 30 0 Q22 0 22 5 V10 Q22 19 13 19"/>
-            <path d="M-10 -9 H8 M-10 0 H14 M-10 9 H3" stroke="#99e0ff"/>
-          </g>
-        <path class="la-dash la-acc" d="M80 89 V146"/><path class="la-dash la-acc" d="M256 89 V146"/>
-        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="89" r="2.4" style="--rd:0s"/>
-        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="89" r="2.4" style="--rd:1.3s"/>
-        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="146" r="2.4" style="--rd:0.7s"/>
-        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="146" r="2.4" style="--rd:2s"/>
-        <g data-fade style="--d:0.70s">
-          <path d="M80 82 L168 126 V133 L80 89 Z" fill="rgba(255,255,255,.06)" class="la-soft"/>
-          <path d="M168 126 L256 82 V89 L168 133 Z" fill="rgba(255,255,255,.13)" class="la-soft"/>
-          <path d="M168 38 L256 82 L168 126 L80 82 Z" fill="#1b6e8a" fill-opacity=".96" class="la-main"/>
-        </g>
-          <g transform="matrix(0.88 0.44 -0.88 0.44 168 82)" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="-38" y="-27" width="76" height="54" rx="4"/>
-            <path d="M-38 -16 H38" stroke="rgba(255,255,255,.5)"/>
-            <circle cx="-31" cy="-21.5" r="1.6" fill="rgba(255,255,255,.9)" stroke="none"/><circle cx="-25" cy="-21.5" r="1.6" fill="rgba(255,255,255,.9)" stroke="none"/>
-            <path d="M-30 -6 H-6 M-30 4 H4 M-30 14 H-12" stroke="rgba(255,255,255,.5)"/>
-            <rect x="8" y="-8" width="22" height="26" rx="2.5" stroke="#99e0ff" fill="rgba(153,224,255,.18)"/>
-          </g>
-        <path class="la-soft" d="M264 82 H300"/>
-        <circle class="la-dot" cx="264" cy="82" r="1.8"/>
-        <text class="la-txt" x="308" y="80" font-size="8.5">Interfaz</text>
-        <text class="ly-sub" x="308" y="92">Escritorio y web</text>
-        <path class="la-soft" d="M264 146 H300"/>
-        <circle class="la-dot" cx="264" cy="146" r="1.8"/>
-        <text class="la-txt" x="308" y="144" font-size="8.5">Fórmulas</text>
-        <text class="ly-sub" x="308" y="156">Scripts sin recompilar</text>
-        <path class="la-soft" d="M264 210 H300"/>
-        <circle class="la-dot" cx="264" cy="210" r="1.8"/>
-        <text class="la-txt" x="308" y="208" font-size="8.5">Base de datos</text>
-        <text class="ly-sub" x="308" y="220">SQL Server · Oracle</text>
-      </svg>
-    </figure>
   </div>
 
   <div class="wrap">
@@ -680,43 +614,7 @@
         <p>Lo mínimo que necesitan el servidor de datos y los equipos de tus usuarios. Sin hardware especial.</p>
       </div>
 
-      <div class="req-cards cross" data-reveal>
-        <svg class="req-x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 4 97 96"/><path pathLength="1" d="M97 4 3 96"/></svg>
-        <div class="req-free"><strong>Solo necesitas una computadora</strong><span>Funciona en cualquier plataforma y en cualquier navegador.</span></div>
-        <article class="req-card" data-reveal>
-          <div class="req-head">
-            <div class="req-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="6.5" rx="1.2"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.2"/><path d="M7 7.25h.01M7 16.75h.01"/><path d="M11 7.25h6M11 16.75h6"/></svg></div>
-            <div><h3>Servidor de datos</h3><p>Donde vive tu información</p></div>
-          </div>
-          <div class="req-big"><b data-count="8">8</b><span>GB de RAM</span></div>
-          <div class="req-meter" style="--n:16" aria-hidden="true">
-            <i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="rec" style="--i:8"></i><i class="rec" style="--i:9"></i><i class="rec" style="--i:10"></i><i class="rec" style="--i:11"></i><i class="rec" style="--i:12"></i><i class="rec" style="--i:13"></i><i class="rec" style="--i:14"></i><i class="rec" style="--i:15"></i>
-          </div>
-          <div class="req-legend"><span><i class="on"></i>Mínimo: 8 GB</span><span><i></i>Recomendado: 16 GB</span></div>
-          <div class="req-stats">
-            <div class="req-stat"><b data-count="200" data-suffix=" GB">200 GB</b><span>de espacio libre para datos</span></div>
-            <div class="req-stat"><b>Windows 2000</b><span>en adelante</span></div>
-          </div>
-          <div class="req-chips"><span>SQL Server</span><span>MySQL</span><span>Oracle</span></div>
-        </article>
-
-        <article class="req-card" data-reveal>
-          <div class="req-head">
-            <div class="req-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8.5 20h7M12 16v4"/></svg></div>
-            <div><h3>PCs cliente</h3><p>Donde trabaja tu gente</p></div>
-          </div>
-          <div class="req-big"><b data-count="4">4</b><span>GB de RAM</span></div>
-          <div class="req-meter" style="--n:8" aria-hidden="true">
-            <i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="rec" style="--i:4"></i><i class="rec" style="--i:5"></i><i class="rec" style="--i:6"></i><i class="rec" style="--i:7"></i>
-          </div>
-          <div class="req-legend"><span><i class="on"></i>Mínimo: 4 GB</span><span><i></i>Recomendado: 8 GB</span></div>
-          <div class="req-stats">
-            <div class="req-stat"><b data-count="100" data-suffix=" MB">100 MB</b><span>de espacio libre en disco</span></div>
-            <div class="req-stat"><b>1024 × 768</b><span>resolución mínima</span></div>
-          </div>
-          <div class="req-chips"><span>Windows XP</span><span>7</span><span>8</span><span>10</span><span>11</span><span>… y posteriores</span></div>
-        </article>
-      </div>
+      <div class="req-free" data-reveal><strong>Solo necesitas una computadora</strong><span>Funciona en cualquier plataforma y en cualquier navegador.</span></div>
 
       <div class="req-cta" data-reveal>
         <p>¿Dudas sobre tu infraestructura? Cuéntanos qué tienes y te decimos si estás listo.</p>
