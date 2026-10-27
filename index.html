@@ -345,8 +345,8 @@
           <div class="laptop-lid">
             <span class="laptop-cam" aria-hidden="true"></span>
             <div class="laptop-screen">
-              <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1280" height="720"
-                     data-src="media/squarenet-recorrido.mp4"></video>
+              <video class="laptop-video" id="laptopVideo" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" width="1920" height="1080"
+                     data-src="media/squarenet-recorrido.mp4" data-src-av1="media/squarenet-recorrido-av1.mp4"></video>
               <img class="laptop-poster" src="media/squarenet-recorrido-poster.jpg" alt="Rol de pagos en el sistema SquareNet: horas extra, décimos, fondos de reserva, aporte al IESS e impuesto a la renta" width="1280" height="720" loading="lazy" decoding="async">
               <span class="laptop-gloss" aria-hidden="true"></span>
               <button class="laptop-full" id="laptopFull" type="button" aria-label="Ver el video en pantalla completa" title="Ver en pantalla completa">
@@ -939,15 +939,26 @@
         laptop.classList.toggle('is-paused', paused);
         toggle.setAttribute('aria-label', paused ? 'Reproducir la animación' : 'Pausar la animación');
       }
+      // Dos versiones del mismo video (1080p, 30 fps): AV1 (más liviano) solo si el equipo lo decodifica por
+      // hardware; si no, H.264, que casi cualquier tarjeta de video decodifica sin cargar al procesador.
+      function pickSrc(cb) {
+        var h264 = video.getAttribute('data-src'), av1 = video.getAttribute('data-src-av1'), mc = navigator.mediaCapabilities;
+        if (!av1 || !mc || !mc.decodingInfo) return cb(h264);
+        mc.decodingInfo({ type: 'file', video: { contentType: 'video/mp4; codecs="av01.0.08M.08"', width: 1920, height: 1080, bitrate: 720000, framerate: 30 } })
+          .then(function (r) { cb(r.supported && r.smooth && r.powerEfficient ? av1 : h264); }, function () { cb(h264); });
+      }
       function load() {
         if (loaded) return;
         loaded = true;
-        video.src = video.getAttribute('data-src');
-        video.preload = 'auto';
-        video.load();
+        pickSrc(function (src) {
+          video.src = src;
+          video.preload = 'auto';
+          video.load();
+          sync();
+        });
       }
       function sync() {
-        if (!loaded) return;
+        if (!video.getAttribute('src')) return;
         if (isFull() || (inView && opened && !closed && !userPaused && !document.hidden)) {
           var p = video.play();
           if (p && p.catch) p.catch(function () { userPaused = true; setPaused(true); });
