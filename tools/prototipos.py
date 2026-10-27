@@ -17,7 +17,7 @@ FONTS = [
     ('serif', 'Source Serif (antes)', '"Source Serif 4", system-ui, serif', 600, '-.015em'),
     ('jakarta', 'Plus Jakarta Sans', '"Plus Jakarta Sans", system-ui, sans-serif', 700, '-.025em'),
     ('figtree', 'Figtree', '"Figtree", system-ui, sans-serif', 700, '-.02em'),
-    ('dmsans', 'DM Sans (actual)', '"DM Sans", system-ui, sans-serif', 700, '-.03em'),
+    ('dmsans', 'DM Sans (actual)', '"DM Sans", system-ui, sans-serif', 700, '-.02em'),
 ]
 DEFAULT = 'dmsans'
 GFONTS = ('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600'
