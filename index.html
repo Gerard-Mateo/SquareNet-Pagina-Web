@@ -250,6 +250,12 @@
     .laptop-poster,.laptop-toggle,.screens .ico,.showcase-more i{transition:none}
   }
   .clients{padding:var(--space-6) 0}
+  /* franja propia de clientes: separa los logos de la lista de módulos y del carrusel */
+  .clients-band{background:var(--color-accent-100);border-block:1px solid color-mix(in srgb,var(--color-accent) 16%,transparent);margin-top:var(--space-4)}
+  .clients-band .clients{padding:var(--space-6)}
+  .clients-band .clients h6{color:var(--color-accent-800)}
+  /* la pista animada es su propio contexto de apilamiento y aísla el multiply de los logos: el fondo va también en ella para que el blanco de los logos desaparezca */
+  .clients-band .marquee-track{background:var(--color-accent-100)}
   .clients h6{color:var(--color-neutral-700);margin-bottom:var(--space-4);text-align:center}
   .modules-teaser{padding:var(--space-8) 0;border-top:1px solid var(--color-divider);text-align:center}
   .modules-teaser h2{margin-bottom:var(--space-3)}
@@ -352,6 +358,7 @@
     </div>
   </section>
 
+  <section class="clients-band" aria-label="Clientes">
   <div class="wrap clients reveal">
     <h6>Confían en nosotros</h6>
     <div class="marquee">
@@ -400,6 +407,7 @@
       </div>
     </div>
   </div>
+  </section>
 
   <div class="feature-carousel reveal" id="featureCarousel">
     <div class="feature-carousel-track" id="featureTrack">
