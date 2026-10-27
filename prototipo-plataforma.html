@@ -21,14 +21,31 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet">
 <style>
-  /* PROTOTIPO: igual a la página real, solo cambia la letra (Source Serif 4 → Plus Jakarta Sans) */
-  :root{--font-heading:"Plus Jakarta Sans",system-ui,sans-serif;--font-body:"Plus Jakarta Sans",system-ui,sans-serif;--font-heading-weight:700}
-  h1,h2,h3{letter-spacing:-.025em}
-  .proto-tag{position:fixed;z-index:999;left:12px;bottom:12px;display:flex;gap:10px;align-items:center;padding:8px 14px;border-radius:999px;background:#16181b;color:#fff;font:600 13px/1 "Plus Jakarta Sans",sans-serif;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
-  .proto-tag a{color:#99e0ff}
+  /* PROTOTIPO: igual a la página real, solo cambia la letra de títulos y texto (selector abajo a la izquierda) */
+  html[data-letra="serif"]{--font-heading:"Source Serif 4", system-ui, serif;--font-body:"Source Serif 4", system-ui, serif;--font-heading-weight:600}
+  html[data-letra="serif"] h1,html[data-letra="serif"] h2,html[data-letra="serif"] h3{letter-spacing:-.015em}
+  html[data-letra="jakarta"]{--font-heading:"Plus Jakarta Sans", system-ui, sans-serif;--font-body:"Plus Jakarta Sans", system-ui, sans-serif;--font-heading-weight:700}
+  html[data-letra="jakarta"] h1,html[data-letra="jakarta"] h2,html[data-letra="jakarta"] h3{letter-spacing:-.025em}
+  html[data-letra="figtree"]{--font-heading:"Figtree", system-ui, sans-serif;--font-body:"Figtree", system-ui, sans-serif;--font-heading-weight:700}
+  html[data-letra="figtree"] h1,html[data-letra="figtree"] h2,html[data-letra="figtree"] h3{letter-spacing:-.02em}
+  html[data-letra="dmsans"]{--font-heading:"DM Sans", system-ui, sans-serif;--font-body:"DM Sans", system-ui, sans-serif;--font-heading-weight:700}
+  html[data-letra="dmsans"] h1,html[data-letra="dmsans"] h2,html[data-letra="dmsans"] h3{letter-spacing:-.03em}
+  .proto-tag{position:fixed;z-index:999;left:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-width:calc(100vw - 24px);padding:6px;border-radius:18px;background:#16181b;color:#fff;font:600 13px/1 system-ui,sans-serif;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
+  .proto-tag span{padding:0 6px;opacity:.7}
+  .proto-tag button{font:inherit;border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:transparent;color:#fff}
+  .proto-tag button[aria-pressed="true"]{background:#fff;color:#16181b}
+  .proto-tag a{color:#99e0ff;padding:0 8px}
 </style>
+<script>
+  // aplica la letra antes de pintar, para que no parpadee
+  (function () {
+    var ok = ['serif', 'jakarta', 'figtree', 'dmsans'], q = new URLSearchParams(location.search).get('letra'), s = null;
+    try { s = localStorage.getItem('sqn-proto-letra'); } catch (e) {}
+    document.documentElement.setAttribute('data-letra', ok.indexOf(q) >= 0 ? q : (ok.indexOf(s) >= 0 ? s : 'jakarta'));
+  })();
+</script>
 <style>
   .hero-art .ly-sub{font-family:var(--font-heading);font-size:7.6px;fill:rgba(255,255,255,.55);stroke:none}
   .ly-dot{opacity:0}
@@ -828,6 +845,18 @@
       Array.prototype.forEach.call(panels, function (p) { io.observe(p); });
     })();
   </script>
-  <div class="proto-tag">Prototipo · solo cambia la letra <a href="plataforma.html">Ver la original ↗</a></div>
+  <div class="proto-tag" role="group" aria-label="Letra del prototipo"><span>Letra</span><button type="button" data-letra="serif">Source Serif (actual)</button><button type="button" data-letra="jakarta">Plus Jakarta Sans</button><button type="button" data-letra="figtree">Figtree</button><button type="button" data-letra="dmsans">DM Sans</button><a href="plataforma.html">Original ↗</a></div>
+  <script>
+    (function () {
+      var html = document.documentElement, bs = document.querySelectorAll('.proto-tag [data-letra]');
+      function mark() { bs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-letra') === html.getAttribute('data-letra'))); }); }
+      bs.forEach(function (b) { b.addEventListener('click', function () {
+        html.setAttribute('data-letra', b.getAttribute('data-letra'));
+        try { localStorage.setItem('sqn-proto-letra', b.getAttribute('data-letra')); } catch (e) {}
+        mark();
+      }); });
+      mark();
+    })();
+  </script>
 </body>
 </html>
