@@ -21,7 +21,7 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet">
 <style>
   /* PROTOTIPO: igual a la página real, solo cambia la letra de títulos y texto (selector abajo a la izquierda) */
   html[data-letra="serif"]{--font-heading:"Source Serif 4", system-ui, serif;--font-body:"Source Serif 4", system-ui, serif;--font-heading-weight:600}
@@ -37,13 +37,17 @@
   .proto-tag button{font:inherit;border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:transparent;color:#fff}
   .proto-tag button[aria-pressed="true"]{background:#fff;color:#16181b}
   .proto-tag a{color:#99e0ff;padding:0 8px}
+  /* prueba: clientes justo debajo del hero, sobre una franja de color */
+  .proto-clients{background:var(--color-accent-100);border-block:1px solid color-mix(in srgb,var(--color-accent) 14%,transparent)}
+  .proto-clients .clients{padding:var(--space-6) var(--space-6) var(--space-4)}
+  .proto-clients .clients h6{color:var(--color-accent-800)}
 </style>
 <script>
   // aplica la letra antes de pintar, para que no parpadee
   (function () {
     var ok = ['serif', 'jakarta', 'figtree', 'dmsans'], q = new URLSearchParams(location.search).get('letra'), s = null;
     try { s = localStorage.getItem('sqn-proto-letra'); } catch (e) {}
-    document.documentElement.setAttribute('data-letra', ok.indexOf(q) >= 0 ? q : (ok.indexOf(s) >= 0 ? s : 'jakarta'));
+    document.documentElement.setAttribute('data-letra', ok.indexOf(q) >= 0 ? q : (ok.indexOf(s) >= 0 ? s : 'dmsans'));
   })();
 </script>
 <style>
@@ -845,7 +849,7 @@
       Array.prototype.forEach.call(panels, function (p) { io.observe(p); });
     })();
   </script>
-  <div class="proto-tag" role="group" aria-label="Letra del prototipo"><span>Letra</span><button type="button" data-letra="serif">Source Serif (actual)</button><button type="button" data-letra="jakarta">Plus Jakarta Sans</button><button type="button" data-letra="figtree">Figtree</button><button type="button" data-letra="dmsans">DM Sans</button><a href="plataforma.html">Original ↗</a></div>
+  <div class="proto-tag" role="group" aria-label="Letra del prototipo"><span>Letra</span><button type="button" data-letra="serif">Source Serif (antes)</button><button type="button" data-letra="jakarta">Plus Jakarta Sans</button><button type="button" data-letra="figtree">Figtree</button><button type="button" data-letra="dmsans">DM Sans (actual)</button><a href="plataforma.html">Original ↗</a></div>
   <script>
     (function () {
       var html = document.documentElement, bs = document.querySelectorAll('.proto-tag [data-letra]');

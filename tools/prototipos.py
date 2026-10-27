@@ -14,13 +14,13 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 
 # clave, nombre visible, familia CSS, peso de títulos, espaciado de títulos
 FONTS = [
-    ('serif', 'Source Serif (actual)', '"Source Serif 4", system-ui, serif', 600, '-.015em'),
+    ('serif', 'Source Serif (antes)', '"Source Serif 4", system-ui, serif', 600, '-.015em'),
     ('jakarta', 'Plus Jakarta Sans', '"Plus Jakarta Sans", system-ui, sans-serif', 700, '-.025em'),
     ('figtree', 'Figtree', '"Figtree", system-ui, sans-serif', 700, '-.02em'),
-    ('dmsans', 'DM Sans', '"DM Sans", system-ui, sans-serif', 700, '-.03em'),
+    ('dmsans', 'DM Sans (actual)', '"DM Sans", system-ui, sans-serif', 700, '-.03em'),
 ]
-DEFAULT = 'jakarta'
-GFONTS = ('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600'
+DEFAULT = 'dmsans'
+GFONTS = ('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600'
           '&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600'
           '&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap')
 
@@ -42,6 +42,10 @@ def head_block():
   .proto-tag button{{font:inherit;border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:transparent;color:#fff}}
   .proto-tag button[aria-pressed="true"]{{background:#fff;color:#16181b}}
   .proto-tag a{{color:#99e0ff;padding:0 8px}}
+  /* prueba: clientes justo debajo del hero, sobre una franja de color */
+  .proto-clients{{background:var(--color-accent-100);border-block:1px solid color-mix(in srgb,var(--color-accent) 14%,transparent)}}
+  .proto-clients .clients{{padding:var(--space-6) var(--space-6) var(--space-4)}}
+  .proto-clients .clients h6{{color:var(--color-accent-800)}}
 </style>
 <script>
   // aplica la letra antes de pintar, para que no parpadee
@@ -71,12 +75,24 @@ def tag_block(orig):
 '''
 
 
+def move_clients(s, nl):
+    """Prueba: la franja de clientes pasa de abajo de todo a justo debajo del hero, con fondo de color."""
+    a = s.index('  <div class="wrap clients reveal">')
+    b = s.index('  <div class="wrap">' + nl + '    <a class="cta-band"', a)
+    block = s[a:b].rstrip() + nl
+    s = s[:a] + s[b:]
+    c = s.index('  <section class="showcase"')
+    return s[:c] + '  <section class="proto-clients" aria-label="Clientes">' + nl + block + '  </section>' + nl + nl + s[c:]
+
+
 def build(src, dst):
     s = open(os.path.join(ROOT, src), encoding='utf-8', newline='').read()
     nl = '\r\n' if '\r\n' in s else '\n'
     anchor = '<link href="css/broadsheet.css" rel="stylesheet">'
     i = s.index(anchor) + len(anchor)
     s = s[:i] + nl + head_block().replace('\n', nl) + s[i:]
+    if src == 'index.html':
+        s = move_clients(s, nl)
     # navegar entre los prototipos
     s = s.replace('href="index.html"', 'href="prototipo-index.html"').replace('href="plataforma.html"', 'href="prototipo-plataforma.html"')
     j = s.rindex('</body>')

@@ -6,7 +6,7 @@
 .a{stroke:#99e0ff;stroke-width:1.8}
 .af{fill:#99e0ff;stroke:none}
 .g{filter:url(#glow)}
-.t{font-family:Georgia,'Source Serif 4',serif;font-weight:600;fill:#fff;stroke:none}
+.t{font-family:'DM Sans',Arial,Helvetica,sans-serif;font-weight:600;fill:#fff;stroke:none}
 </style>
 <defs>
 <linearGradient id="bg" x1=".17" y1=".1" x2=".83" y2=".9"><stop offset="0" stop-color="#004961"/><stop offset="1" stop-color="#0a303e"/></linearGradient>
