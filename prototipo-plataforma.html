@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SquareNet Software - Plataforma</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="plataforma, squarenet, modulos, gestión humana, erp">
+<meta name="description" content="Bondades de la plataforma SquareNet">
+<link rel="canonical" href="https://www.squarenet.com.ec/plataforma.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SquareNet">
+<meta property="og:locale" content="es_EC">
+<meta property="og:url" content="https://www.squarenet.com.ec/plataforma.html">
+<meta property="og:title" content="SquareNet Software - Plataforma">
+<meta property="og:description" content="Bondades de la plataforma SquareNet">
+<meta property="og:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SquareNet Software - Plataforma">
+<meta name="twitter:description" content="Bondades de la plataforma SquareNet">
+<meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
+<link href="img/squarenet.ico" rel="shortcut icon">
+<link href="css/broadsheet.css" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  /* PROTOTIPO: igual a la página real, solo cambia la letra (Source Serif 4 → Plus Jakarta Sans) */
+  :root{--font-heading:"Plus Jakarta Sans",system-ui,sans-serif;--font-body:"Plus Jakarta Sans",system-ui,sans-serif;--font-heading-weight:700}
+  h1,h2,h3{letter-spacing:-.025em}
+  .proto-tag{position:fixed;z-index:999;left:12px;bottom:12px;display:flex;gap:10px;align-items:center;padding:8px 14px;border-radius:999px;background:#16181b;color:#fff;font:600 13px/1 "Plus Jakarta Sans",sans-serif;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
+  .proto-tag a{color:#99e0ff}
+</style>
+<style>
+  .hero-art .ly-sub{font-family:var(--font-heading);font-size:7.6px;fill:rgba(255,255,255,.55);stroke:none}
+  .ly-dot{opacity:0}
+  @keyframes lyDown{0%{transform:translateY(0);opacity:0}15%,85%{opacity:1}100%{transform:translateY(57px);opacity:0}}
+  @keyframes lyUp{0%{transform:translateY(0);opacity:0}15%,85%{opacity:1}100%{transform:translateY(-57px);opacity:0}}
+  .la.is-play .ly-down{animation:lyDown 2.6s linear infinite calc(1.4s + var(--rd,0s))}
+  .la.is-play .ly-up{animation:lyUp 2.6s linear infinite calc(1.4s + var(--rd,0s))}
+
+  .sec-head{max-width:720px;margin:var(--space-8) 0 var(--space-4)}
+  .sec-head h2{font-size:38px;margin:0 0 var(--space-3)}
+  .sec-head p{font-size:17px;opacity:.85;margin:0}
+
+  /* — filas de producto: texto + ventana animada — */
+  .show-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-8);align-items:center;padding:var(--space-8) 0;border-top:1px solid var(--color-divider)}
+  .show-row.reverse{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+  .show-row.reverse .show-copy{order:2}
+  .show-num{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-700);display:flex;align-items:center;gap:10px}
+  .show-num::after{content:"";height:1px;width:42px;background:var(--color-accent)}
+  .show-copy h2{font-size:34px;margin:var(--space-3) 0 var(--space-4)}
+  .show-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-3)}
+  .show-list li{display:flex;gap:12px;align-items:flex-start;font-size:17px;line-height:1.5}
+  .show-list svg{flex:0 0 22px;width:22px;height:22px;margin-top:2px}
+  .show-list svg circle{fill:var(--color-accent-100)}
+  .show-list svg path{fill:none;stroke:var(--color-accent-700);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  .show-media{position:relative;container-type:inline-size;padding:40px 28px 40px;border-radius:var(--radius-lg);overflow:hidden;
+    background:radial-gradient(circle at 16% 10%,color-mix(in srgb,var(--color-accent-300) 46%,transparent) 0%,transparent 54%),
+      radial-gradient(circle at 92% 92%,color-mix(in srgb,var(--color-accent-2-300) 30%,transparent) 0%,transparent 48%),var(--color-accent-100)}
+  .show-media::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+    background:radial-gradient(circle,color-mix(in srgb,var(--color-accent-700) 30%,transparent) 1.2px,transparent 1.2px) 0 0/20px 20px;
+    -webkit-mask-image:linear-gradient(135deg,#000 0,transparent 70%);mask-image:linear-gradient(135deg,#000 0,transparent 70%)}
+  .show-chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:8px 13px;background:#fff;border-radius:var(--radius-md);
+    font-size:13px;font-weight:600;color:var(--color-accent-800);box-shadow:0 10px 24px color-mix(in srgb,#0a303e 22%,transparent);animation:chipFloat 5s ease-in-out infinite}
+  .show-chip svg{width:16px;height:16px;fill:none;stroke:var(--color-accent-700);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+  /* — ventana de aplicación (maqueta en HTML/CSS, escala con el ancho vía cqw) — */
+  .win{position:relative;width:100%;font-size:12px;font-size:max(6.6px,calc(100cqw / 46));line-height:1.35;color:var(--color-text);background:#fff;
+    border:1px solid color-mix(in srgb,var(--color-text) 14%,transparent);border-radius:.35em;overflow:hidden;
+    box-shadow:0 1.6em 3em color-mix(in srgb,#0a303e 24%,transparent),0 .15em .4em color-mix(in srgb,#0a303e 14%,transparent)}
+  .win svg{display:block}
+  .win-bar{display:flex;align-items:center;gap:.5em;padding:.7em 1em;background:var(--color-neutral-100);border-bottom:1px solid color-mix(in srgb,var(--color-text) 10%,transparent)}
+  .win-bar i{width:.75em;height:.75em;border-radius:50%;background:var(--color-neutral-300)}
+  .win-title{margin-left:.6em;font-size:.92em;color:var(--color-neutral-700)}
+  .cur{position:absolute;left:0;top:0;z-index:6;width:1.15em;height:1.65em;opacity:0;pointer-events:none;transform-origin:0 0;filter:drop-shadow(0 .12em .18em rgba(0,0,0,.35))}
+  .cbx{position:relative;flex:0 0 1.15em;width:1.15em;height:1.15em;border:1.5px solid var(--color-accent);border-radius:.2em;background:var(--color-accent)}
+  .cbx::after{content:"";position:absolute;left:.3em;top:.08em;width:.3em;height:.6em;border:solid #fff;border-width:0 .15em .15em 0;transform:rotate(45deg)}
+
+  .show-media:not(.is-live) *,.show-media:not(.is-live) *::after{animation-play-state:paused!important}
+
+  /* ventana 1 · filtro tipo Excel */
+  .mf-body{position:relative;padding:1em 1em 3.4em;min-height:29em}
+  .mf-head,.mf-row{display:grid;grid-template-columns:40% 34% 26%;align-items:center}
+  .mf-head{height:2.2em;font-size:.82em;letter-spacing:.07em;text-transform:uppercase;color:var(--color-neutral-600);border-bottom:1px solid var(--color-divider)}
+  .mf-head .is-f{display:flex;align-items:center;gap:.5em}
+  .mf-funnel{width:1.1em;height:1.1em;fill:currentColor}
+  .mf-row{height:2.2em;border-bottom:1px solid color-mix(in srgb,var(--color-text) 7%,transparent);overflow:hidden}
+  .mf-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:.6em}
+  .mf-row span:first-child{font-weight:600}
+  .mf-pop{position:absolute;left:18.2em;top:3.3em;width:17.5em;z-index:2;padding:.5em;background:#fff;border:1px solid color-mix(in srgb,var(--color-text) 16%,transparent);border-radius:.3em;
+    box-shadow:0 1em 2.2em color-mix(in srgb,#0a303e 26%,transparent)}
+  .mf-m{display:flex;align-items:center;gap:.7em;height:1.7em;padding:0 .5em;font-size:.95em;color:var(--color-neutral-800)}
+  .mf-m svg{width:1.1em;height:1.1em;fill:none;stroke:var(--color-neutral-600);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mf-sep{height:1px;background:var(--color-divider);margin:.3em 0}
+  .mf-search{height:1.9em;margin:.4em 0;padding:0 .6em;display:flex;align-items:center;border:1px solid var(--color-neutral-300);border-radius:.2em;color:var(--color-neutral-500);font-size:.95em}
+  .mf-it{display:flex;align-items:center;gap:.7em;height:1.7em;padding:0 .5em;font-size:.95em;border-radius:.2em}
+  .mf-foot{display:flex;justify-content:flex-end;gap:.5em;margin-top:.5em;padding-top:.5em;border-top:1px solid var(--color-divider)}
+  .mf-btn{padding:.35em 1em;border-radius:.2em;font-size:.92em;border:1px solid var(--color-neutral-300);color:var(--color-neutral-700)}
+  .mf-btn.pri{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
+  .mf-status{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;height:2.4em;padding:0 1.2em;background:var(--color-neutral-100);border-top:1px solid var(--color-divider);font-size:.88em;color:var(--color-neutral-700)}
+  .mf-status span{position:absolute}
+  .mf-status .st2{opacity:0;color:var(--color-accent-800);font-weight:600}
+
+  .is-in .mf-pop{animation:mfPop 10s ease infinite}
+  .is-in .cbx.a{animation:cbBoxA 10s ease infinite}.is-in .cbx.a::after{animation:cbMarkA 10s ease infinite}
+  .is-in .cbx.b{animation:cbBoxB 10s ease infinite}.is-in .cbx.b::after{animation:cbMarkB 10s ease infinite}
+  .is-in .cbx.all::after{animation:cbAll 10s ease infinite}
+  .is-in .mf-it.fa{animation:flashA 10s ease infinite}.is-in .mf-it.fb{animation:flashB 10s ease infinite}
+  .is-in .mf-row.rf,.is-in .mf-row.rg{animation:rowGone 10s ease infinite}
+  .is-in .mf-btn.pri{animation:btnPress 10s ease infinite}
+  .is-in .mf-head .is-f{animation:fActive 10s ease infinite}
+  .is-in .mf-status .st1{animation:st1 10s ease infinite}.is-in .mf-status .st2{animation:st2 10s ease infinite}
+  .is-in .cur.k1{animation:curF 10s cubic-bezier(.45,0,.2,1) infinite}
+  @keyframes mfPop{0%,3%{opacity:0;transform:translateY(.6em)}8%,41%{opacity:1;transform:none}46%,100%{opacity:0;transform:translateY(.4em)}}
+  @keyframes cbBoxA{0%,16.5%{background:var(--color-accent);border-color:var(--color-accent)}17.5%,93%{background:#fff;border-color:var(--color-neutral-400)}95%,100%{background:var(--color-accent);border-color:var(--color-accent)}}
+  @keyframes cbMarkA{0%,16.5%{opacity:1}17.5%,93%{opacity:0}95%,100%{opacity:1}}
+  @keyframes cbBoxB{0%,26.5%{background:var(--color-accent);border-color:var(--color-accent)}27.5%,93%{background:#fff;border-color:var(--color-neutral-400)}95%,100%{background:var(--color-accent);border-color:var(--color-accent)}}
+  @keyframes cbMarkB{0%,26.5%{opacity:1}27.5%,93%{opacity:0}95%,100%{opacity:1}}
+  @keyframes cbAll{0%,17%{transform:rotate(45deg);width:.3em;height:.6em;left:.3em;top:.08em;border-width:0 .15em .15em 0}20%,93%{transform:rotate(0);width:.62em;height:0;left:.23em;top:.45em;border-width:0 0 .16em 0}96%,100%{transform:rotate(45deg);width:.3em;height:.6em;left:.3em;top:.08em;border-width:0 .15em .15em 0}}
+  @keyframes flashA{0%,16.5%{background:transparent}17.5%{background:var(--color-accent-100)}24%,100%{background:transparent}}
+  @keyframes flashB{0%,26.5%{background:transparent}27.5%{background:var(--color-accent-100)}34%,100%{background:transparent}}
+  @keyframes rowGone{0%,43%{opacity:1;height:2.2em}49%,93%{opacity:0;height:0;border-bottom-width:0}97%,100%{opacity:1;height:2.2em}}
+  @keyframes btnPress{0%,38.5%{transform:scale(1);filter:none}39.5%{transform:scale(.9);filter:brightness(.88)}42%,100%{transform:scale(1);filter:none}}
+  @keyframes fActive{0%,44%{color:var(--color-neutral-600)}48%,93%{color:var(--color-accent-700)}97%,100%{color:var(--color-neutral-600)}}
+  @keyframes st1{0%,44%{opacity:1}48%,93%{opacity:0}97%,100%{opacity:1}}
+  @keyframes st2{0%,44%{opacity:0}50%,93%{opacity:1}97%,100%{opacity:0}}
+
+  /* ventana 2 · depurador de fórmulas: el estado base es el final (rastro completo); los keyframes lo esconden antes */
+  .dg-top{display:flex;align-items:center;gap:.8em;padding:.75em 1em;border-bottom:1px solid var(--color-divider);font-size:.95em}
+  .dg-top span{color:var(--color-neutral-600);text-transform:uppercase;letter-spacing:.07em;font-size:.85em}
+  .dg-top span:nth-of-type(2){margin-left:auto}
+  .dg-code{padding:.9em .8em .9em 0;overflow:hidden;background:#fff;color:#1f1f1f;font-family:Consolas,"SFMono-Regular",ui-monospace,"Courier New",monospace;font-size:.7em;line-height:1.7}
+  .ln{display:flex;align-items:center;white-space:pre;min-height:1.7em}
+  .ln .no{flex:0 0 3.4em;text-align:right;padding-right:1.2em;color:#a3a3a3;user-select:none}
+  .ln .tx{display:inline-block;white-space:pre}
+  .dg-code .cm{color:#2e8a2e}
+  .dg-code .kw{color:#1f3fcc;font-weight:700}
+  .dg-code .vl{color:#a326b4}
+  .iv{display:inline-block;vertical-align:top;overflow:hidden;white-space:pre}
+  .dg-foot{display:flex;align-items:center;justify-content:space-between;gap:1em;padding:.75em 1em;border-top:1px solid var(--color-divider);background:var(--color-neutral-100)}
+  .dg-status{position:relative;height:1.4em;flex:1;font-size:.95em}
+  .dg-status span{position:absolute;left:0;top:0;white-space:nowrap}
+  .dg-status .s1,.dg-status .s3{color:var(--color-neutral-500);opacity:0}
+  .dg-status .s2{color:var(--color-accent-800);font-weight:600}
+  .dg-btn{display:inline-flex;align-items:center;gap:.5em;padding:.4em 1.1em;border-radius:.2em;font-size:.95em;background:var(--color-accent);color:#fff}
+  .dg-btn svg{width:.75em;height:.75em;fill:currentColor}
+  .mc-h{font-size:.82em;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin:.2em 0 .6em}
+
+  .is-in .dg-code{animation:dgFade 10s ease infinite}
+  .is-in .tr1{animation:dgL1 10s linear infinite}.is-in .tr2{animation:dgL2 10s linear infinite}.is-in .tr3{animation:dgL3 10s linear infinite}.is-in .tr4{animation:dgL4 10s linear infinite}.is-in .tr5{animation:dgL5 10s linear infinite}.is-in .tr6{animation:dgL6 10s linear infinite}.is-in .tr7{animation:dgL7 10s linear infinite}.is-in .tr8{animation:dgL8 10s linear infinite}.is-in .tr9{animation:dgL9 10s linear infinite}.is-in .tr10{animation:dgL10 10s linear infinite}.is-in .tr11{animation:dgL11 10s linear infinite}.is-in .tr12{animation:dgL12 10s linear infinite}
+  .is-in .iv.va{animation:dgIvA 10s ease infinite}.is-in .iv.vb{animation:dgIvB 10s ease infinite}
+  .is-in .dg-btn{animation:dgPress 10s ease infinite}
+  .is-in .dg-status .s1{animation:dgS1 10s ease infinite}.is-in .dg-status .s3{animation:dgS3 10s ease infinite}.is-in .dg-status .s2{animation:dgS2 10s ease infinite}
+  .is-in .cur.k2{animation:curC 10s cubic-bezier(.45,0,.2,1) infinite}
+  @keyframes dgFade{0%,92%{opacity:1}94%,96%{opacity:0}98%,100%{opacity:1}}
+  @keyframes dgL1{0%,17%{clip-path:inset(0 100% 0 0)}19.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL2{0%,20%{clip-path:inset(0 100% 0 0)}22.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL3{0%,23%{clip-path:inset(0 100% 0 0)}25.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL4{0%,26%{clip-path:inset(0 100% 0 0)}28.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL5{0%,29%{clip-path:inset(0 100% 0 0)}31.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL6{0%,32%{clip-path:inset(0 100% 0 0)}34.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL7{0%,35%{clip-path:inset(0 100% 0 0)}37.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL8{0%,38%{clip-path:inset(0 100% 0 0)}40.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL9{0%,41%{clip-path:inset(0 100% 0 0)}43.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL10{0%,44%{clip-path:inset(0 100% 0 0)}46.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL11{0%,47%{clip-path:inset(0 100% 0 0)}49.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgL12{0%,50%{clip-path:inset(0 100% 0 0)}52.4%,94%{clip-path:inset(0 0 0 0)}95%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes dgIvA{0%,53%{width:0}54.5%,94%{width:var(--w)}95%,100%{width:0}}
+  @keyframes dgIvB{0%,55.5%{width:0}57%,94%{width:var(--w)}95%,100%{width:0}}
+  @keyframes dgPress{0%,12.8%{transform:scale(1);filter:none}13.6%{transform:scale(.9);filter:brightness(.88)}15.5%,100%{transform:scale(1);filter:none}}
+  @keyframes dgS1{0%,14%{opacity:1}15.5%,95%{opacity:0}97%,100%{opacity:1}}
+  @keyframes dgS3{0%,14.5%{opacity:0}16%,55%{opacity:1}57%,100%{opacity:0}}
+  @keyframes dgS2{0%,56%{opacity:0}59%,92%{opacity:1}94%,100%{opacity:0}}
+
+  /* ventana 3 · diseñador de reportes */
+  .md-tabs{display:flex;gap:.2em;padding:.5em 1em 0;background:var(--color-neutral-100);border-bottom:1px solid var(--color-divider);font-size:.92em}
+  .md-tabs span{padding:.45em 1.1em;border:1px solid transparent;border-bottom:0;border-radius:.25em .25em 0 0;color:var(--color-neutral-600)}
+  .md-tabs .on{background:#fff;border-color:var(--color-divider);color:var(--color-text);position:relative;top:1px}
+  .md-body{display:grid;grid-template-columns:1fr 21em;min-height:25em}
+  .md-code{padding:.8em 0;background:#14232b;color:#d7e3e8;border-left:1px solid var(--color-divider);overflow:hidden}
+  .md-code .mc-h{padding:0 1em;color:#8fb3c2}
+  .md-code pre{margin:.4em 0 0;font:.9em/1.8 ui-monospace,Consolas,monospace;white-space:pre}
+  .md-code .ln{display:block;padding:0 1em;border-left:.2em solid transparent}
+  .md-code b{font-weight:400;color:#7fd4f5}.md-code i{font-style:normal;color:#f29cc2}.md-code u{text-decoration:none;color:#c7e89b}
+  .md-code .c{font-style:normal}.md-code .c::after{content:"#0f7fa6"}
+  .md-code .l-a{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}
+  .is-in .md-code .l-a{animation:lnA 10s infinite}.is-in .md-code .l-b{animation:lnB 10s infinite}.is-in .md-code .l-c{animation:lnC 10s infinite}
+  .is-in .md-code .l-band{animation:lnBand 10s infinite}
+  .is-in .md-code .c::after{animation:cHex 10s infinite}
+  @keyframes lnA{0%,29%,96%,100%{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}31%,94%{background:transparent;border-left-color:transparent}}
+  @keyframes lnB{0%,32%,60%,100%{background:transparent;border-left-color:transparent}34%,58%{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}}
+  @keyframes lnC{0%,62%,94%,100%{background:transparent;border-left-color:transparent}64%,92%{background:rgba(127,212,245,.14);border-left-color:#7fd4f5}}
+  @keyframes lnBand{0%,12%,18%,43%,49%,95%,100%{background:transparent}14%,16%,45%,47%{background:rgba(242,156,194,.18)}}
+  @keyframes cHex{0%,14.9%{content:"#0f7fa6"}15%,45.9%{content:"#c2185b"}46%,95.9%{content:"#08485e"}96%,100%{content:"#0f7fa6"}}
+  .md-canvas{position:relative;display:flex;align-items:center;justify-content:center;padding:1.2em;
+    background:radial-gradient(circle,var(--color-neutral-300) 1px,transparent 1px) 0 0/1.1em 1.1em,var(--color-neutral-100)}
+  .md-card{position:relative;width:15em;height:21em;background:#fff;border-radius:.5em;box-shadow:0 .6em 1.6em rgba(0,0,0,.14);overflow:hidden}
+  .md-band{position:absolute;left:0;right:0;top:0;height:4.4em;background:var(--color-accent)}
+  .md-photo{position:absolute;left:4.7em;top:2.4em;width:5.6em;height:5.6em;border-radius:.5em;background:var(--color-neutral-200);border:.25em solid #fff;display:flex;align-items:center;justify-content:center;color:var(--color-neutral-500)}
+  .md-photo svg{width:2.6em;height:2.6em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+  .md-f{position:absolute;left:1em;width:13em;height:1.7em;display:flex;align-items:center;justify-content:center;border:1px dashed var(--color-neutral-400);border-radius:.15em}
+  .md-f span{font-size:.78em;letter-spacing:.05em;font-weight:600;color:var(--color-neutral-800)}
+  .md-f1{top:9.2em}.md-f2{top:11.2em}.md-f3{top:13.2em}
+  .md-qr{position:absolute;left:1.2em;top:15.4em;width:4.6em;height:4.6em}
+  .md-qr svg{width:100%;height:100%;fill:var(--color-neutral-900)}
+  .md-logo{position:absolute;left:6.6em;top:15.6em;width:7.2em;height:4.2em;display:flex;align-items:center;justify-content:center;border-radius:.2em;background:var(--color-accent-100);color:var(--color-accent-800)}
+  .md-logo span{font-size:.8em;font-weight:700;letter-spacing:.14em}
+  .md-sel{position:absolute;left:1em;top:9.2em;width:13em;height:1.7em;border:1.5px solid var(--color-accent);background:color-mix(in srgb,var(--color-accent) 9%,transparent);pointer-events:none;z-index:2}
+  .md-sel .h{position:absolute;width:.55em;height:.55em;background:#fff;border:1.5px solid var(--color-accent)}
+  .md-sel .tl{left:-.32em;top:-.32em}.md-sel .tr{right:-.32em;top:-.32em}.md-sel .bl{left:-.32em;bottom:-.32em}.md-sel .br{right:-.32em;bottom:-.32em}
+  .md-tip{position:absolute;left:0;top:-2.1em;white-space:nowrap;padding:.25em .6em;background:var(--color-accent-800);color:#fff;border-radius:.2em;font-size:.82em;opacity:0}
+  .md-tip.t0{opacity:1}
+  .md-props{padding:.8em 1em;background:#fff;border-left:1px solid var(--color-divider)}
+  .md-prow{display:flex;align-items:center;gap:.5em;margin-bottom:.55em;font-size:.95em;color:var(--color-neutral-700)}
+  .md-prow label{flex:0 0 3.4em}
+  .md-prow .inp{flex:1;padding:.3em .6em;border:1px solid var(--color-neutral-300);border-radius:.2em;color:var(--color-text);min-width:0}
+  .md-toggles{display:flex;gap:.4em;margin:.8em 0 1.1em;font-size:.88em}
+  .md-toggles span{padding:.3em .6em;border:1px solid var(--color-neutral-300);border-radius:.2em;color:var(--color-neutral-700)}
+  .md-toggles .on{background:var(--color-accent-100);border-color:var(--color-accent-300);color:var(--color-accent-800);font-weight:600}
+  .md-sw{display:flex;gap:.6em;padding:.2em}
+  .md-sw i{width:1.7em;height:1.7em;border-radius:.25em}
+  .md-sw .s1{background:var(--color-accent);box-shadow:0 0 0 .2em #fff,0 0 0 .34em var(--color-text)}
+  .md-sw .s2{background:var(--color-accent-2-600)}.md-sw .s3{background:var(--color-accent-800)}.md-sw .s4{background:var(--color-neutral-500)}
+
+  .is-in .md-sel{animation:mdSel 10s infinite}
+  .is-in .md-band{animation:mdBand 10s ease infinite}
+  .is-in .md-tip.t0{animation:tip0 10s infinite}.is-in .md-tip.t1{animation:tip1 10s infinite}.is-in .md-tip.t2{animation:tip2 10s infinite}
+  .is-in .md-sw .s1{animation:sw1 10s infinite}.is-in .md-sw .s2{animation:sw2 10s infinite}.is-in .md-sw .s3{animation:sw3 10s infinite}
+  .is-in .cur.k3{animation:curD 10s cubic-bezier(.45,0,.2,1) infinite}
+  @keyframes mdSel{
+    0%,28%{left:1em;top:9.2em;width:13em;height:1.7em;animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    34%,58%{left:1em;top:13.2em;width:13em;height:1.7em;animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    64%,92%{left:1.2em;top:15.4em;width:4.6em;height:4.6em;animation-timing-function:cubic-bezier(.45,0,.2,1)}
+    97%,100%{left:1em;top:9.2em;width:13em;height:1.7em}
+  }
+  @keyframes mdBand{0%,13%{background:var(--color-accent)}17%,44%{background:var(--color-accent-2-600)}48%,92%{background:var(--color-accent-800)}96%,100%{background:var(--color-accent)}}
+  @keyframes tip0{0%,28%{opacity:1}31%,93%{opacity:0}96%,100%{opacity:1}}
+  @keyframes tip1{0%,30%{opacity:0}34%,57%{opacity:1}60%,100%{opacity:0}}
+  @keyframes tip2{0%,59%{opacity:0}64%,91%{opacity:1}94%,100%{opacity:0}}
+  @keyframes sw1{0%,13%{box-shadow:0 0 0 .2em #fff,0 0 0 .34em var(--color-text)}14%,94%{box-shadow:none}96%,100%{box-shadow:0 0 0 .2em #fff,0 0 0 .34em var(--color-text)}}
+  @keyframes sw2{0%,13%{box-shadow:none}14%,44%{box-shadow:0 0 0 .2em #fff,0 0 0 .34em var(--color-text)}45%,100%{box-shadow:none}}
+  @keyframes sw3{0%,44%{box-shadow:none}45%,92%{box-shadow:0 0 0 .2em #fff,0 0 0 .34em var(--color-text)}94%,100%{box-shadow:none}}
+
+  .wrap > section.feats{padding-bottom:0}
+
+
+  @keyframes curF{
+    0%{opacity:0;transform:translate(40em,27.5em) scale(1)}
+    3%{opacity:0;transform:translate(40em,27.5em) scale(1)}
+    6%{opacity:1;transform:translate(40em,27.5em) scale(1)}
+    15%{opacity:1;transform:translate(19.8em,18.4em) scale(1)}
+    16.2%{opacity:1;transform:translate(19.8em,18.4em) scale(1)}
+    16.6%{opacity:1;transform:translate(19.8em,18.4em) scale(0.78)}
+    17.4%{opacity:1;transform:translate(19.8em,18.4em) scale(1)}
+    20%{opacity:1;transform:translate(19.8em,18.4em) scale(1)}
+    24.5%{opacity:1;transform:translate(19.8em,21.6em) scale(1)}
+    26%{opacity:1;transform:translate(19.8em,21.6em) scale(1)}
+    26.5%{opacity:1;transform:translate(19.8em,21.6em) scale(0.78)}
+    27.3%{opacity:1;transform:translate(19.8em,21.6em) scale(1)}
+    30%{opacity:1;transform:translate(19.8em,21.6em) scale(1)}
+    37.5%{opacity:1;transform:translate(32.4em,24.5em) scale(1)}
+    38.4%{opacity:1;transform:translate(32.4em,24.5em) scale(1)}
+    38.8%{opacity:1;transform:translate(32.4em,24.5em) scale(0.78)}
+    39.6%{opacity:1;transform:translate(32.4em,24.5em) scale(1)}
+    41%{opacity:1;transform:translate(32.4em,24.5em) scale(1)}
+    47%{opacity:0;transform:translate(35.5em,27.2em) scale(1)}
+    100%{opacity:0;transform:translate(40em,27.5em) scale(1)}
+  }
+  @keyframes curC{
+    0%{opacity:0;transform:translate(44em,20em) scale(1)}
+    3%{opacity:0;transform:translate(44em,20em) scale(1)}
+    5%{opacity:1;transform:translate(44em,20em) scale(1)}
+    11.5%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    13%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    13.5%{opacity:1;transform:translate(41.1em,30.1em) scale(0.78)}
+    14.3%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    16%{opacity:1;transform:translate(41.1em,30.1em) scale(1)}
+    22%{opacity:0;transform:translate(43.2em,32.5em) scale(1)}
+    100%{opacity:0;transform:translate(44em,20em) scale(1)}
+  }
+  @keyframes curD{
+    0%{opacity:0;transform:translate(28em,12em) scale(1)}
+    2%{opacity:0;transform:translate(28em,12em) scale(1)}
+    4%{opacity:1;transform:translate(28em,12em) scale(1)}
+    12.4%{opacity:1;transform:translate(35.3em,21.2em) scale(1)}
+    12.8%{opacity:1;transform:translate(35.3em,21.2em) scale(1)}
+    13.2%{opacity:1;transform:translate(35.3em,21.2em) scale(0.78)}
+    14%{opacity:1;transform:translate(35.3em,21.2em) scale(1)}
+    18%{opacity:1;transform:translate(35.3em,21.2em) scale(1)}
+    27%{opacity:1;transform:translate(15.4em,21.4em) scale(1)}
+    27.6%{opacity:1;transform:translate(15.4em,21.4em) scale(1)}
+    28%{opacity:1;transform:translate(15.4em,21.4em) scale(0.78)}
+    28.8%{opacity:1;transform:translate(15.4em,21.4em) scale(1)}
+    35%{opacity:1;transform:translate(15.4em,21.4em) scale(1)}
+    43.4%{opacity:1;transform:translate(37.6em,21.2em) scale(1)}
+    43.8%{opacity:1;transform:translate(37.6em,21.2em) scale(1)}
+    44.2%{opacity:1;transform:translate(37.6em,21.2em) scale(0.78)}
+    45%{opacity:1;transform:translate(37.6em,21.2em) scale(1)}
+    49%{opacity:1;transform:translate(37.6em,21.2em) scale(1)}
+    57.4%{opacity:1;transform:translate(11.4em,25.1em) scale(1)}
+    57.8%{opacity:1;transform:translate(11.4em,25.1em) scale(1)}
+    58.2%{opacity:1;transform:translate(11.4em,25.1em) scale(0.78)}
+    59%{opacity:1;transform:translate(11.4em,25.1em) scale(1)}
+    62%{opacity:1;transform:translate(11.4em,25.1em) scale(1)}
+    69%{opacity:0;transform:translate(15em,28em) scale(1)}
+    100%{opacity:0;transform:translate(28em,12em) scale(1)}
+  }
+
+  /* — cifras + tarjetas — */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);margin:var(--space-6) 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)}
+  .stat{padding:var(--space-6) var(--space-4);border-left:1px solid var(--color-divider)}
+  .stat:first-child{border-left:0;padding-left:0}
+  .stat b{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:64px;line-height:1;color:var(--color-accent-700);font-variant-numeric:tabular-nums}
+  .stat span{display:block;margin-top:var(--space-2);font-size:16px;color:var(--color-neutral-700);max-width:24ch;line-height:1.4}
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+  .feat{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-6) var(--space-6) var(--space-4);background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);
+    box-shadow:var(--shadow-sm);transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,border-color .3s ease}
+  .feat:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--color-accent-300)}
+  .feat-ico{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:var(--color-accent-100);color:var(--color-accent-700);transition:background .25s ease}
+  .feat:hover .feat-ico{background:var(--color-accent-200)}
+  .feat-ico svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .feat h3{font-size:23px;margin:0}
+  .feat p{margin:0;font-size:17px;line-height:1.55;color:var(--color-neutral-800);flex:1}
+  .feat-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--space-1)}
+  .feat-chips .tag{font-size:13px;padding:4px 10px}
+  .feat-chips small{align-self:center;margin-right:2px;font-size:13.5px;color:var(--color-neutral-700)}
+
+  /* — requerimientos — */
+  .req-band{margin-top:var(--space-8);padding:var(--space-6) 0 calc(var(--space-8) * 1.6)}
+  .req-band + .site-footer{margin-top:0}
+  .req-top{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap;margin-bottom:var(--space-6)}
+  .req-top h2{font-size:42px;max-width:18ch;margin:0}
+  .req-top p{max-width:42ch;font-size:18px;opacity:.85;margin:0}
+  .req-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+  .req-card{padding:var(--space-6);border-radius:var(--radius-lg);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+  .req-head{display:flex;gap:var(--space-3);align-items:center;margin-bottom:var(--space-6)}
+  .req-ico{width:56px;height:56px;flex:none;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.3);border-radius:var(--radius-md);color:var(--color-accent-300)}
+  .req-ico svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .req-head h3{font-size:27px;margin:0}
+  .req-head p{margin:2px 0 0;font-size:15px;opacity:.72}
+  .req-big{display:flex;align-items:baseline;gap:10px}
+  .req-big b{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:72px;line-height:1;font-variant-numeric:tabular-nums}
+  .req-big span{font-size:20px;opacity:.85}
+  .req-meter{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:4px;margin:var(--space-3) 0 var(--space-2)}
+  .req-meter i{display:block;height:14px;border:1px solid rgba(255,255,255,.3);border-radius:2px;opacity:0;transform:scaleY(.4)}
+  .req-meter i.on{background:var(--color-accent-300);border-color:var(--color-accent-300);box-shadow:0 0 10px color-mix(in srgb,var(--color-accent-300) 55%,transparent)}
+  .req-meter i.rec{background:rgba(153,224,255,.2);border-color:rgba(153,224,255,.55)}
+  .req-card.is-in .req-meter i{animation:segIn .45s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i) * 55ms + .35s)}
+  @keyframes segIn{to{opacity:1;transform:none}}
+  .req-legend{display:flex;gap:var(--space-4);flex-wrap:wrap;font-size:14.5px;opacity:.88}
+  .req-legend i{display:inline-block;width:12px;height:12px;margin-right:7px;vertical-align:-1px;border:1px solid rgba(153,224,255,.55);border-radius:2px;background:rgba(153,224,255,.2)}
+  .req-legend i.on{background:var(--color-accent-300);border-color:var(--color-accent-300)}
+  .req-stats{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-6);padding-top:var(--space-4);border-top:1px solid rgba(255,255,255,.14)}
+  .req-stat b{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+  .req-stat span{font-size:15px;opacity:.75}
+  .req-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-4)}
+  .req-chips span{font-size:14px;padding:5px 12px;border:1px solid rgba(255,255,255,.28);border-radius:2px;background:rgba(255,255,255,.06)}
+  /* PCs cliente: al entrar se tacha con una X y queda el mensaje de que basta una computadora */
+  .req-cards.cross{position:relative}
+  .req-x{overflow:visible;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+  .req-x path{fill:none;stroke:var(--color-accent-2-500);stroke-width:.7;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+  .req-x{transition:opacity .4s ease 1s}.req-cards.cross.is-in .req-x{opacity:.3}
+  .req-free{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:var(--space-2);padding:var(--space-6);opacity:0;transform:translateY(12px)}
+  .req-free strong{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(34px,4.6vw,64px);line-height:1.05;max-width:18ch;text-shadow:0 2px 18px rgba(0,30,40,.6)}
+  .req-free span{font-size:18px;max-width:30ch;text-shadow:0 2px 14px rgba(0,30,40,.6)}
+  .req-cards.cross > :not(.req-x):not(.req-free){transition:opacity .4s ease .7s}
+  .req-cards.cross.is-in > :not(.req-x):not(.req-free){opacity:.14}
+  .req-cards.cross.is-in .req-x path{animation:xDraw .5s cubic-bezier(.6,0,.3,1) forwards .3s}
+  .req-cards.cross.is-in .req-x path + path{animation-delay:.55s}
+  .req-cards.cross.is-in .req-free{transition:opacity .4s ease .9s,transform .4s ease .9s;opacity:1;transform:none}
+  @keyframes xDraw{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion:reduce){
+    .req-cards.cross > :not(.req-x):not(.req-free){opacity:.14;transition:none}
+    .req-x path{stroke-dashoffset:0!important;animation:none!important}
+    .req-free{opacity:1;transform:none;transition:none!important}
+  }
+  .req-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8);padding-top:var(--space-6);border-top:1px solid rgba(255,255,255,.16)}
+  .req-cta p{margin:0;font-size:20px;max-width:46ch}
+  .req-cta .btn{background:#fff;color:var(--color-accent-800)}
+  .req-cta .btn:hover{background:var(--color-accent-100)}
+
+  @media (max-width:1100px){
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat:nth-child(3){border-left:0;padding-left:0}
+    .stat:nth-child(n+3){border-top:1px solid var(--color-divider)}
+  }
+  @media (max-width:860px){
+    .sec-head h2,.req-top h2{font-size:30px}
+    .show-row,.show-row.reverse{grid-template-columns:1fr;gap:var(--space-6);padding:var(--space-6) 0}
+    .show-row.reverse .show-copy{order:0}
+    .show-copy h2{font-size:28px}
+    .show-media{padding:34px 12px 34px}
+    .show-chip{font-size:12px;padding:6px 10px}
+    .req-cards{grid-template-columns:1fr}
+    .req-card{padding:var(--space-4)}
+    .req-big b{font-size:56px}
+    .req-cta p{font-size:18px}
+  }
+  @media (max-width:640px){
+    .feat-grid{grid-template-columns:1fr}
+    .stat b{font-size:50px}
+    .req-stat b{font-size:28px}
+    .stat{padding:var(--space-4) var(--space-3)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .win *,.win *::after,.show-chip,.feat,.req-meter i{animation:none!important;transition:none!important}
+    .req-meter i{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" id="mainNav">
+      <a class="nav-brand" href="prototipo-index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="prototipo-index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="prototipo-plataforma.html" aria-current="page">Plataforma SquareNet</a>
+        <a href="modulos.html">Módulos</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Plataforma SquareNet</div>
+      <h1>Plataforma SquareNet©</h1>
+      <p>Nuestra plataforma de trabajo rompe los esquemas convencionales: una interfaz totalmente intuitiva, sencilla y de fácil aprendizaje, con navegación fluida entre los datos, filtros tipo Excel, agrupamiento dinámico, exportación directa a Excel y registro de auditoría en todo ámbito.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="contacto.html">Hablar con un asesor</a>
+        <a class="btn btn-secondary" href="modulos.html">Ver los módulos</a>
+      </div>
+    </div>
+    <figure class="hero-art band-dark la" data-delay=".15" role="img" aria-label="Ilustración: la plataforma SquareNet en tres capas: interfaz, fórmulas y scripts, y base de datos">
+      <svg viewBox="0 0 400 300" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <defs>
+          <radialGradient id="lyHalo" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#99e0ff" stop-opacity=".2"/>
+            <stop offset="1" stop-color="#99e0ff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="190" cy="150" r="150" fill="url(#lyHalo)"/>
+        <path class="la-frame" data-draw d="M14 40 V14 H40 M360 14 H386 V40 M386 260 V286 H360 M40 286 H14 V260"/>
+        <g data-fade style="--d:0.20s">
+          <path d="M80 210 L168 254 V261 L80 217 Z" fill="rgba(255,255,255,.06)" class="la-soft"/>
+          <path d="M168 254 L256 210 V217 L168 261 Z" fill="rgba(255,255,255,.13)" class="la-soft"/>
+          <path d="M168 166 L256 210 L168 254 L80 210 Z" fill="#10526a" fill-opacity=".96" class="la-main"/>
+        </g>
+          <ellipse cx="168" cy="232" rx="26" ry="8" fill="rgba(0,0,0,.28)"/>
+          <g fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M151 196 V224 C151 232 185 232 185 224 V196" fill="rgba(153,224,255,.14)"/>
+            <ellipse cx="168" cy="196" rx="17" ry="6.2" fill="rgba(153,224,255,.28)"/>
+            <path d="M151 208 C151 214.2 185 214.2 185 208" stroke="rgba(255,255,255,.5)"/>
+            <path d="M151 219 C151 225.2 185 225.2 185 219" stroke="rgba(255,255,255,.5)"/>
+          </g>
+        <path class="la-dash la-acc" d="M80 153 V210"/><path class="la-dash la-acc" d="M256 153 V210"/>
+        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="153" r="2.4" style="--rd:0.5s"/>
+        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="153" r="2.4" style="--rd:1.8s"/>
+        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="210" r="2.4" style="--rd:1.2s"/>
+        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="210" r="2.4" style="--rd:2.5s"/>
+        <g data-fade style="--d:0.45s">
+          <path d="M80 146 L168 190 V197 L80 153 Z" fill="rgba(255,255,255,.06)" class="la-soft"/>
+          <path d="M168 190 L256 146 V153 L168 197 Z" fill="rgba(255,255,255,.13)" class="la-soft"/>
+          <path d="M168 102 L256 146 L168 190 L80 146 Z" fill="#156079" fill-opacity=".96" class="la-main"/>
+        </g>
+          <g transform="matrix(0.88 0.44 -0.88 0.44 168 146)" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="ly-code">
+            <path d="M-13 -19 Q-22 -19 -22 -10 V-5 Q-22 0 -30 0 Q-22 0 -22 5 V10 Q-22 19 -13 19"/>
+            <path d="M13 -19 Q22 -19 22 -10 V-5 Q22 0 30 0 Q22 0 22 5 V10 Q22 19 13 19"/>
+            <path d="M-10 -9 H8 M-10 0 H14 M-10 9 H3" stroke="#99e0ff"/>
+          </g>
+        <path class="la-dash la-acc" d="M80 89 V146"/><path class="la-dash la-acc" d="M256 89 V146"/>
+        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="89" r="2.4" style="--rd:0s"/>
+        <circle class="la-accf la-glow ly-dot ly-down" cx="80" cy="89" r="2.4" style="--rd:1.3s"/>
+        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="146" r="2.4" style="--rd:0.7s"/>
+        <circle class="la-accf la-glow ly-dot ly-up" cx="256" cy="146" r="2.4" style="--rd:2s"/>
+        <g data-fade style="--d:0.70s">
+          <path d="M80 82 L168 126 V133 L80 89 Z" fill="rgba(255,255,255,.06)" class="la-soft"/>
+          <path d="M168 126 L256 82 V89 L168 133 Z" fill="rgba(255,255,255,.13)" class="la-soft"/>
+          <path d="M168 38 L256 82 L168 126 L80 82 Z" fill="#1b6e8a" fill-opacity=".96" class="la-main"/>
+        </g>
+          <g transform="matrix(0.88 0.44 -0.88 0.44 168 82)" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-38" y="-27" width="76" height="54" rx="4"/>
+            <path d="M-38 -16 H38" stroke="rgba(255,255,255,.5)"/>
+            <circle cx="-31" cy="-21.5" r="1.6" fill="rgba(255,255,255,.9)" stroke="none"/><circle cx="-25" cy="-21.5" r="1.6" fill="rgba(255,255,255,.9)" stroke="none"/>
+            <path d="M-30 -6 H-6 M-30 4 H4 M-30 14 H-12" stroke="rgba(255,255,255,.5)"/>
+            <rect x="8" y="-8" width="22" height="26" rx="2.5" stroke="#99e0ff" fill="rgba(153,224,255,.18)"/>
+          </g>
+        <path class="la-soft" d="M264 82 H300"/>
+        <circle class="la-dot" cx="264" cy="82" r="1.8"/>
+        <text class="la-txt" x="308" y="80" font-size="8.5">Interfaz</text>
+        <text class="ly-sub" x="308" y="92">Escritorio y web</text>
+        <path class="la-soft" d="M264 146 H300"/>
+        <circle class="la-dot" cx="264" cy="146" r="1.8"/>
+        <text class="la-txt" x="308" y="144" font-size="8.5">Fórmulas</text>
+        <text class="ly-sub" x="308" y="156">Scripts sin recompilar</text>
+        <path class="la-soft" d="M264 210 H300"/>
+        <circle class="la-dot" cx="264" cy="210" r="1.8"/>
+        <text class="la-txt" x="308" y="208" font-size="8.5">Base de datos</text>
+        <text class="ly-sub" x="308" y="220">SQL Server · Oracle</text>
+      </svg>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <article class="show-row">
+      <div class="show-copy" data-reveal>
+        <div class="show-num">01 · Filtros</div>
+        <h2>Filtros intuitivos, fáciles para el usuario</h2>
+        <ul class="show-list">
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span>Busca, ordena, clasifica, mueve y esconde: herramientas integradas en todo el sistema.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Filtros tipo Excel</strong> para escoger múltiples valores.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span>Diseño amigable para una mejor experiencia de usuario.</span></li>
+        </ul>
+      </div>
+      <div class="show-media" data-reveal>
+        <div class="win" role="img" aria-label="Ilustración de una tabla de empleados con un filtro tipo Excel: se desmarcan dos departamentos y la tabla muestra solo el resto">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Empleados · Nómina</span></div>
+          <div class="mf-body">
+            <div class="mf-head"><span>Empleado</span><span class="is-f">Departamento<svg class="mf-funnel" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h13L9.6 8.4v5l-3.2-1.7V8.4Z"/></svg></span><span>Ingreso</span></div>
+            <div class="mf-row"><span>Andrea Salazar</span><span>Administración</span><span>03/2019</span></div>
+            <div class="mf-row rf"><span>Luis Mena</span><span>Finanzas</span><span>11/2020</span></div>
+            <div class="mf-row"><span>Carla Vega</span><span>Operaciones</span><span>06/2018</span></div>
+            <div class="mf-row rg"><span>Diego Paredes</span><span>Ventas</span><span>02/2022</span></div>
+            <div class="mf-row"><span>Mónica Ruiz</span><span>Administración</span><span>09/2021</span></div>
+            <div class="mf-row rf"><span>Pablo Andrade</span><span>Finanzas</span><span>01/2017</span></div>
+            <div class="mf-row"><span>Sofía Núñez</span><span>Operaciones</span><span>08/2023</span></div>
+            <div class="mf-row rg"><span>Esteban Cruz</span><span>Ventas</span><span>05/2019</span></div>
+            <div class="mf-row"><span>Valeria Ortiz</span><span>Administración</span><span>10/2020</span></div>
+            <div class="mf-row"><span>Jorge Lara</span><span>Operaciones</span><span>04/2016</span></div>
+            <div class="mf-pop">
+              <div class="mf-m"><svg viewBox="0 0 16 16"><path d="M8 2.5v11M4.2 10 8 13.8 11.8 10"/></svg>Ordenar de A a Z</div>
+              <div class="mf-m"><svg viewBox="0 0 16 16"><path d="M8 13.5v-11M4.2 6 8 2.2 11.8 6"/></svg>Ordenar de Z a A</div>
+              <div class="mf-m"><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="4.2" rx="1"/><rect x="2" y="9.3" width="12" height="4.2" rx="1"/></svg>Agrupar por Departamento</div>
+              <div class="mf-sep"></div>
+              <div class="mf-search">Buscar…</div>
+              <div class="mf-it"><span class="cbx all"></span>(Seleccionar todo)</div>
+              <div class="mf-it"><span class="cbx"></span>Administración</div>
+              <div class="mf-it fa"><span class="cbx a"></span>Finanzas</div>
+              <div class="mf-it"><span class="cbx"></span>Operaciones</div>
+              <div class="mf-it fb"><span class="cbx b"></span>Ventas</div>
+              <div class="mf-foot"><span class="mf-btn">Cancelar</span><span class="mf-btn pri">Aceptar</span></div>
+            </div>
+            <div class="mf-status"><span class="st1">24 registros</span><span class="st2">Filtro activo · 12 de 24 registros</span></div>
+          </div>
+          <svg class="cur k1" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.8 7 8 10.2 11.2 7M3 13h10"/></svg>Exportación directa a Excel</span>
+      </div>
+    </article>
+
+    <article class="show-row reverse">
+      <div class="show-copy" data-reveal>
+        <div class="show-num">02 · Programación</div>
+        <h2>Programable</h2>
+        <ul class="show-list">
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Máxima flexibilidad</strong>, con la funcionalidad de programación, desde expresiones simples hasta los scripts más complejos.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>No necesita recompilación</strong>, ya que es código interpretado en tiempo real.</span></li>
+        </ul>
+      </div>
+      <div class="show-media" data-reveal>
+        <div class="win" role="img" aria-label="Ilustración del depurador de fórmulas: al ejecutar la fórmula del impuesto a la renta, el sistema escribe paso a paso de dónde sale cada valor hasta llegar al impuesto del mes">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Fórmulas · Impuesto a la renta</span></div>
+          <div class="dg-top"><span>Concepto</span><b>Impuesto a la renta</b><span>Rol</span><b>Octubre 2026</b></div>
+          <div class="dg-code">
+                <div class="ln"><span class="no">1</span><span class="tx cm tr1">// Impuesto a la Renta</span></div>
+                <div class="ln"><span class="no">2</span><span class="tx cm tr2">//    + Sueldo: anterior: 31500.00 + este mes: 3500.00 + pronóstico: 3500.00 * 2 meses = 42000.00</span></div>
+                <div class="ln"><span class="no">3</span><span class="tx cm tr3">//    + SobreSueldo: anterior: 1240.50 + este mes: 185.00 + pronóstico pers.: 0.00 * 2 meses = 1425.50</span></div>
+                <div class="ln"><span class="no">4</span><span class="tx cm tr4">//    + Ingreso No aportable: anterior: 0.00 + este mes: 0 + pronóstico: 0 * 2 meses = 0.00</span></div>
+                <div class="ln"><span class="no">5</span><span class="tx cm tr5">//    + Utilidades: 612.40</span></div>
+                <div class="ln"><span class="no">6</span><span class="tx cm tr6">//    - Aporte Personal: anterior: 3093.98 + este mes: 348.23 + pronóstico: 330.75 * 2 meses = 4103.71</span></div>
+                <div class="ln"><span class="no">7</span><span class="tx cm tr7">//  = BASE IMPONIBLE NETA: 39934.19</span></div>
+                <div class="ln"><span class="no">8</span><span class="tx cm tr8">//    Cálculo Impuesto Anual: 3637.64</span></div>
+                <div class="ln"><span class="no">9</span><span class="tx cm tr9">//    - Gastos Personales 9200.00 (limitado a 7396.20, 1 carga, 9 cb) * 18% = 1331.32</span></div>
+                <div class="ln"><span class="no">10</span><span class="tx cm tr10">//    - Retenido meses anteriores: 1702.35</span></div>
+                <div class="ln"><span class="no">11</span><span class="tx cm tr11">//    = Impuesto Faltante: 603.97 / 3 meses</span></div>
+                <div class="ln"><span class="no">12</span><span class="tx cm tr12">//  IMPUESTO A LA RENTA DEL MES: 201.32</span></div>
+                <div class="ln"><span class="no">13</span></div>
+                <div class="ln"><span class="no">14</span><span class="tx"><b class="kw">if</b>( FECHA_ROL_INICIAL( )<span class="iv va" style="--w:11ch"> <span class="vl">01/10/2026</span></span>.Month == 1 )<span class="iv vb" style="--w:9ch"> <span class="cm">// Falso</span></span></span></div>
+                <div class="ln"><span class="no">15</span><span class="tx">{</span></div>
+                <div class="ln"><span class="no">16</span><span class="tx">}</span></div>
+                <div class="ln"><span class="no">17</span></div>
+                <div class="ln"><span class="no">18</span><span class="tx"><b class="kw">return</b> IMPUESTO_RENTA()<span class="iv va" style="--w:7ch"> <span class="vl">201.32</span></span>;<span class="iv vb" style="--w:19ch"> <span class="cm">// 201.32 = 201.32</span></span></span></div>
+          </div>
+          <div class="dg-foot">
+            <div class="dg-status"><span class="s1">Listo para depurar</span><span class="s3">Depurando…</span><span class="s2">✓ Impuesto a la renta del mes: 201,32</span></div>
+            <span class="dg-btn"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1.2v7.6L8.6 5Z"/></svg>Depurar</span>
+          </div>
+          <svg class="cur k2" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.8 3.5 9h4l-.8 5.2L12.5 7h-4L9 1.8Z"/></svg>Sin recompilar</span>
+      </div>
+    </article>
+
+    <article class="show-row">
+      <div class="show-copy" data-reveal>
+        <div class="show-num">03 · Reportes</div>
+        <h2>Personalizable</h2>
+        <ul class="show-list">
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Independencia de su proveedor</strong> para realizar cambios.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span>Modifique la presentación de sus reportes mediante una <strong>práctica herramienta visual</strong>.</span></li>
+        </ul>
+      </div>
+      <div class="show-media" data-reveal>
+        <div class="win" role="img" aria-label="Ilustración de una herramienta visual para diseñar reportes: una credencial de empleado cuyos campos, colores y código QR se modifican con unos clics">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Diseñador de reportes · Credencial</span></div>
+          <div class="md-tabs"><span class="on">Diseño</span><span>Vista previa</span><span>Datos</span></div>
+          <div class="md-body">
+            <div class="md-canvas">
+              <div class="md-card">
+                <div class="md-band"></div>
+                <div class="md-photo"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></div>
+                <div class="md-f md-f1"><span>{nombre}</span></div>
+                <div class="md-f md-f2"><span>{cargo}</span></div>
+                <div class="md-f md-f3"><span>{departamento}</span></div>
+                <div class="md-qr"><svg viewBox="0 0 21 21" shape-rendering="crispEdges"><path d="M0 0h7v1h-7zM10 0h1v1h-1zM14 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h1v1h-1zM14 2h1v1h-1zM16 2h3v1h-3zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h3v1h-3zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM14 4h1v1h-1zM16 4h3v1h-3zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h3v1h-3zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h7v1h-7zM10 7h1v1h-1zM0 8h3v1h-3zM4 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM10 8h4v1h-4zM15 8h3v1h-3zM19 8h2v1h-2zM1 9h5v1h-5zM8 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM2 10h1v1h-1zM5 10h2v1h-2zM10 10h2v1h-2zM16 10h1v1h-1zM19 10h1v1h-1zM1 11h1v1h-1zM7 11h1v1h-1zM10 11h1v1h-1zM14 11h1v1h-1zM16 11h1v1h-1zM18 11h1v1h-1zM0 12h1v1h-1zM2 12h2v1h-2zM5 12h2v1h-2zM11 12h1v1h-1zM13 12h1v1h-1zM15 12h1v1h-1zM17 12h2v1h-2zM8 13h1v1h-1zM14 13h1v1h-1zM20 13h1v1h-1zM0 14h7v1h-7zM9 14h3v1h-3zM14 14h1v1h-1zM16 14h2v1h-2zM19 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM13 15h1v1h-1zM15 15h5v1h-5zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM12 16h4v1h-4zM19 16h1v1h-1zM0 17h1v1h-1zM2 17h3v1h-3zM6 17h1v1h-1zM9 17h1v1h-1zM11 17h2v1h-2zM14 17h2v1h-2zM17 17h1v1h-1zM19 17h1v1h-1zM0 18h1v1h-1zM2 18h3v1h-3zM6 18h1v1h-1zM8 18h3v1h-3zM13 18h1v1h-1zM15 18h1v1h-1zM19 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM14 19h6v1h-6zM0 20h7v1h-7zM8 20h1v1h-1zM11 20h1v1h-1zM14 20h1v1h-1z"/></svg></div>
+                <div class="md-logo"><span>TU LOGO</span></div>
+                <div class="md-sel">
+                  <i class="h tl"></i><i class="h tr"></i><i class="h bl"></i><i class="h br"></i>
+                  <span class="md-tip t0">Campo · nombre</span><span class="md-tip t1">Campo · departamento</span><span class="md-tip t2">Código QR</span>
+                </div>
+              </div>
+            </div>
+            <aside class="md-code" aria-hidden="true">
+              <div class="mc-h">credencial.html</div>
+              <pre><span class="ln"><b>&lt;div</b> <i>class</i>=<u>"credencial"</u><b>&gt;</b></span><span class="ln l-band">  <b>&lt;header</b> <i>style</i>=<u>"background:<em class="c"></em>"</u><b>&gt;</b></span><span class="ln">  <b>&lt;img</b> <i>src</i>=<u>"{foto}"</u><b>&gt;</b></span><span class="ln l-a">  <b>&lt;h3&gt;</b>{nombre}<b>&lt;/h3&gt;</b></span><span class="ln">  <b>&lt;p&gt;</b>{cargo}<b>&lt;/p&gt;</b></span><span class="ln l-b">  <b>&lt;p&gt;</b>{departamento}<b>&lt;/p&gt;</b></span><span class="ln l-c">  <b>&lt;img</b> <i>class</i>=<u>"qr"</u> <i>src</i>=<u>"{qr}"</u><b>&gt;</b></span><span class="ln">  <b>&lt;img</b> <i>src</i>=<u>"logo.png"</u><b>&gt;</b></span><span class="ln"><b>&lt;/div&gt;</b></span></pre>
+            </aside>
+          </div>
+        </div>
+        <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7.2" width="9" height="6.3" rx="1.2"/><path d="M5.5 7.2V5.2a2.5 2.5 0 0 1 4.9-.7"/></svg>Sin depender de tu proveedor</span>
+      </div>
+    </article>
+
+    <section class="feats" aria-labelledby="feats-title">
+     
+      <article class="show-row reverse"></article>
+      <div class="feat-grid">
+        <article class="feat" data-reveal>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></div>
+          <h3>Tecnología sólida</h3>
+          <p>Escritorio en PowerBuilder y web en Microsoft C# ASP.NET MVC, con una interfaz de escritorio fácil de usar.</p>
+          <div class="feat-chips"><small>Compatible con</small><span class="tag tag-accent">Windows 11</span><span class="tag tag-accent">Windows 10</span><span class="tag tag-accent">Windows 8</span><span class="tag tag-accent">Windows 7</span><span class="tag tag-accent">Todas las ediciones Server</span></div>
+        </article>
+        <article class="feat" data-reveal>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="10" height="18" rx="1"/><path d="M14 9h5a1 1 0 0 1 1 1v11h-6"/><path d="M8 7h2M8 11h2M8 15h2"/></svg></div>
+          <h3>Multi-empresa y multi-sucursal</h3>
+          <p>Ambiente multi-empresa, multi-sucursal y multi-usuario. Replica los datos de cada sucursal, sin importar la marca de su base, para consolidar la información.</p>
+          <div class="feat-chips"><small>Bases de datos</small><span class="tag tag-accent">Microsoft SQL Server</span><span class="tag tag-accent">Oracle</span></div>
+        </article>
+        <article class="feat" data-reveal>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.4 3.1 8.1 7.5 9.5 4.4-1.4 7.5-5.1 7.5-9.5V6L12 3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></div>
+          <h3>Seguridad y auditoría</h3>
+          <p>Perfiles de permisos para cada usuario y un control de auditoría completo: quién, dónde, cuándo y qué cambió.</p>
+          <div class="feat-chips"><small>Permisos por</small><span class="tag tag-accent">Empresa</span><span class="tag tag-accent">Sucursal</span><span class="tag tag-accent">Pantalla</span><span class="tag tag-accent">Proceso</span><span class="tag tag-accent">Reporte</span><span class="tag tag-accent">Tabla</span><span class="tag tag-accent">Campo</span></div>
+        </article>
+        <article class="feat" data-reveal>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11"/><path d="M10 10V4.5a1.5 1.5 0 0 1 3 0V10"/><path d="M13 10V5.5a1.5 1.5 0 0 1 3 0V13"/><path d="M7 11v1.5c0 4 2 7.5 6 7.5s5-3 5-6.5V12"/></svg></div>
+          <h3>Integración directa con lectores biométricos</h3>
+          <p>Las marcaciones viajan solas del reloj al sistema: nadie descarga archivos ni pasa datos a mano.</p>
+          <div class="feat-chips"><small>Lectores</small><span class="tag tag-accent">ZK Teco</span><span class="tag tag-accent">HandPunch</span></div>
+        </article>
+        <article class="feat" data-reveal>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 8h8M8 12h8"/><path d="M8 17c1.2-2 2.2-2 3 0s1.8 1.4 2.6-.4"/></svg></div>
+          <h3>Documentos a tu medida</h3>
+          <p>Genera contratos y certificados desde plantillas de Word, agrega pies de firma personalizables a cualquier reporte y crea archivos con plantillas configurables.</p>
+          <div class="feat-chips"><small>Plantillas para</small><span class="tag tag-accent">Contratos</span><span class="tag tag-accent">Certificados</span><span class="tag tag-accent">Pies de firma</span><span class="tag tag-accent">Archivos</span></div>
+        </article>
+        <article class="feat" data-reveal>
+          <div class="feat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/><path d="m9 12.2 2.2 2.2L15.5 10"/></svg></div>
+          <h3>Actualizaciones sin dolor</h3>
+          <p>La base de datos se actualiza sola con cada versión: nadie ejecuta scripts SQL. Y para administradores, una herramienta SQL para reportes avanzados.</p>
+          <div class="feat-chips"><small>Incluye</small><span class="tag tag-accent">Actualización automática</span><span class="tag tag-accent">Herramienta SQL</span></div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <section class="band-dark req-band" aria-labelledby="req-title">
+    <div class="wrap">
+      <div class="req-top" data-reveal>
+        <div>
+          <div class="kicker">Requerimientos</div>
+          <h2 id="req-title">Funciona con la infraestructura que ya tienes</h2>
+        </div>
+        <p>Lo mínimo que necesitan el servidor de datos y los equipos de tus usuarios. Sin hardware especial.</p>
+      </div>
+
+      <div class="req-cards cross" data-reveal>
+        <svg class="req-x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 4 97 96"/><path pathLength="1" d="M97 4 3 96"/></svg>
+        <div class="req-free"><strong>Solo necesitas una computadora</strong><span>Funciona en cualquier plataforma y en cualquier navegador.</span></div>
+        <article class="req-card" data-reveal>
+          <div class="req-head">
+            <div class="req-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="6.5" rx="1.2"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.2"/><path d="M7 7.25h.01M7 16.75h.01"/><path d="M11 7.25h6M11 16.75h6"/></svg></div>
+            <div><h3>Servidor de datos</h3><p>Donde vive tu información</p></div>
+          </div>
+          <div class="req-big"><b data-count="8">8</b><span>GB de RAM</span></div>
+          <div class="req-meter" style="--n:16" aria-hidden="true">
+            <i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="rec" style="--i:8"></i><i class="rec" style="--i:9"></i><i class="rec" style="--i:10"></i><i class="rec" style="--i:11"></i><i class="rec" style="--i:12"></i><i class="rec" style="--i:13"></i><i class="rec" style="--i:14"></i><i class="rec" style="--i:15"></i>
+          </div>
+          <div class="req-legend"><span><i class="on"></i>Mínimo: 8 GB</span><span><i></i>Recomendado: 16 GB</span></div>
+          <div class="req-stats">
+            <div class="req-stat"><b data-count="200" data-suffix=" GB">200 GB</b><span>de espacio libre para datos</span></div>
+            <div class="req-stat"><b>Windows 2000</b><span>en adelante</span></div>
+          </div>
+          <div class="req-chips"><span>SQL Server</span><span>MySQL</span><span>Oracle</span></div>
+        </article>
+
+        <article class="req-card" data-reveal>
+          <div class="req-head">
+            <div class="req-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8.5 20h7M12 16v4"/></svg></div>
+            <div><h3>PCs cliente</h3><p>Donde trabaja tu gente</p></div>
+          </div>
+          <div class="req-big"><b data-count="4">4</b><span>GB de RAM</span></div>
+          <div class="req-meter" style="--n:8" aria-hidden="true">
+            <i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="rec" style="--i:4"></i><i class="rec" style="--i:5"></i><i class="rec" style="--i:6"></i><i class="rec" style="--i:7"></i>
+          </div>
+          <div class="req-legend"><span><i class="on"></i>Mínimo: 4 GB</span><span><i></i>Recomendado: 8 GB</span></div>
+          <div class="req-stats">
+            <div class="req-stat"><b data-count="100" data-suffix=" MB">100 MB</b><span>de espacio libre en disco</span></div>
+            <div class="req-stat"><b>1024 × 768</b><span>resolución mínima</span></div>
+          </div>
+          <div class="req-chips"><span>Windows XP</span><span>7</span><span>8</span><span>10</span><span>11</span><span>… y posteriores</span></div>
+        </article>
+      </div>
+
+      <div class="req-cta" data-reveal>
+        <p>¿Dudas sobre tu infraestructura? Cuéntanos qué tienes y te decimos si estás listo.</p>
+        <a class="btn" href="contacto.html">Hablar con un asesor</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <span class="wordmark">SquareNet</span>
+        <p>Software de gestión de personal para empresas en Ecuador: nómina, asistencia, recursos humanos y control de acceso en una sola plataforma.</p>
+      </div>
+      <div class="footer-col">
+        <h6>Navegación</h6>
+        <a href="prototipo-index.html">Home</a>
+        <a href="somos.html">Quiénes Somos</a>
+        <a href="prototipo-plataforma.html">Plataforma SquareNet</a>
+        <a href="contacto.html">Contactos</a>
+      </div>
+      <div class="footer-col">
+        <h6>Módulos</h6>
+        <a href="modulono.html">Nómina</a>
+        <a href="moduloca.html">Asistencia</a>
+        <a href="modulorh.html">Recursos Humanos</a>
+        <a href="moduloac.html">Acceso</a>
+        <a href="modulocv.html">Visitas</a>
+        <a href="modulocc.html">Comedor</a>
+        <a href="moduloev.html">Evaluaciones</a>
+        <a href="moduloas.html">Autoservicio</a>
+        <a href="modulots.html">Trabajo Social</a>
+      </div>
+      <div class="footer-col">
+        <h6>Contacto</h6>
+        <a href="mailto:info@squarenet.com.ec">info@squarenet.com.ec</a>
+        <a href="tel:+59324507012">(593-2) 450-7012</a>
+        <span class="footer-address">San Rafael, Quito, Ecuador</span>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© <span id="fecha"></span> SquareNet · www.squarenet.com.ec · Todos los derechos reservados.</span>
+      <a class="footer-link" href="privacidad.html">Privacidad y cookies</a>
+      <img src="img/hechoenecuador.gif" alt="Sello Mucho Mejor si es Hecho en Ecuador" class="footer-badge">
+    </div>
+  </footer>
+
+  <script>
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', function () {
+      var open = mainNav.getAttribute('data-open') === 'true';
+      mainNav.setAttribute('data-open', String(!open));
+      navToggle.setAttribute('aria-expanded', String(!open));
+    });
+  </script>
+  <script src="js/fecha.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/consent.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/art.js"></script>
+  <script>
+    (function () {
+      var els = document.querySelectorAll('[data-count]');
+      if (!els.length) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) return;
+      var show = function (el, v) { el.textContent = Math.round(v) + (el.getAttribute('data-suffix') || ''); };
+      var from = function (el) { return parseFloat(el.getAttribute('data-from') || '0'); };
+      Array.prototype.forEach.call(els, function (el) { show(el, from(el)); });
+      var io = new IntersectionObserver(function (entries) {
+        Array.prototype.forEach.call(entries, function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          io.unobserve(el);
+          var a = from(el), b = parseFloat(el.getAttribute('data-count')), t0 = null;
+          if (a === b) return;
+          (function step(t) {
+            if (t0 === null) t0 = t;
+            var p = Math.min(1, (t - t0) / 1300);
+            show(el, a + (b - a) * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          })(performance.now());
+        });
+      }, { threshold: 0.6 });
+      Array.prototype.forEach.call(els, function (el) { io.observe(el); });
+    })();
+
+    // Las maquetas animadas solo corren mientras están en pantalla.
+    (function () {
+      var panels = document.querySelectorAll('.show-media');
+      if (!panels.length) return;
+      if (!('IntersectionObserver' in window)) {
+        Array.prototype.forEach.call(panels, function (p) { p.classList.add('is-live'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        Array.prototype.forEach.call(entries, function (e) { e.target.classList.toggle('is-live', e.isIntersecting); });
+      }, { rootMargin: '80px 0px' });
+      Array.prototype.forEach.call(panels, function (p) { io.observe(p); });
+    })();
+  </script>
+  <div class="proto-tag">Prototipo · solo cambia la letra <a href="plataforma.html">Ver la original ↗</a></div>
+</body>
+</html>
