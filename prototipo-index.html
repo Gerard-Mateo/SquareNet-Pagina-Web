@@ -22,7 +22,7 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Oxanium:wght@700&family=Space+Grotesk:wght@500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap" rel="stylesheet">
 <style>
   /* PROTOTIPO: igual a la página real, solo cambia la letra de títulos y texto (selector abajo a la izquierda) */
   html[data-letra="serif"]{--font-heading:"Source Serif 4", system-ui, serif;--font-body:"Source Serif 4", system-ui, serif;--font-heading-weight:600}
@@ -33,6 +33,20 @@
   html[data-letra="figtree"] h1,html[data-letra="figtree"] h2,html[data-letra="figtree"] h3{letter-spacing:-.02em}
   html[data-letra="dmsans"]{--font-heading:"DM Sans", system-ui, sans-serif;--font-body:"DM Sans", system-ui, sans-serif;--font-heading-weight:700}
   html[data-letra="dmsans"] h1,html[data-letra="dmsans"] h2,html[data-letra="dmsans"] h3{letter-spacing:-.02em}
+  /* PRUEBA marca nueva: paleta azul (#1E82E6) y texto casi negro (#0E1116) en lugar del teal */
+  :root{--color-text:#0E1116;--color-accent:#1E82E6;
+    --color-accent-100:#ebf4fd;--color-accent-200:#d2e6fa;--color-accent-300:#a5cdf5;--color-accent-400:#6aaeee;--color-accent-500:#3f95ea;
+    --color-accent-600:#1e82e6;--color-accent-700:#1769bd;--color-accent-800:#125192;--color-accent-900:#0d3863}
+  footer.site-footer{background:#0E1116}
+  .sqn-logo{display:inline-flex;align-items:center;gap:.31em;font-size:57px;color:#0E1116;transition:font-size .35s cubic-bezier(.16,1,.3,1)}
+  .nav-scrolled .sqn-logo{font-size:36px}
+  .nav-scrolled .sqn-tag{display:none}
+  .sqn-logo svg{width:1em;height:1em;flex:none}
+  .sqn-logo > span{display:flex;flex-direction:column}
+  .sqn-word{font:700 .81em/.9 'Oxanium',sans-serif;letter-spacing:-.075em}
+  .sqn-word span{color:#1E82E6}
+  .sqn-tag{margin-top:.094em;padding-left:.03em;font:500 .117em 'Space Grotesk',sans-serif;letter-spacing:.34em;color:#5B6270;white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){.sqn-logo{transition:none}}
   .proto-tag{position:fixed;z-index:999;left:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-width:calc(100vw - 24px);padding:6px;border-radius:18px;background:#16181b;color:#fff;font:600 13px/1 system-ui,sans-serif;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
   .proto-tag span{padding:0 6px;opacity:.7}
   .proto-tag button{font:inherit;border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:transparent;color:#fff}
@@ -291,15 +305,20 @@
   .modules-teaser h2{margin-bottom:var(--space-3)}
   .modules-teaser-intro{max-width:620px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
   .modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);text-align:left}
-  .modules-grid .card{position:relative;height:100%;padding-bottom:calc(var(--space-3) + 24px);border:1px solid transparent;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,background .3s ease,border-color .3s ease}
-  .modules-grid .card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,var(--color-accent-100),transparent 60%);opacity:0;transition:opacity .3s ease}
+  .modules-grid .card{position:relative;height:100%;padding-bottom:calc(var(--space-3) + 24px);border:1px solid transparent;border-top:3px solid var(--mc);overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,background .3s ease,border-color .3s ease}
+  .modules-grid .card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,color-mix(in srgb,var(--mc) 14%,transparent),transparent 65%);opacity:0;transition:opacity .3s ease}
   .modules-grid .card-title,.modules-grid .card-body{position:relative;z-index:1}
-  .modules-grid .card-title{font-size:22px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
-  .modules-grid .card-link:hover .card{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg);background:var(--color-bg);border-color:var(--color-accent-300)}
+  /* cada módulo con su color (--mc en el enlace): títulos en negro, el color va en el ícono, la línea de arriba y el hover */
+  .modules-grid .card-title{display:flex;align-items:center;gap:12px;font-size:22px;color:var(--color-text);transition:color .2s ease}
+  .modules-grid .card-body{color:color-mix(in srgb,var(--color-text) 80%,transparent);opacity:1;font-size:14px}
+  .mod-ic{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:var(--radius-md);background:color-mix(in srgb,var(--mc) 13%,#fff);color:var(--mc);transition:transform .3s cubic-bezier(.2,.8,.3,1.4),background .3s ease,color .3s ease}
+  .mod-ic svg{width:26px;height:26px}
+  .modules-grid .card-link:hover .card{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg);background:var(--color-bg);border-color:color-mix(in srgb,var(--mc) 40%,transparent);border-top-color:var(--mc)}
   .modules-grid .card-link:hover .card::before{opacity:1}
-  .modules-grid .card-link:hover .card-title{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
-  .module-arrow{position:absolute;right:var(--space-3);bottom:var(--space-3);z-index:1;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--color-accent);opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease}
+  .modules-grid .card-link:hover .mod-ic{background:var(--mc);color:#fff;transform:rotate(-6deg) scale(1.08)}
+  .module-arrow{position:absolute;right:var(--space-3);bottom:var(--space-3);z-index:1;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--mc,var(--color-accent));opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease}
   .modules-grid .card-link:hover .module-arrow{opacity:1;transform:translateX(0) scale(1.15)}
+  @media (prefers-reduced-motion:reduce){.mod-ic{transition:none}.modules-grid .card-link:hover .mod-ic{transform:none}}
   .cta-band{display:block;text-align:center;text-decoration:none;padding:var(--space-8) var(--space-6);margin:var(--space-6) 0 var(--space-8);border-radius:var(--radius-lg);background:var(--color-accent-800)}
   .cta-band h2{color:#fff;margin-bottom:var(--space-2)}
   .cta-band p{color:#fff;opacity:.9;margin-bottom:var(--space-4)}
@@ -324,7 +343,7 @@
 <body>
   <div class="wrap">
     <nav class="nav" id="mainNav">
-      <a class="nav-brand" href="prototipo-index.html"><img src="img/logosq.png" alt="SquareNet"></a>
+      <a class="nav-brand" href="prototipo-index.html"><span class="sqn-logo" role="img" aria-label="SquareNet, software solutions"><svg viewBox="0 0 120 120" aria-hidden="true"><g stroke="#1E82E6" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="35.5" y="8.5" width="76" height="76"/><path d="M8.5 35.5L35.5 8.5M84.5 35.5L111.5 8.5M84.5 111.5L111.5 84.5M8.5 111.5L35.5 84.5"/></g><g fill="#1E82E6"><circle cx="35.5" cy="8.5" r="4.5"/><circle cx="111.5" cy="8.5" r="4.5"/><circle cx="111.5" cy="84.5" r="4.5"/><circle cx="35.5" cy="84.5" r="4.5"/></g><rect x="8.5" y="35.5" width="76" height="76" stroke="#0E1116" stroke-width="6" stroke-linejoin="round" fill="none"/><g fill="#0E1116"><circle cx="8.5" cy="35.5" r="4.5"/><circle cx="84.5" cy="35.5" r="4.5"/><circle cx="84.5" cy="111.5" r="4.5"/><circle cx="8.5" cy="111.5" r="4.5"/></g></svg><span><span class="sqn-word">square<span>net</span></span><span class="sqn-tag">SOFTWARE SOLUTIONS</span></span></span></a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
       <div class="nav-links" id="navLinks">
         <a href="prototipo-index.html" aria-current="page">Home</a>
@@ -653,65 +672,65 @@
     <h2>Un módulo para cada necesidad de tu gente</h2>
     <p class="modules-teaser-intro">SquareNet se arma como un rompecabezas: empieza con lo que tu empresa necesita hoy y suma módulos cuando quieras. Cada uno resuelve una parte del día a día de tu equipo.</p>
     <div class="modules-grid">
-      <a class="card-link" href="modulono.html">
+      <a class="card-link" href="modulono.html" style="--mc:#0B8079">
         <div class="card elev-sm">
-          <h3 class="card-title">Nómina</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/></svg></span>Nómina</h3>
           <p class="card-body">Calcula y paga sueldos sin fórmulas complicadas ni hojas de Excel.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="moduloca.html">
+      <a class="card-link" href="moduloca.html" style="--mc:#E8710A">
         <div class="card elev-sm">
-          <h3 class="card-title">Asistencia</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>Asistencia</h3>
           <p class="card-body">Sabe quién llegó, a qué hora y cuánto trabajó cada día.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="modulorh.html">
+      <a class="card-link" href="modulorh.html" style="--mc:#2F9E44">
         <div class="card elev-sm">
-          <h3 class="card-title">Recursos Humanos</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/></svg></span>Recursos Humanos</h3>
           <p class="card-body">Contratos, vacaciones y documentos de tu gente, en un solo lugar.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="moduloac.html">
+      <a class="card-link" href="moduloac.html" style="--mc:#C92A2A">
         <div class="card elev-sm">
-          <h3 class="card-title">Acceso</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/></svg></span>Acceso</h3>
           <p class="card-body">Decide quién entra, a qué zonas y en qué horario.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="modulocv.html">
+      <a class="card-link" href="modulocv.html" style="--mc:#AE3EC9">
         <div class="card elev-sm">
-          <h3 class="card-title">Visitas</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/></svg></span>Visitas</h3>
           <p class="card-body">Registra cada visita a tu empresa de forma simple y ordenada.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="modulocc.html">
+      <a class="card-link" href="modulocc.html" style="--mc:#C88A04">
         <div class="card elev-sm">
-          <h3 class="card-title">Comedor</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/></svg></span>Comedor</h3>
           <p class="card-body">Organiza quién come, cuándo y qué, sin papeleo.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="moduloev.html">
+      <a class="card-link" href="moduloev.html" style="--mc:#D6336C">
         <div class="card elev-sm">
-          <h3 class="card-title">Evaluaciones</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="M8.5 16v-3M12 16v-6M15.5 16v-4.5"/></svg></span>Evaluaciones</h3>
           <p class="card-body">Mide el desempeño de tu gente y sigue su evolución.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="moduloas.html">
+      <a class="card-link" href="moduloas.html" style="--mc:#1C7ED6">
         <div class="card elev-sm">
-          <h3 class="card-title">Autoservicio</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/></svg></span>Autoservicio</h3>
           <p class="card-body">Tu personal consulta su rol y vacaciones desde el celular.</p>
           <span class="module-arrow">→</span>
         </div>
       </a>
-      <a class="card-link" href="modulots.html">
+      <a class="card-link" href="modulots.html" style="--mc:#6741D9">
         <div class="card elev-sm">
-          <h3 class="card-title">Trabajo Social</h3>
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M12 17.2s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/></svg></span>Trabajo Social</h3>
           <p class="card-body">Fichas socioeconómicas y seguimiento de casos de tu gente.</p>
           <span class="module-arrow">→</span>
         </div>
@@ -732,6 +751,7 @@
       <div class="footer-brand">
         <span class="wordmark">SquareNet</span>
         <p>Software de gestión de personal para empresas en Ecuador: nómina, asistencia, recursos humanos y control de acceso en una sola plataforma.</p>
+        <a class="footer-social" href="https://www.linkedin.com/company/squarenet-ec" target="_blank" rel="noopener" aria-label="SquareNet en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0Z"/></svg><span>LinkedIn</span></a>
       </div>
       <div class="footer-col">
         <h6>Navegación</h6>

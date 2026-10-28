@@ -22,7 +22,32 @@ FONTS = [
 DEFAULT = 'dmsans'
 GFONTS = ('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600'
           '&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600'
-          '&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap')
+          '&family=Oxanium:wght@700&family=Space+Grotesk:wght@500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600&display=swap')
+
+# PRUEBA marca nueva: logo del cubo y paleta azul #1E82E6 + casi negro #0E1116
+LOGO = ('<span class="sqn-logo" role="img" aria-label="SquareNet, software solutions">'
+        '<svg viewBox="0 0 120 120" aria-hidden="true">'
+        '<g stroke="#1E82E6" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="35.5" y="8.5" width="76" height="76"/>'
+        '<path d="M8.5 35.5L35.5 8.5M84.5 35.5L111.5 8.5M84.5 111.5L111.5 84.5M8.5 111.5L35.5 84.5"/></g>'
+        '<g fill="#1E82E6"><circle cx="35.5" cy="8.5" r="4.5"/><circle cx="111.5" cy="8.5" r="4.5"/><circle cx="111.5" cy="84.5" r="4.5"/><circle cx="35.5" cy="84.5" r="4.5"/></g>'
+        '<rect x="8.5" y="35.5" width="76" height="76" stroke="#0E1116" stroke-width="6" stroke-linejoin="round" fill="none"/>'
+        '<g fill="#0E1116"><circle cx="8.5" cy="35.5" r="4.5"/><circle cx="84.5" cy="35.5" r="4.5"/><circle cx="84.5" cy="111.5" r="4.5"/><circle cx="8.5" cy="111.5" r="4.5"/></g></svg>'
+        '<span><span class="sqn-word">square<span>net</span></span><span class="sqn-tag">SOFTWARE SOLUTIONS</span></span></span>')
+BRAND_CSS = """
+  /* PRUEBA marca nueva: paleta azul (#1E82E6) y texto casi negro (#0E1116) en lugar del teal */
+  :root{--color-text:#0E1116;--color-accent:#1E82E6;
+    --color-accent-100:#ebf4fd;--color-accent-200:#d2e6fa;--color-accent-300:#a5cdf5;--color-accent-400:#6aaeee;--color-accent-500:#3f95ea;
+    --color-accent-600:#1e82e6;--color-accent-700:#1769bd;--color-accent-800:#125192;--color-accent-900:#0d3863}
+  footer.site-footer{background:#0E1116}
+  .sqn-logo{display:inline-flex;align-items:center;gap:.31em;font-size:57px;color:#0E1116;transition:font-size .35s cubic-bezier(.16,1,.3,1)}
+  .nav-scrolled .sqn-logo{font-size:36px}
+  .nav-scrolled .sqn-tag{display:none}
+  .sqn-logo svg{width:1em;height:1em;flex:none}
+  .sqn-logo > span{display:flex;flex-direction:column}
+  .sqn-word{font:700 .81em/.9 'Oxanium',sans-serif;letter-spacing:-.075em}
+  .sqn-word span{color:#1E82E6}
+  .sqn-tag{margin-top:.094em;padding-left:.03em;font:500 .117em 'Space Grotesk',sans-serif;letter-spacing:.34em;color:#5B6270;white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){.sqn-logo{transition:none}}"""
 
 PAGES = [('index.html', 'prototipo-index.html'), ('plataforma.html', 'prototipo-plataforma.html')]
 
@@ -36,7 +61,7 @@ def head_block():
 <link href="{GFONTS}" rel="stylesheet">
 <style>
   /* PROTOTIPO: igual a la página real, solo cambia la letra de títulos y texto (selector abajo a la izquierda) */
-{rules}
+{rules}{BRAND_CSS}
   .proto-tag{{position:fixed;z-index:999;left:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-width:calc(100vw - 24px);padding:6px;border-radius:18px;background:#16181b;color:#fff;font:600 13px/1 system-ui,sans-serif;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}}
   .proto-tag span{{padding:0 6px;opacity:.7}}
   .proto-tag button{{font:inherit;border:0;border-radius:999px;padding:8px 12px;cursor:pointer;background:transparent;color:#fff}}
@@ -77,6 +102,7 @@ def build(src, dst):
     anchor = '<link href="css/broadsheet.css" rel="stylesheet">'
     i = s.index(anchor) + len(anchor)
     s = s[:i] + nl + head_block().replace('\n', nl) + s[i:]
+    s = s.replace('<img src="img/logosq.png" alt="SquareNet">', LOGO)
     # navegar entre los prototipos
     s = s.replace('href="index.html"', 'href="prototipo-index.html"').replace('href="plataforma.html"', 'href="prototipo-plataforma.html"')
     j = s.rindex('</body>')

@@ -405,6 +405,10 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: var(--space-6); padding: var(--space-8) 0 var(--space-6); }
 .footer-brand .wordmark { display: block; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 20px; color: #fff; margin-bottom: var(--space-3); }
 .footer-brand p { font-size: 13px; line-height: 1.6; color: rgba(255, 255, 255, 0.65); max-width: 280px; margin: 0; }
+.footer-social { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--space-3); font-size: 13px; color: rgba(255, 255, 255, 0.75); text-decoration: none; transition: color .2s ease; }
+.footer-social svg { width: 22px; height: 22px; border-radius: 2px; transition: color .2s ease, transform .2s ease; }
+.footer-social:hover { color: #fff; }
+.footer-social:hover svg { color: #0A66C2; background: #fff; transform: translateY(-2px); }
 .footer-col h6 { color: rgba(255, 255, 255, 0.5); margin-bottom: var(--space-3); }
 .footer-col a, .footer-col .footer-address { display: block; font-size: 13px; margin-bottom: var(--space-2); }
 .footer-col a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }

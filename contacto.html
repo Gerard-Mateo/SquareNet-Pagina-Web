@@ -25,23 +25,30 @@
   .ct-head{max-width:640px;margin-bottom:var(--space-6)}
   .ct-head h1{font-size:48px;margin-bottom:var(--space-2)}
   .ct-head p{font-size:17px;opacity:.85;margin:0}
-  .ct-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-6);align-items:start}
+  .ct-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-6);align-items:start}
+  /* contacto directo debajo del formulario, en una fila */
+  .reach .reach-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));column-gap:var(--space-6)}
 
   .lead-form{display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-6);background:var(--color-surface);
     border:1px solid var(--color-divider);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
   .lead-form h2{font-size:24px;margin:0}
   .lead-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+  .lead-row.one{grid-template-columns:1fr}
   .lead-f{display:flex;flex-direction:column;gap:8px;border:0;margin:0;padding:0;min-width:0}
   .lead-f label,.lead-f legend{font-family:var(--font-heading);font-weight:600;font-size:15px;padding:0}
   .lead-f legend small{font-weight:400;opacity:.65}
   .lead-f textarea{min-height:96px;padding:10px 12px;font:inherit;font-size:16px;line-height:1.5;resize:vertical;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
   .lead-f textarea:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
+  .lead-f .req{color:#b3261e;margin-left:2px}
+  .lead-f select{height:46px;padding:0 36px 0 12px;font:inherit;font-size:16px;color:inherit;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23555' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center/12px 8px;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none;appearance:none;cursor:pointer}
+  .lead-f select:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
+  .lead-f select.is-bad{border-color:#b3261e}
   .lead-f label small{font-weight:400;opacity:.65}
   .lead-other{display:flex;flex-direction:column;gap:6px;margin-top:4px}
   .lead-other[hidden]{display:none}
   .lead-other label{font-family:var(--font-body);font-weight:400;font-size:14px;opacity:.8}
-  .lead-f input[type=text]{height:46px;padding:0 12px;font:inherit;font-size:16px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
-  .lead-f input[type=text]:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
+  .lead-f input[type=text],.lead-f input[type=tel]{height:46px;padding:0 12px;font:inherit;font-size:16px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
+  .lead-f input[type=text]:focus,.lead-f input[type=tel]:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
   .lead-opts{display:flex;flex-wrap:wrap;gap:8px}
   .lead-opts label{position:relative;font-family:var(--font-body);font-weight:400;font-size:14.5px}
   .lead-opts input{position:absolute;opacity:0;inset:0;cursor:pointer}
@@ -98,7 +105,7 @@
     .ct{padding-top:var(--space-6)}
     .ct-head h1{font-size:36px}
     .ct-grid{grid-template-columns:1fr}
-    .reach{order:-1;padding:var(--space-4)}
+    .reach{padding:var(--space-4)}
     .reach-val{font-size:16px}
     .visit-map{height:320px}
   }
@@ -137,23 +144,31 @@
       <form class="lead-form" id="leadForm" novalidate data-reveal>
         <h2>Solicita una cotización</h2>
         <div class="lead-row">
-          <div class="lead-f"><label for="lf-name">Nombre y cargo</label><input type="text" id="lf-name" name="name" autocomplete="name" placeholder="Ej.: Ana Pérez, Jefa de RRHH" required></div>
-          <div class="lead-f"><label for="lf-company">Empresa</label><input type="text" id="lf-company" name="company" autocomplete="organization" required></div>
+          <div class="lead-f"><label for="lf-name">Nombre<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="given-name" required></div>
+          <div class="lead-f"><label for="lf-last">Apellido<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-last" name="last" autocomplete="family-name" required></div>
         </div>
         <div class="lead-row">
-        <div class="lead-f"><label for="lf-contact">Correo o teléfono</label>
-          <div class="lead-ct">
-            <span class="lead-cc" id="lf-cc-wrap" hidden><span id="lf-cc-show" aria-hidden="true">EC +593</span><select id="lf-cc" aria-label="País del teléfono"></select></span>
-            <input type="text" id="lf-contact" name="contact" autocomplete="email" placeholder="nombre@tuempresa.com o 099 123 4567" aria-describedby="lf-contact-msg" required>
+          <div class="lead-f"><label for="lf-company">Empresa<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-company" name="company" autocomplete="organization" placeholder="Razón social" required></div>
+          <div class="lead-f"><label for="lf-role">Cargo <small>(opcional)</small></label><input type="text" id="lf-role" name="role" autocomplete="organization-title" placeholder="Ej.: Jefa de RRHH"></div>
+        </div>
+        <div class="lead-row">
+          <div class="lead-f"><label for="lf-contact">Correo<span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="lf-contact" name="contact" inputmode="email" autocomplete="email" placeholder="nombre@tuempresa.com" aria-describedby="lf-contact-msg" required>
+            <p class="lead-msg" id="lf-contact-msg" aria-live="polite" hidden></p>
           </div>
-          <p class="lead-msg" id="lf-contact-msg" aria-live="polite" hidden></p>
+          <div class="lead-f"><label for="lf-phone">Teléfono<span class="req" aria-hidden="true">*</span></label>
+            <div class="lead-ct">
+              <span class="lead-cc"><span id="lf-cc-show" aria-hidden="true">EC +593</span><select id="lf-cc" aria-label="País del teléfono"></select></span>
+              <input type="tel" id="lf-phone" name="phone" autocomplete="tel-national" placeholder="099 123 4567" aria-describedby="lf-phone-msg" required>
+            </div>
+            <p class="lead-msg" id="lf-phone-msg" aria-live="polite" hidden></p>
+          </div>
         </div>
-        <div class="lead-f"><label for="lf-ruc">RUC de la empresa <small>(opcional)</small></label>
-          <input type="text" id="lf-ruc" name="ruc" inputmode="numeric" maxlength="17" placeholder="13 dígitos, ej.: 1790012345001" aria-describedby="lf-ruc-msg">
-          <p class="lead-msg" id="lf-ruc-msg" aria-live="polite" hidden></p>
+        <div class="lead-row">
+          <div class="lead-f"><label for="lf-country">País<span class="req" aria-hidden="true">*</span></label><select id="lf-country" name="country" autocomplete="country-name" required><option selected>Ecuador</option><option>Colombia</option><option>Perú</option><option>Chile</option><option>Bolivia</option><option>Argentina</option><option>México</option><option>Panamá</option><option>Costa Rica</option><option>Guatemala</option><option>Venezuela</option><option>Estados Unidos</option><option>España</option><option>Otro</option></select></div>
+          <div class="lead-f"><label for="lf-source">¿Cómo nos conociste?<span class="req" aria-hidden="true">*</span></label><select id="lf-source" name="source" required><option value="" selected disabled>Elige una opción</option><option>Google</option><option>LinkedIn</option><option>Recomendación de alguien</option><option>Evento o feria</option><option>Redes sociales</option><option>Otro</option></select></div>
         </div>
-        </div>
-        <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?</legend><div class="lead-opts"><label><input type="radio" name="size" value="1–50"><span>1–50</span></label><label><input type="radio" name="size" value="51–200"><span>51–200</span></label><label><input type="radio" name="size" value="201–500"><span>201–500</span></label><label><input type="radio" name="size" value="Más de 500"><span>Más de 500</span></label></div></fieldset>
+        <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?<span class="req" aria-hidden="true">*</span></legend><div class="lead-opts"><label><input type="radio" name="size" value="50–100"><span>50–100</span></label><label><input type="radio" name="size" value="100–250"><span>100–250</span></label><label><input type="radio" name="size" value="250–500"><span>250–500</span></label><label><input type="radio" name="size" value="500–1000"><span>500–1000</span></label><label><input type="radio" name="size" value="1000–2000"><span>1000–2000</span></label><label><input type="radio" name="size" value="2000+"><span>2000+</span></label></div></fieldset>
         <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia y relojes"><span>Asistencia y relojes</span></label><label><input type="checkbox" name="need" value="Vacaciones y permisos"><span>Vacaciones y permisos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div><div class="lead-other" id="lf-other-wrap" hidden><label for="lf-other">¿Qué le gustaría mejorar?</label><input type="text" id="lf-other" name="other" maxlength="200" placeholder="Ej.: control de horas extras"></div></fieldset>
         <div class="lead-f"><label for="lf-msg">Comentarios <small>(opcional)</small></label><textarea id="lf-msg" name="msg" rows="3" maxlength="600" placeholder="Cualquier cosa que quieras contarnos"></textarea></div>
         <p class="lead-err" id="leadErr" role="alert" hidden></p>
@@ -213,6 +228,7 @@
       <div class="footer-brand">
         <span class="wordmark">SquareNet</span>
         <p>Software de gestión de personal para empresas en Ecuador: nómina, asistencia, recursos humanos y control de acceso en una sola plataforma.</p>
+        <a class="footer-social" href="https://www.linkedin.com/company/squarenet-ec" target="_blank" rel="noopener" aria-label="SquareNet en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0Z"/></svg><span>LinkedIn</span></a>
       </div>
       <div class="footer-col">
         <h6>Navegación</h6>
@@ -265,7 +281,7 @@
         if (otro.checked) form.elements.other.focus();
       });
 
-      // — correo o teléfono —
+      // — correo y teléfono —
       // Teléfonos: Ecuador primero (validación exacta), luego Latinoamérica y EE. UU. con largo del número nacional [mín, máx].
       var COUNTRIES = [['EC', 'Ecuador', '593'], ['AR', 'Argentina', '54', 10, 11], ['BO', 'Bolivia', '591', 8, 8], ['BR', 'Brasil', '55', 10, 11],
         ['CL', 'Chile', '56', 9, 9], ['CO', 'Colombia', '57', 10, 10], ['CR', 'Costa Rica', '506', 8, 8], ['CU', 'Cuba', '53', 8, 8],
@@ -279,40 +295,43 @@
         'hotmal.com': 'hotmail.com', 'hotmai.com': 'hotmail.com', 'hotmil.com': 'hotmail.com', 'hotmail.co': 'hotmail.com', 'outlok.com': 'outlook.com',
         'outllok.com': 'outlook.com', 'yaho.com': 'yahoo.com', 'yahooo.com': 'yahoo.com' };
       var ct = document.getElementById('lf-contact'), msg = document.getElementById('lf-contact-msg');
-      var ccWrap = document.getElementById('lf-cc-wrap'), cc = document.getElementById('lf-cc'), ccShow = document.getElementById('lf-cc-show');
+      var ph = document.getElementById('lf-phone'), phMsg = document.getElementById('lf-phone-msg');
+      var cc = document.getElementById('lf-cc'), ccShow = document.getElementById('lf-cc-show');
       COUNTRIES.forEach(function (c, i) { cc.add(new Option(c[1] + ' (+' + c[2] + ')', i)); });
       var country = function () { return COUNTRIES[+cc.value]; };
-      var looksPhone = function (t) { return /^[+(\d]/.test(t) && !/[a-z@]/i.test(t); };
 
-      function say(kind, html) {
-        msg.hidden = !kind; msg.className = 'lead-msg' + (kind ? ' is-' + kind : ''); msg.innerHTML = html || '';
-        ct.classList.toggle('is-bad', kind === 'err'); ct.setAttribute('aria-invalid', kind === 'err' ? 'true' : 'false');
+      function sayIn(input, box, kind, html) {
+        box.hidden = !kind; box.className = 'lead-msg' + (kind ? ' is-' + kind : ''); box.innerHTML = html || '';
+        input.classList.toggle('is-bad', kind === 'err'); input.setAttribute('aria-invalid', kind === 'err' ? 'true' : 'false');
       }
+      var say = function (k, h) { sayIn(ct, msg, k, h); }, sayPh = function (k, h) { sayIn(ph, phMsg, k, h); };
       function esc(t) { return t.replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
 
-      // Revisa el campo y, si show, muestra error o sugerencia. Devuelve la línea para el correo o null si no es válido.
+      // Cada revisión devuelve la línea para el correo o null si no es válido; con show muestra el error o la sugerencia.
+      function checkPhone(show) {
+        var t = ph.value.trim();
+        if (!t) { if (show) sayPh(); return null; }
+        var c = country(), d = t.replace(/\D/g, ''), n;
+        if (c[0] === 'EC') {
+          if (d.indexOf('593') === 0 && d.length >= 11) d = d.slice(3);
+          n = d.replace(/^0/, '');
+          var cel = /^9\d{8}$/.test(n), fijo = /^[2-7]\d{7}$/.test(n);
+          if (!cel && !fijo) { if (show) sayPh('err', 'Revisa el número: en Ecuador un celular tiene 10 dígitos (09…) y un fijo 9, con el código de provincia (02…).'); return null; }
+          n = cel ? n.replace(/^(\d{2})(\d{3})(\d{4})$/, '$1 $2 $3') : n.replace(/^(\d)(\d{3})(\d{4})$/, '$1 $2 $3');
+        } else {
+          if (d.indexOf(c[2]) === 0 && d.length - c[2].length >= c[3]) d = d.slice(c[2].length);
+          n = d.replace(/^0+/, '');  // el 0 de marcación nacional no cuenta
+          if (n.length < c[3] || n.length > c[4]) {
+            if (show) sayPh('err', 'Revisa el número: en ' + c[1] + ' tiene ' + c[3] + (c[4] > c[3] ? ' u ' + c[4] : '') + ' dígitos, sin el código de país.');
+            return null;
+          }
+        }
+        if (show) sayPh();
+        return 'Teléfono: +' + c[2] + ' ' + n + (c[0] === 'EC' ? '' : ' (' + c[1] + ')');
+      }
       function check(show) {
         var t = ct.value.trim();
         if (!t) { if (show) say(); return null; }
-        if (looksPhone(t)) {
-          var c = country(), d = t.replace(/\D/g, ''), n;
-          if (c[0] === 'EC') {
-            if (d.indexOf('593') === 0 && d.length >= 11) d = d.slice(3);
-            n = d.replace(/^0/, '');
-            var cel = /^9\d{8}$/.test(n), fijo = /^[2-7]\d{7}$/.test(n);
-            if (!cel && !fijo) { if (show) say('err', 'Revisa el número: en Ecuador un celular tiene 10 dígitos (09…) y un fijo 9, con el código de provincia (02…).'); return null; }
-            n = cel ? n.replace(/^(\d{2})(\d{3})(\d{4})$/, '$1 $2 $3') : n.replace(/^(\d)(\d{3})(\d{4})$/, '$1 $2 $3');
-          } else {
-            if (d.indexOf(c[2]) === 0 && d.length - c[2].length >= c[3]) d = d.slice(c[2].length);
-            n = d.replace(/^0+/, '');  // el 0 de marcación nacional no cuenta
-            if (n.length < c[3] || n.length > c[4]) {
-              if (show) say('err', 'Revisa el número: en ' + c[1] + ' tiene ' + c[3] + (c[4] > c[3] ? ' u ' + c[4] : '') + ' dígitos, sin el código de país.');
-              return null;
-            }
-          }
-          if (show) say();
-          return 'Teléfono: +' + c[2] + ' ' + n + (c[0] === 'EC' ? '' : ' (' + c[1] + ')');
-        }
         var m = t.toLowerCase().match(/^([^\s@]+)@([^\s@]+)$/);
         if (!m) { if (show) say('err', 'Revisa el correo: debería verse como nombre@tuempresa.com.'); return null; }
         var dom = m[2], fix = TYPOS[dom] || (/\.(con|cmo|comm|cpm|vom|xom)$/.test(dom) ? dom.replace(/\.[a-z]+$/, '.com') : null);
@@ -326,87 +345,51 @@
         return 'Correo: ' + t + (free ? ' (correo personal)' : '');
       }
 
-      function syncMode() {
-        var t = ct.value.trim(), phone = !!t && looksPhone(t);
-        if (phone && t.charAt(0) === '+') {  // "+57…" → Colombia; con +1 se respeta EE. UU. o Rep. Dominicana si ya estaba elegido
+      function syncCc() {
+        var t = ph.value.trim();
+        if (t.charAt(0) === '+') {  // "+57…" → Colombia; con +1 se respeta EE. UU. o Rep. Dominicana si ya estaba elegido
           var d = t.replace(/\D/g, ''), best = -1;
           COUNTRIES.forEach(function (c, i) { if (d.indexOf(c[2]) === 0 && (best < 0 || c[2].length > COUNTRIES[best][2].length)) best = i; });
           if (best >= 0 && COUNTRIES[best][2] !== country()[2]) cc.value = best;
         }
-        ccWrap.hidden = !phone;
-        ct.setAttribute('autocomplete', phone ? 'tel-national' : 'email');
         ccShow.textContent = country()[0] + ' +' + country()[2];
       }
-      ct.addEventListener('input', function () { syncMode(); if (ct.classList.contains('is-bad')) check(true); else if (!msg.hidden) say(); });
       // se revisa un momento después de salir del campo: si el aviso apareciera de inmediato, empujaría el botón
       // «Enviar» justo mientras lo pulsan y el clic se perdería
+      ct.addEventListener('input', function () { if (ct.classList.contains('is-bad')) check(true); else if (!msg.hidden) say(); });
       ct.addEventListener('blur', function () { setTimeout(function () { check(true); }, 250); });
-      cc.addEventListener('change', function () { syncMode(); if (ct.value.trim()) check(true); });
+      ph.addEventListener('input', function () { syncCc(); if (ph.classList.contains('is-bad')) checkPhone(true); else if (!phMsg.hidden) sayPh(); });
+      ph.addEventListener('blur', function () { setTimeout(function () { checkPhone(true); }, 250); });
+      cc.addEventListener('change', function () { syncCc(); if (ph.value.trim()) checkPhone(true); });
+      // el país del formulario elige también el código del teléfono
+      document.getElementById('lf-country').addEventListener('change', function () {
+        var name = this.value;
+        COUNTRIES.forEach(function (c, i) { if (c[1] === name) cc.value = i; });
+        syncCc(); if (ph.value.trim()) checkPhone(true);
+      });
       msg.addEventListener('click', function (e) {
         var b = e.target.closest('[data-fix]'); if (!b) return;
-        ct.value = b.getAttribute('data-fix'); syncMode(); check(true); ct.focus();
+        ct.value = b.getAttribute('data-fix'); check(true); ct.focus();
       });
 
-      // — RUC (opcional) —
-      // Estructura: 13 dígitos, provincia 01–24 (o 30, extranjeros), tercer dígito 0–5 persona natural, 6 entidad pública,
-      // 9 sociedad, y establecimiento distinto de 000. Si eso falla no se envía. El dígito verificador (módulo 10 para
-      // personas, módulo 11 para sociedades y entidades públicas) solo avisa: el SRI emite algunos RUC que no lo cumplen.
-      var ruc = document.getElementById('lf-ruc'), rucMsg = document.getElementById('lf-ruc-msg');
-      function rucSay(kind, text) {
-        rucMsg.hidden = !kind; rucMsg.className = 'lead-msg' + (kind ? ' is-' + kind : ''); rucMsg.textContent = text || '';
-        ruc.classList.toggle('is-bad', kind === 'err'); ruc.setAttribute('aria-invalid', kind === 'err' ? 'true' : 'false');
-      }
-      function mod11(d, coef, at) {
-        var sum = 0; for (var i = 0; i < coef.length; i++) sum += +d[i] * coef[i];
-        var r = 11 - sum % 11; return (r === 11 ? 0 : r) === +d[at];
-      }
-      // Devuelve { line } para el correo (line vacío si no escribió nada) o null si el RUC está mal armado.
-      function checkRuc(show) {
-        var d = ruc.value.replace(/\D/g, '');
-        if (!d) { if (show) rucSay(); return { line: '' }; }
-        var bad = function (t) { if (show) rucSay('err', t); return null; };
-        if (d.length !== 13) return bad('El RUC tiene 13 dígitos' + (d.length < 13 ? ' (llevas ' + d.length + ').' : '.'));
-        var prov = +d.slice(0, 2), t = +d[2], tipo, ok;
-        if (!((prov >= 1 && prov <= 24) || prov === 30)) return bad('Los dos primeros dígitos del RUC son la provincia (01 a 24).');
-        if (t <= 5) {
-          tipo = 'persona natural';
-          var sum = 0;
-          for (var i = 0; i < 9; i++) { var x = +d[i] * (i % 2 ? 1 : 2); sum += x > 9 ? x - 9 : x; }
-          ok = (10 - sum % 10) % 10 === +d[9];
-          if (d.slice(10) === '000') return bad('Los tres últimos dígitos del RUC (establecimiento) no pueden ser 000.');
-        } else if (t === 6) {
-          tipo = 'entidad pública'; ok = mod11(d, [3, 2, 7, 6, 5, 4, 3, 2], 8);
-          if (d.slice(9) === '0000') return bad('Los cuatro últimos dígitos del RUC (establecimiento) no pueden ser 0000.');
-        } else if (t === 9) {
-          tipo = 'sociedad'; ok = mod11(d, [4, 3, 2, 7, 6, 5, 4, 3, 2], 9);
-          if (d.slice(10) === '000') return bad('Los tres últimos dígitos del RUC (establecimiento) no pueden ser 000.');
-        } else {
-          return bad('El tercer dígito del RUC no corresponde a una empresa ni a una persona (debe ser 0–6 o 9).');
-        }
-        if (show) rucSay(ok ? 'ok' : 'tip', ok ? '✓ RUC válido · ' + tipo : 'El dígito verificador no cuadra. Revísalo; si está bien, puedes enviarlo igual.');
-        return { line: '\nRUC: ' + d + ' (' + tipo + (ok ? '' : ', dígito verificador no cuadra') + ')' };
-      }
-      ruc.addEventListener('input', function () {
-        var n = ruc.value.replace(/\D/g, '').length;
-        if (n === 13 || ruc.classList.contains('is-bad')) checkRuc(true); else if (!rucMsg.hidden) rucSay();
-      });
-      ruc.addEventListener('blur', function () { setTimeout(function () { checkRuc(true); }, 250); });
-
+      document.getElementById('lf-source').addEventListener('change', function () { this.classList.remove('is-bad'); });
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
-        if (!v('name') || !v('company') || !v('contact')) { err.textContent = 'Completa nombre y cargo, empresa y un correo o teléfono.'; err.hidden = false; return; }
-        var contact = check(true);
+        var size = (form.querySelector('input[name=size]:checked') || {}).value;
+        f.source.classList.toggle('is-bad', !v('source'));
+        if (!v('name') || !v('last') || !v('company') || !v('contact') || !v('phone') || !size || !v('source')) {
+          err.textContent = 'Completa los campos con *: nombre, apellido, empresa, correo, teléfono, país, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
+        }
+        var contact = check(true), phone = checkPhone(true);
         if (!contact) { err.hidden = true; ct.focus(); return; }
-        var rucRes = checkRuc(true);
-        if (!rucRes) { err.hidden = true; ruc.focus(); return; }
+        if (!phone) { err.hidden = true; ph.focus(); return; }
         err.hidden = true;
-        var size = (form.querySelector('input[name=size]:checked') || {}).value || 'No indicado';
         var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) {
           return c === otro && v('other') ? 'Otro: ' + v('other') : c.value;
         }).join(', ') || 'No indicado';
-        var body = 'Nombre y cargo: ' + v('name') + '\nEmpresa: ' + v('company') + rucRes.line + '\n' + contact +
-          '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
+        var body = 'Nombre: ' + v('name') + ' ' + v('last') + (v('role') ? '\nCargo: ' + v('role') : '') + '\nEmpresa: ' + v('company') + '\n' + contact + '\n' + phone +
+          '\nPaís: ' + v('country') + '\nNos conoció por: ' + v('source') + '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
           (v('msg') ? '\n\nComentarios:\n' + v('msg') : '');
         location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
       });

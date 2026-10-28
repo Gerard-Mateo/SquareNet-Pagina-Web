@@ -20,6 +20,21 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<style>
+  /* dispositivos compatibles: logos reales donde los hay, nombre en texto donde no */
+  .mod-sec .dev-logos{list-style:none;margin:var(--space-5) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:var(--space-3);padding-top:var(--space-4)}
+  .dev-logos li{display:flex}
+  .dev-logos a,.dev-logos .dev-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:118px;padding:var(--space-4) var(--space-3);background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);text-decoration:none;color:var(--color-text);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .dev-logos a:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--color-accent-300)}
+  .dev-logos img{height:36px;width:auto;max-width:100%}
+  .dev-word{font-family:var(--font-heading);font-weight:800;font-size:28px;letter-spacing:-.02em;line-height:1.2;color:#4a4d52}
+  .dev-word b{color:var(--color-accent-700);font-weight:800}
+  .dev-logos small{font-size:12px;color:var(--color-neutral-700)}
+  .dev-logos .dev-more{background:transparent;border-style:dashed;text-align:center;font-size:14px;line-height:1.4}
+  .dev-more strong{font-family:var(--font-heading);font-size:30px;line-height:1;color:var(--color-accent-700)}
+  @media (max-width:600px){.mod-sec .dev-logos{grid-template-columns:1fr 1fr;gap:var(--space-2)}.dev-logos a,.dev-logos .dev-card{min-height:96px;padding:var(--space-3) var(--space-2)}.dev-logos img{height:24px}.dev-word{font-size:20px}.dev-logos li:last-child{grid-column:1/-1}}
+  @media (prefers-reduced-motion:reduce){.dev-logos a{transition:none}.dev-logos a:hover{transform:none}}
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -80,7 +95,7 @@
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><span class="fx">fx</span></span><h3>Reglas por script en tiempo real</h3><p>Cada intento de acceso se evalúa al instante con tus propias reglas, desde las simples hasta las más complejas.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></span><h3>Zonas jerárquicas</h3><p>Define las áreas de tu empresa como un árbol: edificio, piso, zona.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6M15 14.4c.7-.3 1.4-.4 2-.4 2.4 0 4 1.8 4 4.6"/></svg></span><h3>Perfiles por centro de costo</h3><p>Los permisos se asignan por centro de costo, con excepciones puntuales por persona.</p></article>
-        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></span><h3>Relojes ZK Teco</h3><p>Compatible con los relojes biométricos de ZK Teco que ya usa tu empresa.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></span><h3>Relojes de varias marcas</h3><p>Compatible con ZKTeco, Hikvision, BioTime y otros dispositivos que ya usa tu empresa.</p></article>
       </div>
       <details class="mod-all">
         <summary>Todas las funciones (5)</summary>
@@ -94,9 +109,21 @@
       </details>
     </section>
 
+    <section class="mod-sec" aria-labelledby="dev-title">
+      <h2 id="dev-title" data-reveal>Funciona con tus dispositivos</h2>
+      <p class="lead" data-reveal>SquareNet se conecta con los relojes biométricos y lectores de las marcas más usadas, y con cualquier dispositivo que pueda comunicarse con él. ¿Ya tienes equipos? Pregúntanos por los tuyos.</p>
+      <ul class="dev-logos" data-reveal>
+        <li><a href="lectorZK.html"><img src="img/dispositivos/zkteco.svg" alt="ZKTeco" loading="lazy"><small>Relojes biométricos</small></a></li>
+        <li><span class="dev-card"><img src="img/dispositivos/hikvision.svg" alt="Hikvision" loading="lazy"><small>Terminales de acceso</small></span></li>
+        <li><span class="dev-card"><span class="dev-word">Bio<b>Time</b></span><small>Software de ZKTeco</small></span></li>
+        <li><a href="lectorHandPunch.html"><span class="dev-word">HandPunch</span><small>Lector de geometría de mano</small></a></li>
+        <li><span class="dev-card dev-more"><strong>+</strong>Y cualquier dispositivo que se comunique con SquareNet</span></li>
+      </ul>
+    </section>
+
     <section class="mod-sec" aria-labelledby="rep-title">
       <h2 id="rep-title" data-reveal>Reportes incluidos</h2>
-      <p class="lead" data-reveal>1 reportes listos para usar, exportables a Excel o PDF desde el sistema.</p>
+      <p class="lead" data-reveal>1 reporte listo para usar, exportable a Excel o PDF desde el sistema.</p>
       <ul class="mod-reports">
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Registro de Acceso</b><span>Detalle de todos los accesos en un rango de fechas.</span></div></li>
       </ul>
@@ -124,6 +151,7 @@
       <div class="footer-brand">
         <span class="wordmark">SquareNet</span>
         <p>Software de gestión de personal para empresas en Ecuador: nómina, asistencia, recursos humanos y control de acceso en una sola plataforma.</p>
+        <a class="footer-social" href="https://www.linkedin.com/company/squarenet-ec" target="_blank" rel="noopener" aria-label="SquareNet en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0Z"/></svg><span>LinkedIn</span></a>
       </div>
       <div class="footer-col">
         <h6>Navegación</h6>
