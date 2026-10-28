@@ -216,14 +216,15 @@
   .showcase-copy{max-width:980px;margin:calc(var(--space-8) + var(--space-4)) auto 0;text-align:center}
   .showcase-copy h2{font-size:clamp(30px,4.4vw,52px);line-height:1.08;margin:0}
   .showcase-copy h2 .num{color:var(--color-accent-700);font-variant-numeric:tabular-nums}
-  .screens{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6) var(--space-4)}
-  .screens li{display:flex;flex-direction:column;align-items:center;gap:var(--space-2);font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;line-height:1.25}
-  .screens strong{font-weight:var(--font-heading-weight)}
-  .screens .desc{font-family:var(--font-body);font-weight:400;font-size:14px;line-height:1.4;opacity:.75;max-width:24ch}
-  .screens .ico{display:grid;place-items:center;width:54px;height:54px;border-radius:var(--radius-md);background:var(--color-accent-100);color:var(--color-accent-700);
-    transition:background .25s ease,transform .3s cubic-bezier(.2,.8,.3,1.4)}
-  .screens li:hover .ico{background:var(--color-accent-200);transform:translateY(-3px)}
-  .screens svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  /* icono / título / descripción alineados entre columnas (subgrid): cada fila de la lista comparte sus tres alturas */
+  .screens{list-style:none;margin:var(--space-8) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:var(--space-6);row-gap:0;text-align:left}
+  .screens li{grid-row:span 3;display:grid;grid-template-rows:subgrid;row-gap:0;justify-items:start;align-items:start;font-family:var(--font-heading)}
+  .screens .ico{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-md);background:color-mix(in srgb,var(--ic) 13%,#fff);color:var(--ic);
+    transition:background .25s ease,color .25s ease,transform .3s cubic-bezier(.2,.8,.3,1.4)}
+  .screens li:hover .ico{background:var(--ic);color:#fff;transform:translateY(-3px)}
+  .screens strong{padding:var(--space-3) 0 6px;font-weight:var(--font-heading-weight);font-size:17px;line-height:1.2}
+  .screens .desc{padding-bottom:var(--space-6);font-family:var(--font-body);font-weight:400;font-size:14px;line-height:1.5;color:color-mix(in srgb,var(--color-text) 74%,transparent)}
+  .screens svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
   .showcase-more{display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-6);font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:15px;color:var(--color-accent);text-decoration:none}
   .showcase-more i{font-style:normal;display:inline-block;transition:transform .25s ease}
   .showcase-more:hover{color:var(--color-accent-700)}
@@ -245,7 +246,7 @@
   /* celular: 2 columnas compactas (ícono + título); la descripción larga solo en pantallas más grandes */
   @media (max-width:520px){
     .screens{gap:var(--space-6) var(--space-3)}
-    .screens li{font-size:14.5px;text-align:center}
+    .screens li{font-size:14.5px;text-align:center;justify-items:center}.screens strong{padding-top:var(--space-2);padding-bottom:var(--space-2)}
     .screens .ico{width:46px;height:46px}
     .screens svg{width:23px;height:23px}
     .screens .desc{display:none}
@@ -261,24 +262,30 @@
   /* la pista animada es su propio contexto de apilamiento y aísla el multiply de los logos: el fondo va también en ella para que el blanco de los logos desaparezca */
   .clients-band .marquee-track{background:var(--color-accent-100)}
   .clients h6{color:var(--color-neutral-700);margin-bottom:var(--space-4);text-align:center}
-  .modules-teaser{padding:var(--space-8) 0;border-top:1px solid var(--color-divider);text-align:center}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  .modules-teaser{scroll-margin-top:72px;padding:var(--space-8) 0;border-top:1px solid var(--color-divider);text-align:center}
   .modules-teaser h2{margin-bottom:var(--space-3)}
   .modules-teaser-intro{max-width:620px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
-  .modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);text-align:left}
-  .modules-grid .card{position:relative;height:100%;padding-bottom:calc(var(--space-3) + 24px);border:1px solid transparent;border-top:3px solid var(--mc);overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,background .3s ease,border-color .3s ease}
-  .modules-grid .card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,color-mix(in srgb,var(--mc) 14%,transparent),transparent 65%);opacity:0;transition:opacity .3s ease}
-  .modules-grid .card-title,.modules-grid .card-body{position:relative;z-index:1}
-  /* cada módulo con su color (--mc en el enlace): títulos en negro, el color va en el ícono, la línea de arriba y el hover */
-  .modules-grid .card-title{display:flex;align-items:center;gap:12px;font-size:22px;color:var(--color-text);transition:color .2s ease}
-  .modules-grid .card-body{color:color-mix(in srgb,var(--color-text) 80%,transparent);opacity:1;font-size:14px}
-  .mod-ic{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:var(--radius-md);background:color-mix(in srgb,var(--mc) 13%,#fff);color:var(--mc);transition:transform .3s cubic-bezier(.2,.8,.3,1.4),background .3s ease,color .3s ease}
-  .mod-ic svg{width:26px;height:26px}
-  .modules-grid .card-link:hover .card{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg);background:var(--color-bg);border-color:color-mix(in srgb,var(--mc) 40%,transparent);border-top-color:var(--mc)}
-  .modules-grid .card-link:hover .card::before{opacity:1}
-  .modules-grid .card-link:hover .mod-ic{background:var(--mc);color:#fff;transform:rotate(-6deg) scale(1.08)}
-  .module-arrow{position:absolute;right:var(--space-3);bottom:var(--space-3);z-index:1;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--mc,var(--color-accent));opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease}
-  .modules-grid .card-link:hover .module-arrow{opacity:1;transform:translateX(0) scale(1.15)}
-  @media (prefers-reduced-motion:reduce){.mod-ic{transition:none}.modules-grid .card-link:hover .mod-ic{transform:none}}
+  /* módulos con sus funciones, al estilo Humand: tarjetas suaves, chips blancos con ícono de color; cada chip lleva a su función (#ancla) en la página del módulo */
+  .fn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);align-items:start;text-align:left}
+  .fn-col{display:flex;flex-direction:column;gap:var(--space-4)}
+  .fn-col:nth-child(2){margin-top:var(--space-6)}
+  .fn-card{padding:var(--space-4) var(--space-4) calc(var(--space-4) + 4px);border-radius:20px;background:linear-gradient(150deg,color-mix(in srgb,var(--mc) 10%,#fff),color-mix(in srgb,var(--mc) 3%,#eef0f5));box-shadow:0 1px 0 #fff inset,0 10px 30px -18px color-mix(in srgb,var(--mc) 55%,#1b2340);transition:transform .3s ease,box-shadow .3s ease}
+  .fn-card:hover{transform:translateY(-3px);box-shadow:0 1px 0 #fff inset,0 18px 38px -18px color-mix(in srgb,var(--mc) 65%,#1b2340)}
+  .fn-head{display:flex;align-items:center;gap:10px;margin:var(--space-1) 0 var(--space-4);padding:0 4px;color:color-mix(in srgb,var(--color-text) 78%,var(--mc));text-decoration:none}
+  .fn-head h3{margin:0;font-size:23px;letter-spacing:-.02em}
+  .fn-go{margin-left:auto;font-family:var(--font-heading);font-size:24px;line-height:1;color:var(--mc);opacity:0;transform:translateX(-8px);transition:opacity .25s ease,transform .25s ease}
+  .fn-head:hover .fn-go,.fn-head:focus-visible .fn-go{opacity:1;transform:none}
+  .fn-chips{display:flex;flex-wrap:wrap;gap:10px}
+  .fn-chip{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 8px;font-size:14px;font-weight:600;line-height:1.2;color:var(--color-text);text-decoration:none;background:#fff;border-radius:12px;box-shadow:0 1px 2px rgba(27,35,64,.07),0 2px 8px -4px rgba(27,35,64,.12);transition:transform .2s ease,box-shadow .2s ease}
+  .fn-chip img{flex:none;width:32px;height:32px;image-rendering:pixelated;transition:transform .25s cubic-bezier(.2,.8,.3,1.4)}
+  .fn-chip:hover,.fn-chip:focus-visible{transform:translateY(-2px);box-shadow:0 1px 2px rgba(27,35,64,.08),0 8px 16px -8px color-mix(in srgb,var(--mc) 60%,#1b2340)}
+  .fn-chip:hover img,.fn-chip:focus-visible img{transform:scale(1.1)}
+  .mod-tag{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:var(--radius-sm);color:var(--color-accent-2-700);background:var(--color-accent-2-100)}
+  @media (max-width:1000px){.fn-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fn-col{display:contents}.fn-col:nth-child(2){margin-top:0}}
+  @media (max-width:640px){.fn-grid{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.fn-card,.fn-chip,.fn-go,.fn-chip img{transition:none}.fn-card:hover,.fn-chip:hover,.fn-chip:hover img{transform:none}}
   .cta-band{display:block;text-align:center;text-decoration:none;padding:var(--space-8) var(--space-6);margin:var(--space-6) 0 var(--space-8);border-radius:var(--radius-lg);background:var(--color-accent-800)}
   .cta-band h2{color:#fff;margin-bottom:var(--space-2)}
   .cta-band p{color:#fff;opacity:.9;margin-bottom:var(--space-4)}
@@ -296,7 +303,6 @@
     .feature-slide-copy .feature-slide-lead{font-size:17px}
     .carousel-arrow{display:none}
     .feature-slide > .wrap{padding-left:var(--space-6)}
-    .modules-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -353,16 +359,16 @@
       <div class="showcase-copy reveal" id="showcaseCopy">
         <h2 id="pantallas-title">Más de <span class="num" data-count="300">300</span> funcionalidades en un solo sistema</h2>
         <ul class="screens">
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><strong>Nómina en un clic</strong><span class="desc">Roles, quincenas, décimos, utilidades, liquidaciones e impuesto a la renta.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><strong>Asistencia con biométricos</strong><span class="desc">Integración con relojes, resumen diario y aprobación de horas extra.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="m9.5 14.5 2 2 3.5-4"/></svg></span><strong>Archivos legales listos</strong><span class="desc">Banco, IESS, Ministerio de Trabajo (MRL) y formulario 107.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><strong>Autoservicio para colaboradores</strong><span class="desc">Roles, vacaciones, permisos y marcación web desde el celular.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.1 8 7.5 9.5 4.4-1.5 7.5-5 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></span><strong>Cada cambio auditado</strong><span class="desc">Quién, cuándo y el valor anterior, más el bloqueo de períodos cerrados.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5Z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><strong>Contabilidad sin digitar</strong><span class="desc">Asientos automáticos hacia tu sistema contable.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3.2" height="8" rx=".6"/><rect x="10.4" y="7" width="3.2" height="13" rx=".6"/><rect x="15.3" y="3.5" width="3.2" height="16.5" rx=".6"/></svg></span><strong>Reportes a tu medida</strong><span class="desc">Tus propias columnas y rubros, configurados una vez y usados cada mes. Más de 90 reportes listos y exportación a Excel en un clic.</span></li>
-          <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span><strong>Y más</strong><span class="desc">Explora todos los módulos y funciones.</span></li>
+          <li style="--ic:#0B8079"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><strong>Nómina en un clic</strong><span class="desc">Roles, quincenas, décimos, utilidades, liquidaciones e impuesto a la renta.</span></li>
+          <li style="--ic:#E8710A"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><strong>Asistencia con biométricos</strong><span class="desc">Integración con relojes, resumen diario y aprobación de horas extra.</span></li>
+          <li style="--ic:#C92A2A"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M13 3v5h5"/><path d="m9.5 14.5 2 2 3.5-4"/></svg></span><strong>Archivos legales listos</strong><span class="desc">Banco, IESS, Ministerio de Trabajo (MRL) y formulario 107.</span></li>
+          <li style="--ic:#1C7ED6"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></span><strong>Autoservicio para colaboradores</strong><span class="desc">Roles, vacaciones, permisos y marcación web desde el celular.</span></li>
+          <li style="--ic:#2F9E44"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.1 8 7.5 9.5 4.4-1.5 7.5-5 7.5-9.5V6Z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></span><strong>Cada cambio auditado</strong><span class="desc">Quién, cuándo y el valor anterior, más el bloqueo de períodos cerrados.</span></li>
+          <li style="--ic:#C88A04"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5Z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><strong>Contabilidad sin digitar</strong><span class="desc">Asientos automáticos hacia tu sistema contable.</span></li>
+          <li style="--ic:#6741D9"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3.2" height="8" rx=".6"/><rect x="10.4" y="7" width="3.2" height="13" rx=".6"/><rect x="15.3" y="3.5" width="3.2" height="16.5" rx=".6"/></svg></span><strong>Reportes a tu medida</strong><span class="desc">Tus propias columnas y rubros, configurados una vez y usados cada mes. Más de 90 reportes listos y exportación a Excel en un clic.</span></li>
+          <li style="--ic:#D6336C"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg></span><strong>Y más</strong><span class="desc">Explora todos los módulos y funciones.</span></li>
         </ul>
-        <a class="showcase-more" href="modulos.html">Explorar los módulos <i>→</i></a>
+        <a class="showcase-more" href="#modulos">Explorar los módulos <i>→</i></a>
       </div>
     </div>
   </section>
@@ -389,7 +395,7 @@
         <a href="https://www.linkedin.com/company/enkador-s-a-/" target="_blank" rel="noopener" aria-label="Enkador en LinkedIn"><img src="img/Enkador.jpg" alt="Enkador" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/quimicaariston/" target="_blank" rel="noopener" aria-label="Química Ariston en LinkedIn"><img src="img/Quimica_Ariston.jpg" alt="Química Ariston" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/finca-los-nonnos/" target="_blank" rel="noopener" aria-label="Finca Los Ñoños en LinkedIn"><img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/toyota/" target="_blank" rel="noopener" aria-label="Toyotaservicios S.A. (Toyota) en LinkedIn"><img src="img/Toyota.png" alt="Toyotaservicios S.A." loading="lazy"></a>
+        <img src="img/Toyota.png" alt="Toyotaservicios S.A." loading="lazy">
       </div>
     </div>
     <div class="marquee">
@@ -628,73 +634,52 @@
     </div>
   </div>
 
-  <div class="wrap modules-teaser">
+  <div class="wrap modules-teaser" id="modulos">
     <h2>Un módulo para cada necesidad de tu gente</h2>
-    <p class="modules-teaser-intro">SquareNet se arma como un rompecabezas: empieza con lo que tu empresa necesita hoy y suma módulos cuando quieras. Cada uno resuelve una parte del día a día de tu equipo.</p>
-    <div class="modules-grid">
-      <a class="card-link" href="modulono.html" style="--mc:#0B8079">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/></svg></span>Nómina</h3>
-          <p class="card-body">Calcula y paga sueldos sin fórmulas complicadas ni hojas de Excel.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="moduloca.html" style="--mc:#E8710A">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>Asistencia</h3>
-          <p class="card-body">Sabe quién llegó, a qué hora y cuánto trabajó cada día.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="modulorh.html" style="--mc:#2F9E44">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/></svg></span>Recursos Humanos</h3>
-          <p class="card-body">Contratos, vacaciones y documentos de tu gente, en un solo lugar.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="moduloac.html" style="--mc:#C92A2A">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/></svg></span>Acceso</h3>
-          <p class="card-body">Decide quién entra, a qué zonas y en qué horario.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="modulocv.html" style="--mc:#AE3EC9">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/></svg></span>Visitas</h3>
-          <p class="card-body">Registra cada visita a tu empresa de forma simple y ordenada.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="modulocc.html" style="--mc:#C88A04">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/></svg></span>Comedor</h3>
-          <p class="card-body">Organiza quién come, cuándo y qué, sin papeleo.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="moduloev.html" style="--mc:#D6336C">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="M8.5 16v-3M12 16v-6M15.5 16v-4.5"/></svg></span>Evaluaciones</h3>
-          <p class="card-body">Mide el desempeño de tu gente y sigue su evolución.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="moduloas.html" style="--mc:#1C7ED6">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/></svg></span>Autoservicio</h3>
-          <p class="card-body">Tu personal consulta su rol y vacaciones desde el celular.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
-      <a class="card-link" href="modulots.html" style="--mc:#6741D9">
-        <div class="card elev-sm">
-          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M12 17.2s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/></svg></span>Trabajo Social</h3>
-          <p class="card-body">Fichas socioeconómicas y seguimiento de casos de tu gente.</p>
-          <span class="module-arrow">→</span>
-        </div>
-      </a>
+    <p class="modules-teaser-intro">SquareNet se arma como un rompecabezas: empieza con lo que tu empresa necesita hoy y suma módulos cuando quieras. Toca cualquier función para ver cómo funciona.</p>
+    <div class="fn-grid">
+      <div class="fn-col">
+        <article class="fn-card" style="--mc:#0B8079">
+        <a class="fn-head" href="modulono.html"><h3>Nómina</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="modulono.html#plantillas-de-rubros"><img src="img/iconos/modulono-plantillas-de-rubros.png" width="32" height="32" alt="" loading="lazy" decoding="async">Plantillas de rubros</a><a class="fn-chip" href="modulono.html#formulas-editables"><img src="img/iconos/modulono-formulas-editables.png" width="32" height="32" alt="" loading="lazy" decoding="async">Fórmulas editables</a><a class="fn-chip" href="modulono.html#roles-de-pago"><img src="img/iconos/modulono-roles-de-pago.png" width="32" height="32" alt="" loading="lazy" decoding="async">Roles de pago</a><a class="fn-chip" href="modulono.html#rubros-fijos"><img src="img/iconos/modulono-rubros-fijos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Rubros fijos</a><a class="fn-chip" href="modulono.html#cuotas-y-prestamos"><img src="img/iconos/modulono-cuotas-y-prestamos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Cuotas y préstamos</a><a class="fn-chip" href="modulono.html#decimos"><img src="img/iconos/modulono-decimos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Décimos</a><a class="fn-chip" href="modulono.html#utilidades"><img src="img/iconos/modulono-utilidades.png" width="32" height="32" alt="" loading="lazy" decoding="async">Utilidades</a><a class="fn-chip" href="modulono.html#asientos-contables"><img src="img/iconos/modulono-asientos-contables.png" width="32" height="32" alt="" loading="lazy" decoding="async">Asientos contables</a><a class="fn-chip" href="modulono.html#reportes-personalizados"><img src="img/iconos/modulono-reportes-personalizados.png" width="32" height="32" alt="" loading="lazy" decoding="async">Reportes personalizados</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#E8710A">
+        <a class="fn-head" href="moduloca.html"><h3>Asistencia</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="moduloca.html#registros-de-asistencia"><img src="img/iconos/moduloca-registros-de-asistencia.png" width="32" height="32" alt="" loading="lazy" decoding="async">Registros de asistencia</a><a class="fn-chip" href="moduloca.html#resumen-por-horario"><img src="img/iconos/moduloca-resumen-por-horario.png" width="32" height="32" alt="" loading="lazy" decoding="async">Resumen por horario</a><a class="fn-chip" href="moduloca.html#aprobacion-de-horas-extra"><img src="img/iconos/moduloca-aprobacion-de-horas-extra.png" width="32" height="32" alt="" loading="lazy" decoding="async">Aprobación de horas extra</a><a class="fn-chip" href="moduloca.html#ausentismos-y-permisos"><img src="img/iconos/moduloca-ausentismos-y-permisos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Ausentismos y permisos</a><a class="fn-chip" href="moduloca.html#kardex-de-horas"><img src="img/iconos/moduloca-kardex-de-horas.png" width="32" height="32" alt="" loading="lazy" decoding="async">Kardex de horas</a><a class="fn-chip" href="moduloca.html#politicas-de-vacaciones"><img src="img/iconos/moduloca-politicas-de-vacaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Políticas de vacaciones</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#D6336C">
+        <a class="fn-head" href="moduloev.html"><h3>Evaluaciones</h3><span class="mod-tag">Nuevo</span><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="moduloev.html#plantillas-de-evaluacion"><img src="img/iconos/moduloev-plantillas-de-evaluacion.png" width="32" height="32" alt="" loading="lazy" decoding="async">Plantillas de evaluación</a><a class="fn-chip" href="moduloev.html#evaluaciones"><img src="img/iconos/moduloev-evaluaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Evaluaciones</a></div>
+      </article>
+      </div>
+      <div class="fn-col">
+        <article class="fn-card" style="--mc:#1C7ED6">
+        <a class="fn-head" href="moduloas.html"><h3>Autoservicio</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="moduloas.html#rol-de-pagos"><img src="img/iconos/moduloas-rol-de-pagos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Rol de pagos</a><a class="fn-chip" href="moduloas.html#vacaciones-y-permisos"><img src="img/iconos/moduloas-vacaciones-y-permisos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Vacaciones y permisos</a><a class="fn-chip" href="moduloas.html#marcacion-web"><img src="img/iconos/moduloas-marcacion-web.png" width="32" height="32" alt="" loading="lazy" decoding="async">Marcación web</a><a class="fn-chip" href="moduloas.html#certificados"><img src="img/iconos/moduloas-certificados.png" width="32" height="32" alt="" loading="lazy" decoding="async">Certificados</a><a class="fn-chip" href="moduloas.html#formulario-107"><img src="img/iconos/moduloas-formulario-107.png" width="32" height="32" alt="" loading="lazy" decoding="async">Formulario 107</a><a class="fn-chip" href="moduloas.html#gastos-personales"><img src="img/iconos/moduloas-gastos-personales.png" width="32" height="32" alt="" loading="lazy" decoding="async">Gastos personales</a><a class="fn-chip" href="moduloas.html#evaluaciones"><img src="img/iconos/moduloas-evaluaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Evaluaciones</a><a class="fn-chip" href="moduloas.html#formularios"><img src="img/iconos/moduloas-formularios.png" width="32" height="32" alt="" loading="lazy" decoding="async">Formularios</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#C88A04">
+        <a class="fn-head" href="modulocc.html"><h3>Comedor</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="modulocc.html#horarios-de-atencion"><img src="img/iconos/modulocc-horarios-de-atencion.png" width="32" height="32" alt="" loading="lazy" decoding="async">Horarios de atención</a><a class="fn-chip" href="modulocc.html#autorizaciones-de-comida"><img src="img/iconos/modulocc-autorizaciones-de-comida.png" width="32" height="32" alt="" loading="lazy" decoding="async">Autorizaciones de comida</a><a class="fn-chip" href="modulocc.html#eventos"><img src="img/iconos/modulocc-eventos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Eventos</a><a class="fn-chip" href="modulocc.html#consulta-de-consumo"><img src="img/iconos/modulocc-consulta-de-consumo.png" width="32" height="32" alt="" loading="lazy" decoding="async">Consulta de consumo</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#AE3EC9">
+        <a class="fn-head" href="modulocv.html"><h3>Visitas</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="modulocv.html#registro-de-visitantes"><img src="img/iconos/modulocv-registro-de-visitantes.png" width="32" height="32" alt="" loading="lazy" decoding="async">Registro de visitantes</a><a class="fn-chip" href="modulocv.html#motivos-de-visita"><img src="img/iconos/modulocv-motivos-de-visita.png" width="32" height="32" alt="" loading="lazy" decoding="async">Motivos de visita</a><a class="fn-chip" href="modulocv.html#consulta-de-visitas"><img src="img/iconos/modulocv-consulta-de-visitas.png" width="32" height="32" alt="" loading="lazy" decoding="async">Consulta de visitas</a><a class="fn-chip" href="modulocv.html#empresas-externas"><img src="img/iconos/modulocv-empresas-externas.png" width="32" height="32" alt="" loading="lazy" decoding="async">Empresas externas</a></div>
+      </article>
+      </div>
+      <div class="fn-col">
+        <article class="fn-card" style="--mc:#2F9E44">
+        <a class="fn-head" href="modulorh.html"><h3>Recursos Humanos</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="modulorh.html#ficha-del-colaborador"><img src="img/iconos/modulorh-ficha-del-colaborador.png" width="32" height="32" alt="" loading="lazy" decoding="async">Ficha del colaborador</a><a class="fn-chip" href="modulorh.html#contratos"><img src="img/iconos/modulorh-contratos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Contratos</a><a class="fn-chip" href="modulorh.html#organigrama"><img src="img/iconos/modulorh-organigrama.png" width="32" height="32" alt="" loading="lazy" decoding="async">Organigrama</a><a class="fn-chip" href="modulorh.html#competencias"><img src="img/iconos/modulorh-competencias.png" width="32" height="32" alt="" loading="lazy" decoding="async">Competencias</a><a class="fn-chip" href="modulorh.html#capacitacion"><img src="img/iconos/modulorh-capacitacion.png" width="32" height="32" alt="" loading="lazy" decoding="async">Capacitación</a><a class="fn-chip" href="modulorh.html#procesos-de-salida"><img src="img/iconos/modulorh-procesos-de-salida.png" width="32" height="32" alt="" loading="lazy" decoding="async">Procesos de salida</a><a class="fn-chip" href="modulorh.html#cartas-y-documentos"><img src="img/iconos/modulorh-cartas-y-documentos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Cartas y documentos</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#C92A2A">
+        <a class="fn-head" href="moduloac.html"><h3>Acceso</h3><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="moduloac.html#politicas-de-acceso"><img src="img/iconos/moduloac-politicas-de-acceso.png" width="32" height="32" alt="" loading="lazy" decoding="async">Políticas de acceso</a><a class="fn-chip" href="moduloac.html#horarios-de-acceso"><img src="img/iconos/moduloac-horarios-de-acceso.png" width="32" height="32" alt="" loading="lazy" decoding="async">Horarios de acceso</a><a class="fn-chip" href="moduloac.html#perfiles-de-acceso"><img src="img/iconos/moduloac-perfiles-de-acceso.png" width="32" height="32" alt="" loading="lazy" decoding="async">Perfiles de acceso</a><a class="fn-chip" href="moduloac.html#acceso-por-persona"><img src="img/iconos/moduloac-acceso-por-persona.png" width="32" height="32" alt="" loading="lazy" decoding="async">Acceso por persona</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#6741D9">
+        <a class="fn-head" href="modulots.html"><h3>Trabajo Social</h3><span class="mod-tag">Nuevo</span><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="modulots.html#fichas-socioeconomicas"><img src="img/iconos/modulots-fichas-socioeconomicas.png" width="32" height="32" alt="" loading="lazy" decoding="async">Fichas socioeconómicas</a><a class="fn-chip" href="modulots.html#casos-sociales"><img src="img/iconos/modulots-casos-sociales.png" width="32" height="32" alt="" loading="lazy" decoding="async">Casos sociales</a><a class="fn-chip" href="modulots.html#actividades-de-seguimiento"><img src="img/iconos/modulots-actividades-de-seguimiento.png" width="32" height="32" alt="" loading="lazy" decoding="async">Actividades de seguimiento</a><a class="fn-chip" href="modulots.html#derivaciones"><img src="img/iconos/modulots-derivaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Derivaciones</a></div>
+      </article>
+      </div>
     </div>
   </div>
 

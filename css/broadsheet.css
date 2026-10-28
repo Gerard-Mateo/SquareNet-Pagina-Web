@@ -903,3 +903,10 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 @media (prefers-reduced-motion: reduce) {
   .calc-tab::after, .cv-months span b, .cv-bar b, .cv-time .t1, .cv-time .t2, .cv-time .now, .cv-seg i, .cv-brackets span { transition: none; }
 }
+
+/* — funciones de cada módulo: una tarjeta por función; el home enlaza a cada una con #ancla — */
+.mod-fn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3); margin-top: var(--space-6); }
+.mod-fn { scroll-margin-top: 110px; padding: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-divider); border-left: 3px solid var(--mc, var(--color-accent)); border-radius: var(--radius-md); }
+.mod-fn h3 { font-size: 17px; margin: 0 0 var(--space-1); }
+.mod-fn p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--color-neutral-700); }
+.mod-fn:target { background: color-mix(in srgb, var(--mc, var(--color-accent)) 9%, var(--color-bg)); border-color: var(--mc, var(--color-accent)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc, var(--color-accent)) 22%, transparent); }

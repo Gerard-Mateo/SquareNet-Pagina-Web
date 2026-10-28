@@ -37,48 +37,23 @@
   .flow-intro h2{margin-bottom:var(--space-3)}
   .flow-intro p{font-size:16px;opacity:.85;margin:0}
 
-  /* mosaico sin orden: cada módulo es una pieza, de tamaños distintos */
-  .mosaic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(190px,auto);gap:var(--space-4);
-    grid-template-areas:"no no as ts" "no no cc ts" "rh rh ac au" "cv cv ev ev"}
-  .mosaic > :nth-child(1){grid-area:no}.mosaic > :nth-child(2){grid-area:as}.mosaic > :nth-child(3){grid-area:ts}
-  .mosaic > :nth-child(4){grid-area:cc}.mosaic > :nth-child(5){grid-area:rh}.mosaic > :nth-child(6){grid-area:ac}
-  .mosaic > :nth-child(7){grid-area:au}.mosaic > :nth-child(8){grid-area:cv}.mosaic > :nth-child(9){grid-area:ev}
-  .mosaic .mod-card p{max-width:46ch}
-  .mod-card.big{justify-content:flex-end;padding:var(--space-6) var(--space-6) calc(var(--space-6) + 14px);color:#fff}
-  .mod-card.big .mod-icon{width:44px;height:44px;color:var(--color-accent-300);margin-bottom:auto}
-  .mod-card.big h3{font-size:clamp(32px,3.6vw,48px);line-height:1}
-  .mod-card.big p{font-size:16px;color:rgba(255,255,255,.82)}
-  .mod-card.big .mod-go{color:var(--color-accent-300);opacity:.6;transform:none}
-  .mod-card.big:hover h3{color:#fff;text-decoration-color:var(--color-accent-300)}
-  .mod-card.big::before{display:none}
-  .mod-card.tall{justify-content:flex-end}
-  .mod-card.tall .mod-icon{margin-bottom:auto;width:34px;height:34px}
-  .mosaic .mod-card.tint{background:var(--color-accent-100)}
-  .mod-tag{align-self:flex-start;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:var(--radius-sm);
-    color:var(--color-accent-2-700);background:var(--color-accent-2-100)}
-
-  .mod-card{position:relative;display:flex;flex-direction:column;gap:var(--space-2);
-    padding:var(--space-4) var(--space-4) calc(var(--space-4) + 14px);
-    border:1px solid transparent;border-radius:var(--radius-md);
-    text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);overflow:hidden;
-    transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,border-color .3s ease,background .3s ease}
-  .mod-card:not(.big){background:var(--color-surface)}
-  .mod-card::before{content:"";position:absolute;inset:0;z-index:0;opacity:0;transition:opacity .3s ease;
-    background:linear-gradient(135deg,var(--color-accent-100),transparent 62%)}
-  .mod-card > *{position:relative;z-index:1}
-  .mod-icon{width:26px;height:26px;color:var(--color-accent);transition:transform .3s cubic-bezier(.2,.8,.3,1.4)}
-  .mod-card h3{font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:18px;margin:0;
-    text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
-  .mod-card p{margin:0;font-size:13.5px;line-height:1.55;color:var(--color-neutral-700)}
-  .mod-go{position:absolute;right:var(--space-4);bottom:var(--space-3);font-family:var(--font-heading);font-size:22px;
-    line-height:1;color:var(--color-accent);opacity:0;transform:translateX(-8px);transition:opacity .25s ease,transform .25s ease}
-  .mod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--color-accent-300)}
-  .mod-card:not(.big):not(.tint):hover{background:var(--color-bg)}
-  .mod-card:hover::before{opacity:1}
-  .mod-card:hover h3{color:var(--color-accent-700);text-decoration-color:var(--color-accent-700)}
-  .mod-card:hover .mod-icon{transform:scale(1.12) rotate(-4deg)}
-  .mod-card:hover .mod-go{opacity:1;transform:translateX(0)}
-
+  .modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);text-align:left}
+  .modules-grid .card{position:relative;height:100%;padding-bottom:calc(var(--space-3) + 24px);border:1px solid transparent;border-top:3px solid var(--mc);overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.3,1.4),box-shadow .3s ease,background .3s ease,border-color .3s ease}
+  .modules-grid .card::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,color-mix(in srgb,var(--mc) 14%,transparent),transparent 65%);opacity:0;transition:opacity .3s ease}
+  .modules-grid .card-title,.modules-grid .card-body{position:relative;z-index:1}
+  /* cada módulo con su color (--mc en el enlace): línea de arriba, ícono, flecha y hover */
+  .modules-grid .card-title{display:flex;align-items:center;gap:12px;font-size:22px;color:var(--color-text)}
+  .modules-grid .card-body{color:color-mix(in srgb,var(--color-text) 80%,transparent);opacity:1;font-size:14px}
+  .modules-grid .card-link:hover .card{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow-lg);background:var(--color-bg);border-color:color-mix(in srgb,var(--mc) 40%,transparent);border-top-color:var(--mc)}
+  .modules-grid .card-link:hover .card::before{opacity:1}
+  .module-arrow{position:absolute;right:var(--space-3);bottom:var(--space-3);z-index:1;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--mc,var(--color-accent));opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease}
+  .modules-grid .card-link:hover .module-arrow{opacity:1;transform:translateX(0) scale(1.15)}
+  .mod-ic{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:var(--radius-md);background:color-mix(in srgb,var(--mc) 13%,#fff);color:var(--mc);transition:transform .3s cubic-bezier(.2,.8,.3,1.4),background .3s ease,color .3s ease}
+  .mod-ic svg{width:26px;height:26px}
+  .modules-grid .card-link:hover .mod-ic{background:var(--mc);color:#fff;transform:rotate(-6deg) scale(1.08)}
+  .mod-tag{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:var(--radius-sm);color:var(--color-accent-2-700);background:var(--color-accent-2-100)}
+  @media (max-width:1000px){.modules-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:640px){.modules-grid{grid-template-columns:1fr}}
   .modulos-cta{margin:var(--space-8) 0;padding:var(--space-8) var(--space-6);border-radius:var(--radius-lg);
     background:var(--color-accent-800);text-align:center;text-decoration:none;display:block}
   .modulos-cta h2{color:#fff;margin-bottom:var(--space-2)}
@@ -86,15 +61,8 @@
   .modulos-cta .btn{background:#fff;color:var(--color-accent-800)}
   .modulos-cta:hover .btn{background:var(--color-accent-100)}
 
-  @media (max-width:1000px){
-    .mosaic{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"no no" "as ts" "cc ts" "rh rh" "ac au" "cv ev"}
-  }
-  @media (max-width:600px){
-    .mosaic{grid-template-columns:1fr;grid-auto-rows:auto;grid-template-areas:"no" "as" "ts" "cc" "rh" "ac" "au" "cv" "ev"}
-    .mod-card.big{min-height:300px}
-  }
   @media (prefers-reduced-motion:reduce){
-    .mod-card,.mod-icon,.mod-go{transition:none!important}
+    .modules-grid .card,.mod-ic,.module-arrow{transition:none!important}
   }
 </style>
 </head>
@@ -128,80 +96,69 @@
       <p>SquareNet se arma como un rompecabezas: empiezas con lo que tu empresa necesita hoy y sumas módulos cuando quieras, en el orden que quieras. Todos comparten la misma base de datos, así que lo que pasa en uno se refleja en los demás.</p>
     </div>
 
-    <div class="mosaic">
-      <a class="mod-card big band-dark" href="modulono.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/>
-        </svg>
-        <h3>Nómina</h3>
-        <p>Calcula el rol de pagos con fórmulas editables al estilo Excel, y genera los archivos batch para el IESS, el Ministerio de Trabajo y los formularios del SRI.</p>
-        <span class="mod-go">→</span>
+    <div class="modules-grid">
+      <a class="card-link" href="modulono.html" style="--mc:#0B8079" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M12 7.2v9"/><path d="M14.4 9.4c0-1-1-1.7-2.4-1.7s-2.4.7-2.4 1.6c0 2.3 4.8 1.2 4.8 3.5 0 1-1.1 1.7-2.4 1.7s-2.4-.7-2.4-1.7"/></svg></span>Nómina</h3>
+          <p class="card-body">Calcula y paga sueldos sin fórmulas complicadas ni hojas de Excel.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="moduloca.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/>
-        </svg>
-        <h3>Asistencia</h3>
-        <p>Controla el cumplimiento del horario, incluso en plantas industriales: atrasos, horas extra y permisos calculados solos. Centraliza los relojes ZKTeco, HIKVision y BioTime de todas tus sucursales.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="moduloca.html" style="--mc:#E8710A" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span>Asistencia</h3>
+          <p class="card-body">Sabe quién llegó, a qué hora y cuánto trabajó cada día.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card tall tint" href="modulots.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M12 17.2s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/>
-        </svg>
-        <span class="mod-tag">Nuevo</span>
-        <h3>Trabajo Social</h3>
-        <p>Fichas socioeconómicas y seguimiento de casos sociales de cada colaborador y su familia, con acceso restringido para proteger su información.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="modulorh.html" style="--mc:#2F9E44" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/></svg></span>Recursos Humanos</h3>
+          <p class="card-body">Contratos, vacaciones y documentos de tu gente, en un solo lugar.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="modulocc.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/>
-        </svg>
-        <h3>Comedor</h3>
-        <p>Controla las comidas en los comedores de tu empresa y cruza la información con tu proveedor externo, sin papeleo.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="moduloac.html" style="--mc:#C92A2A" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/></svg></span>Acceso</h3>
+          <p class="card-body">Decide quién entra, a qué zonas y en qué horario.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="modulorh.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="2.6"/><path d="M8 17c0-2.2 1.8-3.6 4-3.6s4 1.4 4 3.6"/>
-        </svg>
-        <h3>Recursos Humanos</h3>
-        <p>Fichas, contratos, acciones de personal, capacitación y estudios. Lo que se registra aquí alimenta la asistencia y el rol de pagos.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="modulocv.html" style="--mc:#AE3EC9" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/></svg></span>Visitas</h3>
+          <p class="card-body">Registra cada visita a tu empresa de forma simple y ordenada.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="moduloac.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M10 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"/><path d="M4 12h9"/><path d="M10 8.8 13.2 12 10 15.2"/>
-        </svg>
-        <h3>Acceso</h3>
-        <p>Decide quién entra a cada zona de la empresa y en qué horario, con relojes biométricos y reglas configurables por fórmulas.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="modulocc.html" style="--mc:#C88A04" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v5.2a2.6 2.6 0 0 0 5.2 0V3"/><path d="M9.1 8.2V21"/><path d="M17.8 3c-1.7 1.1-2.6 2.8-2.6 4.9 0 1.7 1 2.8 2.6 3.1V21"/></svg></span>Comedor</h3>
+          <p class="card-body">Organiza quién come, cuándo y qué, sin papeleo.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="moduloas.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/>
-        </svg>
-        <h3>Autoservicio</h3>
-        <p>Tu personal consulta su rol de pagos y sus vacaciones desde el navegador o el celular, sin pasar por RRHH.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="moduloev.html" style="--mc:#D6336C" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="M8.5 16v-3M12 16v-6M15.5 16v-4.5"/></svg></span>Evaluaciones<span class="mod-tag">Nuevo</span></h3>
+          <p class="card-body">Mide el desempeño de tu gente y sigue su evolución.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="modulocv.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="4" y="5" width="16" height="15" rx="2"/><path d="M9 5V3.6h6V5"/><circle cx="12" cy="11.5" r="2.2"/><path d="M8.6 17.4c0-1.7 1.5-2.8 3.4-2.8s3.4 1.1 3.4 2.8"/>
-        </svg>
-        <h3>Visitas</h3>
-        <p>Registra quién visita tus instalaciones y de qué empresa viene, con reportes sencillos de permanencia.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="moduloas.html" style="--mc:#1C7ED6" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 5.6h2.8"/><path d="M9.6 13.2 11.4 15l3.4-3.8"/></svg></span>Autoservicio</h3>
+          <p class="card-body">Tu personal consulta su rol y vacaciones desde el celular.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
-      <a class="mod-card" href="moduloev.html" data-reveal>
-        <svg class="mod-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5V2.5h6v1"/><path d="M8.5 16v-3M12 16v-6M15.5 16v-4.5"/>
-        </svg>
-        <span class="mod-tag">Nuevo</span>
-        <h3>Evaluaciones</h3>
-        <p>Evalúa el desempeño y las competencias de tu personal con plantillas propias, y sigue su evolución ciclo a ciclo.</p>
-        <span class="mod-go">→</span>
+      <a class="card-link" href="modulots.html" style="--mc:#6741D9" data-reveal>
+        <div class="card elev-sm">
+          <h3 class="card-title"><span class="mod-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M12 17.2s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/></svg></span>Trabajo Social<span class="mod-tag">Nuevo</span></h3>
+          <p class="card-body">Fichas socioeconómicas y seguimiento de casos de tu gente.</p>
+          <span class="module-arrow">→</span>
+        </div>
       </a>
     </div>
 

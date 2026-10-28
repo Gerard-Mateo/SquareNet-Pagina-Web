@@ -82,6 +82,8 @@
   .show-num::after{content:"";height:1px;width:42px;background:var(--color-accent)}
   .show-copy h2{font-size:34px;margin:var(--space-3) 0 var(--space-4)}
   .show-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-3)}
+  .hero-tag{font-family:var(--font-heading);font-weight:700;font-size:clamp(20px,2vw,26px);line-height:1.3;letter-spacing:-.01em;color:var(--color-accent-700);margin:0 0 var(--space-3)}
+  .show-lead{font-size:17px;line-height:1.55;margin:0 0 var(--space-4);color:var(--color-neutral-800)}
   .show-list li{display:flex;gap:12px;align-items:flex-start;font-size:17px;line-height:1.5}
   .show-list svg{flex:0 0 22px;width:22px;height:22px;margin-top:2px}
   .show-list svg circle{fill:var(--color-accent-100)}
@@ -112,52 +114,194 @@
 
   .show-media:not(.is-live) *,.show-media:not(.is-live) *::after{animation-play-state:paused!important}
 
-  /* ventana 1 · filtro tipo Excel */
-  .mf-body{position:relative;padding:1em 1em 3.4em;min-height:29em}
-  .mf-head,.mf-row{display:grid;grid-template-columns:40% 34% 26%;align-items:center}
-  .mf-head{height:2.2em;font-size:.82em;letter-spacing:.07em;text-transform:uppercase;color:var(--color-neutral-600);border-bottom:1px solid var(--color-divider)}
-  .mf-head .is-f{display:flex;align-items:center;gap:.5em}
-  .mf-funnel{width:1.1em;height:1.1em;fill:currentColor}
-  .mf-row{height:2.2em;border-bottom:1px solid color-mix(in srgb,var(--color-text) 7%,transparent);overflow:hidden}
-  .mf-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:.6em}
-  .mf-row span:first-child{font-weight:600}
-  .mf-pop{position:absolute;left:18.2em;top:3.3em;width:17.5em;z-index:2;padding:.5em;background:#fff;border:1px solid color-mix(in srgb,var(--color-text) 16%,transparent);border-radius:.3em;
-    box-shadow:0 1em 2.2em color-mix(in srgb,#0a303e 26%,transparent)}
-  .mf-m{display:flex;align-items:center;gap:.7em;height:1.7em;padding:0 .5em;font-size:.95em;color:var(--color-neutral-800)}
-  .mf-m svg{width:1.1em;height:1.1em;fill:none;stroke:var(--color-neutral-600);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-  .mf-sep{height:1px;background:var(--color-divider);margin:.3em 0}
-  .mf-search{height:1.9em;margin:.4em 0;padding:0 .6em;display:flex;align-items:center;border:1px solid var(--color-neutral-300);border-radius:.2em;color:var(--color-neutral-500);font-size:.95em}
-  .mf-it{display:flex;align-items:center;gap:.7em;height:1.7em;padding:0 .5em;font-size:.95em;border-radius:.2em}
-  .mf-foot{display:flex;justify-content:flex-end;gap:.5em;margin-top:.5em;padding-top:.5em;border-top:1px solid var(--color-divider)}
-  .mf-btn{padding:.35em 1em;border-radius:.2em;font-size:.92em;border:1px solid var(--color-neutral-300);color:var(--color-neutral-700)}
-  .mf-btn.pri{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
-  .mf-status{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;height:2.4em;padding:0 1.2em;background:var(--color-neutral-100);border-top:1px solid var(--color-divider);font-size:.88em;color:var(--color-neutral-700)}
-  .mf-status span{position:absolute}
-  .mf-status .st2{opacity:0;color:var(--color-accent-800);font-weight:600}
+  /* ventana 1 · tabla de datos (grid): todo va dentro de .mf2; el JS del final mueve el cursor */
+  @property --c1{syntax:'<percentage>';inherits:true;initial-value:26%}
+  @property --c2{syntax:'<percentage>';inherits:true;initial-value:11%}
+  @property --c3{syntax:'<percentage>';inherits:true;initial-value:19%}
+  @property --c4{syntax:'<percentage>';inherits:true;initial-value:15%}
+  @property --c5{syntax:'<percentage>';inherits:true;initial-value:14.5%}
+  @property --c6{syntax:'<percentage>';inherits:true;initial-value:14.5%}
 
-  .is-in .mf-pop{animation:mfPop 10s ease infinite}
-  .is-in .cbx.a{animation:cbBoxA 10s ease infinite}.is-in .cbx.a::after{animation:cbMarkA 10s ease infinite}
-  .is-in .cbx.b{animation:cbBoxB 10s ease infinite}.is-in .cbx.b::after{animation:cbMarkB 10s ease infinite}
-  .is-in .cbx.all::after{animation:cbAll 10s ease infinite}
-  .is-in .mf-it.fa{animation:flashA 10s ease infinite}.is-in .mf-it.fb{animation:flashB 10s ease infinite}
-  .is-in .mf-row.rf,.is-in .mf-row.rg{animation:rowGone 10s ease infinite}
-  .is-in .mf-btn.pri{animation:btnPress 10s ease infinite}
-  .is-in .mf-head .is-f{animation:fActive 10s ease infinite}
-  .is-in .mf-status .st1{animation:st1 10s ease infinite}.is-in .mf-status .st2{animation:st2 10s ease infinite}
-  .is-in .cur.k1{animation:curF 10s cubic-bezier(.45,0,.2,1) infinite}
-  @keyframes mfPop{0%,3%{opacity:0;transform:translateY(.6em)}8%,41%{opacity:1;transform:none}46%,100%{opacity:0;transform:translateY(.4em)}}
-  @keyframes cbBoxA{0%,16.5%{background:var(--color-accent);border-color:var(--color-accent)}17.5%,93%{background:#fff;border-color:var(--color-neutral-400)}95%,100%{background:var(--color-accent);border-color:var(--color-accent)}}
-  @keyframes cbMarkA{0%,16.5%{opacity:1}17.5%,93%{opacity:0}95%,100%{opacity:1}}
-  @keyframes cbBoxB{0%,26.5%{background:var(--color-accent);border-color:var(--color-accent)}27.5%,93%{background:#fff;border-color:var(--color-neutral-400)}95%,100%{background:var(--color-accent);border-color:var(--color-accent)}}
-  @keyframes cbMarkB{0%,26.5%{opacity:1}27.5%,93%{opacity:0}95%,100%{opacity:1}}
-  @keyframes cbAll{0%,17%{transform:rotate(45deg);width:.3em;height:.6em;left:.3em;top:.08em;border-width:0 .15em .15em 0}20%,93%{transform:rotate(0);width:.62em;height:0;left:.23em;top:.45em;border-width:0 0 .16em 0}96%,100%{transform:rotate(45deg);width:.3em;height:.6em;left:.3em;top:.08em;border-width:0 .15em .15em 0}}
-  @keyframes flashA{0%,16.5%{background:transparent}17.5%{background:var(--color-accent-100)}24%,100%{background:transparent}}
-  @keyframes flashB{0%,26.5%{background:transparent}27.5%{background:var(--color-accent-100)}34%,100%{background:transparent}}
-  @keyframes rowGone{0%,43%{opacity:1;height:2.2em}49%,93%{opacity:0;height:0;border-bottom-width:0}97%,100%{opacity:1;height:2.2em}}
-  @keyframes btnPress{0%,38.5%{transform:scale(1);filter:none}39.5%{transform:scale(.9);filter:brightness(.88)}42%,100%{transform:scale(1);filter:none}}
-  @keyframes fActive{0%,44%{color:var(--color-neutral-600)}48%,93%{color:var(--color-accent-700)}97%,100%{color:var(--color-neutral-600)}}
-  @keyframes st1{0%,44%{opacity:1}48%,93%{opacity:0}97%,100%{opacity:1}}
-  @keyframes st2{0%,44%{opacity:0}50%,93%{opacity:1}97%,100%{opacity:0}}
+  .mf2{
+    --ink:#1d1b1a; --ink2:#5f5a55; --ink3:#9a948d;
+    --paper:#ffffff; --chrome:#f4f1ec; --line:#e7e2db; --line2:#d6d0c7;
+    --sel:#e8f1fb; --accent:#2f6fd6; --accent-soft:#dbe8fb;
+    --band:#e3eef0; --h-sue:#e4f3dd; --h-pat:#dcebf8; --h-per:#f7dfdd;
+    --grp:#f6f3ee; --tot:#efebe4; --warn:#d2463a;
+    --rh:26px;
+    position:relative; max-width:760px; margin:0 auto; padding:0 0 46px;
+    font:12.5px/1.25 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink);
+  }
+  .mf2 *{box-sizing:border-box}
+  .mf2 .gw{position:relative;background:var(--paper);border:1px solid var(--line2);border-radius:12px;
+    box-shadow:0 1px 0 rgba(0,0,0,.03),0 18px 40px -18px rgba(40,30,20,.28);overflow:hidden}
+  .mf2 .gw-bar{display:flex;align-items:center;gap:6px;height:34px;padding:0 12px;background:var(--chrome);border-bottom:1px solid var(--line)}
+  .mf2 .gw-bar i{width:10px;height:10px;border-radius:50%;background:#e0d9cf}
+  .mf2 .gw-bar i:nth-child(1){background:#ef8a7d}.mf2 .gw-bar i:nth-child(2){background:#f1c46b}.mf2 .gw-bar i:nth-child(3){background:#8fcf8a}
+  .mf2 .gw-title{margin-left:10px;font-weight:600;color:var(--ink2);font-size:12px}
+  .mf2 .gw-tools{margin-left:auto;display:flex;gap:6px}
+  .mf2 .gw-tools span{font-size:11px;color:var(--ink2);border:1px solid var(--line2);background:var(--paper);border-radius:6px;padding:3px 8px}
+
+  .mf2 .mf-body{position:relative;transition:opacity .5s}
+  .mf2 .mf-body.is-fade{opacity:0}
+  .mf2.is-reset *{transition:none!important}
+
+  /* group-by panel */
+  .mf2 .mf-group{position:relative;height:38px;display:flex;align-items:center;gap:8px;padding:0 10px;border-bottom:1px solid var(--line);background:var(--chrome);transition:background .25s}
+  .mf2 .mf-group.is-over{background:var(--accent-soft)}
+  .mf2 .mf-group.is-over::after{content:"";position:absolute;inset:5px;border:1.5px dashed var(--accent);border-radius:7px;pointer-events:none}
+  .mf2 .mf-gph{color:var(--ink3);font-style:italic;transition:opacity .25s}
+  .mf2 .mf-gchip{display:inline-flex;align-items:center;gap:6px;padding:4px 8px 4px 10px;border:1px solid var(--line2);background:var(--paper);border-radius:6px;font-weight:600;
+    box-shadow:0 1px 2px rgba(0,0,0,.06);transform:scale(.6);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;position:absolute;left:10px}
+  .mf2 .mf-gchip svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.6}
+  .mf2 .mf-gchip .x{color:var(--ink3)}
+  .mf2.is-grouped .mf-gchip{transform:none;opacity:1}
+  .mf2.is-grouped .mf-gph{opacity:0}
+
+  /* grid */
+  .mf2 .mf-t{position:relative;--c1:26%;--c2:11%;--c3:19%;--c4:15%;--c5:14.5%;--c6:14.5%;
+    transition:--c1 .6s,--c2 .6s,--c3 .6s,--c4 .6s,--c5 .6s,--c6 .6s}
+  .mf2.is-grouped .mf-t{--c1:32%;--c2:13%;--c3:0%;--c4:19%;--c5:18%;--c6:18%}
+  .mf2.is-grouped.no-pat .mf-t{--c1:36%;--c2:16%;--c3:0%;--c4:24%;--c5:0%;--c6:24%}
+  .mf2 .mf-r{display:grid;grid-template-columns:var(--c1) var(--c2) var(--c3) var(--c4) var(--c5) var(--c6)}
+  .mf2 .mf-r>span{overflow:hidden;white-space:nowrap;text-overflow:clip;padding:0 8px;min-width:0}
+  .mf2 .n{text-align:right;font-variant-numeric:tabular-nums}
+  .mf2 .mf-r>span{transition:padding .6s,opacity .35s}
+  .mf2.is-grouped .mf-r:not(.mf-band)>span:nth-child(3),.mf2.pat-sq .mf-r:not(.mf-band)>span:nth-child(5),.mf2.no-pat .mf-r:not(.mf-band)>span:nth-child(5){padding-left:0;padding-right:0;opacity:0}
+
+  .mf2 .mf-band{height:22px;align-items:center;font-weight:600;font-size:11.5px;color:var(--ink2)}
+  .mf2 .mf-band .b{background:var(--band);height:100%;display:flex;align-items:center;grid-column:2 / span 2;transition:opacity .3s}
+  .mf2 .mf-band .b2{background:#eef0f6;height:100%;display:flex;align-items:center;justify-content:center;grid-column:5 / span 2}
+  .mf2 .mf-head{height:44px;border-bottom:1px solid var(--line2);font-weight:600;font-size:11.5px}
+  .mf2 .mf-head>span{position:relative;display:flex;align-items:flex-start;padding-top:6px;border-right:1px solid var(--line);transition:background .2s,opacity .2s}
+  .mf2 .mf-head>span.n{justify-content:flex-end;text-align:right}
+  .mf2 .mf-head .lbl{white-space:normal;line-height:1.15;padding-right:2px}
+  .mf2 .mf-head .h-sue{background:var(--h-sue)}.mf2 .mf-head .h-pat{background:var(--h-pat)}.mf2 .mf-head .h-per{background:var(--h-per)}
+  .mf2 .mf-head>span.is-lift{opacity:.35}
+  .mf2 .mf-fb{position:absolute;right:4px;bottom:4px;width:16px;height:14px;border-radius:3px;display:grid;place-items:center;color:var(--ink3);transition:background .2s,color .2s}
+  .mf2 .mf-fb svg{width:10px;height:10px;fill:currentColor}
+  .mf2 .mf-fb.is-on{background:var(--accent);color:#fff}
+  .mf2 .mf-fb.is-press{background:var(--line2)}
+  .mf2 .mf-sort{position:absolute;right:22px;bottom:3px;font-size:9px;font-style:normal;color:var(--accent);opacity:0;transform:scale(.5);transition:opacity .2s,transform .25s cubic-bezier(.3,1.6,.5,1)}
+  .mf2 .mf-head>span.is-sorted .mf-sort{opacity:1;transform:none}
+  .mf2 .mf-head>span.is-dbl{background-image:linear-gradient(rgba(47,111,214,.12),rgba(47,111,214,.12))}
+  .mf2 .mf-flat .mf-row.is-moving{transition:transform .55s cubic-bezier(.4,0,.2,1),height .45s,opacity .3s,background .3s}
+
+  .mf2 .mf-view{position:relative;height:calc(var(--rh) * 11);overflow:hidden}
+  .mf2 .mf-flat,.mf2 .mf-grp{position:absolute;inset:0 0 auto 0;transition:opacity .45s}
+  .mf2 .mf-grp{opacity:0;transition:opacity .45s,transform 2.6s cubic-bezier(.45,0,.3,1)}
+  .mf2.is-grouped .mf-flat{opacity:0}
+  .mf2.is-grouped .mf-grp{opacity:1}
+  .mf2 .mf-row{height:var(--rh);align-items:center;border-bottom:1px solid var(--line);overflow:hidden;
+    transition:height .45s cubic-bezier(.4,0,.2,1),opacity .3s,background .3s}
+  .mf2 .mf-row:nth-child(even){background:#fcfbf9}
+  .mf2 .mf-row.is-out{height:0;opacity:0;border-bottom-width:0}
+  .mf2 .mf-row.is-hit{background:var(--sel)}
+  .mf2 .mf-row .dep{display:flex;align-items:center;gap:6px}
+  .mf2 .dot{width:7px;height:7px;border-radius:2px;flex:none}
+  .mf2 .mf-gh{height:var(--rh);display:flex;align-items:center;gap:6px;padding:0 8px;background:var(--grp);border-bottom:1px solid var(--line);font-weight:600}
+  .mf2 .mf-gh svg{width:9px;height:9px;fill:var(--ink2)}
+  .mf2 .mf-gh em{font-style:normal;color:var(--ink3);font-weight:500}
+  .mf2 .mf-tot{height:var(--rh);align-items:center;background:var(--tot);border-bottom:1px solid var(--line2);font-weight:700}
+  .mf2 .mf-row .ind,.mf2 .mf-tot .ind{padding-left:22px}
+  .mf2 .mf-foot{height:28px;align-items:center;border-top:1px solid var(--line2);background:var(--chrome);font-weight:700}
+  .mf2 .mf-foot .lbl{color:var(--ink2);font-weight:600}
+  .mf2 .num-flash{animation:mfFlash .6s}
+  @keyframes mfFlash{0%{color:var(--accent)}100%{color:inherit}}
+
+  /* status bar */
+  .mf2 .mf-status{display:flex;align-items:center;gap:10px;height:30px;padding:0 10px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink2);background:var(--paper)}
+  .mf2 .mf-status .st{transition:opacity .25s}
+  .mf2 .mf-status .pill{display:inline-flex;align-items:center;gap:5px;background:var(--accent-soft);color:var(--accent);border-radius:20px;padding:2px 8px 2px 7px;font-weight:600;opacity:0;transform:translateY(3px);transition:opacity .25s,transform .25s}
+  .mf2 .mf-status .pill.is-on{opacity:1;transform:none}
+  .mf2 .mf-status .pill svg{width:10px;height:10px;fill:currentColor}
+
+  /* filter popup */
+  .mf2 .mf-pop{position:absolute;z-index:5;width:226px;background:var(--paper);border:1px solid var(--line2);border-radius:8px;
+    box-shadow:0 14px 34px -10px rgba(30,20,10,.35);padding:5px 0 0;font-size:12px;
+    opacity:0;transform:translateY(-6px) scale(.98);transform-origin:top left;pointer-events:none;transition:opacity .18s,transform .18s}
+  .mf2 .mf-pop.is-open{opacity:1;transform:none}
+  .mf2 .mf-m{display:flex;align-items:center;gap:8px;height:23px;padding:0 10px;border-radius:5px;margin:0 4px}
+  .mf2 .mf-m svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;color:var(--ink2)}
+  .mf2 .mf-m.is-dis{color:var(--ink3)}.mf2 .mf-m.is-dis svg{color:var(--line2)}
+  .mf2 .mf-m.clear:not(.is-dis) svg{color:var(--warn)}
+  .mf2 .is-hover{background:var(--sel)}
+  .mf2 .mf-sep{height:1px;background:var(--line);margin:5px 0}
+  .mf2 .mf-search{display:flex;align-items:center;gap:6px;height:26px;margin:2px 8px 4px;padding:0 8px;border:1px solid var(--line2);border-radius:5px;color:var(--ink3)}
+  .mf2 .mf-search.is-focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);color:var(--ink)}
+  .mf2 .mf-search svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.6;flex:none}
+  .mf2 .mf-search .q{white-space:pre}
+  .mf2 .mf-search .caret{width:1px;height:13px;background:var(--ink);opacity:0;margin-left:-4px}
+  .mf2 .mf-search.is-focus .caret{animation:mfBlink 1s steps(1) infinite}
+  @keyframes mfBlink{0%{opacity:1}50%{opacity:0}}
+  .mf2 .mf-list{height:124px;overflow:hidden;margin:0 4px}
+  .mf2 .mf-it{display:flex;align-items:center;gap:7px;height:23px;padding:0 8px;border-radius:5px;overflow:hidden;white-space:nowrap;transition:height .3s,opacity .25s,background .15s}
+  .mf2 .mf-it.is-out{height:0;opacity:0}
+  .mf2 .mf-it mark{background:#fde9a6;color:inherit;border-radius:2px}
+  .mf2 .mf-it .ct{margin-left:auto;color:var(--ink3);font-variant-numeric:tabular-nums}
+  .mf2 .gcb{width:13px;height:13px;border-radius:3px;border:1.4px solid var(--ink3);flex:none;position:relative;transition:background .15s,border-color .15s}
+  .mf2 .gcb.on{background:var(--accent);border-color:var(--accent)}
+  .mf2 .gcb.on::after{content:"";position:absolute;left:3.5px;top:1px;width:3px;height:6px;border:solid #fff;border-width:0 1.6px 1.6px 0;transform:rotate(45deg)}
+  .mf2 .gcb.mid{border-color:var(--accent)}
+  .mf2 .gcb.mid::after{content:"";position:absolute;inset:3px;background:var(--accent);border-radius:1px}
+  .mf2 .mf-pf{display:flex;justify-content:flex-end;gap:6px;padding:8px;border-top:1px solid var(--line);margin-top:4px}
+  .mf2 .mf-btn{padding:4px 11px;border:1px solid var(--line2);border-radius:5px;transition:transform .1s,filter .15s}
+  .mf2 .mf-btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .mf2 .mf-btn.is-press{transform:scale(.94);filter:brightness(.92)}
+
+  /* cursor + drag ghost */
+  .mf2 .mf-cur{position:absolute;left:0;top:0;z-index:9;pointer-events:none;will-change:transform;
+    transform:translate(var(--x,600px),var(--y,300px));transition:transform var(--d,.8s) cubic-bezier(.5,0,.25,1)}
+  .mf2 .mf-cur svg.ptr{width:14px;height:20px;display:block;transition:transform .12s;transform-origin:2px 2px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
+  .mf2 .mf-cur.is-down svg.ptr{transform:scale(.85)}
+  .mf2 .mf-cur .ring{position:absolute;left:-9px;top:-9px;width:20px;height:20px;border-radius:50%;border:2px solid var(--accent);opacity:0}
+  .mf2 .mf-cur.is-click .ring{animation:mfRing .45s ease-out}
+  @keyframes mfRing{0%{opacity:.8;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+  .mf2 .mf-ghost{position:absolute;left:10px;top:12px;display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--accent);background:rgba(255,255,255,.96);
+    border-radius:6px;font-weight:600;white-space:nowrap;box-shadow:0 8px 18px -6px rgba(30,60,120,.35);opacity:0;transform:scale(.85) rotate(-2deg);transition:opacity .15s,transform .2s,border-color .2s,color .2s}
+  .mf2 .mf-ghost.is-on{opacity:1;transform:rotate(-2deg)}
+
+  /* column resize guide */
+  .mf2 .mf-rz{position:absolute;top:22px;bottom:0;width:2px;margin-left:-1px;background:var(--accent);opacity:0;z-index:4;pointer-events:none;transition:opacity .15s,background .2s}
+  .mf2 .mf-rz.is-on{opacity:1}
+  .mf2 .mf-rz.is-zero{background:var(--warn)}
+  .mf2 .mf-cur svg.rsz{display:none;position:absolute;left:-10px;top:-8px;width:20px;height:16px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+  .mf2 .mf-cur.is-rsz svg.ptr{opacity:0}
+  .mf2 .mf-cur.is-rsz svg.rsz{display:block}
+
+  /* export + download */
+  .mf2 .mf-dlb{position:relative;width:26px;height:24px;border-radius:50%;display:grid;place-items:center;color:var(--ink2);transition:background .25s,color .25s}
+  .mf2 .mf-dlb svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .mf2 .mf-dlb.is-act{background:var(--accent-soft);color:var(--accent);animation:mfBump .45s}
+  @keyframes mfBump{40%{transform:scale(1.2)}}
+  .mf2 .mf-fly{position:absolute;left:0;top:0;z-index:10;width:54px;height:54px;border-radius:50%;background:#4a4d52;color:#fff;display:grid;place-items:center;
+    box-shadow:0 8px 20px -6px rgba(0,0,0,.45);opacity:0;pointer-events:none}
+  .mf2 .mf-fly svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .mf2 .mf-tray{position:absolute;top:40px;right:8px;z-index:8;width:308px;display:flex;gap:12px;padding:13px 16px 13px 13px;background:#202124;color:#e8eaed;border-radius:10px;
+    box-shadow:0 16px 34px -10px rgba(0,0,0,.55);opacity:0;transform:translateY(-6px);transition:opacity .2s,transform .25s;pointer-events:none}
+  .mf2 .mf-tray.is-open{opacity:1;transform:none}
+  .mf2 .mf-tray .ic{width:26px;height:30px;flex:none}
+  .mf2 .mf-tray .nm{font-weight:600;font-size:12.5px;line-height:1.35}
+  .mf2 .mf-tray .mt{margin-top:4px;font-size:11.5px;color:#bdc1c6;display:flex;align-items:center;gap:8px}
+  .mf2 .mf-tray .bar{width:110px;height:4px;border-radius:2px;background:#3c4043;overflow:hidden}
+  .mf2 .mf-tray .bar i{display:block;height:100%;width:0;background:#8ab4f8;transition:width .9s cubic-bezier(.4,0,.2,1)}
+
+  /* context menu */
+  .mf2 .mf-ctx,.mf2 .mf-sub{position:absolute;z-index:7;min-width:170px;background:var(--paper);border:1px solid var(--line2);border-radius:8px;padding:4px 0;
+    box-shadow:0 14px 34px -10px rgba(30,20,10,.35);opacity:0;transform:scale(.97);transform-origin:top left;transition:opacity .15s,transform .15s;pointer-events:none}
+  .mf2 .mf-ctx.is-open,.mf2 .mf-sub.is-open{opacity:1;transform:none}
+  .mf2 .mf-ctx .mf-m .ar{margin-left:auto;color:var(--ink2)}
+  .mf2 .mf-m .xli{width:13px;height:13px}
+
+  /* captions under the window */
+  .mf2 .mf-steps{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;align-items:center;gap:14px;color:var(--ink2);font-size:12px}
+  .mf2 .mf-steps ol{display:flex;gap:5px;list-style:none;margin:0;padding:0}
+  .mf2 .mf-steps li{width:18px;height:4px;border-radius:2px;background:var(--line2);transition:background .3s,width .3s}
+  .mf2 .mf-steps li.is-on{background:var(--ink);width:28px}
+  .mf2 .mf-cap{min-width:220px;font-weight:600;transition:opacity .25s}
+
+  .mf2.is-fit{width:var(--fw);max-width:none;transform-origin:0 0;transform:scale(var(--fs))}
 
   /* ventana 2 · depurador de fórmulas: el estado base es el final (rastro completo); los keyframes lo esconden antes */
   .dg-top{display:flex;align-items:center;gap:.8em;padding:.75em 1em;border-bottom:1px solid var(--color-divider);font-size:.95em}
@@ -463,6 +607,7 @@
     <div class="hero-copy">
       <div class="kicker">Plataforma SquareNet</div>
       <h1>Plataforma SquareNet©</h1>
+      <p class="hero-tag">Tan fácil como Excel. Configurable con fórmulas. Hecho a la medida de su empresa.</p>
       <p>Nuestra plataforma de trabajo rompe los esquemas convencionales: una interfaz totalmente intuitiva, sencilla y de fácil aprendizaje, con navegación fluida entre los datos, filtros tipo Excel, agrupamiento dinámico, exportación directa a Excel y registro de auditoría en todo ámbito.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="contacto.html">Hablar con un asesor</a>
@@ -474,45 +619,74 @@
   <div class="wrap">
     <article class="show-row">
       <div class="show-copy" data-reveal>
-        <div class="show-num">01 · Filtros</div>
-        <h2>Filtros intuitivos, fáciles para el usuario</h2>
+        <div class="show-num">01 · Tabla de datos (Grid)</div>
+        <h2>Trabaja tus datos como en Excel</h2>
+        <p class="show-lead">Si sabes usar Excel, ya sabes usar SquareNet: busca, filtra, ordena y agrupa tu información en segundos, en cualquier pantalla.</p>
         <ul class="show-list">
-          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span>Busca, ordena, clasifica, mueve y esconde: herramientas integradas en todo el sistema.</span></li>
-          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Filtros tipo Excel</strong> para escoger múltiples valores.</span></li>
-          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span>Diseño amigable para una mejor experiencia de usuario.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Filtros tipo Excel:</strong> escoge uno o varios valores por columna.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Búsqueda rápida:</strong> escribe y encuentra el registro al instante.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Orden con un clic:</strong> ascendente o descendente en cualquier columna.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Agrupa por columnas:</strong> arrastra una columna y organiza tu data por área, cargo o lo que necesites.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Acomoda la tabla a tu gusto:</strong> mueve las columnas al orden que prefieras.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5l3 3 6-6.5"/></svg><span><strong>Exporta a Excel:</strong> descarga justo la tabla que estás viendo, con tus filtros aplicados.</span></li>
         </ul>
       </div>
       <div class="show-media" data-reveal>
-        <div class="win" role="img" aria-label="Ilustración de una tabla de empleados con un filtro tipo Excel: se desmarcan dos departamentos y la tabla muestra solo el resto">
-          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Empleados · Nómina</span></div>
-          <div class="mf-body">
-            <div class="mf-head"><span>Empleado</span><span class="is-f">Departamento<svg class="mf-funnel" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h13L9.6 8.4v5l-3.2-1.7V8.4Z"/></svg></span><span>Ingreso</span></div>
-            <div class="mf-row"><span>Andrea Salazar</span><span>Administración</span><span>03/2019</span></div>
-            <div class="mf-row rf"><span>Luis Mena</span><span>Finanzas</span><span>11/2020</span></div>
-            <div class="mf-row"><span>Carla Vega</span><span>Operaciones</span><span>06/2018</span></div>
-            <div class="mf-row rg"><span>Diego Paredes</span><span>Ventas</span><span>02/2022</span></div>
-            <div class="mf-row"><span>Mónica Ruiz</span><span>Administración</span><span>09/2021</span></div>
-            <div class="mf-row rf"><span>Pablo Andrade</span><span>Finanzas</span><span>01/2017</span></div>
-            <div class="mf-row"><span>Sofía Núñez</span><span>Operaciones</span><span>08/2023</span></div>
-            <div class="mf-row rg"><span>Esteban Cruz</span><span>Ventas</span><span>05/2019</span></div>
-            <div class="mf-row"><span>Valeria Ortiz</span><span>Administración</span><span>10/2020</span></div>
-            <div class="mf-row"><span>Jorge Lara</span><span>Operaciones</span><span>04/2016</span></div>
-            <div class="mf-pop">
-              <div class="mf-m"><svg viewBox="0 0 16 16"><path d="M8 2.5v11M4.2 10 8 13.8 11.8 10"/></svg>Ordenar de A a Z</div>
-              <div class="mf-m"><svg viewBox="0 0 16 16"><path d="M8 13.5v-11M4.2 6 8 2.2 11.8 6"/></svg>Ordenar de Z a A</div>
-              <div class="mf-m"><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="4.2" rx="1"/><rect x="2" y="9.3" width="12" height="4.2" rx="1"/></svg>Agrupar por Departamento</div>
-              <div class="mf-sep"></div>
-              <div class="mf-search">Buscar…</div>
-              <div class="mf-it"><span class="cbx all"></span>(Seleccionar todo)</div>
-              <div class="mf-it"><span class="cbx"></span>Administración</div>
-              <div class="mf-it fa"><span class="cbx a"></span>Finanzas</div>
-              <div class="mf-it"><span class="cbx"></span>Operaciones</div>
-              <div class="mf-it fb"><span class="cbx b"></span>Ventas</div>
-              <div class="mf-foot"><span class="mf-btn">Cancelar</span><span class="mf-btn pri">Aceptar</span></div>
+        <div class="mf2" id="mf2" role="img" aria-label="Animación de una tabla de nómina: se ordena con doble clic, se busca dentro de un filtro, se desmarcan departamentos, se agrupa arrastrando la columna Departamento con subtotales por grupo, se oculta una columna reduciendo su ancho y se exporta la tabla a Excel">
+          <div class="gw">
+            <div class="gw-bar"><i></i><i></i><i></i><span class="gw-title">Empleados · Nómina · Oct 2026</span>
+              <div class="gw-tools"><span>Columnas</span><span class="mf-dlb" data-el="dlb"><svg viewBox="0 0 16 16"><path d="M8 2v8M4.8 7 8 10.2 11.2 7M3 13.5h10"/></svg></span></div></div>
+            <div class="mf-body">
+              <div class="mf-group" data-el="group">
+                <span class="mf-gph">Arrastre columnas aquí para agrupar</span>
+                <span class="mf-gchip">Departamento <svg viewBox="0 0 12 12"><path d="M6 10V2M3 5l3-3 3 3"/></svg><span class="x">✕</span></span>
+              </div>
+              <div class="mf-t">
+                <div class="mf-r mf-band"><span></span><span class="b">Centro de costo</span><span></span><span class="b2">Aportes IESS</span></div>
+                <div class="mf-r mf-head" data-el="head"></div>
+                <div class="mf-view">
+                  <div class="mf-flat" data-el="flat"></div>
+                  <div class="mf-grp" data-el="grp"></div>
+                </div>
+                <div class="mf-r mf-foot" data-el="foot"></div>
+                <span class="mf-rz" data-el="rz"></span>
+              </div>
+              <div class="mf-status">
+                <span class="st" data-el="st">12 registros</span>
+                <span class="pill" data-el="pill"><svg viewBox="0 0 16 16"><path d="M1.5 2.5h13L9.6 8.4v5l-3.2-1.7V8.4Z"/></svg><b data-el="pilltx"></b></span>
+              </div>
+              <div class="mf-pop" data-el="pop"></div>
+              <div class="mf-ctx" data-el="ctx">
+                <div class="mf-m is-dis"><svg viewBox="0 0 16 16"><path d="M4 1.5h6l3 3v10H4z"/><path d="M8.5 7v5M6 9.5h5"/></svg>Insertar</div>
+                <div class="mf-m is-dis"><svg viewBox="0 0 16 16"><path d="M4 1.5h6l3 3v10H4z"/><path d="M6.5 8l4 4M10.5 8l-4 4"/></svg>Eliminar</div>
+                <div class="mf-sep"></div>
+                <div class="mf-m"><svg viewBox="0 0 16 16"><path d="M1.5 2.5h11L8.3 7.4v4.5l-2.6-1.4V7.4Z"/><path d="M11 10.5l3.5 3.5M14.5 10.5 11 14" style="stroke:#d2463a"/></svg>Desactivar Filtros</div>
+                <div class="mf-sep"></div>
+                <div class="mf-m"><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="4.2" rx="1"/><rect x="2" y="9.3" width="12" height="4.2" rx="1"/></svg>Desactivar Grupos</div>
+                <div class="mf-sep"></div>
+                <div class="mf-m" data-c="otros"><span style="width:12px"></span>Otros<span class="ar">▸</span></div>
+              </div>
+              <div class="mf-sub" data-el="sub">
+                <div class="mf-m"><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="1"/><path d="M6 2.5v11M10 2.5v11"/></svg>Seleccionar Columnas</div>
+                <div class="mf-m"><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="1"/><path d="M2 6h12M6 6v7.5M10 6v7.5"/></svg>Mostrar Todas las columnas</div>
+                <div class="mf-m"><svg viewBox="0 0 16 16"><rect x="3.5" y="2.5" width="9" height="11.5" rx="1"/><path d="M6 2.5V1.5h4v1M6 7h4M6 10h4"/></svg>Copiar Al Portapapeles</div>
+                <div class="mf-m" data-c="xls"><svg class="xli" viewBox="0 0 16 16" style="stroke:none"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5" fill="#1e7a46"/><path d="M5 5l6 6M11 5l-6 6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>Guardar Como Excel</div>
+              </div>
             </div>
-            <div class="mf-status"><span class="st1">24 registros</span><span class="st2">Filtro activo · 12 de 24 registros</span></div>
+            <div class="mf-fly" data-el="fly"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7 10l5 5 5-5M5 20h14"/></svg></div>
+            <div class="mf-tray" data-el="tray">
+              <svg class="ic" viewBox="0 0 26 30" aria-hidden="true"><path d="M3 1.5h14l7 7v19a1.5 1.5 0 0 1-1.5 1.5h-19A1.5 1.5 0 0 1 2 27.5v-25A1 1 0 0 1 3 1.5Z" fill="#fff"/><path d="M17 1.5v7h7" fill="#d7e8dd"/><rect x="0" y="11" width="15" height="14" rx="2" fill="#1e7a46"/><path d="M4.2 14.5l6.6 7M10.8 14.5l-6.6 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 14h5M16.5 17.5h5M16.5 21h5" stroke="#1e7a46" stroke-width="1.4"/></svg>
+              <div><div class="nm">Nómina por departamento · 2026-10 Octubre.xlsx</div>
+              <div class="mt"><span class="bar"><i data-el="bar"></i></span><span data-el="dlmeta">Descargando…</span></div></div>
+            </div>
+            <div class="mf-cur" data-el="cur">
+              <svg class="ptr" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              <svg class="rsz" viewBox="0 0 20 16" aria-hidden="true"><path d="M8.2 1.5v13M11.8 1.5v13M1.5 8h5M13.5 8h5M4 5.3 1.3 8 4 10.7M16 5.3 18.7 8 16 10.7" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 1.5v13M11.8 1.5v13M1.5 8h5M13.5 8h5M4 5.3 1.3 8 4 10.7M16 5.3 18.7 8 16 10.7" fill="none" stroke="#1d1b1a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="ring"></span>
+              <span class="mf-ghost" data-el="ghost"><span data-el="ghosttx">Departamento</span></span>
+            </div>
           </div>
-          <svg class="cur k1" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          <div class="mf-steps" aria-hidden="true"><ol data-el="dots"><li></li><li></li><li></li><li></li><li></li><li></li></ol><span class="mf-cap" data-el="cap"></span></div>
         </div>
         <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.8 7 8 10.2 11.2 7M3 13h10"/></svg>Exportación directa a Excel</span>
       </div>
@@ -756,6 +930,332 @@
         Array.prototype.forEach.call(entries, function (e) { e.target.classList.toggle('is-live', e.isIntersecting); });
       }, { rootMargin: '80px 0px' });
       Array.prototype.forEach.call(panels, function (p) { io.observe(p); });
+    })();
+
+    // 01 · Tabla de datos: el cursor ordena, busca, filtra, agrupa, oculta una columna y exporta a Excel.
+    // Datos inventados. Corre solo con el panel en pantalla y la pestaña visible.
+    (() => {
+      const root = document.getElementById('mf2');
+      if (!root) return;
+      const $ = k => root.querySelector(`[data-el="${k}"]`);
+      const win = root.querySelector('.gw');
+      const panel = root.closest('.show-media');
+
+      const DEPS = {
+        'Administración': '#7c6cd6', 'Finanzas': '#d08a2e', 'Logística': '#2f9c8f',
+        'Operaciones': '#3f7fd8', 'Ventas': '#d0506a'
+      };
+      const D = [
+        ['Valeria Ortiz Benítez','AD-104','Administración',1240],
+        ['Tomás Echeverría Paz','FI-210','Finanzas',1580],
+        ['Renata Aguilar Mora','OP-317','Operaciones',890],
+        ['Bruno Castañeda Lugo','VE-402','Ventas',960],
+        ['Inés Villacrés Soto','LO-511','Logística',820],
+        ['Martín Quiroga Ibarra','AD-108','Administración',1110],
+        ['Gabriela Rendón Haro','FI-214','Finanzas',1725],
+        ['Joaquín Peralta Ríos','OP-322','Operaciones',845],
+        ['Valentina Cordero Sáenz','LO-518','Logística',870],
+        ['Hugo Montalvo Reyes','VE-409','Ventas',1015],
+        ['Camila Estrada Neira','AD-112','Administración',1360],
+        ['Óscar Benavides Toral','OP-330','Operaciones',910]
+      ].map(([name,code,dep,sue]) => ({name,code,dep,sue,pat:+(sue*.1115).toFixed(2),per:+(sue*.0945).toFixed(2)}));
+
+      const fmt = n => n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+      const sum = (rows,k) => rows.reduce((a,r)=>a+r[k],0);
+      const funnel = '<svg viewBox="0 0 16 16"><path d="M1.5 2.5h13L9.6 8.4v5l-3.2-1.7V8.4Z"/></svg>';
+
+      const COLS = [['emp','Apellidos y nombres',''],['cod','Código',''],['dep','Departamento',''],
+                    ['sue','Sueldo devengado','n h-sue'],['pat','Aporte patronal','n h-pat'],['per','Aporte personal','n h-per']];
+      $('head').innerHTML = COLS.map(([k,t,c]) =>
+        `<span class="${c}" data-col="${k}"><span class="lbl">${t}</span><i class="mf-sort">▲</i><span class="mf-fb" data-fb="${k}">${funnel}</span></span>`).join('');
+      const cells = r => `<span>${r.name}</span><span>${r.code}</span><span class="dep"><i class="dot" style="background:${DEPS[r.dep]}"></i>${r.dep}</span>
+         <span class="n">${fmt(r.sue)}</span><span class="n">${fmt(r.pat)}</span><span class="n">${fmt(r.per)}</span>`;
+      $('flat').innerHTML = D.map((r,i)=>`<div class="mf-r mf-row" data-i="${i}">${cells(r)}</div>`).join('');
+      const rowsEl = [...$('flat').children];
+
+      const head = k => $('head').querySelector(`[data-col="${k}"]`);
+      const fb = k => $('head').querySelector(`[data-fb="${k}"]`);
+
+      let visible = D.map(()=>true);
+      function setFoot(flash){
+        const rows = D.filter((_,i)=>visible[i]);
+        $('foot').innerHTML = `<span class="lbl">Total general (${rows.length})</span><span></span><span></span>
+          <span class="n ${flash?'num-flash':''}">${fmt(sum(rows,'sue'))}</span><span class="n ${flash?'num-flash':''}">${fmt(sum(rows,'pat'))}</span><span class="n ${flash?'num-flash':''}">${fmt(sum(rows,'per'))}</span>`;
+      }
+      function applyVisible(){ rowsEl.forEach((el,i)=>el.classList.toggle('is-out',!visible[i])); setFoot(true); }
+
+      function buildGroups(){
+        const rows = D.filter((_,i)=>visible[i]);
+        const deps = [...new Set(rows.map(r=>r.dep))].sort((a,b)=>a.localeCompare(b,'es'));
+        $('grp').innerHTML = deps.map(d=>{
+          const g = rows.filter(r=>r.dep===d).sort((a,b)=>a.name.localeCompare(b.name,'es'));
+          return `<div class="mf-gh"><svg viewBox="0 0 10 10"><path d="M1 3h8L5 8z"/></svg><i class="dot" style="background:${DEPS[d]}"></i>Departamento: ${d} <em>(${g.length})</em></div>`
+            + g.map(r=>`<div class="mf-r mf-row"><span class="ind">${r.name}</span><span>${r.code}</span><span></span><span class="n">${fmt(r.sue)}</span><span class="n">${fmt(r.pat)}</span><span class="n">${fmt(r.per)}</span></div>`).join('')
+            + `<div class="mf-r mf-tot"><span class="ind">Total ${d} (${g.length})</span><span></span><span></span><span class="n">${fmt(sum(g,'sue'))}</span><span class="n">${fmt(sum(g,'pat'))}</span><span class="n">${fmt(sum(g,'per'))}</span></div>`;
+        }).join('');
+        return deps.length;
+      }
+
+      const pop = $('pop');
+      const I = {
+        up:'<svg viewBox="0 0 16 16"><path d="M5 13V3M2.5 5.5 5 3l2.5 2.5M10 3h4M10 7h3M10 11h2"/></svg>',
+        dn:'<svg viewBox="0 0 16 16"><path d="M5 3v10M2.5 10.5 5 13l2.5-2.5M10 3h2M10 7h3M10 11h4"/></svg>',
+        clr:'<svg viewBox="0 0 16 16"><path d="M1.5 2.5h13L9.6 8.4v5l-3.2-1.7V8.4ZM11 11l4 4M15 11l-4 4"/></svg>',
+        mag:'<svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>'
+      };
+      function openPop(col, {filtered=false}={}){
+        const items = col==='emp'
+          ? D.map(r=>r.name).sort((a,b)=>a.localeCompare(b,'es')).map(v=>({v}))
+          : Object.keys(DEPS).map(v=>({v,ct:D.filter(r=>r.dep===v).length}));
+        pop.innerHTML = `
+          <div class="mf-m" data-m="up">${I.up}Ordenar de A a Z</div>
+          <div class="mf-m" data-m="dn">${I.dn}Ordenar de Z a A</div>
+          <div class="mf-m clear ${filtered?'':'is-dis'}" data-m="clr">${I.clr}Borrar filtro</div>
+          <div class="mf-sep"></div>
+          <div class="mf-search" data-m="search">${I.mag}<span class="q">Buscar…</span><span class="caret"></span></div>
+          <div class="mf-list">
+            <div class="mf-it" data-v="*"><span class="gcb ${filtered?'mid':'on'}"></span>(Seleccionar todo)</div>
+            ${items.map(it=>`<div class="mf-it" data-v="${it.v}"><span class="gcb ${filtered && !(it.v.toLowerCase().includes('val'))?'':'on'}"></span><span class="tx">${it.v}</span>${it.ct?`<span class="ct">${it.ct}</span>`:''}</div>`).join('')}
+          </div>
+          <div class="mf-pf"><span class="mf-btn">Cancelar</span><span class="mf-btn pri" data-m="ok">Aceptar</span></div>`;
+        const h = head(col), body = root.querySelector('.mf-body');
+        const hb = h.getBoundingClientRect(), bb = body.getBoundingClientRect();
+        const sc = scale(); let left = (hb.left - bb.left) / sc; left = Math.max(6, Math.min(left, body.offsetWidth - 232));
+        pop.style.left = left+'px'; pop.style.top = ((hb.bottom - bb.top) / sc + 2)+'px';
+        requestAnimationFrame(()=>pop.classList.add('is-open'));
+      }
+      const pm = k => pop.querySelector(`[data-m="${k}"]`);
+      const pit = v => pop.querySelector(`[data-v="${v}"]`);
+      const closePop = () => pop.classList.remove('is-open');
+
+      const cur = $('cur');
+      // cada pausa espera además a que el panel vuelva a estar en pantalla
+      const live = () => (!panel || panel.classList.contains('is-live')) && !document.hidden;
+      const waitLive = () => live() ? null : new Promise(r => { const t = setInterval(() => { if (live()) { clearInterval(t); r(); } }, 300); });
+      const sleep = ms => new Promise(r=>setTimeout(r,ms)).then(waitLive);
+      let cx=0, cy=0;
+      function place(x,y,d){ cx=x; cy=y; cur.style.setProperty('--d',d+'ms'); cur.style.setProperty('--x',x+'px'); cur.style.setProperty('--y',y+'px'); }
+      // las posiciones se miden en px de pantalla; el panel puede estar escalado, así que se corrige por la escala
+      const scale = () => win.getBoundingClientRect().width / win.offsetWidth || 1;
+      function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), w=win.getBoundingClientRect(), s=scale(); return [(a.left-w.left+a.width*fx)/s, (a.top-w.top+a.height*fy)/s]; }
+      async function move(el,ms=700,fx,fy){ const [x,y]=pt(el,fx,fy); place(x,y,ms); await sleep(ms+60); }
+      async function moveXY(x,y,ms){ place(x,y,ms); await sleep(ms+60); }
+      async function click(el){
+        cur.classList.add('is-down'); el && el.classList.add('is-press');
+        await sleep(110);
+        cur.classList.remove('is-down'); el && el.classList.remove('is-press');
+        cur.classList.remove('is-click'); void cur.offsetWidth; cur.classList.add('is-click');
+        await sleep(160);
+      }
+      async function hover(el,ms){ await move(el,ms,.35,.5); el.classList.add('is-hover'); }
+      const unhover = () => pop.querySelectorAll('.is-hover').forEach(e=>e.classList.remove('is-hover'));
+
+      const caps = ['Orden rápido con doble clic','Búsqueda dentro del filtro','Filtro por valores','Agrupar arrastrando la columna','Ocultar columnas ajustando el ancho','Exportación directa a Excel'];
+      async function stage(n){
+        const c=$('cap'); c.style.opacity=0; await sleep(200);
+        c.textContent = caps[n]; c.style.opacity=1;
+        [...$('dots').children].forEach((li,i)=>li.classList.toggle('is-on',i===n));
+      }
+      function status(t, pill){
+        $('st').textContent = t;
+        $('pill').classList.toggle('is-on', !!pill); if(pill) $('pilltx').textContent = pill;
+      }
+
+      function sortFlat(cmp){
+        const box = $('flat'), first = new Map(rowsEl.map(e=>[e,e.getBoundingClientRect().top]));
+        const order = rowsEl.map((e,i)=>i).sort((a,b)=>cmp(D[a],D[b]));
+        order.forEach(i=>box.appendChild(rowsEl[i]));
+        const s = scale();
+        rowsEl.forEach(e=>{ const d = (first.get(e) - e.getBoundingClientRect().top) / s;
+          e.classList.remove('is-moving'); e.style.transform = d ? `translateY(${d}px)` : ''; });
+        void box.offsetWidth;
+        rowsEl.forEach(e=>{ e.classList.add('is-moving'); e.style.transform=''; });
+      }
+      function markSort(col, dir){
+        $('head').querySelectorAll('[data-col]').forEach(h=>h.classList.toggle('is-sorted', h.dataset.col===col));
+        if (col) head(col).querySelector('.mf-sort').textContent = dir>0 ? '▲' : '▼';
+      }
+      async function dbl(el){
+        el.classList.add('is-dbl'); await click(); await sleep(40); await click(); el.classList.remove('is-dbl');
+      }
+
+      function reset(){
+        root.classList.add('is-reset');
+        root.classList.remove('is-grouped','no-pat','pat-sq');
+        const t0=root.querySelector('.mf-t'); t0.style.transition=''; t0.style.removeProperty('--c5');
+        $('rz').classList.remove('is-on','is-zero'); cur.classList.remove('is-rsz','is-down');
+        $('ctx').classList.remove('is-open'); $('sub').classList.remove('is-open'); $('tray').classList.remove('is-open'); $('dlb').classList.remove('is-act'); $('bar').style.transition='none'; $('bar').style.width='0'; $('dlmeta').textContent='Descargando…';
+        visible = D.map(()=>true); rowsEl.forEach(e=>{ e.classList.remove('is-out','is-hit','is-moving'); e.style.transform=''; $('flat').appendChild(e); }); markSort(null);
+        $('grp').style.transition='none'; $('grp').style.transform='none'; void $('grp').offsetWidth; $('grp').style.transition='';
+        root.querySelectorAll('.mf-fb').forEach(e=>e.classList.remove('is-on'));
+        root.querySelectorAll('.is-lift').forEach(e=>e.classList.remove('is-lift'));
+        $('ghost').classList.remove('is-on'); $('group').classList.remove('is-over');
+        closePop(); setFoot(false); status('12 registros');
+        void root.offsetWidth; root.classList.remove('is-reset');
+      }
+
+      async function run(){
+        const W = win.offsetWidth;
+        reset(); place(W*.72, 230, 0); await sleep(700);
+
+        // 0 · orden rápido: doble clic en el encabezado
+        await stage(0);
+        const hs = head('sue'), hn = head('emp');
+        await move(hs.querySelector('.lbl'),900,.5,.5); await dbl(hs);
+        sortFlat((a,b)=>b.sue-a.sue); markSort('sue',-1); status('12 registros · Sueldo devengado: de mayor a menor');
+        await sleep(1500);
+        await dbl(hs);
+        sortFlat((a,b)=>a.sue-b.sue); markSort('sue',1); status('12 registros · Sueldo devengado: de menor a mayor');
+        await sleep(1500);
+        await move(hn.querySelector('.lbl'),800,.4,.5); await dbl(hn);
+        sortFlat((a,b)=>a.name.localeCompare(b.name,'es')); markSort('emp',1); status('12 registros · Apellidos y nombres: de A a Z');
+        await sleep(1600);
+
+        // 1 · búsqueda dentro del filtro
+        await stage(1);
+        await move(fb('emp'),900); await click(fb('emp')); openPop('emp'); await sleep(450);
+        const s = pm('search'); await move(s,500,.4); await click(); s.classList.add('is-focus');
+        const q = s.querySelector('.q'); q.textContent='';
+        for (const ch of 'val'){
+          q.textContent += ch; await sleep(200);
+          const t = q.textContent.toLowerCase();
+          pop.querySelectorAll('.mf-it[data-v]:not([data-v="*"])').forEach(it=>{
+            const v = it.dataset.v, k = v.toLowerCase().indexOf(t);
+            it.classList.toggle('is-out', k<0);
+            if(k>=0) it.querySelector('.tx').innerHTML = v.slice(0,k)+'<mark>'+v.slice(k,k+t.length)+'</mark>'+v.slice(k+t.length);
+          });
+        }
+        await sleep(500); s.classList.remove('is-focus');
+        await move(pm('ok'),650); await click(pm('ok')); closePop();
+        visible = D.map(r=>r.name.toLowerCase().includes('val')); applyVisible();
+        rowsEl.forEach((e,i)=>e.classList.toggle('is-hit',visible[i]));
+        fb('emp').classList.add('is-on');
+        status('2 de 12 registros','Empleado contiene “val”');
+        await sleep(1900);
+
+        await move(fb('emp'),700); await click(fb('emp')); openPop('emp',{filtered:true}); await sleep(380);
+        await hover(pm('clr'),550); await sleep(150); await click(pm('clr')); unhover(); closePop();
+        visible = D.map(()=>true); applyVisible(); rowsEl.forEach(e=>e.classList.remove('is-hit'));
+        fb('emp').classList.remove('is-on'); status('12 registros');
+        await sleep(800);
+
+        // 2 · filtro por valores en Departamento
+        await stage(2);
+        await move(fb('dep'),850); await click(fb('dep')); openPop('dep'); await sleep(450);
+        for (const d of ['Finanzas','Ventas']){
+          const it = pit(d); await hover(it,520); await click(); it.querySelector('.gcb').classList.remove('on');
+          pit('*').querySelector('.gcb').className='gcb mid'; await sleep(220); unhover();
+        }
+        await move(pm('ok'),650); await click(pm('ok')); closePop();
+        visible = D.map(r=>!['Finanzas','Ventas'].includes(r.dep)); applyVisible();
+        fb('dep').classList.add('is-on');
+        status(`${visible.filter(Boolean).length} de 12 registros`,'Departamento: 3 de 5');
+        await sleep(1700);
+
+        // 3 · agrupar arrastrando Departamento al panel
+        await stage(3);
+        const hd = head('dep'); await move(hd.querySelector('.lbl'),800,.4,.5);
+        cur.classList.add('is-down'); await sleep(150);
+        $('ghosttx').textContent='Departamento'; $('ghost').classList.add('is-on'); hd.classList.add('is-lift');
+        const gp = $('group'); const [gx,gy] = pt(gp,.12,.5);
+        await moveXY(cx-30, cy-30, 350);
+        gp.classList.add('is-over');
+        await moveXY(gx, gy, 650); await sleep(250);
+        cur.classList.remove('is-down'); $('ghost').classList.remove('is-on'); gp.classList.remove('is-over'); hd.classList.remove('is-lift');
+        const groups = buildGroups(); root.classList.add('is-grouped');
+        status(`Agrupado por Departamento · ${groups} grupos · ${visible.filter(Boolean).length} registros`,'Departamento: 3 de 5');
+        await sleep(1300);
+        const g = $('grp'), over = g.scrollHeight - g.parentElement.clientHeight;
+        await moveXY(W*.55, cy+150, 700);
+        if (over>0){ g.style.transform=`translateY(${-over}px)`; await sleep(2900); }
+        else await sleep(1200);
+
+        // 4 · ocultar una columna llevando su borde a ancho cero
+        await stage(4);
+        const hp = head('pat'), t = root.querySelector('.mf-t'), rz = $('rz');
+        const ez = 'cubic-bezier(.5,0,.25,1)';
+        const [rx,ry] = pt(hp,1,.55), [lx] = pt(hp,0,.55);
+        await moveXY(rx-1, ry, 850); cur.classList.add('is-rsz'); await sleep(350);
+        const off = (t.getBoundingClientRect().left - win.getBoundingClientRect().left) / scale();
+        rz.style.transition='none'; rz.style.left=(rx-off)+'px'; void rz.offsetWidth; rz.style.transition='';
+        cur.classList.add('is-down'); rz.classList.add('is-on'); await sleep(250);
+        const DR = 1300;
+        rz.style.transition = `left ${DR}ms ${ez},opacity .15s,background .2s`; rz.style.left = (lx-off)+'px';
+        t.style.transition = `--c5 ${DR}ms ${ez}`; t.style.setProperty('--c5','0%');
+        place(lx, ry, DR);
+        await sleep(DR*.35); root.classList.add('pat-sq');
+        await sleep(DR*.4); rz.classList.add('is-zero');
+        await sleep(DR*.25+350);
+        cur.classList.remove('is-down'); rz.classList.remove('is-on','is-zero');
+        t.style.transition=''; t.style.removeProperty('--c5'); root.classList.add('no-pat');
+        await sleep(250); cur.classList.remove('is-rsz');
+        await sleep(500); await moveXY(W*.5, ry+120, 700);
+        await sleep(1300);
+
+        // 5 · exportar a Excel desde el menú contextual
+        await stage(5);
+        const dlb = $('dlb'), fly = $('fly'), ctx = $('ctx'), sub = $('sub'), body = root.querySelector('.mf-body');
+        const rowT = $('grp').querySelectorAll('.mf-row')[3];
+        await move(rowT,900,.4,.5); await click();
+        const sc = scale(), bb = body.getBoundingClientRect(), wb = win.getBoundingClientRect();
+        ctx.style.left = (cx-(bb.left-wb.left)/sc+2)+'px'; ctx.style.top = (cy-(bb.top-wb.top)/sc+2)+'px'; ctx.classList.add('is-open');
+        await sleep(550);
+        const ot = ctx.querySelector('[data-c="otros"]');
+        await move(ot,700,.4,.5); ot.classList.add('is-hover'); await sleep(250);
+        const ob = ot.getBoundingClientRect();
+        let subL = (ob.right-bb.left)/sc+4;
+        if (subL + 200 > body.offsetWidth) subL = (ob.left-bb.left)/sc - 196;  // sin espacio a la derecha: se abre a la izquierda
+        sub.style.left = subL+'px'; sub.style.top = ((ob.top-bb.top)/sc-4)+'px'; sub.classList.add('is-open');
+        await sleep(400);
+        const xi = sub.querySelector('[data-c="xls"]');
+        await move(xi,500,.45,.5); xi.classList.add('is-hover'); await sleep(300);
+        await click(xi);
+        const [sx,sy] = pt(xi,.5,.5), [ex,ey] = pt(dlb,.5,.5);
+        ctx.classList.remove('is-open'); sub.classList.remove('is-open'); ot.classList.remove('is-hover'); xi.classList.remove('is-hover');
+        fly.style.transition='none'; fly.style.opacity=0; fly.style.transform=`translate(${sx-27}px,${sy-50}px) scale(.4)`; void fly.offsetWidth;
+        fly.style.transition='transform .3s cubic-bezier(.3,1.5,.5,1),opacity .15s';
+        fly.style.opacity=1; fly.style.transform=`translate(${sx-27}px,${sy-75}px) scale(1)`;
+        await sleep(500);
+        fly.style.transition='transform .75s cubic-bezier(.55,0,.35,1),opacity .25s .55s';
+        fly.style.transform=`translate(${ex-27}px,${ey-27}px) scale(.35)`; fly.style.opacity=0;
+        await sleep(700);
+        dlb.classList.remove('is-act'); void dlb.offsetWidth; dlb.classList.add('is-act');
+        $('tray').classList.add('is-open'); await sleep(150);
+        $('bar').style.transition=''; $('bar').style.width='100%';
+        await sleep(1000);
+        $('dlmeta').textContent='18.4 KB • Completado'; $('bar').parentElement.style.display='none';
+        await moveXY(W*.55, 300, 900);
+        await sleep(2600);
+        $('tray').classList.remove('is-open'); $('bar').parentElement.style.display='';
+
+        root.querySelector('.mf-body').classList.add('is-fade'); await sleep(550);
+        reset(); await sleep(50);
+        root.querySelector('.mf-body').classList.remove('is-fade'); await sleep(400);
+      }
+
+      // en pantallas angostas la ventana se dibuja a 580 px y se escala entera (como una imagen) en vez de apretar las columnas
+      const FW = 580;
+      function fit(){
+        root.classList.remove('is-fit'); root.style.marginBottom = '';
+        const w = root.parentElement.clientWidth - parseFloat(getComputedStyle(root.parentElement).paddingLeft) - parseFloat(getComputedStyle(root.parentElement).paddingRight);
+        if (w >= FW) return;
+        const k = w / FW;
+        root.style.setProperty('--fw', FW + 'px'); root.style.setProperty('--fs', k); root.classList.add('is-fit');
+        root.style.marginBottom = (-root.offsetHeight * (1 - k)) + 'px';
+      }
+      fit();
+      if ('ResizeObserver' in window) new ResizeObserver(() => fit()).observe(root.parentElement); else addEventListener('resize', fit);
+
+      setFoot(false);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches){
+        visible = D.map(r=>!['Finanzas','Ventas'].includes(r.dep)); applyVisible(); buildGroups();
+        root.classList.add('is-grouped'); fb('dep').classList.add('is-on'); cur.style.display='none';
+        status('Agrupado por Departamento · 3 grupos · 8 registros','Departamento: 3 de 5');
+        $('cap').textContent = caps[5]; $('dots').children[5].classList.add('is-on');
+        root.classList.add('no-pat');
+        return;
+      }
+      (async () => { await sleep(300); for(;;) await run(); })();
     })();
   </script>
   <div class="proto-tag" role="group" aria-label="Letra del prototipo"><span>Letra</span><button type="button" data-letra="serif">Source Serif (antes)</button><button type="button" data-letra="jakarta">Plus Jakarta Sans</button><button type="button" data-letra="figtree">Figtree</button><button type="button" data-letra="dmsans">DM Sans (actual)</button><a href="plataforma.html">Original ↗</a></div>
