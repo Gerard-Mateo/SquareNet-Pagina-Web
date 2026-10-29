@@ -910,3 +910,9 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .mod-fn h3 { font-size: 17px; margin: 0 0 var(--space-1); }
 .mod-fn p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--color-neutral-700); }
 .mod-fn:target { background: color-mix(in srgb, var(--mc, var(--color-accent)) 9%, var(--color-bg)); border-color: var(--mc, var(--color-accent)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc, var(--color-accent)) 22%, transparent); }
+
+/* Entrada de los bloques de contacto (CTA) en todo el sitio (salvo el blog): js/nav.js agrega html.cta-js y marca
+   .cta-on cuando el bloque entra en pantalla. Sin JS o con movimiento reducido se ven tal cual. */
+.cta-js :is(.cta-band,.mod-cta,.modulos-cta){opacity:0;transform:translateY(44px) scale(.96);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.cta-js :is(.cta-band,.mod-cta,.modulos-cta) :is(.cta-row,.btn,.cta-band-btn){opacity:0;transform:translateY(14px);transition:opacity .6s ease .35s,transform .6s cubic-bezier(.16,1,.3,1) .35s}
+.cta-js :is(.cta-band,.mod-cta,.modulos-cta).cta-on,.cta-js :is(.cta-band,.mod-cta,.modulos-cta).cta-on :is(.cta-row,.btn,.cta-band-btn){opacity:1;transform:none}

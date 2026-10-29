@@ -58,6 +58,7 @@
 }
 </script>
 <style>
+  .marquee-track img.mq-solid{border-radius:10px}
   .hero h1{font-size:56px}
   .hero-copy h1,.hero-copy p,.hero-copy .cta-row{
     animation:hero-float-in 1.4s cubic-bezier(.22,.61,.36,1) both;
@@ -94,7 +95,8 @@
   .erp-band p strong{color:var(--color-text)}
   .erp-logos{display:flex;align-items:center;justify-content:center;gap:calc(var(--space-8) * 2);flex-wrap:wrap;margin-top:calc(var(--space-8) * 3)}
   .erp-logos img{height:48px;width:auto;object-fit:contain;transition:transform .35s cubic-bezier(.2,.8,.3,1.4)}
-  .erp-logos img:hover{transform:scale(1.12)}
+  .erp-logos a{display:block}
+  .erp-logos a:hover img,.erp-logos a:focus-visible img{transform:scale(1.12)}
   @media (max-width:860px){ .erp-band h2{font-size:26px} }
   @media (prefers-reduced-motion:reduce){ .erp-logos img{transition:none} }
   .feature-carousel{position:relative;overflow:hidden}
@@ -304,6 +306,46 @@
     .carousel-arrow{display:none}
     .feature-slide > .wrap{padding-left:var(--space-6)}
   }
+
+  /* Testimonios: tarjetas que se expanden (la activa muestra foto + cita) */
+  .reviews{padding:var(--space-8) 0}
+  .reviews-head{margin-bottom:var(--space-6)}
+  .rv-track{display:flex;gap:12px;height:500px}
+  .rv{position:relative;flex:1 1 0;min-width:0;display:flex;border-radius:var(--radius-lg);overflow:hidden;background:#fff;border:1px solid var(--color-border,#e3e3e3);cursor:pointer;transition:flex-grow .6s cubic-bezier(.2,.8,.2,1)}
+  .rv.is-on{flex-grow:3.3;cursor:default;box-shadow:var(--shadow-md);border-color:transparent}
+  .rv.is-on::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--color-accent);z-index:2}
+  .rv-photo{position:relative;flex:1 0 0;min-width:0;overflow:hidden}
+  .rv.is-on .rv-photo{flex:0 0 42%}
+  .rv-photo img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+  .rv:not(.is-on) .rv-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--color-accent-900) 55%,transparent));transition:opacity .4s}
+  .rv:not(.is-on):hover .rv-photo img.bg{transform:scale(1.05)}
+  .rv-tag{position:absolute;top:0;left:0;z-index:1;background:var(--color-accent-800);color:#fff;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;white-space:nowrap}
+  .rv-logo{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;height:64px;background:#fff;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;padding:8px 12px}
+  .rv-logo[style]{padding:0}
+  .rv-logo img{height:100%;max-width:100%;object-fit:contain}
+  .rv-body{flex:1 1 0;min-width:0;display:none;flex-direction:column;justify-content:space-between;padding:44px 40px 36px}
+  .rv.is-on .rv-body{display:flex;animation:rvIn .5s .25s both}
+  @keyframes rvIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .rv-mark{font-family:Georgia,serif;font-size:88px;line-height:1;height:48px;margin-bottom:var(--space-3);color:var(--color-accent);opacity:.85}
+  .rv-body blockquote{margin:0;flex:1;font-size:clamp(18px,1.55vw,22px);line-height:1.55;letter-spacing:-.01em;color:var(--color-text,#1a1a1a);text-wrap:pretty}
+  .rv-body blockquote.rv-l{font-size:clamp(16px,1.35vw,19px)}
+  .rv-body blockquote.rv-xl{font-size:clamp(15px,1.2vw,17px)}
+  .rv-who{display:grid;gap:2px;padding-left:14px;border-left:3px solid var(--color-accent)}
+  .rv-who b{font-size:16px;color:var(--color-accent-700)}
+  .rv-who span{font-size:13px;color:var(--color-text-muted,#777)}
+  .rv:focus{outline:none}
+  .rv:focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
+  @media (max-width:860px){
+    .rv-track{flex-direction:column;height:auto}
+    .rv,.rv.is-on{flex:none;flex-direction:column}
+    .rv:not(.is-on){height:100px}
+    .rv:not(.is-on) .rv-tag{display:none}
+    .rv.is-on .rv-photo{flex:none;height:230px}
+    .rv-body{padding:24px 22px 26px}
+    .rv-mark{font-size:64px;height:34px}
+    .rv-body blockquote{margin-bottom:var(--space-6)}
+  }
+  @media (prefers-reduced-motion:reduce){.rv,.rv-photo img.bg{transition:none}.rv.is-on .rv-body{animation:none}}
 </style>
 </head>
 <body>
@@ -379,20 +421,20 @@
     <div class="marquee">
       <div class="marquee-track" id="marqueeTrack1">
         <a href="https://www.linkedin.com/company/sheraton-guayaquil-hotel/" target="_blank" rel="noopener" aria-label="Sheraton en LinkedIn"><img src="img/Sheraton.jpg" alt="Sheraton" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/ufinet/" target="_blank" rel="noopener" aria-label="Ufinet en LinkedIn"><img src="img/Ufinet.jpg" alt="Ufinet" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/laboratorios-recamier-ltda/" target="_blank" rel="noopener" aria-label="Recamier en LinkedIn"><img src="img/Recamier.png" alt="Recamier" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/ufinet/" target="_blank" rel="noopener" aria-label="Ufinet en LinkedIn"><img src="img/Ufinet.jpg" class="mq-solid" alt="Ufinet" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/laboratorios-recamier-ltda/" target="_blank" rel="noopener" aria-label="Recamier en LinkedIn"><img src="img/Recamier.png" class="mq-solid" alt="Recamier" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/gate-gourmet/" target="_blank" rel="noopener" aria-label="Gate Gourmet en LinkedIn"><img src="img/GateGourmet.jpg" alt="Gate Gourmet" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/molinos-champion/" target="_blank" rel="noopener" aria-label="Molinos Champion en LinkedIn"><img src="img/Molinos_Champion.jpg" alt="Molinos Champion" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/sertecpet/" target="_blank" rel="noopener" aria-label="Sertecpet en LinkedIn"><img src="img/Sertecpet.jpg" alt="Sertecpet" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/marbelize/" target="_blank" rel="noopener" aria-label="Marbelize en LinkedIn"><img src="img/Marbelize.jpg" alt="Marbelize" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/marbelize/" target="_blank" rel="noopener" aria-label="Marbelize en LinkedIn"><img src="img/Marbelize.jpg" class="mq-solid" alt="Marbelize" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/jaboneriawilson/" target="_blank" rel="noopener" aria-label="Jabonería Willson en LinkedIn"><img src="img/Jaboneria_Willson.jpg" alt="Jabonería Willson" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/la-reforma-s-a-papeles-absorbentes/" target="_blank" rel="noopener" aria-label="La Reforma en LinkedIn"><img src="img/La_Reforma.jpg" alt="La Reforma" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/automotorescarloslarrea/" target="_blank" rel="noopener" aria-label="Carlar en LinkedIn"><img src="img/Carlar.jpg" alt="Carlar" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/automotorescarloslarrea/" target="_blank" rel="noopener" aria-label="Carlar en LinkedIn"><img src="img/Carlar.jpg" class="mq-solid" alt="Carlar" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/plasticaucho/" target="_blank" rel="noopener" aria-label="Plasticaucho Industrial en LinkedIn"><img src="img/Plasticaucho.jpg" alt="Plasticaucho Industrial" loading="lazy"></a>
-        <img src="img/Pesdel.png" alt="Pesdel" loading="lazy">
+        <img src="img/Pesdel.png" class="mq-solid" alt="Pesdel" loading="lazy">
         <a href="https://www.linkedin.com/company/servifreno/" target="_blank" rel="noopener" aria-label="Servifreno en LinkedIn"><img src="img/Servifreno.jpg" alt="Servifreno" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/envasursa/" target="_blank" rel="noopener" aria-label="Envasur en LinkedIn"><img src="img/Envasur.png" alt="Envasur" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/enkador-s-a-/" target="_blank" rel="noopener" aria-label="Enkador en LinkedIn"><img src="img/Enkador.jpg" alt="Enkador" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/enkador-s-a-/" target="_blank" rel="noopener" aria-label="Enkador en LinkedIn"><img src="img/Enkador.jpg" class="mq-solid" alt="Enkador" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/quimicaariston/" target="_blank" rel="noopener" aria-label="Química Ariston en LinkedIn"><img src="img/Quimica_Ariston.jpg" alt="Química Ariston" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/finca-los-nonnos/" target="_blank" rel="noopener" aria-label="Finca Los Ñoños en LinkedIn"><img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy"></a>
         <img src="img/Toyota.png" alt="Toyotaservicios S.A." loading="lazy">
@@ -400,10 +442,10 @@
     </div>
     <div class="marquee">
       <div class="marquee-track reverse" id="marqueeTrack2">
-        <a class="mq-big mq-named" href="https://www.linkedin.com/company/ernstandyoung/" target="_blank" rel="noopener" aria-label="Ernst &amp; Young (EY) en LinkedIn"><img src="img/EY.jpg" alt="" loading="lazy"><span>Ernst &amp; Young</span></a>
+        <a class="mq-big mq-named" href="https://www.linkedin.com/company/ernstandyoung/" target="_blank" rel="noopener" aria-label="Ernst &amp; Young (EY) en LinkedIn"><img src="img/EY.jpg" class="mq-solid" alt="" loading="lazy"><span>Ernst &amp; Young</span></a>
         <a href="https://www.linkedin.com/company/curtiduria-tungurahua/" target="_blank" rel="noopener" aria-label="Curtiduría Tungurahua en LinkedIn"><img src="img/Curtiduria_Tungurahua.jpg" alt="Curtiduría Tungurahua" loading="lazy"></a>
         <img src="img/Caves.jpg" alt="Caves" loading="lazy">
-        <a href="https://www.linkedin.com/company/multicines-ecuador/" target="_blank" rel="noopener" aria-label="Multicines en LinkedIn"><img src="img/Multicines.png" alt="Multicines" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/multicines-ecuador/" target="_blank" rel="noopener" aria-label="Multicines en LinkedIn"><img src="img/Multicines.png" class="mq-solid" alt="Multicines" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/incubandina/" target="_blank" rel="noopener" aria-label="Incubandina en LinkedIn"><img src="img/Incubandina.jpg" alt="Incubandina" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/ecuatran-s-a/" target="_blank" rel="noopener" aria-label="Ecuatran en LinkedIn"><img src="img/Ecuatran.png" alt="Ecuatran" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/ecuador-vita/" target="_blank" rel="noopener" aria-label="Pasteurizadora Quito en LinkedIn"><img src="img/Pasteurizadora_Quito.jpg" alt="Pasteurizadora Quito" loading="lazy"></a>
@@ -411,17 +453,80 @@
         <a href="https://www.linkedin.com/company/assaecuador/" target="_blank" rel="noopener" aria-label="Assa en LinkedIn"><img src="img/Assa.jpg" alt="Assa" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/la-tablita-group/" target="_blank" rel="noopener" aria-label="Tablita del Tártaro en LinkedIn"><img src="img/Tablita_del_tartaro.svg" alt="Tablita del Tártaro" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/teimsa/" target="_blank" rel="noopener" aria-label="Teimsa en LinkedIn"><img src="img/Teimsa.jpg" alt="Teimsa" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/ekronac/" target="_blank" rel="noopener" aria-label="Ekron en LinkedIn"><img src="img/Ekron.jpg" alt="Ekron" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/puntonet-s.a./" target="_blank" rel="noopener" aria-label="PuntoNet en LinkedIn"><img src="img/PuntoNet.jpg" alt="PuntoNet" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/ekronac/" target="_blank" rel="noopener" aria-label="Ekron en LinkedIn"><img src="img/Ekron.jpg" class="mq-solid" alt="Ekron" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/puntonet-s.a./" target="_blank" rel="noopener" aria-label="PuntoNet en LinkedIn"><img src="img/PuntoNet.jpg" class="mq-solid" alt="PuntoNet" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/inverneg-sa/" target="_blank" rel="noopener" aria-label="Inverneg en LinkedIn"><img src="img/Inverneg.jpg" alt="Inverneg" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/bioalimentarec/" target="_blank" rel="noopener" aria-label="Bioalimentar en LinkedIn"><img src="img/Bioalimentar.jpg" alt="Bioalimentar" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/mueblefacil/" target="_blank" rel="noopener" class="mq-named" aria-label="Mueblefácil en LinkedIn"><img src="img/Mueblefacil.jpg" alt="" loading="lazy"><span>Mueblefácil</span></a>
-        <a href="https://www.linkedin.com/company/dk-management-services/" target="_blank" rel="noopener" aria-label="DK en LinkedIn"><img src="img/dk.jpg" alt="DK" loading="lazy"></a>
+        <a href="https://www.linkedin.com/company/dk-management-services/" target="_blank" rel="noopener" aria-label="DK en LinkedIn"><img src="img/dk.jpg" class="mq-solid" alt="DK" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/wok-to-walk-ec/" target="_blank" rel="noopener" aria-label="Wok to Walk Ecuador en LinkedIn"><img src="img/WokToWalk.png" alt="Wok to Walk Ecuador" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/zapatosvenusec/" target="_blank" rel="noopener" aria-label="Venus en LinkedIn"><img src="img/Venus.png" alt="Venus" loading="lazy"></a>
       </div>
     </div>
   </div>
+  </section>
+
+  <section class="reviews" aria-labelledby="rvTitle">
+    <div class="wrap">
+      <div class="reviews-head">
+        <div class="kicker">Testimonios</div>
+        <h2 id="rvTitle">Lo que dicen nuestros clientes</h2>
+      </div>
+      <div class="rv-track" id="rvTrack">
+        <article class="rv is-on" tabindex="0" aria-label="Testimonio de Multicines">
+          <div class="rv-photo">
+            <img class="bg" src="img/casos/multicines.jpg" alt="" loading="lazy">
+            <span class="rv-tag">Entretenimiento</span>
+            <div class="rv-logo" style="background:#1a1d24"><img src="img/Multicines.png" alt="Multicines" loading="lazy"></div>
+          </div>
+          <div class="rv-body">
+            <div class="rv-mark" aria-hidden="true">“</div>
+            <!-- EJEMPLO FICTICIO: reemplazar por el testimonio real de Multicines antes de publicar -->
+            <blockquote>Manejamos personal en varios complejos. Antes cuadrar las horas extra nos tomaba días; ahora las marcaciones llegan solas y el rol sale con las horas ya calculadas. Y cuando tenemos una duda, el equipo de SquareNet nos responde rápido.</blockquote>
+            <div class="rv-who"><b>María Fernanda López</b><span>Jefa de Talento Humano · Multicines</span></div>
+          </div>
+        </article>
+        <article class="rv" tabindex="0" aria-label="Testimonio de DK Management">
+          <div class="rv-photo">
+            <img class="bg" src="img/casos/dk.jpg" style="object-position:85% 50%" alt="" loading="lazy">
+            <span class="rv-tag">Centros comerciales</span>
+            <div class="rv-logo" style="background:linear-gradient(180deg,#0067aa,#004e7e)"><img src="img/dk.jpg" alt="DK Management" loading="lazy"></div>
+          </div>
+          <div class="rv-body">
+            <div class="rv-mark" aria-hidden="true">“</div>
+            <!-- EJEMPLO FICTICIO: reemplazar por el testimonio real de DK Management antes de publicar -->
+            <blockquote>Manejamos personal en varios centros comerciales y cada uno tiene su propia realidad. Con SquareNet tenemos todo en un solo sistema y los reportes listos para el IESS sin rehacer nada.</blockquote>
+            <div class="rv-who"><b>Andrés Villacís</b><span>Gerente Administrativo · DK Management</span></div>
+          </div>
+        </article>
+        <article class="rv" tabindex="0" aria-label="Testimonio de La Tablita Group">
+          <div class="rv-photo">
+            <img class="bg" src="img/casos/tablita.jpg" alt="" loading="lazy">
+            <span class="rv-tag">Restaurantes</span>
+            <div class="rv-logo"><img src="img/Tablita_del_tartaro.svg" alt="La Tablita Group" loading="lazy"></div>
+          </div>
+          <div class="rv-body">
+            <div class="rv-mark" aria-hidden="true">“</div>
+            <!-- EJEMPLO FICTICIO: reemplazar por el testimonio real de La Tablita Group antes de publicar -->
+            <blockquote>En restaurantes la rotación es alta. Ingresar y liquidar personal pasó de tomarnos días a unos minutos, y el comedor por fin cuadra con la nómina.</blockquote>
+            <div class="rv-who"><b>Carolina Paredes</b><span>Coordinadora de Nómina · La Tablita Group</span></div>
+          </div>
+        </article>
+        <article class="rv" tabindex="0" aria-label="Testimonio de Puntonet">
+          <div class="rv-photo">
+            <img class="bg" src="img/casos/puntonet.jpg" alt="" loading="lazy">
+            <span class="rv-tag">Telecomunicaciones</span>
+            <div class="rv-logo" style="background:linear-gradient(135deg,#4665fd,#3b3fff)"><img src="img/PuntoNet.jpg" alt="Puntonet" loading="lazy"></div>
+          </div>
+          <div class="rv-body">
+            <div class="rv-mark" aria-hidden="true">“</div>
+            <!-- EJEMPLO FICTICIO: reemplazar por el testimonio real de Puntonet antes de publicar -->
+            <blockquote>Lo que más valoramos es el acompañamiento: cuando cambia la ley, el sistema ya está actualizado y el equipo de soporte nos responde rápido.</blockquote>
+            <div class="rv-who"><b>Diego Salazar</b><span>Director de Recursos Humanos · Puntonet</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
   <div class="feature-carousel reveal" id="featureCarousel">
@@ -626,10 +731,10 @@
       <h2><span class="accent">Integra</span> SquareNet con tu <span class="accent">ecosistema empresarial</span></h2>
       <p>SquareNet se conecta con los <strong>sistemas ERP más usados.</strong> Menos reprocesos, más consistencia en tus datos.</p>
       <div class="erp-logos">
-        <img src="img/sap-logo.svg" alt="SAP">
-        <img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365">
-        <img src="img/jdedwards-logo.svg" alt="JD Edwards">
-        <img src="img/infor-logo.svg" alt="Infor">
+        <a href="contacto.html" aria-label="Integración con SAP: contáctanos"><img src="img/sap-logo.svg" alt="SAP"></a>
+        <a href="contacto.html" aria-label="Integración con Microsoft Dynamics 365: contáctanos"><img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365"></a>
+        <a href="contacto.html" aria-label="Integración con JD Edwards: contáctanos"><img src="img/jdedwards-logo.svg" alt="JD Edwards"></a>
+        <a href="contacto.html" aria-label="Integración con Infor: contáctanos"><img src="img/infor-logo.svg" alt="Infor"></a>
       </div>
     </div>
   </div>
@@ -647,15 +752,15 @@
         <a class="fn-head" href="moduloca.html"><h3>Asistencia</h3><span class="fn-go" aria-hidden="true">→</span></a>
         <div class="fn-chips"><a class="fn-chip" href="moduloca.html#registros-de-asistencia"><img src="img/iconos/moduloca-registros-de-asistencia.png" width="32" height="32" alt="" loading="lazy" decoding="async">Registros de asistencia</a><a class="fn-chip" href="moduloca.html#resumen-por-horario"><img src="img/iconos/moduloca-resumen-por-horario.png" width="32" height="32" alt="" loading="lazy" decoding="async">Resumen por horario</a><a class="fn-chip" href="moduloca.html#aprobacion-de-horas-extra"><img src="img/iconos/moduloca-aprobacion-de-horas-extra.png" width="32" height="32" alt="" loading="lazy" decoding="async">Aprobación de horas extra</a><a class="fn-chip" href="moduloca.html#ausentismos-y-permisos"><img src="img/iconos/moduloca-ausentismos-y-permisos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Ausentismos y permisos</a><a class="fn-chip" href="moduloca.html#kardex-de-horas"><img src="img/iconos/moduloca-kardex-de-horas.png" width="32" height="32" alt="" loading="lazy" decoding="async">Kardex de horas</a><a class="fn-chip" href="moduloca.html#politicas-de-vacaciones"><img src="img/iconos/moduloca-politicas-de-vacaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Políticas de vacaciones</a></div>
       </article>
-        <article class="fn-card" style="--mc:#D6336C">
-        <a class="fn-head" href="moduloev.html"><h3>Evaluaciones</h3><span class="mod-tag">Nuevo</span><span class="fn-go" aria-hidden="true">→</span></a>
-        <div class="fn-chips"><a class="fn-chip" href="moduloev.html#plantillas-de-evaluacion"><img src="img/iconos/moduloev-plantillas-de-evaluacion.png" width="32" height="32" alt="" loading="lazy" decoding="async">Plantillas de evaluación</a><a class="fn-chip" href="moduloev.html#evaluaciones"><img src="img/iconos/moduloev-evaluaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Evaluaciones</a></div>
-      </article>
       </div>
       <div class="fn-col">
         <article class="fn-card" style="--mc:#1C7ED6">
         <a class="fn-head" href="moduloas.html"><h3>Autoservicio</h3><span class="fn-go" aria-hidden="true">→</span></a>
         <div class="fn-chips"><a class="fn-chip" href="moduloas.html#rol-de-pagos"><img src="img/iconos/moduloas-rol-de-pagos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Rol de pagos</a><a class="fn-chip" href="moduloas.html#vacaciones-y-permisos"><img src="img/iconos/moduloas-vacaciones-y-permisos.png" width="32" height="32" alt="" loading="lazy" decoding="async">Vacaciones y permisos</a><a class="fn-chip" href="moduloas.html#marcacion-web"><img src="img/iconos/moduloas-marcacion-web.png" width="32" height="32" alt="" loading="lazy" decoding="async">Marcación web</a><a class="fn-chip" href="moduloas.html#certificados"><img src="img/iconos/moduloas-certificados.png" width="32" height="32" alt="" loading="lazy" decoding="async">Certificados</a><a class="fn-chip" href="moduloas.html#formulario-107"><img src="img/iconos/moduloas-formulario-107.png" width="32" height="32" alt="" loading="lazy" decoding="async">Formulario 107</a><a class="fn-chip" href="moduloas.html#gastos-personales"><img src="img/iconos/moduloas-gastos-personales.png" width="32" height="32" alt="" loading="lazy" decoding="async">Gastos personales</a><a class="fn-chip" href="moduloas.html#evaluaciones"><img src="img/iconos/moduloas-evaluaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Evaluaciones</a><a class="fn-chip" href="moduloas.html#formularios"><img src="img/iconos/moduloas-formularios.png" width="32" height="32" alt="" loading="lazy" decoding="async">Formularios</a></div>
+      </article>
+        <article class="fn-card" style="--mc:#D6336C">
+        <a class="fn-head" href="moduloev.html"><h3>Evaluaciones</h3><span class="mod-tag">Nuevo</span><span class="fn-go" aria-hidden="true">→</span></a>
+        <div class="fn-chips"><a class="fn-chip" href="moduloev.html#plantillas-de-evaluacion"><img src="img/iconos/moduloev-plantillas-de-evaluacion.png" width="32" height="32" alt="" loading="lazy" decoding="async">Plantillas de evaluación</a><a class="fn-chip" href="moduloev.html#evaluaciones"><img src="img/iconos/moduloev-evaluaciones.png" width="32" height="32" alt="" loading="lazy" decoding="async">Evaluaciones</a></div>
       </article>
         <article class="fn-card" style="--mc:#C88A04">
         <a class="fn-head" href="modulocc.html"><h3>Comedor</h3><span class="fn-go" aria-hidden="true">→</span></a>
@@ -1074,5 +1179,13 @@
   <script src="js/fecha.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/consent.js"></script>
+<script>
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('#rvTrack .rv'));if(!cards.length)return;
+  cards.forEach(function(c){var q=c.querySelector('blockquote'),n=q.textContent.trim().length;q.classList.add(n>230?'rv-xl':n>170?'rv-l':'rv-s')});
+  function go(i){cards.forEach(function(c,j){c.classList.toggle('is-on',j===i)})}
+  cards.forEach(function(c,j){c.addEventListener('click',function(){go(j)});c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(j)}})});
+})();
+</script>
 </body>
 </html>

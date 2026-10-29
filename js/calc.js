@@ -674,7 +674,6 @@
         : 'Tabla de consulta: la calculadora usa las tablas de ' + Object.keys(P.renta).join(', ').replace(/, (\d+)$/, ' y $1') + '.');
     }
     // la fila de tus cargas en la tabla de topes de gastos personales
-    Array.prototype.forEach.call(document.querySelectorAll('[data-topes] tbody tr'), function (tr, j) { tr.classList.toggle('is-on', j === cargas); });
   }
   function placeHl(card, instant) {
     var hl = q(card, '.ir-hl'), s = card._hl;

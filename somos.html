@@ -22,6 +22,7 @@
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
   .road-top{max-width:760px;margin-top:var(--space-2)}
+  .road-intro{font-size:clamp(28px,3.4vw,40px);margin:var(--space-4) 0 0}
   .road-lede{font-size:19px;opacity:.85;margin:var(--space-3) 0 var(--space-4)}
   .road-hint{display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.04em;color:var(--color-neutral-700)}
   .road-hint svg{width:18px;height:18px;fill:none;stroke:var(--color-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:hintBob 1.6s ease-in-out infinite}
@@ -34,20 +35,13 @@
   .road-fill{width:4px;margin-left:-2px;border-radius:2px;transform-origin:top;transform:scaleY(var(--p,1));
     background:linear-gradient(to bottom,var(--color-accent-400),var(--color-accent) 55%,var(--color-accent-700));
     box-shadow:0 0 14px color-mix(in srgb,var(--color-accent-300) 75%,transparent)}
-  .road-rider{display:none;position:absolute;left:50%;z-index:1;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;
-    background:var(--color-accent);border:3px solid var(--color-bg);
-    box-shadow:0 0 0 1px var(--color-accent),0 0 20px color-mix(in srgb,var(--color-accent-300) 95%,transparent);
-    top:calc(var(--y0,26px) + (100% - var(--y0,26px) - var(--yb,0px)) * var(--p,1))}
-  .road.is-live .road-rider{display:block}
-  .road-rider::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid var(--color-accent-300);animation:riderPing 2.2s ease-out infinite}
-  /* escritorio: el punto se resiste (se estira hacia donde vas) y al soltarse salta al nodo siguiente */
-  .road.is-snap .road-rider{transform:scale(calc(1 - var(--sp,0) * .05),calc(1 + var(--sp,0) * .12))}
-  .road.is-snap .road-fill{box-shadow:0 0 calc(14px + var(--tn,0) * 18px) color-mix(in srgb,var(--color-accent-300) calc(75% + var(--tn,0) * 25%),transparent)}
+  /* «pasillo»: no hay punto que viaje; cada nodo se enciende al cruzar el centro de la pantalla y la línea se llena
+     por tramos hasta el último nodo encendido */
+  .road-fill{display:none}  /* solo se encienden los círculos: la línea queda punteada (pedido del cliente) */
   .stop.is-hit .node{animation:nodeHit .75s cubic-bezier(.2,.9,.3,1)}
   .stop.is-hit .node::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--color-accent-300);pointer-events:none;animation:nodeRing .85s cubic-bezier(.2,.8,.3,1) forwards}
   @keyframes nodeHit{0%{transform:scale(1.08)}28%{transform:scale(1.34)}62%{transform:scale(.98)}100%{transform:scale(1.08)}}
   @keyframes nodeRing{0%{transform:scale(.7);opacity:1}100%{transform:scale(2.3);opacity:0}}
-  @keyframes riderPing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.5);opacity:0}}
 
   .stop{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr);align-items:start;margin-bottom:calc(var(--space-8) * 2)}
   .node{grid-column:2;grid-row:1;justify-self:center;position:relative;z-index:2;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
@@ -58,10 +52,11 @@
     box-shadow:0 0 0 8px color-mix(in srgb,var(--color-accent) 16%,transparent);transform:scale(1.08)}
 
   .st-card{position:relative;grid-row:1;padding:var(--space-6);background-color:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+  /* en escritorio el círculo va a media altura de la parada (junto al año/cifras), no arriba */
+  @media (min-width:861px){.stop:not(.chap):not(.end) .node,.stop:not(.chap):not(.end) .side-l,.stop:not(.chap):not(.end) .side-r{align-self:center}.stop:not(.chap):not(.end) .st-card::before{top:calc(50% - 1px)}}
   .st-card::before{content:"";position:absolute;top:25px;width:22px;height:2px;background:var(--color-neutral-400);transition:background .4s ease}
   .cl{grid-column:1;--sx:-48px}.cl::before{right:-23px}
   .cr{grid-column:3;--sx:48px}.cr::before{left:-23px}
-  .stop.is-on .st-card::before,.road:not(.is-live) .st-card::before{background:var(--color-accent)}
   .st-card .kicker{margin-bottom:var(--space-2)}
   .st-card h2{font-size:32px;margin:0 0 var(--space-3)}
   .st-card h3{font-size:23px;margin:0 0 var(--space-2)}
@@ -75,8 +70,11 @@
   .side-l{grid-column:1;padding-right:var(--space-6);text-align:right}
   .side-r{grid-column:3;padding-left:var(--space-6)}
   .st-ghost .g{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(84px,11vw,160px);line-height:.85;letter-spacing:-.03em;
-    color:color-mix(in srgb,var(--color-accent) 17%,transparent);user-select:none;transform:translateY(calc(var(--gp,0) * -64px))}
+    color:color-mix(in srgb,var(--color-accent) 17%,transparent);user-select:none;transform:translateY(calc(var(--gp,0) * -64px));transition:color .5s ease,text-shadow .5s ease}
+  /* el año (o el número) se enciende junto con su círculo */
+  .stop.is-on .st-ghost .g{color:var(--color-accent);text-shadow:0 0 28px color-mix(in srgb,var(--color-accent-300) 55%,transparent)}
   .st-ghost small{display:block;margin-top:var(--space-2);font-size:15px;color:var(--color-neutral-600)}
+  .flag-ec{display:inline-block;width:1.6em;height:1.6em;margin-left:.15em;vertical-align:-.45em}
   .st-stats{display:flex;flex-direction:column;gap:var(--space-4)}
   .st-stats b{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(60px,7.5vw,108px);line-height:.95;color:var(--color-accent-700);font-variant-numeric:tabular-nums;transform:translateY(calc(var(--gp,0) * -26px))}
   .st-stats span{font-size:16px;color:var(--color-neutral-700)}
@@ -118,11 +116,15 @@
   .road.is-live .st-card,.road.is-live .end-card,.road.is-live .st-ghost,.road.is-live .st-stats{opacity:0;transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
   .road.is-live .st-card,.road.is-live .end-card{transform:translate(var(--sx,0px),var(--sy,0px))}
   .road.is-live .stop.is-seen .st-card,.road.is-live .stop.is-seen .end-card,.road.is-live .stop.is-seen .st-ghost,.road.is-live .stop.is-seen .st-stats{opacity:1;transform:none}
+  /* el cierre aparece justo cuando se enciende la banderita (no antes), subiendo y creciendo un poco */
+  .road.is-live .stop.end .end-card{transform:translateY(44px) scale(.96)}
+  .road.is-live .stop.end.is-seen:not(.is-on) .end-card{opacity:0;transform:translateY(44px) scale(.96)}
+  .road.is-live .stop.end.is-on .end-card{opacity:1;transform:none}
   .road.is-live .stop.chap .chap-label{opacity:0;transition:opacity .9s ease}
   .road.is-live .stop.chap.is-seen .chap-label{opacity:1}
 
   @media (max-width:860px){
-    .road-line,.road-fill,.road-rider{left:26px}
+    .road-line,.road-fill{left:26px}
     .stop{grid-template-columns:52px minmax(0,1fr);column-gap:var(--space-3);margin-bottom:var(--space-8)}
     .node{grid-column:1;justify-self:start;width:44px;height:44px;margin-left:4px}
     .node svg{width:22px;height:22px}
@@ -145,7 +147,7 @@
     .end-card .mark{font-size:12px;letter-spacing:.08em}
   }
   @media (prefers-reduced-motion:reduce){
-    .road-hint svg,.road-rider::after{animation:none}
+    .road-hint svg{animation:none}
     .node{transition:none}
     .road.is-live .st-card,.road.is-live .end-card,.road.is-live .st-ghost,.road.is-live .st-stats{transition:none}
   }
@@ -171,78 +173,66 @@
     <div class="kicker">Quiénes Somos</div>
     <h1>Empresa</h1>
     <div class="road-top">
-      <p class="road-lede">Nuestra historia, de principio a fin: de dónde venimos, hacia dónde vamos y por qué elegir SquareNet.</p>
+      <h2 class="road-intro">Ingenieros pioneros, una propuesta distinta</h2>
+      <p class="road-lede">SquareNet Software es una empresa ecuatoriana fundada en 2002 por ingenieros apasionados por la tecnología. Desde el inicio hemos construido software con la tecnología más actual del mercado, con una filosofía simple: un sistema que se adapte a cada empresa, y no al revés.</p>
       <div class="road-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>Desplázate para recorrerla</div>
     </div>
 
     <div class="road" id="road">
       <div class="road-line" aria-hidden="true"></div>
       <div class="road-fill" aria-hidden="true"></div>
-      <div class="road-rider" aria-hidden="true"></div>
 
       <section class="stop" aria-labelledby="s-origen">
         <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></div>
         <div class="side-l st-ghost" aria-hidden="true"><span class="g">2002</span><small>Año de fundación</small></div>
         <article class="st-card cr">
-          <div class="kicker">2002 · El origen</div>
-          <h2 id="s-origen">Ingenieros pioneros, una propuesta distinta</h2>
-          <p>SquareNet Software es una empresa ecuatoriana fundada en 2002 por ingenieros pioneros en el desarrollo de aplicaciones informáticas, siempre con la última tecnología del mercado. Somos una propuesta distinta, con una filosofía de trabajo renovada.</p>
-          <p>SquareNet nació como un programa de escritorio hecho en PowerBuilder.</p>
+          <div class="kicker">2002 · Los inicios</div>
+          <h2 id="s-origen">Nace SquareNet</h2>
+          <p>Lanzamos SquareNet como un programa de escritorio para gestionar la nómina y el talento humano de empresas ecuatorianas.</p>
         </article>
+      </section>
+
+      <section class="stop" aria-labelledby="s-dev">
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5.5l-3 13"/></svg></div>
+        <article class="st-card cl">
+          <div class="kicker">2018 · Empieza la transformación</div>
+          <h2 id="s-dev">Comienza SquareNet web</h2>
+          <p>Empezamos a reconstruir SquareNet para la web, con tecnología Microsoft ASP.NET Core.</p>
+        </article>
+        <div class="side-r st-ghost" aria-hidden="true"><span class="g">2018</span><small>Empieza el desarrollo web</small></div>
       </section>
 
       <section class="stop" aria-labelledby="s-web">
         <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.8h.01M9 6.8h.01"/><path d="m10 13.5-2 2 2 2M14 13.5l2 2-2 2"/></svg></div>
-        <article class="st-card cl">
+        <div class="side-l st-ghost" aria-hidden="true"><span class="g">2022</span><small>Nace SquareNet web</small></div>
+        <article class="st-card cr">
           <div class="kicker">2022 · El salto a la web</div>
-          <h2 id="s-web">De escritorio a la web</h2>
-          <p>En 2022 comenzamos a pasar SquareNet a su versión web, con tecnología ASP.NET Core. Hasta entonces era un programa de escritorio hecho en PowerBuilder.</p>
-          <p>Al pasar a la web pudimos sacarle mucho más provecho a SquareNet: es más accesible y más rápido.</p>
+          <h2 id="s-web">SquareNet web, en producción</h2>
+          <p>Después de cuatro años de desarrollo, lanzamos SquareNet web. Hoy es más rápido, más accesible y funciona desde cualquier navegador, sin instalar nada.</p>
         </article>
-        <div class="side-r st-ghost" aria-hidden="true"><span class="g">2022</span><small>Nace SquareNet web</small></div>
       </section>
 
       <section class="stop" aria-labelledby="s-exp">
         <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6M15 14.4c.7-.3 1.4-.4 2-.4 2.4 0 4 1.8 4 4.6"/></svg></div>
-        <article class="st-card cr">
+        <article class="st-card cl">
           <div class="kicker">Hoy · Una trayectoria que se nota</div>
           <h2 id="s-exp">Experiencia que se nota</h2>
-          <p>Nuestro equipo acumula más de 30 años de experiencia conjunta junto a instituciones financieras, comerciales, industriales y de servicios. De ahí nacen soluciones óptimas, con tecnología de punta e investigación continua.</p>
-          <p class="sectors-line">Financiero · Comercial · Industrial · Servicios</p>
+          <p>Nuestro equipo lleva décadas de experiencia conjunta trabajando con empresas e instituciones del sector financiero, comercial, industrial y de servicios. Lo que hoy le preocupa a tu empresa, seguramente ya lo resolvimos antes.</p>
         </article>
-        <div class="side-l st-stats">
-          <div><b data-count="24">24</b><span>años en el mercado</span></div>
+        <div class="side-r st-stats">
+          <div><b data-count="24" data-since="2002" data-suffix=" años">24 años</b><span>en el mercado ecuatoriano <img class="flag-ec" src="img/ecuador-emoji.svg" alt="Ecuador" width="36" height="36"></span></div>
           <div><b data-count="30" data-suffix="+">30+</b><span>años de experiencia conjunta del equipo</span></div>
         </div>
       </section>
 
       <section class="stop both" aria-label="Misión y visión">
         <article class="st-card cl band-dark">
-          <div class="st-art la" aria-hidden="true" data-delay=".35">
-            <svg viewBox="0 0 96 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path class="la-soft" data-draw d="M8 86 H88"/>
-              <rect class="la-main" data-draw x="14" y="62" width="14" height="24" rx="1.5"/>
-              <rect class="la-main" data-draw x="34" y="48" width="14" height="38" rx="1.5"/>
-              <rect class="la-main" data-draw x="54" y="32" width="14" height="54" rx="1.5"/>
-              <path class="la-acc la-glow" data-draw d="M12 44 L36 28 L50 36 L82 10"/>
-              <path class="la-acc la-glow" data-draw d="M68 10 H82 V24"/>
-            </svg>
-          </div>
           <div class="kicker">Hoy · Lo que hacemos</div>
           <h2>Misión</h2>
           <p>Apoyar a las organizaciones para que incrementen su competitividad, ahorrando dinero y optimizando recursos, mediante el empleo estratégico de la tecnología informática.</p>
         </article>
         <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r=".7" fill="currentColor"/></svg></div>
         <article class="st-card cr band-dark">
-          <div class="st-art la" aria-hidden="true" data-delay=".5">
-            <svg viewBox="0 0 96 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path class="la-soft" data-draw d="M6 70 H90"/>
-              <path class="la-main" data-draw d="M24 70 A24 24 0 0 1 72 70"/>
-              <path class="la-soft" data-draw d="M48 36 V26 M27 44 L20 37 M69 44 L76 37 M14 58 L6 55 M82 58 L90 55"/>
-              <path class="la-acc la-glow" data-draw d="M80 14 V30 M72 22 H88"/>
-              <path class="la-soft" data-draw d="M32 80 H64"/>
-            </svg>
-          </div>
           <div class="kicker">Mañana · A dónde vamos</div>
           <h2>Visión</h2>
           <p>Desarrollar productos y servicios reconocidos por su alta calidad, para todo el mercado latinoamericano.</p>
@@ -391,25 +381,25 @@
     });
 
     // El camino se llena con el scroll; cada parada se activa cuando la línea llega a su nodo.
-    // En escritorio el punto «se resiste»: entre dos nodos avanza poco y se estira, y al pasar la mitad del tramo
-    // se suelta y salta al siguiente con un resorte (y el nodo suena con un golpe). En celular sigue el scroll tal cual.
-    // Sin JS (o con movimiento reducido) queda el camino completo y todo visible.
+    // Camino como un pasillo: cada nodo se enciende (uno por uno) cuando cruza el centro de la pantalla y la línea
+    // se llena hasta el último encendido. Sin JS (o con movimiento reducido) queda el camino completo y todo visible.
     (function () {
       var road = document.getElementById('road');
       if (!road) return;
+      // años en el mercado: se calculan con el año actual (data-since), así no hay que tocarlos cada enero
+      Array.prototype.forEach.call(road.querySelectorAll('[data-since]'), function (el) {
+        var n = new Date().getFullYear() - parseInt(el.getAttribute('data-since'), 10);
+        el.setAttribute('data-count', n); el.textContent = n + (el.getAttribute('data-suffix') || '');
+      });
       var firstNode = road.querySelector('.node');
       var lastNode = road.querySelector('.stop.end .node');
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce || !firstNode || !lastNode) return;
-      var desk = window.matchMedia('(min-width: 861px) and (hover: hover) and (pointer: fine)');
 
       var stops = Array.prototype.slice.call(road.querySelectorAll('.stop')).filter(function (s) { return s.querySelector('.node'); });
       var movers = Array.prototype.slice.call(road.querySelectorAll('.st-ghost .g, .st-stats b'));
       var counters = Array.prototype.slice.call(road.querySelectorAll('[data-count]'));
-      var prev = {}, queued = false;
-      var BAJA = 0.52, SUBE = 0.46, TENSION = 0.16;   // umbrales del tramo para soltarse (bajando / subiendo) y cuánto cede antes
-      var LINEA_PC = 0.35, LINEA_CEL = 0.6;           // altura de la línea de referencia: un tercio de pantalla en escritorio (el nodo que estás leyendo)
-      var pts = [], raw = 0, yPrev = null, dir = 1, c = 0, target = 0, x = 0, v = 0, tn = 0, running = false, onPrev = [];
+      var prev = {}, queued = false, first = true, lit = -1;
 
       function showCount(el, val) { el.textContent = Math.round(val) + (el.getAttribute('data-suffix') || ''); }
       function count(el) {
@@ -430,65 +420,27 @@
         s.classList.remove('is-hit'); void s.offsetWidth; s.classList.add('is-hit');
         clearTimeout(s._hit); s._hit = setTimeout(function () { s.classList.remove('is-hit'); }, 900);
       }
-      // pinta la línea y el punto en la posición x (0 = primer nodo, 1 = último)
-      function paint(pos, fancy) {
-        setVar('--p', Math.max(0, Math.min(1, pos)).toFixed(4));
-        setVar('--tn', fancy ? Math.abs(tn).toFixed(3) : '0');
-        // redondo casi siempre: solo se estira un poco mientras salta (según la velocidad del resorte)
-        setVar('--sp', fancy ? Math.min(1, Math.abs(v) / 0.02).toFixed(3) : '0');
-        stops.forEach(function (s, k) {
-          // en escritorio: encendidos los nodos ya superados, y el actual apenas el punto llega a él (sin parpadeos por el rebote)
-          var on = raw >= 0 && (fancy ? (k < c || (k === c && (dir < 0 || pos >= pts[k] - 0.012))) : pos >= pts[k] - 0.003);
-          if (fancy && on && !onPrev[k] && dir > 0 && k > 0) hit(s);
-          onPrev[k] = on;
-          s.classList.toggle('is-on', on);
-        });
-      }
-      // resorte con un poco de rebote: sigue al objetivo y al soltarse cae sobre el nodo
-      function spring() {
-        v = (v + (target - x) * 0.14) * 0.72;
-        x += v;
-        if (Math.abs(v) < 0.00004 && Math.abs(target - x) < 0.00004) { x = target; v = 0; running = false; }
-        paint(x, true);
-        if (running) requestAnimationFrame(spring);
-      }
 
       function frame() {
         queued = false;
-        var vh = window.innerHeight, rr = road.getBoundingClientRect();
+        var vh = window.innerHeight, rr = road.getBoundingClientRect(), mid = vh / 2;
         var a = firstNode.getBoundingClientRect(), b = lastNode.getBoundingClientRect();
-        var fancy = desk.matches, y0 = a.top + a.height / 2, y1 = b.top + b.height / 2, line = vh * (fancy ? LINEA_PC : LINEA_CEL);
-        raw = (line - y0) / (y1 - y0);
-        pts = stops.map(function (s) { var r = s.querySelector('.node').getBoundingClientRect(); return (r.top + r.height / 2 - y0) / (y1 - y0); });
+        var y0 = a.top + a.height / 2, y1 = b.top + b.height / 2;
         setVar('--y0', (y0 - rr.top).toFixed(1) + 'px');
         setVar('--yb', (rr.bottom - y1).toFixed(1) + 'px');
-        var r01 = Math.max(0, Math.min(1, raw));
-        // dirección según el scroll real (ignora micro-vueltas de 2 px y cambios de layout)
-        var sy = window.scrollY || window.pageYOffset;
-        if (yPrev === null) yPrev = sy;
-        else if (Math.abs(sy - yPrev) > 2) { dir = sy > yPrev ? 1 : -1; yPrev = sy; }
-        road.classList.toggle('is-snap', fancy);
-        if (fancy) {
-          var n = pts.length;
-          while (c < n - 1 && r01 >= pts[c] + BAJA * (pts[c + 1] - pts[c])) c++;
-          while (c > 0 && r01 <= pts[c - 1] + SUBE * (pts[c] - pts[c - 1])) c--;
-          tn = 0; target = pts[c];
-          // la tensión solo va hacia donde te mueves: recién soltado, el punto descansa en su nodo
-          if (dir > 0 && r01 > pts[c] && c < n - 1) {           // bajando: cede un poco hacia el siguiente nodo
-            var g = pts[c + 1] - pts[c];
-            tn = Math.min(1, (r01 - pts[c]) / (BAJA * g));
-            target = pts[c] + g * TENSION * tn * (1.4 - 0.4 * tn);
-          } else if (dir < 0 && r01 < pts[c] && c > 0) {      // subiendo: cede hacia el anterior
-            var h = pts[c] - pts[c - 1];
-            tn = -Math.min(1, (pts[c] - r01) / ((1 - SUBE) * h));
-            target = pts[c] + h * TENSION * tn * (1.4 + 0.4 * tn);
-          }
-          if (!running) { running = true; requestAnimationFrame(spring); }
-        } else {
-          tn = 0; x = r01; v = 0; c = 0;
-          while (c < pts.length - 1 && r01 >= pts[c + 1]) c++;
-          paint(r01, false);
+        // último nodo que ya cruzó el centro de la pantalla
+        var n = -1, ys = stops.map(function (s) { var r = s.querySelector('.node').getBoundingClientRect(); return r.top + r.height / 2; });
+        ys.forEach(function (y, k) { if (y <= mid) n = k; });
+        if (n !== lit) {
+          stops.forEach(function (s, k) {
+            var on = k <= n;
+            if (on && !s.classList.contains('is-on') && !first) hit(s);
+            s.classList.toggle('is-on', on);
+          });
+          lit = n;
         }
+        setVar('--p', n < 0 ? '0' : ((ys[n] - y0) / (y1 - y0)).toFixed(4));
+        first = false;
         stops.forEach(function (s) {
           if (s.classList.contains('is-seen')) return;
           if (s.querySelector('.node').getBoundingClientRect().top < vh * 0.88) {
@@ -508,13 +460,9 @@
       road.classList.add('is-live');
       window.addEventListener('scroll', queue, { passive: true });
       window.addEventListener('resize', queue);
-      if (desk.addEventListener) desk.addEventListener('change', queue);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(queue);
       frame();
-      // al cargar (o volver con el scroll a mitad de página) arranca ya en su nodo, sin animar
-      x = target; v = 0;
-      // para las pruebas en el navegador
-      window.__road = function () { return { raw: raw, c: c, x: x, target: target, tn: tn, pts: pts }; };
+      window.__road = function () { return { lit: lit }; };
     })();
   </script>
   <script src="js/fecha.js"></script>

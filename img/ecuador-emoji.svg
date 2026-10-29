@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" role="img" aria-label="Bandera de Ecuador">
+  <defs>
+    <clipPath id="ec-r"><rect x="2" y="7" width="32" height="22" rx="4"/></clipPath>
+  </defs>
+  <g clip-path="url(#ec-r)">
+    <rect x="2" y="7" width="32" height="11" fill="#FFD100"/>
+    <rect x="2" y="18" width="32" height="5.5" fill="#0A3E9C"/>
+    <rect x="2" y="23.5" width="32" height="5.5" fill="#E2231A"/>
+  </g>
+  <!-- simplified coat of arms: condor wings over an oval shield -->
+  <path d="M13.2 13.6c1.6-.4 3.1.1 4.8 1.2 1.7-1.1 3.2-1.6 4.8-1.2-1 .9-2.2 1.4-3.3 1.6h-3c-1.1-.2-2.3-.7-3.3-1.6Z" fill="#5a3b1c"/>
+  <ellipse cx="18" cy="19.2" rx="2.9" ry="3.6" fill="#7cc3ea" stroke="#C99A2E" stroke-width=".8"/>
+  <path d="M15.4 20.4 17 18.4l1.1 1.2 1.2-1.6 1.4 2.4v.9c-.6 1.2-1.6 1.9-2.7 1.9s-2.1-.7-2.6-1.9Z" fill="#2f8a3c"/>
+  <circle cx="18" cy="17.3" r=".8" fill="#FFD100"/>
+  <rect x="2" y="7" width="32" height="22" rx="4" fill="none" stroke="rgba(0,0,0,.12)"/>
+</svg>
