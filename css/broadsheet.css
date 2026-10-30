@@ -957,3 +957,21 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .mod-fn h3 { display: flex; align-items: center; gap: 14px; }
 .mod-fn-ic { flex: none; width: 40px; height: 40px; padding: 8px; box-sizing: content-box; image-rendering: pixelated; background: #fff; border: 1px solid color-mix(in srgb, var(--mc, var(--color-accent)) 22%, transparent); border-radius: var(--radius-md); }
 @media (max-width: 860px) { .mod-fn-ic { width: 32px; height: 32px; padding: 6px; } }
+
+/* Filas de función con captura fija (.is-shot): texto arriba (título + frase a la izquierda, lo que puedes hacer a la derecha)
+   y la captura de la pantalla real a todo el ancho, para que se lea. Clic = la captura en tamaño completo. */
+.mod-fn.is-shot, .mod-fn.is-shot:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+.mod-fn.is-shot .mod-fn-copy { order: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(28px, 5vw, 80px); align-items: start; }
+.mod-fn.is-shot .mod-fn-copy > :not(.mod-fn-list) { grid-column: 1; }
+.mod-fn.is-shot .mod-fn-list { grid-column: 2; grid-row: 1 / span 3; align-self: end; }
+.mod-fn-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.mod-fn-list li { position: relative; padding-left: 30px; font-size: 16px; line-height: 1.55; color: var(--color-neutral-700); }
+.mod-fn-list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: color-mix(in srgb, var(--mc, var(--color-accent)) 14%, #fff) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m6 10.5 2.6 2.6L14 7.6' fill='none' stroke='%23000' stroke-opacity='.55' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; }
+.mod-fn-shot { margin: 0; }
+.mod-fn-shot a { display: block; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid color-mix(in srgb, var(--mc, var(--color-accent)) 18%, var(--color-divider)); box-shadow: 0 24px 50px -28px rgba(20, 40, 50, .45); cursor: zoom-in; }
+.mod-fn-shot img { display: block; width: 100%; height: auto; }
+.mod-fn:target .mod-fn-shot a { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc, var(--color-accent)) 30%, transparent); }
+@media (max-width: 860px) {
+  .mod-fn.is-shot .mod-fn-copy { grid-template-columns: minmax(0, 1fr); }
+  .mod-fn.is-shot .mod-fn-list { grid-column: 1; grid-row: auto; margin-top: var(--space-4); }
+}
