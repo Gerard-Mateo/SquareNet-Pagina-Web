@@ -419,6 +419,8 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
   font-size: 12px; color: rgba(255, 255, 255, 0.55);
   display: flex; align-items: center; justify-content: center; gap: var(--space-3); flex-wrap: wrap;
 }
+.footer-mark { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); max-width: 280px; margin-bottom: var(--space-3); }
+.footer-mark .wordmark { margin-bottom: 0; }
 .footer-badge { height: 40px; width: auto; background: #fff; border-radius: var(--radius-sm); padding: 3px 6px; }
 .footer-link {
   font: inherit; color: rgba(255, 255, 255, 0.75); text-decoration: underline; text-underline-offset: 3px;
@@ -905,14 +907,49 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 }
 
 /* — funciones de cada módulo: una tarjeta por función; el home enlaza a cada una con #ancla — */
-.mod-fn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3); margin-top: var(--space-6); }
-.mod-fn { scroll-margin-top: 110px; padding: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-divider); border-left: 3px solid var(--mc, var(--color-accent)); border-radius: var(--radius-md); }
-.mod-fn h3 { font-size: 17px; margin: 0 0 var(--space-1); }
-.mod-fn p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--color-neutral-700); }
-.mod-fn:target { background: color-mix(in srgb, var(--mc, var(--color-accent)) 9%, var(--color-bg)); border-color: var(--mc, var(--color-accent)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc, var(--color-accent)) 22%, transparent); }
+/* Funciones de cada módulo: una fila grande por función (texto + animación), alternadas */
+.mod-fn-rows { margin-top: var(--space-6); }
+.mod-fn { scroll-margin-top: 110px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(28px, 5vw, 80px); align-items: center; padding: clamp(40px, 6vw, 80px) 0; border-top: 1px solid var(--color-divider); }
+.mod-fn:first-child { border-top: 0; padding-top: var(--space-4); }
+.mod-fn:nth-child(even) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+.mod-fn:nth-child(even) .mod-fn-copy { order: 2; }
+.mod-fn-n { display: block; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--mc, var(--color-accent)); margin-bottom: var(--space-2); }
+.mod-fn h3 { font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 var(--space-3); }
+.mod-fn p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-neutral-700); max-width: 46ch; }
+.mod-fn-media { position: relative; min-height: 340px; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--mc, var(--color-accent)) 8%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--mc, var(--color-accent)) 18%, transparent); display: grid; place-items: center; overflow: hidden; }
+/* Hueco hasta que llegue la animación de la función (se reemplaza todo .mod-fn-ph) */
+.mod-fn-ph { display: grid; justify-items: center; gap: var(--space-3); color: color-mix(in srgb, var(--mc, var(--color-accent)) 70%, #000); font-weight: 600; font-size: 15px; }
+.mod-fn-ph img { width: 64px; height: 64px; image-rendering: pixelated; padding: 14px; box-sizing: content-box; background: #fff; border-radius: 16px; box-shadow: var(--shadow-sm); }
+.mod-fn:target .mod-fn-media { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc, var(--color-accent)) 30%, transparent); }
+.mod-fn:target .mod-fn-n { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 860px) {
+  .mod-fn, .mod-fn:nth-child(even) { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-8) 0; }
+  .mod-fn:nth-child(even) .mod-fn-copy { order: 0; }
+  .mod-fn-media { min-height: 240px; }
+}
 
 /* Entrada de los bloques de contacto (CTA) en todo el sitio (salvo el blog): js/nav.js agrega html.cta-js y marca
    .cta-on cuando el bloque entra en pantalla. Sin JS o con movimiento reducido se ven tal cual. */
 .cta-js :is(.cta-band,.mod-cta,.modulos-cta){opacity:0;transform:translateY(44px) scale(.96);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .cta-js :is(.cta-band,.mod-cta,.modulos-cta) :is(.cta-row,.btn,.cta-band-btn){opacity:0;transform:translateY(14px);transition:opacity .6s ease .35s,transform .6s cubic-bezier(.16,1,.3,1) .35s}
 .cta-js :is(.cta-band,.mod-cta,.modulos-cta).cta-on,.cta-js :is(.cta-band,.mod-cta,.modulos-cta).cta-on :is(.cta-row,.btn,.cta-band-btn){opacity:1;transform:none}
+
+/* Animaciones de las funciones de cada módulo: la pantalla se funde a negro al terminar, antes de volver a empezar (.sn-fade lo pone el loop de cada animación) */
+.mod-fn-media .scr::after { content: ""; position: absolute; inset: 0; z-index: 60; background: #000; opacity: 0; pointer-events: none; transition: opacity .55s ease; }
+.mod-fn-media .scr.sn-fade::after { opacity: 1; }
+
+/* Escenario de las animaciones de funciones (.mod-fn-media.rp-stage) y los pasos de la historia (.rp-story) que se encienden con la animación */
+.rp-stage{padding:var(--space-8) var(--space-4);min-height:0;background:none;border:0;overflow:visible}
+.mod-fn:target .rp-stage{box-shadow:none}
+.rp-story{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;gap:16px;counter-reset:rp}
+.rp-story li{position:relative;padding-left:44px;color:var(--color-neutral-600);transition:color .4s}
+.rp-story li::before{counter-increment:rp;content:counter(rp);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--color-divider);display:grid;place-items:center;font-weight:700;font-size:13px;transition:background .4s,border-color .4s,color .4s}
+.rp-story li b{display:block;font-size:16px;color:var(--color-neutral-700);margin-bottom:2px;transition:color .4s}
+.rp-story li span{font-size:14.5px;line-height:1.45}
+.rp-story li.is-on{color:var(--color-text)}
+.rp-story li.is-on b{color:var(--color-text)}
+.rp-story li.is-on::before{background:var(--mc,var(--color-accent));border-color:transparent;color:#fff}
+/* Ícono del sistema (16 px, pixelado a propósito) junto al título de cada función */
+.mod-fn h3 { display: flex; align-items: center; gap: 14px; }
+.mod-fn-ic { flex: none; width: 40px; height: 40px; padding: 8px; box-sizing: content-box; image-rendering: pixelated; background: #fff; border: 1px solid color-mix(in srgb, var(--mc, var(--color-accent)) 22%, transparent); border-radius: var(--radius-md); }
+@media (max-width: 860px) { .mod-fn-ic { width: 32px; height: 32px; padding: 6px; } }

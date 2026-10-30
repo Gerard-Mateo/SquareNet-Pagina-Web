@@ -22,29 +22,28 @@
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
 /* Rol de pagos en el celular (.rp2): animación con historia en 4 pasos */
-.rp-stage{display:flex;align-items:center;justify-content:center;gap:clamp(24px,5vw,72px);padding:var(--space-8) var(--space-4);border-radius:var(--radius-lg)}
-.rp-story{list-style:none;margin:0;padding:0;max-width:330px;display:grid;gap:18px;counter-reset:rp}
-.rp-story li{position:relative;padding-left:46px;color:rgba(255,255,255,.55);transition:color .4s}
-.rp-story li::before{counter-increment:rp;content:counter(rp);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;font-weight:700;font-size:13px;transition:background .4s,border-color .4s,color .4s}
-.rp-story li b{display:block;font-size:17px;color:rgba(255,255,255,.7);margin-bottom:2px;transition:color .4s}
-.rp-story li span{font-size:14px;line-height:1.45}
-.rp-story li.is-on{color:rgba(255,255,255,.92)}
-.rp-story li.is-on b{color:#fff}
-.rp-story li.is-on::before{background:var(--color-accent-400,#3cc);border-color:transparent;color:#05343a}
 .rp2{position:relative;flex:0 0 auto;font:13px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
 .rp2 *{box-sizing:border-box}
 .rp2.is-reset *{transition:none!important}
-.rp2 .rph{position:relative;width:340px;height:660px;border-radius:38px;background:#1b1c1f;padding:12px;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 30px 60px -20px rgba(0,0,0,.6)}
-.rp2 .scr{position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;background:#fff}
-.rp2 .notch{position:absolute;left:50%;top:8px;width:90px;height:22px;margin-left:-45px;border-radius:12px;background:#1b1c1f;z-index:12}
-.rp2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:76px;padding:30px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+/* Celular estilo iPhone: marco de titanio, botones laterales, Dynamic Island, barra de estado e indicador de inicio */
+.rp2 .rph{position:relative;width:340px;height:690px;border-radius:54px;background:#0b0b0d;padding:11px;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.rp2 .rph::before,.rp2 .rph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.rp2 .rph::before{left:-8px;top:120px;height:32px;box-shadow:0 56px 0 0 #8a8d92,0 116px 0 0 #8a8d92;height:28px}
+.rp2 .rph::after{right:-8px;top:180px;height:84px}
+.rp2 .scr{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:#fff}
+.rp2 .notch{position:absolute;left:50%;top:11px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:12}
+.rp2 .sbar{position:absolute;left:0;right:0;top:0;z-index:11;height:50px;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 34px;color:#fff;font:600 15px/1 -apple-system,"SF Pro Text","Segoe UI",sans-serif;letter-spacing:-.2px}
+.rp2 .sbar svg{height:12px;fill:#fff}
+.rp2 .sbar span{display:flex;gap:6px;align-items:center}
+.rp2 .home{position:absolute;left:50%;bottom:8px;width:128px;height:5px;margin-left:-64px;border-radius:3px;background:#111;z-index:12}
+.rp2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:94px;padding:46px 14px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
 .rp2 .rlogo{display:flex;align-items:center;gap:7px;color:#fff}
 .rp2 .rlogo svg{width:26px;height:26px}
 .rp2 .rlogo b{font:600 18px/1 "Segoe UI",sans-serif;letter-spacing:-.2px}
 .rp2 .rlogo small{display:block;font-size:8px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
 .rp2 .burger{width:40px;height:30px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
 .rp2 .burger i{display:block;width:20px;height:2px;background:#fff;border-radius:1px}
-.rp2 .view{position:absolute;left:0;right:0;top:76px;bottom:0;overflow:hidden}
+.rp2 .view{position:absolute;left:0;right:0;top:94px;bottom:0;overflow:hidden}
 .rp2 .page{padding:8px 8px 0;transition:transform 1s cubic-bezier(.25,.8,.3,1)}
 .rp2 h2{margin:0 0 4px 2px;font:400 19px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
 .rp2 .sel{position:relative;height:22px;border:1px solid #bbb;background:#fff;display:flex;align-items:center;padding:0 24px 0 4px;font-size:12.5px;transition:box-shadow .2s}
@@ -73,28 +72,650 @@
 .rp2 .net{margin:22px 4px 0 0;text-align:right;color:#1e8a3c;font-weight:600;font-size:15px}
 .rp2 .net span{padding:2px 4px;border-radius:4px;transition:background .4s,box-shadow .4s}
 .rp2 .net span.is-hi{background:#e3f5e8;box-shadow:0 0 0 2px #9fd9b0}
-.rp2 .acc{display:block;margin:14px 4px 0 auto;width:150px;height:32px;border:0;border-radius:4px;background:#1e66d0;color:#fff;font:600 13px/32px "Segoe UI",sans-serif;text-align:center;transition:background .3s}
-.rp2 .acc.is-done{background:#1e8a3c}
-.rp2 .rfoot{margin:16px 0 0;padding:8px 8px 14px;border-top:1px solid #e6e6e6;font-size:12.5px}
+.rp2 .rfoot{margin:16px 0 0;padding:8px 8px 30px;border-top:1px solid #e6e6e6;font-size:12.5px}
 .rp2 .rfoot a{color:#1a5fb4}
-/* pantalla bloqueada con la notificación */
-.rp2 .lock{position:absolute;inset:0;z-index:10;background:linear-gradient(160deg,#1d4f6e,#0c2233 60%,#3a1d3c);color:#fff;text-align:center;padding-top:70px;transition:opacity .5s,transform .5s}
-.rp2 .lock.is-off{opacity:0;transform:scale(1.06);pointer-events:none}
-.rp2 .lock .clk{font:300 64px/1 "Segoe UI",sans-serif;letter-spacing:-1px}
-.rp2 .lock .dt{font-size:13px;opacity:.8;margin-top:6px}
-.rp2 .ntf{position:absolute;left:12px;right:12px;top:190px;padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.88);color:#111;text-align:left;display:flex;gap:10px;align-items:flex-start;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;transform:translateY(-14px) scale(.96);transition:opacity .4s,transform .45s cubic-bezier(.2,.9,.3,1.2)}
-.rp2 .ntf.is-on{opacity:1;transform:none}
-.rp2 .ntf i{flex:0 0 30px;height:30px;border-radius:8px;background:linear-gradient(#3a72b3,#24538c);display:grid;place-items:center;color:#fff;font:700 15px/1 "Segoe UI",sans-serif;font-style:normal}
-.rp2 .ntf b{display:block;font-size:12.5px}
-.rp2 .ntf span{font-size:12.5px;line-height:1.35}
-.rp2 .ntf small{position:absolute;right:12px;top:11px;font-size:11px;color:#666}
 .rp2 .tap{position:absolute;left:0;top:0;z-index:20;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
 .rp2 .tap.is-press{--s:.78}
 .rp2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
 .rp2 .tap.is-ping::after{animation:rpPing .5s ease-out}
 @keyframes rpPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
-@media (max-width:860px){.rp-stage{flex-direction:column;gap:var(--space-6)}.rp-story{order:2;max-width:340px}}
 @media (max-width:400px){.rp2 .rph{transform:scale(.88);transform-origin:top center;margin-bottom:-79px}}
+/* Ausentismos en iPhone (.au2) */
+.au2{position:relative;flex:0 0 auto;font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.au2 *{box-sizing:border-box}
+.au2.is-reset *{transition:none!important}
+.au2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.au2 .iph::before,.au2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.au2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.au2 .iph::after{right:-8px;top:180px;height:86px}
+.au2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.au2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:8}
+.au2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:7;display:flex;align-items:center;justify-content:flex-end;padding:6px 30px 0 34px;color:#fff}
+.au2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.au2 .sbar svg{height:11px}
+.au2 .ahome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:8}
+.au2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.au2 .alogo{display:flex;align-items:center;gap:7px;color:#fff}
+.au2 .alogo svg{width:24px;height:24px}
+.au2 .alogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.au2 .alogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.au2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.au2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.au2 .view{position:absolute;left:0;right:0;top:96px;bottom:0;overflow:hidden}
+.au2 .page{transition:transform .7s cubic-bezier(.3,.8,.3,1)}
+.au2 .form{background:#ebebeb;padding:8px 8px 10px}
+.au2 h2{margin:0 0 8px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.au2 .arow{display:flex;align-items:center;height:26px}
+.au2 .arow label{width:44px;font-size:11.5px}
+.au2 .dt{position:relative;width:118px;height:20px;border:1px solid #c4c4c4;background:#fff;font-size:11px;display:flex;align-items:center;padding-left:3px;transition:box-shadow .2s}
+.au2 .dt.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.au2 .dt .ar,.au2 .cmb .ar{position:absolute;right:0;top:0;bottom:0;width:16px;border-left:1px solid #ddd;background:linear-gradient(#fafafa,#e6e6e6)}
+.au2 .dt .ar::after,.au2 .cmb .ar::after{content:"";position:absolute;left:4px;top:6px;border:4px solid transparent;border-top:5px solid #666}
+.au2 .days{margin-left:auto;margin-right:20px;font-size:11px;opacity:0;transition:opacity .3s}
+.au2 .days.is-on{opacity:1}
+.au2 .lb{margin-top:6px;font-size:11.5px;font-weight:600}
+.au2 .cmb{position:relative;height:20px;border:1px solid #c4c4c4;background:#fff;font-size:11px;display:flex;align-items:center;padding-left:3px;transition:box-shadow .2s}
+.au2 .cmb.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.au2 .warn{height:16px;color:#d0021b;font-size:11px;padding-top:2px;opacity:0;transition:opacity .3s}
+.au2 .warn.is-on{opacity:1}
+.au2 .obs{height:48px;border:1px solid #c4c4c4;background:#fff;font-size:11px;padding:3px 4px;transition:box-shadow .2s}
+.au2 .obs.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.au2 .rc{display:inline-block;width:1px;height:12px;vertical-align:-2px;background:#111;animation:auBlink 1s steps(1) infinite}
+@keyframes auBlink{0%{opacity:1}50%{opacity:0}}
+.au2 .btnr{display:flex;justify-content:flex-end;margin-top:8px}
+.au2 .abtn{height:26px;padding:0 10px;display:grid;place-items:center;border:1px solid #bdbdbd;border-radius:3px;background:linear-gradient(#fdfdfd,#e8e8e8);font-size:12px;color:#222;transition:transform .1s,filter .15s}
+.au2 .abtn.wide{margin-top:8px}
+.au2 .abtn.is-press{transform:scale(.97);filter:brightness(.9)}
+.au2 .att{font-size:10.5px;color:#1e6fd0;margin-right:auto;align-self:center;opacity:0;transition:opacity .3s}
+.au2 .att.is-on{opacity:1}
+.au2 .disp{padding:12px 4px 0;font-size:11.5px;font-weight:600}
+.au2 .flt{display:flex;align-items:center;gap:6px;padding:14px 2px 6px;font-size:11.5px}
+.au2 .flt .dt{width:92px}
+.au2 .agrid{position:relative;overflow:hidden;border-top:1px solid #d6d6d6}
+.au2 .gt{width:652px;transition:transform .8s cubic-bezier(.3,.8,.3,1)}
+.au2 .gr{display:grid;grid-template-columns:94px 94px 72px 24px 104px 118px 116px 30px;height:22px;align-items:center;font-size:11px;border-bottom:1px solid #ececec}
+.au2 .gr span{padding:0 3px;white-space:nowrap;overflow:hidden;height:100%;display:flex;align-items:center;border-right:1px solid #ececec}
+.au2 .gh{font-weight:600;background:linear-gradient(#fff,#f1f1f1);border-bottom:1px solid #d6d6d6}
+.au2 .gr.is-sel{background:#e3eefb}
+.au2 .gr.is-new{height:0;overflow:hidden;transition:height .4s}
+.au2 .gr.is-new.is-on{height:22px}
+.au2 .ok{color:#1a9a2f}.au2 .no{color:#d0021b}
+.au2 .gr svg{width:13px;height:13px}
+.au2 .ft{padding:26px 8px 30px;border-top:1px solid #e6e6e6;margin-top:180px;font-size:11px}
+.au2 .cal{position:absolute;z-index:6;width:190px;background:#fff;border:1px solid #bdbdbd;box-shadow:0 8px 18px -6px rgba(0,0,0,.35);padding:4px 6px 6px;font-size:10.5px;opacity:0;transform:translateY(-4px);transition:opacity .15s,transform .15s;pointer-events:none}
+.au2 .cal.is-open{opacity:1;transform:none}
+.au2 .cal .mh{display:flex;align-items:center;justify-content:space-between;height:16px;font-size:11.5px}
+.au2 .cal .yh{text-align:center;font-size:11px;font-weight:600;height:15px}
+.au2 .cal .nv{width:18px;text-align:center;color:#555}
+.au2 .cal .nv.is-press{background:#e3eefb;border-radius:3px}
+.au2 .cal .g{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.au2 .cal .g span{height:21px;display:grid;place-items:center;border-radius:50%}
+.au2 .cal .g .wd{font-weight:600;height:18px}
+.au2 .cal .g .mut{color:#bbb}
+.au2 .cal .g .sel{background:#1e66d0;color:#fff;width:21px;margin:0 auto}
+.au2 .cal .cf{display:flex;justify-content:space-between;padding:4px 10px 0;color:#444}
+.au2 .lst{position:absolute;z-index:6;background:#fffff2;border:1px solid #9a9a9a;box-shadow:0 8px 16px -6px rgba(0,0,0,.35);font-size:11px;opacity:0;transition:opacity .15s;pointer-events:none}
+.au2 .lst.is-open{opacity:1}
+.au2 .lst div{height:17px;display:flex;align-items:center;padding:0 3px}
+.au2 .lst div.is-hi{background:#1e66d0;color:#fff}
+.au2 .kb{position:absolute;left:0;right:0;bottom:0;z-index:7;height:232px;background:#d1d4d9;padding:8px 3px 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,.8,.3,1)}
+.au2 .kb.is-on{transform:none}
+.au2 .kb .tb{display:flex;justify-content:flex-end;height:22px;margin:-4px 6px 4px;font:600 13px/22px -apple-system,system-ui,sans-serif;color:#1e66d0}
+.au2 .kr{display:flex;justify-content:center;gap:5px;margin-bottom:9px}
+.au2 .kr span{width:28px;height:38px;border-radius:5px;background:#fff;box-shadow:0 1px 0 #898a8d;display:grid;place-items:center;font:400 17px/1 -apple-system,system-ui,sans-serif;transition:background .08s}
+.au2 .kr span.w{width:38px;background:#acb0b8;font-size:13px}
+.au2 .kr span.sp{width:170px;font-size:13px}
+.au2 .kr span.is-k{background:#acb0b8}
+.au2 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:7;height:300px;background:#f2f2f7;border-radius:12px 12px 0 0;box-shadow:0 -6px 20px rgba(0,0,0,.2);transform:translateY(100%);transition:transform .35s cubic-bezier(.3,.8,.3,1);font-family:-apple-system,"SF Pro Text",system-ui,sans-serif}
+.au2 .sheet.is-on{transform:none}
+.au2 .dim{position:absolute;inset:0;z-index:6;background:rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none}
+.au2 .dim.is-on{opacity:1}
+.au2 .sheet .grab{display:block;width:36px;height:5px;border-radius:3px;background:#c7c7cc;margin:6px auto 4px}
+.au2 .sheet .sh{display:flex;justify-content:space-between;align-items:center;padding:4px 14px 8px;font-size:14px}
+.au2 .sheet .sh b{font-weight:600}
+.au2 .sheet .sh span{color:#1e66d0}
+.au2 .sheet .asec{padding:4px 16px;color:#6d6d72;font-size:11px;text-transform:uppercase}
+.au2 .sheet .fl{margin:0 12px;background:#fff;border-radius:10px;overflow:hidden}
+.au2 .sheet .fi{display:flex;align-items:center;gap:10px;height:46px;padding:0 12px;border-bottom:.5px solid #e0e0e5;font-size:13px;transition:background .15s}
+.au2 .sheet .fi:last-child{border-bottom:0}
+.au2 .sheet .fi.is-hi{background:#e5e5ea}
+.au2 .sheet .fi svg{width:24px;height:28px;flex:none}
+.au2 .sheet .fi small{display:block;color:#8e8e93;font-size:10.5px}
+.au2 .toast{position:absolute;left:50%;bottom:44px;z-index:7;width:220px;margin-left:-110px;padding:9px 10px;background:#5cb85c;color:#fff;text-align:center;font-size:11px;line-height:1.35;border-radius:2px;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.au2 .toast.is-on{opacity:1;transform:none}
+.au2 .tap{position:absolute;left:0;top:0;z-index:9;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.au2 .tap.is-press{--s:.78}
+.au2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.au2 .tap.is-ping::after{animation:auPing .5s ease-out}
+@keyframes auPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+@media (max-width:400px){.au2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
+/* Lo que ve RRHH en SquareNet: tarjeta con el mapa que entra junto al iPhone */
+.mw2 .mwhr{position:absolute;right:-170px;bottom:120px;z-index:20;width:270px;background:#fff;border-radius:10px;box-shadow:0 18px 40px -12px rgba(10,30,50,.45);overflow:hidden;font-size:11px;opacity:0;transform:translateX(24px) scale(.96);transition:opacity .45s,transform .55s cubic-bezier(.2,.9,.3,1.1)}
+.mw2 .mwhr.is-on{opacity:1;transform:none}
+.mw2 .hr-h{display:flex;align-items:center;gap:6px;padding:7px 10px;background:linear-gradient(#3a72b3,#24538c);color:#fff;font-weight:600;font-size:11px}
+.mw2 .hr-h i{font-style:normal;margin-left:auto;font-size:9.5px;opacity:.8;font-weight:400}
+.mw2 .hr-b{padding:7px 10px 4px;line-height:1.5}
+.mw2 .hr-b b{font-weight:700}
+.mw2 .hr-map{position:relative;height:130px;margin:4px 10px 10px;border:1px solid #d6d6d6;border-radius:6px;overflow:hidden;background:#eef0ea}
+.mw2 .hr-map svg.base{position:absolute;inset:0;width:100%;height:100%}
+.mw2 .hr-acc{position:absolute;left:50%;top:50%;width:var(--r,110px);height:var(--r,110px);margin:calc(var(--r,110px)/-2) 0 0 calc(var(--r,110px)/-2);border-radius:50%;background:rgba(30,102,208,.16);border:1.5px solid rgba(30,102,208,.55);transition:all 2.2s cubic-bezier(.3,.8,.3,1)}
+.mw2 .hr-pin{position:absolute;left:50%;top:50%;width:24px;height:32px;margin:-33px 0 0 -12px;transform:translateY(-36px);opacity:0;transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.mw2 .hr-pin.is-on{transform:none;opacity:1}
+.mw2 .hr-tag{position:absolute;left:6px;top:6px;padding:3px 7px;border-radius:12px;background:rgba(255,255,255,.95);box-shadow:0 1px 3px rgba(0,0,0,.15);font-size:9.5px;font-weight:600;color:#1e66d0}
+.mw2 .hr-accl{position:absolute;right:6px;bottom:6px;padding:3px 7px;border-radius:12px;background:#1d1b1a;color:#fff;font-size:9.5px;font-weight:600;font-variant-numeric:tabular-nums}
+@media (max-width:1100px){.mw2 .mwhr{right:-60px}}
+@media (max-width:600px){.mw2 .mwhr{position:relative;right:auto;bottom:auto;margin:18px auto 0}}
+/* Animación .mw2 */
+.mw2{position:relative;flex:0 0 auto;
+  font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.mw2 *{box-sizing:border-box}
+.mw2.is-reset *{transition:none!important}
+.mw2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;
+  background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.mw2 .iph::before,.mw2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.mw2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.mw2 .iph::after{right:-8px;top:180px;height:86px}
+.mw2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.mw2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:12}
+.mw2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:11;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;color:#fff;font:600 14px/1 -apple-system,"SF Pro Text",system-ui,sans-serif}
+.mw2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.mw2 .sbar svg{height:11px}
+.mw2 .sbar .loc{height:10px;opacity:0;transition:opacity .3s}
+.mw2 .sbar .loc.is-on{opacity:1}
+.mw2 .xhome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:12}
+.mw2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.mw2 .xlogo{display:flex;align-items:center;gap:7px;color:#fff}
+.mw2 .xlogo svg{width:24px;height:24px}
+.mw2 .xlogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.mw2 .xlogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.mw2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.mw2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.mw2 .view{position:absolute;left:0;right:0;top:96px;bottom:0;overflow:hidden;padding:8px 8px 0}
+.mw2 h2{margin:0 0 6px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.mw2 .mk{display:block;width:130px;height:32px;margin:0 auto;border-radius:3px;background:#2f6db0;border:1px solid #24538c;color:#fff;font-size:12px;display:grid;place-items:center;transition:transform .1s,box-shadow .2s}
+.mw2 .mk.is-press{transform:scale(.96);box-shadow:0 0 0 2px #1a3d6b}
+.mw2 .ol{text-align:center;font-size:11px;margin:10px 0 4px}
+.mw2 .obs{height:40px;border:1px solid #c4c4c4;padding:4px;font-size:11px;transition:box-shadow .2s}
+.mw2 .obs.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.mw2 .obs .ph{color:#999}
+.mw2 .rc{display:inline-block;width:1px;height:12px;vertical-align:-2px;background:#111;animation:mwBlink 1s steps(1) infinite}
+@keyframes mwBlink{0%{opacity:1}50%{opacity:0}}
+.mw2 .md{margin-top:20px;padding-bottom:4px;border-bottom:1px solid #e6e6e6;font-size:11px;font-weight:600}
+.mw2 .ent{opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s;padding:6px 0 0 8px;position:relative;font-size:11px;line-height:1.55}
+.mw2 .ent.is-on{opacity:1;transform:none}
+.mw2 .ent::before{content:"";position:absolute;left:0;top:11px;width:4px;height:4px;border-radius:50%;background:#333}
+.mw2 .ent b{font-weight:700}
+.mw2 .ent .coord{font-variant-numeric:tabular-nums}
+.mw2 .ft{position:absolute;left:8px;right:8px;bottom:22px;padding-top:8px;border-top:1px solid #e6e6e6;font-size:11px}
+.mw2 .dim{position:absolute;inset:0;z-index:8;background:rgba(0,0,0,.32);opacity:0;transition:opacity .25s;pointer-events:none}
+.mw2 .dim.is-on{opacity:1}
+.mw2 .perm{position:absolute;left:50%;top:50%;z-index:9;width:270px;margin:-190px 0 0 -135px;border-radius:16px;overflow:hidden;background:rgba(246,246,248,.97);
+  font-family:-apple-system,"SF Pro Text",system-ui,sans-serif;text-align:center;opacity:0;transform:scale(1.08);transition:opacity .2s,transform .25s;pointer-events:none}
+.mw2 .perm.is-on{opacity:1;transform:none}
+.mw2 .perm h4{margin:16px 16px 4px;font-size:14px;font-weight:600;line-height:1.3;letter-spacing:0}
+.mw2 .perm p{margin:0 18px 10px;font-size:11.5px;color:#333;line-height:1.35}
+.mw2 .pmap{position:relative;height:120px;margin:0;background:#eef0ea;overflow:hidden}
+.mw2 .pmap svg{position:absolute;inset:0;width:100%;height:100%}
+.mw2 .pmap .ptag{position:absolute;left:8px;top:8px;display:flex;align-items:center;gap:5px;padding:3px 8px;border-radius:12px;background:#fff;font-size:10.5px;font-weight:600;color:#1e66d0;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.mw2 .pmap .ptag svg{position:static;width:10px;height:10px}
+.mw2 .perm .b{height:42px;display:grid;place-items:center;border-top:.5px solid #c8c8cc;color:#1e66d0;font-size:14px;transition:background .15s}
+.mw2 .perm .b.is-press{background:#dcdce0}
+.mw2 .cfm{position:absolute;left:16px;right:16px;top:170px;z-index:9;background:#fff;border:1px solid #bbb;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);
+  opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .25s;pointer-events:none}
+.mw2 .cfm.is-on{opacity:1;transform:none}
+.mw2 .cfm .t{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #e6e6e6;font-weight:600;font-size:11.5px}
+.mw2 .cfm .m{padding:14px 18px;font-size:11.5px}
+.mw2 .cfm .a{display:flex;justify-content:flex-end;gap:22px;padding:6px 16px 12px;font-weight:600;font-size:12px}
+.mw2 .cfm .a span{padding:4px 6px;border-radius:3px;transition:background .15s}
+.mw2 .cfm .a span.is-press{background:#e3eefb}
+.mw2 .cfm .a .okb{color:#1e66d0}
+.mw2 .kb{position:absolute;left:0;right:0;bottom:0;z-index:7;height:232px;background:#d1d4d9;padding:8px 3px 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,.8,.3,1)}
+.mw2 .kb.is-on{transform:none}
+.mw2 .kb .tb{display:flex;justify-content:flex-end;height:22px;margin:-4px 6px 4px;font:600 13px/22px -apple-system,system-ui,sans-serif;color:#1e66d0}
+.mw2 .kr{display:flex;justify-content:center;gap:5px;margin-bottom:9px}
+.mw2 .kr span{width:28px;height:38px;border-radius:5px;background:#fff;box-shadow:0 1px 0 #898a8d;display:grid;place-items:center;font:400 17px/1 -apple-system,system-ui,sans-serif;transition:background .08s}
+.mw2 .kr span.w{width:38px;background:#acb0b8;font-size:13px}
+.mw2 .kr span.sp{width:170px;font-size:13px}
+.mw2 .kr span.is-k{background:#acb0b8}
+.mw2 .toast{position:absolute;left:50%;bottom:46px;z-index:7;width:230px;margin-left:-115px;padding:9px 10px;background:#5cb85c;color:#fff;text-align:center;font-size:11px;border-radius:2px;
+  opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.mw2 .toast.is-on{opacity:1;transform:none}
+.mw2 .tap{position:absolute;left:0;top:0;z-index:13;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;
+  background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);
+  transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);
+  transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.mw2 .tap.is-press{--s:.78}
+.mw2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.mw2 .tap.is-ping::after{animation:mwPing .5s ease-out}
+@keyframes mwPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+@media (max-width:400px){.mw2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
+/* Animación .ce2 */
+.ce2{position:relative;flex:0 0 auto;
+  font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.ce2 *{box-sizing:border-box}
+.ce2.is-reset *{transition:none!important}
+.ce2 .ios{font-family:-apple-system,"SF Pro Text",system-ui,sans-serif}
+.ce2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;
+  background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.ce2 .iph::before,.ce2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.ce2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.ce2 .iph::after{right:-8px;top:180px;height:86px}
+.ce2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.ce2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:20}
+.ce2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:19;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;color:#fff;font:600 14px/1 -apple-system,"SF Pro Text",system-ui,sans-serif;transition:color .3s}
+.ce2 .sbar.dark{color:#111}
+.ce2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.ce2 .sbar svg{height:11px}
+.ce2 .sbar svg *{fill:currentColor}
+.ce2 .xhome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:20}
+.ce2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.ce2 .xlogo{display:flex;align-items:center;gap:7px;color:#fff}
+.ce2 .xlogo svg{width:24px;height:24px}
+.ce2 .xlogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.ce2 .xlogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.ce2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.ce2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.ce2 .view{position:absolute;left:0;right:0;top:96px;bottom:84px;overflow:hidden}
+.ce2 .page{padding:8px 8px 0;transition:transform 1s cubic-bezier(.3,.8,.3,1)}
+.ce2 h2{margin:0 0 8px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.ce2 .sel{position:relative;height:22px;border:1px solid #bbb;background:#fff;display:flex;align-items:center;padding:0 24px 0 4px;font-size:11.5px;transition:box-shadow .2s}
+.ce2 .sel.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.ce2 .sel::after{content:"";position:absolute;right:0;top:0;bottom:0;width:20px;border-left:1px solid #ddd;background:linear-gradient(#fafafa,#e8e8e8)}
+.ce2 .sel::before{content:"";position:absolute;right:6px;top:8px;z-index:1;border:4px solid transparent;border-top:5px solid #777}
+.ce2 .loading{margin:10px 4px;font-size:11px;color:#555;opacity:0;transition:opacity .2s}
+.ce2 .loading.is-on{opacity:1}
+.ce2 .menu{position:absolute;left:14px;top:62px;z-index:8;width:278px;border-radius:13px;overflow:hidden;background:rgba(242,242,247,.97);
+  box-shadow:0 12px 34px rgba(0,0,0,.28);opacity:0;transform:scale(.92);transform-origin:top left;transition:opacity .2s,transform .25s;pointer-events:none}
+.ce2 .menu.is-on{opacity:1;transform:none}
+.ce2 .menu div{display:flex;align-items:center;height:36px;padding:0 12px 0 32px;font-size:13.5px;white-space:nowrap;border-bottom:.5px solid #d1d1d6;position:relative;transition:background .15s}
+.ce2 .menu div:last-child{border-bottom:0}
+.ce2 .menu div.is-hi{background:#d8d8dd}
+.ce2 .menu div.ck::before{content:"✓";position:absolute;left:12px;font-weight:600}
+.ce2 .letter{opacity:0;transition:opacity .45s;font:9.6px/1.55 Georgia,"Times New Roman",serif;color:#1b1b1b;padding:10px 6px 30px}
+.ce2 .letter.is-on{opacity:1}
+.ce2 .lh{display:flex;align-items:center;justify-content:space-between;padding-bottom:7px;border-bottom:2px solid #24538c}
+.ce2 .lh .lg{display:flex;align-items:center;gap:7px;font:700 15px/1 "Segoe UI",Arial,sans-serif;letter-spacing:1.2px;color:#24538c}
+.ce2 .lh .lg svg{width:26px;height:26px}
+.ce2 .lh small{font:9px/1.2 Arial,sans-serif;color:#777;text-align:right}
+.ce2 .letter .dt{text-align:right;margin:10px 0 12px}
+.ce2 .letter p{margin:0 0 9px;text-align:justify;font:inherit;color:inherit;max-width:none}
+.ce2 .letter .tt{text-align:center;font-weight:700;text-decoration:underline;font-style:italic;margin:14px 0 12px}
+.ce2 .letter .sg{margin-top:16px;text-align:center}
+.ce2 .letter .sg svg{display:block;width:110px;height:38px;margin:0 auto}
+.ce2 .letter .sg b{display:block}
+.ce2 .letter .lf{margin-top:26px;padding-top:6px;border-top:1px solid #ddd;font:8px/1.4 Arial,sans-serif;color:#888;text-align:right}
+.ce2 .sf{position:absolute;left:0;right:0;bottom:0;height:84px;z-index:6;background:rgba(247,247,249,.96);border-top:.5px solid #d1d1d6;padding:8px 14px 0}
+.ce2 .sf .url{height:34px;border-radius:11px;background:#e4e4ea;display:flex;align-items:center;justify-content:center;gap:5px;font-size:13.5px;color:#111}
+.ce2 .sf .url svg{width:10px;height:12px}
+.ce2 .sf .tb{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 10px;color:#1e66d0}
+.ce2 .sf .tb span{display:grid;place-items:center;width:34px;height:30px;border-radius:8px;transition:background .15s}
+.ce2 .sf .tb span.is-press{background:#e0e0e6}
+.ce2 .sf .tb svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ce2 .sf .tb .off{color:#c3c3c8}
+.ce2 .dim{position:absolute;inset:0;z-index:9;background:rgba(0,0,0,.3);opacity:0;transition:opacity .3s;pointer-events:none}
+.ce2 .dim.is-on{opacity:1}
+.ce2 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:10;background:#f2f2f7;border-radius:14px 14px 0 0;box-shadow:0 -6px 20px rgba(0,0,0,.18);
+  transform:translateY(105%);transition:transform .4s cubic-bezier(.3,.8,.3,1)}
+.ce2 .sheet.is-on{transform:none}
+.ce2 .share{height:470px}
+.ce2 .sh-h{display:flex;align-items:center;gap:10px;padding:14px 14px 10px}
+.ce2 .sh-h .th{width:40px;height:40px;border-radius:8px;background:#fff;border:.5px solid #d1d1d6;display:grid;place-items:center}
+.ce2 .sh-h .th svg{width:26px;height:26px}
+.ce2 .sh-h b{display:block;font-size:13.5px;font-weight:600}
+.ce2 .sh-h small{color:#8e8e93;font-size:11.5px}
+.ce2 .sh-h .xx{margin-left:auto;width:28px;height:28px;border-radius:50%;background:#e3e3e8;display:grid;place-items:center;color:#7a7a80;font-size:13px}
+.ce2 .apps{display:flex;gap:14px;padding:6px 14px 12px;border-top:.5px solid #d8d8dd;border-bottom:.5px solid #d8d8dd;background:#f2f2f7}
+.ce2 .apps div{width:56px;text-align:center;font-size:10.5px;color:#333}
+.ce2 .apps i{display:block;width:54px;height:54px;border-radius:13px;margin:6px auto 5px}
+.ce2 .acts{margin:12px;border-radius:11px;overflow:hidden;background:#fff}
+.ce2 .acts div{display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 14px;font-size:14px;border-bottom:.5px solid #e0e0e5;transition:background .15s}
+.ce2 .acts div:last-child{border-bottom:0}
+.ce2 .acts div.is-hi{background:#e2e2e7}
+.ce2 .acts svg{width:20px;height:20px;fill:none;stroke:#111;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ce2 .print{top:46px;border-radius:12px 12px 0 0;background:#f2f2f7}
+.ce2 .pr-h{display:flex;justify-content:space-between;align-items:center;height:46px;padding:0 14px;font-size:15px}
+.ce2 .pr-h b{font-weight:600}
+.ce2 .pr-h span{color:#1e66d0}
+.ce2 .pr-h .xgo{font-weight:600;padding:4px 6px;border-radius:6px;transition:background .15s}
+.ce2 .pr-h .xgo.is-press{background:#dfe9fb}
+.ce2 .grp{margin:6px 14px 0;border-radius:11px;overflow:hidden;background:#fff}
+.ce2 .grp div{display:flex;align-items:center;justify-content:space-between;height:42px;padding:0 12px;font-size:13.5px;border-bottom:.5px solid #e0e0e5}
+.ce2 .grp div:last-child{border-bottom:0}
+.ce2 .grp .xv{color:#8e8e93}
+.ce2 .grp .xst{display:flex;border:.5px solid #c7c7cc;border-radius:7px;overflow:hidden}
+.ce2 .grp .xst i{width:34px;height:24px;display:grid;place-items:center;font-style:normal;background:#efeff4;font-size:15px}
+.ce2 .grp .xst i+i{border-left:.5px solid #c7c7cc}
+.ce2 .xpv{display:flex;gap:12px;padding:16px 14px 0;overflow:hidden}
+.ce2 .pg{flex:none;width:150px;text-align:center;font-size:11px;color:#6d6d72}
+.ce2 .pg .sh{position:relative;width:150px;height:194px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18);overflow:hidden;margin-bottom:6px}
+.ce2 .pg .sh .letter{position:absolute;left:0;top:0;width:316px;transform:scale(.475);transform-origin:top left;opacity:1;padding:14px 12px}
+.ce2 .pg .ck{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#1e66d0;color:#fff;font-size:9px;margin-right:4px;vertical-align:-2px}
+.ce2 .ban{position:absolute;left:10px;right:10px;top:52px;z-index:18;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;background:rgba(245,245,247,.97);box-shadow:0 8px 24px rgba(0,0,0,.2);
+  transform:translateY(-220%);opacity:0;transition:transform .45s cubic-bezier(.3,.8,.3,1),opacity .3s}
+.ce2 .ban.is-on{transform:none;opacity:1}
+.ce2 .ban .pi{width:34px;height:34px;border-radius:8px;background:#8e8e93;display:grid;place-items:center}
+.ce2 .ban .pi svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
+.ce2 .ban b{display:block;font-size:13px;font-weight:600}
+.ce2 .ban small{font-size:11.5px;color:#555}
+.ce2 .tap{position:absolute;left:0;top:0;z-index:21;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;
+  background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);
+  transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);
+  transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.ce2 .tap.is-press{--s:.78}
+.ce2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.ce2 .tap.is-ping::after{animation:cePing .5s ease-out}
+@keyframes cePing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+@media (max-width:400px){.ce2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
+/* Animación .sr2 (formulario 107) */
+.sr2{position:relative;flex:0 0 auto;
+  font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.sr2 *{box-sizing:border-box}
+.sr2.is-reset *{transition:none!important}
+.sr2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;
+  background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.sr2 .iph::before,.sr2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.sr2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.sr2 .iph::after{right:-8px;top:180px;height:86px}
+.sr2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.sr2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:20}
+.sr2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:19;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;color:#fff;font:600 14px/1 -apple-system,"SF Pro Text",system-ui,sans-serif}
+.sr2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.sr2 .sbar svg{height:11px}
+.sr2 .sbar svg *{fill:currentColor}
+.sr2 .xhome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:20}
+.sr2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.sr2 .xlogo{display:flex;align-items:center;gap:7px;color:#fff}
+.sr2 .xlogo svg{width:24px;height:24px}
+.sr2 .xlogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.sr2 .xlogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.sr2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.sr2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.sr2 .view{position:absolute;left:0;right:0;top:96px;bottom:0;overflow:hidden}
+.sr2 .page{padding:8px 0 0;transition:transform 1.6s cubic-bezier(.35,.1,.25,1)}
+.sr2 h2{margin:0 0 6px 8px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.sr2 .yr{display:flex;align-items:center;gap:10px;margin:0 0 8px 4px;font-size:12px}
+.sr2 .yr .in{width:56px;height:22px;border:1px solid #c4c4c4;display:flex;align-items:center;justify-content:flex-end;padding-right:5px;font-size:12px;transition:box-shadow .2s}
+.sr2 .yr .in.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.sr2 .rc{display:inline-block;width:1px;height:13px;vertical-align:-2px;background:#111;animation:srBlink 1s steps(1) infinite}
+@keyframes srBlink{0%{opacity:1}50%{opacity:0}}
+.sr2 .ft{padding:10px 8px 40px;font-size:11px}
+.sr2 .f{--lv:#ccccf5;font:7.1px/1.2 "Segoe UI",Arial,sans-serif;color:#000;border:1px solid #000;margin:0 2px}
+.sr2 .f .lv{background:var(--lv)}
+.sr2 .top{display:grid;grid-template-columns:88px 1fr 50px}
+.sr2 .top .sri{grid-row:span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-right:1px solid #000;background:#fff;padding:4px 2px}
+.sr2 .top .sri b{font:800 17px/1 Arial,sans-serif;letter-spacing:1px;color:#1f3f8f}
+.sr2 .top .sri small{font-size:5px;text-align:center;line-height:1.15}
+.sr2 .top .sri i{font-style:normal;font-weight:700;font-size:7.4px;margin-top:2px}
+.sr2 .top .tt{text-align:center;font-size:7.3px;padding:3px 4px;background:var(--lv)}
+.sr2 .top .no{grid-row:span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#d0021b;font-size:7.4px;border-left:1px solid #000;background:var(--lv)}
+.sr2 .top .ef{display:grid;grid-template-columns:1fr 14px 38px 1fr 14px 50px;border-top:1px solid #000;align-items:stretch}
+.sr2 .top .ef>span{display:flex;align-items:center;justify-content:center;text-align:center;border-left:1px solid #000;font-size:6.8px}
+.sr2 .top .ef>span:first-child{border-left:0}
+.sr2 .top .ef .big{font-size:12px;font-weight:700}
+.sr2 .top .ef .fe{display:grid;grid-template-columns:repeat(3,1fr);font-size:5.6px;padding:0}
+.sr2 .top .ef .fe span{text-align:center;border-left:1px solid #000}
+.sr2 .top .ef .fe span:nth-child(-n+3){border-bottom:1px solid #000}
+.sr2 .top .ef .fe span:nth-child(3n+1){border-left:0}
+.sr2 .top .ef .fe span:nth-child(n+4){font-size:7px}
+.sr2 .sec{padding:1px 3px;background:var(--lv);border-top:1px solid #000}
+.sr2 .idr{display:grid;grid-template-columns:12px 1fr 12px 1.25fr;border-top:1px solid #000}
+.sr2 .idr>span{border-left:1px solid #000;padding:1px 2px}
+.sr2 .idr>span:first-child{border-left:0}
+.sr2 .idr .c{display:flex;align-items:center;justify-content:center;padding:0;font-size:6.2px}
+.sr2 .idr small{display:block;font-size:5.4px}
+.sr2 .idr b{font-size:8.4px}
+.sr2 .ln{display:grid;grid-template-columns:1fr 17px 8px 56px;border-top:1px solid #000;min-height:12px}
+.sr2 .ln>span{display:flex;align-items:center;padding:0 2px}
+.sr2 .ln .c{justify-content:center;background:var(--lv);border-left:1px solid #000;border-right:1px solid #000;padding:0;font-size:6.4px}
+.sr2 .ln .s{justify-content:center;padding:0}
+.sr2 .ln .v{justify-content:flex-end;border-left:1px solid #000;font-size:7.6px;font-variant-numeric:tabular-nums;transition:background .5s}
+.sr2 .ln .v.is-flash{animation:srFlash 1.1s}
+@keyframes srFlash{0%,30%{background:#fff3b0}100%{background:transparent}}
+.sr2 .imp{padding:2px 4px;background:var(--lv);border-top:1px solid #000;font-size:7.4px}
+.sr2 .ins{padding:3px 4px;border-top:1px solid #000;font-size:6.3px;line-height:1.35;text-align:justify}
+.sr2 .ins p{margin:0 0 3px;font:inherit;color:inherit;max-width:none}
+.sr2 .dec{padding:4px;border-top:1px solid #000;text-align:center;font-weight:700;font-size:6.6px}
+.sr2 .sig{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #000;height:46px}
+.sr2 .sig span{display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;border-left:1px solid #000;font-weight:700;font-size:6px;text-align:center}
+.sr2 .sig span:first-child{border-left:0}
+.sr2 .kb{position:absolute;left:0;right:0;bottom:0;z-index:7;height:236px;background:#d1d4d9;padding:6px 5px 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,.8,.3,1);font-family:-apple-system,system-ui,sans-serif}
+.sr2 .kb.is-on{transform:none}
+.sr2 .kb .kok{display:flex;justify-content:flex-end;height:22px;margin:0 8px 4px;font:600 13px/22px -apple-system,system-ui,sans-serif;color:#1e66d0}
+.sr2 .kp{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sr2 .kp span{height:44px;border-radius:6px;background:#fff;box-shadow:0 1px 0 #898a8d;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px;line-height:1;transition:background .08s}
+.sr2 .kp span small{font-size:8.5px;letter-spacing:1.6px;font-weight:600;margin-top:1px}
+.sr2 .kp span.e{background:transparent;box-shadow:none}
+.sr2 .kp span.is-k{background:#acb0b8}
+.sr2 .tap{position:absolute;left:0;top:0;z-index:21;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;
+  background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);
+  transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);
+  transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.sr2 .tap.is-press{--s:.78}
+.sr2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.sr2 .tap.is-ping::after{animation:srPing .5s ease-out}
+@keyframes srPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+@media (max-width:400px){.sr2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
+/* Animación .gp2 */
+.gp2{position:relative;flex:0 0 auto;
+  font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.gp2 *{box-sizing:border-box}
+.gp2.is-reset *{transition:none!important}
+.gp2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;
+  background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.gp2 .iph::before,.gp2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.gp2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.gp2 .iph::after{right:-8px;top:180px;height:86px}
+.gp2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.gp2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:20}
+.gp2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:19;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;color:#fff;font:600 14px/1 -apple-system,"SF Pro Text",system-ui,sans-serif}
+.gp2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.gp2 .sbar svg{height:11px}
+.gp2 .xhome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:20}
+.gp2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.gp2 .xlogo{display:flex;align-items:center;gap:7px;color:#fff}
+.gp2 .xlogo svg{width:24px;height:24px}
+.gp2 .xlogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.gp2 .xlogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.gp2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.gp2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.gp2 .view{position:absolute;left:0;right:0;top:96px;bottom:0;overflow:hidden}
+.gp2 .page{padding:8px 0 0;transition:transform .8s cubic-bezier(.35,.1,.25,1)}
+.gp2 h2{margin:0 0 6px 8px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.gp2 .rc{display:inline-block;width:1px;height:13px;vertical-align:-2px;background:#111;animation:gpBlink 1s steps(1) infinite}
+@keyframes gpBlink{0%{opacity:1}50%{opacity:0}}
+.gp2 .ft{padding:10px 8px 40px;font-size:11px}
+.gp2 .kb{position:absolute;left:0;right:0;bottom:0;z-index:7;height:236px;background:#d1d4d9;padding:6px 5px 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,.8,.3,1);font-family:-apple-system,system-ui,sans-serif}
+.gp2 .kb.is-on{transform:none}
+.gp2 .kb .tb{display:flex;justify-content:flex-end;height:22px;margin:0 8px 4px;font:600 13px/22px -apple-system,system-ui,sans-serif;color:#1e66d0}
+.gp2 .kp{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.gp2 .kp span{height:44px;border-radius:6px;background:#fff;box-shadow:0 1px 0 #898a8d;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px;line-height:1;transition:background .08s}
+.gp2 .kp span small{font-size:8.5px;letter-spacing:1.6px;font-weight:600;margin-top:1px}
+.gp2 .kp span.e{background:transparent;box-shadow:none}
+.gp2 .kp span.is-k{background:#acb0b8}
+.gp2 .tap{position:absolute;left:0;top:0;z-index:21;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;
+  background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);
+  transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);
+  transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.gp2 .tap.is-press{--s:.78}
+.gp2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.gp2 .tap.is-ping::after{animation:gpPing .5s ease-out}
+@keyframes gpPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+.gp2 .box{margin:0 8px;padding:8px;border:1px solid #d0d0d0;background:#f6f6f6;font-size:10.5px}
+.gp2 .box .r{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:30px}
+.gp2 .box .r span:first-child{flex:1}
+.gp2 .sel{position:relative;width:38px;height:20px;border:1px solid #bbb;background:#fff;display:flex;align-items:center;padding-left:4px;font-size:10.5px}
+.gp2 .sel::after{content:"";position:absolute;right:4px;top:7px;border:3.5px solid transparent;border-top:4.5px solid #666}
+.gp2 .num{width:38px;height:20px;border:1px solid #bbb;background:#fff;display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:10.5px;transition:box-shadow .2s}
+.gp2 .is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.gp2 .menu{position:absolute;z-index:8;width:200px;border-radius:13px;overflow:hidden;background:rgba(242,242,247,.97);box-shadow:0 12px 30px rgba(0,0,0,.28);font:14px -apple-system,system-ui,sans-serif;opacity:0;transform:scale(.92);transform-origin:top right;transition:opacity .2s,transform .25s;pointer-events:none}
+.gp2 .menu.is-on{opacity:1;transform:none}
+.gp2 .menu div{position:relative;height:38px;display:flex;align-items:center;padding-left:32px;border-bottom:.5px solid #d1d1d6;transition:background .15s}
+.gp2 .menu div:last-child{border-bottom:0}
+.gp2 .menu div.ck::before{content:"✓";position:absolute;left:12px;font-weight:600}
+.gp2 .menu div.is-hi{background:#d8d8dd}
+.gp2 .xgrid{margin:12px 2px 0;font-size:10.5px;border-top:1px solid #d6d6d6}
+.gp2 .gr{display:grid;grid-template-columns:1fr 72px 90px;height:23px;align-items:center;border-bottom:1px solid #ececec}
+.gp2 .gr span{padding:0 4px;height:100%;display:flex;align-items:center;border-right:1px solid #ececec}
+.gp2 .gr span:nth-child(2){justify-content:flex-end;font-variant-numeric:tabular-nums}
+.gp2 .gh{font-weight:600;background:linear-gradient(#fff,#f1f1f1)}
+.gp2 .gr.is-sel{background:#e3eefb}
+.gp2 .gr .ed{box-shadow:inset 0 0 0 1.5px #4d8fd6;background:#fff}
+.gp2 .gt{background:#d6d6d6;font-weight:600;border-bottom:0;margin-top:30px}
+.gp2 .gt span{border-right:0}
+.gp2 .fila{text-align:right;font-size:10px;padding:3px 4px}
+.gp2 .v.is-flash{animation:gpFlash 1.1s}
+@keyframes gpFlash{0%,30%{background:#fff3b0}100%{background:transparent}}
+.gp2 .xbtn{display:inline-flex;align-items:center;gap:5px;margin:10px 4px;height:26px;padding:0 9px;border:1px solid #bdbdbd;border-radius:3px;background:linear-gradient(#fdfdfd,#e8e8e8);font-size:11.5px;color:#222;transition:transform .1s,filter .15s}
+.gp2 .xbtn.is-press{transform:scale(.96);filter:brightness(.9)}
+.gp2 .xbtn svg{width:13px;height:13px}
+.gp2 .txt{padding:4px 6px;font-size:10px;line-height:1.5;text-align:justify}
+.gp2 .txt p{margin:0 0 8px;font:inherit;color:inherit;max-width:none}
+.gp2 .toast{position:absolute;left:50%;bottom:30px;z-index:7;width:200px;margin-left:-100px;padding:10px;background:#5cb85c;color:#fff;text-align:center;font-size:11px;border-radius:2px;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.gp2 .toast.is-on{opacity:1;transform:none}
+@media (max-width:400px){.gp2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
+/* Animación .ev2 */
+.ev2{position:relative;flex:0 0 auto;
+  font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.ev2 *{box-sizing:border-box}
+.ev2.is-reset *{transition:none!important}
+.ev2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;
+  background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.ev2 .iph::before,.ev2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.ev2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.ev2 .iph::after{right:-8px;top:180px;height:86px}
+.ev2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.ev2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:20}
+.ev2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:19;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;color:#fff;font:600 14px/1 -apple-system,"SF Pro Text",system-ui,sans-serif}
+.ev2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.ev2 .sbar svg{height:11px}
+.ev2 .xhome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:20}
+.ev2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.ev2 .xlogo{display:flex;align-items:center;gap:7px;color:#fff}
+.ev2 .xlogo svg{width:24px;height:24px}
+.ev2 .xlogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.ev2 .xlogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.ev2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.ev2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.ev2 .view{position:absolute;left:0;right:0;top:96px;bottom:0;overflow:hidden}
+.ev2 .page{padding:8px 0 0;transition:transform .8s cubic-bezier(.35,.1,.25,1)}
+.ev2 h2{margin:0 0 6px 8px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.ev2 .ft{padding:10px 8px 40px;font-size:11px}
+.ev2 .tap{position:absolute;left:0;top:0;z-index:21;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;
+  background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);
+  transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);
+  transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.ev2 .tap.is-press{--s:.78}
+.ev2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.ev2 .tap.is-ping::after{animation:evPing .5s ease-out}
+@keyframes evPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+.ev2 .menu{position:absolute;z-index:8;width:250px;border-radius:13px;overflow:hidden;background:rgba(242,242,247,.97);box-shadow:0 12px 30px rgba(0,0,0,.28);font:14px -apple-system,system-ui,sans-serif;opacity:0;transform:scale(.92);transform-origin:top right;transition:opacity .2s,transform .25s;pointer-events:none}
+.ev2 .menu.is-on{opacity:1;transform:none}
+.ev2 .menu div{position:relative;height:38px;display:flex;align-items:center;padding-left:32px;border-bottom:.5px solid #d1d1d6;transition:background .15s}
+.ev2 .menu div:last-child{border-bottom:0}
+.ev2 .menu div.is-hi{background:#d8d8dd}
+.ev2 .esel{position:relative;margin:0 4px;height:22px;border:1px solid #bbb;background:#fff;display:flex;align-items:center;padding:0 22px 0 4px;font-size:11px;transition:box-shadow .2s}
+.ev2 .esel.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.ev2 .esel::after{content:"";position:absolute;right:6px;top:8px;border:4px solid transparent;border-top:5px solid #666}
+.ev2 .body{opacity:0;transition:opacity .4s}
+.ev2 .body.is-on{opacity:1}
+.ev2 .prom{margin:6px 4px 8px;font-size:17px}
+.ev2 .prom b{color:#d0021b;font-weight:600}
+.ev2 table{width:100%;border-collapse:collapse;font-size:10.5px;margin:0}
+.ev2 th,.ev2 td{height:24px;padding:0 5px;border:0;border-bottom:1px solid #e6e6e6;text-align:left;background:none;color:#222}
+.ev2 th{font-weight:600;background:linear-gradient(#fff,#f1f1f1)}
+.ev2 td.n,.ev2 th.n{text-align:right;width:48px;font-variant-numeric:tabular-nums}
+.ev2 td.pc{color:#1a9a2f;font-weight:700;text-align:right}
+.ev2 .leg{display:flex;justify-content:center;gap:12px;font-size:9.5px;margin:12px 0 0}
+.ev2 .leg i{display:inline-block;width:20px;height:8px;border:2px solid;margin-right:4px;vertical-align:-1px}
+.ev2 .radar{display:block;width:310px;height:200px;margin:0 auto 14px}
+.ev2 .radar .ev,.ev2 .radar .id{transform-box:view-box;transform-origin:125px 112px;transform:scale(0);transition:transform 1.1s cubic-bezier(.3,1.2,.4,1)}
+.ev2 .body.is-on .radar.is-in .id{transform:scale(1)}
+.ev2 .body.is-on .radar.is-in .ev{transform:scale(1);transition-delay:.35s}
+@media (max-width:400px){.ev2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
+/* Animación .fm2 */
+.fm2{position:relative;flex:0 0 auto;
+  font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
+.fm2 *{box-sizing:border-box}
+.fm2.is-reset *{transition:none!important}
+.fm2 .iph{position:relative;width:356px;height:730px;border-radius:56px;padding:11px;
+  background:#0b0b0d;box-shadow:0 0 0 2px #9a9ca1,0 0 0 4px #5d6066,0 0 0 5px #2a2b2e,0 30px 60px -20px rgba(0,0,0,.55)}
+.fm2 .iph::before,.fm2 .iph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#6c6f75,#a9abb0)}
+.fm2 .iph::before{left:-8px;top:150px;height:56px;box-shadow:0 70px 0 #8a8d92}
+.fm2 .iph::after{right:-8px;top:180px;height:86px}
+.fm2 .scr{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#fff}
+.fm2 .island{position:absolute;left:50%;top:10px;width:104px;height:30px;margin-left:-52px;border-radius:16px;background:#000;z-index:20}
+.fm2 .sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:19;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;color:#fff;font:600 14px/1 -apple-system,"SF Pro Text",system-ui,sans-serif}
+.fm2 .sbar .ic{display:flex;gap:5px;align-items:center}
+.fm2 .sbar svg{height:11px}
+.fm2 .xhome{position:absolute;left:50%;bottom:7px;width:120px;height:5px;margin-left:-60px;border-radius:3px;background:#111;z-index:20}
+.fm2 .hdr{position:absolute;left:0;right:0;top:0;z-index:5;height:96px;padding:50px 12px 0;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#3a72b3,#24538c)}
+.fm2 .xlogo{display:flex;align-items:center;gap:7px;color:#fff}
+.fm2 .xlogo svg{width:24px;height:24px}
+.fm2 .xlogo b{font:600 17px/1 "Segoe UI",sans-serif}
+.fm2 .xlogo small{display:block;font-size:7.5px;letter-spacing:1.5px;opacity:.75;margin-top:2px}
+.fm2 .burger{width:38px;height:28px;border-radius:4px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);display:grid;place-content:center;gap:4px}
+.fm2 .burger i{display:block;width:18px;height:2px;background:#fff;border-radius:1px}
+.fm2 .view{position:absolute;left:0;right:0;top:96px;bottom:0;overflow:hidden}
+.fm2 .page{padding:8px 0 0;transition:transform .8s cubic-bezier(.35,.1,.25,1)}
+.fm2 h2{margin:0 0 6px 8px;font:400 17px/1.3 "Segoe UI",sans-serif;color:#333;letter-spacing:0}
+.fm2 .rc{display:inline-block;width:1px;height:13px;vertical-align:-2px;background:#111;animation:fmBlink 1s steps(1) infinite}
+@keyframes fmBlink{0%{opacity:1}50%{opacity:0}}
+.fm2 .ft{padding:10px 8px 40px;font-size:11px}
+.fm2 .tap{position:absolute;left:0;top:0;z-index:21;width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:50%;
+  background:rgba(40,40,50,.22);border:2px solid rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25);
+  transform:translate(var(--x,200px),var(--y,500px)) scale(var(--s,1));opacity:var(--o,0);
+  transition:transform var(--d,.7s) cubic-bezier(.5,0,.25,1),opacity .25s}
+.fm2 .tap.is-press{--s:.78}
+.fm2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
+.fm2 .tap.is-ping::after{animation:fmPing .5s ease-out}
+@keyframes fmPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
+.fm2 .is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.fm2 .menu{position:absolute;z-index:8;width:230px;border-radius:13px;overflow:hidden;background:rgba(242,242,247,.97);box-shadow:0 12px 30px rgba(0,0,0,.28);font:14px -apple-system,system-ui,sans-serif;opacity:0;transform:scale(.92);transform-origin:top right;transition:opacity .2s,transform .25s;pointer-events:none}
+.fm2 .menu.is-on{opacity:1;transform:none}
+.fm2 .menu div{position:relative;height:38px;display:flex;align-items:center;padding-left:32px;border-bottom:.5px solid #d1d1d6;transition:background .15s}
+.fm2 .menu div:last-child{border-bottom:0}
+.fm2 .menu div.is-hi{background:#d8d8dd}
+.fm2 .esel{position:relative;margin:0 4px;height:22px;border:1px solid #bbb;background:#fff;display:flex;align-items:center;padding:0 22px 0 4px;font-size:11px;transition:box-shadow .2s}
+.fm2 .esel.is-focus{box-shadow:0 0 0 2px #9cc3ee}
+.fm2 .esel::after{content:"";position:absolute;right:6px;top:8px;border:4px solid transparent;border-top:5px solid #666}
+.fm2 .body{opacity:0;transition:opacity .4s;padding:6px 8px 0;font-size:10.5px;line-height:1.5;color:#2a2f3a}
+.fm2 .body.is-on{opacity:1}
+.fm2 .body p{margin:0 0 8px;text-align:justify;font:inherit;color:inherit;max-width:none}
+.fm2 .hero{color:#1d2433;padding:0 0 8px;margin:12px 0 10px;border-bottom:2px solid #24538c}
+.fm2 .hero h3{color:#1d2433;font:600 14px/1.3 "Segoe UI",sans-serif;letter-spacing:0;margin:0}
+.fm2 .body h4{display:block;margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid #e3e8f0;font:600 11.5px/1.3 "Segoe UI",sans-serif;letter-spacing:0;color:#1d2433}
+.fm2 .body h4 b{color:#24538c}
+.fm2 .body h4 b::after{content:". "}
+.fm2 .body .q{font-weight:600;margin:14px 0 4px;color:#1d2433}
+.fm2 table.t{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #dfe5ee;border-radius:4px;overflow:hidden;font-size:9.5px;margin:6px 0 10px}
+.fm2 table.t td,.fm2 table.t th{border:0;border-bottom:1px solid #edf0f5;padding:5px 6px;vertical-align:top;text-align:left;background:none;color:#2a2f3a}
+.fm2 table.t tr:first-child th{background:#24538c;color:#fff;font-weight:600;text-align:center}
+.fm2 table.t tr:nth-child(2) th{background:#eef3fa;color:#24538c;font-weight:600;text-align:center}
+.fm2 table.t td:first-child{font-weight:700;color:#24538c;text-align:center}
+.fm2 .seg{display:flex;gap:22px;margin:4px 0 8px;padding:0;border:0;background:none;box-shadow:none;border-radius:0}
+.fm2 .rad{display:flex;align-items:center;gap:6px;height:24px;padding-left:2px}
+.fm2 .rad i{flex:none;width:14px;height:14px;border-radius:50%;border:1.5px solid #777;display:grid;place-items:center;transition:border-color .15s}
+.fm2 .rad i::after{content:"";width:6px;height:6px;border-radius:50%;background:#1e66d0;transform:scale(0);transition:transform .15s}
+.fm2 .rad.on i{border-color:#1e66d0}
+.fm2 .rad.on i::after{transform:scale(1)}
+.fm2 .ta{min-height:40px;border:1px solid #cfd6e0;border-radius:4px;background:#fff;padding:5px;margin:4px 0 6px;font-size:10.5px;transition:box-shadow .2s}
+.fm2 .who{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.fm2 .who div{padding:8px 10px;border-radius:4px;background:#f5f7fa;font-weight:600;font-size:10.5px}
+.fm2 .who div:first-child{grid-column:span 2}
+.fm2 .who small{display:block;font-size:8.5px;color:#7a8597;font-weight:500;letter-spacing:.4px;text-transform:uppercase}
+.fm2 .chk{display:flex;gap:9px;align-items:flex-start;margin:10px 0 6px;padding:6px 0;transition:all .25s}
+.fm2 .chk i{flex:none;width:15px;height:15px;border-radius:3px;border:1.6px solid #9aa6b8;position:relative;transition:all .2s}
+.fm2 .chk.on i{background:#1e66d0;border-color:#1e66d0}
+.fm2 .chk.on i::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.fm2 .kb{position:absolute;left:0;right:0;bottom:0;z-index:7;height:232px;background:#d1d4d9;padding:8px 3px 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.3,.8,.3,1)}
+.fm2 .kb.is-on{transform:none}
+.fm2 .kb .tb{display:flex;justify-content:flex-end;height:22px;margin:-4px 6px 4px;font:600 13px/22px -apple-system,system-ui,sans-serif;color:#1e66d0}
+.fm2 .kr{display:flex;justify-content:center;gap:5px;margin-bottom:9px}
+.fm2 .kr span{width:28px;height:38px;border-radius:5px;background:#fff;box-shadow:0 1px 0 #898a8d;display:grid;place-items:center;font:400 17px/1 -apple-system,system-ui,sans-serif;transition:background .08s}
+.fm2 .kr span.w{width:38px;background:#acb0b8;font-size:13px}
+.fm2 .kr span.sp{width:170px;font-size:13px}
+.fm2 .kr span.is-k{background:#acb0b8}
+@media (max-width:400px){.fm2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 </style>
 </head>
 <body>
@@ -117,27 +738,33 @@
     <header class="mod-hero" data-reveal>
       <a class="mod-crumb" href="modulos.html">Módulos <b>· 04 Cobra</b></a>
       <h1>Autoservicio</h1>
-      <p>Tu personal consulta su rol de pagos, pide vacaciones y descarga su formulario 107 desde el celular o el navegador, sin pasar por RRHH.</p>
+      <p>Un portal para tu personal, que les da la libertad de revisar su rol de pagos, pedir vacaciones, marcar su asistencia y sacar sus certificados desde el celular, sin pasar por RRHH.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="contacto.html">Solicitar una demo</a>
         <a class="btn btn-secondary" href="modulos.html">Ver todos los módulos</a>
       </div>
     </header>
 
-    <div class="mod-media">
-        <div data-reveal><div class="rp-stage band-dark">
-          <ol class="rp-story" id="rpStory">
-            <li data-st="0"><b>Llega el aviso</b><span>El rol de octubre está listo y Andrea recibe la notificación en su celular.</span></li>
-            <li data-st="1"><b>Elige el mes</b><span>Entra al autoservicio y escoge su rol. También puede ver los de meses anteriores.</span></li>
-            <li data-st="2"><b>Revisa cada valor</b><span>Ingresos, descuentos y el detalle de cada rubro, sin preguntarle a RRHH.</span></li>
-            <li data-st="3"><b>Lo acepta</b><span>Ve cuánto recibe y acepta el rol con un botón. RRHH ya no persigue firmas.</span></li>
-          </ol>
-          <div class="rp2" id="rp2" role="img" aria-label="Animación del autoservicio en el celular: llega la notificación del rol de pagos, la empleada elige el mes, revisa ingresos y egresos y acepta el rol electrónicamente">
+        </div></div>
+    </div>
+
+    <section class="mod-sec mod-fns" id="funciones" style="--mc:#1C7ED6" aria-labelledby="fn-title">
+      <h2 id="fn-title">Funciones de Autoservicio</h2>
+      <div class="mod-fn-rows">
+        <article class="mod-fn" id="rol-de-pagos">
+          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-rol-de-pagos.png" alt="" width="16" height="16">Rol de pagos</h3><p>Tu gente consulta su rol de pagos del mes y los de meses anteriores desde el celular o el navegador.</p>
+            <ol class="rp-story" id="rpStory">
+              <li data-st="0"><b>Elige el mes</b><span>Entra al autoservicio y escoge el rol que quiere ver, del mes actual o de meses anteriores.</span></li>
+              <li data-st="1"><b>Revisa cada valor</b><span>Ingresos, descuentos y el detalle de cada rubro, sin preguntarle a RRHH.</span></li>
+              <li data-st="2"><b>Ve cuánto recibe</b><span>El total a recibir, claro y al momento.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="rol-de-pagos">
+          <div class="rp2" id="rp2" role="img" aria-label="Animación del autoservicio en el celular: se elige el rol de pagos del mes y se revisan los ingresos, los egresos y el total a recibir">
             <div class="rph"><div class="scr" data-el="scr">
               <i class="notch"></i>
-              <div class="lock" data-el="lock"><div class="clk">8:02</div><div class="dt">viernes, 30 de octubre</div>
-                <div class="ntf" data-el="ntf"><i>S</i><div><b>SquareNet Autoservicio</b><span>Tu rol de pago de octubre ya está disponible.</span></div><small>ahora</small></div>
-              </div>
+              <div class="sbar" aria-hidden="true"><b></b><span><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0Zm-4-4L2.5 6a7.8 7.8 0 0 1 11 0L12 7.5a5.6 5.6 0 0 0-8 0ZM.9 4.4 0 3.5a11.4 11.4 0 0 1 16 0l-.9.9a10.1 10.1 0 0 0-14.2 0Z"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3.2" fill="none" stroke="#fff" stroke-opacity=".45"/><rect x="2" y="2" width="18" height="8" rx="2"/><path d="M25 4v4a2 2 0 0 0 0-4Z" fill-opacity=".45"/></svg></span></div>
+              <i class="home"></i>
               <div class="hdr"><span class="rlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span><span class="burger"><i></i><i></i><i></i></span></div>
               <div class="view">
                 <div class="page" data-el="page">
@@ -162,7 +789,6 @@
                     <div class="rsec">Egresos</div>
                     <table><tr><th>Nombre</th><th>Valor</th></tr><tr><td>Quincena</td><td>208.00</td></tr><tr><td>Aporte personal IESS</td><td>56.42</td></tr><tr class="tot"><td>Total egresos</td><td>264.42</td></tr></table>
                     <div class="net"><span data-el="net">Total a recibir: $464.83</span></div>
-                    <span class="acc" data-el="acc">Aceptar rol</span>
                   </div>
                   <div class="rfoot">© 2026 - <a>SquareNet</a></div>
                 </div>
@@ -174,16 +800,509 @@
                 </div>
               </div>
               <span class="tap" data-el="tap"></span>
+              </div>
+        </article>
+        <article class="mod-fn" id="vacaciones-y-permisos">
+          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-vacaciones-y-permisos.png" alt="" width="16" height="16">Vacaciones y permisos</h3><p>Solicitan vacaciones y permisos viendo los días disponibles, y revisan sus ausentismos.</p>            <ol class="rp-story" id="auStory">
+              <li><b>Elige las fechas</b><span>Marca desde y hasta en el calendario y ve cuántos días está pidiendo.</span></li>
+              <li><b>Escoge el motivo</b><span>Al elegir vacaciones, el sistema le muestra cuántos días tiene disponibles.</span></li>
+              <li><b>Explica y adjunta</b><span>Escribe una observación y sube un documento de respaldo desde el celular.</span></li>
+              <li><b>Envía la solicitud</b><span>Queda pendiente hasta que su jefe la apruebe, y puede ver el estado en la lista.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="vacaciones-y-permisos">
+          <div class="au2" id="au2" role="img" aria-label="Animación del autoservicio en un iPhone: se solicita un ausentismo por vacaciones eligiendo fechas, motivo y observación, se adjunta un documento y la solicitud queda pendiente de aprobación">
+            <div class="iph"><div class="scr" data-el="scr">
+              <i class="island"></i>
+              <div class="sbar" aria-hidden="true"><span class="ic">
+                <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="#fff"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="#fff"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="#fff"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="#fff"/></svg>
+                <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z" fill="#fff"/></svg>
+                <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="17" height="8" rx="1.8" fill="#fff"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" fill="#fff" fill-opacity=".5"/></svg>
+              </span></div>
+              <div class="hdr">
+                <span class="alogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                <span class="burger"><i></i><i></i><i></i></span>
+              </div>
+              <div class="view">
+                <div class="page" data-el="page">
+                  <div class="form">
+                    <h2>Ausentismos</h2>
+                    <div class="arow"><label>Desde:</label><span class="dt" data-el="desde"><span data-el="desdev">30/10/2026 00:00</span><i class="ar"></i></span></div>
+                    <div class="arow"><label>Hasta:</label><span class="dt" data-el="hasta"><span data-el="hastav">30/10/2026 23:59</span><i class="ar"></i></span><span class="days" data-el="days">5 Día(s)</span></div>
+                    <div class="lb">Motivo:</div>
+                    <div class="cmb" data-el="motivo"><span data-el="motivov"></span><i class="ar"></i></div>
+                    <div class="warn" data-el="warn">Tiene disponible 5.00 días de vacación</div>
+                    <div class="lb" style="margin-top:0">Observación:</div>
+                    <div class="obs" data-el="obs"><span data-el="obsv"></span></div>
+                    <div class="btnr"><span class="att" data-el="att">📎 reserva_viaje.pdf</span><span class="abtn" data-el="cargar">Cargar Documento</span></div>
+                    <div class="abtn wide" data-el="solicitar">Solicitar</div>
+                  </div>
+                  <div class="disp">Días de vacación disponible: 5.00</div>
+                  <div class="flt">Desde: <span class="dt"><span>30/07/2026</span><i class="ar"></i></span></div>
+                  <div class="agrid">
+                    <div class="gt" data-el="gt">
+                      <div class="gr gh"><span>Desde</span><span>Hasta</span><span>Motivo</span><span></span><span>Aprobado Por</span><span>Fecha Aprobación</span><span>Observación</span><span>Doc</span></div>
+                      <div class="gr"><span>15/10/2026 00:00</span><span>15/10/2026 23:59</span><span>Vacaciones</span><span class="pr"></span><span class="ok">Administrador</span><span class="ok">14/10/2026 10:18:21</span><span>trámite personal</span><span></span></div>
+                      <div class="gr"><span>26/10/2026 00:00</span><span>26/10/2026 23:59</span><span>Vacaciones</span><span class="pr"></span><span class="no">(Sin Aprobación)</span><span></span><span>cita médica familiar</span><span></span></div>
+                      <div class="gr is-new" data-el="newrow"><span>02/11/2026 00:00</span><span>06/11/2026 23:59</span><span>Vacaciones</span><span class="pr"></span><span class="no">(Sin Aprobación)</span><span></span><span>viaje familiar a la costa</span><span></span></div>
+                    </div>
+                  </div>
+                  <div class="ft">© 2026 - SquareNet</div>
+                </div>
+                <div class="cal" data-el="cal"></div>
+                <div class="lst" data-el="lst"></div>
+              </div>
+              <div class="toast" data-el="toast">Se ha creado su solicitud de ausentismo correctamente, espere aprobación</div>
+              <div class="dim" data-el="dim"></div>
+              <div class="sheet" data-el="sheet">
+                <i class="grab"></i>
+                <div class="sh"><span>Cancelar</span><b>Recientes</b><span style="opacity:0">.</span></div>
+                <div class="asec">Archivos</div>
+                <div class="fl">
+                  <div class="fi" data-f="1"><svg viewBox="0 0 24 28"><path d="M3 1h12l6 6v19a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" fill="#fff" stroke="#c7c7cc"/><rect x="2" y="15" width="14" height="8" rx="1.5" fill="#e0413a"/><text x="9" y="21.3" font-size="5.6" font-weight="700" font-family="Arial" fill="#fff" text-anchor="middle">PDF</text></svg><span>reserva_viaje.pdf<small>Hoy, 08:12 · 184 KB</small></span></div>
+                  <div class="fi"><svg viewBox="0 0 24 28"><rect x="2" y="2" width="20" height="24" rx="3" fill="#7fb6e8"/><path d="M4 22l5-7 4 5 3-3 5 5Z" fill="#3e8b4b"/><circle cx="16" cy="9" r="2.4" fill="#ffd34d"/></svg><span>IMG_2381.JPG<small>Ayer, 18:40 · 2.1 MB</small></span></div>
+                  <div class="fi"><svg viewBox="0 0 24 28"><path d="M3 1h12l6 6v19a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" fill="#fff" stroke="#c7c7cc"/><rect x="2" y="15" width="14" height="8" rx="1.5" fill="#e0413a"/><text x="9" y="21.3" font-size="5.6" font-weight="700" font-family="Arial" fill="#fff" text-anchor="middle">PDF</text></svg><span>certificado_medico.pdf<small>12/10/2026 · 96 KB</small></span></div>
+                </div>
+              </div>
+              <div class="kb" data-el="kb">
+                <div class="tb">OK</div>
+                <div class="kr"><span>q</span><span>w</span><span>e</span><span>r</span><span>t</span><span>y</span><span>u</span><span>i</span><span>o</span><span>p</span></div>
+                <div class="kr"><span>a</span><span>s</span><span>d</span><span>f</span><span>g</span><span>h</span><span>j</span><span>k</span><span>l</span><span>ñ</span></div>
+                <div class="kr"><span class="w">⇧</span><span>z</span><span>x</span><span>c</span><span>v</span><span>b</span><span>n</span><span>m</span><span class="w">⌫</span></div>
+                <div class="kr"><span class="w">123</span><span class="w">🙂</span><span class="sp" data-k=" ">espacio</span><span class="w" style="width:76px">intro</span></div>
+              </div>
+              <span class="tap" data-el="tap"></span>
+              <i class="ahome"></i>
             </div></div>
           </div>
-        </div></div>
-    </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="marcacion-web">
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-marcacion-web.png" alt="" width="16" height="16">Marcación web</h3><p>Marcan su entrada y salida desde el celular o el navegador.</p>
+            <ol class="rp-story" id="mw2Story">
+<li><b>Deja una nota</b><span>Si hace falta, escribe una observación antes de marcar.</span></li>
+              <li><b>Marca y comparte su ubicación</b><span>Toca «Realizar Marcación» y el navegador le pide permiso para usar su ubicación precisa.</span></li>
+              <li><b>Queda registrada</b><span>Ve su marcación con la hora, el dispositivo y la observación.</span></li>
+              <li><b>RRHH ve dónde marcó</b><span>En SquareNet, cada marcación web guarda la ubicación exacta en el mapa, con precisión de pocos metros.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="marcacion-web">
+          <div class="mw2" id="mw2" role="img" aria-label="Animación de la marcación web en un iPhone: el empleado escribe una observación, realiza la marcación, permite la ubicación precisa y la marcación queda registrada con la hora, el dispositivo y la observación">
+            <div class="iph">
+              <div class="scr" data-el="scr">
+                <i class="island"></i>
+                <div class="sbar"><span style="display:flex;align-items:center;gap:4px"><svg class="loc" data-el="locic" viewBox="0 0 10 10"><path d="M9.3.7 1 4.2l3.6.9.9 3.6Z" fill="#fff"/></svg></span><span class="ic">
+                  <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="#fff"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="#fff"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="#fff"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="#fff"/></svg>
+                  <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z" fill="#fff"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="17" height="8" rx="1.8" fill="#fff"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" fill="#fff" fill-opacity=".5"/></svg>
+                </span></div>
+                <div class="hdr">
+                  <span class="xlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                  <span class="burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="view">
+                  <h2>Marcación Web</h2>
+                  <span class="mk" data-el="mk">Realizar Marcación</span>
+                  <div class="ol">Observaciones:</div>
+                  <div class="obs" data-el="obs"><span class="ph" data-el="obsv">Puede realizar una observación (opcional) de su marcación.</span></div>
+                  <div class="md">Marcaciones del día:</div>
+                  <div class="ent" data-el="ent">
+                    <div><b>Hora Marcación:</b> 30/10/2026 10:43</div>
+                    <div><b>Dispositivo:</b> iPhone Safari</div>
+                    <div><b>Observaciones:</b> estoy en el centro</div>
+                  </div>
+                  <div class="ft">© 2026 - SquareNet</div>
+                </div>
+                <div class="toast" data-el="toast">Se ha creado la Marcación Correctamente</div>
+                <div class="kb" data-el="kb">
+                  <div class="tb">OK</div>
+                  <div class="kr"><span>q</span><span>w</span><span>e</span><span>r</span><span>t</span><span>y</span><span>u</span><span>i</span><span>o</span><span>p</span></div>
+                  <div class="kr"><span>a</span><span>s</span><span>d</span><span>f</span><span>g</span><span>h</span><span>j</span><span>k</span><span>l</span><span>ñ</span></div>
+                  <div class="kr"><span class="w">⇧</span><span>z</span><span>x</span><span>c</span><span>v</span><span>b</span><span>n</span><span>m</span><span class="w">⌫</span></div>
+                  <div class="kr"><span class="w">123</span><span class="w">🙂</span><span class="sp" data-k=" ">espacio</span><span class="w" style="width:76px">intro</span></div>
+                </div>
+                <div class="dim" data-el="dim"></div>
+                <div class="perm" data-el="perm">
+                  <h4>¿Permitir que “portal.empresademo.example” use tu ubicación?</h4>
+                  <p>Tu ubicación se registra junto con cada marcación.</p>
+                  <div class="pmap">
+                    <svg viewBox="0 0 270 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                      <rect width="270" height="120" fill="#eef0ea"/>
+                      <path d="M180 0h90v50c-26 5-50-3-70 6-12-16-17-36-20-56Z" fill="#cfe6c4"/>
+                      <g stroke="#fff" fill="none" stroke-linecap="round"><path d="M-10 58 280 34" stroke-width="9"/><path d="M128 -10 148 130" stroke-width="9"/><path d="M-10 18 280 4M-10 92 280 76M50 -10 62 130M212 -10 222 130" stroke-width="5"/></g>
+                      <circle cx="135" cy="58" r="13" fill="rgba(30,102,208,.16)" stroke="rgba(30,102,208,.5)"/>
+                      <circle cx="135" cy="58" r="5.5" fill="#1e66d0" stroke="#fff" stroke-width="2"/>
+                    </svg>
+                    <span class="ptag"><svg viewBox="0 0 10 10"><path d="M9.3.7 1 4.2l3.6.9.9 3.6Z" fill="#1e66d0"/></svg>Precisa: Activada</span>
+                  </div>
+                  <div class="b" data-el="once">Permitir una vez</div>
+                  <div class="b">Permitir al usar el sitio</div>
+                  <div class="b">No permitir</div>
+                </div>
+                <div class="cfm" data-el="cfm">
+                  <div class="t"><span>Nueva Marcación</span><span>×</span></div>
+                  <div class="m">Desea realizar la Marcación?</div>
+                  <div class="a"><span class="okb" data-el="ok">OK</span><span>CANCEL</span></div>
+                </div>
+                <span class="tap" data-el="tap"></span>
+                <i class="xhome"></i>
+              </div>
+            </div>
+            <div class="mwhr" data-el="hr" aria-hidden="true">
+              <div class="hr-h">SquareNet · Marcaciones<i>lo que ve RRHH</i></div>
+              <div class="hr-b"><b>Empleado:</b> Demo, Usuario · 10:43<br><b>Ubicación:</b> -0.18065, -78.48261</div>
+              <div class="hr-map">
+                <svg class="base" viewBox="0 0 270 130" preserveAspectRatio="xMidYMid slice"><rect width="270" height="130" fill="#eef0ea"/><path d="M180 0h90v54c-26 5-50-3-72 7-12-18-15-40-18-61Z" fill="#cfe6c4"/><path d="M0 102c34-9 68 5 102-2s60-19 94-12 56 17 74 14v28H0Z" fill="#cfe3f3"/><g stroke="#fff" stroke-linecap="round" fill="none"><path d="M-10 60 280 34" stroke-width="10"/><path d="M126 -10 148 140" stroke-width="10"/><path d="M-10 18 280 4M-10 96 280 78M50 -10 62 140M212 -10 222 140" stroke-width="5"/><path d="M-10 40 280 18M-10 80 280 56M92 -10 104 140M176 -10 186 140" stroke-width="3"/></g><g fill="#e2e1dc"><rect x="68" y="66" width="18" height="12" rx="2"/><rect x="156" y="44" width="14" height="10" rx="2"/><rect x="196" y="68" width="16" height="10" rx="2"/></g><text x="12" y="57" font-size="7" fill="#8a8c86" font-family="Arial" transform="rotate(-5 12 57)">Av. Central</text></svg>
+                <span class="hr-acc" data-el="hacc"></span>
+                <svg class="hr-pin" data-el="hpin" viewBox="0 0 26 34"><path d="M13 1C6.4 1 1.5 6 1.5 12.3 1.5 21 13 33 13 33s11.5-12 11.5-20.7C24.5 6 19.6 1 13 1Z" fill="#e0413a" stroke="#fff" stroke-width="1.5"/><circle cx="13" cy="12.5" r="4.3" fill="#fff"/></svg>
+                <span class="hr-tag">Ubicación precisa</span>
+                <span class="hr-accl" data-el="haccl">± 48 m</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="certificados">
+          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-certificados.png" alt="" width="16" height="16">Certificados</h3><p>Obtienen sus certificados sin pasar por Recursos Humanos.</p>
+            <ol class="rp-story" id="ce2Story">
+<li><b>Elige el certificado</b><span>Laboral con o sin sueldo, para el banco, de cesantía… los que tu empresa haya configurado.</span></li>
+              <li><b>Se genera al instante</b><span>Con sus datos, el membrete de la empresa y la firma de RRHH, listo para leer.</span></li>
+              <li><b>Lo imprime o lo comparte</b><span>Desde el mismo celular, sin pedírselo a nadie.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="certificados">
+          <div class="ce2" id="ce2" role="img" aria-label="Animación del autoservicio en un iPhone: se elige un certificado laboral, se genera al instante con los datos del empleado y se imprime desde el celular">
+            <div class="iph">
+              <div class="scr" data-el="scr">
+                <i class="island"></i>
+                <div class="sbar" data-el="sbar"><span></span><span class="ic">
+                  <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="5" y="5" width="3" height="6" rx=".8"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8"/><rect x="15" y="0" width="3" height="11" rx=".8"/></svg>
+                  <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x="2" y="2" width="17" height="8" rx="1.8"/><path d="M3.5.5h17A3 3 0 0 1 23.5 3.5v5a3 3 0 0 1-3 3h-17a3 3 0 0 1-3-3v-5a3 3 0 0 1 3-3Zm0 1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h17a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2Z" opacity=".5"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" opacity=".5"/></svg>
+                </span></div>
+                <div class="hdr">
+                  <span class="xlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                  <span class="burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="view">
+                  <div class="page" data-el="page">
+                    <h2>Certificados</h2>
+                    <div class="sel" data-el="sel"><span data-el="selv"></span></div>
+                    <div class="loading" data-el="loading">Cargando...</div>
+                    <div class="letter" data-el="letter">
+                      <div class="lh"><span class="lg"><svg viewBox="0 0 26 26"><rect x="1" y="1" width="24" height="24" rx="6" fill="#24538c"/><path d="M8.5 18.5v-11h9M8.5 13h7.5M8.5 18.5h9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>EMPRESA DEMO</span><small>Empresa Demo S.A.<br>RUC 1792000000001</small></div>
+                      <div class="dt">Quito, 30 de Octubre de 2026</div>
+                      <p>Estimados Sres.</p>
+                      <p><b>A Quien Corresponda</b></p>
+                      <p>Ciudad. -</p>
+                      <div class="tt">CERTIFICADO DE TRABAJO</div>
+                      <p>Mediante el presente <b>CERTIFICO</b> que la Sra. <b>Paredes Lozano Andrea Carolina</b>, con cédula de ciudadanía número 1724598036, labora en Empresa Demo S.A. desde el 3 de Marzo de 2021, desempeñándose como Asistente Contable, con un sueldo básico de $ 520.00 (QUINIENTOS VEINTE DÓLARES) mensuales, más los beneficios de ley.</p>
+                      <p>Lo certifico en honor a la verdad, pudiendo la interesada hacer uso del presente certificado como convenga a sus intereses.</p>
+                      <div class="sg">Atentamente,
+                        <svg viewBox="0 0 110 38" aria-hidden="true"><path d="M8 28c6-4 9-16 14-20 3-3 5 2 3 8-2 7-5 11-1 11 4 0 7-13 11-14 3 0 0 9 3 10 3 1 6-8 9-8 2 0 1 6 4 6 4 0 9-7 15-7 6 0 9 3 16 0 6-2 11-6 18-8" fill="none" stroke="#2a3a8c" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <b>LCDA. MARIANA CELI ANDRADE</b><b>JEFA DE TALENTO HUMANO</b></div>
+                      <div class="lf">Av. Central 1200 y Calle 9 · Quito – Ecuador<br>(02) 555-0142 · talento@empresademo.example</div>
+                    </div>
+                  </div>
+                  <div class="menu ios" data-el="menu"></div>
+                </div>
+                <div class="sf ios">
+                  <div class="url"><svg viewBox="0 0 10 12"><rect x="1" y="5" width="8" height="6.5" rx="1.4" fill="#555"/><path d="M2.8 5V3.5a2.2 2.2 0 0 1 4.4 0V5" fill="none" stroke="#555" stroke-width="1.2"/></svg>portal.empresademo.example</div>
+                  <div class="tb">
+                    <span><svg viewBox="0 0 20 20"><path d="M12.5 4 6.5 10l6 6"/></svg></span>
+                    <span class="off"><svg viewBox="0 0 20 20"><path d="m7.5 4 6 6-6 6"/></svg></span>
+                    <span data-el="shareb"><svg viewBox="0 0 20 20"><path d="M10 2.5v10M6.5 6 10 2.5 13.5 6M6 8.5H4.5v9h11v-9H14"/></svg></span>
+                    <span><svg viewBox="0 0 20 20"><path d="M10 5.5c-1.8-1.5-4.4-2-7-1.6v11c2.6-.4 5.2.1 7 1.6 1.8-1.5 4.4-2 7-1.6v-11c-2.6-.4-5.2.1-7 1.6Zm0 0v11"/></svg></span>
+                    <span><svg viewBox="0 0 20 20"><rect x="3" y="6" width="10" height="10" rx="2"/><path d="M7 4.5V4a1.5 1.5 0 0 1 1.5-1.5H16A1.5 1.5 0 0 1 17.5 4v7.5A1.5 1.5 0 0 1 16 13h-.5"/></svg></span>
+                  </div>
+                </div>
+                <div class="dim" data-el="dim"></div>
+                <div class="sheet share ios" data-el="share">
+                  <div class="sh-h"><span class="th"><svg viewBox="0 0 26 26"><rect x="1" y="1" width="24" height="24" rx="6" fill="#24538c"/><path d="M8.5 18.5v-11h9M8.5 13h7.5M8.5 18.5h9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span><span><b>Certificados</b><small>portal.empresademo.example</small></span><span class="xx">✕</span></div>
+                  <div class="apps">
+                    <div><i style="background:radial-gradient(circle at 50% 50%,#fff 0 30%,#3fa9f5 31% 100%)"></i>AirDrop</div>
+                    <div><i style="background:linear-gradient(#6ee36a,#2ec247)"></i>Mensajes</div>
+                    <div><i style="background:linear-gradient(#5eb5ff,#1a73e8)"></i>Mail</div>
+                    <div><i style="background:linear-gradient(#fff6c2,#ffd84d)"></i>Notas</div>
+                  </div>
+                  <div class="acts">
+                    <div>Copiar<svg viewBox="0 0 20 20"><rect x="6" y="6" width="10" height="11" rx="2"/><path d="M14 6V4.5A1.5 1.5 0 0 0 12.5 3h-7A1.5 1.5 0 0 0 4 4.5v8A1.5 1.5 0 0 0 5.5 14H6"/></svg></div>
+                    <div>Añadir a la lista de lectura<svg viewBox="0 0 20 20"><circle cx="6.5" cy="10" r="3.5"/><circle cx="13.5" cy="10" r="3.5"/></svg></div>
+                    <div>Añadir a favoritos<svg viewBox="0 0 20 20"><path d="M10 3l2.1 4.4 4.8.6-3.5 3.3.9 4.7L10 13.7 5.7 16l.9-4.7L3.1 8l4.8-.6Z"/></svg></div>
+                    <div>Buscar en la página<svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="5"/><path d="m13 13 4 4"/></svg></div>
+                    <div data-el="printact">Imprimir<svg viewBox="0 0 20 20"><path d="M5.5 7.5V3h9v4.5"/><rect x="2.5" y="7.5" width="15" height="7" rx="1.8"/><path d="M5.5 12h9v5h-9z"/></svg></div>
+                  </div>
+                </div>
+                <div class="sheet print ios" data-el="print">
+                  <div class="pr-h"><span>Cancelar</span><b>Opciones</b><span class="xgo" data-el="go">Imprimir</span></div>
+                  <div class="grp">
+                    <div>Impresora<span class="xv">Impresora Talento Humano ›</span></div>
+                    <div>1 copia<span class="xst"><i>−</i><i>+</i></span></div>
+                    <div>Tamaño de papel<span class="xv">Carta ›</span></div>
+                  </div>
+                  <div class="xpv" data-el="pv">
+                    <div class="pg"><div class="sh" data-el="pg1"></div><span class="ck">✓</span>Página 1</div>
+                    <div class="pg"><div class="sh" data-el="pg2"></div><span class="ck">✓</span>Página 2</div>
+                  </div>
+                </div>
+                <div class="ban ios" data-el="ban"><span class="pi"><svg viewBox="0 0 20 20"><path d="M5.5 7.5V3h9v4.5"/><rect x="2.5" y="7.5" width="15" height="7" rx="1.8"/><path d="M5.5 12h9v5h-9z"/></svg></span><span><b>Imprimiendo…</b><small>Certificados · 2 páginas · Impresora Talento Humano</small></span></div>
+                <span class="tap" data-el="tap"></span>
+                <i class="xhome"></i>
+              </div>
+            </div>
+          </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="formulario-107">
+          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-formulario-107.png" alt="" width="16" height="16">Formulario 107</h3><p>Lo imprimen ellos mismos, sin pedírselo a nadie.</p>
+            <ol class="rp-story" id="sr2Story">
+              <li><b>Abre su formulario 107</b><span>El del último año, con todos los casilleros del SRI ya llenos.</span></li>
+              <li><b>Lo revisa completo</b><span>Ingresos, décimos, aporte al IESS, gastos personales e impuesto retenido.</span></li>
+              <li><b>Cambia el año</b><span>Y aparecen los valores de ese ejercicio fiscal.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="formulario-107">
+          <div class="sr2" id="sr2" role="img" aria-label="Animación del autoservicio en un iPhone: se consulta el Formulario SRI 107 del año, se recorre completo y al cambiar el año se cargan los valores de ese ejercicio fiscal">
+            <div class="iph">
+              <div class="scr" data-el="scr">
+                <i class="island"></i>
+                <div class="sbar"><span></span><span class="ic">
+                  <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="5" y="5" width="3" height="6" rx=".8"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8"/><rect x="15" y="0" width="3" height="11" rx=".8"/></svg>
+                  <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x="2" y="2" width="17" height="8" rx="1.8"/><path d="M3.5.5h17A3 3 0 0 1 23.5 3.5v5a3 3 0 0 1-3 3h-17a3 3 0 0 1-3-3v-5a3 3 0 0 1 3-3Zm0 1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h17a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2Z" opacity=".5"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" opacity=".5"/></svg>
+                </span></div>
+                <div class="hdr">
+                  <span class="xlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                  <span class="burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="view">
+                  <div class="page" data-el="page">
+                    <h2>Formulario SRI 107</h2>
+                    <div class="yr">Año: <span class="in" data-el="yin"><span data-el="yv">2025</span></span></div>
+                    <div class="f">
+                      <div class="top">
+                        <div class="sri"><b>SRI</b><small>SERVICIO DE RENTAS<br>INTERNAS</small><i>FORMULARIO 107</i></div>
+                        <div class="tt">COMPROBANTE DE RETENCIONES EN LA FUENTE DEL IMPUESTO A LA RENTA POR INGRESOS DEL TRABAJO EN RELACION DE DEPENDENCIA</div>
+                        <div class="no">No.<br><span data-el="num">0000712</span></div>
+                        <div class="ef"><span>EJERCICIO<br>FISCAL</span><span class="lv">102</span><span class="big" data-el="ej">2025</span><span>FECHA<br>ENTREGA</span><span class="lv">103</span>
+                          <span class="fe"><span>AÑO</span><span>MES</span><span>DIA</span><span>2026</span><span>10</span><span>30</span></span></div>
+                      </div>
+                      <div class="sec">100 Identificación del Empleador (Agente de Retención)</div>
+                      <div class="idr"><span class="c lv">105</span><span><small>RUC</small><b>1792000000001</b></span><span class="c lv">106</span><span><small>RAZON SOCIAL Ó APELLIDOS Y NOMBRES COMPLETOS</small><b>Empresa Demo S.A.</b></span></div>
+                      <div class="sec">200 Identificación del empleado Contribuyente</div>
+                      <div class="idr"><span class="c lv">201</span><span><small>CEDULA O PASAPORTE</small><b>1724598036</b></span><span class="c lv">202</span><span><small>APELLIDOS Y NOMBRES COMPLETOS</small><b>Paredes Lozano Andrea Carolina</b></span></div>
+                      <div class="sec">Liquidación del Impuesto</div>
+                      <div data-el="lines"></div>
+                      <div class="imp">IMPORTANTE: Sírvase leer cada una de las siguientes instrucciones.</div>
+                      <div class="ins">
+                        <p>1.- El trabajador que, dentro del mismo período fiscal, haya laborado con más de un empleador deberá entregar a su nuevo empleador el formulario 107 del empleador anterior, para la correcta proyección de sus ingresos.</p>
+                        <p>2.- Los valores de gastos personales se registran de forma informativa según la proyección presentada por el trabajador al inicio del período.</p>
+                        <p>3.- El empleador entregará este comprobante al trabajador hasta la fecha establecida por la normativa tributaria vigente.</p>
+                      </div>
+                      <div class="dec">DECLARO QUE LOS DATOS PROPORCIONADOS EN ESTE DOCUMENTO SON EXACTOS Y VERDADEROS, POR LO QUE ASUMO LA RESPONSABILIDAD LEGAL QUE DE ELLA SE DERIVEN</div>
+                      <div class="sig"><span>FIRMA DEL AGENTE DE RETENCIÓN</span><span>FIRMA DEL EMPLEADO CONTRIBUYENTE</span><span>FIRMA DEL CONTADOR</span></div>
+                    </div>
+                    <div class="ft">© 2026 - SquareNet</div>
+                  </div>
+                </div>
+                <div class="kb" data-el="kb">
+                  <div class="kok" data-el="kok">OK</div>
+                  <div class="kp">
+                    <span>1<small>&nbsp;</small></span><span>2<small>ABC</small></span><span>3<small>DEF</small></span>
+                    <span>4<small>GHI</small></span><span>5<small>JKL</small></span><span>6<small>MNO</small></span>
+                    <span>7<small>PQRS</small></span><span>8<small>TUV</small></span><span>9<small>WXYZ</small></span>
+                    <span class="e"></span><span>0<small>&nbsp;</small></span><span class="e" data-k="del" style="font-size:18px">⌫</span>
+                  </div>
+                </div>
+                <span class="tap" data-el="tap"></span>
+                <i class="xhome"></i>
+              </div>
+            </div>
+          </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="gastos-personales">
+          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-gastos-personales.png" alt="" width="16" height="16">Gastos personales</h3><p>Registran sus gastos personales para que el impuesto a la renta los tome en cuenta.</p>
+            <ol class="rp-story" id="gp2Story">
+<li><b>Indica sus cargas</b><span>Cuántas cargas familiares tiene y si alguien tiene una enfermedad catastrófica.</span></li>
+              <li><b>Registra cada gasto</b><span>Vivienda, educación, salud, vestimenta, alimentación y turismo. El total se suma solo.</span></li>
+              <li><b>Guarda y listo</b><span>La retención del impuesto a la renta se calcula con lo que declaró, sin papeles para RRHH.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="gastos-personales">
+          <div class="gp2" id="gp2" role="img" aria-label="Animación del autoservicio en un iPhone: el empleado declara sus gastos personales del año, ajusta sus cargas familiares y un valor, y guarda la declaración">
+            <div class="iph">
+              <div class="scr" data-el="scr">
+                <i class="island"></i>
+                <div class="sbar"><span></span><span class="ic">
+                  <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="#fff"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="#fff"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="#fff"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="#fff"/></svg>
+                  <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z" fill="#fff"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="17" height="8" rx="1.8" fill="#fff"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" fill="#fff" fill-opacity=".5"/></svg>
+                </span></div>
+                <div class="hdr">
+                  <span class="xlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                  <span class="burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="view">
+                  <div class="page" data-el="page">
+                    <h2>Declaración de Gastos Personales 2026</h2>
+                    <div class="box">
+                      <div class="r"><span>Trabajador o sus cargas familiares con Enfermedad Catastrófica</span><span class="sel" data-el="cat"><span data-el="catv">SI</span></span></div>
+                      <div class="r"><span>Número de cargas familiares para rebaja de gastos personales</span><span class="num" data-el="car"><span data-el="carv">0</span></span></div>
+                    </div>
+                    <div class="xgrid" data-el="grid">
+                      <div class="gr gh"><span>Tipo Gasto Personal</span><span>Valor</span><span>Observación</span></div>
+                    </div>
+                    <div class="fila" data-el="fila">Fila 1 de 6</div>
+                    <span class="xbtn" data-el="save"><svg viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="1.5" fill="#3a63b8"/><rect x="3.5" y="1" width="7" height="4" fill="#dfe8f8"/><rect x="3" y="8" width="8" height="5" fill="#fff"/></svg>Guardar</span>
+                    <div class="txt">
+                      <p>Al presionar el botón "Guardar" usted acepta y confirma que los valores ingresados son correctos y verdaderos, y se hará responsable legalmente por los mismos.</p>
+                      <p>1.- Cuando un contribuyente trabaje con dos o más empleadores, presentará este informe al empleador con el que perciba mayores ingresos, quien efectuará la retención considerando los ingresos gravados y deducciones de todos los empleadores.</p>
+                      <p>2.- Para el cálculo se considera el valor de la canasta familiar básica vigente a enero del ejercicio fiscal en curso.</p>
+                    </div>
+                    <div class="ft">© 2026 - SquareNet</div>
+                  </div>
+                  <div class="menu" data-el="menu"><div data-o="SI">SI</div><div data-o="NO">NO</div></div>
+                </div>
+                <div class="toast" data-el="toast">Se ha guardado con Éxito!</div>
+                <div class="kb" data-el="kb">
+                  <div class="tb">OK</div>
+                  <div class="kp">
+                    <span>1<small>&nbsp;</small></span><span>2<small>ABC</small></span><span>3<small>DEF</small></span>
+                    <span>4<small>GHI</small></span><span>5<small>JKL</small></span><span>6<small>MNO</small></span>
+                    <span>7<small>PQRS</small></span><span>8<small>TUV</small></span><span>9<small>WXYZ</small></span>
+                    <span class="e"></span><span>0<small>&nbsp;</small></span><span class="e" data-k="del" style="font-size:18px">⌫</span>
+                  </div>
+                </div>
+                <span class="tap" data-el="tap"></span>
+                <i class="xhome"></i>
+              </div>
+            </div>
+          </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="evaluaciones">
+          <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-evaluaciones.png" alt="" width="16" height="16">Evaluaciones</h3><p>Responden las evaluaciones que les asignaron y ven sus resultados frente al valor ideal.</p>
+            <ol class="rp-story" id="ev2Story">
+<li><b>Elige la evaluación</b><span>La anual, la semestral o cualquiera que ya se haya cerrado.</span></li>
+              <li><b>Ve su promedio</b><span>Su resultado general y el de cada dimensión: competencias, conocimientos y desempeño.</span></li>
+              <li><b>Se compara con el ideal</b><span>Cada punto frente al valor esperado, en tablas y gráficos radar fáciles de leer.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="evaluaciones">
+          <div class="ev2" id="ev2" role="img" aria-label="Animación del autoservicio en un iPhone: el empleado elige una evaluación y ve su promedio general y, por competencias, conocimientos y desempeño, sus valores frente al ideal en tablas y gráficos radar">
+            <div class="iph">
+              <div class="scr" data-el="scr">
+                <i class="island"></i>
+                <div class="sbar"><span></span><span class="ic">
+                  <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="#fff"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="#fff"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="#fff"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="#fff"/></svg>
+                  <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z" fill="#fff"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="17" height="8" rx="1.8" fill="#fff"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" fill="#fff" fill-opacity=".5"/></svg>
+                </span></div>
+                <div class="hdr">
+                  <span class="xlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                  <span class="burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="view">
+                  <div class="page" data-el="page">
+                    <h2>Evaluaciones</h2>
+                    <div class="esel" data-el="sel"><span data-el="selv"></span></div>
+                    <div class="body" data-el="body"></div>
+                    <div class="ft">© 2026 - SquareNet</div>
+                  </div>
+                  <div class="menu" data-el="menu"><div data-o="a">29/10/2026 - Evaluación anual</div><div data-o="b">15/04/2026 - Evaluación semestral</div></div>
+                </div>
+                <span class="tap" data-el="tap"></span>
+                <i class="xhome"></i>
+              </div>
+            </div>
+          </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="formularios">
+          <div class="mod-fn-copy"><span class="mod-fn-n">08</span><h3><img class="mod-fn-ic" src="img/iconos/moduloas-formularios.png" alt="" width="16" height="16">Formularios</h3><p>Responden los formularios y encuestas que les asignas, como las de clima laboral.</p>
+            <ol class="rp-story" id="fm2Story">
+<li><b>Abre el formulario</b><span>Los que RRHH le asignó: conflicto de interés, actualización de datos, clima laboral…</span></li>
+              <li><b>Lo lee y responde</b><span>Preguntas de sí o no, campos de texto y tablas de apoyo, todo desde el celular.</span></li>
+              <li><b>Firma la declaración</b><span>Su nombre, cédula y fecha ya vienen llenos: solo confirma y queda registrado.</span></li>
+            </ol>
+          </div>
+          <div class="mod-fn-media rp-stage" data-fn="formularios">
+          <div class="fm2" id="fm2" role="img" aria-label="Animación del autoservicio en un iPhone: el empleado abre el formulario de declaración de conflicto de interés, lo lee, responde las preguntas y su nombre, identificación y fecha quedan en la declaración final">
+            <div class="iph">
+              <div class="scr" data-el="scr">
+                <i class="island"></i>
+                <div class="sbar"><span></span><span class="ic">
+                  <svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="#fff"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="#fff"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="#fff"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="#fff"/></svg>
+                  <svg viewBox="0 0 16 11"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.4 10.4 0 0 0 8 .3 10.4 10.4 0 0 0 .7 3.2L2 4.6a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.3-1.4A6.7 6.7 0 0 0 8 3.9a6.7 6.7 0 0 0-4.7 1.8l1.3 1.4C5.5 6.3 6.7 5.8 8 5.8Zm0 3.6 2-2.1A2.9 2.9 0 0 0 8 7.5c-.8 0-1.5.3-2 .8Z" fill="#fff"/></svg>
+                  <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="17" height="8" rx="1.8" fill="#fff"/><path d="M25 4v4c.8-.3 1.3-1.1 1.3-2S25.8 4.3 25 4Z" fill="#fff" fill-opacity=".5"/></svg>
+                </span></div>
+                <div class="hdr">
+                  <span class="xlogo"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="#fff" fill-opacity=".95"/><path d="M8 18V8h9M8 13h7M8 18h9" fill="none" stroke="#24538c" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Empresa Demo</b><small>S.A.</small></span></span>
+                  <span class="burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="view">
+                  <div class="page" data-el="page">
+                    <h2>Formularios</h2>
+                    <div class="esel" data-el="sel"><span data-el="selv"></span></div>
+                    <div class="body" data-el="body">
+                      <div class="hero"><h3>Formulario de Declaración de Conflicto de Interés – Trabajadores</h3></div>
+                      <p>Para Empresa Demo S.A. es importante cuidar su integridad y reputación, y asegurar que sus decisiones no se vean afectadas por conflictos de interés.</p>
+                      <h4><b>I</b>Generalidades</h4>
+                      <p class="q">¿Para qué sirve este formulario?</p>
+                      <p>Permite que cada trabajador o aspirante comunique a la Empresa cualquier situación, real o aparente, que pueda generar un conflicto de interés, para que sea gestionada a tiempo.</p>
+                      <p class="q">¿Qué es un conflicto de interés?</p>
+                      <p>Es una situación en la que intereses personales, familiares o económicos pueden influir en el juicio de una persona al cumplir sus funciones.</p>
+                      <p class="q">¿Cuándo se debe llenar?</p>
+                      <p>Al ingresar a la Empresa, una vez al año y siempre que cambie su situación personal, profesional o económica.</p>
+                      <table class="t"><tr><th colspan="3">Grados de Parentesco</th></tr><tr><th>Grado</th><th>Por consanguinidad</th><th>Por afinidad</th></tr>
+                        <tr><td>1°</td><td>Padres, hijos</td><td>Cónyuge, suegros, yerno, nuera</td></tr>
+                        <tr><td>2°</td><td>Abuelos, nietos, hermanos</td><td>Cuñados, abuelos del cónyuge</td></tr>
+                        <tr><td>3°</td><td>Tíos, sobrinos, bisabuelos</td><td>N/A</td></tr>
+                        <tr><td>4°</td><td>Primos hermanos, tíos abuelos</td><td>N/A</td></tr></table>
+                      <h4><b>II</b>Declaración de un posible conflicto</h4>
+                      <p>A continuación, responda en su totalidad las siguientes preguntas:</p>
+                      <p class="q">¿Mantiene usted relación familiar con algún trabajador, aspirante o administrador de la Empresa?</p>
+                      <div class="seg"><div class="rad" data-r="1s"><i></i>Sí</div><div class="rad" data-r="1n"><i></i>No</div></div>
+                      <p>Si respondió "Sí", indique nombre, cargo y parentesco:</p>
+                      <div class="ta" data-el="ta1"><span data-el="ta1v"></span></div>
+                      <p class="q">¿Usted o algún familiar tiene interés económico con un cliente, proveedor o competidor de la Empresa?</p>
+                      <div class="seg"><div class="rad" data-r="2s"><i></i>Sí</div><div class="rad" data-r="2n"><i></i>No</div></div>
+                      <div class="ta"></div>
+                      <p class="q">¿Ha recibido u ofrecido regalos u hospitalidad de un cliente, proveedor o competidor?</p>
+                      <div class="seg"><div class="rad" data-r="3s"><i></i>Sí</div><div class="rad" data-r="3n"><i></i>No</div></div>
+                      <div class="ta"></div>
+                      <h4><b>III</b>Declaración</h4>
+                      <p>Certifico que he respondido este formulario de manera completa y verdadera, que conozco las políticas de la Empresa y que actualizaré esta información cuando mi situación cambie.</p>
+                      <div class="who"><div><small>Nombres</small>Paredes Lozano Andrea Carolina</div><div><small>Identificación</small>1724598036</div><div><small>Fecha</small>2026 - 10</div></div>
+                      <div class="chk" data-el="chk"><i></i><span>He leído y acepto la declaración, y certifico que la información es verdadera.</span></div>
+                    </div>
+                    <div class="ft">© 2026 - SquareNet</div>
+                  </div>
+                  <div class="menu" data-el="menu"><div data-o="a">Conflicto de Interés 2026</div><div data-o="b">Actualización de Datos 2026</div></div>
+                </div>
+                <div class="kb" data-el="kb">
+                  <div class="tb">OK</div>
+                  <div class="kr"><span>q</span><span>w</span><span>e</span><span>r</span><span>t</span><span>y</span><span>u</span><span>i</span><span>o</span><span>p</span></div>
+                  <div class="kr"><span>a</span><span>s</span><span>d</span><span>f</span><span>g</span><span>h</span><span>j</span><span>k</span><span>l</span><span>ñ</span></div>
+                  <div class="kr"><span class="w">⇧</span><span>z</span><span>x</span><span>c</span><span>v</span><span>b</span><span>n</span><span>m</span><span class="w">⌫</span></div>
+                  <div class="kr"><span class="w">123</span><span class="w">🙂</span><span class="sp" data-k=" ">espacio</span><span class="w" style="width:76px">intro</span></div>
+                </div>
+                <span class="tap" data-el="tap"></span>
+                <i class="xhome"></i>
+              </div>
+            </div>
+          </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <section class="mod-sec" aria-labelledby="ess-title">
       <h2 id="ess-title" data-reveal>Lo esencial</h2>
       <div class="mod-feats n6">
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 18.4h2.8"/></svg></span><h3>Desde cualquier dispositivo</h3><p>Portal web para tus empleados: entran con su cédula y su contraseña personal.</p></article>
-        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><h3>Roles con aceptación electrónica</h3><p>Revisan sus roles de pago, actuales y anteriores, y los aceptan con un botón.</p></article>
+        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-2.4-1.6L13.2 21l-2.4-1.6L8.4 21 6 19.4Z"/><path d="M9.2 8h5.6M9.2 11.5h5.6M9.2 15h3"/></svg></span><h3>Roles de pago en línea</h3><p>Revisan sus roles de pago, actuales y anteriores, cuando quieran.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span><h3>Vacaciones en línea</h3><p>Solicitan vacaciones y permisos viendo sus días disponibles al momento.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span><h3>Formulario 107</h3><p>Lo imprimen ellos mismos, sin pedírselo a RRHH.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><h3>Horas y acciones de personal</h3><p>Ven sus horas extra y permisos de Asistencia, y todos los cambios de su contrato.</p></article>
@@ -199,24 +1318,10 @@
           <li>Puede revisar sus acciones de personal, es decir, todos los cambios que ha tenido el empleado.</li>
           <li>Puede imprimir su formulario 107.</li>
           <li>Visualiza las horas (extras, permisos, etc.) desde el módulo de Control de Asistencia.</li>
-          <li>Revisión de sus roles de pago anteriores y botón de aceptación electrónica.</li>
+          <li>Revisión de sus roles de pago, del mes y anteriores.</li>
           <li>Puede agregar más funcionalidad bajo pedido.</li>
           </ul>
       </details>
-    </section>
-
-    <section class="mod-sec mod-fns" id="funciones" style="--mc:#1C7ED6" aria-labelledby="fn-title">
-      <h2 id="fn-title">Funciones de Autoservicio</h2>
-      <div class="mod-fn-grid">
-        <article class="mod-fn" id="rol-de-pagos"><h3>Rol de pagos</h3><p>Tu gente revisa sus roles anteriores y los acepta con un botón de aceptación electrónica.</p></article>
-        <article class="mod-fn" id="vacaciones-y-permisos"><h3>Vacaciones y permisos</h3><p>Solicitan vacaciones y permisos viendo los días disponibles, y revisan sus ausentismos.</p></article>
-        <article class="mod-fn" id="marcacion-web"><h3>Marcación web</h3><p>Marcan su entrada y salida desde el celular o el navegador.</p></article>
-        <article class="mod-fn" id="certificados"><h3>Certificados</h3><p>Obtienen sus certificados sin pasar por Recursos Humanos.</p></article>
-        <article class="mod-fn" id="formulario-107"><h3>Formulario 107</h3><p>Lo imprimen ellos mismos, sin pedírselo a nadie.</p></article>
-        <article class="mod-fn" id="gastos-personales"><h3>Gastos personales</h3><p>Registran sus gastos personales para que el impuesto a la renta los tome en cuenta.</p></article>
-        <article class="mod-fn" id="evaluaciones"><h3>Evaluaciones</h3><p>Responden las evaluaciones que les asignaron.</p></article>
-        <article class="mod-fn" id="formularios"><h3>Formularios</h3><p>Responden los formularios y encuestas que les asignas, como las de clima laboral.</p></article>
-      </div>
     </section>
 
     <section class="mod-sec" aria-labelledby="rel-title">
@@ -240,7 +1345,7 @@
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div class="footer-brand">
-        <span class="wordmark">SquareNet</span>
+        <div class="footer-mark"><span class="wordmark">SquareNet</span><img src="img/hechoenecuador.gif" alt="Sello Mucho Mejor si es Hecho en Ecuador" class="footer-badge"></div>
         <p>Software de gestión de personal para empresas en Ecuador: nómina, asistencia, recursos humanos y control de acceso en una sola plataforma.</p>
         <a class="footer-social" href="https://www.linkedin.com/company/squarenet-ec" target="_blank" rel="noopener" aria-label="SquareNet en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0Z"/></svg><span>LinkedIn</span></a>
       </div>
@@ -273,7 +1378,6 @@
     <div class="wrap footer-bottom">
       <span>© <span id="fecha"></span> SquareNet · www.squarenet.com.ec · Todos los derechos reservados.</span>
       <a class="footer-link" href="privacidad.html">Privacidad y cookies</a>
-      <img src="img/hechoenecuador.gif" alt="Sello Mucho Mejor si es Hecho en Ecuador" class="footer-badge">
     </div>
   </footer>
 
@@ -308,39 +1412,558 @@
       body.classList.remove('is-on');$('opts').classList.remove('is-open');$('sel').classList.remove('is-focus');
       [].slice.call($('opts').querySelectorAll('.is-hi')).forEach(function(e){e.classList.remove('is-hi')});
       $('selv').textContent='Seleccione…';$('selv').className='ph';
-      page.style.transform='';$('net').classList.remove('is-hi');$('acc').classList.remove('is-done');$('acc').textContent='Aceptar rol';
-      $('lock').classList.remove('is-off');$('ntf').classList.remove('is-on');lift();
+      page.style.transform='';$('net').classList.remove('is-hi');
+      lift();
       void root.offsetWidth;root.classList.remove('is-reset');
     }
     async function run(){
       reset();place(230,520,0);step(0);await sleep(900);
-      $('ntf').classList.add('is-on');await sleep(1400);
-      await touch($('ntf'),.5,.5,800);$('lock').classList.add('is-off');lift();await sleep(700);
-      step(1);
       await touch($('sel'),.6,.5,800);$('sel').classList.add('is-focus');$('opts').classList.add('is-open');await sleep(500);
       var o=$('opts').querySelector('[data-o="0"]');
       await touch(o,.45,.5,550);o.classList.add('is-hi');await sleep(220);
       $('opts').classList.remove('is-open');$('sel').classList.remove('is-focus');
       $('selv').textContent='Octubre 2026 - Administrativos';$('selv').className='';
       lift();await sleep(250);body.classList.add('is-on');await sleep(1600);
-      step(2);
+      step(1);
       var view=page.parentElement,max=page.scrollHeight-view.clientHeight;
       place(200,470,0);tap.style.setProperty('--o',1);await sleep(250);
       place(200,250,900);page.style.transform='translateY('+(-max*.55)+'px)';await sleep(950);lift();await sleep(1500);
       place(200,470,0);tap.style.setProperty('--o',1);await sleep(250);
       place(200,250,900);page.style.transform='translateY('+(-max)+'px)';await sleep(950);lift();await sleep(700);
-      step(3);
-      $('net').classList.add('is-hi');await sleep(1400);
-      await touch($('acc'),.5,.5,700);$('acc').classList.add('is-done');$('acc').textContent='✓ Rol aceptado';lift();await sleep(2800);
+      step(2);
+      $('net').classList.add('is-hi');await sleep(3200);
       page.style.transform='';await sleep(1400);
       body.style.transition='opacity .4s';body.classList.remove('is-on');await sleep(450);body.style.transition='';
     }
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-      $('lock').classList.add('is-off');$('selv').textContent='Octubre 2026 - Administrativos';$('selv').className='';body.classList.add('is-on');story.forEach(function(li){li.classList.add('is-on')});return;
+      $('selv').textContent='Octubre 2026 - Administrativos';$('selv').className='';body.classList.add('is-on');story.forEach(function(li){li.classList.add('is-on')});return;
     }
-    (async function(){await sleep(300);for(;;)await run()})();
+    (async function(){await sleep(300);for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); }})();
   })();
   </script>
+  <script>
+  (function(){
+    var root=document.getElementById('au2');if(!root)return;
+    function $(k){return root.querySelector('[data-el="'+k+'"]')}
+    var scr=$('scr'),tap=$('tap'),view=root.querySelector('.view'),story=[].slice.call(document.querySelectorAll('#auStory li'));
+    var live=false;
+    function wait(){return (live&&!document.hidden)?null:new Promise(function(r){var t=setInterval(function(){if(live&&!document.hidden){clearInterval(t);r()}},250)})}
+    function sleep(ms){return new Promise(function(r){setTimeout(r,ms)}).then(wait)}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(e){live=e[0].isIntersecting}).observe(root);else live=true;
+    function step(n){story.forEach(function(li,i){li.classList.toggle('is-on',i===n)})}
+    var printer='<svg viewBox="0 0 14 14"><rect x="3.5" y="1.5" width="7" height="4" fill="#fff" stroke="#777"/><rect x="1.5" y="5" width="11" height="5.5" rx="1" fill="#9aa4b0"/><rect x="3.5" y="8.5" width="7" height="4" fill="#fff" stroke="#777"/></svg>';
+    [].slice.call(root.querySelectorAll('.pr')).forEach(function(e){e.innerHTML=printer});
+    function k(){return scr.getBoundingClientRect().width/scr.offsetWidth||1}
+    var MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    var cal=$('cal');
+    function drawCal(y,m,sel){
+      var first=new Date(y,m,1),lead=(first.getDay()+6)%7,dim=new Date(y,m+1,0).getDate(),pdim=new Date(y,m,0).getDate(),cells='';
+      for(var i=0;i<42;i++){var d=i-lead+1;
+        if(d<1)cells+='<span class="mut">'+(pdim+d)+'</span>';
+        else if(d>dim)cells+='<span class="mut">'+(d-dim)+'</span>';
+        else cells+='<span data-d="'+d+'" class="'+(d===sel?'sel':'')+'">'+d+'</span>';}
+      cal.innerHTML='<div class="mh"><span class="nv">‹</span><span>'+MESES[m]+'</span><span class="nv" data-el="nx">›</span></div><div class="yh">'+y+'</div><div class="g">'+['Lu','Ma','Mi','Ju','Vi','Sa','Do'].map(function(w){return '<span class="wd">'+w+'</span>'}).join('')+cells+'</div><div class="cf"><span>Hoy</span><span>Limpiar</span></div>';
+    }
+    function openCal(field){var v=view.getBoundingClientRect(),f=field.getBoundingClientRect(),q=k();
+      cal.style.left=((f.left-v.left)/q)+'px';cal.style.top=((f.bottom-v.top)/q+2)+'px';cal.classList.add('is-open')}
+    function day(d){return cal.querySelector('[data-d="'+d+'"]')}
+    var MOT=['Asunto personal','Calamidad doméstica','Cita médica','Compensación','Vacaciones','Vacaciones adicionales'];
+    var lst=$('lst');lst.innerHTML=MOT.map(function(m){return '<div data-m="'+m+'">'+m+'</div>'}).join('');
+    function pt(el,fx,fy){var a=el.getBoundingClientRect(),s=scr.getBoundingClientRect(),q=k();return[(a.left-s.left+a.width*fx)/q,(a.top-s.top+a.height*fy)/q]}
+    function place(x,y,d){tap.style.setProperty('--d',d+'ms');tap.style.setProperty('--x',x+'px');tap.style.setProperty('--y',y+'px')}
+    async function touch(el,fx,fy,ms,pressEl){var p=pt(el,fx,fy);place(p[0],p[1],ms);tap.style.setProperty('--o',1);await sleep(ms+70);
+      tap.classList.add('is-press');pressEl&&pressEl.classList.add('is-press');await sleep(130);
+      tap.classList.remove('is-press');pressEl&&pressEl.classList.remove('is-press');
+      tap.classList.remove('is-ping');void tap.offsetWidth;tap.classList.add('is-ping');await sleep(180)}
+    function lift(){tap.style.setProperty('--o',0)}
+    var keys=[].slice.call($('kb').querySelectorAll('.kr span'));
+    function keyFor(ch){return ch===' '?keys.filter(function(x){return x.dataset.k===' '})[0]:keys.filter(function(x){return x.textContent===ch.toLowerCase()})[0]}
+    async function typeObs(txt){var out=$('obsv');
+      for(var i=0;i<txt.length;i++){var ch=txt[i],kk=keyFor(ch);kk&&kk.classList.add('is-k');
+        out.innerHTML=out.textContent+ch+'<span class="rc"></span>';await sleep(ch===' '?55:70);kk&&kk.classList.remove('is-k')}}
+    function reset(){
+      root.classList.add('is-reset');
+      $('desdev').textContent='30/10/2026 00:00';$('hastav').textContent='30/10/2026 23:59';
+      $('days').classList.remove('is-on');$('motivov').textContent='';$('warn').classList.remove('is-on');
+      $('obsv').innerHTML='';$('att').classList.remove('is-on');
+      ['desde','hasta','motivo','obs'].forEach(function(x){$(x).classList.remove('is-focus')});
+      cal.classList.remove('is-open');lst.classList.remove('is-open');[].slice.call(lst.querySelectorAll('.is-hi')).forEach(function(e){e.classList.remove('is-hi')});
+      $('kb').classList.remove('is-on');$('sheet').classList.remove('is-on');$('dim').classList.remove('is-on');
+      [].slice.call($('sheet').querySelectorAll('.is-hi')).forEach(function(e){e.classList.remove('is-hi')});
+      $('toast').classList.remove('is-on');$('newrow').classList.remove('is-on','is-sel');
+      $('gt').style.transform='';$('page').style.transform='';lift();
+      void root.offsetWidth;root.classList.remove('is-reset');
+    }
+    async function run(){
+      reset();place(240,560,0);step(0);await sleep(900);
+      var ds=$('desde');
+      await touch(ds.querySelector('.ar'),.5,.5,800);ds.classList.add('is-focus');drawCal(2026,9,30);openCal(ds);await sleep(500);
+      var nx=cal.querySelector('[data-el="nx"]');await touch(nx,.5,.5,550,nx);drawCal(2026,10,null);await sleep(350);
+      await touch(day(2),.5,.5,550);day(2).classList.add('sel');await sleep(200);
+      $('desdev').textContent='02/11/2026 00:00';cal.classList.remove('is-open');ds.classList.remove('is-focus');await sleep(350);
+      var hs=$('hasta');
+      await touch(hs.querySelector('.ar'),.5,.5,600);hs.classList.add('is-focus');drawCal(2026,10,null);openCal(hs);await sleep(450);
+      await touch(day(6),.5,.5,600);day(6).classList.add('sel');await sleep(200);
+      $('hastav').textContent='06/11/2026 23:59';cal.classList.remove('is-open');hs.classList.remove('is-focus');
+      $('days').classList.add('is-on');await sleep(700);
+      step(1);
+      var mo=$('motivo');
+      await touch(mo,.85,.5,650);mo.classList.add('is-focus');
+      var v=view.getBoundingClientRect(),f=mo.getBoundingClientRect(),q=k();
+      lst.style.left=((f.left-v.left)/q)+'px';lst.style.top=((f.bottom-v.top)/q)+'px';lst.style.width=(f.width/q)+'px';lst.classList.add('is-open');await sleep(500);
+      var vac=lst.querySelector('[data-m="Vacaciones"]');
+      await touch(vac,.3,.5,600);vac.classList.add('is-hi');await sleep(200);
+      lst.classList.remove('is-open');mo.classList.remove('is-focus');$('motivov').textContent='Vacaciones';
+      $('warn').classList.add('is-on');await sleep(1300);
+      step(2);
+      var ob=$('obs');
+      await touch(ob,.4,.4,650);ob.classList.add('is-focus');$('obsv').innerHTML='<span class="rc"></span>';$('kb').classList.add('is-on');lift();await sleep(450);
+      await typeObs('viaje familiar a la costa');await sleep(400);
+      await touch($('kb').querySelector('.tb'),.93,.5,500);$('kb').classList.remove('is-on');ob.classList.remove('is-focus');$('obsv').textContent='viaje familiar a la costa';await sleep(450);
+      var cg=$('cargar');
+      await touch(cg,.5,.5,650,cg);$('dim').classList.add('is-on');$('sheet').classList.add('is-on');await sleep(650);
+      var fi=$('sheet').querySelector('[data-f="1"]');
+      await touch(fi,.4,.5,600);fi.classList.add('is-hi');await sleep(250);
+      $('sheet').classList.remove('is-on');$('dim').classList.remove('is-on');$('att').classList.add('is-on');lift();await sleep(600);
+      step(3);
+      var so=$('solicitar');
+      await touch(so,.5,.5,650,so);await sleep(150);
+      $('toast').classList.add('is-on');$('newrow').classList.add('is-on','is-sel');lift();await sleep(1200);
+      var gr=root.querySelector('.agrid'),g=pt(gr,.8,.6);place(g[0],g[1],0);tap.style.setProperty('--o',1);await sleep(250);
+      place(g[0]-190,g[1],800);$('gt').style.transform='translateX(-250px)';await sleep(850);lift();
+      await sleep(3000);
+      $('toast').classList.remove('is-on');await sleep(800);
+      $('gt').style.transform='';$('page').style.transform='';await sleep(1000);
+    }
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+      $('desdev').textContent='02/11/2026 00:00';$('hastav').textContent='06/11/2026 23:59';$('days').classList.add('is-on');
+      $('motivov').textContent='Vacaciones';$('warn').classList.add('is-on');$('obsv').textContent='viaje familiar a la costa';
+      $('newrow').classList.add('is-on');story.forEach(function(li){li.classList.add('is-on')});return;
+    }
+    (async function(){await sleep(300);for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); }})();
+  })();
+  </script>
+  <script>
+(() => {
+  const root=document.getElementById('mw2');
+  const $=k=>root.querySelector(`[data-el="${k}"]`);
+  const scr=$('scr'), tap=$('tap');
+  let live=false;
+  const wait=()=>(live&&!document.hidden)?null:new Promise(r=>{const t=setInterval(()=>{if(live&&!document.hidden){clearInterval(t);r()}},250)});
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms)).then(wait);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{live=e[0].isIntersecting}).observe(root);else live=true;
+  const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
+  const story=[...document.querySelectorAll('#mw2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
+  function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), s=scr.getBoundingClientRect(); const q=K(); return [(a.left-s.left+a.width*fx)/q, (a.top-s.top+a.height*fy)/q]; }
+  function place(x,y,d){ tap.style.setProperty('--d',d+'ms'); tap.style.setProperty('--x',x+'px'); tap.style.setProperty('--y',y+'px'); }
+  async function touch(el,fx,fy,ms=650,pressEl){
+    const [x,y]=pt(el,fx,fy); place(x,y,ms); tap.style.setProperty('--o',1); await sleep(ms+70);
+    tap.classList.add('is-press'); pressEl&&pressEl.classList.add('is-press'); await sleep(130);
+    tap.classList.remove('is-press'); pressEl&&pressEl.classList.remove('is-press');
+    tap.classList.remove('is-ping'); void tap.offsetWidth; tap.classList.add('is-ping'); await sleep(180);
+  }
+  const lift=()=>tap.style.setProperty('--o',0);
+  const keys=[...$('kb').querySelectorAll('.kr span')];
+  const keyFor=ch=>ch===' '?keys.find(k=>k.dataset.k===' '):keys.find(k=>k.textContent===ch);
+  async function typeObs(txt){
+    const out=$('obsv'); out.className=''; let s='';
+    for(const ch of txt){ const k=keyFor(ch); k&&k.classList.add('is-k'); s+=ch; out.innerHTML=s+'<span class="rc"></span>'; await sleep(ch===' '?60:80); k&&k.classList.remove('is-k'); }
+  }
+  function setAcc(px){ $('acc').style.setProperty('--r',px+'px'); }
+  async function countAcc(from,to,ms){
+    const t0=performance.now();
+    return new Promise(res=>{ (function f(t){ const k=Math.min(1,(t-t0)/ms), e=1-Math.pow(1-k,3);
+      $('accl').textContent='± '+Math.round(from+(to-from)*e)+' m'; k<1?requestAnimationFrame(f):res(); })(t0); });
+  }
+  function reset(){
+    root.classList.add('is-reset');
+    $('obsv').className='ph'; $('obsv').textContent='Puede realizar una observación (opcional) de su marcación.';
+    $('obs').classList.remove('is-focus'); $('kb').classList.remove('is-on');
+    ['dim','perm','cfm','toast','ent','locic','hr','hpin'].forEach(k=>$(k).classList.remove('is-on'));
+    $('hacc').style.setProperty('--r','110px'); $('haccl').textContent='± 48 m'; lift();
+    void root.offsetWidth; root.classList.remove('is-reset');
+  }
+  async function run(){
+    reset(); place(230,560,0); await sleep(900);
+    step(0); await touch($('obs'),.4,.5,800); $('obs').classList.add('is-focus'); $('obsv').className=''; $('obsv').innerHTML='<span class="rc"></span>'; $('kb').classList.add('is-on'); lift(); await sleep(450);
+    await typeObs('estoy en el centro'); await sleep(350);
+    await touch($('kb').querySelector('.tb'),.93,.5,500); $('kb').classList.remove('is-on'); $('obs').classList.remove('is-focus'); $('obsv').textContent='estoy en el centro'; await sleep(450);
+    step(1); await touch($('mk'),.5,.5,700,$('mk')); await sleep(200);
+    $('dim').classList.add('is-on'); $('perm').classList.add('is-on'); lift(); await sleep(1600);
+    await touch($('once'),.5,.5,650,$('once')); await sleep(150);
+    $('perm').classList.remove('is-on'); $('locic').classList.add('is-on'); await sleep(300);
+    $('cfm').classList.add('is-on'); await sleep(700);
+    await touch($('ok'),.5,.5,650,$('ok')); await sleep(150);
+    $('cfm').classList.remove('is-on'); $('dim').classList.remove('is-on'); lift();
+    $('obsv').className='ph'; $('obsv').textContent='Puede realizar una observación (opcional) de su marcación.';
+    step(2); $('toast').classList.add('is-on'); $('ent').classList.add('is-on'); await sleep(700);
+    await sleep(1200);
+    step(3); $('hr').classList.add('is-on'); await sleep(600);
+    $('hpin').classList.add('is-on'); await sleep(350);
+    $('hacc').style.setProperty('--r','22px');
+    await new Promise(res=>{const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/2200),e=1-Math.pow(1-k,3);$('haccl').textContent='± '+Math.round(48-43*e)+' m';k<1?requestAnimationFrame(f):res()})(t0)});
+    await sleep(3200);
+    $('toast').classList.remove('is-on'); await sleep(1500);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ story.forEach(li=>li.classList.add('is-on'));
+    $('ent').classList.add('is-on'); $('hr').classList.add('is-on'); $('hpin').classList.add('is-on'); $('hacc').style.setProperty('--r','22px'); $('haccl').textContent='± 5 m'; return;
+  }
+  (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('ce2');
+  const $=k=>root.querySelector(`[data-el="${k}"]`);
+  const scr=$('scr'), tap=$('tap');
+  let live=false;
+  const wait=()=>(live&&!document.hidden)?null:new Promise(r=>{const t=setInterval(()=>{if(live&&!document.hidden){clearInterval(t);r()}},250)});
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms)).then(wait);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{live=e[0].isIntersecting}).observe(root);else live=true;
+  const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
+  const story=[...document.querySelectorAll('#ce2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
+  const OPTS=['Carta de Bienvenida','Certificado Base','Certificado Laboral','Certificado Laboral Con Sueldo','Certificado Laboral Sin Sueldo','Certificado de Cesantía','Certificado para Banco'];
+  $('menu').innerHTML=OPTS.map(o=>`<div data-o="${o}">${o}</div>`).join('');
+  const L=$('letter');
+  const c1=L.cloneNode(true); c1.removeAttribute('data-el'); c1.classList.add('is-on'); c1.querySelector('.lf').remove(); $('pg1').appendChild(c1);
+  const c2=document.createElement('div'); c2.className='letter is-on';
+  c2.innerHTML=`<div class="lf" style="border-top:0;margin-top:0">${L.querySelector('.lf').innerHTML}</div>`; $('pg2').appendChild(c2);
+  function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), s=scr.getBoundingClientRect(); const q=K(); return [(a.left-s.left+a.width*fx)/q, (a.top-s.top+a.height*fy)/q]; }
+  function place(x,y,d){ tap.style.setProperty('--d',d+'ms'); tap.style.setProperty('--x',x+'px'); tap.style.setProperty('--y',y+'px'); }
+  async function touch(el,fx,fy,ms=650,pressEl){
+    const [x,y]=pt(el,fx,fy); place(x,y,ms); tap.style.setProperty('--o',1); await sleep(ms+70);
+    tap.classList.add('is-press'); pressEl&&pressEl.classList.add('is-press'); await sleep(130);
+    tap.classList.remove('is-press'); pressEl&&pressEl.classList.remove('is-press');
+    tap.classList.remove('is-ping'); void tap.offsetWidth; tap.classList.add('is-ping'); await sleep(180);
+  }
+  const lift=()=>tap.style.setProperty('--o',0);
+  async function swipe(x,y1,y2,ms,apply){ place(x,y1,0); tap.style.setProperty('--o',1); await sleep(220); place(x,y2,ms); apply(); await sleep(ms+40); lift(); }
+  function reset(){
+    root.classList.add('is-reset');
+    $('selv').textContent=''; $('sel').classList.remove('is-focus');
+    $('menu').classList.remove('is-on'); $('menu').querySelectorAll('div').forEach(d=>d.classList.remove('is-hi','ck'));
+    step(1); $('loading').classList.remove('is-on'); $('letter').classList.remove('is-on');
+    $('page').style.transform=''; $('pv').firstElementChild.style.marginLeft='';
+    ['dim','share','print','ban'].forEach(k=>$(k).classList.remove('is-on'));
+    root.querySelectorAll('.is-hi').forEach(e=>e.classList.remove('is-hi'));
+    $('sbar').classList.remove('dark'); lift();
+    void root.offsetWidth; root.classList.remove('is-reset');
+  }
+  async function run(){
+    reset(); place(230,520,0); await sleep(900);
+    step(0); await touch($('sel'),.6,.5,800); $('sel').classList.add('is-focus'); $('menu').classList.add('is-on'); await sleep(700);
+    const it=$('menu').querySelector('[data-o="Certificado Laboral Con Sueldo"]');
+    await touch(it,.45,.5,650); it.classList.add('is-hi'); await sleep(200);
+    $('menu').classList.remove('is-on'); $('sel').classList.remove('is-focus'); $('selv').textContent='Certificado Laboral Con Sueldo'; lift();
+    $('loading').classList.add('is-on'); await sleep(900);
+    $('loading').classList.remove('is-on'); $('letter').classList.add('is-on'); await sleep(1300);
+    const max=$('page').scrollHeight-$('page').parentElement.clientHeight;
+    await swipe(180,470,220,800,()=>$('page').style.transform=`translateY(${-max}px)`); await sleep(1400);
+    await swipe(180,220,470,800,()=>$('page').style.transform=''); await sleep(500);
+    step(2); await touch($('shareb'),.5,.5,800,$('shareb')); $('dim').classList.add('is-on'); $('share').classList.add('is-on'); lift(); await sleep(800);
+    const pa=$('printact');
+    await touch(pa,.3,.5,700); pa.classList.add('is-hi'); await sleep(250);
+    $('share').classList.remove('is-on'); await sleep(250);
+    $('print').classList.add('is-on'); $('sbar').classList.add('dark'); lift(); await sleep(1000);
+    await sleep(1400);
+    await touch($('go'),.5,.5,800,$('go')); await sleep(150);
+    $('print').classList.remove('is-on'); $('dim').classList.remove('is-on'); $('sbar').classList.remove('dark'); lift(); await sleep(350);
+    $('ban').classList.add('is-on'); await sleep(2800);
+    $('ban').classList.remove('is-on'); await sleep(1200);
+    $('letter').style.transition='opacity .4s'; $('letter').classList.remove('is-on'); await sleep(450); $('letter').style.transition='';
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ story.forEach(li=>li.classList.add('is-on'));
+    $('selv').textContent='Certificado Laboral Con Sueldo'; $('letter').classList.add('is-on'); return;
+  }
+  (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('sr2');
+  const $=k=>root.querySelector(`[data-el="${k}"]`);
+  const scr=$('scr'), tap=$('tap');
+  let live=false;
+  const wait=()=>(live&&!document.hidden)?null:new Promise(r=>{const t=setInterval(()=>{if(live&&!document.hidden){clearInterval(t);r()}},250)});
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms)).then(wait);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{live=e[0].isIntersecting}).observe(root);else live=true;
+  const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
+  const story=[...document.querySelectorAll('#sr2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
+  // casilleros del formulario; los valores de cada año son inventados y cuadran entre sí
+  const LINES=[
+    ['301','+','SUELDOS, SALARIOS Y OTROS INGRESOS GRAVADOS DE IMPUESTO A LA RENTA (MATERIA GRAVADA DE LA SEGURIDAD SOCIAL)'],
+    ['303','+','OTROS INGRESOS GRAVADOS DE IMPUESTO A LA RENTA (MATERIA NO GRAVADA DE LA SEGURIDAD SOCIAL)'],
+    ['305','+','PARTICIPACIÓN UTILIDADES'],
+    ['307','+','INGRESOS GRAVADOS GENERADOS CON OTROS EMPLEADORES'],
+    ['311','','DÉCIMO TERCER SUELDO'],
+    ['313','','DÉCIMO CUARTO SUELDO'],
+    ['315','','FONDOS DE RESERVA'],
+    ['317','','OTROS INGRESOS EN RELACIÓN DE DEPENDENCIA QUE NO CONSTITUYEN RENTA GRAVADA'],
+    ['351','-','(-) APORTE PERSONAL IESS CON ESTE EMPLEADOR (únicamente pagado por el trabajador)'],
+    ['353','-','(-) APORTE PERSONAL IESS CON OTROS EMPLEADORES (únicamente pagado por el trabajador)'],
+    ['361','','GASTOS PERSONALES - VIVIENDA - Informativo'],
+    ['362','','GASTOS PERSONALES - TURISMO - Informativo'],
+    ['363','','GASTOS PERSONALES - SALUD - Informativo'],
+    ['365','','GASTOS PERSONALES - EDUCACIÓN - Informativo'],
+    ['367','','GASTOS PERSONALES - ALIMENTACIÓN - Informativo'],
+    ['369','','GASTOS PERSONALES - VESTIMENTA - Informativo'],
+    ['371','-','(-) EXONERACIÓN POR DISCAPACIDAD'],
+    ['373','-','(-) EXONERACIÓN POR TERCERA EDAD'],
+    ['381','+','IMPUESTO A LA RENTA ASUMIDO POR ESTE EMPLEADOR'],
+    ['399','=','BASE IMPONIBLE GRAVADA<br>301+303+305+307-351-353-371-373+381 >= 0'],
+    ['401','=','IMPUESTO A LA RENTA CAUSADO'],
+    ['402','=','REBAJA POR GASTOS PERSONALES'],
+    ['403','=','IMPUESTO A LA RENTA DESPUÉS DE REBAJA POR GASTOS PERSONALES'],
+    ['404','','VALOR DEL IMPUESTO RETENIDO Y ASUMIDO POR OTROS EMPLEADORES DURANTE EL PERIODO DECLARADO'],
+    ['405','','VALOR DEL IMPUESTO ASUMIDO POR ESTE EMPLEADOR'],
+    ['407','','VALOR DEL IMPUESTO RETENIDO AL TRABAJADOR POR ESTE EMPLEADOR'],
+    ['349','=','INGRESOS GRAVADOS CON ESTE EMPLEADOR ( informativo )<br>301 + 303 + 305 + 381']
+  ];
+  const BASE={
+    2025:{n:'0000712',v:{301:6825.00,305:612.40,311:568.75,313:470.00,315:520.00,361:1450.00,363:820.00,365:600.00,367:1100.00,369:480.00}},
+    2024:{n:'0000655',v:{301:6480.00,305:455.20,311:540.00,313:460.00,315:480.00,361:1380.00,363:640.00,365:550.00,367:1020.00,369:410.00}},
+    2023:{n:'0000598',v:{301:6120.00,305:318.75,311:510.00,313:450.00,315:0.00,361:1200.00,363:510.00,365:480.00,367:960.00,369:380.00}}
+  };
+  for (const y in BASE){ const v=BASE[y].v;
+    v[351]=Math.round(v[301]*0.0945*100)/100;
+    v[399]=Math.round((v[301]+v[305]-v[351])*100)/100;
+    v[349]=Math.round((v[301]+v[305])*100)/100;
+  }
+  const fmt=n=>(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  $('lines').innerHTML=LINES.map(([c,s,t])=>`<div class="ln"><span>${t}</span><span class="c">${c}</span><span class="s">${s}</span><span class="v" data-c="${c}">0.00</span></div>`).join('');
+  function fill(y,flash){
+    const b=BASE[y]; $('num').textContent=b.n; $('ej').textContent=y;
+    $('lines').querySelectorAll('.v').forEach(e=>{ const nv=fmt(b.v[e.dataset.c]);
+      if(flash && nv!==e.textContent){ e.classList.remove('is-flash'); void e.offsetWidth; e.classList.add('is-flash'); }
+      e.textContent=nv; });
+  }
+  function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), s=scr.getBoundingClientRect(); const q=K(); return [(a.left-s.left+a.width*fx)/q, (a.top-s.top+a.height*fy)/q]; }
+  function place(x,y,d){ tap.style.setProperty('--d',d+'ms'); tap.style.setProperty('--x',x+'px'); tap.style.setProperty('--y',y+'px'); }
+  async function touch(el,fx,fy,ms=650){
+    const [x,y]=pt(el,fx,fy); place(x,y,ms); tap.style.setProperty('--o',1); await sleep(ms+70);
+    tap.classList.add('is-press'); await sleep(130); tap.classList.remove('is-press');
+    tap.classList.remove('is-ping'); void tap.offsetWidth; tap.classList.add('is-ping'); await sleep(180);
+  }
+  const lift=()=>tap.style.setProperty('--o',0);
+  async function swipe(x,y1,y2,ms,apply){ place(x,y1,0); tap.style.setProperty('--o',1); await sleep(200); place(x,y2,ms); apply(); await sleep(ms+40); lift(); }
+  const keys=[...$('kb').querySelectorAll('.kp span')];
+  const key=ch=>ch==='del'?keys.find(k=>k.dataset.k==='del'):keys.find(k=>k.firstChild&&k.firstChild.nodeValue===ch);
+  async function press(ch){ const k=key(ch); k.classList.add('is-k'); await sleep(110); k.classList.remove('is-k'); }
+  async function changeYear(y){
+    const yv=$('yv');
+    await touch($('yin'),.6,.5,700); $('yin').classList.add('is-focus'); $('kb').classList.add('is-on');
+    yv.innerHTML=yv.textContent+'<span class="rc"></span>'; await sleep(450);
+    await touch(key('del'),.5,.5,500); await press('del'); const t=yv.textContent.slice(0,-1); yv.innerHTML=t+'<span class="rc"></span>'; await sleep(150);
+    const last=String(y).slice(-1); await touch(key(last),.5,.5,450); await press(last); yv.innerHTML=t+last+'<span class="rc"></span>'; await sleep(300);
+    await touch($('kok'),.95,.5,500); $('kb').classList.remove('is-on'); $('yin').classList.remove('is-focus'); yv.textContent=y; lift();
+    await sleep(250); fill(y,true);
+  }
+  function reset(){
+    root.classList.add('is-reset');
+    $('yv').textContent='2025'; fill(2025,false); $('page').style.transform=''; $('kb').classList.remove('is-on'); $('yin').classList.remove('is-focus');
+    $('lines').querySelectorAll('.is-flash').forEach(e=>e.classList.remove('is-flash')); lift(); step(0);
+    void root.offsetWidth; root.classList.remove('is-reset');
+  }
+  async function run(){
+    reset(); place(220,520,0); await sleep(1400);
+    const view=$('page').parentElement, max=$('page').scrollHeight-view.clientHeight;
+    step(1);
+    await swipe(200,520,220,700,()=>$('page').style.transform=`translateY(${-max*.5}px)`); await sleep(1500);
+    await swipe(200,520,220,700,()=>$('page').style.transform=`translateY(${-max}px)`); await sleep(1800);
+    await swipe(200,220,560,700,()=>$('page').style.transform=''); await sleep(1700);
+    step(2);
+    await changeYear(2024); await sleep(2200);
+    await changeYear(2023); await sleep(2600);
+  }
+  fill(2025,false);
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ story.forEach(li=>li.classList.add('is-on')); return; }
+  (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('gp2');
+  const $=k=>root.querySelector(`[data-el="${k}"]`);
+  const scr=$('scr'), tap=$('tap');
+  let live=false;
+  const wait=()=>(live&&!document.hidden)?null:new Promise(r=>{const t=setInterval(()=>{if(live&&!document.hidden){clearInterval(t);r()}},250)});
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms)).then(wait);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{live=e[0].isIntersecting}).observe(root);else live=true;
+  const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
+  const story=[...document.querySelectorAll('#gp2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
+  const ROWS=[['Vivienda',300],['Educación, arte y cultura',40],['Salud',20],['Vestimenta',50],['Alimentación',180],['Turismo',25]];
+  const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2});
+  $('grid').insertAdjacentHTML('beforeend',ROWS.map(([t,v],i)=>`<div class="gr" data-i="${i}"><span>${t}</span><span class="v">${fmt(v)}</span><span></span></div>`).join('')+
+    `<div class="gr gt"><span>Total</span><span class="v" data-el="tot"></span><span></span></div>`);
+  const vals=ROWS.map(r=>r[1]);
+  const total=f=>{ const e=$('tot'); e.textContent=fmt(vals.reduce((a,b)=>a+b,0)); if(f){e.classList.remove('is-flash');void e.offsetWidth;e.classList.add('is-flash');} };
+  const row=i=>$('grid').querySelector(`[data-i="${i}"]`);
+  function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), s=scr.getBoundingClientRect(); const q=K(); return [(a.left-s.left+a.width*fx)/q, (a.top-s.top+a.height*fy)/q]; }
+  function place(x,y,d){ tap.style.setProperty('--d',d+'ms'); tap.style.setProperty('--x',x+'px'); tap.style.setProperty('--y',y+'px'); }
+  async function touch(el,fx,fy,ms=650,pe){ const [x,y]=pt(el,fx,fy); place(x,y,ms); tap.style.setProperty('--o',1); await sleep(ms+70);
+    tap.classList.add('is-press'); pe&&pe.classList.add('is-press'); await sleep(130); tap.classList.remove('is-press'); pe&&pe.classList.remove('is-press');
+    tap.classList.remove('is-ping'); void tap.offsetWidth; tap.classList.add('is-ping'); await sleep(180); }
+  const lift=()=>tap.style.setProperty('--o',0);
+  const keys=[...$('kb').querySelectorAll('.kp span')];
+  const key=ch=>ch==='del'?keys.find(k=>k.dataset.k==='del'):keys.find(k=>k.firstChild&&k.firstChild.nodeValue===ch);
+  async function type(el,seq,start){ let t=start; el.innerHTML=t+'<span class="rc"></span>';
+    for(const ch of seq){ const k=key(ch); await touch(k,.5,.5,380); k.classList.add('is-k'); await sleep(90); k.classList.remove('is-k');
+      t= ch==='del'? t.slice(0,-1) : t+ch; el.innerHTML=t+'<span class="rc"></span>'; await sleep(120); } return t; }
+  async function closeKb(){ await touch($('kb').querySelector('.tb'),.95,.5,450); $('kb').classList.remove('is-on'); lift(); }
+  async function save(){ await touch($('save'),.5,.5,700,$('save')); lift(); $('toast').classList.add('is-on'); await sleep(1800); $('toast').classList.remove('is-on'); }
+  function reset(){ root.classList.add('is-reset');
+    $('catv').textContent='SI'; $('carv').textContent='0'; vals[2]=20; row(2).querySelector('.v').textContent=fmt(20); total(false);
+    root.querySelectorAll('.is-sel,.is-focus,.ed,.ck,.is-hi').forEach(e=>e.classList.remove('is-sel','is-focus','ed','ck','is-hi'));
+    row(0).classList.add('is-sel'); $('fila').textContent='Fila 1 de 6';
+    ['menu','kb','toast'].forEach(k=>$(k).classList.remove('is-on')); $('page').style.transform=''; lift();
+    void root.offsetWidth; root.classList.remove('is-reset'); }
+  async function run(){
+    reset(); place(220,560,0); await sleep(1200);
+    step(0); await touch($('cat'),.5,.5,800); $('cat').classList.add('is-focus');
+    const q=K(), v=root.querySelector('.view').getBoundingClientRect(), c=$('cat').getBoundingClientRect(), m=$('menu');
+    m.style.left=((c.right-v.left)/q-200)+'px'; m.style.top=((c.bottom-v.top)/q+4)+'px';
+    m.querySelector('[data-o="SI"]').classList.add('ck'); m.classList.add('is-on'); await sleep(500);
+    const no=m.querySelector('[data-o="NO"]'); await touch(no,.4,.5,500); no.classList.add('is-hi'); await sleep(200);
+    m.classList.remove('is-on'); $('cat').classList.remove('is-focus'); $('catv').textContent='NO'; await sleep(400);
+    await touch($('car'),.6,.5,600); $('car').classList.add('is-focus'); $('kb').classList.add('is-on'); await sleep(400);
+    await type($('carv'),['del','1'],'0'); await closeKb(); $('car').classList.remove('is-focus'); $('carv').textContent='1'; await sleep(300);
+    await save(); await sleep(400);
+    step(1); const r=row(2), cell=r.querySelector('.v');
+    await touch(cell,.6,.5,700); row(0).classList.remove('is-sel'); r.classList.add('is-sel'); $('fila').textContent='Fila 3 de 6'; await sleep(250);
+    await touch(cell,.6,.5,200); cell.classList.add('ed'); $('kb').classList.add('is-on'); await sleep(450);
+    await type(cell,['del','del','del','del','del','3','5'],'20.00'); await closeKb();
+    cell.classList.remove('ed'); vals[2]=35; cell.textContent=fmt(35); total(true); await sleep(1100);
+    step(2); await save(); await sleep(500);
+    const view=$('page').parentElement, max=$('page').scrollHeight-view.clientHeight;
+    place(200,520,0); tap.style.setProperty('--o',1); await sleep(200); place(200,240,800); $('page').style.transform=`translateY(${-max}px)`; await sleep(850); lift();
+    await sleep(2400); $('page').style.transform=''; await sleep(1800);
+  }
+  total(false); row(0).classList.add('is-sel');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ story.forEach(li=>li.classList.add('is-on')); return; }
+  (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('ev2');
+  const $=k=>root.querySelector(`[data-el="${k}"]`);
+  const scr=$('scr'), tap=$('tap');
+  let live=false;
+  const wait=()=>(live&&!document.hidden)?null:new Promise(r=>{const t=setInterval(()=>{if(live&&!document.hidden){clearInterval(t);r()}},250)});
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms)).then(wait);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{live=e[0].isIntersecting}).observe(root);else live=true;
+  const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
+  const story=[...document.querySelectorAll('#ev2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
+  const SECS=[
+    ['Competencias',[['Integridad',4,3.40],['Liderazgo',4,3.10],['Comunicación',4,3.60]]],
+    ['Conocimientos',[['Excel avanzado',4,3.20],['Normativa tributaria',5,3.80],['SquareNet',5,4.10]]],
+    ['Desempeño',[['Puntualidad',5,4.20],['Trabajo en equipo',5,4.00],['Efectividad',5,3.70],['Respeto',5,4.60],['Iniciativa',5,3.30],['Dedicación',6,4.80],['Organización',5,3.90],['Servicio',5,4.10]]]
+  ];
+  const f2=n=>n.toFixed(2);
+  function radar(items){
+    const n=items.length, cx=125, cy=112, R=72, max=Math.max(...items.map(i=>i[1]));
+    const P=(k,v)=>{ const a=-Math.PI/2+2*Math.PI*k/n, r=R*v/max; return [cx+r*Math.cos(a), cy+r*Math.sin(a)]; };
+    const poly=(sel)=>items.map((it,k)=>P(k,sel(it)).map(x=>x.toFixed(1)).join(',')).join(' ');
+    let g='';
+    for(let s=1;s<=max;s++) g+=`<polygon points="${items.map((_,k)=>P(k,s).join(',')).join(' ')}" fill="none" stroke="#e3e3e3"/>`;
+    items.forEach((_,k)=>{ const [x,y]=P(k,max); g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#e3e3e3"/>`; });
+    for(let s=1;s<=max;s++) g+=`<text x="${cx+2}" y="${cy-R*s/max+3}" font-size="6.5" fill="#888">${s}</text>`;
+    const lbl=items.map((it,k)=>{ const [x,y]=P(k,max*1.2); const anc=Math.abs(x-cx)<6?'middle':(x>cx?'start':'end'); return `<text x="${x}" y="${y+3}" font-size="8" fill="#555" text-anchor="${anc}">${it[0]}</text>`; }).join('');
+    const dots=(sel,c)=>items.map((it,k)=>{const [x,y]=P(k,sel(it)); return `<circle cx="${x}" cy="${y}" r="2.2" fill="${c}"/>`;}).join('');
+    return `<svg class="radar" viewBox="-45 0 340 220">${g}${lbl}
+      <g class="id"><polygon points="${poly(i=>i[1])}" fill="rgba(60,140,70,.10)" stroke="#3c8c46" stroke-width="2"/>${dots(i=>i[1],'#d0505a')}</g>
+      <g class="ev"><polygon points="${poly(i=>i[2])}" fill="rgba(70,150,220,.14)" stroke="#4a9be0" stroke-width="2"/>${dots(i=>i[2],'#d0505a')}</g></svg>`;
+  }
+  const pcs=SECS.map(([,it])=>it.reduce((a,b)=>a+b[2],0)/it.reduce((a,b)=>a+b[1],0)*100);
+  const prom=pcs.reduce((a,b)=>a+b,0)/pcs.length;
+  $('body').innerHTML=`<div class="prom">Promedio General: <b>${f2(prom)}%</b></div>`+SECS.map(([t,it],i)=>`
+    <table><tr><th>${t}</th><th class="n">Ideal</th><th class="n">Evaluado</th></tr>
+    ${it.map(r=>`<tr><td>${r[0]}</td><td class="n">${f2(r[1])}</td><td class="n">${f2(r[2])}</td></tr>`).join('')}
+    <tr><td></td><td></td><td class="pc">${f2(pcs[i])}%</td></tr></table>
+    <div class="leg"><span><i style="border-color:#3c8c46;background:rgba(60,140,70,.1)"></i>Valor Ideal</span><span><i style="border-color:#4a9be0;background:rgba(70,150,220,.14)"></i>Valor Evaluado</span></div>
+    ${radar(it)}`).join('');
+  const radars=[...root.querySelectorAll('.radar')];
+  function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), s=scr.getBoundingClientRect(); const q=K(); return [(a.left-s.left+a.width*fx)/q, (a.top-s.top+a.height*fy)/q]; }
+  function place(x,y,d){ tap.style.setProperty('--d',d+'ms'); tap.style.setProperty('--x',x+'px'); tap.style.setProperty('--y',y+'px'); }
+  async function touch(el,fx,fy,ms=650){ const [x,y]=pt(el,fx,fy); place(x,y,ms); tap.style.setProperty('--o',1); await sleep(ms+70);
+    tap.classList.add('is-press'); await sleep(130); tap.classList.remove('is-press'); tap.classList.remove('is-ping'); void tap.offsetWidth; tap.classList.add('is-ping'); await sleep(180); }
+  const lift=()=>tap.style.setProperty('--o',0);
+  const page=$('page'), view=page.parentElement;
+  function revealVisible(){ const v=view.getBoundingClientRect(); radars.forEach(r=>{ const b=r.getBoundingClientRect(); if(b.top<v.bottom-60) r.classList.add('is-in'); }); }
+  let y=0;
+  async function scrollTo(ny){ place(200,520,0); tap.style.setProperty('--o',1); await sleep(200); place(200,520-Math.min(300,ny-y),800); page.style.transform=`translateY(${-ny}px)`; y=ny; await sleep(850); lift(); revealVisible(); }
+  function reset(){ root.classList.add('is-reset'); $('selv').textContent=''; $('body').classList.remove('is-on'); radars.forEach(r=>r.classList.remove('is-in'));
+    $('menu').classList.remove('is-on'); root.querySelectorAll('.is-hi').forEach(e=>e.classList.remove('is-hi')); page.style.transform=''; y=0; lift();
+    void root.offsetWidth; root.classList.remove('is-reset'); }
+  async function run(){
+    reset(); place(220,560,0); await sleep(1000);
+    step(0); await touch($('sel'),.6,.5,800); $('sel').classList.add('is-focus');
+    const q=K(), v=view.getBoundingClientRect(), c=$('sel').getBoundingClientRect(), m=$('menu');
+    m.style.left=((c.left-v.left)/q)+'px'; m.style.top=((c.bottom-v.top)/q+4)+'px'; m.classList.add('is-on'); await sleep(550);
+    const o=m.querySelector('[data-o="a"]'); await touch(o,.4,.5,550); o.classList.add('is-hi'); await sleep(200);
+    m.classList.remove('is-on'); $('sel').classList.remove('is-focus'); $('selv').textContent='29/10/2026 - Evaluación anual'; lift();
+    step(1); $('body').classList.add('is-on'); await sleep(100); revealVisible(); await sleep(2200);
+    step(2); const max=page.scrollHeight-view.clientHeight;
+    for(const t of [0.2,0.42,0.64,0.84,1]){ await scrollTo(Math.round(max*t)); await sleep(1500); }
+    await sleep(1200); page.style.transition='transform 1.2s cubic-bezier(.3,.8,.3,1)'; page.style.transform=''; y=0; await sleep(1500); page.style.transition='';
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ story.forEach(li=>li.classList.add('is-on')); $('selv').textContent='29/10/2026 - Evaluación anual'; $('body').classList.add('is-on'); radars.forEach(r=>r.classList.add('is-in')); return; }
+  (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('fm2');
+  const $=k=>root.querySelector(`[data-el="${k}"]`);
+  const scr=$('scr'), tap=$('tap'), page=$('page'), view=page.parentElement;
+  let live=false;
+  const wait=()=>(live&&!document.hidden)?null:new Promise(r=>{const t=setInterval(()=>{if(live&&!document.hidden){clearInterval(t);r()}},250)});
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms)).then(wait);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{live=e[0].isIntersecting}).observe(root);else live=true;
+  const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
+  const story=[...document.querySelectorAll('#fm2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
+  function pt(el,fx=.5,fy=.5){ const a=el.getBoundingClientRect(), s=scr.getBoundingClientRect(); const q=K(); return [(a.left-s.left+a.width*fx)/q, (a.top-s.top+a.height*fy)/q]; }
+  function place(x,y,d){ tap.style.setProperty('--d',d+'ms'); tap.style.setProperty('--x',x+'px'); tap.style.setProperty('--y',y+'px'); }
+  async function touch(el,fx,fy,ms=650){ const [x,y]=pt(el,fx,fy); place(x,y,ms); tap.style.setProperty('--o',1); await sleep(ms+70);
+    tap.classList.add('is-press'); await sleep(130); tap.classList.remove('is-press'); tap.classList.remove('is-ping'); void tap.offsetWidth; tap.classList.add('is-ping'); await sleep(180); }
+  const lift=()=>tap.style.setProperty('--o',0);
+  let y=0;
+  async function scrollTo(ny,ms=800){ ny=Math.max(0,Math.min(ny,page.scrollHeight-view.clientHeight+240)); place(200,520,0); tap.style.setProperty('--o',1); await sleep(200);
+    place(200,520-Math.max(-300,Math.min(300,ny-y)),ms); page.style.transform=`translateY(${-ny}px)`; y=ny; await sleep(ms+50); lift(); }
+  const offTop=el=>{ let t=0; for(let e=el;e&&e!==page;e=e.offsetParent) t+=e.offsetTop; return t; };
+  const radio=k=>root.querySelector(`[data-r="${k}"]`);
+  async function pick(k){ const r=radio(k); await touch(r.querySelector('i'),.5,.5,600); root.querySelectorAll(`[data-r^="${k[0]}"]`).forEach(e=>e.classList.remove('on')); r.classList.add('on'); await sleep(300); }
+  const keys=[...$('kb').querySelectorAll('.kr span')];
+  const keyFor=ch=>ch===' '?keys.find(k=>k.dataset.k===' '):keys.find(k=>k.textContent===ch.toLowerCase());
+  async function type(out,txt){ let s=''; for(const ch of txt){ const k=keyFor(ch); k&&k.classList.add('is-k'); s+=ch; out.innerHTML=s+'<span class="rc"></span>'; await sleep(ch===' '?55:70); k&&k.classList.remove('is-k'); } }
+  function reset(){ root.classList.add('is-reset'); $('selv').textContent=''; $('body').classList.remove('is-on'); $('menu').classList.remove('is-on');
+    root.querySelectorAll('.is-hi,.on,.is-focus').forEach(e=>e.classList.remove('is-hi','on','is-focus')); $('ta1v').textContent=''; $('kb').classList.remove('is-on');
+    page.style.transform=''; y=0; lift(); void root.offsetWidth; root.classList.remove('is-reset'); }
+  async function run(){
+    reset(); place(220,560,0); await sleep(1000);
+    step(0); await touch($('sel'),.6,.5,800); $('sel').classList.add('is-focus');
+    const q=K(), v=view.getBoundingClientRect(), c=$('sel').getBoundingClientRect(), m=$('menu');
+    m.style.left=((c.left-v.left)/q)+'px'; m.style.top=((c.bottom-v.top)/q+4)+'px'; m.classList.add('is-on'); await sleep(550);
+    const o=m.querySelector('[data-o="a"]'); await touch(o,.4,.5,550); o.classList.add('is-hi'); await sleep(200);
+    m.classList.remove('is-on'); $('sel').classList.remove('is-focus'); $('selv').textContent='Conflicto de Interés 2026'; lift();
+    $('body').classList.add('is-on'); await sleep(1800);
+    await scrollTo(260); await sleep(1300);
+    step(1); await scrollTo(offTop(root.querySelector('table.t'))-60); await sleep(1600);
+    await scrollTo(offTop(radio('1s'))-120); await sleep(500);
+    await pick('1s');
+    const ta=$('ta1'); await touch(ta,.4,.4,600); ta.classList.add('is-focus'); $('ta1v').innerHTML='<span class="rc"></span>'; $('kb').classList.add('is-on'); lift(); await sleep(450);
+    await type($('ta1v'),'primo hermano en logistica');
+    await sleep(300); await touch($('kb').querySelector('.tb'),.93,.5,500); $('kb').classList.remove('is-on'); ta.classList.remove('is-focus'); $('ta1v').textContent='primo hermano en logística'; await sleep(400);
+    await scrollTo(offTop(radio('2s'))-140); await pick('2n'); await sleep(200);
+    await scrollTo(offTop(radio('3s'))-160); await pick('3n'); await sleep(300);
+    step(2); await scrollTo(page.scrollHeight-view.clientHeight); await sleep(900);
+    await touch($('chk').querySelector('i'),.5,.5,700); $('chk').classList.add('on'); await sleep(400); lift(); await sleep(2800);
+    page.style.transition='transform 1.2s cubic-bezier(.3,.8,.3,1)'; page.style.transform=''; y=0; await sleep(1500); page.style.transition='';
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ story.forEach(li=>li.classList.add('is-on')); $('selv').textContent='Conflicto de Interés 2026'; $('body').classList.add('is-on'); return; }
+  (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
+})();
+</script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>
