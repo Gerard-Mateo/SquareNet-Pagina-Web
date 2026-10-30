@@ -53,6 +53,8 @@ Cada página nueva o rediseñada debe reusar estos tokens/componentes en vez de 
   - **Anuncios de Google (AdSense)**: `<aside class="ad-slot" data-ad-slot="" hidden>` en el artículo de renta, debajo de «En corto». `js/consent.js` los llena solo si `ADSENSE_CLIENT` tiene el ID de editor, el bloque tiene su `data-ad-slot` y el visitante aceptó las cookies (el banner aparece si hay GA_ID o ADSENSE_CLIENT). Rechazar borra también `__gads/__gpi/__eoi`. Ya están en la tabla de cookies de `privacidad.html`.
   - Pendiente (el usuario lo pidió "para después"): sección de noticias del Gobierno/SRI/IESS con suscripción y posts generados automáticamente.
 
+- **Animaciones de funciones en las páginas de módulo (`.mod-fn` / `.rp-stage`) en celular**: la grilla de una columna usa `minmax(0,1fr)` (con `1fr` la columna crecía al ancho fijo de la ventana animada, 920 px, y el celular alejaba toda la página a 1000 px). En ≤860 px el escenario no lleva relleno lateral y el `fit()` de cada ventana usa todo el ancho (`media.clientWidth-(innerWidth<=860?0:40)`); los teléfonos de Autoservicio miden 356 px y caben en 390. Al agregar una ventana nueva, copiar ese `fit()` y probar con un viewport de 390 que `documentElement.scrollWidth` siga en 390.
+
 ## Calculadoras y artículos-herramienta del blog
 
 - **Portada del blog**: sección «Calculadoras» en grande (título serif enorme + lista numerada de las 7 calculadoras: renta, sueldo neto, décimo tercero, décimo cuarto, liquidación, fondos y utilidades, `.tools`/`.tools-list` en el `<style>` de `blog/index.html`). Reemplazó la franja oscura de cuadritos «Saca tus números en segundos», que al cliente no le gustó: no volver a ella.

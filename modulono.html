@@ -728,7 +728,7 @@
   const story=[...document.querySelectorAll('#pr2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
   /* se dibuja a 920 px y se escala entero al ancho de su columna */
   let k=1; const media=root.parentElement;
-  const fit=()=>{ k=Math.min(1,(media.clientWidth-40)/920); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*640)+'px'; root.style.marginRight=(-(1-k)*920)+'px'; };
+  const fit=()=>{ k=Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/920); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*640)+'px'; root.style.marginRight=(-(1-k)*920)+'px'; };
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   function hl(src){ const ci=src.indexOf('//'); const a=ci>=0?src.slice(0,ci):src, c=ci>=0?src.slice(ci):'';
@@ -801,7 +801,7 @@
   const story=[...document.querySelectorAll('#pf2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
   /* se dibuja a 920 px y se escala entero al ancho de su columna */
   let k=1; const media=root.parentElement;
-  const fit=()=>{ k=Math.min(1,(media.clientWidth-40)/920); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*640)+'px'; root.style.marginRight=(-(1-k)*920)+'px'; };
+  const fit=()=>{ k=Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/920); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*640)+'px'; root.style.marginRight=(-(1-k)*920)+'px'; };
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   function hl(src){ const ci=src.indexOf('//'); const a=ci>=0?src.slice(0,ci):src, c=ci>=0?src.slice(ci):'';
@@ -890,7 +890,7 @@
   const K=()=>scr.getBoundingClientRect().width/scr.offsetWidth||1;
   const story=[...document.querySelectorAll('#rl2Story li')];const step=n=>story.forEach((li,i)=>li.classList.toggle('is-on',i===n));
   let k=1; const media=root.parentElement;
-  const fit=()=>{ k=Math.min(1,(media.clientWidth-40)/940); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*660)+'px'; root.style.marginRight=(-(1-k)*940)+'px'; };
+  const fit=()=>{ k=Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/940); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*660)+'px'; root.style.marginRight=(-(1-k)*940)+'px'; };
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const fmt=n=>(n<0?'-':'')+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});

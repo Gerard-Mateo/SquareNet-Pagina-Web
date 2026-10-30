@@ -916,6 +916,7 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .mod-fn-n { display: block; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--mc, var(--color-accent)); margin-bottom: var(--space-2); }
 .mod-fn h3 { font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 var(--space-3); }
 .mod-fn p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-neutral-700); max-width: 46ch; }
+.mod-fn-copy, .mod-fn-media { min-width: 0; }
 .mod-fn-media { position: relative; min-height: 340px; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--mc, var(--color-accent)) 8%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--mc, var(--color-accent)) 18%, transparent); display: grid; place-items: center; overflow: hidden; }
 /* Hueco hasta que llegue la animación de la función (se reemplaza todo .mod-fn-ph) */
 .mod-fn-ph { display: grid; justify-items: center; gap: var(--space-3); color: color-mix(in srgb, var(--mc, var(--color-accent)) 70%, #000); font-weight: 600; font-size: 15px; }
@@ -923,7 +924,8 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .mod-fn:target .mod-fn-media { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc, var(--color-accent)) 30%, transparent); }
 .mod-fn:target .mod-fn-n { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 860px) {
-  .mod-fn, .mod-fn:nth-child(even) { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-8) 0; }
+  /* minmax(0,1fr) y no 1fr: con 1fr la columna crecía al ancho fijo de la ventana animada (920 px) y el celular alejaba toda la página */
+  .mod-fn, .mod-fn:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding: var(--space-8) 0; }
   .mod-fn:nth-child(even) .mod-fn-copy { order: 0; }
   .mod-fn-media { min-height: 240px; }
 }
@@ -940,6 +942,7 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 
 /* Escenario de las animaciones de funciones (.mod-fn-media.rp-stage) y los pasos de la historia (.rp-story) que se encienden con la animación */
 .rp-stage{padding:var(--space-8) var(--space-4);min-height:0;background:none;border:0;overflow:visible}
+@media (max-width:860px){.rp-stage{padding:var(--space-4) 0}}   /* en celular el escenario usa todo el ancho: los teléfonos de Autoservicio miden 356 px */
 .mod-fn:target .rp-stage{box-shadow:none}
 .rp-story{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;gap:16px;counter-reset:rp}
 .rp-story li{position:relative;padding-left:44px;color:var(--color-neutral-600);transition:color .4s}
