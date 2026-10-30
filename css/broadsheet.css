@@ -947,6 +947,7 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .rp-story{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;gap:16px;counter-reset:rp}
 .rp-story li{position:relative;padding-left:44px;color:var(--color-neutral-600);transition:color .4s}
 .rp-story li::before{counter-increment:rp;content:counter(rp);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--color-divider);display:grid;place-items:center;font-weight:700;font-size:13px;transition:background .4s,border-color .4s,color .4s}
+@media (max-width:700px){.rp-story{display:none}}   /* celular: no se ven a la vez la animación y los pasos, así que solo queda la animación (pedido del cliente) */
 .rp-story li b{display:block;font-size:16px;color:var(--color-neutral-700);margin-bottom:2px;transition:color .4s}
 .rp-story li span{font-size:14.5px;line-height:1.45}
 .rp-story li.is-on{color:var(--color-text)}
