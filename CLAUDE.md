@@ -2,6 +2,8 @@
 
 Sitio estático (HTML/CSS/JS vanilla, sin build step) para SquareNet Software, empresa ecuatoriana de software de nómina/RRHH. No hay `package.json`; se sirve directo (`python -m http.server` para probar local).
 
+**Flujo de trabajo (pedido del usuario)**: al terminar cada pedido, commit y push a `master` (y al branch de la sesión si hay uno), sin esperar a que lo pida.
+
 ## Sistema de diseño
 
 Todo el sitio usa `css/broadsheet.css` — un design system "editorial broadsheet":
