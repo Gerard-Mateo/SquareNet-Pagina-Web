@@ -602,9 +602,9 @@ const lv=R(root.querySelector('[data-el="lastv"]').children[3]),cx=lv.r-30,L='st
 root.querySelector('[data-el="lk"]').innerHTML=`<path d="M${cx} ${lv.t+lv.h/2} V${k.t}" ${L}/>${D(cx,lv.t+lv.h/2)}${D(cx,k.t)}`;
 const c3=root.querySelector('[data-el="c3"]'),sc=R(root.querySelector('[data-el="lastv"]').nextElementSibling.children[3]);
 c3.style.left=(wr.r-70)+'px';c3.style.top=(wr.b-250)+'px';
-const k3=R(c3),sx=sc.l+sc.w/2;
-root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} V${k3.t+40} H${k3.l}" ${L}/>${D(sx,sc.t+sc.h/2)}${D(k3.l,k3.t+40)}`;
-s.style.height=Math.max(mr.b,k3.b)+36+'px';
+const k3=R(c3),sx=sc.l+sc.w/2,ex=k3.l+k3.w/2,routeBottom=Math.max(wr.b,k3.b)+55;
+root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} V${routeBottom} H${ex} V${k3.b}" ${L}/>${D(sx,sc.t+sc.h/2)}${D(ex,k3.b)}`;
+s.style.height=Math.max(mr.b,k3.b,routeBottom)+20+'px';
 
 const stage=root.firstElementChild,media=root.parentElement;
 function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/1080));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1080)+'px';}
