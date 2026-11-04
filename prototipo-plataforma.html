@@ -95,11 +95,6 @@
   .show-media::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
     background:radial-gradient(circle,color-mix(in srgb,var(--color-accent-700) 30%,transparent) 1.2px,transparent 1.2px) 0 0/20px 20px;
     -webkit-mask-image:linear-gradient(135deg,#000 0,transparent 70%);mask-image:linear-gradient(135deg,#000 0,transparent 70%)}
-  .show-chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:8px 13px;background:#fff;border-radius:var(--radius-md);
-    font-size:13px;font-weight:600;color:var(--color-accent-800);box-shadow:0 10px 24px color-mix(in srgb,#0a303e 22%,transparent);animation:chipFloat 5s ease-in-out infinite}
-  .show-chip svg{width:16px;height:16px;fill:none;stroke:var(--color-accent-700);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  @keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-
   /* — ventana de aplicación (maqueta en HTML/CSS, escala con el ancho vía cqw) — */
   .win{position:relative;width:100%;font-size:12px;font-size:max(6.6px,calc(100cqw / 46));line-height:1.35;color:var(--color-text);background:#fff;
     border:1px solid color-mix(in srgb,var(--color-text) 14%,transparent);border-radius:.35em;overflow:hidden;
@@ -648,7 +643,6 @@
     .show-row.reverse .show-copy{order:0}
     .show-copy h2{font-size:28px}
     .show-media{padding:50px 12px 34px}
-    .show-chip{font-size:12px;padding:6px 10px;top:10px!important;right:12px!important}
     .req-cards{grid-template-columns:1fr}
     .req-card{padding:var(--space-4)}
     .req-big b{font-size:56px}
@@ -661,7 +655,7 @@
     .stat{padding:var(--space-4) var(--space-3)}
   }
   @media (prefers-reduced-motion:reduce){
-    .win *,.win *::after,.show-chip,.feat,.req-meter i{animation:none!important;transition:none!important}
+    .win *,.win *::after,.feat,.req-meter i{animation:none!important;transition:none!important}
     .req-meter i{opacity:1;transform:none}
   }
 </style>
@@ -766,7 +760,6 @@
           </div>
           <div class="mf-steps" aria-hidden="true"><ol data-el="dots"><li></li><li></li><li></li><li></li><li></li><li></li></ol><span class="mf-cap" data-el="cap"></span></div>
         </div>
-        <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.8 7 8 10.2 11.2 7M3 13h10"/></svg>Exportación directa a Excel</span>
       </div>
     </article>
 
@@ -824,7 +817,6 @@
             </div>
           </div>
         </div>
-        <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.8 3.5 9h4l-.8 5.2L12.5 7h-4L9 1.8Z"/></svg>Sin recompilar</span>
       </div>
     </article>
 
@@ -929,7 +921,6 @@
             </div>
           </div>
         </div>
-        <span class="show-chip" style="right:18px;top:12px"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7.2" width="9" height="6.3" rx="1.2"/><path d="M5.5 7.2V5.2a2.5 2.5 0 0 1 4.9-.7"/></svg>Sin depender de tu proveedor</span>
       </div>
     </article>
 
@@ -1476,7 +1467,7 @@
         await move($('f1'),900,.4,.5); await click(); selectEl($('f1').firstChild,'f1'); await sleep(1300);
         const band=$('band');
         await move(band,750,.3,.45); await click(); selectEl(band,'band'); await sleep(450);
-        for (const hex of ['#0f766e','#b45309']){ await click(); setBand(hex); await sleep(900); }
+        for (const hex of ['#dc2626','#b45309']){ await click(); setBand(hex); await sleep(900); }
         await move($('f3'),750,.4,.5); await click(); selectEl($('f3').firstChild,'f3'); await sleep(1300);
         await move($('qr'),750,.5,.5); await click(); selectEl($('qr'),'qr'); await sleep(1700);
 
@@ -1507,8 +1498,8 @@
         const hx=$('hex');
         await move(hx,850,.5,.5); await dbl(); dropCaret(); hx.classList.add('is-sel'); await sleep(450);
         hx.classList.remove('is-sel'); hx.textContent='';
-        for(const ch of '#0f766e'){ hx.textContent+=ch; setCaret(hx.parentNode,hx.nextSibling); await sleep(130); }
-        page.style.setProperty('--acc','#0f766e'); code.style.setProperty('--acc','#0f766e');
+        for(const ch of '#dc2626'){ hx.textContent+=ch; setCaret(hx.parentNode,hx.nextSibling); await sleep(130); }
+        page.style.setProperty('--acc','#dc2626'); code.style.setProperty('--acc','#dc2626');
         await sleep(900); textMode(false); dropCaret();
         await moveXY(FW*.72, 380, 900);
         await sleep(2400);
