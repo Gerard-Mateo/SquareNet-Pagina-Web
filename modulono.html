@@ -20,6 +20,172 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<style>
+/* Cuotas y préstamos .cu2 (pantalla fija del cliente; se dibuja a 840 px y se escala a la columna) */
+.cu2{position:relative;flex:0 0 auto;width:840px;transform-origin:top left;font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.cu2 *{box-sizing:border-box}
+.cu2 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
+.cu2 .chk{display:flex;align-items:center;gap:9px;height:40px;padding:0 14px;border-bottom:1px solid #eee;font-size:12.5px}
+.cu2 .cb{width:15px;height:15px;border-radius:3px;background:#2f6fd6;position:relative}
+.cu2 .cb::after{content:"";position:absolute;left:4.5px;top:1.5px;width:3.5px;height:7.5px;border:solid #fff;border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+.cu2 .g{border-collapse:collapse;width:100%;table-layout:fixed;margin:0;font-size:12px}
+.cu2 .g td,.cu2 .g th{height:22px;padding:0 6px;border:0;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;color:#1d1b1a;font-size:12px;line-height:1.25;background:none}
+.cu2 .g th{height:24px;font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2}
+.cu2 .g tr:nth-child(odd) td{background:#fafafa}
+.cu2 .g tr.p td{background:#fff}
+.cu2 .g tr.sel td,.cu2 .g tr.p.sel td{background:#e1ecfa}
+.cu2 .g tr.sel td:nth-child(2){box-shadow:inset 0 0 0 1px #6f96c8}
+.cu2 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
+.cu2 .g td.c{text-align:center;text-overflow:clip;padding:0 2px;color:#222}
+.cu2 .sort{font-size:8px;color:#888;margin-left:4px;vertical-align:1px}
+.cu2 .lk{width:12px;height:14px;vertical-align:-3px}
+.cu2 .xsec{border-bottom:1px solid #dcd8d1}
+.cu2 .xsec.tt{height:118px}
+.cu2 .ft{display:flex;align-items:stretch;border-top:1px solid #dcd8d1}
+.cu2 .ft .lab{width:150px;padding:8px 12px;font-weight:600;color:#24538c;line-height:1.75}
+.cu2 .ft .val{width:110px;padding:8px 12px;background:#e9e7e3;text-align:right;font-weight:700;color:#24538c;line-height:1.75;font-variant-numeric:tabular-nums}
+.cu2 .ft .bar{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 20px}
+.cu2 .ft .bar .b{height:10px;border-radius:5px;background:#f1d9b0;overflow:hidden}
+.cu2 .ft .bar .b i{display:block;height:100%;width:87.5%;background:#2f9a4a;border-radius:5px}
+.cu2 .ft .bar small{color:#7a746d;font-size:12px}
+.cu2 .cur{position:absolute;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+/* Utilidades: misma presentación y escala adaptable que cuotas */
+.ut2{width:760px}
+.ut2 .win{height:708px;display:flex;flex-direction:column}
+.ut2 .tabs{display:flex;gap:2px;padding:6px 6px 0;border-bottom:1px solid #d2d2d2;background:#fff}
+.ut2 .tabs span{padding:5px 12px;font-size:12px;color:#2f6fbf}
+.ut2 .tabs .on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:4px 4px 0 0}
+.ut2 .detail{flex:1}
+.ut2 .g th.w{white-space:normal;line-height:1.15;height:38px}
+.ut2 .g.detail-table td{height:25px}
+.ut2 .g tr.bk td:nth-child(5),.ut2 .g tr.bk td:nth-child(6){background:#e6e3de}
+.ut2 .pc,.ut2 .cc{width:12px;height:13px;vertical-align:-2px}
+.ut2 .gt2{display:flex;border-top:1px solid #d2d2d2;background:#f4f3f0}
+.ut2 .gt2 span{display:flex;align-items:center;justify-content:flex-end;height:30px;padding:0 6px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Archivo bancario: pantalla fija adaptable, como cuotas */
+.bk2{width:760px}
+.bk2 .win{height:708px;display:flex;flex-direction:column}
+.bk2 .ttl{display:flex;align-items:center;gap:10px;height:40px;flex:none;padding:0 12px;border-bottom:1px solid #d2d2d2;background:#fff;font-weight:600;font-size:13px}
+.bk2 .bank-icon{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:5px;background:#1e4f8c;color:#fff}
+.bk2 .bank-icon svg{width:14px;height:14px}
+.bk2 .detail{flex:1}
+.bk2 .g td{height:25px}
+.bk2 .bank-total{display:flex;align-items:center;justify-content:space-between;height:34px;padding-left:10px;border-top:1px solid #d2d2d2;background:#f4f3f0;font-weight:700;color:#24538c}
+.bk2 .bank-total span:last-child{height:100%;display:flex;align-items:center;padding:0 8px;background:#dedbd5;min-width:96px;justify-content:flex-end;font-variant-numeric:tabular-nums}
+/* Editor de fórmulas */
+.formula3 .ed{display:flex;flex:none;height:430px;border-bottom:1px solid #d2d2d2}
+.formula3 .code{flex:1;min-width:0;border:1.5px solid #4d8fd6;margin:8px 0 8px 8px;border-radius:4px;overflow:hidden;padding:4px 0;font:11.2px/17.4px Consolas,"Cascadia Mono",ui-monospace,monospace;color:#111;background:linear-gradient(90deg,#f4f4f4 0 30px,#fff 30px)}
+.formula3 .ln{display:flex;white-space:pre}.formula3 .no{flex:none;width:30px;padding-right:6px;text-align:right;color:#9a9a9a}
+.formula3 .kw{color:#1515e0}.formula3 .cm{color:#1f9a2e}.formula3 .st{color:#a31515}.formula3 .nu{color:#b04fd6}.formula3 .rb{color:#8a3b12}
+.formula3 .rc{display:inline-block;width:1.5px;height:14px;vertical-align:-2px;background:#111}
+.formula3 .btns{width:104px;flex:none;display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:14px}
+.formula3 .btns .btn{width:80px;min-height:0;height:28px;padding:0;display:grid;place-items:center;border:1px solid #c4c4c4;border-radius:5px;background:linear-gradient(#fdfdfd,#ececec);font-weight:600;font-size:12.5px;color:#111}
+.formula3 .btn.v{margin-top:auto;margin-bottom:14px}
+.formula3 .tabs{display:flex;gap:2px;padding:6px 6px 0;border-bottom:1px solid #d2d2d2;flex:none}
+.formula3 .tabs span{display:flex;align-items:center;gap:5px;padding:5px 10px;font-size:12px;color:#2f6fbf}
+.formula3 .tabs span.on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:4px 4px 0 0;background:#fff}
+.formula3 .tabs i{font:italic 700 10px "Times New Roman",serif;color:#555}.formula3 .tabs svg{width:12px;height:12px}
+.formula3 .dg{flex:1;min-height:0;overflow:hidden}
+/* Vista de detalle del rol de pagos */
+.pay2 .detail{flex:1}
+.pay2 .g td.v{text-align:right;font-variant-numeric:tabular-nums}
+.pay2 .g tr.in td.v{background:#dff5dc!important}.pay2 .g tr.eg td.v{background:#fde3e3!important}
+.pay2 .g tr.sel td.v{box-shadow:inset 0 0 0 1px #6f96c8}
+.pay2 .g td.sg{text-align:center;font-weight:700;color:#555}
+.pay2 .ic{width:13px;height:13px;vertical-align:-2px}
+.pay2 .pc,.pay2 .cc{width:12px;height:13px;vertical-align:-2px}
+.pay2 .g tr.gh td{background:#f6f5f2!important;color:#7a746d;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;height:22px!important}
+.pay2 .foot{display:flex;justify-content:flex-end;flex:none;border-top:1px solid #d2d2d2;background:#f4f3f0}
+.pay2 .foot .l{padding:7px 10px;text-align:right;font-weight:600;color:#24538c;line-height:1.7}
+.pay2 .foot .r{width:96px;padding:7px 10px;text-align:right;font-weight:700;color:#24538c;line-height:1.7;background:#dedbd5;font-variant-numeric:tabular-nums}
+.pay2 .foot .sp{width:84px}
+.ac2 .g td.db,.ac2 .g td.hb{text-align:right;font-variant-numeric:tabular-nums}
+.ac2 .g td.db{background:#dff5dc!important}
+.ac2 .g td.hb{background:#fde3e3!important}
+.ac2 .account-total{display:flex;justify-content:flex-end;flex:none;border-top:1px solid #d2d2d2;background:#f4f3f0}
+.ac2 .account-total span{height:34px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums}
+.ac2 .account-total .label{background:transparent;margin-right:auto;justify-content:flex-start;padding-left:10px}
+/* Vista fija de configuración de reportes */
+.rp3 .up{display:flex;flex:none;border-bottom:1px solid #d2d2d2}
+.rp3 .rl{width:200px;border-right:1px solid #d2d2d2}
+.rp3 .cfg{flex:1;background:#f4f3f0;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rp3 .box{background:#fff;border:1px solid #e0ddd7;border-radius:6px;padding:4px 10px}
+.rp3 .box .r{display:flex;align-items:center;justify-content:space-between;height:21px;font-size:12px}
+.rp3 .cb{width:13px;height:13px;border:1.3px solid #a9a39b;border-radius:3px;background:#fff}
+.rp3 .cb:not(.on)::after{display:none}
+.rp3 .cb.on{border-color:#2f6fd6;background:#2f6fd6}
+.rp3 .cb.on::after{left:3.3px;top:.6px;width:3px;height:6.5px;border-width:0 1.6px 1.6px 0}
+.rp3 .lo{flex:1;display:flex;min-height:0}
+.rp3 .side{flex:1;display:flex;flex-direction:column;min-width:0}
+.rp3 .side .hd{display:flex;justify-content:space-between;align-items:center;height:28px;padding:0 8px;font-weight:700;font-size:12px;background:#fcfbf9;border-bottom:1px solid #e6e6e6}
+.rp3 .side .hd span{font-weight:500;color:#9a948d;font-size:11px}
+.rp3 .mid{width:44px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-left:1px solid #e6e6e6;border-right:1px solid #e6e6e6;background:#fcfbf9}
+.rp3 .mid .btn{width:26px;min-height:0;height:22px;padding:0;border:1px solid #c9c4bc;border-radius:4px;background:#fff;display:grid;place-items:center;font-weight:700;font-size:11px;color:#555}
+.rp3 .mid .btn.go{background:#2f6fd6;border-color:#2f6fd6;color:#fff;box-shadow:0 5px 12px -5px rgba(47,111,214,.8)}
+.rp3 .sg{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10.5px;font-weight:600}
+.rp3 .eg{background:#fde3e3;color:#b42318}.rp3 .in{background:#dff5dc;color:#1b6b45}.rp3 .inf{background:#eceae6;color:#6d6760}
+.rp3 .g tr.pick td{background:#fff3c4!important}.rp3 .g tr.pick td:first-child{box-shadow:inset 3px 0 0 #e0a800}
+.rp3 .g tr.new td{background:#e6f5ea!important;font-weight:600}.rp3 .g tr.new td:first-child{box-shadow:inset 3px 0 0 #2fa462}
+/* Décimos: HTML del cliente, acotado a .dc3 */
+.dc3 *{box-sizing:border-box}
+.dc3{margin:0;font:12.5px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.dc3 .stage{position:relative;width:980px;padding:44px 32px 32px}
+.dc3 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
+.dc3 .top{height:34px;display:flex;align-items:center;gap:12px;padding:0 12px;background:linear-gradient(#3d78b8,#24538c);color:#fff}
+.dc3 .sq{background:#fff;border-radius:3px;padding:3px 7px;font:800 15px/1 Arial;color:#1b2f5c}
+.dc3 .sq b{color:#2f8fe0}
+.dc3 .co{font-weight:600;font-size:13.5px}
+.dc3 .adm{margin-left:auto;background:#fff;color:#111;border-radius:4px;padding:4px 10px;font-size:12px}
+.dc3 .chk{display:flex;align-items:center;gap:9px;height:40px;padding:0 14px;border-bottom:1px solid #eee}
+.dc3 .cb{width:15px;height:15px;border-radius:3px;background:#2f6fd6;position:relative}
+.dc3 .cb::after{content:"";position:absolute;left:4.5px;top:1.5px;width:3.5px;height:7.5px;border:solid #fff;border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+.dc3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
+.dc3 .g td,.dc3 .g th{height:26px;padding:0 9px;border-bottom:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.dc3 .g th{height:30px;font-weight:600;background:#f6f5f2;border-bottom:1px solid #dcd8d1}
+.dc3 .g td+td,.dc3 .g th+th{border-left:1px solid #f0eeea}
+.dc3 .g tr.sel td{background:#e3eefb}
+.dc3 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
+.dc3 .g td.c{text-align:center;text-overflow:clip;padding:0 2px}
+.dc3 .ok{color:#2f9a4a;font-weight:700}
+.dc3 .pend{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:#fff1d6;color:#a15c00}
+.dc3 .g tr.p td{background:#fffaf0}
+.dc3 .g tr.p.sel td{background:#e3eefb}
+.dc3 .lk{width:13px;height:15px;vertical-align:-3px}
+.dc3 .sec{border-bottom:1px solid #dcd8d1}
+.dc3 .sec.top-t{height:118px}
+.dc3 .ft{display:flex;align-items:stretch;border-top:1px solid #dcd8d1}
+.dc3 .ft .lab{width:150px;padding:8px 12px;font-weight:600;color:#24538c;line-height:1.75}
+.dc3 .ft .val{width:110px;padding:8px 12px;background:#e9e7e3;text-align:right;font-weight:700;color:#24538c;line-height:1.75;font-variant-numeric:tabular-nums}
+.dc3 .ft .bar{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 20px}
+.dc3 .ft .bar .b{height:10px;border-radius:5px;background:#f1d9b0;overflow:hidden}
+.dc3 .ft .bar .b i{display:block;height:100%;width:87.5%;background:#2f9a4a;border-radius:5px}
+.dc3 .ft .bar small{color:#7a746d}
+.dc3 .cur{position:absolute;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+.dc3 .chip{position:absolute;right:50px;top:2px;display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:24px;background:#1d1b1a;color:#fff;font-size:13.5px;font-weight:600;box-shadow:0 10px 22px -8px rgba(0,0,0,.45)}
+.dc3 .chip svg{width:15px;height:15px}
+.dc3 .g{font-size:12px}
+.dc3 .g td,.dc3 .g th{height:22px;padding:0 6px;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb}
+.dc3 .g td+td,.dc3 .g th+th{border-left:0}
+.dc3 .g th{height:24px;font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2}
+.dc3 .g tr:nth-child(odd) td{background:#fafafa}
+.dc3 .g tr.p td{background:#fff}
+.dc3 .g tr.sel td,.dc3 .g tr.p.sel td{background:#e1ecfa}
+.dc3 .g tr.sel td:nth-child(2){box-shadow:inset 0 0 0 1px #6f96c8}
+.dc3 .g td.c{color:#222}
+.dc3 .sort{font-size:8px;color:#888;margin-left:4px;vertical-align:1px}
+.dc3 .lk{width:12px;height:14px}
+.dc3 .pc,.dc3 .cc{width:12px;height:13px;vertical-align:-2px}
+.dc3 .tp{display:block;margin:0 -6px;padding:0 6px;height:22px;line-height:22px}
+.dc3 .ac{background:#fde3e3;color:#b42318}
+.dc3 .me{background:#dff5dc;color:#1b6b45}
+.dc3 .g tr.gt td{background:#ececec!important;font-weight:700;height:26px}
+.dc3 .g tr.gt td.n{color:#24538c}
+.dc3 .gt2{display:flex;border-top:1px solid #d2d2d2;background:#f4f3f0}
+.dc3 .gt2 span{display:flex;align-items:center;justify-content:flex-end;height:30px;padding:0 6px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums}
+.dc3 .top-t{height:auto}
+.dc3 #dc3d th{height:38px;vertical-align:middle;line-height:1.15}
+.dc3 #dc3d th.w{white-space:normal}
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -50,59 +216,190 @@
 
     <section class="mod-sec mod-fns" id="funciones" style="--mc:#0B8079" aria-labelledby="fn-title">
       <div class="mod-fn-rows">
-        <article class="mod-fn is-shot" id="plantillas-de-rubros">
-          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-plantillas-de-rubros.png" alt="" width="16" height="16">Plantillas de rubros</h3><p>Define plantillas distintas según cambie la ley o el tipo de pago: relación laboral, pago por horas, pago por servicios.</p>
-            <ul class="mod-fn-list">
-              <li>Una plantilla por cada tipo de relación: dependencia, jubilados, pago por horas o por servicios, cada una con sus propios títulos para el rol y la quincena.</li>
-              <li>Cada rubro es ingreso, egreso o informativo, con su orden en el rol y si se imprime o solo cuando no es cero.</li>
-              <li>Cada rubro trae su fórmula: el aporte al IESS, los décimos, la quincena o el impuesto a la renta saben cómo calcularse.</li>
-            </ul>
+        <article class="mod-fn" id="formulas-editables">
+          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-formulas-editables.png" alt="" width="16" height="16">Fórmulas editables</h3><p>Personaliza el cálculo de cada rubro con fórmulas o scripts al estilo de Excel, y un depurador te muestra paso a paso cómo se calculó.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="formulas-editables">
+            <div class="cu2 bk2 formula3" id="formula3" role="img" aria-label="Editor de fórmulas de SquareNet con un ejemplo de cálculo de fondos de reserva">
+              <div class="win">
+  <div class="ed"><div class="code" data-el="code"></div>
+   <div class="btns"><span class="btn">Aceptar</span><span class="btn">Cancelar</span><span class="btn v">Verificar</span></div></div>
+  <div class="tabs"><span><i>f(x)</i>Funciones SquareNet</span><span><i>f(x)</i>Funciones Nativas</span>
+   <span><svg viewBox="0 0 12 12"><ellipse cx="6" cy="3" rx="4.5" ry="1.8" fill="#e6e6e6" stroke="#999"/><path d="M1.5 3v6c0 1 2 1.8 4.5 1.8s4.5-.8 4.5-1.8V3" fill="#e6e6e6" stroke="#999"/></svg>Modelo</span>
+   <span class="on"><svg viewBox="0 0 12 12"><ellipse cx="6" cy="3" rx="4.5" ry="1.8" fill="#e6e6e6" stroke="#999"/><path d="M1.5 3v6c0 1 2 1.8 4.5 1.8s4.5-.8 4.5-1.8V3" fill="#e6e6e6" stroke="#999"/></svg>Data</span></div>
+  <div class="dg"><table class="g" data-el="t"><colgroup><col style="width:70px"><col><col style="width:110px"></colgroup><tr><th>Código</th><th>Nombre</th><th>Referencia</th></tr></table></div>
+              </div>
+              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
           </div>
-          <figure class="mod-fn-shot"><a href="img/funciones/nomina-plantillas-de-rubros.webp" target="_blank" rel="noopener" aria-label="Ver la captura en tamaño completo"><img src="img/funciones/nomina-plantillas-de-rubros.webp" alt="Plantilla de rubros en SquareNet: la plantilla Dependencia con sus rubros (ingresos, egresos e informativos) y el rubro Quincena abierto con su fórmula" width="1840" height="1282" loading="lazy"></a></figure>
         </article>
-        <article class="mod-fn is-shot" id="formulas-editables">
-          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-formulas-editables.png" alt="" width="16" height="16">Fórmulas editables</h3><p>Personaliza el cálculo de cada rubro con fórmulas o scripts al estilo de Excel, y un depurador te muestra paso a paso cómo se calculó.</p>
-            <ul class="mod-fn-list">
-              <li>Editas la fórmula de cualquier rubro en un editor con colores y líneas numeradas, como el de un programador.</li>
-              <li>Todos los datos a mano en una lista: sueldo, días de vacación, horas extra, días de enfermedad, más las funciones propias de SquareNet.</li>
-              <li>Verificas la regla antes de aceptarla y el cambio rige desde el próximo rol, sin esperar una nueva versión.</li>
-            </ul>
+        <article class="mod-fn" id="roles-de-pago">
+          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-roles-de-pago.png" alt="" width="16" height="16">Roles de pago</h3><p>Procesa el rol en unos 20 segundos por cada 100 empleados, con tipos de rol para separar grupos, pago en quincenas y varios modelos de impresión.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="roles-de-pago">
+            <div class="cu2 bk2 pay2" id="pay2" role="img" aria-label="Detalle de un rol de pagos con rubros informativos, ingresos, egresos y total a recibir">
+              <div class="win">
+  <div class="xsec"><table class="g"><colgroup><col style="width:28px"><col><col style="width:26px"><col style="width:26px"><col style="width:110px"><col style="width:96px"><col style="width:92px"></colgroup>
+   <tr><th></th><th>Apellidos y Nombres</th><th>P</th><th>C</th><th>Identificación</th><th>Sueldo</th><th>Cargo</th></tr>
+   <tr class="sel"><td class="c"><svg class="ic" viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="6" fill="#2f9a4a"/><path d="M3.8 6.7l1.8 1.8 3.6-3.8" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></td><td data-el="pick">Benítez Zurita Marco Antonio</td><td class="c" data-el="pc"></td><td class="c" data-el="cc"></td><td>1718823407</td><td class="n">1,250.00</td><td>Analista</td></tr></table></div>
+  <div class="xsec detail"><table class="g" data-el="r"><colgroup><col style="width:78px"><col style="width:58px"><col><col style="width:96px"><col style="width:28px"><col style="width:28px"><col style="width:28px"></colgroup>
+   <tr><th>Tipo</th><th>Código</th><th>Rubro</th><th>Valor</th><th>S</th><th>I</th><th>F</th></tr></table></div>
+  <div class="foot"><div class="l">Quincena:<br>Total a Recibir:</div><div class="r" data-el="tt"></div><div class="sp"></div></div>
+              </div>
+              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
           </div>
-          <figure class="mod-fn-shot"><a href="img/funciones/nomina-formulas-editables.webp" target="_blank" rel="noopener" aria-label="Ver la captura en tamaño completo"><img src="img/funciones/nomina-formulas-editables.webp" alt="Editor de fórmulas de SquareNet: la fórmula de la quincena con una regla nueva que descuenta los días de enfermedad, y la lista de datos disponibles" width="1840" height="1282" loading="lazy"></a></figure>
-        </article>
-        <article class="mod-fn is-shot" id="roles-de-pago">
-          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-roles-de-pago.png" alt="" width="16" height="16">Roles de pago</h3><p>Procesa el rol en unos 20 segundos por cada 100 empleados, con tipos de rol para separar grupos, pago en quincenas y varios modelos de impresión.</p>
-            <ul class="mod-fn-list">
-              <li>Agrupas a tu gente por centro de costo o por cualquier columna y ubicas en segundos a quien falta procesar.</li>
-              <li>Procesas a una persona o el rol completo: cada rubro se recalcula (sueldo, aporte al IESS, quincena, impuesto a la renta) y ves el total a recibir.</li>
-              <li>Con la lupa ves de dónde sale cada valor, paso a paso, para responder cualquier pregunta de tu gente.</li>
-            </ul>
-          </div>
-          <figure class="mod-fn-shot"><a href="img/funciones/nomina-roles-de-pago.webp" target="_blank" rel="noopener" aria-label="Ver la captura en tamaño completo"><img src="img/funciones/nomina-roles-de-pago.webp" alt="Rol de pagos de octubre en SquareNet: empleados agrupados por centro de costo y una persona recién procesada con sus rubros recalculados y el total a recibir" width="1880" height="1322" loading="lazy"></a></figure>
-        </article>
-        <article class="mod-fn" id="rubros-fijos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-rubros-fijos.png" alt="" width="16" height="16">Rubros fijos</h3><p>Asigna una sola vez los valores recurrentes: caja de ahorros, seguros médicos, servicios.</p></div>
-          <div class="mod-fn-media" data-fn="rubros-fijos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulono-rubros-fijos.png" alt="" width="16" height="16"><span>Rubros fijos</span></div></div>
         </article>
         <article class="mod-fn" id="cuotas-y-prestamos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-cuotas-y-prestamos.png" alt="" width="16" height="16">Cuotas y préstamos</h3><p>Control automático de cuotas por fechas, útil para descuentos por préstamos o bonos programados.</p></div>
-          <div class="mod-fn-media" data-fn="cuotas-y-prestamos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulono-cuotas-y-prestamos.png" alt="" width="16" height="16"><span>Cuotas y préstamos</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-cuotas-y-prestamos.png" alt="" width="16" height="16">Cuotas y préstamos</h3><p>Control automático de cuotas por fechas, útil para descuentos por préstamos o bonos programados.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="cuotas-y-prestamos">
+          <div class="cu2" id="cu2" role="img" aria-label="Pantalla de cuotas de SquareNet: un préstamo de 24 cuotas de 42,50 con 21 pagadas y 3 por descontar en el rol">
+           <div class="win">
+            <div class="chk"><i class="cb"></i>Mostrar Solo cuotas Pendientes</div>
+            <div class="xsec tt"><table class="g"><colgroup><col style="width:86px"><col style="width:180px"><col style="width:110px"><col style="width:122px"><col style="width:130px"><col></colgroup>
+              <tr><th>Código</th><th>Rubro Relacionado</th><th>ID Referencia</th><th>Fecha Creación<span class="sort">▲</span></th><th>Usuario que creó</th><th>Observaciones</th></tr>
+              <tr class="sel"><td>PR-00418</td><td>Préstamos empresa (−)</td><td></td><td>15/12/2024</td><td>Administrador</td><td>Préstamo 24 cuotas</td></tr>
+              <tr><td>PR-00502</td><td>Caja de ahorros (−)</td><td></td><td>03/02/2026</td><td>Talento Humano</td><td></td></tr></table></div>
+            <div class="xsec"><table class="g" data-el="q"><colgroup><col style="width:36px"><col style="width:120px"><col style="width:72px"><col style="width:100px"><col><col style="width:38px"><col style="width:38px"><col style="width:124px"></colgroup>
+              <tr><th></th><th>Fecha de Pago<span class="sort">▲</span></th><th>Valor</th><th>Cancelado</th><th>Observación</th><th>B</th><th>R</th><th>Referencia</th></tr></table></div>
+            <div class="ft">
+             <div class="lab">Pagado(21):<br>Por Pagar(3):<br>Total(24):</div>
+             <div class="val">892.50<br>127.50<br>1,020.00</div>
+             <div class="bar"><div class="b"><i></i></div><small>21 de 24 cuotas pagadas · quedan 3 por descontar en el rol</small></div>
+            </div>
+           </div>
+           <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="decimos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-decimos.png" alt="" width="16" height="16">Décimos</h3><p>Cálculo de décimos mensuales o acumulados según la preferencia del empleado, con las provisiones de décimo tercero, décimo cuarto y vacaciones.</p></div>
-          <div class="mod-fn-media" data-fn="decimos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulono-decimos.png" alt="" width="16" height="16"><span>Décimos</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-decimos.png" alt="" width="16" height="16">Décimos</h3><p>Cálculo de décimos mensuales o acumulados según la preferencia del empleado, con las provisiones de décimo tercero, décimo cuarto y vacaciones.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="decimos">
+          <div class="dc3" id="dc3" style="width:980px">
+<div class="stage" id="dc3s">
+ <div class="win">
+  <div class="sec"><table class="g" style="width:500px"><colgroup><col><col style="width:100px"><col style="width:100px"><col style="width:100px"></colgroup>
+   <tr><th>Rubro</th><th>Fecha Rol<span class="sort">▲</span></th><th>Fecha Inicial</th><th>Fecha Final</th></tr>
+   <tr><td>Décimo Tercer Sueldo</td><td>01/12/2024</td><td>01/12/2023</td><td>30/11/2024</td></tr>
+   <tr><td>Décimo Cuarto costa</td><td>01/03/2025</td><td>01/03/2024</td><td>28/02/2025</td></tr>
+   <tr><td>Décimo Cuarto sierra</td><td>01/08/2025</td><td>01/08/2024</td><td>31/07/2025</td></tr>
+   <tr><td>Décimo Tercer Sueldo</td><td>01/12/2025</td><td>01/12/2024</td><td>30/11/2025</td></tr>
+   <tr><td>Décimo Cuarto costa</td><td>01/03/2026</td><td>01/03/2025</td><td>28/02/2026</td></tr>
+   <tr class="sel"><td id="dc3pick">Décimo Cuarto sierra</td><td>01/08/2026</td><td>01/08/2025</td><td>31/07/2026</td></tr></table></div>
+  <div class="sec"><table class="g" id="dc3d"><colgroup><col><col style="width:26px"><col style="width:26px"><col style="width:46px"><col style="width:96px"><col style="width:30px"><col style="width:84px"><col style="width:84px"><col style="width:88px"></colgroup>
+   <tr><th>Apellidos y Nombres<span class="sort">▲</span></th><th>P</th><th>C</th><th>Días</th><th>Tipo</th><th>B</th><th>Descuentos</th><th class="w">Retención<br>Judicial</th><th class="w">Total a<br>Recibir</th></tr></table></div>
+  <div class="gt2" id="dc3gt"></div>
+ </div>
+ <svg class="cur" id="dc3cur" viewBox="0 0 14 20"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+</div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="utilidades">
-          <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-utilidades.png" alt="" width="16" height="16">Utilidades</h3><p>Reparto automático de utilidades según el procedimiento de ley.</p></div>
-          <div class="mod-fn-media" data-fn="utilidades"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulono-utilidades.png" alt="" width="16" height="16"><span>Utilidades</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-utilidades.png" alt="" width="16" height="16">Utilidades</h3><p>Reparto automático de utilidades según el procedimiento de ley.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="utilidades">
+          <div class="cu2 ut2" id="ut2" role="img" aria-label="Pantalla de utilidades de SquareNet con los valores repartidos entre trabajadores y cargas familiares">
+            <div class="win">
+              <div class="xsec"><table class="g"><colgroup><col style="width:62px"><col style="width:52px"><col style="width:100px"><col style="width:96px"><col style="width:96px"><col style="width:62px"><col></colgroup>
+                <tr><th>Código</th><th>Año<span class="sort">▲</span></th><th class="w">Monto<br>Empleados</th><th class="w">Monto<br>Cargas</th><th class="w">Salario<br>Digno Anual</th><th>Cerrado</th><th>Observación</th></tr>
+                <tr><td>UT-21</td><td class="n">2021</td><td class="n">9,600.00</td><td class="n">4,800.00</td><td class="n">5,307.60</td><td class="c">✓</td><td></td></tr>
+                <tr><td>UT-22</td><td class="n">2022</td><td class="n">10,400.00</td><td class="n">5,200.00</td><td class="n">5,307.60</td><td class="c">✓</td><td></td></tr>
+                <tr><td>UT-23</td><td class="n">2023</td><td class="n">11,200.00</td><td class="n">5,600.00</td><td class="n">5,817.00</td><td class="c">✓</td><td></td></tr>
+                <tr><td>UT-24</td><td class="n">2024</td><td class="n">11,800.00</td><td class="n">5,900.00</td><td class="n">5,986.80</td><td class="c">✓</td><td>sd = 498,90 USD</td></tr>
+                <tr class="sel"><td>UT-25</td><td class="n" data-el="pick">2025</td><td class="n">12,000.00</td><td class="n">6,000.00</td><td class="n">6,083.88</td><td class="c"></td><td>sd = 506,99 USD</td></tr></table></div>
+              <div class="tabs"><span class="on">Detalle</span><span>Empresas</span></div>
+              <div class="xsec detail"><table class="g detail-table" data-el="detail"><colgroup><col><col style="width:26px"><col style="width:26px"><col style="width:26px"><col style="width:44px"><col style="width:60px"><col style="width:90px"><col style="width:76px"><col style="width:88px"></colgroup>
+                <tr><th>Apellidos y Nombres<span class="sort">▲</span></th><th>P</th><th>C</th><th>B</th><th>Días</th><th class="w">N.º<br>Cargas</th><th class="w">Valor<br>Trabajadores</th><th class="w">Valor<br>Cargas</th><th class="w">Total a<br>Recibir</th></tr></table></div>
+              <div class="gt2" data-el="totals"></div>
+            </div>
+            <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          </div>
+          </div>
+        </article>
+        <article class="mod-fn" id="archivo-banco">
+          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-archivo-banco.png" alt="" width="16" height="16">Archivo banco</h3><p>Genera el archivo de acreditación para tu banco con plantillas configurables: quincenas, pagos por partes y por centro de costo.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="archivo-banco">
+            <div class="cu2 bk2" id="bk2" role="img" aria-label="Ejemplo de archivo bancario de nómina con cuentas y valores para acreditar">
+              <div class="win">
+                <div class="ttl"><span class="bank-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M1.5 5.2 7 2l5.5 3.2Z"/><path d="M3 6.5v4.5M5.6 6.5v4.5M8.4 6.5v4.5M11 6.5v4.5M1.5 12.2h11"/></svg></span>Rol de Pago, BANCO DEMO, 2026-10 - Octubre</div>
+                <div class="xsec detail"><table class="g" data-el="rows"><colgroup><col><col style="width:80px"><col style="width:76px"><col style="width:96px"><col style="width:152px"><col style="width:80px"></colgroup>
+                  <tr><th>Apellidos y Nombres<span class="sort">▲</span></th><th>Tipo de Rol</th><th>Cuenta</th><th>N.º Cuenta</th><th>Concepto</th><th>Valor</th></tr></table></div>
+                <div class="bank-total"><span data-el="count"></span><span data-el="total"></span></div>
+              </div>
+              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
         </article>
         <article class="mod-fn" id="asientos-contables">
-          <div class="mod-fn-copy"><span class="mod-fn-n">08</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-asientos-contables.png" alt="" width="16" height="16">Asientos contables</h3><p>Interfaz contable abierta para exportar asientos configurables, ideal para integrarla a tu ERP como SAP, Dynamics AX, JD Edwards o Infor.</p></div>
-          <div class="mod-fn-media" data-fn="asientos-contables"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulono-asientos-contables.png" alt="" width="16" height="16"><span>Asientos contables</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-asientos-contables.png" alt="" width="16" height="16">Asientos contables</h3><p>Interfaz contable abierta para exportar asientos configurables, ideal para integrarla a tu ERP como SAP, Dynamics AX, JD Edwards o Infor.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="asientos-contables">
+            <div class="cu2 bk2 ac2" id="ac2" role="img" aria-label="Ejemplo de asiento contable de nómina, con valores de debe y haber por cuenta y centro de costo">
+              <div class="win">
+                <div class="ttl"><span class="bank-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="1.5" width="10" height="11" rx="1.5"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3"/></svg></span>Asiento contable, Rol de Pago 2026-10 - Octubre</div>
+                <div class="xsec detail"><table class="g" data-el="rows"><colgroup><col style="width:112px"><col><col style="width:64px"><col style="width:116px"><col style="width:92px"><col style="width:92px"></colgroup>
+                  <tr><th>Cuenta</th><th>Concepto</th><th>Ceco</th><th>Empleado</th><th>Debe</th><th>Haber</th></tr></table></div>
+                <div class="account-total" data-el="totals"></div>
+              </div>
+              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
         </article>
         <article class="mod-fn" id="reportes-personalizados">
-          <div class="mod-fn-copy"><span class="mod-fn-n">09</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-reportes-personalizados.png" alt="" width="16" height="16">Reportes personalizados</h3><p>Escoges la información que quieres ver, además de los reportes completos de rol de pagos, resúmenes, décimos, provisiones y préstamos.</p></div>
-          <div class="mod-fn-media" data-fn="reportes-personalizados"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulono-reportes-personalizados.png" alt="" width="16" height="16"><span>Reportes personalizados</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">08</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-reportes-personalizados.png" alt="" width="16" height="16">Reportes personalizados</h3><p>Escoges la información que quieres ver, además de los reportes completos de rol de pagos, resúmenes, décimos, provisiones y préstamos.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="reportes-personalizados">
+            <div class="cu2 bk2 rp3" id="rp3" role="img" aria-label="Ejemplo de configuración de reportes personalizados, con campos y rubros asignados y no asignados">
+              <div class="win">
+  <div class="up">
+   <div class="rl"><table class="g"><colgroup><col style="width:56px"><col></colgroup><tr><th>Código</th><th>Nombre</th></tr>
+    <tr class="sel"><td>RP-02</td><td>Egresos</td></tr><tr><td>RP-01</td><td>Ingresos</td></tr><tr><td>RP-03</td><td>Jerárquico</td></tr><tr><td>RP-06</td><td>Planilla IESS</td></tr><tr><td>RP-04</td><td>Quincena</td></tr><tr><td>RP-05</td><td>Resumido</td></tr></table></div>
+   <div class="cfg">
+    <div class="box"><div class="r">Identificación<i class="cb on"></i></div><div class="r">Fecha Ingreso<i class="cb on"></i></div><div class="r">Forma de Pago<i class="cb on"></i></div><div class="r">Cargo<i class="cb"></i></div><div class="r">Centro de Costo<i class="cb on"></i></div><div class="r">Departamento<i class="cb"></i></div></div>
+    <div class="box"><div class="r">Total Ingreso<i class="cb"></i></div><div class="r">Total Egreso<i class="cb on"></i></div><div class="r">Total A Recibir<i class="cb on"></i></div><div class="r">Total Quincena<i class="cb on"></i></div><div class="r">Resumir x Centro Costo<i class="cb"></i></div><div class="r">Línea Firma<i class="cb"></i></div></div>
+   </div>
+  </div>
+  <div class="lo">
+   <div class="side"><div class="hd">Rubros NO asignados<span>Fila 1 de 597</span></div>
+    <table class="g"><colgroup><col style="width:92px"><col style="width:60px"><col></colgroup><tr><th>Signo</th><th>Código</th><th>Rubro</th></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>1410</td><td>Info solo en quincena</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8010</td><td>Años de servicio</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8170</td><td>Aporte IECE</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6220</td><td>Fondo de cesantía</td></tr>
+     <tr class="pick"><td><span class="sg eg">Egreso</span></td><td>6230</td><td>Seguro médico</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8110</td><td>Base aportable IESS</td></tr>
+     <tr><td><span class="sg in">Ingreso</span></td><td>1120</td><td>Horas extra 50%</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8200</td><td>Base externa</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8020</td><td>Conteo de almuerzos</td></tr>
+     <tr><td><span class="sg in">Ingreso</span></td><td>1420</td><td>Ingreso en quincena</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8190</td><td>Aporte SECAP</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6330</td><td>Egreso en quincena</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8030</td><td>Conteo de horas extra</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6210</td><td>Aporte patronal asumido</td></tr>
+     <tr><td><span class="sg in">Ingreso</span></td><td>1130</td><td>Horas extra 100%</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8210</td><td>Base imponible anual</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6260</td><td>Seguro de vida</td></tr>
+     <tr><td><span class="sg inf">Informativo</span></td><td>8180</td><td>Aporte personal + patronal</td></tr></table></div>
+   <div class="mid"><span class="btn go" data-el="go">&gt;</span><span class="btn">&lt;</span><span class="btn">&gt;&gt;</span><span class="btn">&lt;&lt;</span></div>
+   <div class="side"><div class="hd">Rubros Asignados<span>Fila 16 de 16</span></div>
+    <table class="g"><colgroup><col style="width:92px"><col style="width:60px"><col></colgroup><tr><th>Signo</th><th>Código</th><th>Rubro</th></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6200</td><td>Aporte personal IESS</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6240</td><td>Caja de ahorros</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6100</td><td>Descuento atrasos</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6250</td><td>Descuento celular</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6150</td><td>Otros egresos gravados</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6270</td><td>Préstamos empresa</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6310</td><td>Préstamos IESS</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6300</td><td>Quincena</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6120</td><td>Retención judicial</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6900</td><td>Impuesto a la renta</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6800</td><td>Cuotas pendientes</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6810</td><td>Descuentos liquidación</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6160</td><td>Otros egresos no gravados</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6280</td><td>Anticipo de sueldo</td></tr>
+     <tr><td><span class="sg eg">Egreso</span></td><td>6290</td><td>Pensión alimenticia</td></tr>
+     <tr class="new"><td><span class="sg eg">Egreso</span></td><td>6230</td><td>Seguro médico</td></tr></table></div>
+  </div>
+              </div>
+              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -227,7 +524,6 @@
         <a href="moduloac.html">Acceso</a>
         <a href="modulocv.html">Visitas</a>
         <a href="modulocc.html">Comedor</a>
-        <a href="moduloev.html">Evaluaciones</a>
         <a href="moduloas.html">Autoservicio</a>
         <a href="modulots.html">Trabajo Social</a>
       </div>
@@ -253,9 +549,189 @@
       navToggle.setAttribute('aria-expanded', String(!open));
     });
   </script>
+
+
+  <script>
+(() => {
+  const root=document.getElementById('formula3'); if(!root) return;
+  const media=root.parentElement;
+
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function hl(src){ const ci=src.indexOf('//'); const a=ci>=0?src.slice(0,ci):src, c=ci>=0?src.slice(ci):'';
+  return esc(a).replace(/"[^"]*"/g,m=>`<span class="st">${m}</span>`)
+   .replace(/\b(if|else|return|true|false)\b/g,'<span class="kw">$1</span>')
+   .replace(/\[[^\]]+\]/g,m=>`<span class="rb">${m}</span>`)
+   .replace(/(^|[^\w">\]])(\d+(?:\.\d+)?)(?![\w<])/g,(m,p,n)=>`${p}<span class="nu">${n}</span>`)+(c?`<span class="cm">${esc(c)}</span>`:''); }
+const L=['if( TIPO_FONDOS_RESERVA( ) = "M") // para fondos de reserva mensual','{',
+'  dias = DIAS_TRABAJADOS_TOTAL("", "", true) - 360;','',
+'  if( dias <= 0) // si aún no cumple un año','  {','    return 0;','  }',
+'  else if( dias < DIAS_TRABAJADOS_BASE_30()) // primer mes después del año (se proratea)','  {',
+'    return [Base IESS] * 0.0833 * dias / DIAS_TRABAJADOS_BASE_30();','  }',
+'  else','  {','    return [Base IESS] * 0.0833;','  }','}',
+'else','{','  return 0;','}'];
+root.querySelector('[data-el="code"]').innerHTML=L.map((l,i)=>{const line=hl(l);return `<div class="ln"><span class="no">${i+1}</span><span>${i===10?line.replace('<span class="rb">[Base IESS]</span>','<span class="rb">[Base IESS]</span><span class="rc"></span>'):line}</span></div>`;}).join('');
+const D=[['8100','Variación de IESS por Extras','RB00058'],['8110','Base IESS','RB00059'],['6200','Aporte Personal IESS','RB00060'],['8120','Aporte Patronal IESS','RB00061'],
+ ['8180','Aporte Personal + Patronal','RB00062'],['8190','Aporte SECAP','RB00063'],['8140','Prov. Décimo Tercer Sueldo','RB00064'],['8150','Prov. Décimo Cuarto Sueldo','RB00065']];
+root.querySelector('[data-el="t"]').insertAdjacentHTML('beforeend',D.map(d=>`<tr${d[0]==='8110'?' class="sel"':''}><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join(''));
+
+  const selected=root.querySelector('[data-el="t"] tr.sel td:nth-child(2)'), cur=root.querySelector('[data-el="cur"]');
+  const r=selected.getBoundingClientRect(), bounds=root.getBoundingClientRect();
+  cur.style.left=(r.left-bounds.left+110)+'px'; cur.style.top=(r.top-bounds.top+12)+'px';
+  const fit=()=>{const h=root.offsetHeight, k=Math.max(0,Math.min(1,(media.clientWidth-40)/760)); root.style.transform='scale('+k+')'; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*760)+'px';};
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('pay2'); if(!root) return;
+  const media=root.parentElement;
+
+const PC='<svg class="pc" viewBox="0 0 12 13"><circle cx="6" cy="3" r="2.2" fill="#e08a2e"/><path d="M2.5 12.5V7.5a3.5 3.5 0 0 1 7 0v5Z" fill="#e08a2e"/></svg>';
+const CC='<svg class="cc" viewBox="0 0 12 13"><rect x="1" y="1" width="10" height="11" rx="1.5" fill="#fff" stroke="#3561b8"/><path d="M6 4.5v4.8" stroke="#3561b8" stroke-width="1.4"/><circle cx="6" cy="3" r=".8" fill="#3561b8"/></svg>';
+const PR='<svg class="ic" viewBox="0 0 13 13"><rect x="3.5" y="1" width="6" height="3.5" fill="#fff" stroke="#777" stroke-width=".9"/><rect x="1" y="4" width="11" height="5" rx="1" fill="#9aa4b0"/><rect x="3.5" y="7.5" width="6" height="4.5" fill="#fff" stroke="#777" stroke-width=".9"/></svg>';
+const CA='<svg class="ic" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" fill="#fff" stroke="#6d7a8a" stroke-width=".9"/><path d="M1.5 4.5h10M4.8 4.5v7M8.2 4.5v7M1.5 8h10" stroke="#a3adb9" stroke-width=".7"/></svg>';
+root.querySelector('[data-el="pc"]').innerHTML=PC; root.querySelector('[data-el="cc"]').innerHTML=CC;
+const f=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const r2=n=>Math.round(n*100)/100;
+const SB=1250, H50=6, he=r2(SB/240*1.5*H50), com=150, base=r2(SB+he+com);
+const ap=r2(base*.0945), d13=r2(base/12), d14=r2(470/12), fr=r2(base*.0833), q=r2(SB*.40);
+const G=[
+ ['Informativos',[['Normal','0010','Sueldo Base',f(SB),'',0],['Normal','0090','Días Laborados','30.00','',0],['Normal','0230','Horas extra 50%',H50.toFixed(2),'',0],['Normal','0240','Horas extra 100%','0.00','',0],['Normal','0030','Años de Servicio','4.00','',1],['Normal','0500','Base Aportable IESS',f(base),'',1]]],
+ ['Ingresos',[['Normal','0120','Sueldo Devengado',f(SB),'+',1],['Normal','0100','Valor Horas extra 50%',f(he),'+',1],['Normal','0235','Comisiones',f(com),'+',0],['Normal','0611','Décimo Tercero Mensual',f(d13),'+',1],['Normal','0622','Décimo Cuarto Mensual',f(d14),'+',1],['Normal','0590','Fondos de Reserva Mensual',f(fr),'+',1],['Normal','0140','Bono de alimentación',f(40),'+',0]]],
+ ['Egresos',[['Quincena','0330','Quincena',f(q),'-',1],['Normal','0510','Aporte personal IESS',f(ap),'-',1],['Normal','0300','Préstamos Empresa',f(42.5),'-',0],['Normal','0095','Descuento Atrasos',f(10.42),'-',1],['Normal','0750','Impuesto a la renta',f(21.30),'-',1],['Normal','0260','Seguro médico',f(18),'-',0],['Normal','0270','Caja de ahorros',f(25),'-',0]]]];
+let h='';
+G.forEach(([t,rows])=>{ h+=`<tr class="gh"><td colspan="7">${t}</td></tr>`;
+  rows.forEach(r=>{ const cls=r[4]==='+'?'in':r[4]==='-'?'eg':''; h+=`<tr class="${cls}${r[2]==='Aporte personal IESS'?' sel':''}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="v">${r[3]}</td><td class="sg">${r[4]}</td><td class="c">${PR}</td><td class="c">${r[5]?CA:''}</td></tr>`; }); });
+root.querySelector('[data-el="r"]').insertAdjacentHTML('beforeend',h);
+const ing=SB+he+com+d13+d14+fr+40, egr=q+ap+42.5+10.42+21.30+18+25;
+root.querySelector('[data-el="tt"]').innerHTML=f(q)+'<br>'+f(r2(ing-egr));
+
+  const selected=root.querySelector('[data-el="r"] tr.sel td.v'), cur=root.querySelector('[data-el="cur"]');
+  const r=selected.getBoundingClientRect(), bounds=root.getBoundingClientRect();
+  cur.style.left=(r.left-bounds.left+8)+'px'; cur.style.top=(r.top-bounds.top+10)+'px';
+  const fit=()=>{const h=root.offsetHeight, k=Math.max(0,Math.min(1,(media.clientWidth-40)/760)); root.style.transform='scale('+k+')'; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*760)+'px';};
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+
+  <script>
+(() => {
+  const root=document.getElementById('cu2'); if(!root) return;
+  const media=root.parentElement, q=root.querySelector('[data-el="q"]'), cur=root.querySelector('[data-el="cur"]');
+  const LK='<svg class="lk" viewBox="0 0 13 15"><rect x="1.5" y="6" width="10" height="8" rx="2" fill="#f2b632" stroke="#b07d12"/><path d="M4 6V4.3a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="#b07d12" stroke-width="1.4"/></svg>';
+  const rows=[]; let ref=612040;
+  for(let m=12;m<=24;m++){ const y=2025+Math.floor((m-1)/12), mm=((m-1)%12)+1, pend=m>=22;
+    rows.push({f:`01/${String(mm).padStart(2,'0')}/${y}`,pend,lock:[14,19,20].includes(m),obs:m===15?'Se pasa al siguiente mes por vacaciones':'',ref:pend?'':'RL'+(ref+=4113).toString().padStart(8,'0')}); }
+  q.insertAdjacentHTML('beforeend',rows.map(r=>`<tr class="${r.pend?'p':''}${r.f==='01/10/2026'?' sel':''}"><td class="c">${r.pend?'':LK}</td><td>${r.f}</td><td class="n">42.50</td><td class="c">${r.pend?'':'✓'}</td><td>${r.obs}</td><td class="c">${r.lock?LK:''}</td><td class="c">${r.pend?'':LK}</td><td>${r.ref}</td></tr>`).join(''));
+  const t=q.querySelector('tr.sel').children[1];
+  cur.style.left=(t.offsetLeft+70)+'px'; cur.style.top=(t.offsetTop+q.parentElement.offsetTop+12)+'px';
+  const fit=()=>{ const h=root.offsetHeight, k=Math.min(1,(media.clientWidth-40)/840); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*840)+'px'; };
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('ut2'); if(!root) return;
+  const media=root.parentElement, table=root.querySelector('[data-el="detail"]'), totals=root.querySelector('[data-el="totals"]');
+  const LK='<svg class="lk" viewBox="0 0 13 15"><rect x="1.5" y="6" width="10" height="8" rx="2" fill="#f2b632" stroke="#b07d12"/><path d="M4 6V4.3a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="#b07d12" stroke-width="1.4"/></svg>';
+  const PC='<svg class="pc" viewBox="0 0 12 13"><circle cx="6" cy="3" r="2.2" fill="#e08a2e"/><path d="M2.5 12.5V7.5a3.5 3.5 0 0 1 7 0v5Z" fill="#e08a2e"/></svg>';
+  const CC='<svg class="cc" viewBox="0 0 12 13"><rect x="1" y="1" width="10" height="11" rx="1.5" fill="#fff" stroke="#3561b8"/><path d="M6 4.5v4.8" stroke="#3561b8" stroke-width="1.4"/><circle cx="6" cy="3" r=".8" fill="#3561b8"/></svg>';
+  const E=[['Andrade Pazmiño Lucía Fernanda',360,3],['Benítez Zurita Marco Antonio',360,2],['Cevallos Loor Daniela',210,0],['Herrera Mejía Joaquín',360,1],['Mora Villacís Esteban',360,4],['Ortega Bravo Sebastián',300,0],['Paredes Lozano Andrea Carolina',360,1],['Quiroga Ibarra Valeria',60,0],['Ruiz Carrión Mateo',360,2],['Salgado Ríos Martín Andrés',360,2],['Torres Guamán Paola',120,1],['Vásquez Ortega Diego',330,0,1],['Zambrano Lucero Camila',360,1],['Jaramillo Paz Renata',180,2],['Cordero Sáenz Valentina',360,0],['Rendón Haro Gabriela',240,1]];
+  const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const days=E.reduce((n,e)=>n+e[1],0), loads=E.reduce((n,e)=>n+e[1]*e[2],0);
+  const vt=E.map(e=>Math.round(12000*e[1]/days*100)/100), vc=E.map(e=>Math.round(6000*e[1]*e[2]/loads*100)/100);
+  const adjust=(a,total)=>{a[0]=Math.round((a[0]+total-a.reduce((x,y)=>x+y,0))*100)/100;};
+  adjust(vt,12000); adjust(vc,6000);
+  table.insertAdjacentHTML('beforeend',E.map((e,i)=>`<tr${e[3]?' class="bk"':''}><td>${e[0]}</td><td class="c">${PC}</td><td class="c">${CC}</td><td class="c">${e[3]?LK:''}</td><td class="n">${e[1]}</td><td class="n">${e[2]}</td><td class="n">${fmt(vt[i])}</td><td class="n">${fmt(vc[i])}</td><td class="n">${fmt(vt[i]+vc[i])}</td></tr>`).join(''));
+  const vals={0:'Total General',4:String(days),5:String(E.reduce((n,e)=>n+e[2],0)),6:fmt(12000),7:fmt(6000),8:fmt(18000)};
+  totals.innerHTML=Array.from(table.querySelectorAll('th')).map((th,i)=>`<span style="width:${th.offsetWidth}px;${vals[i]?'':'background:transparent'}${i===0?';justify-content:flex-start;background:transparent;color:#1d1b1a':''}">${vals[i]||''}</span>`).join('');
+  const pick=root.querySelector('[data-el="pick"]'), cur=root.querySelector('[data-el="cur"]');
+  cur.style.left=(pick.offsetLeft+30)+'px'; cur.style.top=(pick.offsetTop+10)+'px';
+  const fit=()=>{const h=root.offsetHeight, k=Math.max(0,Math.min(1,(media.clientWidth-40)/760)); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*760)+'px';};
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+const LK='<svg class="lk" viewBox="0 0 13 15"><rect x="1.5" y="6" width="10" height="8" rx="2" fill="#f2b632" stroke="#b07d12"/><path d="M4 6V4.3a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="#b07d12" stroke-width="1.4"/></svg>';
+const LKR='<svg class="lk" viewBox="0 0 13 15"><rect x="1.5" y="6" width="10" height="8" rx="2" fill="#f07a3a" stroke="#b2421a"/><path d="M4 6V4.3a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="#b2421a" stroke-width="1.4"/></svg>';
+const PC='<svg class="pc" viewBox="0 0 12 13"><circle cx="6" cy="3" r="2.2" fill="#e08a2e"/><path d="M2.5 12.5V7.5a3.5 3.5 0 0 1 7 0v5Z" fill="#e08a2e"/></svg>';
+const CC='<svg class="cc" viewBox="0 0 12 13"><rect x="1" y="1" width="10" height="11" rx="1.5" fill="#fff" stroke="#3561b8"/><path d="M6 4.5v4.8" stroke="#3561b8" stroke-width="1.4"/><circle cx="6" cy="3" r=".8" fill="#3561b8"/></svg>';
+const f=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const BASE=470;
+const A=[['Andrade Pazmiño Lucía Fernanda','1716034521',360,0,0],['Benítez Zurita Marco Antonio','1718823407',360,0,105],['Cevallos Loor Daniela','1309561248',210,0,0],
+ ['Mora Villacís Esteban','1719450236',360,50,0],['Paredes Lozano Andrea Carolina','1724598036',360,0,0],['Salgado Ríos Martín Andrés','1714480392',360,0,0],
+ ['Torres Guamán Paola','1721336904',120,0,0],['Vásquez Ortega Diego','0926481357',360,0,0]];
+const M=[['Cordero Sáenz Valentina','1712284530'],['Rendón Haro Gabriela','1716638201']];
+let h='',T={d:0,m:0,ds:0,r:0,t:0};
+A.forEach(a=>{const d=Math.round(BASE*a[2]/360*100)/100,t=d-a[3]-a[4];T.d+=d;T.ds+=a[3];T.r+=a[4];T.t+=t;
+ h+=`<tr><td>${a[0]}</td><td class="c">${PC}</td><td class="c">${CC}</td><td class="n">${a[2]}</td><td><span class="tp ac">Acumulado</span></td><td class="c">${LK}</td><td class="n">${f(a[3])}</td><td class="n">${f(a[4])}</td><td class="n">${f(t)}</td></tr>`;});
+h+=`<tr class="gt"><td colspan="5">Total Acumulado (${A.length})</td><td></td><td class="n">${f(T.ds)}</td><td class="n">${f(T.r)}</td><td class="n">${f(T.t)}</td></tr>`;
+const mm=Math.round(BASE/12*100)/100;
+M.forEach(m=>{T.m+=mm; h+=`<tr><td>${m[0]}</td><td class="c">${PC}</td><td class="c">${CC}</td><td class="n">30</td><td><span class="tp me">Mensual</span></td><td class="c">${LKR}</td><td class="n"></td><td class="n"></td><td class="n">0.00</td></tr>`;});
+h+=`<tr class="gt"><td colspan="5">Total Mensual (${M.length})</td><td></td><td class="n">0.00</td><td class="n">0.00</td><td class="n">0.00</td></tr>`;
+document.getElementById('dc3d').insertAdjacentHTML('beforeend',h);
+// grand totals aligned to the columns
+const cols=[...document.querySelectorAll('#dc3d col')].map(c=>c.getBoundingClientRect?0:0);
+const th=[...document.querySelectorAll('#dc3d th')], tb=document.getElementById('dc3d').getBoundingClientRect();
+const vals={6:f(T.ds),7:f(T.r),8:f(T.t)};
+let g='';th.forEach((t,i)=>{const w=t.getBoundingClientRect().width; g+=`<span style="width:${w}px;${vals[i]?'':'background:transparent'}">${vals[i]||''}</span>`;});
+document.getElementById('dc3gt').innerHTML=g;
+const p=document.getElementById('dc3pick').getBoundingClientRect(), s=document.getElementById('dc3s').getBoundingClientRect(), c=document.getElementById('dc3cur');
+c.style.left=(p.left-s.left+150)+'px'; c.style.top=(p.top-s.top+10)+'px';
+
+  var root=document.getElementById('dc3'),stage=document.getElementById('dc3s'),media=root.parentElement;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/980);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*980)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+  </script>
+  <script>
+(() => {
+  const root=document.getElementById('bk2'); if(!root) return;
+  const media=root.parentElement, table=root.querySelector('[data-el="rows"]');
+  const E=[['Andrade Pazmiño Lucía Fernanda','General','Ahorros','2205418836',1214.37],['Benítez Zurita Marco Antonio','General','Ahorros','2204873120',1013.20],['Cevallos Loor Daniela','General','Corriente','3100562418',612.48],['Cordero Sáenz Valentina','Pasantes','Ahorros','2209036671',235.00],['Herrera Mejía Joaquín','General','Ahorros','2201749935',1342.10],['Jaramillo Paz Renata','General','Ahorros','2206381204',884.65],['Mora Villacís Esteban','General','Corriente','3102847719',1626.92],['Ortega Bravo Sebastián','General','Ahorros','2207520186',973.40],['Paredes Lozano Andrea Carolina','General','Ahorros','2203364058',452.07],['Quiroga Ibarra Valeria','Pasantes','Ahorros','2208114392',235.00],['Rendón Haro Gabriela','General','Ahorros','2202995047',1108.33],['Ruiz Carrión Mateo','General','Corriente','3104416620',789.56],['Salgado Ríos Martín Andrés','General','Ahorros','2200637281',2486.79],['Torres Guamán Paola','General','Ahorros','2205902714',521.18],['Vásquez Ortega Diego','General','Ahorros','2209478563',680.94],['Zambrano Lucero Camila','General','Ahorros','2201260839',1167.25],['Aguilar Mora Renata','General','Ahorros','2204410937',845.30],['Castañeda Lugo Bruno','General','Corriente','3101928364',927.61],['Echeverría Paz Tomás','General','Ahorros','2207731520',1498.02],['Peralta Ríos Joaquín','Pasantes','Ahorros','2206052197',235.00],['Villacrés Soto Inés','General','Ahorros','2208803741',768.44],['Lara Espinoza Gabriel','General','Ahorros','2203915628',1052.86],['Núñez Vega Sofía','General','Corriente','3105270413',938.15]];
+  const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  E.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+  table.insertAdjacentHTML('beforeend',E.map(e=>`<tr${e[0].startsWith('Benítez')?' class="sel"':''}><td>${e[0]}</td><td>${e[1]}</td><td>${e[2]}</td><td>${e[3]}</td><td>${e[1]==='Pasantes'?'Pasantía':'Rol de Pago'} OCT 2026</td><td class="n">${fmt(e[4])}</td></tr>`).join(''));
+  root.querySelector('[data-el="count"]').textContent=`Total (${E.length})`;
+  root.querySelector('[data-el="total"]').textContent=fmt(E.reduce((sum,e)=>sum+e[4],0));
+  const pick=table.querySelector('tr.sel td'), cur=root.querySelector('[data-el="cur"]');
+  cur.style.left=(pick.offsetLeft+150)+'px'; cur.style.top=(pick.offsetTop+12)+'px';
+  const fit=()=>{const h=root.offsetHeight, k=Math.max(0,Math.min(1,(media.clientWidth-40)/760)); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*760)+'px';};
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('ac2'); if(!root) return;
+  const media=root.parentElement, table=root.querySelector('[data-el="rows"]');
+  const D=[['5.2.01.01','Sueldo Devengado','ADM01','',9840],['5.2.01.01','Sueldo Devengado','OPE02','',12450],['5.2.01.02','Horas extra 50%','OPE02','',486.25],['5.2.01.03','Décimo Tercer Sueldo','ADM01','',820],['5.2.01.03','Décimo Tercer Sueldo','OPE02','',1078.02],['5.2.01.04','Décimo Cuarto Sueldo','ADM01','',313.33],['5.2.01.04','Décimo Cuarto Sueldo','OPE02','',548.33],['5.2.01.05','Fondos de Reserva','ADM01','',819.67],['5.2.01.05','Fondos de Reserva','OPE02','',1077.59],['5.2.01.06','Aporte Patronal IESS','ADM01','',1097.16],['5.2.01.06','Aporte Patronal IESS','OPE02','',1442.39]];
+  const H=[['2.1.02.01','Décimo Tercero por Pagar','','',1898.02],['2.1.02.02','Décimo Cuarto por Pagar','','',861.66],['2.1.03.01','Aporte Personal IESS','','',2152.36],['2.1.03.01','Aporte Patronal IESS','','',2539.55],['2.1.03.02','Préstamo Quirografario IESS','','',186.40],['2.1.03.03','Fondos de Reserva por Pagar','','',1897.26],['2.1.04.01','Retención Impuesto a la Renta','ADM01','MSALGADOR',273.25],['1.1.02.05','Préstamos a Empleados','OPE02','EMORAVI',42.50],['1.1.02.05','Préstamos a Empleados','ADM01','DCEVALLOSL',60],['1.1.02.06','Anticipo Quincena','','',8916],['2.1.05.01','Seguro Médico por Pagar','','',126]];
+  const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const debit=D.reduce((sum,r)=>sum+r[4],0), credit=H.reduce((sum,r)=>sum+r[4],0);
+  H.push(['2.1.01.01','Sueldos por Pagar','','',Math.round((debit-credit)*100)/100]);
+  const row=(r,side)=>`<tr${r[1]==='Retención Impuesto a la Renta'?' class="sel"':''}><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td${side==='db'?' class="db"':''}>${side==='db'?fmt(r[4]):''}</td><td${side==='hb'?' class="hb"':''}>${side==='hb'?fmt(r[4]):''}</td></tr>`;
+  table.insertAdjacentHTML('beforeend',D.map(r=>row(r,'db')).join('')+H.map(r=>row(r,'hb')).join(''));
+  const th=table.querySelectorAll('th');
+  root.querySelector('[data-el="totals"]').innerHTML=`<span class="label">Total (${D.length+H.length})</span><span style="width:${th[4].offsetWidth}px">${fmt(debit)}</span><span style="width:${th[5].offsetWidth}px">${fmt(debit)}</span>`;
+  const pick=table.querySelector('tr.sel td:nth-child(2)'), cur=root.querySelector('[data-el="cur"]');
+  cur.style.left=(pick.offsetLeft+120)+'px'; cur.style.top=(pick.offsetTop+12)+'px';
+  const fit=()=>{const h=root.offsetHeight, k=Math.max(0,Math.min(1,(media.clientWidth-40)/760)); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*760)+'px';};
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(() => {
+  const root=document.getElementById('rp3'); if(!root) return;
+  const media=root.parentElement, button=root.querySelector('[data-el="go"]'), cur=root.querySelector('[data-el="cur"]');
+  cur.style.left=(button.offsetLeft+button.offsetWidth*.55)+'px';
+  cur.style.top=(button.offsetTop+button.offsetHeight*.55)+'px';
+  const fit=()=>{const h=root.offsetHeight, k=Math.max(0,Math.min(1,(media.clientWidth-40)/760)); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*760)+'px';};
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
-  <script src="js/module-player.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/consent.js"></script>
 </body>
