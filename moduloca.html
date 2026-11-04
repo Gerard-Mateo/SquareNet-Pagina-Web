@@ -20,6 +20,146 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<style>
+/* registros-de-asistencia: pantalla del cliente, acotada a .rg3 */
+.rg3 *{box-sizing:border-box}
+.rg3{margin:0;font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.rg3 .stage{width:660px;padding:44px 16px 16px}
+.rg3 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
+.rg3 .fl{display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;border-bottom:1px solid #e2e2e2;background:#fff;flex:none;white-space:nowrap}
+.rg3 .fl .in{height:22px;border:1px solid #b9b9b9;background:#fff;display:flex;align-items:center;padding:0 6px;position:relative;padding-right:24px}
+.rg3 .fl .in::after{content:"";position:absolute;right:7px;top:9px;border:4px solid transparent;border-top:5px solid #666}
+.rg3 .g{border-collapse:collapse;width:100%;table-layout:fixed;font-size:10.5px}
+.rg3 .g td,.rg3 .g th{height:22px;padding:0 4px;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.rg3 .g th{height:28px;font-weight:600;font-size:11px;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2;position:relative}
+.rg3 .g tr:nth-child(even) td{background:#fafafa}
+.rg3 .g tr.sel td{background:#e1ecfa}
+.rg3 .bd{position:absolute;right:3px;top:2px;width:13px;height:13px;border-radius:50%;background:#3b7fc4;color:#fff;font-size:8.5px;font-weight:700;display:grid;place-items:center}
+.rg3 .web{color:#24538c}
+/* Resumen por horario */
+.rh3{font:11px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.rh3 *{box-sizing:border-box}
+.rh3 .stage{position:relative;width:800px;height:540px;overflow:hidden;background:transparent}
+.rh3 .win{position:absolute;left:24px;top:28px;width:566px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
+.rh3 .tabs{display:flex;gap:2px;padding:8px 6px 0;border-bottom:1px solid #d2d2d2}
+.rh3 .tabs span{display:flex;align-items:center;gap:5px;padding:5px 10px;color:#2f6fbf}
+.rh3 .tabs span.on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:4px 4px 0 0;background:#fff}
+.rh3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
+.rh3 .g td,.rh3 .g th{height:28px;padding:0 6px;border-bottom:1px solid #e9e9e9;border-right:1px solid #e9e9e9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.rh3 .g th{height:32px;font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2;white-space:normal;line-height:1.1}
+.rh3 .g tr.sel td{background:#e1ecfa}
+.rh3 .g td.c{text-align:center;padding:0 1px;text-overflow:clip}
+.rh3 .g td.sx{box-shadow:inset 0 0 0 1px #6f96c8}
+.rh3 .gr{color:#4f9a4f}
+.rh3 .tot{display:flex;border-top:1px solid #d2d2d2;background:#f4f3f0;height:28px;font-weight:700;color:#24538c}
+.rh3 .tot div{display:flex;align-items:center;padding:0 6px}
+.rh3 .tot .a{width:140px;background:#cfcfcf}
+.rh3 .tot .b{width:70px;justify-content:center;background:#dedbd5}
+.rh3 .tot .c{width:20px;padding:0}
+.rh3 .tot .d{width:80px;justify-content:center;background:#dedbd5}
+.rh3 .tot .e{width:72px;justify-content:center;background:#dedbd5;color:#4f9a4f}
+.rh3 .foot{height:22px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;color:#444;border-top:1px solid #e6e6e6;background:#fcfcfc}
+.rh3 .card{position:absolute;background:rgba(255,255,255,.96);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 24px 48px -24px rgba(40,30,20,.25);z-index:5;padding:12px}
+.rh3 .inner{border:1px solid #e3e6ee;border-radius:10px;overflow:hidden;position:relative}
+.rh3 .tl{height:84px;position:relative;background:#fff}
+.rh3 .tl .ruler{position:absolute;left:0;right:0;top:0;height:16px;background:#f0eddc;border-bottom:1px solid #cfcab0}
+.rh3 .tl .nx{position:absolute;right:0;top:0;bottom:0;background:#e3f7dc}
+.rh3 .tl b{position:absolute;top:2px;font-weight:400;font-size:9.5px;color:#444;transform:translateX(-50%)}
+.rh3 .tl i{position:absolute;top:10px;width:1px;height:6px;background:#888}
+.rh3 .bar{position:absolute;height:15px;line-height:14px;padding:0 3px;font-size:10.5px;border:1px solid #aaa;white-space:nowrap;overflow:hidden}
+.rh3 .ex{background:#e2e2e2;border-color:#b5b5b5}
+.rh3 .nm{background:#b9ecf7;border-color:#6bc4d8}
+.rh3 .as{background:#fcd9a0;border-color:#e0a850}
+.rh3 .mk .g th{height:30px}
+.rh3 .pin{width:13px;height:15px;vertical-align:-3px}
+.rh3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+/* Asignación diaria de horarios */
+.as3{font:11px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.as3 *{box-sizing:border-box}
+.as3 .stage{width:792px;padding-left:48px!important;padding-bottom:70px!important;padding:44px 16px 16px;display:flex;flex-direction:column}
+.as3 .win{overflow:visible!important;flex:none;background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32);display:flex;flex-direction:column}
+.as3 .tb{display:flex;align-items:flex-end;height:40px;border-bottom:1px solid #d2d2d2;padding:0 8px;gap:2px;white-space:nowrap}
+.as3 .tb .t{padding:6px 10px;color:#2f6fbf}
+.as3 .tb .t.on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:4px 4px 0 0;background:#fff}
+.as3 .tb .f{display:flex;align-items:center;gap:6px;margin:0 0 6px 18px}
+.as3 .in{height:22px;border:1px solid #b9b9b9;display:flex;align-items:center;padding:0 24px 0 6px;position:relative}
+.as3 .in::after{content:"";position:absolute;right:7px;top:9px;border:4px solid transparent;border-top:5px solid #666}
+.as3 .gb{height:32px;display:flex;align-items:center;padding:0 8px;border-bottom:1px solid #e2e2e2;background:#f7f7f7}
+.as3 .gb span{display:inline-flex;align-items:center;gap:6px;border:1px solid #c9c9c9;border-radius:3px;background:#fff;padding:2px 8px}
+.as3 .gb em{font-style:normal;color:#888;font-size:10px}
+.as3 .gb u{text-decoration:none;display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#8a8a8a;color:#fff;font-size:9px}
+.as3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
+.as3 .g td,.as3 .g th{padding:0 4px;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;height:54px;position:relative}
+.as3 .g tr.sup th{height:24px;background:#cfe0e0;font-weight:600;border-bottom:1px solid #b9c9c9}
+.as3 .g th{font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2;height:42px;vertical-align:top;padding-top:5px;line-height:1.2}
+.as3 .g th.w{background:linear-gradient(#f4fbf1,#d9efd2)}
+.as3 .g th b{display:block;font-weight:400}
+.as3 .g th i{position:absolute;right:3px;bottom:3px;width:13px;height:13px;border:1px solid #c5c5c5;background:#fff;font-style:normal;font-size:7px;display:grid;place-items:center;color:#555}
+.as3 .g tr.t td{background:#ececec;font-weight:700;height:34px}
+.as3 .g td.d{padding:0 4px}
+.as3 .g td .ln{position:absolute;bottom:0;height:3px}
+.as3 .g td .ln.g{background:#8fd98f}
+.as3 .g td .ln.r{background:#e0443c}
+.as3 .win{position:relative}
+.as3 .hl{outline:2px solid #3b7fc4;outline-offset:-2px;background:#e1ecfa}
+.as3 .pop{position:absolute;width:340px;background:#fff;border:1px solid #e3e6ee;border-radius:14px;box-shadow:0 30px 60px -12px rgba(36,83,140,.28),0 6px 16px rgba(36,83,140,.10);z-index:5;padding:14px 14px 10px}
+.as3 .pop .ph{font-weight:600;font-size:13px;color:#24385c;margin:0 2px 10px;display:flex;align-items:center;gap:8px}
+.as3 .pop .ph i{width:8px;height:8px;border-radius:50%;background:#3b7fc4;display:inline-block}
+.as3 .pop table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #e3e6ee;border-radius:8px;overflow:hidden}
+.as3 .pop td,.as3 .pop th{height:28px;padding:0 8px;border-bottom:1px solid #eef0f4;text-align:left;white-space:nowrap}
+.as3 .pop th{white-space:normal;height:38px;font-weight:600;line-height:1.15;background:#f6f7fa;color:#33405a}
+.as3 .pop tr:last-child td{border-bottom:0}
+.as3 .pop td.c,.as3 .pop th.c{text-align:center}
+.as3 .pop .gn{color:#4f9a4f}
+.as3 .pop tr.sel td{background:#e8f0fb}
+.as3 .clip{overflow:hidden;border-radius:13px}
+/* Ausentismos y kardex de vacaciones */
+.kv3{font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.kv3 *{box-sizing:border-box}
+.kv3 .stage{position:relative;width:780px;padding:28px 24px 0;
+ background:transparent}
+.kv3 .win{position:relative;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
+.kv3 .tabs{display:flex;gap:2px;padding:8px 6px 0;border-bottom:1px solid #d2d2d2}
+.kv3 .tabs span{display:flex;align-items:center;gap:6px;padding:6px 12px;color:#2f6fbf}
+.kv3 .tabs span.on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:5px 5px 0 0;background:#fff}
+.kv3 .fc{display:flex;align-items:center;gap:10px;height:38px;padding:0 10px}
+.kv3 .in{height:24px;border:1px solid #b9b9b9;display:flex;align-items:center;padding:0 30px 0 6px;position:relative}
+.kv3 .in::after{content:"";position:absolute;right:8px;top:10px;border:4px solid transparent;border-top:5px solid #888}
+.kv3 .cb{width:16px;height:16px;border:1.4px solid #8a8a8a;border-radius:3px;margin-left:50px}
+.kv3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
+.kv3 .g td,.kv3 .g th{height:27px;padding:0 3px;border-bottom:1px solid #e6e6e6;border-right:1px solid #e6e6e6;white-space:nowrap;overflow:hidden;text-align:left}
+.kv3 .g tr.h1 th{height:32px;background:linear-gradient(#fff,#f1f1f1);font-weight:600;border-bottom:1px solid #dcdcdc}
+.kv3 .g tr.h2 th{height:32px;background:linear-gradient(#fff,#f1f1f1);font-weight:600;border-bottom:1px solid #cfcfcf}
+.kv3 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
+.kv3 .g td.sg{background:#f2fbf4}
+.kv3 .g td.dt{background:#ececec}
+.kv3 .g td.sm{background:#f1f5fd}
+.kv3 .g tr.t td{background:#ebebeb;font-weight:700;border-bottom:1px solid #dcdcdc}
+.kv3 .g tr.t td.dt{background:#dedede}
+.kv3 .g tr.sel td{background:#dcebf9}
+.kv3 .g tr.sel td.sg{background:#e6f6ea}
+.kv3 .g tr.sel td.sm{background:#d2e4f7}
+.kv3 .g td.bx{box-shadow:inset 0 0 0 1px #6f96c8}
+.kv3 .g tr.hl td{background:#eef4fc}
+.kv3 .sum{display:flex;background:#c9c9c9;font-weight:700;color:#24538c;height:30px}
+.kv3 .sum div{flex:none;display:flex;align-items:center;justify-content:flex-end;padding:0 4px;border-right:1px solid #e0e0e0;font-variant-numeric:tabular-nums}
+.kv3 .card{position:absolute;background:rgba(255,255,255,.97);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 24px 48px -24px rgba(40,30,20,.25);z-index:5;padding:12px}
+.kv3 .ln{display:flex;align-items:center;height:30px;background:#e9f1fb;border:1px solid #cddbed;border-radius:8px;color:#1f9a2e;white-space:nowrap}
+.kv3 .ln span{padding:0 10px;display:block}
+.kv3 .ln .vac{border:1px solid #6f96c8;background:#e9f1fb;height:22px;line-height:20px;padding:0 6px;color:#1f9a2e}
+.kv3 .cm{position:absolute;width:196px;background:#f8f8f8;border:1px solid #bdbdbd;box-shadow:4px 6px 14px rgba(0,0,0,.28);padding:3px 0;z-index:8}
+.kv3 .cm div{display:flex;align-items:center;gap:8px;height:27px;padding:0 8px 0 8px}
+.kv3 .cm div.d{color:#a9a9a9}
+.kv3 .cm div.hv{background:#cfe3f7;outline:1px solid #8db8e6;outline-offset:-1px}
+.kv3 .cm svg{width:17px;height:17px;flex:none}
+.kv3 .cur{position:absolute;width:22px;height:30px;z-index:9;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+.kv3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+.kv3 .frm{background:#ececec;border-radius:10px;padding:14px 16px 16px;font-size:12px}
+.kv3 .frm .lb{color:#444;margin-bottom:4px}
+.kv3 .frm .tx{height:24px;background:#fff;border:1px solid #7a9cc4;padding:0 6px;line-height:22px}
+.kv3 .frm .rd{color:#d01818;margin-top:6px}
+.kv3 .frm .bt{margin-top:42px;height:28px;border:1px solid #bdbdbd;border-radius:4px;background:linear-gradient(#fbfbfb,#e8e8e8);display:grid;place-items:center;font-weight:700;font-size:13px}
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -48,50 +188,93 @@
       </div>
     </header>
 
-    <div class="mod-media">
-        <div class="mod-video" data-reveal>
-          <div class="mod-window">
-            <div class="mod-bar" aria-hidden="true"><i></i><i></i><i></i><span>SquareNet · Control de Asistencia</span><em>Grabación real</em></div>
-            <div class="mod-screen" title="Ver en pantalla completa">
-              <video muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1" width="1280" height="720" data-src="media/clip-asistencia.mp4"></video>
-              <img class="mod-poster" src="media/clip-asistencia.jpg" alt="Pantalla de marcaciones y resumen de asistencia de SquareNet" width="1280" height="720" loading="lazy" decoding="async">
-              <span class="mod-progress" aria-hidden="true"><b></b></span>
-              <button class="mod-toggle" type="button" aria-label="Pausar el video">
-                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
-                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
-              </button>
-            </div>
-          </div>
-          <p class="mod-caption"><span>Pantallas reales del módulo Control de Asistencia de SquareNet.</span><span>Clic en el video para verlo en pantalla completa.</span></p>
-        </div>
-    </div>
 
     <section class="mod-sec mod-fns" id="funciones" style="--mc:#E8710A" aria-labelledby="fn-title">
       <h2 id="fn-title">Funciones de Asistencia</h2>
       <div class="mod-fn-rows">
         <article class="mod-fn" id="registros-de-asistencia">
           <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-registros-de-asistencia.png" alt="" width="16" height="16">Registros de asistencia</h3><p>Filtros rápidos para encontrar inconsistencias en las marcaciones, como registros impares cuando solo marcó la entrada.</p></div>
-          <div class="mod-fn-media" data-fn="registros-de-asistencia"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/moduloca-registros-de-asistencia.png" alt="" width="16" height="16"><span>Registros de asistencia</span></div></div>
+          <div class="mod-fn-media rp-stage" data-fn="registros-de-asistencia">
+          <div class="rg3" id="rg3" style="width:660px">
+<div class="stage"><div class="win">
+ <div class="fl">Desde<span class="in">03/11/2026 00:00:00</span>Hasta<span class="in">04/11/2026 23:59:00</span>Tipo<span class="in" style="width:104px">Asistencia</span></div>
+ <table class="g"><colgroup><col><col style="width:122px"><col style="width:114px"><col style="width:92px"></colgroup>
+ <thead><tr><th>Apellidos y Nombres<i class="bd">1</i></th><th>Reloj</th><th>Fecha<i class="bd">2</i></th><th>Entrada/Salida</th></tr></thead>
+ <tbody id="rg3b"></tbody></table>
+</div></div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="resumen-por-horario">
           <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-resumen-por-horario.png" alt="" width="16" height="16">Resumen por horario</h3><p>Resume una fecha según los horarios asignados y determina las horas trabajadas con su tipo, en unos 2 segundos.</p></div>
-          <div class="mod-fn-media" data-fn="resumen-por-horario"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/moduloca-resumen-por-horario.png" alt="" width="16" height="16"><span>Resumen por horario</span></div></div>
+          <div class="mod-fn-media rp-stage" data-fn="resumen-por-horario">
+            <div class="rh3" id="rh3" style="width:800px" role="img" aria-label="Resumen por horario con horas cumplidas, línea de tiempo y marcaciones de entrada y salida">
+<div class="stage" data-el="s">
+ <div class="win" data-el="w">
+  <div class="tabs"><span class="on">Resumen</span><span><svg width="14" height="14" viewBox="0 0 14 14"><rect x="2" y="2" width="9" height="10" fill="#fff" stroke="#3b7fc4"/><path d="M4 6h5M4 9h4" stroke="#3b7fc4"/></svg>Ausentismo</span></div>
+  <table class="g"><colgroup><col style="width:140px"><col style="width:70px"><col style="width:20px"><col style="width:80px"><col style="width:72px"><col style="width:26px"><col></colgroup>
+   <tr><th>Tipo de Hora</th><th>Horas laborales</th><th></th><th>Horas Cumplidas</th><th>Diferencia</th><th></th><th>Aprobado Por</th></tr>
+   <tr><td class="gr">Horas Extra 100%</td><td></td><td class="c">+</td><td></td><td></td><td class="c">🔍</td><td></td></tr>
+   <tr><td class="gr">Horas Suplem. 50%</td><td></td><td class="c">+</td><td class="c">01:58</td><td></td><td class="c">🔍</td><td><svg width="15" height="15" viewBox="0 0 15 15" style="vertical-align:-3px;margin-right:5px"><rect x="1.500" y="2" width="8" height="10" fill="#fff" stroke="#7a8aa0"/><circle cx="9.500" cy="9.500" r="4.500" fill="#fff" stroke="#d63a2f" stroke-width="1.600"/><path d="M6.600 12.400l5.800-5.800" stroke="#d63a2f" stroke-width="1.600"/></svg>Necesita Aprobación</td></tr>
+   <tr class="sel"><td class="sx" data-el="tip">Normal</td><td class="c">5:00</td><td class="c">+</td><td class="c">05:00</td><td></td><td class="c">🔍</td><td data-el="lnk"></td></tr>
+   <tr><td>Hora Nocturna</td><td class="c">3:00</td><td class="c">+</td><td class="c">03:00</td><td></td><td class="c">🔍</td><td></td></tr>
+   <tr><td class="gr">Hora de Merienda</td><td></td><td></td><td class="c">48:25</td><td></td><td class="c">🔍</td><td></td></tr></table>
+  <div class="tot"><div class="a">Total Normal:</div><div class="b">8:00</div><div class="c"></div><div class="d">8:00</div><div class="e">0:00</div></div>
+  <div class="foot">Fila 1 de 5</div>
+ </div>
+
+ <div class="card" data-el="c1" style="left:196px;width:584px"><div class="inner"><div class="tl" data-el="tl"><div class="nx"></div></div></div></div>
+
+ <div class="card mk" data-el="c2" style="width:320px"><div class="inner"><table class="g"><colgroup><col style="width:128px"><col style="width:62px"><col style="width:58px"><col></colgroup>
+  <tr><th>Hora</th><th></th><th>Reloj</th><th>GPS</th></tr>
+  <tr class="sel"><td data-el="rE">23/10/2026 13:52:07</td><td>Entrada</td><td>1PLAS</td><td class="c">PIN</td></tr>
+  <tr><td data-el="rS">23/10/2026 23:58:15</td><td>Salida</td><td>3PLAS</td><td class="c">PIN</td></tr></table></div></div>
+ <svg class="lk" data-el="lk"></svg>
+</div>
+            </div>
+          </div>
         </article>
-        <article class="mod-fn" id="aprobacion-de-horas-extra">
-          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-aprobacion-de-horas-extra.png" alt="" width="16" height="16">Aprobación de horas extra</h3><p>Los supervisores aprueban o no las horas que genera el sistema, por ejemplo las extras.</p></div>
-          <div class="mod-fn-media" data-fn="aprobacion-de-horas-extra"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/moduloca-aprobacion-de-horas-extra.png" alt="" width="16" height="16"><span>Aprobación de horas extra</span></div></div>
-        </article>
+
         <article class="mod-fn" id="ausentismos-y-permisos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Ausentismos y permisos</h3><p>Usa los ausentismos y permisos registrados en Recursos Humanos, con tipos de hora ilimitados como vacaciones o permiso médico.</p></div>
-          <div class="mod-fn-media" data-fn="ausentismos-y-permisos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16"><span>Ausentismos y permisos</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Ausentismos y kardex de vacaciones</h3><p>Usa los ausentismos y permisos registrados en Recursos Humanos, con tipos de hora ilimitados como vacaciones o permiso médico.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="ausentismos-y-permisos">
+            <div class="kv3" id="kv3" style="width:780px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
+<div class="stage" data-el="s">
+ <div class="win" data-el="w">
+  <div class="tabs"><span>Ausentismo</span><span class="on">Vacaciones</span></div>
+  <div class="fc">Fecha Corte<span class="in">04/11/2026</span><i class="cb"></i>Agregar acumulado parcial del último año</div>
+  <table class="g" data-el="t"><colgroup><col style="width:50px"><col style="width:56px"><col style="width:94px"><col style="width:210px"><col style="width:80px"><col style="width:80px"><col style="width:80px"><col></colgroup>
+  <tr class="h1"><th colspan="4" style="background:#f1f1f1"></th><th colspan="3">Días Normales</th><th>Días Total</th></tr>
+  <tr class="h2"><th>Per</th><th>Año</th><th>Fecha</th><th>Concepto</th><th>A Favor</th><th>Usados</th><th>Saldo</th><th></th></tr>
+  </table>
+  <div class="sum" data-el="sm"></div>
+ </div>
+ <div class="card" data-el="c1" style="width:520px"><div class="ln"><span style="width:34px;padding:0 0 0 10px"><svg width="16" height="18" viewBox="0 0 13 15"><rect x="1.500" y="6" width="10" height="8" rx="2" fill="#f2b632" stroke="#b07d12"/><path d="M4 6V4.300a2.500 2.500 0 0 1 5 0V6" fill="none" stroke="#b07d12" stroke-width="1.400"/></svg></span><span style="width:142px">05/10/2026 00:00</span><span style="width:142px">11/10/2026 23:59</span><span style="width:40px;text-align:right">7</span><span style="width:30px"></span><span class="vac" data-el="vac" style="width:100px">Vacaciones</span></div></div>
+ <div class="cm" data-el="cm"><div><svg viewBox="0 0 17 17"><rect x="2" y="2" width="11" height="13" fill="#fff" stroke="#556"/><path d="M5 7h5M5 10h4" stroke="#889"/><path d="M12 1v5M9.500 3.500h5" stroke="#e0a020" stroke-width="1.700"/></svg>Insertar</div>
+  <div class="d"><svg viewBox="0 0 17 17"><rect x="2" y="2" width="11" height="13" fill="#fff" stroke="#c9b0b0"/><path d="M9 9l5 5M14 9l-5 5" stroke="#e6a6a0" stroke-width="1.600"/></svg>Eliminar</div>
+  <div class="hv"><svg viewBox="0 0 17 17"><rect x="2" y="2" width="10" height="13" fill="#fff" stroke="#556"/><path d="M4 6h5M4 9h4" stroke="#889"/><circle cx="12" cy="12" r="4.200" fill="#3aa84a"/><path d="M10 12l1.600 1.600L14.300 10.500" stroke="#fff" stroke-width="1.500" fill="none"/></svg>Aprobar Ausentismo</div>
+  <div class="d"><svg viewBox="0 0 17 17"><rect x="2" y="2" width="10" height="13" fill="#fff" stroke="#bbb"/><circle cx="12" cy="12" r="4.200" fill="#e8a8a2"/><path d="M9.500 14.500l5-5" stroke="#fff" stroke-width="1.400"/></svg>Desaprobar Ausentismo</div>
+  <div><svg viewBox="0 0 17 17"><rect x="2" y="2" width="11" height="13" fill="#fff" stroke="#556"/><circle cx="12" cy="12" r="4.200" fill="#d63a2f"/><path d="M10.200 10.200l3.600 3.600M13.800 10.200l-3.600 3.600" stroke="#fff" stroke-width="1.400"/></svg>Rechazar</div></div>
+ <div class="card" data-el="c3" style="width:300px"><div class="frm"><div class="lb">Motivo:</div><div class="tx">Vacaciones</div><div class="rd">Tiene disponible 8.00 días de vacación</div><div class="bt">Solicitar</div></div></div>
+ <svg class="cur" data-el="cur" viewBox="0 0 14 20"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.200" stroke-linejoin="round"/></svg>
+ <svg class="lk" data-el="lk"></svg>
+</div>
+            </div>
+          </div>
         </article>
-        <article class="mod-fn" id="kardex-de-horas">
-          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-kardex-de-horas.png" alt="" width="16" height="16">Kardex de horas</h3><p>El detalle completo de horas y novedades de cada persona: marcaciones impares, sin marcaciones, retrasos, sin horario asignado.</p></div>
-          <div class="mod-fn-media" data-fn="kardex-de-horas"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/moduloca-kardex-de-horas.png" alt="" width="16" height="16"><span>Kardex de horas</span></div></div>
-        </article>
-        <article class="mod-fn" id="politicas-de-vacaciones">
-          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-politicas-de-vacaciones.png" alt="" width="16" height="16">Políticas de vacaciones</h3><p>Define cómo se controlan los días de vacación de tu gente, por períodos.</p></div>
-          <div class="mod-fn-media" data-fn="politicas-de-vacaciones"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/moduloca-politicas-de-vacaciones.png" alt="" width="16" height="16"><span>Políticas de vacaciones</span></div></div>
+        <article class="mod-fn" id="asignacion-de-horarios">
+          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloac-horarios-de-acceso.png" alt="" width="16" height="16">Asignación diaria de horarios</h3><p>Asigna y consulta los horarios de cada persona en un cuadro semanal, con visibilidad de ausentismos y turnos.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="asignacion-de-horarios">
+            <div class="as3" id="as3" style="width:792px" role="img" aria-label="Cuadro semanal de asignación de horarios por persona y centro de costo, con detalle de un turno">
+<div class="stage"><div class="win"><div class="clip">
+ <div class="tb"><span class="t">Detalle</span><span class="t on">Cuadro</span><span class="f">Desde<span class="in">26/10/2026</span>Hasta<span class="in">01/11/2026</span></span></div>
+ <div class="gb"><span>Centro de Costo Nombre <em>▲</em><u>✕</u></span></div>
+ <table class="g"><colgroup><col style="width:92px"><col style="width:132px"><col span="7" style="width:72px"></colgroup>
+ <thead><tr class="sup"><th style="height:24px;padding-top:4px">Centro de Costo</th><th colspan="8" style="height:24px;background:#fff;border-bottom:1px solid #b9c9c9"></th></tr>
+ <tr data-el="head"></tr></thead><tbody data-el="rows"></tbody></table>
+</div></div></div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -102,7 +285,6 @@
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/></svg></span><h3>Horarios y turnos ilimitados</h3><p>Rotativos, por persona o por grupo, indefinidos o por un periodo. Los supervisores asignan el día a día en un cuadro.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></span><h3>Marcaciones automáticas</h3><p>Importa de relojes biométricos, tarjetas o proximidad. Nunca más bajar archivos del reloj a mano.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><span class="fx">fx</span></span><h3>Reglas con fórmulas</h3><p>Por ejemplo, ignorar retrasos de menos de 10 minutos: <code>IF( valor_retraso &lt;= 0:10, 0, valor_retraso )</code>.</p></article>
-        <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><h3>Aprobación de horas</h3><p>Los supervisores aprueban o rechazan las horas extra antes de que pasen a la nómina.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 10v4.5M12 17.5v.1"/></svg></span><h3>Novedades al instante</h3><p>Marcaciones impares, días sin marcación, retrasos o personas sin horario, con filtros rápidos.</p></article>
         <article class="mod-feat" data-reveal><span class="mod-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><h3>Resumen en 2 segundos</h3><p>Calcula las horas trabajadas por tipo y las envía directo a SquareNet Nómina.</p></article>
       </div>
@@ -119,7 +301,6 @@
           <code style="display:block;margin-top:6px;padding:4px 8px;background:var(--color-surface);border-radius:var(--radius-sm);font-size:12px">IF( valor_retraso &lt;= 0:10, 0, valor_retraso )</code></li>
           <li>Se puede asignar el horario a un grupo de personas o directamente a una persona indefinidamente o por un periodo determinado.</li>
           <li>Importación de datos desde relojes de personal, de tarjetas magnéticas, proximidad o biométricos. Adicionalmente se puede importar desde otros formatos o configurar la importación automática dependiendo de su dispositivo. De esta forma nunca más se preocupará por tener que bajar archivos desde su reloj biométrico.</li>
-          <li>Proceso donde los supervisores o el encargado pueden aprobar o no las horas generadas por el sistema. Por ejemplo: en el caso de horas extras.</li>
           <li>Rápidos filtros para encontrar inconsistencias en marcaciones. Registros impares, por ejemplo cuando solo timbró la entrada y no la salida.</li>
           <li>Se resume la información para una fecha determinada en base a los horarios asignados, determinando las horas trabajadas con su respectivo tipo. Muestra la información gráficamente.</li>
           <li>Resumen de asistencia más rápido del mercado (alrededor de 2 segundos).</li>
@@ -136,7 +317,6 @@
       <ul class="mod-reports">
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Reporte de Marcaciones</b><span>Lista lineal detallada de las marcaciones que el sistema ha recopilado en un rango de fechas.</span></div></li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Reporte de Marcaciones Cruzado</b><span>Lista cruzada de las marcaciones (un día en una fila) que el sistema ha recopilado en un rango de fechas.</span></div></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Aprobación de Horas</b><span>Lista de todas las aprobaciones o desaprobaciones de horas de los empleados que hayan generado horas por aprobar.</span></div></li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Ausentismos</b><span>Lista de todos los ausentismos: permisos, vacaciones, etc. en un rango de fechas para el personal escogido.</span></div></li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Asistencia Simple</b><span>Sumatoria de horas laborales y cumplidas en un rango de fechas, agrupable por varios criterios.</span></div></li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4"/></svg><div><b>Asistencia Detalle</b><span>Detalle diario de horas laborales y cumplidas en un rango de fechas, agrupable por varios criterios.</span></div></li>
@@ -187,7 +367,6 @@
         <a href="moduloac.html">Acceso</a>
         <a href="modulocv.html">Visitas</a>
         <a href="modulocc.html">Comedor</a>
-        <a href="moduloev.html">Evaluaciones</a>
         <a href="moduloas.html">Autoservicio</a>
         <a href="modulots.html">Trabajo Social</a>
       </div>
@@ -213,9 +392,131 @@
       navToggle.setAttribute('aria-expanded', String(!open));
     });
   </script>
+  <script>
+(function(){
+const N=['ALVARADO MORA','ANDRADE LOOR SOFÍA','BARRERA PAZ LUIS','BENÍTEZ ZURITA LUZ','CABEZAS RUIZ ANA','CALDERÓN VEGA PAÚL','CEVALLOS TORRES','CHÁVEZ NARVÁEZ','DELGADO PROAÑO','ESPINOSA LARA LEÓN','FIGUEROA SUÁREZ','GALARZA MENA','GUERRERO ORTIZ LÍA','HIDALGO BRAVO LUIS','IZURIETA CRUZ PAOLA','JARAMILLO LUNA','LEÓN VILLACÍS NELI','MALDONADO PAZ LUIS','MONTALVO SILVA EVA','NARVÁEZ TAPIA IVÁN','OJEDA REYES VERA','PALACIOS ROJAS ELI','QUISHPE ROJAS ANA','RECALDE FLORES ANA','SALAZAR BRAVO','TERÁN YÉPEZ DAVID'];
+const R=['Entrada principal','Oficina','Planta','Bodega','Entrada principal','Oficina','Planta'];
+const H=['05:43:02','05:49:25','05:58:50','08:21:05','08:23:14','08:26:01','08:28:35','05:44:34','05:53:11','08:18:05','05:47:51','08:28:07','14:46:32','05:57:48','08:23:41','05:50:19','08:28:32','05:59:26','08:21:44','05:46:10','08:25:57','05:51:33','08:19:48','05:55:20','08:27:09','05:48:36'];
+const web=[2,6,11,15,19,23];
+document.getElementById('rg3b').innerHTML=N.slice(0,7).map((n,i)=>{const w=web.includes(i);const reloj=w?'Marcación web':R[i%R.length];const s=i===1;const d=i<2?'03/11/2026':'04/11/2026';
+return `<tr${i===0?' class="sel"':''}><td>${n}</td><td${w?' class="web"':''}>${reloj}</td><td>${d} ${H[i]}</td><td>${s?'Salida':'Entrada'}</td></tr>`}).join('');
+
+  var root=document.getElementById('rg3'),stage=root.firstElementChild,media=root.parentElement;
+  function fit(){var k=Math.max(0,Math.min(1,(media.clientWidth-40)/660));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*660)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+  </script>
+  <script>
+(function(){
+const root=document.getElementById('rh3'); if(!root) return;
+
+const PIN='<svg class="pin" viewBox="0 0 13 15"><path d="M6.5 14C3 9.6 1.5 7.6 1.5 5.4a5 5 0 0 1 10 0c0 2.2-1.500 4.200-5 8.600Z" fill="#e0523d"/><circle cx="6.5" cy="5.4" r="1.900" fill="#fff"/></svg>';
+root.querySelectorAll('td.c').forEach(t=>{if(t.textContent==='PIN')t.innerHTML=PIN});
+const s=root.querySelector('[data-el="s"]'),w=root.querySelector('[data-el="w"]'),tl=root.querySelector('[data-el="tl"]'),c1=root.querySelector('[data-el="c1"]'),c2=root.querySelector('[data-el="c2"]');
+const wb=w.getBoundingClientRect(),so=s.getBoundingClientRect();
+c1.style.top=(wb.bottom-so.top-26)+'px';
+const TW=tl.getBoundingClientRect().width,W=TW/36;let h='<div class="ruler"></div>';
+for(let i=0;i<36;i++){const x=i*W,n=i<24?i:i-24;h+=`<i style="left:${x}px"></i><b style="left:${x+W/2}px">${n}</b>`}
+const bar=(a,b,t,c,y)=>`<div class="bar ${c}" style="left:${a*W}px;width:${(b-a)*W}px;top:${y}px">${t}</div>`;
+h+=bar(0,6,'Horas Extra 100%','ex',20)+bar(6,14,'Horas Suplem. 50%','ex',20)+bar(14,19,'Normal','nm',38)+bar(19,22,'Hora Nocturna','nm',38)+bar(22,24,'Horas Suplem. 50%','ex',38)+bar(24,30,'Horas Extra 100%','ex',38)+bar(13+52/60+7/3600,23+58/60+15/3600,'Asistencia','as',56);
+tl.insertAdjacentHTML('beforeend',h);tl.querySelector('.nx').style.left=(24*W)+'px';
+const R=e=>{const r=e.getBoundingClientRect(),o=s.getBoundingClientRect();return{l:r.left-o.left,r:r.right-o.left,t:r.top-o.top,b:r.bottom-o.top,w:r.width,h:r.height}};
+const as=R(tl.querySelector('.bar.as')),k=R(c1);
+c2.style.left=(as.l-34-320)+'px';c2.style.top=(k.b-34)+'px';
+const k2=R(c2),e=R(root.querySelector('[data-el="rE"]')),sr=R(root.querySelector('[data-el="rS"]')),cell=R(root.querySelector('[data-el="tip"]'));
+const yE=e.t+e.h/2,yS=sr.t+sr.h/2,L='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',D=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+const cx=cell.r-14,ky=k.t+42;
+root.querySelector('[data-el="lk"]').innerHTML=
+ `<path d="M${cx} ${cell.b} V${ky} H${k.l}" ${L}/>${D(cx,cell.b)}${D(k.l,ky)}`+
+ `<path d="M${as.l} ${as.b} V${yE} H${k2.r}" ${L}/>${D(as.l,as.b)}${D(k2.r,yE)}`+
+ `<path d="M${as.r} ${as.b} V${yS} H${k2.r}" ${L}/>${D(as.r,as.b)}${D(k2.r,yS)}`;
+
+const stage=root.firstElementChild,media=root.parentElement;
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/800));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*800)+'px';}
+fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
+})();
+</script>
+
+  <script>
+(function(){
+const root=document.getElementById('as3'); if(!root) return;
+
+const D=[['Lunes','26 Oct'],['Martes','27 Oct'],['Miércoles','28 Oct'],['Jueves','29 Oct'],['Viernes','30 Oct'],['Sábado','31 Oct'],['Domingo','1 Nov']];
+root.querySelector('[data-el="head"]').innerHTML='<th>Nombre<i>▼</i></th><th>Apellidos y Nombres<i>▼</i></th>'+D.map((d,i)=>`<th class="${i>4?'w':''}">${d[0]}<b>${d[1]}</b><i>▼</i></th>`).join('');
+// c: g=ausentismo aprobado, r=pendiente
+const G=[['Inyección Lona',[
+['CEVALLOS MORA ANA','Velada,Velada,Velada,Descanso,Descanso,Tarde,Tarde',['','','','','','','']],
+['DELGADO PAZ LUIS','Tarde,Tarde,Tarde,Tarde,Descanso,Mañana,Mañana',['','g12-24','g','g0-14','','','']],
+['ESPÍN VERA MARCO','Mañana,Mañana,Mañana,Mañana,Mañana,Descanso,Descanso',['','','','r9-24','r0-12','','']]]],
+['Proyectos',[
+['FARINANGO LUNA','Tarde,Mañana,Descanso,Velada,Velada,Velada,Velada',['g9-13','','','','','','']],
+['GUAMÁN TAPIA IVÁN','Velada,Velada,Descanso,Descanso,Tarde,Tarde,Tarde',['','','g','g','','','']],
+['HIDALGO SOSA PAÚL','Descanso,Tarde,Tarde,Tarde,Descanso,Mañana,Mañana',['','','','','r14-22','','']]]]];
+const seg=c=>{if(!c)return'';const[a,b]=c.length>1?c.slice(1).split('-').map(Number):[0,24];return `<span class="ln ${c[0]}" style="left:${a/24*100}%;width:${(b-a)/24*100}%"></span>`};
+let h='';
+G.forEach(([c,r])=>{r.forEach(x=>{const s=x[1].split(',');h+=`<tr><td>${c}</td><td>${x[0]}</td>${s.map((v,i)=>`<td class="d">${v}${seg(x[2][i])}</td>`).join('')}</tr>`});
+h+=`<tr class="t"><td colspan="9">Total ${c} (${r.length})</td></tr>`});
+root.querySelector('[data-el="rows"]').innerHTML=h;
+
+const T=[['Horas Extra 100%','00:00','06:00',1,1],['Horas Suplem. 50%','06:00','14:00',0,1],['Normal','14:00','19:00',0,0],['Hora Nocturna','19:00','22:00',0,0],['Horas Suplem. 50%','22:00','24:00',0,1]];
+const win=root.querySelector('.win'),wr=win.getBoundingClientRect();
+const cell=[...root.querySelectorAll('[data-el="rows"] tr')].find(r=>r.children[1].textContent.startsWith('DELGADO')).children[2];
+cell.classList.add('hl');const cr=cell.getBoundingClientRect();
+const py=cr.bottom-wr.top+96,cx=cr.left-wr.left+cr.width/2;
+win.insertAdjacentHTML('beforeend',`<div class="pop" style="left:232px;top:${py}px"><div class="ph">Horario Tarde</div><table><colgroup><col style="width:150px"><col><col></colgroup><tr><th>Tipo de Hora</th><th class="c">Hora Entrada</th><th class="c">Hora Salida</th></tr>${T.map(t=>`<tr class="${t[3]?'sel':''}"><td class="${t[4]?'gn':''}">${t[0]}</td><td class="c">${t[1]}</td><td class="c">${t[2]}</td></tr>`).join('')}</table></div>`);
+const ln=document.createElement('div');
+ln.style.cssText=`position:absolute;left:${cx-1}px;top:${cr.bottom-wr.top}px;width:0;height:${py-(cr.bottom-wr.top)}px;border-left:2px dashed #3b7fc4;z-index:4`;win.appendChild(ln);
+const dt=document.createElement('div');dt.style.cssText=`position:absolute;left:${cx-5}px;top:${py-5}px;width:10px;height:10px;border-radius:50%;background:#3b7fc4;z-index:6`;win.appendChild(dt);
+[...root.querySelectorAll('[data-el="rows"] tr')].find(r=>r.children[1].textContent.startsWith('CEVALLOS')).querySelectorAll('td.d').forEach((c,i)=>{if(i<3)c.style.color='#a9a9a9'});
+
+const stage=root.firstElementChild,media=root.parentElement;
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/792));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*792)+'px';}
+fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+const root=document.getElementById('kv3'); if(!root) return;
+
+const f=v=>v===''?'':v;
+const P=[
+[1,'2023',[['1','2023','03/01/2023','Contratación','','','0.00','0.00','','','0.00']],['Total Periodo 1 (2023)','0.00','0.00','0.00','0.00','0.00','0.00','0.00']],
+[2,'2024',[['2','2024','03/01/2024','Acredita año 1','15.00','','15.00','15.00','301.62','','301.62'],['2','2024','25/03/2024','Vacaciones','','15.00','0.00','0.00','','301.62','0.00']],['Total Periodo 2 (2024)','15.00','15.00','0.00','0.00','301.62','301.62','0.00']],
+[3,'2025',[['3','2025','03/01/2025','Acredita año 2','15.00','','15.00','15.00','285.06','','285.06'],['3','2025','01/09/2025','Vacaciones Pago Anticipo','','3.00','12.00','12.00','','57.01','228.05'],['3','2025','04/09/2025','Vacaciones','','12.00','0.00','0.00','','228.05','0.00']],['Total Periodo 3 (2025)','15.00','15.00','0.00','0.00','285.06','285.06','0.00']],
+[4,'2026',[['4','2026','03/01/2026','Acredita año 3','15.00','','15.00','15.00','336.86','','336.86'],['4','2026','05/10/2026','Vacaciones','','7.00','8.00','8.00','','157.20','179.66']],['Total Periodo 4 (2026)','15.00','7.00','8.00','8.00','336.86','157.20','179.66']]];
+const cls=['','','','','n','n','n sg','n dt','n','n','n sm','n','n'];
+const colcls=[ 'n','n','','', 'n','n','n sg','n dt','n','n','n sm'];
+let h='';
+P.forEach(([per,y,rows,tot],pi)=>{rows.forEach((r,ri)=>{const first=pi===3&&ri===1;const last=pi===3&&ri===1;
+ h+=`<tr class="${first?'sel':''}" ${last?'data-el="lastv"':''}>${r.slice(0,8).map((v,i)=>`<td class="${colcls[i]}${first&&i===0?' bx':''}">${v}</td>`).join('')}</tr>`});
+ h+=`<tr class="t"><td colspan="4">${tot[0]}</td>${tot.slice(1,5).map((v,i)=>`<td class="${colcls[i+4]}">${v}</td>`).join('')}</tr>`});
+root.querySelector('[data-el="t"]').insertAdjacentHTML('beforeend',h);
+const W=[50,56,94,210,80,80,80,0],SUM=['','','','','45.00','37.00','8.00','8.00'];
+const tw=root.querySelector('[data-el="t"]').getBoundingClientRect().width;const rest=tw-W.slice(0,7).reduce((a,b)=>a+b,0);W[7]=rest;
+root.querySelector('[data-el="sm"]').innerHTML=SUM.map((v,i)=>`<div style="width:${W[i]}px;${i<4?'background:#f0f0f0;':''}">${v}</div>`).join('');
+const s=root.querySelector('[data-el="s"]'),w=root.querySelector('[data-el="w"]'),c1=root.querySelector('[data-el="c1"]'),cm=root.querySelector('[data-el="cm"]'),cur=root.querySelector('[data-el="cur"]');
+const R=e=>{const r=e.getBoundingClientRect(),o=s.getBoundingClientRect();return{l:r.left-o.left,r:r.right-o.left,t:r.top-o.top,b:r.bottom-o.top,w:r.width,h:r.height}};
+const wr=R(w);c1.style.left='6px';c1.style.top=(wr.b-10)+'px';
+const k=R(c1),v=R(root.querySelector('[data-el="vac"]'));
+cm.style.left=Math.max(0,v.l-cm.offsetWidth+30)+'px';cm.style.top=(v.b+6)+'px';
+const mr=R(cm),ap=R(cm.children[2]);
+cur.style.left=(ap.l+70)+'px';cur.style.top=(ap.t+12)+'px';
+s.style.height=(mr.b+36)+'px';
+const lv=R(root.querySelector('[data-el="lastv"]').children[3]),cx=lv.r-30,L='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',D=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+root.querySelector('[data-el="lk"]').innerHTML=`<path d="M${cx} ${lv.t+lv.h/2} V${k.t}" ${L}/>${D(cx,lv.t+lv.h/2)}${D(cx,k.t)}`;
+const c3=root.querySelector('[data-el="c3"]'),sc=R(root.querySelector('[data-el="lastv"]').nextElementSibling.children[3]);
+c3.style.left=Math.min(sc.l+sc.w/2-60,s.offsetWidth-310)+'px';c3.style.top=(mr.t+12)+'px';
+const k3=R(c3),sx=sc.l+sc.w/2;
+root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} V${k3.t}" ${L}/>${D(sx,sc.t+sc.h/2)}${D(sx,k3.t)}`;
+s.style.height=Math.max(mr.b,k3.b)+36+'px';
+
+const stage=root.firstElementChild,media=root.parentElement;
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/780));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*780)+'px';}
+fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
+})();
+</script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
-  <script src="js/module-player.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/consent.js"></script>
 </body>

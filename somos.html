@@ -69,15 +69,21 @@
   .side-l,.side-r{grid-row:1;align-self:center}
   .side-l{grid-column:1;padding-right:var(--space-6);text-align:right}
   .side-r{grid-column:3;padding-left:var(--space-6)}
-  .st-ghost .g{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(84px,11vw,160px);line-height:.85;letter-spacing:-.03em;
+  .st-ghost .g,.st-stats b{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);line-height:.85;letter-spacing:-.03em;
     color:color-mix(in srgb,var(--color-accent) 17%,transparent);user-select:none;transform:translateY(calc(var(--gp,0) * -64px));transition:color .5s ease,text-shadow .5s ease}
+  .st-ghost .g{font-size:clamp(84px,11vw,160px)}
   /* el año (o el número) se enciende junto con su círculo */
-  .stop.is-on .st-ghost .g{color:var(--color-accent);text-shadow:0 0 28px color-mix(in srgb,var(--color-accent-300) 55%,transparent)}
+  .stop.is-on .st-ghost .g,.stop.is-on .st-stats b,.road:not(.is-live) .st-stats b{color:var(--color-accent);text-shadow:0 0 28px color-mix(in srgb,var(--color-accent-300) 55%,transparent)}
   .st-ghost small{display:block;margin-top:var(--space-2);font-size:15px;color:var(--color-neutral-600)}
-  .flag-ec{display:inline-block;width:1.6em;height:1.6em;margin-left:.15em;vertical-align:-.45em}
   .st-stats{display:flex;flex-direction:column;gap:var(--space-4)}
-  .st-stats b{display:block;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(60px,7.5vw,108px);line-height:.95;color:var(--color-accent-700);font-variant-numeric:tabular-nums;transform:translateY(calc(var(--gp,0) * -26px))}
+  .st-stats b{font-size:clamp(60px,7.5vw,108px);line-height:.95;font-variant-numeric:tabular-nums}
   .st-stats span{font-size:16px;color:var(--color-neutral-700)}
+  /* ECUATORIANO: gris hasta que el nodo se enciende; entonces se ilumina con los colores de la bandera (amarillo, azul, rojo), igual que las cifras */
+  .st-stats .ecuador{font-weight:600}
+  .st-stats .ecuador i{font-style:normal;color:var(--color-neutral-600);transition:color .6s .15s}
+  .stop.is-on .st-stats .ecuador .y,.road:not(.is-live) .st-stats .ecuador .y{color:#d49b00}
+  .stop.is-on .st-stats .ecuador .b,.road:not(.is-live) .st-stats .ecuador .b{color:#1760a9}
+  .stop.is-on .st-stats .ecuador .r,.road:not(.is-live) .st-stats .ecuador .r{color:#c92e37}
 
   /* misión y visión */
   .st-card.band-dark{border:0;box-shadow:var(--shadow-md);overflow:hidden}
@@ -220,8 +226,8 @@
           <p>Nuestro equipo lleva décadas de experiencia conjunta trabajando con empresas e instituciones del sector financiero, comercial, industrial y de servicios. Lo que hoy le preocupa a tu empresa, seguramente ya lo resolvimos antes.</p>
         </article>
         <div class="side-r st-stats">
-          <div><b data-count="24" data-since="2002" data-suffix=" años">24 años</b><span>en el mercado ecuatoriano <img class="flag-ec" src="img/ecuador-emoji.svg" alt="Ecuador" width="36" height="36"></span></div>
-          <div><b data-count="30" data-suffix="+">30+</b><span>años de experiencia conjunta del equipo</span></div>
+          <div><b data-count="24" data-since="2002" data-suffix=" años">24 años</b><span>en el mercado <span class="ecuador"><i class="y">ECUA</i><i class="b">TORI</i><i class="r">ANO</i></span></span></div>
+          <div><b data-count="30" data-suffix=" mil+">30 mil+</b><span>colaboradores reciben su rol con SquareNet cada mes</span></div>
         </div>
       </section>
 
@@ -242,79 +248,49 @@
       <section class="stop chap" aria-labelledby="s-why">
         <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.6a2.8 2.8 0 1 1 4.4 2.3c-.9.6-1.7 1.2-1.7 2.4M12 17.2h.01"/></svg></div>
         <div class="chap-label">
-          <div class="kicker">Siete razones</div>
-          <h2 id="s-why">¿Por qué usar SquareNet?</h2>
+          <div class="kicker">Cuatro razones</div>
+          <h2 id="s-why">¿Por qué confiar en SquareNet?</h2>
         </div>
       </section>
 
       <section class="stop reason" aria-labelledby="r1">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="11" r="7.5"/><path d="M10.5 17.5 8 26l7-3.5 7 3.5-2.5-8.5"/></svg></div>
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 26s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="15" cy="14" r="2.6"/></svg></div>
         <div class="side-l st-ghost" aria-hidden="true"><span class="g">01</span></div>
         <article class="st-card cr">
           <div class="kicker">Razón 01</div>
-          <h3 id="r1">Experiencia y prestigio</h3>
-          <p>Dos décadas construyendo software de nómina para empresas ecuatorianas, con la trayectoria que eso conlleva.</p>
+          <h3 id="r1">Hecho en Ecuador, para Ecuador</h3>
+          <p>Conocemos la ley laboral, el IESS y el SRI porque los vivimos igual que tú.</p>
         </article>
       </section>
 
       <section class="stop reason" aria-labelledby="r2">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="20" height="4.5" rx="1"/><rect x="5" y="13" width="20" height="4.5" rx="1"/><rect x="5" y="20" width="20" height="4.5" rx="1"/><path d="M15 10.5v2.5M15 17.5v2.5"/></svg></div>
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="15" r="10"/><path d="m10.5 15.3 3.2 3.2 6-6.4"/></svg></div>
         <article class="st-card cl">
           <div class="kicker">Razón 02</div>
-          <h3 id="r2">Filosofía de desarrollo y metodología</h3>
-          <p>Un proceso maduro, pensado para sostener implementaciones complejas sin perder de vista al usuario final.</p>
+          <h3 id="r2">Te enseñamos a pescar</h3>
+          <p>Capacitamos a tu equipo para que entienda y aproveche el sistema, no solo para que lo use.</p>
         </article>
         <div class="side-r st-ghost" aria-hidden="true"><span class="g">02</span></div>
       </section>
 
       <section class="stop reason" aria-labelledby="r3">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="15" r="9.5"/><path d="M18.5 11.5 12.8 12.8l-1.3 5.7 5.7-1.3 1.3-5.6Z"/></svg></div>
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-8l-5.5 4.5V20H8a3 3 0 0 1-3-3Z"/><path d="M10.5 11h9M10.5 14.5h5.5"/></svg></div>
         <div class="side-l st-ghost" aria-hidden="true"><span class="g">03</span></div>
         <article class="st-card cr">
           <div class="kicker">Razón 03</div>
-          <h3 id="r3">Facilidad de aprendizaje</h3>
-          <p>Interfaces pensadas para que su equipo de RRHH trabaje con confianza desde el primer día.</p>
+          <h3 id="r3">Te escuchamos de verdad</h3>
+          <p>Muchas de nuestras funciones nacieron de una sugerencia de un cliente.</p>
         </article>
       </section>
 
       <section class="stop reason" aria-labelledby="r4">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6h-2v18h2M19 6h2v18h-2"/><circle cx="15" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg></div>
+        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="13" width="16" height="11" rx="2"/><path d="M10.5 13V10a4.5 4.5 0 0 1 9 0v3"/><circle cx="15" cy="18.5" r="1.4" fill="currentColor" stroke="none"/></svg></div>
         <article class="st-card cl">
           <div class="kicker">Razón 04</div>
-          <h3 id="r4">Configurable mediante fórmulas</h3>
-          <p>Cada rubro de nómina es una fórmula editable — usted define sus propias reglas de cálculo, sin depender de un desarrollador.</p>
+          <h3 id="r4">Tus datos, en buenas manos</h3>
+          <p>Tratamos la información de tu personal con la responsabilidad que exige la Ley de Protección de Datos.</p>
         </article>
         <div class="side-r st-ghost" aria-hidden="true"><span class="g">04</span></div>
-      </section>
-
-      <section class="stop reason" aria-labelledby="r5">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="15" height="11" rx="1.5"/><rect x="11" y="12" width="15" height="11" rx="1.5"/></svg></div>
-        <div class="side-l st-ghost" aria-hidden="true"><span class="g">05</span></div>
-        <article class="st-card cr">
-          <div class="kicker">Razón 05</div>
-          <h3 id="r5">Soporte inmediato</h3>
-          <p>Vía TeamViewer o AnyDesk: cuando algo no cuadra en un rol de pagos, nos conectamos a su pantalla y lo resolvemos en vivo.</p>
-        </article>
-      </section>
-
-      <section class="stop reason" aria-labelledby="r6">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 11a8.5 8.5 0 1 0 1.5 6.5"/><path d="M24.5 6v6h-6"/></svg></div>
-        <article class="st-card cl">
-          <div class="kicker">Razón 06</div>
-          <h3 id="r6">Actualizaciones continuas</h3>
-          <p>El sistema evoluciona junto con la normativa del IESS, el SRI y el Ministerio de Trabajo.</p>
-        </article>
-        <div class="side-r st-ghost" aria-hidden="true"><span class="g">06</span></div>
-      </section>
-
-      <section class="stop reason" aria-labelledby="r7">
-        <div class="node" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11.5" cy="11" r="4"/><circle cx="20" cy="13" r="3.2"/><path d="M4.5 25c0-4.5 3-7.5 7-7.5s7 3 7 7.5M17 25c0-3.2 1.6-6.4 5-6.4s5.5 3 5.5 6.4"/></svg></div>
-        <div class="side-l st-ghost" aria-hidden="true"><span class="g">07</span></div>
-        <article class="st-card cr">
-          <div class="kicker">Razón 07</div>
-          <h3 id="r7">El mejor capital humano</h3>
-          <p>Detrás de cada implementación hay un equipo que entiende tanto de nómina ecuatoriana como de software.</p>
-        </article>
       </section>
 
       <section class="stop end" aria-label="Cierre">
@@ -353,7 +329,6 @@
         <a href="moduloac.html">Acceso</a>
         <a href="modulocv.html">Visitas</a>
         <a href="modulocc.html">Comedor</a>
-        <a href="moduloev.html">Evaluaciones</a>
         <a href="moduloas.html">Autoservicio</a>
         <a href="modulots.html">Trabajo Social</a>
       </div>
