@@ -133,18 +133,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.squarenet.com.ec/lectorZK.html</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.squarenet.com.ec/lectorHandPunch.html</loc>
-    <lastmod>2026-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.squarenet.com.ec/somos.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
