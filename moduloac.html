@@ -37,12 +37,14 @@
 /* Perfiles de acceso */
 .pa3{font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
 .pa3 *{box-sizing:border-box}
-.pa3 .stage{position:relative;width:1040px;height:620px;padding:20px;overflow:hidden;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;
+.pa3 .stage{position:relative;width:1040px;height:580px;padding:20px;overflow:hidden;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;
  background:transparent}
 .pa3 .win{position:relative;width:950px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
 .pa3 table{border-collapse:collapse;table-layout:fixed}
 .pa3 th{height:24px;text-align:left;font-weight:600;padding:0 4px;background:#f6f6f6;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;position:relative}
 .pa3 td{height:22px;padding:0 4px;border-bottom:1px solid #e4e4e4;border-right:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa3 [data-el="t2"] td,.pa3 [data-el="t3"] td{height:30px;font-size:14px}
+.pa3 [data-el="t2"] th,.pa3 [data-el="t3"] th{height:30px;font-size:13px}
 .pa3 tr.sel td{background:#dcebfa}
 .pa3 tr.sel td:nth-child(3){outline:1px solid #3b9be8;outline-offset:-1px}
 .pa3 .sa{display:inline-block;margin-left:6px;border:4px solid transparent;border-bottom:5px solid #8a8a8a;border-top:0}
@@ -241,9 +243,9 @@ const root=document.getElementById('pa4');if(!root)return;
 
 const P=[['0000000042','Administración','Libre'],['0000000037','Bodega Norte','Planta'],['0000000051','Calidad','Libre'],['0000000046','Comedor','Libre'],['0000000033','Dirección','Libre'],['0000000058','Distribución','Por Turno'],['0000000029','Logística','Por Turno'],['0000000011','Mantenimiento','Planta'],['0000000039','Obreros','Planta'],['0000000024','Oficinas','Libre'],['0000000062','Planta Norte','Planta'],['0000000017','Producción','Por Turno'],['0000000005','Todos los perfiles','Libre'],['0000000048','Visitas','Por Turno']];
 root.querySelector('[data-el="b1"]').innerHTML=P.map((r,i)=>`<tr${i==1?' class="sel"':''}><td>${r[0]}</td><td>${r[1]}</td><td data-el="p${i}">${r[2]}</td></tr>`).join('');
-const E='AGROINDUSTRIAS VALLE S.A.';
-const NA=[['SERVICIOS ALBA CIA. LTDA.','41','SERVICIOS ALBA'],[E,'3305','Corte y Empaque'],[E,'3305B','Envasado Línea 2'],['PASANTES VALLE S.A.','00000001','PASANTE'],['TRANSPORTES LUNA CIA. LTDA.','17','TRANSPORTES LUNA'],['TRANSPORTES LUNA CIA. LTDA.','58','TRANSPORTES LUNA'],['TRANSPORTES LUNA CIA. LTDA.','5801','TRANSPORTES LUNA']];
-const AS=[[E,'7710A01','Almacén Norte'],[E,'7710A02','Despachos Norte'],[E,'7710B10','Bodega de Insumos'],[E,'7742','Control de Inventario'],[E,'77ZC301','Recepción de Mercadería'],[E,'77ZL120','Transporte Interno'],[E,'77ZL124','Ventas Mostrador']];
+const E='Empresa Demo S.A.';
+const NA=[[E,'101','Administración'],[E,'102','Ventas'],[E,'103','Recursos Humanos'],[E,'104','Mantenimiento']];
+const AS=[[E,'201','Bodega Norte'],[E,'202','Logística'],[E,'203','Inventario'],[E,'204','Despachos']];
 const tb=(a,sel)=>a.map((r,i)=>`<tr${i==0&&sel?' class="sel"':''}><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
 root.querySelector('[data-el="b2"]').innerHTML=tb(NA,1);root.querySelector('[data-el="b3"]').innerHTML=tb(AS,1);
 root.querySelector('[data-el="t3"] tr.sel td:nth-child(1)').style.outline='1px solid #3b9be8';root.querySelector('[data-el="t3"] tr.sel td:nth-child(1)').style.outlineOffset='-1px';
