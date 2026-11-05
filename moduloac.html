@@ -43,6 +43,8 @@
 .pa3 table{border-collapse:collapse;table-layout:fixed}
 .pa3 th{height:24px;text-align:left;font-weight:600;padding:0 4px;background:#f6f6f6;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;position:relative}
 .pa3 td{height:22px;padding:0 4px;border-bottom:1px solid #e4e4e4;border-right:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa3 [data-el="t1"] td{height:30px;font-size:14px}
+.pa3 [data-el="t1"] th{height:30px;font-size:13px}
 .pa3 [data-el="t2"] td,.pa3 [data-el="t3"] td{height:30px;font-size:14px}
 .pa3 [data-el="t2"] th,.pa3 [data-el="t3"] th{height:30px;font-size:13px}
 .pa3 tr.sel td{background:#dcebfa}
@@ -59,9 +61,10 @@
 .pa3 .mid i{width:24px;height:22px;border:1px solid #adadad;background:linear-gradient(#fdfdfd,#e4e4e4);border-radius:3px;font:700 11px/20px "Segoe UI",sans-serif;text-align:center;font-style:normal;color:#222}
 .pa3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.97);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
 .pa3 .fm{left:510px;top:4px;width:510px;padding:14px 16px 14px 12px}
-.pa3 .fm small{display:block;margin:0 0 8px 6px;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;text-transform:uppercase}
-.pa3 .code{font:10px/16px Consolas,"Cascadia Mono","DejaVu Sans Mono",ui-monospace,Menlo,monospace}
-.pa3 .ln{display:flex;height:16px;white-space:pre}
+.pa3 .fm small{display:block;margin:0 0 8px 6px;font-size:12px;letter-spacing:.06em;font-weight:700;color:#8a93a6;text-transform:uppercase}
+.pa3 .code{font:12px/18px Consolas,"Cascadia Mono","DejaVu Sans Mono",ui-monospace,Menlo,monospace}
+.pa3 .ln{display:flex;min-height:18px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pa3 .ln>span:last-child{min-width:0;flex:1}
 .pa3 .no{width:24px;flex:none;text-align:right;color:#8aa2bd;font-size:10px;padding-right:10px;border-right:1px solid #e6e9ef;margin-right:8px}
 .pa3 .kw{color:#1515e0;font-weight:700}
 .pa3 .cm{color:#14a014}
@@ -241,7 +244,7 @@
 (function(){
 const root=document.getElementById('pa4');if(!root)return;
 
-const P=[['0000000042','Administración','Libre'],['0000000037','Bodega Norte','Planta'],['0000000051','Calidad','Libre'],['0000000046','Comedor','Libre'],['0000000033','Dirección','Libre'],['0000000058','Distribución','Por Turno'],['0000000029','Logística','Por Turno'],['0000000011','Mantenimiento','Planta'],['0000000039','Obreros','Planta'],['0000000024','Oficinas','Libre'],['0000000062','Planta Norte','Planta'],['0000000017','Producción','Por Turno'],['0000000005','Todos los perfiles','Libre'],['0000000048','Visitas','Por Turno']];
+const P=[['0000000042','Administración','Libre'],['0000000037','Bodega Norte','Planta'],['0000000029','Logística','Por Turno'],['0000000011','Mantenimiento','Planta'],['0000000039','Obreros','Planta'],['0000000048','Visitas','Por Turno']];
 root.querySelector('[data-el="b1"]').innerHTML=P.map((r,i)=>`<tr${i==1?' class="sel"':''}><td>${r[0]}</td><td>${r[1]}</td><td data-el="p${i}">${r[2]}</td></tr>`).join('');
 const E='Empresa Demo S.A.';
 const NA=[[E,'101','Administración'],[E,'102','Ventas'],[E,'103','Recursos Humanos'],[E,'104','Mantenimiento']];
@@ -257,7 +260,10 @@ const esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;');
 function hl(src){const ci=src.indexOf('//');const a=ci>=0?src.slice(0,ci):src,c=ci>=0?src.slice(ci):'';
  return esc(a).replace(/"[^"]*"/g,m=>`<span class="st">${m}</span>`).replace(/\b(if|return)\b/g,'<span class="kw">$1</span>')+(c?`<span class="cm">${esc(c)}</span>`:'')}
 root.querySelector('[data-el="code"]').innerHTML=L.map((l,i)=>`<div class="ln"><span class="no">${i+1}</span><span>${hl(l)}</span></div>`).join('');
-const S=root.querySelector('[data-el="s"]'),R=e=>{const r=e.getBoundingClientRect(),o=S.getBoundingClientRect();return{l:r.left-o.left,r:r.right-o.left,t:r.top-o.top,b:r.bottom-o.top,w:r.width,h:r.height}};
+const S=root.querySelector('[data-el="s"]'),win=root.querySelector('[data-el="w"]'),topTable=root.querySelector('[data-el="t1"]'),formula=root.querySelector('[data-el="fm"]'),tabs=root.querySelector('.tabs');
+tabs.style.marginTop=Math.max(4,formula.offsetTop+formula.offsetHeight-win.offsetTop-topTable.offsetHeight+10)+'px';
+S.style.height=(Math.max(win.offsetTop+win.offsetHeight,formula.offsetTop+formula.offsetHeight)+20)+'px';
+const R=e=>{const r=e.getBoundingClientRect(),o=S.getBoundingClientRect();return{l:r.left-o.left,r:r.right-o.left,t:r.top-o.top,b:r.bottom-o.top,w:r.width,h:r.height}};
 function te(el){const t=document.createRange();t.selectNodeContents(el);return t.getBoundingClientRect().right-S.getBoundingClientRect().left}
 const c=R(root.querySelector('[data-el="p1"]')),m=R(root.querySelector('[data-el="fm"]')),x=te(root.querySelector('[data-el="p1"]'))+8,y=c.t+c.h/2;
 const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
