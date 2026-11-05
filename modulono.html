@@ -50,6 +50,11 @@
 .cu2 .ft .bar small{color:#7a746d;font-size:12px}
 .cu2 .cur{position:absolute;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
 /* Utilidades: misma presentación y escala adaptable que cuotas */
+@media (min-width:861px){
+  #utilidades{grid-template-columns:minmax(240px,3fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+  #utilidades .rp-stage{padding-inline:0}
+}
+#ut2 .win{height:auto}
 .ut2{width:760px}
 .ut2 .win{height:708px;display:flex;flex-direction:column}
 .ut2 .tabs{display:flex;gap:2px;padding:6px 6px 0;border-bottom:1px solid #d2d2d2;background:#fff}
@@ -249,6 +254,40 @@
 .as3 .g.lst tr.pk td{background:#2f86e0;color:#fff}
 .as3 .g.lst tr.pk td:nth-child(2){box-shadow:inset 0 0 0 1.500px #d23b3b}
 .as3 .cur{z-index:7}
+/* archivo-banco: pantalla del cliente, acotada a .ab3 */
+.ab3 *{box-sizing:border-box}
+.ab3{margin:0;font:12.5px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.ab3 .stage{position:relative;width:1120px;height:352px;padding:0;display:block;overflow:visible}
+.ab3 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
+.ab3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
+.ab3 .g td,.ab3 .g th{height:26px;padding:0 9px;border-bottom:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.ab3 .g th{height:30px;font-weight:600;background:#f6f5f2;border-bottom:1px solid #dcd8d1}
+.ab3 .g tr.sel td{background:#e3eefb}
+.ab3 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
+.ab3 .sec{border-bottom:1px solid #dcd8d1}
+.ab3 #ab3t td{height:25px}
+.ab3 .cur{position:absolute;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+.ab3 .g{font-size:12px}
+.ab3 .g td,.ab3 .g th{height:22px;padding:0 6px;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb}
+.ab3 .g td+td,.ab3 .g th+th{border-left:0}
+.ab3 .g th{height:24px;font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2}
+.ab3 .g tr:nth-child(odd) td{background:#fafafa}
+.ab3 .g tr.sel td,.ab3 .g tr.p.sel td{background:#e1ecfa}
+.ab3 .g tr.sel td:nth-child(2){box-shadow:inset 0 0 0 1px #6f96c8}
+.ab3 .sort{font-size:8px;color:#888;margin-left:4px;vertical-align:1px}
+.ab3 .ttl{display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-bottom:1px solid #d2d2d2;background:#fff;font-weight:600;font-size:13px}
+.ab3 .ttl .bk{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:5px;background:#1e4f8c;color:#fff}
+.ab3 .ttl .bk svg{width:14px;height:14px}
+.ab3 .ft{display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 0 0 10px;border-top:1px solid #d2d2d2;background:#f4f3f0;font-weight:700;color:#24538c}
+.ab3 .ft span:last-child{height:100%;display:flex;align-items:center;padding:0 8px;background:#dedbd5;min-width:96px;justify-content:flex-end;font-variant-numeric:tabular-nums}
+.ab3 .stage .win{position:absolute;left:24px;top:36px;width:716px;display:block;z-index:2}
+.ab3 .cur{z-index:4}
+.ab3 .bank{position:absolute;left:864px;top:116px;width:221px;height:223px;z-index:3;filter:drop-shadow(0 28px 30px rgba(20,100,50,.28))}
+.ab3 .lk2{position:absolute;left:0;top:0;width:1120px;height:420px;z-index:6;pointer-events:none;overflow:visible}
+.ab3 .fc{position:absolute;left:754px;top:112px;width:58px;height:72px;z-index:5;border-radius:10px;background:#fff;border:1px solid #d3e8da;box-shadow:0 18px 30px -10px rgba(20,100,50,.4),0 4px 10px rgba(20,100,50,.12);overflow:hidden}
+.ab3 .fc::before{content:"";position:absolute;right:0;top:0;border:9px solid transparent;border-top-color:#d5ecdc;border-right-color:#d5ecdc;border-bottom-color:#fff;border-left-color:#fff;box-shadow:-1px 1px 0 #bfdccb}
+.ab3 .fc i{position:absolute;left:9px;right:12px;height:3px;border-radius:2px;background:#cfe3d6}
+.ab3 .fc b{position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(#3fae5f,#1b6b3a);color:#fff;font:800 11px/22px "Segoe UI",Arial,sans-serif;letter-spacing:.08em;text-align:center}
 </style>
 </head>
 <body>
@@ -371,8 +410,6 @@
             <div class="win">
               <div class="xsec"><table class="g"><colgroup><col style="width:62px"><col style="width:52px"><col style="width:100px"><col style="width:96px"><col style="width:96px"><col style="width:62px"><col></colgroup>
                 <tr><th>Código</th><th>Año<span class="sort">▲</span></th><th class="w">Monto<br>Empleados</th><th class="w">Monto<br>Cargas</th><th class="w">Salario<br>Digno Anual</th><th>Cerrado</th><th>Observación</th></tr>
-                <tr><td>UT-21</td><td class="n">2021</td><td class="n">9,600.00</td><td class="n">4,800.00</td><td class="n">5,307.60</td><td class="c">✓</td><td></td></tr>
-                <tr><td>UT-22</td><td class="n">2022</td><td class="n">10,400.00</td><td class="n">5,200.00</td><td class="n">5,307.60</td><td class="c">✓</td><td></td></tr>
                 <tr><td>UT-23</td><td class="n">2023</td><td class="n">11,200.00</td><td class="n">5,600.00</td><td class="n">5,817.00</td><td class="c">✓</td><td></td></tr>
                 <tr><td>UT-24</td><td class="n">2024</td><td class="n">11,800.00</td><td class="n">5,900.00</td><td class="n">5,986.80</td><td class="c">✓</td><td>sd = 498,90 USD</td></tr>
                 <tr class="sel"><td>UT-25</td><td class="n" data-el="pick">2025</td><td class="n">12,000.00</td><td class="n">6,000.00</td><td class="n">6,083.88</td><td class="c"></td><td>sd = 506,99 USD</td></tr></table></div>
@@ -388,15 +425,43 @@
         <article class="mod-fn" id="archivo-banco">
           <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-archivo-banco.png" alt="" width="16" height="16">Archivo banco</h3><p>Cerraste el rol y el pago ya está listo: SquareNet genera el archivo en el formato de tu banco con la cuenta y el valor de cada colaborador. Lo subes a la banca en línea y listo, sin digitar cuentas ni armar Excel a mano. Sirve para el rol, los décimos y las utilidades.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="archivo-banco">
-            <div class="cu2 bk2" id="bk2" role="img" aria-label="Ejemplo de archivo bancario de nómina con cuentas y valores para acreditar">
-              <div class="win">
-                <div class="ttl"><span class="bank-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M1.5 5.2 7 2l5.5 3.2Z"/><path d="M3 6.5v4.5M5.6 6.5v4.5M8.4 6.5v4.5M11 6.5v4.5M1.5 12.2h11"/></svg></span>Rol de Pago, BANCO DEMO, 2026-10 - Octubre</div>
-                <div class="xsec detail"><table class="g" data-el="rows"><colgroup><col><col style="width:80px"><col style="width:76px"><col style="width:96px"><col style="width:152px"><col style="width:80px"></colgroup>
-                  <tr><th>Apellidos y Nombres<span class="sort">▲</span></th><th>Tipo de Rol</th><th>Cuenta</th><th>N.º Cuenta</th><th>Concepto</th><th>Valor</th></tr></table></div>
-                <div class="bank-total"><span data-el="count"></span><span data-el="total"></span></div>
-              </div>
-              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
-            </div>
+          <div class="ab3" id="ab3" style="width:1120px">
+<div class="stage" id="ab3s">
+ <div class="win">
+  <div class="ttl"><span class="bk"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"><path d="M1.5 5.2 7 2l5.5 3.2Z"/><path d="M3 6.5v4.5M5.6 6.5v4.5M8.4 6.5v4.5M11 6.5v4.5M1.5 12.2h11"/></svg></span>Rol de Pago, BANCO DEMO, 2026-10 - Octubre</div>
+  <div class="sec"><table class="g" id="ab3t"><colgroup><col><col style="width:80px"><col style="width:76px"><col style="width:96px"><col style="width:152px"><col style="width:80px"></colgroup>
+   <tr><th>Apellidos y Nombres<span class="sort">▲</span></th><th>Tipo de Rol</th><th>Cuenta</th><th>N.º Cuenta</th><th>Concepto</th><th>Valor</th></tr></table></div>
+  <div class="ft"><span id="ab3tc"></span><span id="ab3tv"></span></div>
+ </div>
+<svg class="bank" viewBox="0 0 260 262" width="221" height="223">
+ <defs>
+  <radialGradient id="ab3glow" cx=".5" cy="1" r="1"><stop offset="0" stop-color="#b8f0c8"/><stop offset=".55" stop-color="#2fa84f"/><stop offset="1" stop-color="#0f4a27"/></radialGradient>
+ </defs>
+ <ellipse cx="130" cy="232" rx="118" ry="7" fill="#0f3a1f" opacity=".14"/>
+ <path d="M130 8L252 66H8Z" fill="#e4f2e9" stroke="#b7d6c1" stroke-width="2" stroke-linejoin="round"/>
+ <circle cx="130" cy="44" r="15" fill="#1b6b3a"/><text x="130" y="50.500" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-weight="800" font-size="19" fill="#fff">$</text>
+ <rect x="8" y="66" width="244" height="10" rx="3" fill="#1b6b3a"/>
+ <rect x="26" y="82" width="24" height="118" rx="3" fill="#d5e9dc"/><rect x="66" y="82" width="24" height="118" rx="3" fill="#d5e9dc"/>
+ <rect x="170" y="82" width="24" height="118" rx="3" fill="#d5e9dc"/><rect x="210" y="82" width="24" height="118" rx="3" fill="#d5e9dc"/>
+ <path d="M104 200V140a26 26 0 0 1 52 0V200Z" fill="#0f4a27"/>
+ <path d="M110 200V142a20 20 0 0 1 40 0V200Z" fill="url(#ab3glow)"/>
+ <rect x="8" y="200" width="244" height="14" rx="4" fill="#bcd8c6"/>
+</svg>
+<svg class="lk2" viewBox="0 0 1120 420">
+ <defs>
+  <linearGradient id="ab3ag" gradientUnits="userSpaceOnUse" x1="810" y1="0" x2="975" y2="0"><stop offset="0" stop-color="#6fd08c"/><stop offset="1" stop-color="#1b6b3a"/></linearGradient>
+  <filter id="ab3sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#1b6b3a" flood-opacity=".35"/></filter>
+ </defs>
+ <g filter="url(#ab3sh)">
+  <path d="M812 150C890 142 862 262 940 262" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round"/>
+  <path d="M812 150C890 142 862 262 940 262" fill="none" stroke="url(#ab3ag)" stroke-width="13" stroke-linecap="round"/>
+  <g><path d="M936 246L970 262L936 278Z" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"/><path d="M936 246L970 262L936 278Z" fill="#1b6b3a" stroke="#1b6b3a" stroke-width="3" stroke-linejoin="round"/></g>
+ </g>
+</svg>
+<div class="fc"><i style="top:18px"></i><i style="top:27px"></i><i style="top:36px"></i><i style="top:45px;right:24px"></i><b>CSV</b></div>
+ <svg class="cur" id="ab3cur" viewBox="0 0 14 20"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+</div>
+          </div>
           </div>
         </article>
         <article class="mod-fn" id="asientos-contables">
@@ -668,7 +733,7 @@ root.querySelector('[data-el="t"]').insertAdjacentHTML('beforeend',D.map(d=>`<tr
   const LK='<svg class="lk" viewBox="0 0 13 15"><rect x="1.5" y="6" width="10" height="8" rx="2" fill="#f2b632" stroke="#b07d12"/><path d="M4 6V4.3a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="#b07d12" stroke-width="1.4"/></svg>';
   const PC='<svg class="pc" viewBox="0 0 12 13"><circle cx="6" cy="3" r="2.2" fill="#e08a2e"/><path d="M2.5 12.5V7.5a3.5 3.5 0 0 1 7 0v5Z" fill="#e08a2e"/></svg>';
   const CC='<svg class="cc" viewBox="0 0 12 13"><rect x="1" y="1" width="10" height="11" rx="1.5" fill="#fff" stroke="#3561b8"/><path d="M6 4.5v4.8" stroke="#3561b8" stroke-width="1.4"/><circle cx="6" cy="3" r=".8" fill="#3561b8"/></svg>';
-  const E=[['Andrade Pazmiño Lucía Fernanda',360,3],['Benítez Zurita Marco Antonio',360,2],['Cevallos Loor Daniela',210,0],['Herrera Mejía Joaquín',360,1],['Mora Villacís Esteban',360,4],['Ortega Bravo Sebastián',300,0],['Paredes Lozano Andrea Carolina',360,1],['Quiroga Ibarra Valeria',60,0],['Ruiz Carrión Mateo',360,2],['Salgado Ríos Martín Andrés',360,2],['Torres Guamán Paola',120,1],['Vásquez Ortega Diego',330,0,1],['Zambrano Lucero Camila',360,1],['Jaramillo Paz Renata',180,2],['Cordero Sáenz Valentina',360,0],['Rendón Haro Gabriela',240,1]];
+  const E=[['Andrade Pazmiño Lucía Fernanda',360,3],['Benítez Zurita Marco Antonio',360,2],['Cevallos Loor Daniela',210,0],['Herrera Mejía Joaquín',360,1],['Mora Villacís Esteban',360,4],['Vásquez Ortega Diego',330,0,1]];
   const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   const days=E.reduce((n,e)=>n+e[1],0), loads=E.reduce((n,e)=>n+e[1]*e[2],0);
   const vt=E.map(e=>Math.round(12000*e[1]/days*100)/100), vc=E.map(e=>Math.round(6000*e[1]*e[2]/loads*100)/100);
@@ -809,6 +874,27 @@ c.style.left=(r.left-s.left+176)+'px'; c.style.top=(r.top-s.top+14)+'px';
 
   var root=document.getElementById('as3'),stage=root.firstElementChild,media=root.parentElement;
   function fit(){var k=Math.min(1,(media.clientWidth-40)/980);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*980)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+  </script>
+  <script>
+(function(){
+const f=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const E=[['Andrade Pazmiño Lucía Fernanda','General','Ahorros','2205418836',1214.37],['Benítez Zurita Marco Antonio','General','Ahorros','2204873120',1013.20],
+ ['Cevallos Loor Daniela','General','Corriente','3100562418',612.48],['Cordero Sáenz Valentina','Pasantes','Ahorros','2209036671',235.00],
+ ['Herrera Mejía Joaquín','General','Ahorros','2201749935',1342.10],['Jaramillo Paz Renata','General','Ahorros','2206381204',884.65],
+ ['Mora Villacís Esteban','General','Corriente','3102847719',1626.92]];
+E.sort((a,b)=>a[0].localeCompare(b[0],'es'));
+let h='',T=0;
+E.forEach((e,i)=>{T+=e[4]; const pas=e[1]==='Pasantes';
+ h+=`<tr class="${pas?'pas':''}${e[0].startsWith('Benítez')?' sel':''}"><td>${e[0]}</td><td>${e[1]}</td><td>${e[2]}</td><td>${e[3]}</td><td>${pas?'Pasantía OCT 2026':'Rol de Pago OCT 2026'}</td><td class="n">${f(e[4])}</td></tr>`;});
+document.getElementById('ab3t').insertAdjacentHTML('beforeend',h);
+document.getElementById('ab3tc').textContent=`Total (${E.length})`; document.getElementById('ab3tv').textContent=f(T);
+const r=document.querySelector('#ab3t tr.sel td').getBoundingClientRect(), s=document.getElementById('ab3s').getBoundingClientRect(), c=document.getElementById('ab3cur');
+c.style.left=(r.left-s.left+150)+'px'; c.style.top=(r.top-s.top+12)+'px';
+
+  var root=document.getElementById('ab3'),stage=root.firstElementChild,media=root.parentElement;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/1120);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1120)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
