@@ -60,7 +60,16 @@
 .pe3 .ct i{width:16px;height:16px;border-radius:4px}
 .pe3 .im{display:flex;gap:16px;padding:14px 16px 16px}
 .pe3 .im label{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;text-transform:uppercase;margin-bottom:6px}
-.pe3 .ph{width:104px;height:128px;border-radius:8px;overflow:hidden;border:1px solid #c5d0e0;background:linear-gradient(#d4deec,#aebdd2)}
+.pe3 .ph{position:relative;width:104px;height:128px;border-radius:8px;overflow:hidden;border:1px solid #c5d0e0;background:linear-gradient(#eef2f7,#dce4ef)}
+.pe3 .stick-head{position:absolute;left:38px;top:14px;width:27px;height:27px;border:3px solid #647a98;border-radius:50%}
+.pe3 .stick-body,.pe3 .stick-arm,.pe3 .stick-leg{position:absolute;background:#647a98;border-radius:4px;transform-origin:top center}
+.pe3 .stick-body{left:49px;top:40px;width:4px;height:38px}
+.pe3 .stick-arm{top:47px;width:4px;height:27px}
+.pe3 .stick-arm.left{left:49px;transform:rotate(48deg)}
+.pe3 .stick-arm.right{left:49px;transform:rotate(-48deg)}
+.pe3 .stick-leg{left:49px;top:76px;width:4px;height:33px}
+.pe3 .stick-leg.left{transform:rotate(30deg)}
+.pe3 .stick-leg.right{transform:rotate(-30deg)}
 .pe3 .fr{width:178px;height:84px;border:1px solid #dfe3ea;border-radius:8px;background:#fff}
 /* contratos: pantalla del cliente, acotada a .co3 (se dibuja a 725 px y se escala a la columna) */
 .co3 *{box-sizing:border-box}
@@ -200,7 +209,7 @@
 </div>
 <div class="card" id="pe3c4" style="left:46px;top:12px;width:352px">
  <div class="ct"><i style="background:#8a63c9"></i>Imágenes</div>
- <div class="im"><div><label>Foto</label><div class="ph"><svg width="104" height="128" viewBox="0 0 104 128"><circle cx="52" cy="50" r="23" fill="#8392ab"/><path d="M6 128c2-36 20-48 46-48s44 12 46 48z" fill="#8392ab"/></svg></div></div>
+ <div class="im"><div><label>Foto</label><div class="ph" role="img" aria-label="Ilustración de una persona"><span class="stick-head"></span><span class="stick-body"></span><span class="stick-arm left"></span><span class="stick-arm right"></span><span class="stick-leg left"></span><span class="stick-leg right"></span></div></div>
  <div><label>Firma</label><div class="fr"><svg width="176" height="82" viewBox="0 0 176 82"><path d="M12 56C20 14 34 12 30 48c-2 14 8 10 16-10 4-10 10-10 8 2-2 12 6 12 14-4 4-8 10-6 8 4s6 10 14-2 8-8 6 2 6 8 14-6c8-12 14-12 12-2" fill="none" stroke="#1f2f6b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 66C50 58 110 62 160 54" fill="none" stroke="#1f2f6b" stroke-width="1.4" stroke-linecap="round"/></svg></div></div></div>
 </div>
 <div class="card" id="pe3c1" style="left:0;top:250px;width:400px">
