@@ -63,8 +63,13 @@
 .ut2 .gt2{display:flex;border-top:1px solid #d2d2d2;background:#f4f3f0}
 .ut2 .gt2 span{display:flex;align-items:center;justify-content:flex-end;height:30px;padding:0 6px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* Archivo bancario: pantalla fija adaptable, como cuotas */
+@media (min-width:861px){
+  #archivo-banco{grid-template-columns:minmax(0,7fr) minmax(240px,3fr);gap:clamp(20px,3vw,40px)}
+  #archivo-banco .rp-stage{padding-inline:0}
+}
 .bk2{width:760px}
 .bk2 .win{height:708px;display:flex;flex-direction:column}
+#bk2 .win{height:auto}
 .bk2 .ttl{display:flex;align-items:center;gap:10px;height:40px;flex:none;padding:0 12px;border-bottom:1px solid #d2d2d2;background:#fff;font-weight:600;font-size:13px}
 .bk2 .bank-icon{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:5px;background:#1e4f8c;color:#fff}
 .bk2 .bank-icon svg{width:14px;height:14px}
@@ -114,65 +119,43 @@
 .rp3 .eg{background:#fde3e3;color:#b42318}.rp3 .in{background:#dff5dc;color:#1b6b45}.rp3 .inf{background:#eceae6;color:#6d6760}
 .rp3 .g tr.pick td{background:#fff3c4!important}.rp3 .g tr.pick td:first-child{box-shadow:inset 3px 0 0 #e0a800}
 .rp3 .g tr.new td{background:#e6f5ea!important;font-weight:600}.rp3 .g tr.new td:first-child{box-shadow:inset 3px 0 0 #2fa462}
-/* Décimos: HTML del cliente, acotado a .dc3 */
+/* Décimos: HTML del cliente, acotado a .dc3 (se dibuja a 820 px y se escala a la columna) */
 .dc3 *{box-sizing:border-box}
 .dc3{margin:0;font:12.5px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
-.dc3 .stage{position:relative;width:980px;padding:44px 32px 32px}
-.dc3 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
-.dc3 .top{height:34px;display:flex;align-items:center;gap:12px;padding:0 12px;background:linear-gradient(#3d78b8,#24538c);color:#fff}
-.dc3 .sq{background:#fff;border-radius:3px;padding:3px 7px;font:800 15px/1 Arial;color:#1b2f5c}
-.dc3 .sq b{color:#2f8fe0}
-.dc3 .co{font-weight:600;font-size:13.5px}
-.dc3 .adm{margin-left:auto;background:#fff;color:#111;border-radius:4px;padding:4px 10px;font-size:12px}
-.dc3 .chk{display:flex;align-items:center;gap:9px;height:40px;padding:0 14px;border-bottom:1px solid #eee}
-.dc3 .cb{width:15px;height:15px;border-radius:3px;background:#2f6fd6;position:relative}
-.dc3 .cb::after{content:"";position:absolute;left:4.5px;top:1.5px;width:3.5px;height:7.5px;border:solid #fff;border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
-.dc3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
-.dc3 .g td,.dc3 .g th{height:26px;padding:0 9px;border-bottom:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
-.dc3 .g th{height:30px;font-weight:600;background:#f6f5f2;border-bottom:1px solid #dcd8d1}
-.dc3 .g td+td,.dc3 .g th+th{border-left:1px solid #f0eeea}
-.dc3 .g tr.sel td{background:#e3eefb}
-.dc3 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
-.dc3 .g td.c{text-align:center;text-overflow:clip;padding:0 2px}
-.dc3 .ok{color:#2f9a4a;font-weight:700}
-.dc3 .pend{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:#fff1d6;color:#a15c00}
-.dc3 .g tr.p td{background:#fffaf0}
-.dc3 .g tr.p.sel td{background:#e3eefb}
-.dc3 .lk{width:13px;height:15px;vertical-align:-3px}
+.dc3 .stage{position:relative;width:820px;height:620px;padding:150px 0 0 24px;overflow:visible}
+.dc3 .win{width:700px;height:442px;background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
+.dc3 .strip{height:44px;display:flex;align-items:center;padding:0 16px;font-weight:600;font-size:13.5px;color:#24538c;background:#f7f8fb;border-bottom:1px solid #dcd8d1}
 .dc3 .sec{border-bottom:1px solid #dcd8d1}
-.dc3 .sec.top-t{height:118px}
-.dc3 .ft{display:flex;align-items:stretch;border-top:1px solid #dcd8d1}
-.dc3 .ft .lab{width:150px;padding:8px 12px;font-weight:600;color:#24538c;line-height:1.75}
-.dc3 .ft .val{width:110px;padding:8px 12px;background:#e9e7e3;text-align:right;font-weight:700;color:#24538c;line-height:1.75;font-variant-numeric:tabular-nums}
-.dc3 .ft .bar{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 20px}
-.dc3 .ft .bar .b{height:10px;border-radius:5px;background:#f1d9b0;overflow:hidden}
-.dc3 .ft .bar .b i{display:block;height:100%;width:87.5%;background:#2f9a4a;border-radius:5px}
-.dc3 .ft .bar small{color:#7a746d}
-.dc3 .cur{position:absolute;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
-.dc3 .chip{position:absolute;right:50px;top:2px;display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:24px;background:#1d1b1a;color:#fff;font-size:13.5px;font-weight:600;box-shadow:0 10px 22px -8px rgba(0,0,0,.45)}
-.dc3 .chip svg{width:15px;height:15px}
-.dc3 .g{font-size:12px}
-.dc3 .g td,.dc3 .g th{height:22px;padding:0 6px;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb}
-.dc3 .g td+td,.dc3 .g th+th{border-left:0}
+.dc3 .g{border-collapse:collapse;width:100%;table-layout:fixed;margin:0;font-size:12px}
+.dc3 .g td,.dc3 .g th{height:22px;padding:0 6px;border:0;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;color:#1d1b1a}
 .dc3 .g th{height:24px;font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2}
 .dc3 .g tr:nth-child(odd) td{background:#fafafa}
-.dc3 .g tr.p td{background:#fff}
-.dc3 .g tr.sel td,.dc3 .g tr.p.sel td{background:#e1ecfa}
+.dc3 .g tr.sel td{background:#e1ecfa}
 .dc3 .g tr.sel td:nth-child(2){box-shadow:inset 0 0 0 1px #6f96c8}
-.dc3 .g td.c{color:#222}
+.dc3 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
+.dc3 .g td.c{text-align:center;text-overflow:clip;padding:0 2px;color:#222}
 .dc3 .sort{font-size:8px;color:#888;margin-left:4px;vertical-align:1px}
-.dc3 .lk{width:12px;height:14px}
+.dc3 .lk{width:12px;height:14px;vertical-align:-3px}
 .dc3 .pc,.dc3 .cc{width:12px;height:13px;vertical-align:-2px}
-.dc3 .tp{display:block;margin:0 -6px;padding:0 6px;height:22px;line-height:22px}
+.dc3 .tp{display:block;margin:0 -6px;padding:0 6px;height:25px;line-height:25px}
 .dc3 .ac{background:#fde3e3;color:#b42318}
 .dc3 .me{background:#dff5dc;color:#1b6b45}
 .dc3 .g tr.gt td{background:#ececec!important;font-weight:700;height:26px}
 .dc3 .g tr.gt td.n{color:#24538c}
 .dc3 .gt2{display:flex;border-top:1px solid #d2d2d2;background:#f4f3f0}
 .dc3 .gt2 span{display:flex;align-items:center;justify-content:flex-end;height:30px;padding:0 6px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums}
-.dc3 .top-t{height:auto}
 .dc3 #dc3d th{height:38px;vertical-align:middle;line-height:1.15}
 .dc3 #dc3d th.w{white-space:normal}
+.dc3 #dc3d td{height:25px}
+.dc3 .card{display:block;padding:0;position:absolute;left:292px;top:14px;width:518px;z-index:6;background:#fff;border:1px solid #e3e8f2;border-radius:18px;overflow:hidden;box-shadow:0 40px 70px -18px rgba(30,70,130,.34),0 10px 24px -6px rgba(30,70,130,.14)}
+.dc3 .g.big{font-size:14px}
+.dc3 .g.big th{height:40px;padding:0 12px;background:linear-gradient(#fff,#f1f2f5)}
+.dc3 .g.big td{height:42px;padding:0 12px}
+.dc3 .g.big tr:nth-child(odd) td{background:#fff}
+.dc3 .g.big tr:nth-child(even) td{background:#fafafa}
+.dc3 .g.big tr.sel td{background:#e1ecfa}
+.dc3 .g.big tr.sel td:nth-child(2){box-shadow:inset 0 0 0 1.5px #4f86c6}
+.dc3 .cur{position:absolute;z-index:10;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
 /* Rol de pagos .rl3 (pantalla del cliente; se dibuja a 840 px y se escala a la columna) */
 .rl3 *{box-sizing:border-box}
 .rl3{margin:0;color:#1d1b1a}
@@ -303,20 +286,20 @@
         <article class="mod-fn" id="decimos">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-decimos.png" alt="" width="16" height="16">Décimos</h3><p>Cálculo de décimos mensuales o acumulados según la preferencia del empleado, con las provisiones de décimo tercero, décimo cuarto y vacaciones.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="decimos">
-          <div class="dc3" id="dc3" style="width:980px">
+          <div class="dc3" id="dc3" style="width:820px" role="img" aria-label="Décimos en SquareNet: décimo cuarto de la sierra con los colaboradores que lo acumulan y los que lo cobran mensual, descuentos, retención judicial y total a recibir">
 <div class="stage" id="dc3s">
  <div class="win">
-  <div class="sec"><table class="g" style="width:500px"><colgroup><col><col style="width:100px"><col style="width:100px"><col style="width:100px"></colgroup>
-   <tr><th>Rubro</th><th>Fecha Rol<span class="sort">▲</span></th><th>Fecha Inicial</th><th>Fecha Final</th></tr>
-   <tr><td>Décimo Tercer Sueldo</td><td>01/12/2024</td><td>01/12/2023</td><td>30/11/2024</td></tr>
-   <tr><td>Décimo Cuarto costa</td><td>01/03/2025</td><td>01/03/2024</td><td>28/02/2025</td></tr>
-   <tr><td>Décimo Cuarto sierra</td><td>01/08/2025</td><td>01/08/2024</td><td>31/07/2025</td></tr>
-   <tr><td>Décimo Tercer Sueldo</td><td>01/12/2025</td><td>01/12/2024</td><td>30/11/2025</td></tr>
-   <tr><td>Décimo Cuarto costa</td><td>01/03/2026</td><td>01/03/2025</td><td>28/02/2026</td></tr>
-   <tr class="sel"><td id="dc3pick">Décimo Cuarto sierra</td><td>01/08/2026</td><td>01/08/2025</td><td>31/07/2026</td></tr></table></div>
-  <div class="sec"><table class="g" id="dc3d"><colgroup><col><col style="width:26px"><col style="width:26px"><col style="width:46px"><col style="width:96px"><col style="width:30px"><col style="width:84px"><col style="width:84px"><col style="width:88px"></colgroup>
+  <div class="strip">Décimos por pagar</div>
+  <div class="sec"><table class="g" id="dc3d"><colgroup><col><col style="width:26px"><col style="width:26px"><col style="width:42px"><col style="width:92px"><col style="width:28px"><col style="width:84px"><col style="width:78px"><col style="width:80px"></colgroup>
    <tr><th>Apellidos y Nombres<span class="sort">▲</span></th><th>P</th><th>C</th><th>Días</th><th>Tipo</th><th>B</th><th>Descuentos</th><th class="w">Retención<br>Judicial</th><th class="w">Total a<br>Recibir</th></tr></table></div>
   <div class="gt2" id="dc3gt"></div>
+ </div>
+ <div class="card">
+  <table class="g big"><colgroup><col><col style="width:114px"><col style="width:114px"><col style="width:114px"></colgroup>
+   <tr><th>Rubro</th><th>Fecha Rol<span class="sort">▲</span></th><th>Fecha Inicial</th><th>Fecha Final</th></tr>
+   <tr><td>Décimo Tercer Sueldo</td><td>01/12/2025</td><td>01/12/2024</td><td>30/11/2025</td></tr>
+   <tr><td>Décimo Cuarto costa</td><td>01/03/2026</td><td>01/03/2025</td><td>28/02/2026</td></tr>
+   <tr class="sel"><td id="dc3pick">Décimo Cuarto sierra</td><td>01/08/2026</td><td>01/08/2025</td><td>31/07/2026</td></tr></table>
  </div>
  <svg class="cur" id="dc3cur" viewBox="0 0 14 20"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
 </div>
@@ -675,10 +658,10 @@ const vals={6:f(T.ds),7:f(T.r),8:f(T.t)};
 let g='';th.forEach((t,i)=>{const w=t.getBoundingClientRect().width; g+=`<span style="width:${w}px;${vals[i]?'':'background:transparent'}">${vals[i]||''}</span>`;});
 document.getElementById('dc3gt').innerHTML=g;
 const p=document.getElementById('dc3pick').getBoundingClientRect(), s=document.getElementById('dc3s').getBoundingClientRect(), c=document.getElementById('dc3cur');
-c.style.left=(p.left-s.left+150)+'px'; c.style.top=(p.top-s.top+10)+'px';
+c.style.left=(p.left-s.left+158)+'px'; c.style.top=(p.top-s.top+22)+'px';
 
   var root=document.getElementById('dc3'),stage=document.getElementById('dc3s'),media=root.parentElement;
-  function fit(){var k=Math.min(1,(media.clientWidth-40)/980);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*980)+'px';}
+  function fit(){var k=Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/820);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*820)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
@@ -686,7 +669,7 @@ c.style.left=(p.left-s.left+150)+'px'; c.style.top=(p.top-s.top+10)+'px';
 (() => {
   const root=document.getElementById('bk2'); if(!root) return;
   const media=root.parentElement, table=root.querySelector('[data-el="rows"]');
-  const E=[['Andrade Pazmiño Lucía Fernanda','General','Ahorros','2205418836',1214.37],['Benítez Zurita Marco Antonio','General','Ahorros','2204873120',1013.20],['Cevallos Loor Daniela','General','Corriente','3100562418',612.48],['Cordero Sáenz Valentina','Pasantes','Ahorros','2209036671',235.00],['Herrera Mejía Joaquín','General','Ahorros','2201749935',1342.10],['Jaramillo Paz Renata','General','Ahorros','2206381204',884.65],['Mora Villacís Esteban','General','Corriente','3102847719',1626.92],['Ortega Bravo Sebastián','General','Ahorros','2207520186',973.40],['Paredes Lozano Andrea Carolina','General','Ahorros','2203364058',452.07],['Quiroga Ibarra Valeria','Pasantes','Ahorros','2208114392',235.00],['Rendón Haro Gabriela','General','Ahorros','2202995047',1108.33],['Ruiz Carrión Mateo','General','Corriente','3104416620',789.56],['Salgado Ríos Martín Andrés','General','Ahorros','2200637281',2486.79],['Torres Guamán Paola','General','Ahorros','2205902714',521.18],['Vásquez Ortega Diego','General','Ahorros','2209478563',680.94],['Zambrano Lucero Camila','General','Ahorros','2201260839',1167.25],['Aguilar Mora Renata','General','Ahorros','2204410937',845.30],['Castañeda Lugo Bruno','General','Corriente','3101928364',927.61],['Echeverría Paz Tomás','General','Ahorros','2207731520',1498.02],['Peralta Ríos Joaquín','Pasantes','Ahorros','2206052197',235.00],['Villacrés Soto Inés','General','Ahorros','2208803741',768.44],['Lara Espinoza Gabriel','General','Ahorros','2203915628',1052.86],['Núñez Vega Sofía','General','Corriente','3105270413',938.15]];
+  const E=[['Andrade Pazmiño Lucía Fernanda','General','Ahorros','2205418836',1214.37],['Benítez Zurita Marco Antonio','General','Ahorros','2204873120',1013.20],['Cevallos Loor Daniela','General','Corriente','3100562418',612.48],['Cordero Sáenz Valentina','Pasantes','Ahorros','2209036671',235.00],['Herrera Mejía Joaquín','General','Ahorros','2201749935',1342.10],['Jaramillo Paz Renata','General','Ahorros','2206381204',884.65],['Mora Villacís Esteban','General','Corriente','3102847719',1626.92]];
   const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   E.sort((a,b)=>a[0].localeCompare(b[0],'es'));
   table.insertAdjacentHTML('beforeend',E.map(e=>`<tr${e[0].startsWith('Benítez')?' class="sel"':''}><td>${e[0]}</td><td>${e[1]}</td><td>${e[2]}</td><td>${e[3]}</td><td>${e[1]==='Pasantes'?'Pasantía':'Rol de Pago'} OCT 2026</td><td class="n">${fmt(e[4])}</td></tr>`).join(''));
