@@ -977,12 +977,14 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
   .mod-fn.is-shot .mod-fn-list { grid-column: 1; grid-row: auto; margin-top: var(--space-4); }
 }
 
-/* Reportes incluidos en tarjetas (.is-cards): cada reporte con su color (--rc) y su ícono; si no hay --rc usa el acento del módulo */
+/* Reportes incluidos en tarjetas (.is-cards): grises en reposo; al pasar el mouse se encienden con su color (--rc) */
 .mod-reports.is-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
-.mod-reports.is-cards li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-4); border: 1px solid var(--color-divider); border-top: 3px solid var(--rc, var(--color-accent)); border-radius: var(--radius-md); background: var(--color-surface); transition: transform .25s ease, box-shadow .25s ease; }
-.mod-reports.is-cards li:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.mod-reports.is-cards .rp-ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-md); background: color-mix(in srgb, var(--rc, var(--color-accent)) 14%, #fff); }
-.mod-reports.is-cards .rp-ic svg { width: 22px; height: 22px; margin: 0; stroke: var(--rc, var(--color-accent)); }
+.mod-reports.is-cards li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-4); border: 1px solid var(--color-divider); border-top: 3px solid var(--color-neutral-300, #c9c6c3); border-radius: var(--radius-md); background: var(--color-surface); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.mod-reports.is-cards li:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-top-color: var(--rc, var(--color-accent)); }
+.mod-reports.is-cards .rp-ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-md); background: #e3e1df; transition: background .25s ease; }
+.mod-reports.is-cards .rp-ic svg { width: 22px; height: 22px; margin: 0; stroke: #8a8785; transition: stroke .25s ease; }
+.mod-reports.is-cards li:hover .rp-ic { background: color-mix(in srgb, var(--rc, var(--color-accent)) 14%, #fff); }
+.mod-reports.is-cards li:hover .rp-ic svg { stroke: var(--rc, var(--color-accent)); }
 .mod-reports.is-cards b { font-size: 17px; }
 .mod-reports.is-cards span { font-size: 14.5px; }
 @media (max-width: 1000px) { .mod-reports.is-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
