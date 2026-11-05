@@ -137,8 +137,8 @@
   .erp-band p strong{color:var(--color-text)}
   .erp-logos{display:flex;align-items:center;justify-content:center;gap:calc(var(--space-8) * 2);flex-wrap:wrap;margin-top:calc(var(--space-8) * 3)}
   .erp-logos img{height:48px;width:auto;object-fit:contain;transition:transform .35s cubic-bezier(.2,.8,.3,1.4)}
-  .erp-logos a{display:block}
-  .erp-logos a:hover img,.erp-logos a:focus-visible img{transform:scale(1.12)}
+  .erp-logos span{display:block}
+  .erp-logos span:hover img{transform:scale(1.12)}
   @media (max-width:860px){ .erp-band h2{font-size:26px} }
   @media (prefers-reduced-motion:reduce){ .erp-logos img{transition:none} }
   .feature-carousel{position:relative;overflow:hidden}
@@ -164,13 +164,19 @@
   .carousel-dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:8px;z-index:2}
   .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
   .carousel-dot[aria-current="true"]{background:#fff}
-  .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;width:calc(var(--space-6) + 64px);height:70%;border-radius:0;border:none;background:none;backdrop-filter:none;color:#fff;cursor:pointer;font-size:64px;line-height:1;padding:0 calc(var(--space-4) + var(--space-2));text-shadow:0 2px 12px rgba(0,0,0,.35);opacity:.8;transition:opacity .2s ease}
-  .carousel-arrow span{display:block;transition:transform .2s ease}
+  /* en pantallas táctiles los puntos del carrusel y «Explorar los módulos» tienen zona de toque de ~40 px (el punto se ve igual de chico) */
+  @media (pointer:coarse){.carousel-dots{gap:16px}.carousel-dot{position:relative}.carousel-dot::after{content:"";position:absolute;inset:-9px}.showcase-more{min-height:44px}}
+  /* zona de clic de las flechas: todo el alto y --arw de ancho (pedido del cliente: «que el alcance sea mucho mayor»); puede pasar sobre el margen del texto porque las diapositivas no tienen enlaces */
+  .feature-carousel{--arw:clamp(140px,13vw,220px)}
+  .carousel-arrow{position:absolute;top:0;bottom:0;z-index:2;display:flex;align-items:center;width:var(--arw);height:auto;border-radius:0;border:none;background:none;backdrop-filter:none;color:#fff;cursor:pointer;font-size:64px;line-height:1;padding:0 calc(var(--space-4) + var(--space-2));text-shadow:0 2px 12px rgba(0,0,0,.35);opacity:.8;transition:opacity .2s ease,background-color .2s ease}
+  .carousel-arrow span{display:block;transition:transform .25s cubic-bezier(.2,.8,.3,1.3)}
   .carousel-arrow:hover,.carousel-arrow:focus-visible{opacity:1}
+  .carousel-arrow.prev:hover{background:linear-gradient(90deg,rgba(0,0,0,.18),transparent)}
+  .carousel-arrow.next:hover{background:linear-gradient(270deg,rgba(0,0,0,.18),transparent)}
   .carousel-arrow.prev{left:0;justify-content:flex-start}
-  .carousel-arrow.prev:hover span{transform:translateX(-4px)}
+  .carousel-arrow.prev:hover span{transform:translateX(-4px) scale(1.5)}
   .carousel-arrow.next{right:0;justify-content:flex-end}
-  .carousel-arrow.next:hover span{transform:translateX(4px)}
+  .carousel-arrow.next:hover span{transform:translateX(4px) scale(1.5)}
   .feature-slide-art{flex:none;align-self:center;width:min(26vw,340px);height:min(26vw,340px);z-index:0;opacity:0;pointer-events:none}
   .feature-slide-art svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 14px 30px rgba(6,10,14,.4));transform:translate3d(calc(var(--artPX, 0) * 1px),calc(var(--artPY, 0) * 1px),0);transition:transform .9s cubic-bezier(.16,1,.3,1)}
   .feature-slide-art .art-frame{stroke:rgba(255,255,255,.28);stroke-width:1}
@@ -308,11 +314,11 @@
   .clients h6{color:var(--color-neutral-700);margin-bottom:var(--space-4);text-align:center}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  .modules-teaser{scroll-margin-top:72px;padding:var(--space-8) 0;border-top:1px solid var(--color-divider);text-align:center}
+  .modules-teaser{scroll-margin-top:72px;padding-block:var(--space-8);border-top:1px solid var(--color-divider);text-align:center}
   .modules-teaser h2{margin-bottom:var(--space-3)}
   .modules-teaser-intro{max-width:620px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
   /* módulos con sus funciones, al estilo Humand: tarjetas suaves, chips blancos con ícono de color; cada chip lleva a su función (#ancla) en la página del módulo */
-  .fn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);align-items:start;text-align:left}
+  .fn-grid{display:grid;grid-template-columns:repeat(var(--fn-cols,3),minmax(0,1fr));gap:var(--space-4);align-items:start;text-align:left}
   .fn-col{display:flex;flex-direction:column;gap:var(--space-4)}
   .fn-card{padding:var(--space-4) var(--space-4) calc(var(--space-4) + 4px);border-radius:20px;background:linear-gradient(150deg,color-mix(in srgb,var(--mc) 10%,#fff),color-mix(in srgb,var(--mc) 3%,#eef0f5));box-shadow:0 1px 0 #fff inset,0 10px 30px -18px color-mix(in srgb,var(--mc) 55%,#1b2340);transition:transform .3s ease,box-shadow .3s ease}
   .fn-card:hover{transform:translateY(-3px);box-shadow:0 1px 0 #fff inset,0 18px 38px -18px color-mix(in srgb,var(--mc) 65%,#1b2340)}
@@ -326,13 +332,20 @@
   .fn-chip:hover,.fn-chip:focus-visible{transform:translateY(-2px);box-shadow:0 1px 2px rgba(27,35,64,.08),0 8px 16px -8px color-mix(in srgb,var(--mc) 60%,#1b2340)}
   .fn-chip:hover img,.fn-chip:focus-visible img{transform:scale(1.1)}
   .mod-tag{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:var(--radius-sm);color:var(--color-accent-2-700);background:var(--color-accent-2-100)}
+  /* sin JS: en tablet y celular las tarjetas fluyen en columnas del navegador */
   @media (max-width:1000px){.fn-grid{display:block;columns:2;column-gap:var(--space-4)}.fn-col{display:contents}.fn-card{break-inside:avoid;margin-bottom:var(--space-4)}}
   @media (max-width:640px){.fn-grid{columns:1}}
+  /* con JS (balanceFn): grid de 3, 2 o 1 columnas y cada tarjeta en la columna que deja todas casi a la misma altura */
+  .fn-grid.is-balanced{display:grid;columns:auto}
+  .fn-grid.is-balanced .fn-col{display:flex}
+  .fn-grid.is-balanced .fn-col:empty{display:none}
+  .fn-grid.is-balanced .fn-card{margin-bottom:0}
   @media (prefers-reduced-motion:reduce){.fn-card,.fn-chip,.fn-go,.fn-chip img{transition:none}.fn-card:hover,.fn-chip:hover,.fn-chip:hover img{transform:none}}
   .cta-band{display:block;text-align:center;text-decoration:none;padding:var(--space-8) var(--space-6);margin:var(--space-6) 0 var(--space-8);border-radius:var(--radius-lg);background:var(--color-accent-800)}
   .cta-band h2{color:#fff;margin-bottom:var(--space-2)}
   .cta-band p{color:#fff;opacity:.9;margin-bottom:var(--space-4)}
   .cta-band-btn{background:#fff;color:var(--color-accent-800)}
+  @media (max-width:400px){.cta-band{padding:var(--space-8) var(--space-4)}}   /* a 320 px «Simplifiquemos» no cabía en el recuadro */
   .cta-band:hover .cta-band-btn{background:var(--color-accent-100)}
   @media (max-width:860px){
     .hero h1{font-size:36px}
@@ -345,7 +358,7 @@
     .feature-slide-copy h2{font-size:36px}
     .feature-slide-copy .feature-slide-lead{font-size:17px}
     .carousel-arrow{display:none}
-    .feature-slide > .wrap{padding-left:var(--space-6)}
+    .feature-slide > .wrap{padding-left:var(--space-6);padding-right:var(--space-6)}
   }
 
   /* Testimonios: tarjetas que se expanden (la activa muestra foto + cita) */
@@ -475,10 +488,9 @@
         <img src="img/Pesdel.png" class="mq-solid" alt="Pesdel" loading="lazy">
         <a href="https://www.linkedin.com/company/servifreno/" target="_blank" rel="noopener" aria-label="Servifreno en LinkedIn"><img src="img/Servifreno.jpg" alt="Servifreno" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/envasursa/" target="_blank" rel="noopener" aria-label="Envasur en LinkedIn"><img src="img/Envasur.png" alt="Envasur" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/enkador-s-a-/" target="_blank" rel="noopener" aria-label="Enkador en LinkedIn"><img src="img/Enkador.jpg" class="mq-solid" alt="Enkador" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/quimicaariston/" target="_blank" rel="noopener" aria-label="Química Ariston en LinkedIn"><img src="img/Quimica_Ariston.jpg" alt="Química Ariston" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/finca-los-nonnos/" target="_blank" rel="noopener" aria-label="Finca Los Ñoños en LinkedIn"><img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy"></a>
-        <img src="img/Toyota.png" alt="Toyotaservicios S.A." loading="lazy">
+        <a class="mq-named" href="https://www.linkedin.com/company/automotorescarloslarrea/" target="_blank" rel="noopener" aria-label="Toyotaservicios S.A. y Carlos Larrea en LinkedIn"><img src="img/Toyota.png" alt="" loading="lazy"><span>Carlos Larrea</span></a>
       </div>
     </div>
     <div class="marquee">
@@ -487,14 +499,12 @@
         <a href="https://www.linkedin.com/company/curtiduria-tungurahua/" target="_blank" rel="noopener" aria-label="Curtiduría Tungurahua en LinkedIn"><img src="img/Curtiduria_Tungurahua.jpg" alt="Curtiduría Tungurahua" loading="lazy"></a>
         <img src="img/Caves.jpg" alt="Caves" loading="lazy">
         <a href="https://www.linkedin.com/company/multicines-ecuador/" target="_blank" rel="noopener" aria-label="Multicines en LinkedIn"><img src="img/Multicines.png" class="mq-solid" alt="Multicines" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/incubandina/" target="_blank" rel="noopener" aria-label="Incubandina en LinkedIn"><img src="img/Incubandina.jpg" alt="Incubandina" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/ecuatran-s-a/" target="_blank" rel="noopener" aria-label="Ecuatran en LinkedIn"><img src="img/Ecuatran.png" alt="Ecuatran" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/ecuador-vita/" target="_blank" rel="noopener" aria-label="Pasteurizadora Quito en LinkedIn"><img src="img/Pasteurizadora_Quito.jpg" alt="Pasteurizadora Quito" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/delltex-s-a/" target="_blank" rel="noopener" aria-label="Deltex en LinkedIn"><img src="img/Deltex.jpg" alt="Deltex" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/assaecuador/" target="_blank" rel="noopener" aria-label="Assa en LinkedIn"><img src="img/Assa.jpg" alt="Assa" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/la-tablita-group/" target="_blank" rel="noopener" aria-label="Tablita del Tártaro en LinkedIn"><img src="img/Tablita_del_tartaro.svg" alt="Tablita del Tártaro" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/teimsa/" target="_blank" rel="noopener" aria-label="Teimsa en LinkedIn"><img src="img/Teimsa.jpg" alt="Teimsa" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/ekronac/" target="_blank" rel="noopener" aria-label="Ekron en LinkedIn"><img src="img/Ekron.jpg" class="mq-solid" alt="Ekron" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/puntonet-s.a./" target="_blank" rel="noopener" aria-label="PuntoNet en LinkedIn"><img src="img/PuntoNet.jpg" class="mq-solid" alt="PuntoNet" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/inverneg-sa/" target="_blank" rel="noopener" aria-label="Inverneg en LinkedIn"><img src="img/Inverneg.jpg" alt="Inverneg" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/bioalimentarec/" target="_blank" rel="noopener" aria-label="Bioalimentar en LinkedIn"><img src="img/Bioalimentar.jpg" alt="Bioalimentar" loading="lazy"></a>
@@ -770,10 +780,10 @@
       <h2><span class="accent">Integra</span> SquareNet con tu <span class="accent">ecosistema empresarial</span></h2>
       <p>SquareNet se conecta con los <strong>sistemas ERP más usados.</strong> Menos reprocesos, más consistencia en tus datos.</p>
       <div class="erp-logos">
-        <a href="contacto.html" aria-label="Integración con SAP: contáctanos"><img src="img/sap-logo.svg" alt="SAP"></a>
-        <a href="contacto.html" aria-label="Integración con Microsoft Dynamics 365: contáctanos"><img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365"></a>
-        <a href="contacto.html" aria-label="Integración con JD Edwards: contáctanos"><img src="img/jdedwards-logo.svg" alt="JD Edwards"></a>
-        <a href="contacto.html" aria-label="Integración con Infor: contáctanos"><img src="img/infor-logo.svg" alt="Infor"></a>
+        <span><img src="img/sap-logo.svg" alt="SAP"></span>
+        <span><img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365"></span>
+        <span><img src="img/jdedwards-logo.svg" alt="JD Edwards"></span>
+        <span><img src="img/infor-logo.svg" alt="Infor"></span>
       </div>
     </div>
   </div>
@@ -897,7 +907,30 @@
         Array.prototype.forEach.call(dotsWrap.children, function (dot, di) {
           dot.setAttribute('aria-current', di === index ? 'true' : 'false');
         });
+        schedule();
       }
+
+      // avanza solo cada 3 s, o 6 s después de que la persona cambió a mano (flechas, puntos, deslizar) para darle
+      // tiempo de leer (pedido del cliente). El mouse encima NO lo pausa (con la zona de flechas tan grande se quedaba
+      // detenido para siempre); se pausa con el foco de teclado dentro, al tocarlo,
+      // fuera de pantalla o con la pestaña oculta, y con prefers-reduced-motion no avanza
+      var timer = null, held = false, seen = false, manual = false;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function schedule() {
+        clearTimeout(timer);
+        if (reduce || held || !seen || document.hidden) return;
+        timer = setTimeout(function () { manual = false; go(index + 1); }, manual ? 6000 : 3000);
+      }
+      function hold(v) { held = v; schedule(); }
+      function user(i) { manual = true; go(i); schedule(); }
+      carousel.addEventListener('focusin', function (e) { try { if (e.target.matches(':focus-visible')) hold(true); } catch (x) {} });
+      carousel.addEventListener('focusout', function (e) { if (!carousel.contains(e.relatedTarget)) hold(false); });
+      carousel.addEventListener('touchstart', function () { manual = true; hold(true); }, { passive: true });
+      carousel.addEventListener('touchend', function () { hold(false); }, { passive: true });
+      document.addEventListener('visibilitychange', schedule);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (en) { seen = en[0].isIntersecting; schedule(); }, { threshold: 0.5 }).observe(carousel);
+      } else { seen = true; }
 
       function go(i) {
         var newIndex = (i + slides.length) % slides.length;
@@ -921,12 +954,12 @@
         dot.className = 'carousel-dot';
         dot.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1));
         dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
-        dot.addEventListener('click', function () { go(i); });
+        dot.addEventListener('click', function () { user(i); });
         dotsWrap.appendChild(dot);
       });
 
-      document.getElementById('featurePrev').addEventListener('click', function () { go(index - 1); });
-      document.getElementById('featureNext').addEventListener('click', function () { go(index + 1); });
+      document.getElementById('featurePrev').addEventListener('click', function () { user(index - 1); });
+      document.getElementById('featureNext').addEventListener('click', function () { user(index + 1); });
 
       var touchStartX = null, touchStartY = null;
       carousel.addEventListener('touchstart', function (e) {
@@ -940,7 +973,7 @@
         var dy = e.changedTouches[0].clientY - touchStartY;
         touchStartX = null;
         if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-          go(dx < 0 ? index + 1 : index - 1);
+          user(dx < 0 ? index + 1 : index - 1);
         }
       }, { passive: true });
     })();
@@ -1042,10 +1075,15 @@
       var saveData = !!(navigator.connection && navigator.connection.saveData);
       var noAuto = reduce || saveData; // sin autoplay ni descarga hasta que el usuario pulse play
       var hasIO = 'IntersectionObserver' in window;
-      var loaded = false, inView = false, userPaused = noAuto, opened = reduce || !hasIO;
+      var loaded = false, inView = false, fullyVisible = false, userPaused = noAuto, opened = reduce || !hasIO;
       var linked = false, closed = false, ticking = false;
       var full = document.getElementById('laptopFull'), screen = laptop.querySelector('.laptop-screen');
       function isFull() { return document.fullscreenElement === video || document.webkitFullscreenElement === video || video.webkitDisplayingFullscreen; }
+      function screenFullyVisible() {
+        var r = screen.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && r.top >= 0 && r.left >= 0 && r.bottom <= window.innerHeight && r.right <= window.innerWidth;
+      }
+      function canPlay() { return isFull() || (inView && fullyVisible && screenFullyVisible() && opened && !closed && !userPaused && !document.hidden); }
 
       function setPaused(paused) {
         laptop.classList.toggle('is-paused', paused);
@@ -1073,9 +1111,9 @@
       }
       function sync() {
         if (!video.getAttribute('src')) return;
-        if (isFull() || (inView && opened && !closed && !userPaused && !document.hidden)) {
+        if (canPlay()) {
           var p = video.play();
-          if (p && p.catch) p.catch(function () { userPaused = true; setPaused(true); });
+          if (p && p.catch) p.catch(function (error) { if (error && error.name === 'AbortError') return; userPaused = true; setPaused(true); });
         } else {
           video.pause();
         }
@@ -1109,7 +1147,7 @@
         window.addEventListener('resize', onScroll);
       }
 
-      video.addEventListener('playing', function () { laptop.classList.add('is-playing'); });
+      video.addEventListener('playing', function () { if (!canPlay()) { video.pause(); return; } laptop.classList.add('is-playing'); });
       toggle.addEventListener('click', function () {
         userPaused = !userPaused;
         setPaused(userPaused);
@@ -1135,7 +1173,19 @@
       document.addEventListener('visibilitychange', sync);
       setPaused(noAuto);
 
-      if (!hasIO) { inView = true; if (!noAuto) load(); sync(); return; }
+      if (!hasIO) {
+        function checkView() {
+          var r = screen.getBoundingClientRect(), w = window.innerWidth, h = window.innerHeight;
+          var visible = Math.max(0, Math.min(r.right, w) - Math.max(r.left, 0)) * Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0));
+          inView = !!(r.width && r.height && visible / (r.width * r.height) >= 0.3);
+          fullyVisible = inView && r.top >= 0 && r.left >= 0 && r.bottom <= h && r.right <= w;
+          sync();
+        }
+        window.addEventListener('scroll', checkView, { passive: true });
+        window.addEventListener('resize', checkView);
+        if (!noAuto) load();
+        checkView(); return;
+      }
       if (!reduce) laptop.classList.add('anim');
 
       // el video (3,5 MB) se descarga cuando ya cargó el resto de la página, no compitiendo con ella
@@ -1147,7 +1197,7 @@
       }, { rootMargin: '900px 0px' }).observe(laptop);
 
       new IntersectionObserver(function (entries) {
-        inView = entries[0].isIntersecting;
+        inView = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.3;
         if (inView && !opened) {
           laptop.classList.add('is-open');
           if (lidProgress() > 0.05) {
@@ -1161,6 +1211,10 @@
         }
         sync();
       }, { threshold: 0.3 }).observe(laptop);
+      new IntersectionObserver(function (entries) {
+        fullyVisible = entries[0].isIntersecting && entries[0].intersectionRatio >= 1;
+        sync();
+      }, { threshold: [0, 1] }).observe(screen);
     })();
 
     (function () {
@@ -1209,6 +1263,43 @@
       document.addEventListener('visibilitychange', sync);
       sync();
     })();
+  </script>
+  <script>
+(function(){
+  /* «Un módulo para cada necesidad»: reparte las 8 tarjetas en 3, 2 o 1 columnas (según el ancho) probando todas las combinaciones
+     y quedándose con la que deja las columnas casi a la misma altura. Dentro de cada columna conservan su orden del HTML. */
+  var grid=document.querySelector('.fn-grid'); if(!grid) return;
+  var cards=[].slice.call(grid.querySelectorAll('.fn-card')), cols=[].slice.call(grid.querySelectorAll('.fn-col'));
+  if(!cards.length||cols.length<3) return;
+  var GAP=20, last=0, raf=0;
+  function nCols(){ var w=window.innerWidth; return w>1000?3:(w>640?2:1); }
+  function balance(){
+    var k=nCols();
+    grid.classList.add('is-balanced');
+    grid.style.setProperty('--fn-cols',k);
+    var hs=cards.map(function(c){ return c.offsetHeight; });   // el ancho de las tarjetas no depende de la columna donde estén
+    var n=cards.length, best=null, bestCost=Infinity, a=new Array(n).fill(0), total=Math.pow(k,n), i, j, sums, cnt, mx, mn, cost;
+    if(k===1){ best=a; }
+    else for(i=0;i<total;i++){
+      var x=i; sums=new Array(k).fill(0); cnt=new Array(k).fill(0);
+      for(j=0;j<n;j++){ var c=x%k; x=(x-c)/k; a[j]=c; sums[c]+=hs[j]+(cnt[c]?GAP:0); cnt[c]++; }
+      mx=Math.max.apply(null,sums); mn=Math.min.apply(null,sums);
+      if(mn===0) continue;                       // ninguna columna vacía
+      cost=mx+(mx-mn)*0.5;
+      if(cost<bestCost-0.5){ bestCost=cost; best=a.slice(); }
+    }
+    var map={}, nextId=0;   /* las columnas se numeran por orden de aparición: la de Nómina (la primera tarjeta) queda a la izquierda */
+    cards.forEach(function(c,idx){ var col=best[idx]; if(!(col in map)) map[col]=nextId++; cols[map[col]].appendChild(c); });
+    last=k;
+  }
+  function schedule(){ cancelAnimationFrame(raf); raf=requestAnimationFrame(balance); }
+  balance();
+  window.addEventListener('resize',schedule);
+  window.addEventListener('load',schedule);
+  /* si cambia el alto de una tarjeta (carga la letra, otro ancho) se vuelve a repartir */
+  if('ResizeObserver' in window){ var ro=new ResizeObserver(schedule); cards.forEach(function(c){ ro.observe(c); }); }
+  if(document.fonts&&document.fonts.addEventListener) document.fonts.addEventListener('loadingdone',schedule);
+})();
   </script>
   <script src="js/fecha.js"></script>
   <script src="js/nav.js"></script>

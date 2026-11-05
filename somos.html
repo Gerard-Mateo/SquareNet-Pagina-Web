@@ -141,8 +141,9 @@
     .stop.both .cr{grid-row:2;margin-top:var(--space-3)}
     .st-ghost{display:none}
     .side-l,.side-r{grid-column:2;grid-row:2;padding:var(--space-4) 0 0;text-align:left}
-    .st-stats{flex-direction:row;gap:var(--space-6)}
+    .st-stats{flex-direction:row;flex-wrap:wrap;gap:var(--space-4) var(--space-6)}
     .st-stats b{font-size:52px;transform:none}
+    .st-stats > div{min-width:0}
     .st-art{width:64px;height:64px;right:12px;top:12px}
     .stop.chap{grid-template-columns:52px minmax(0,1fr);justify-items:start}
     .chap-label{grid-column:2;grid-row:1;margin-top:0;padding:0;background:none;text-align:left}
@@ -152,6 +153,7 @@
     .end-card p{font-size:23px;max-width:none}
     .end-card .mark{font-size:12px;letter-spacing:.08em}
   }
+  @media (max-width:400px){.st-stats b{font-size:44px}}
   @media (prefers-reduced-motion:reduce){
     .road-hint svg{animation:none}
     .node{transition:none}

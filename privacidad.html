@@ -23,6 +23,16 @@
   .legal-box{margin-top:var(--space-4);padding:var(--space-4);background:var(--color-accent-100);border-left:3px solid var(--color-accent);border-radius:var(--radius-md)}
   .legal-box p{margin:0}
   @media (max-width:860px){ .legal .table{display:block;overflow-x:auto} }
+  /* en celular la tabla de cookies pasa a una ficha por cookie (la cuarta columna quedaba fuera de la pantalla y había que desplazarla de lado sin saberlo) */
+  @media (max-width:640px){
+    .legal .table{overflow:visible}
+    .legal .table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .legal .table tbody,.legal .table tr,.legal .table td{display:block}
+    .legal .table tr{padding:var(--space-3) 0;border-bottom:1px solid var(--color-divider)}
+    .legal .table tr:hover{background:none}
+    .legal .table td{border:0;padding:3px 0}
+    .legal .table td::before{content:attr(data-label);display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600)}
+  }
 </style>
 </head>
 <body>
@@ -62,10 +72,10 @@
           <tr><th>Nombre</th><th>Tipo</th><th>Para qué sirve</th><th>Duración</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>sqn-consent</code></td><td>Necesario</td><td>Recordar si aceptaste o rechazaste las cookies de analítica y publicidad. Se guarda en el almacenamiento local de tu navegador y no se envía a nadie.</td><td>Hasta que borres los datos del navegador</td></tr>
-          <tr><td><code>_ga</code></td><td>Analítica</td><td>Google Analytics: distinguir visitas de forma anónima para contar cuántas personas usan el sitio.</td><td>2 años</td></tr>
-          <tr><td><code>_ga_*</code></td><td>Analítica</td><td>Google Analytics: mantener el estado de la visita (páginas vistas en una misma sesión).</td><td>2 años</td></tr>
-          <tr><td><code>__gads</code>, <code>__gpi</code>, <code>__eoi</code></td><td>Publicidad</td><td>Google AdSense, en algunos artículos del blog: mostrar anuncios, limitar cuántas veces ves el mismo y medir su rendimiento.</td><td>Hasta 13 meses</td></tr>
+          <tr><td data-label="Nombre"><code>sqn-consent</code></td><td data-label="Tipo">Necesario</td><td data-label="Para qué sirve">Recordar si aceptaste o rechazaste las cookies de analítica y publicidad. Se guarda en el almacenamiento local de tu navegador y no se envía a nadie.</td><td data-label="Duración">Hasta que borres los datos del navegador</td></tr>
+          <tr><td data-label="Nombre"><code>_ga</code></td><td data-label="Tipo">Analítica</td><td data-label="Para qué sirve">Google Analytics: distinguir visitas de forma anónima para contar cuántas personas usan el sitio.</td><td data-label="Duración">2 años</td></tr>
+          <tr><td data-label="Nombre"><code>_ga_*</code></td><td data-label="Tipo">Analítica</td><td data-label="Para qué sirve">Google Analytics: mantener el estado de la visita (páginas vistas en una misma sesión).</td><td data-label="Duración">2 años</td></tr>
+          <tr><td data-label="Nombre"><code>__gads</code>, <code>__gpi</code>, <code>__eoi</code></td><td data-label="Tipo">Publicidad</td><td data-label="Para qué sirve">Google AdSense, en algunos artículos del blog: mostrar anuncios, limitar cuántas veces ves el mismo y medir su rendimiento.</td><td data-label="Duración">Hasta 13 meses</td></tr>
         </tbody>
       </table>
       <p>Las cookies de analítica y de publicidad <strong>solo se activan si las aceptas</strong> en el aviso que aparece en tu primera visita. Con ellas vemos datos agregados: qué páginas se visitan, cuánto tiempo, desde qué tipo de dispositivo, ciudad aproximada y de dónde llegaste (por ejemplo, desde Google). No nos permiten saber quién eres. Si no las aceptas, no se muestran anuncios.</p>

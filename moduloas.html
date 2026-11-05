@@ -21,6 +21,7 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
+.mod-fn-media.rp-stage{grid-template-columns:minmax(0,1fr)}   /* el teléfono se centra en la columna y se achica con fitPhones() si no cabe */
 /* Rol de pagos en el celular (.rp2): animación con historia en 4 pasos */
 .rp2{position:relative;flex:0 0 auto;font:13px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
 .rp2 *{box-sizing:border-box}
@@ -79,7 +80,6 @@
 .rp2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
 .rp2 .tap.is-ping::after{animation:rpPing .5s ease-out}
 @keyframes rpPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
-@media (max-width:400px){.rp2 .rph{transform:scale(.88);transform-origin:top center;margin-bottom:-79px}}
 /* Ausentismos en iPhone (.au2) */
 .au2{position:relative;flex:0 0 auto;font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
 .au2 *{box-sizing:border-box}
@@ -188,7 +188,6 @@
 .au2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
 .au2 .tap.is-ping::after{animation:auPing .5s ease-out}
 @keyframes auPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
-@media (max-width:400px){.au2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 /* Lo que ve RRHH en SquareNet: tarjeta con el mapa que entra junto al iPhone */
 .mw2 .mwhr{position:absolute;right:-170px;bottom:120px;z-index:20;width:270px;background:#fff;border-radius:10px;box-shadow:0 18px 40px -12px rgba(10,30,50,.45);overflow:hidden;font-size:11px;opacity:0;transform:translateX(24px) scale(.96);transition:opacity .45s,transform .55s cubic-bezier(.2,.9,.3,1.1)}
 .mw2 .mwhr.is-on{opacity:1;transform:none}
@@ -203,7 +202,7 @@
 .mw2 .hr-pin.is-on{transform:none;opacity:1}
 .mw2 .hr-tag{position:absolute;left:6px;top:6px;padding:3px 7px;border-radius:12px;background:rgba(255,255,255,.95);box-shadow:0 1px 3px rgba(0,0,0,.15);font-size:9.5px;font-weight:600;color:#1e66d0}
 .mw2 .hr-accl{position:absolute;right:6px;bottom:6px;padding:3px 7px;border-radius:12px;background:#1d1b1a;color:#fff;font-size:9.5px;font-weight:600;font-variant-numeric:tabular-nums}
-@media (max-width:1100px){.mw2 .mwhr{right:-60px}}
+@media (max-width:1240px){.mw2 .mwhr{right:-60px}}   /* a 1180 px la tarjeta del mapa se salía 8 px de la pantalla */
 @media (max-width:600px){.mw2 .mwhr{position:relative;right:auto;bottom:auto;margin:18px auto 0}}
 /* Animación .mw2 */
 .mw2{position:relative;flex:0 0 auto;
@@ -288,7 +287,6 @@
 .mw2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
 .mw2 .tap.is-ping::after{animation:mwPing .5s ease-out}
 @keyframes mwPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
-@media (max-width:400px){.mw2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 /* Animación .ce2 */
 .ce2{position:relative;flex:0 0 auto;
   font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
@@ -405,7 +403,6 @@
 .ce2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
 .ce2 .tap.is-ping::after{animation:cePing .5s ease-out}
 @keyframes cePing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
-@media (max-width:400px){.ce2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 /* Animación .sr2 (formulario 107) */
 .sr2{position:relative;flex:0 0 auto;
   font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
@@ -494,7 +491,6 @@
 .sr2 .tap::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(30,102,208,.7);opacity:0}
 .sr2 .tap.is-ping::after{animation:srPing .5s ease-out}
 @keyframes srPing{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(1.3)}}
-@media (max-width:400px){.sr2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 /* Animación .gp2 */
 .gp2{position:relative;flex:0 0 auto;
   font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
@@ -572,7 +568,6 @@
 .gp2 .txt p{margin:0 0 8px;font:inherit;color:inherit;max-width:none}
 .gp2 .toast{position:absolute;left:50%;bottom:30px;z-index:7;width:200px;margin-left:-100px;padding:10px;background:#5cb85c;color:#fff;text-align:center;font-size:11px;border-radius:2px;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
 .gp2 .toast.is-on{opacity:1;transform:none}
-@media (max-width:400px){.gp2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 /* Animación .ev2 */
 .ev2{position:relative;flex:0 0 auto;
   font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
@@ -631,7 +626,6 @@
 .ev2 .radar .ev,.ev2 .radar .id{transform-box:view-box;transform-origin:125px 112px;transform:scale(0);transition:transform 1.1s cubic-bezier(.3,1.2,.4,1)}
 .ev2 .body.is-on .radar.is-in .id{transform:scale(1)}
 .ev2 .body.is-on .radar.is-in .ev{transform:scale(1);transition-delay:.35s}
-@media (max-width:400px){.ev2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 /* Animación .fm2 */
 .fm2{position:relative;flex:0 0 auto;
   font:12px/1.3 "Segoe UI",ui-sans-serif,system-ui,-apple-system,Roboto,sans-serif;color:#222}
@@ -715,7 +709,6 @@
 .fm2 .kr span.w{width:38px;background:#acb0b8;font-size:13px}
 .fm2 .kr span.sp{width:170px;font-size:13px}
 .fm2 .kr span.is-k{background:#acb0b8}
-@media (max-width:400px){.fm2 .iph{transform:scale(.86);transform-origin:top center;margin-bottom:-102px}}
 </style>
 </head>
 <body>
@@ -1962,6 +1955,25 @@
   (async()=>{ await sleep(300); for(;;){ await run(); scr.classList.add('sn-fade'); await sleep(900); setTimeout(()=>scr.classList.remove('sn-fade'),150); } })();
 })();
 </script>
+  <script>
+(function(){
+  /* Teléfonos de Autoservicio: miden 340–356 px y en celular la columna útil mide 280–350. Se achican (escala + margen negativo) para caber siempre. */
+  var stages=[].slice.call(document.querySelectorAll('.mod-fn-media.rp-stage'));
+  function fitPhones(){
+    stages.forEach(function(m){
+      var root=m.firstElementChild; if(!root) return;
+      var cs=getComputedStyle(m), avail=m.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight), w=root.offsetWidth;
+      if(!w||avail<=0) return;
+      var k=Math.min(1,avail/w);
+      root.style.transformOrigin='top center';
+      root.style.transform=k<1?'scale('+k+')':'';
+      root.style.marginBottom=k<1?(-(1-k)*root.offsetHeight)+'px':'';
+    });
+  }
+  fitPhones();
+  if('ResizeObserver' in window) stages.forEach(function(m){ new ResizeObserver(fitPhones).observe(m); }); else addEventListener('resize',fitPhones);
+})();
+  </script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>

@@ -278,7 +278,7 @@
   .modules-teaser h2{margin-bottom:var(--space-3)}
   .modules-teaser-intro{max-width:620px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
   /* módulos con sus funciones, al estilo Humand: tarjetas suaves, chips blancos con ícono de color; cada chip lleva a su función (#ancla) en la página del módulo */
-  .fn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);align-items:start;text-align:left}
+  .fn-grid{display:grid;grid-template-columns:repeat(var(--fn-cols,3),minmax(0,1fr));gap:var(--space-4);align-items:start;text-align:left}
   .fn-col{display:flex;flex-direction:column;gap:var(--space-4)}
   .fn-card{padding:var(--space-4) var(--space-4) calc(var(--space-4) + 4px);border-radius:20px;background:linear-gradient(150deg,color-mix(in srgb,var(--mc) 10%,#fff),color-mix(in srgb,var(--mc) 3%,#eef0f5));box-shadow:0 1px 0 #fff inset,0 10px 30px -18px color-mix(in srgb,var(--mc) 55%,#1b2340);transition:transform .3s ease,box-shadow .3s ease}
   .fn-card:hover{transform:translateY(-3px);box-shadow:0 1px 0 #fff inset,0 18px 38px -18px color-mix(in srgb,var(--mc) 65%,#1b2340)}
@@ -292,8 +292,14 @@
   .fn-chip:hover,.fn-chip:focus-visible{transform:translateY(-2px);box-shadow:0 1px 2px rgba(27,35,64,.08),0 8px 16px -8px color-mix(in srgb,var(--mc) 60%,#1b2340)}
   .fn-chip:hover img,.fn-chip:focus-visible img{transform:scale(1.1)}
   .mod-tag{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:var(--radius-sm);color:var(--color-accent-2-700);background:var(--color-accent-2-100)}
+  /* sin JS: en tablet y celular las tarjetas fluyen en columnas del navegador */
   @media (max-width:1000px){.fn-grid{display:block;columns:2;column-gap:var(--space-4)}.fn-col{display:contents}.fn-card{break-inside:avoid;margin-bottom:var(--space-4)}}
   @media (max-width:640px){.fn-grid{columns:1}}
+  /* con JS (balanceFn): grid de 3, 2 o 1 columnas y cada tarjeta en la columna que deja todas casi a la misma altura */
+  .fn-grid.is-balanced{display:grid;columns:auto}
+  .fn-grid.is-balanced .fn-col{display:flex}
+  .fn-grid.is-balanced .fn-col:empty{display:none}
+  .fn-grid.is-balanced .fn-card{margin-bottom:0}
   @media (prefers-reduced-motion:reduce){.fn-card,.fn-chip,.fn-go,.fn-chip img{transition:none}.fn-card:hover,.fn-chip:hover,.fn-chip:hover img{transform:none}}
   .cta-band{display:block;text-align:center;text-decoration:none;padding:var(--space-8) var(--space-6);margin:var(--space-6) 0 var(--space-8);border-radius:var(--radius-lg);background:var(--color-accent-800)}
   .cta-band h2{color:#fff;margin-bottom:var(--space-2)}
@@ -1217,6 +1223,43 @@
       document.addEventListener('visibilitychange', sync);
       sync();
     })();
+  </script>
+  <script>
+(function(){
+  /* «Un módulo para cada necesidad»: reparte las 8 tarjetas en 3, 2 o 1 columnas (según el ancho) probando todas las combinaciones
+     y quedándose con la que deja las columnas casi a la misma altura. Dentro de cada columna conservan su orden del HTML. */
+  var grid=document.querySelector('.fn-grid'); if(!grid) return;
+  var cards=[].slice.call(grid.querySelectorAll('.fn-card')), cols=[].slice.call(grid.querySelectorAll('.fn-col'));
+  if(!cards.length||cols.length<3) return;
+  var GAP=20, last=0, raf=0;
+  function nCols(){ var w=window.innerWidth; return w>1000?3:(w>640?2:1); }
+  function balance(){
+    var k=nCols();
+    grid.classList.add('is-balanced');
+    grid.style.setProperty('--fn-cols',k);
+    var hs=cards.map(function(c){ return c.offsetHeight; });   // el ancho de las tarjetas no depende de la columna donde estén
+    var n=cards.length, best=null, bestCost=Infinity, a=new Array(n).fill(0), total=Math.pow(k,n), i, j, sums, cnt, mx, mn, cost;
+    if(k===1){ best=a; }
+    else for(i=0;i<total;i++){
+      var x=i; sums=new Array(k).fill(0); cnt=new Array(k).fill(0);
+      for(j=0;j<n;j++){ var c=x%k; x=(x-c)/k; a[j]=c; sums[c]+=hs[j]+(cnt[c]?GAP:0); cnt[c]++; }
+      mx=Math.max.apply(null,sums); mn=Math.min.apply(null,sums);
+      if(mn===0) continue;                       // ninguna columna vacía
+      cost=mx+(mx-mn)*0.5;
+      if(cost<bestCost-0.5){ bestCost=cost; best=a.slice(); }
+    }
+    var map={}, nextId=0;   /* las columnas se numeran por orden de aparición: la de Nómina (la primera tarjeta) queda a la izquierda */
+    cards.forEach(function(c,idx){ var col=best[idx]; if(!(col in map)) map[col]=nextId++; cols[map[col]].appendChild(c); });
+    last=k;
+  }
+  function schedule(){ cancelAnimationFrame(raf); raf=requestAnimationFrame(balance); }
+  balance();
+  window.addEventListener('resize',schedule);
+  window.addEventListener('load',schedule);
+  /* si cambia el alto de una tarjeta (carga la letra, otro ancho) se vuelve a repartir */
+  if('ResizeObserver' in window){ var ro=new ResizeObserver(schedule); cards.forEach(function(c){ ro.observe(c); }); }
+  if(document.fonts&&document.fonts.addEventListener) document.fonts.addEventListener('loadingdone',schedule);
+})();
   </script>
   <script src="js/fecha.js"></script>
   <script src="js/nav.js"></script>
