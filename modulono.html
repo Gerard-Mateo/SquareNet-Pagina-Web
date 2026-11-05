@@ -73,6 +73,7 @@
 .bk2 .bank-total{display:flex;align-items:center;justify-content:space-between;height:34px;padding-left:10px;border-top:1px solid #d2d2d2;background:#f4f3f0;font-weight:700;color:#24538c}
 .bk2 .bank-total span:last-child{height:100%;display:flex;align-items:center;padding:0 8px;background:#dedbd5;min-width:96px;justify-content:flex-end;font-variant-numeric:tabular-nums}
 /* Editor de fórmulas */
+.formula3 .win{height:auto}
 .formula3 .ed{display:flex;flex:none;height:430px;border-bottom:1px solid #d2d2d2}
 .formula3 .code{flex:1;min-width:0;border:1.5px solid #4d8fd6;margin:8px 0 8px 8px;border-radius:4px;overflow:hidden;padding:4px 0;font:11.2px/17.4px Consolas,"Cascadia Mono",ui-monospace,monospace;color:#111;background:linear-gradient(90deg,#f4f4f4 0 30px,#fff 30px)}
 .formula3 .ln{display:flex;white-space:pre}.formula3 .no{flex:none;width:30px;padding-right:6px;text-align:right;color:#9a9a9a}
@@ -85,7 +86,7 @@
 .formula3 .tabs span{display:flex;align-items:center;gap:5px;padding:5px 10px;font-size:12px;color:#2f6fbf}
 .formula3 .tabs span.on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:4px 4px 0 0;background:#fff}
 .formula3 .tabs i{font:italic 700 10px "Times New Roman",serif;color:#555}.formula3 .tabs svg{width:12px;height:12px}
-.formula3 .dg{flex:1;min-height:0;overflow:hidden}
+.formula3 .dg{flex:none;min-height:0;overflow:hidden}
 /* Vista de detalle del rol de pagos */
 .pay2 .detail{flex:1}
 .pay2 .g td.v{text-align:right;font-variant-numeric:tabular-nums}
@@ -570,8 +571,7 @@ const L=['if( TIPO_FONDOS_RESERVA( ) = "M") // para fondos de reserva mensual','
 '  else','  {','    return [Base IESS] * 0.0833;','  }','}',
 'else','{','  return 0;','}'];
 root.querySelector('[data-el="code"]').innerHTML=L.map((l,i)=>{const line=hl(l);return `<div class="ln"><span class="no">${i+1}</span><span>${i===10?line.replace('<span class="rb">[Base IESS]</span>','<span class="rb">[Base IESS]</span><span class="rc"></span>'):line}</span></div>`;}).join('');
-const D=[['8100','Variación de IESS por Extras','RB00058'],['8110','Base IESS','RB00059'],['6200','Aporte Personal IESS','RB00060'],['8120','Aporte Patronal IESS','RB00061'],
- ['8180','Aporte Personal + Patronal','RB00062'],['8190','Aporte SECAP','RB00063'],['8140','Prov. Décimo Tercer Sueldo','RB00064'],['8150','Prov. Décimo Cuarto Sueldo','RB00065']];
+const D=[['8100','Variación de IESS por Extras','RB00058'],['8110','Base IESS','RB00059'],['6200','Aporte Personal IESS','RB00060']];
 root.querySelector('[data-el="t"]').insertAdjacentHTML('beforeend',D.map(d=>`<tr${d[0]==='8110'?' class="sel"':''}><td>${d[0]}</td><td>${d[1]}</td><td>${d[2]}</td></tr>`).join(''));
 
   const selected=root.querySelector('[data-el="t"] tr.sel td:nth-child(2)'), cur=root.querySelector('[data-el="cur"]');
