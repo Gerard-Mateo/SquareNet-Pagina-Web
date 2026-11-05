@@ -863,21 +863,23 @@
         schedule();
       }
 
-      // avanza solo cada 4 s (pedido del cliente); se pausa con el mouse o el foco dentro, al tocarlo,
+      // avanza solo cada 3 s, o 6 s después de que la persona cambió a mano (flechas, puntos, deslizar) para darle
+      // tiempo de leer (pedido del cliente); se pausa con el mouse o el foco dentro, al tocarlo,
       // fuera de pantalla o con la pestaña oculta, y con prefers-reduced-motion no avanza
-      var timer = null, held = false, seen = false;
+      var timer = null, held = false, seen = false, manual = false;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function schedule() {
         clearTimeout(timer);
         if (reduce || held || !seen || document.hidden) return;
-        timer = setTimeout(function () { go(index + 1); }, 4000);
+        timer = setTimeout(function () { manual = false; go(index + 1); }, manual ? 6000 : 3000);
       }
       function hold(v) { held = v; schedule(); }
+      function user(i) { manual = true; go(i); schedule(); }
       carousel.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold(true); });
       carousel.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hold(false); });
       carousel.addEventListener('focusin', function (e) { try { if (e.target.matches(':focus-visible')) hold(true); } catch (x) {} });
       carousel.addEventListener('focusout', function (e) { if (!carousel.contains(e.relatedTarget)) hold(false); });
-      carousel.addEventListener('touchstart', function () { hold(true); }, { passive: true });
+      carousel.addEventListener('touchstart', function () { manual = true; hold(true); }, { passive: true });
       carousel.addEventListener('touchend', function () { hold(false); }, { passive: true });
       document.addEventListener('visibilitychange', schedule);
       if ('IntersectionObserver' in window) {
@@ -906,12 +908,12 @@
         dot.className = 'carousel-dot';
         dot.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1));
         dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
-        dot.addEventListener('click', function () { go(i); });
+        dot.addEventListener('click', function () { user(i); });
         dotsWrap.appendChild(dot);
       });
 
-      document.getElementById('featurePrev').addEventListener('click', function () { go(index - 1); });
-      document.getElementById('featureNext').addEventListener('click', function () { go(index + 1); });
+      document.getElementById('featurePrev').addEventListener('click', function () { user(index - 1); });
+      document.getElementById('featureNext').addEventListener('click', function () { user(index + 1); });
 
       var touchStartX = null, touchStartY = null;
       carousel.addEventListener('touchstart', function (e) {
@@ -925,7 +927,7 @@
         var dy = e.changedTouches[0].clientY - touchStartY;
         touchStartX = null;
         if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-          go(dx < 0 ? index + 1 : index - 1);
+          user(dx < 0 ? index + 1 : index - 1);
         }
       }, { passive: true });
     })();
@@ -1027,7 +1029,7 @@
       var saveData = !!(navigator.connection && navigator.connection.saveData);
       var noAuto = reduce || saveData; // sin autoplay ni descarga hasta que el usuario pulse play
       var hasIO = 'IntersectionObserver' in window;
-      var loaded = false, inView = false, userPaused = noAuto, opened = reduce || !hasIO;
+      var loaded = false, inView = false, fullyVisible = false, started = false, userPaused = noAuto, opened = reduce || !hasIO;
       var linked = false, closed = false, ticking = false;
       var full = document.getElementById('laptopFull'), screen = laptop.querySelector('.laptop-screen');
       function isFull() { return document.fullscreenElement === video || document.webkitFullscreenElement === video || video.webkitDisplayingFullscreen; }
@@ -1058,7 +1060,7 @@
       }
       function sync() {
         if (!video.getAttribute('src')) return;
-        if (isFull() || (inView && opened && !closed && !userPaused && !document.hidden)) {
+        if (isFull() || (inView && (fullyVisible || started) && opened && !closed && !userPaused && !document.hidden)) {
           var p = video.play();
           if (p && p.catch) p.catch(function () { userPaused = true; setPaused(true); });
         } else {
@@ -1094,11 +1096,11 @@
         window.addEventListener('resize', onScroll);
       }
 
-      video.addEventListener('playing', function () { laptop.classList.add('is-playing'); });
+      video.addEventListener('playing', function () { started = true; laptop.classList.add('is-playing'); });
       toggle.addEventListener('click', function () {
         userPaused = !userPaused;
         setPaused(userPaused);
-        if (!userPaused) { load(); opened = true; }
+        if (!userPaused) { started = true; load(); opened = true; }
         sync();
       });
       function goFull(e) {
@@ -1120,7 +1122,20 @@
       document.addEventListener('visibilitychange', sync);
       setPaused(noAuto);
 
-      if (!hasIO) { inView = true; if (!noAuto) load(); sync(); return; }
+      if (!hasIO) {
+        function checkView() {
+          var r = screen.getBoundingClientRect(), w = window.innerWidth, h = window.innerHeight;
+          var visible = Math.max(0, Math.min(r.right, w) - Math.max(r.left, 0)) * Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0));
+          inView = !!(r.width && r.height && visible / (r.width * r.height) >= 0.3);
+          fullyVisible = inView && r.top >= 0 && r.left >= 0 && r.bottom <= h && r.right <= w;
+          if (!inView) started = false;
+          sync();
+        }
+        window.addEventListener('scroll', checkView, { passive: true });
+        window.addEventListener('resize', checkView);
+        if (!noAuto) load();
+        checkView(); return;
+      }
       if (!reduce) laptop.classList.add('anim');
 
       // el video (3,5 MB) se descarga cuando ya cargó el resto de la página, no compitiendo con ella
@@ -1132,7 +1147,8 @@
       }, { rootMargin: '900px 0px' }).observe(laptop);
 
       new IntersectionObserver(function (entries) {
-        inView = entries[0].isIntersecting;
+        inView = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.3;
+        if (!inView) started = false;
         if (inView && !opened) {
           laptop.classList.add('is-open');
           if (lidProgress() > 0.05) {
@@ -1146,6 +1162,10 @@
         }
         sync();
       }, { threshold: 0.3 }).observe(laptop);
+      new IntersectionObserver(function (entries) {
+        fullyVisible = entries[0].isIntersecting && entries[0].intersectionRatio >= 1;
+        sync();
+      }, { threshold: [0, 1] }).observe(screen);
     })();
 
     (function () {
