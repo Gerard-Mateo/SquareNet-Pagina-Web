@@ -58,6 +58,66 @@
 .pe3 .im label{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;text-transform:uppercase;margin-bottom:6px}
 .pe3 .ph{width:104px;height:128px;border-radius:8px;overflow:hidden;border:1px solid #c5d0e0;background:linear-gradient(#d4deec,#aebdd2)}
 .pe3 .fr{width:178px;height:84px;border:1px solid #dfe3ea;border-radius:8px;background:#fff}
+/* contratos: pantalla del cliente, acotada a .co3 (se dibuja a 725 px y se escala a la columna) */
+.co3 *{box-sizing:border-box}
+.co3{margin:0;color:#1d1b1a}
+.co3 .stage{position:relative;width:725px;height:400px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
+.co3 .win{position:absolute;left:10px;top:10px;width:705px;height:215px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 24px 48px -20px rgba(36,60,100,.26),0 3px 10px rgba(36,60,100,.08);overflow:hidden}
+.co3 .win svg{position:absolute;left:0;top:0}
+.co3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.98);border:1px solid #e3e8f2;border-radius:16px;box-shadow:0 34px 60px -18px rgba(30,70,130,.36),0 8px 20px -6px rgba(30,70,130,.15);overflow:hidden}
+.co3 .gb{margin:10px;border:1px solid #c8c8c8;border-radius:4px;background:linear-gradient(#f9f9f9,#ececec);position:relative;padding:14px 10px 6px}
+.co3 .gb>b{position:absolute;left:8px;top:-9px;background:#fff;border:1px solid #c8c8c8;border-bottom:0;border-radius:4px 4px 0 0;padding:1px 8px;font-weight:600}
+.co3 .f{display:flex;align-items:center;height:25px}
+.co3 .f label{width:100px;flex:none;white-space:nowrap}
+.co3 .in{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 5px;line-height:19px;position:relative;white-space:nowrap;overflow:hidden;width:122px}
+.co3 .in.dd::after{content:"";position:absolute;right:0;top:0;width:19px;height:19px;background:#f1f1f1;border-left:1px solid #ccc}
+.co3 .in.dd::before{content:"";position:absolute;right:5px;top:7px;border:4px solid transparent;border-top:5px solid #888;z-index:1}
+.co3 .hl{box-shadow:0 0 0 2px rgba(59,155,232,.35)}
+.co3 .ct{display:flex;align-items:center;gap:8px;padding:9px 14px 8px;font-size:13px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
+.co3 .ct i{width:14px;height:14px;border-radius:4px;background:#e0883a}
+.co3 .lg{display:flex}
+.co3 table{border-collapse:collapse;table-layout:fixed;width:100%;margin:0}
+.co3 th{height:24px;text-align:left;font-weight:600;font-size:11.5px;padding:0 6px;background:#f6f6f6;border:0;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;color:#1d1b1a}
+.co3 td{height:24px;padding:0 6px;border:0;border-bottom:1px solid #e4e4e4;border-right:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;color:#1d1b1a}
+.co3 tr.sel td{background:#dcebfa}
+.co3 tr.sel td:first-child{outline:1px solid #3b9be8;outline-offset:-1px}
+.co3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+/* cargos: pantalla del cliente, acotada a .cg3 (se dibuja a 1180 px y se escala a la columna) */
+.cg3 *{box-sizing:border-box}
+.cg3{margin:0;color:#1d1b1a}
+.cg3 .stage{position:relative;width:1180px;height:520px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12.5px}
+.cg3 .win{position:absolute;left:20px;top:50px;width:820px;height:262px;background:#f0f0f0;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden}
+.cg3 .gb{position:absolute;top:10px;height:240px;border:1px solid #c8c8c8;border-radius:4px;background:linear-gradient(#f9f9f9,#eee)}
+.cg3 .f{position:absolute;left:10px;right:10px;display:flex;align-items:center;height:22px}
+.cg3 .f label{width:134px;flex:none}
+.cg3 .in{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 4px;line-height:19px;white-space:nowrap;overflow:hidden;position:relative;flex:1}
+.cg3 .in.d{background:#e3e3e3}
+.cg3 .in.dd::after{content:"";position:absolute;right:0;top:0;width:19px;height:19px;background:#f1f1f1;border-left:1px solid #ccc}
+.cg3 .in.dd::before{content:"";position:absolute;right:5px;top:7px;border:4px solid transparent;border-top:5px solid #888;z-index:1}
+.cg3 .ta{position:absolute;left:170px;right:10px;border:1px solid #bdbdbd;background:#fff;padding:2px 6px;font-size:13px;line-height:16px;overflow:hidden}
+.cg3 .ta::after{content:"";position:absolute;right:2px;top:2px;bottom:2px;width:12px;background:#f1f1f1}
+.cg3 .ta::before{content:"";position:absolute;right:4px;top:12px;width:8px;height:16px;border-radius:4px;background:#bdbdbd;z-index:1}
+.cg3 .lb{position:absolute;left:10px}
+.cg3 .card{position:absolute;z-index:5;background:#fff;border:1px solid #e3e8f2;border-radius:16px;box-shadow:0 40px 70px -18px rgba(30,70,130,.38),0 10px 24px -6px rgba(30,70,130,.16);overflow:hidden}
+.cg3 .dh{display:flex;align-items:center;justify-content:space-between;background:#0f4d14;color:#fff;padding:0 16px;height:50px}
+.cg3 .dh b{font-weight:500;font-size:14px;letter-spacing:.08em}
+.cg3 .dh small{font-size:10px;line-height:13px;text-align:right;opacity:.9}
+.cg3 .dt{padding:12px 16px 8px;display:flex;align-items:baseline;justify-content:space-between}
+.cg3 .dt b{font-size:19px;font-weight:600;color:#14301a}
+.cg3 .dt span{font-size:11px;color:#8a93a6}
+.cg3 .sc{margin:0 16px;padding:5px 0;border-top:1px solid #e6ece6}
+.cg3 .sc h6{margin:4px 0 6px;font-size:10.5px;letter-spacing:.1em;color:#0f4d14;font-weight:700;text-transform:none}
+.cg3 .kv{display:flex;gap:10px;font-size:12px;line-height:19px}
+.cg3 .kv i{font-style:normal;color:#8a93a6;width:92px;flex:none}
+.cg3 .og{display:flex;flex-direction:column;align-items:center}
+.cg3 .og div{border:1px solid #9bb09d;border-radius:4px;padding:2px 10px;font-size:11px;background:#fff}
+.cg3 .og div.me{background:#0f4d14;color:#fff;border-color:#0f4d14}
+.cg3 .og s{width:1px;height:8px;background:#9bb09d}
+.cg3 .cp{display:flex;align-items:center;gap:8px;font-size:11.5px;line-height:21px}
+.cg3 .cp span{width:128px;flex:none}
+.cg3 .cp u{display:flex;gap:3px;text-decoration:none}
+.cg3 .cp u i{width:22px;height:7px;border-radius:4px;background:#e1e8e1}
+.cg3 .cp u i.on{background:#2f8f3a}
 </style>
 </head>
 <body>
@@ -138,7 +198,28 @@
         </article>
         <article class="mod-fn" id="contratos">
           <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-contratos.png" alt="" width="16" height="16">Contratos</h3><p>Registro de contratos e impresión directa desde plantillas en Word: temporal, indefinido, a prueba, nombramiento.</p></div>
-          <div class="mod-fn-media" data-fn="contratos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-contratos.png" alt="" width="16" height="16"><span>Contratos</span></div></div>
+          <div class="mod-fn-media rp-stage" data-fn="contratos">
+          <div class="co3" id="co3" style="width:725px" role="img" aria-label="Contratos en SquareNet: línea de tiempo de los contratos de una persona (eventual, plazo fijo, indefinido) con sus datos y los cambios de cargo y sueldo">
+<div class="stage">
+<div class="win"><svg data-el="tl" width="705" height="215" viewBox="0 0 705 215"></svg></div>
+<div class="card" data-el="fm" style="left:10px;top:188px;width:262px"><div class="gb"><b>General</b>
+ <div class="f"><label>Fecha Ingreso</label><span class="in dd">15/03/2019</span></div>
+ <div class="f"><label>Sueldo</label><span class="in hl">620.00</span></div>
+ <div class="f"><label>Tipo de Contrato</label><span class="in dd hl">Indefinido</span></div>
+ <div class="f"><label>Cargo</label><span class="in dd">Analista</span></div>
+ <div class="f"><label>Estado</label><span class="in dd">Contrato Válido</span></div>
+</div></div>
+<div class="card" data-el="lg" style="left:272px;top:228px;width:450px"><div class="ct"><i></i>Cambios de personal</div>
+ <div class="lg"><div style="width:204px;border-right:1px solid #e3e8f2"><table><colgroup><col style="width:118px"><col></colgroup>
+ <thead><tr><th>Tipo de Acción</th><th>Fecha</th></tr></thead><tbody>
+ <tr><td>Cambio de Cargo</td><td>10/01/2024</td></tr>
+ <tr class="sel"><td>Cambio de Sueldo</td><td>03/09/2025</td></tr></tbody></table></div>
+ <div style="flex:1"><table><colgroup><col style="width:78px"><col style="width:68px"><col></colgroup><thead><tr><th>Modificado</th><th>Anterior</th><th>Posterior</th></tr></thead>
+ <tbody><tr><td>Cargo</td><td>Analista</td><td>Jefe analista</td></tr><tr class="sel"><td>Sueldo</td><td>620.00</td><td>750.00</td></tr></tbody></table></div></div></div>
+<svg class="lk" data-el="lk"></svg>
+</div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="organigrama">
           <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16">Organigrama</h3><p>Organigrama empresarial con graficación automática.</p></div>
@@ -299,6 +380,32 @@ document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
+  <script>
+(function(){
+  var root=document.getElementById('co3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement, q=k=>root.querySelector('[data-el="'+k+'"]');
+  const tl=q('tl');
+  const A=new Date(2016,6,1),B=new Date(2027,0,1),X0=34,X1=680,dx=d=>X0+(new Date(d)-A)/(B-A)*(X1-X0);
+  const f='font-family="Segoe UI,system-ui,sans-serif"';let h='';
+  [2018,2021,2024].forEach(y=>{const x=dx(y+'-01-01');h+=`<path d="M${x} 38V196" stroke="#f0f2f6"/><text x="${x}" y="28" ${f} font-size="11" fill="#a3abbb" text-anchor="middle">${y}</text>`});
+  const R=[{y:62,c:'#8aa4c8',n:'Eventual',a:'2017-03-15',b:'2018-03-14',v:'$520',m:['2017-09-06']},
+    {y:110,c:'#4a8fd0',n:'Plazo fijo',a:'2018-03-15',b:'2019-03-14',v:'$580',m:['2018-08-12']},
+    {y:158,c:'#2fa84f',n:'Indefinido',a:'2019-03-15',b:'2026-11-05',v:'$620',m:['2024-01-10','2025-09-03'],cur:1}];
+  R.forEach((r,i)=>{const a=dx(r.a),b=dx(r.b),labelShift=i>0?14:0;
+    if(i>0){const p=R[i-1],pb=dx(p.b);h+=`<path d="M${pb} ${p.y} C${pb+18} ${p.y},${a-18} ${r.y},${a} ${r.y}" stroke="${p.c}" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round" fill="none"/>`}
+    h+=`<path d="M${a} ${r.y}H${b}" stroke="${r.c}" stroke-width="8" stroke-linecap="round"/>`;
+    h+=`<text x="${a-4+labelShift}" y="${r.y-14}" ${f} font-size="12.5" font-weight="600" fill="#1f3a5f">${r.n}</text><text x="${a+(r.n.length*7.2)+6+labelShift}" y="${r.y-14}" ${f} font-size="11.5" fill="#7b8498">${r.v}</text>`;
+    if(r.cur)h+=`<circle cx="${b}" cy="${r.y}" r="9" fill="#2fa84f" opacity=".2"/><text x="${dx('2025-09-03')}" y="${r.y-16}" ${f} font-size="11.5" font-weight="700" fill="#1e7d3a" text-anchor="middle">$750</text><text x="${b+6}" y="${r.y-16}" ${f} font-size="11.5" font-weight="700" fill="#1e7d3a" text-anchor="end">Vigente</text>`;
+    r.m.forEach((d,j)=>{const x=dx(d),sel=r.cur&&j==1;h+=sel?`<circle cx="${x}" cy="${r.y}" r="11" fill="#3b9be8" opacity=".25"/><circle cx="${x}" cy="${r.y}" r="6.5" fill="#fff" stroke="#3b7fc4" stroke-width="3"/>`:`<circle cx="${x}" cy="${r.y}" r="5" fill="#fff" stroke="${r.c}" stroke-width="2.6"/>`})});
+  tl.innerHTML=h;
+  // líneas punteadas en coordenadas propias del escenario (offsetTop, no afectado por la escala)
+  const c3=R[2],ax=10+dx(c3.a),ay=10+c3.y,mx=10+dx('2025-09-03'),ft=q('fm').offsetTop,lt=q('lg').offsetTop;
+  const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+  q('lk').innerHTML=`<path d="M${ax} ${ay+6} V${ft+4}" ${Lc}/>${Dt(ax,ft+4)}<path d="M${mx} ${ay+10} V${lt+4}" ${Lc}/>${Dt(mx,lt+4)}`;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/725);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*725)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>
