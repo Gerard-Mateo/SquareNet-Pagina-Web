@@ -22,6 +22,10 @@
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
 /* ficha-del-colaborador: pantalla del cliente, acotada a .pe3 (se dibuja a 1260 px y se escala a la columna) */
+@media (min-width:861px){
+  #ficha-del-colaborador{grid-template-columns:minmax(240px,3fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+  #ficha-del-colaborador .rp-stage{padding-inline:0}
+}
 .pe3 *{box-sizing:border-box}
 .pe3{margin:0;color:#1d1b1a}
 .pe3 .stage{position:relative;width:1260px;height:580px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;}
@@ -376,7 +380,7 @@ const D=[['Cédula','05/10/2025 09:12:03'],['Certificado de estudios','05/10/202
 document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td></td><td></td><td>${r[1]}</td></tr>`).join('');
 
   var root=document.getElementById('pe3'),stage=root.firstElementChild,media=root.parentElement;
-  function fit(){var k=Math.min(1,(media.clientWidth-40)/1260);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1260)+'px';}
+  function fit(){var k=Math.max(0,Math.min(1,(media.clientWidth-16)/1260));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1260)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
