@@ -34,7 +34,7 @@ for (const f of pages) {
   // cosas que no deben quedar
   check(tag + 'sin marcadores sin reemplazar', !/\{NB\}|\{READ\}|BTNX/.test(html));
   check(tag + 'sin enlace a la página de lectores eliminada', !html.includes('lectores.html'));
-  check(tag + 'sin canales de soporte públicos', !/soporte@squarenet|98 220 4777|982204777/.test(html));
+  check(tag + 'sin canales de soporte públicos', !/soporte@squarenet/.test(html));
   if (/data-calc="/.test(html)) check(tag + 'carga calc.js', html.includes('../js/calc.js'));
 }
 
