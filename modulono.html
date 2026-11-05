@@ -92,6 +92,11 @@
 .formula3 .tabs span.on{color:#111;border:1px solid #d2d2d2;border-bottom-color:#fff;margin-bottom:-1px;border-radius:4px 4px 0 0;background:#fff}
 .formula3 .tabs i{font:italic 700 10px "Times New Roman",serif;color:#555}.formula3 .tabs svg{width:12px;height:12px}
 .formula3 .dg{flex:none;min-height:0;overflow:hidden}
+@media (min-width:861px){
+  #asientos-contables{grid-template-columns:minmax(240px,3fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+  #asientos-contables .rp-stage{padding-inline:0}
+}
+#ac2 .win{height:auto}
 .ac2 .g td.db,.ac2 .g td.hb{text-align:right;font-variant-numeric:tabular-nums}
 .ac2 .g td.db{background:#dff5dc!important}
 .ac2 .g td.hb{background:#fde3e3!important}
@@ -222,7 +227,7 @@
     <section class="mod-sec mod-fns" id="funciones" style="--mc:#0B8079" aria-labelledby="fn-title">
       <div class="mod-fn-rows">
         <article class="mod-fn" id="formulas-editables">
-          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-formulas-editables.png" alt="" width="16" height="16">Fórmulas editables</h3><p>Personaliza el cálculo de cada rubro con fórmulas o scripts al estilo de Excel, y un depurador te muestra paso a paso cómo se calculó.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-formulas-editables.png" alt="" width="16" height="16">Fórmulas editables</h3><p>Cada rubro se calcula como tu empresa lo necesita, no como alguien lo dejó fijo en el sistema. Escribe la regla con condiciones, días trabajados y otros rubros, verifícala antes de guardar y mira paso a paso cómo se llegó a cada valor. ¿Cambió la ley o tu política interna? Cambias la fórmula, no esperas una nueva versión.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="formulas-editables">
             <div class="cu2 bk2 formula3" id="formula3" role="img" aria-label="Editor de fórmulas de SquareNet con un ejemplo de cálculo de fondos de reserva">
               <div class="win">
@@ -238,7 +243,7 @@
           </div>
         </article>
         <article class="mod-fn" id="roles-de-pago">
-          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-roles-de-pago.png" alt="" width="16" height="16">Roles de pago</h3><p>Procesa el rol en unos 20 segundos por cada 100 empleados, con tipos de rol para separar grupos, pago en quincenas y varios modelos de impresión.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-roles-de-pago.png" alt="" width="16" height="16">Roles de pago</h3><p>Procesa la nómina de toda la empresa en un click y revisa a cada colaborador en una sola pantalla: ingresos, descuentos, quincena y más. Abre cualquier valor para ver de dónde salió, qué calculó el sistema y qué se ajustó a mano. Y mira cómo se reparte ese rubro entre tus centros de costo, cuando la persona trabaja en diferentes áreas.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="roles-de-pago">
           <div class="rl3" id="rl3" style="width:840px" role="img" aria-label="Rol de pagos en SquareNet: rubros informativos, ingresos y egresos de un colaborador, con el detalle del aporte al IESS y su distribución por centro de costo">
 <div class="stage">
@@ -261,7 +266,7 @@
           </div>
         </article>
         <article class="mod-fn" id="cuotas-y-prestamos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-cuotas-y-prestamos.png" alt="" width="16" height="16">Cuotas y préstamos</h3><p>Control automático de cuotas por fechas, útil para descuentos por préstamos o bonos programados.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-cuotas-y-prestamos.png" alt="" width="16" height="16">Cuotas y préstamos</h3><p>Registra el préstamo una vez y SquareNet descuenta cada cuota en el rol que le toca, sin que nadie lo recuerde. Cada cuota pagada queda ligada al rol en que se descontó.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="cuotas-y-prestamos">
           <div class="cu2" id="cu2" role="img" aria-label="Pantalla de cuotas de SquareNet: un préstamo de 24 cuotas de 42,50 con 21 pagadas y 3 por descontar en el rol">
            <div class="win">
@@ -283,7 +288,7 @@
           </div>
         </article>
         <article class="mod-fn" id="decimos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-decimos.png" alt="" width="16" height="16">Décimos</h3><p>Cálculo de décimos mensuales o acumulados según la preferencia del empleado, con las provisiones de décimo tercero, décimo cuarto y vacaciones.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-decimos.png" alt="" width="16" height="16">Décimos</h3><p>Décimo tercero y décimo cuarto, para todas las regiones, calculados con los días reales de cada persona. Separa a quienes los cobran mensualizados de quienes los acumulan, aplica descuentos y retenciones judiciales, y obtén el total a pagar listo para el banco.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="decimos">
           <div class="dc3" id="dc3" style="width:820px" role="img" aria-label="Décimos en SquareNet: décimo cuarto de la sierra con los colaboradores que lo acumulan y los que lo cobran mensual, descuentos, retención judicial y total a recibir">
 <div class="stage" id="dc3s">
@@ -306,7 +311,7 @@
           </div>
         </article>
         <article class="mod-fn" id="utilidades">
-          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-utilidades.png" alt="" width="16" height="16">Utilidades</h3><p>Reparto automático de utilidades según el procedimiento de ley.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-utilidades.png" alt="" width="16" height="16">Utilidades</h3><p>El 15% repartido como manda la ley: una parte por días trabajados y otra por cargas familiares, con el salario digno y el tope aplicados. ¿Tienes varias empresas en el grupo? Reparte las utilidades entre ellas. Cierra el año y queda guardado para siempre.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="utilidades">
           <div class="cu2 ut2" id="ut2" role="img" aria-label="Pantalla de utilidades de SquareNet con los valores repartidos entre trabajadores y cargas familiares">
             <div class="win">
@@ -327,7 +332,7 @@
           </div>
         </article>
         <article class="mod-fn" id="archivo-banco">
-          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-archivo-banco.png" alt="" width="16" height="16">Archivo banco</h3><p>Genera el archivo de acreditación para tu banco con plantillas configurables: quincenas, pagos por partes y por centro de costo.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-archivo-banco.png" alt="" width="16" height="16">Archivo banco</h3><p>Cerraste el rol y el pago ya está listo: SquareNet genera el archivo en el formato de tu banco con la cuenta y el valor de cada colaborador. Lo subes a la banca en línea y listo, sin digitar cuentas ni armar Excel a mano. Sirve para el rol, los décimos y las utilidades.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="archivo-banco">
             <div class="cu2 bk2" id="bk2" role="img" aria-label="Ejemplo de archivo bancario de nómina con cuentas y valores para acreditar">
               <div class="win">
@@ -341,7 +346,7 @@
           </div>
         </article>
         <article class="mod-fn" id="asientos-contables">
-          <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-asientos-contables.png" alt="" width="16" height="16">Asientos contables</h3><p>Interfaz contable abierta para exportar asientos configurables, ideal para integrarla a tu ERP como SAP, Dynamics AX, JD Edwards o Infor.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-asientos-contables.png" alt="" width="16" height="16">Asientos contables</h3><p>Cada rol termina en su asiento contable, sea agrupado o simple, cuadrado y listo para tu contabilidad. Cada rubro va a su cuenta y se separa por centro de costo. Configuras las cuentas una vez y cada mes el asiento sale solo.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="asientos-contables">
             <div class="cu2 bk2 ac2" id="ac2" role="img" aria-label="Ejemplo de asiento contable de nómina, con valores de debe y haber por cuenta y centro de costo">
               <div class="win">
@@ -355,7 +360,7 @@
           </div>
         </article>
         <article class="mod-fn" id="reportes-personalizados">
-          <div class="mod-fn-copy"><span class="mod-fn-n">08</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-reportes-personalizados.png" alt="" width="16" height="16">Reportes personalizados</h3><p>Escoges la información que quieres ver, además de los reportes completos de rol de pagos, resúmenes, décimos, provisiones y préstamos.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">08</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-reportes-personalizados.png" alt="" width="16" height="16">Reportes personalizados</h3><p>Arma tus propios reportes de nómina sin pedírselos a nadie. Elige los datos del colaborador y los rubros que quieres ver, decide qué totales mostrar, resume por centro de costo y agrega una línea de firma si lo vas a imprimir. Guárdalo con un nombre y úsalo cada mes: uno para egresos, otro para la quincena, otro para la planilla del IESS.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="reportes-personalizados">
             <div class="cu2 bk2 rp3" id="rp3" role="img" aria-label="Ejemplo de configuración de reportes personalizados, con campos y rubros asignados y no asignados">
               <div class="win">
@@ -684,8 +689,8 @@ c.style.left=(p.left-s.left+158)+'px'; c.style.top=(p.top-s.top+22)+'px';
 (() => {
   const root=document.getElementById('ac2'); if(!root) return;
   const media=root.parentElement, table=root.querySelector('[data-el="rows"]');
-  const D=[['5.2.01.01','Sueldo Devengado','ADM01','',9840],['5.2.01.01','Sueldo Devengado','OPE02','',12450],['5.2.01.02','Horas extra 50%','OPE02','',486.25],['5.2.01.03','Décimo Tercer Sueldo','ADM01','',820],['5.2.01.03','Décimo Tercer Sueldo','OPE02','',1078.02],['5.2.01.04','Décimo Cuarto Sueldo','ADM01','',313.33],['5.2.01.04','Décimo Cuarto Sueldo','OPE02','',548.33],['5.2.01.05','Fondos de Reserva','ADM01','',819.67],['5.2.01.05','Fondos de Reserva','OPE02','',1077.59],['5.2.01.06','Aporte Patronal IESS','ADM01','',1097.16],['5.2.01.06','Aporte Patronal IESS','OPE02','',1442.39]];
-  const H=[['2.1.02.01','Décimo Tercero por Pagar','','',1898.02],['2.1.02.02','Décimo Cuarto por Pagar','','',861.66],['2.1.03.01','Aporte Personal IESS','','',2152.36],['2.1.03.01','Aporte Patronal IESS','','',2539.55],['2.1.03.02','Préstamo Quirografario IESS','','',186.40],['2.1.03.03','Fondos de Reserva por Pagar','','',1897.26],['2.1.04.01','Retención Impuesto a la Renta','ADM01','MSALGADOR',273.25],['1.1.02.05','Préstamos a Empleados','OPE02','EMORAVI',42.50],['1.1.02.05','Préstamos a Empleados','ADM01','DCEVALLOSL',60],['1.1.02.06','Anticipo Quincena','','',8916],['2.1.05.01','Seguro Médico por Pagar','','',126]];
+  const D=[['5.2.01.01','Sueldo Devengado','ADM01','',9840],['5.2.01.01','Sueldo Devengado','OPE02','',12450],['5.2.01.02','Horas extra 50%','OPE02','',486.25]];
+  const H=[['2.1.03.01','Aporte Personal IESS','','',2152.36],['2.1.04.01','Retención Impuesto a la Renta','ADM01','MSALGADOR',273.25],['1.1.02.06','Anticipo Quincena','','',8916]];
   const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   const debit=D.reduce((sum,r)=>sum+r[4],0), credit=H.reduce((sum,r)=>sum+r[4],0);
   H.push(['2.1.01.01','Sueldos por Pagar','','',Math.round((debit-credit)*100)/100]);
