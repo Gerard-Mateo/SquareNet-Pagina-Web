@@ -116,10 +116,14 @@
 .as3 .pop .gn{color:#4f9a4f}
 .as3 .pop tr.sel td{background:#e8f0fb}
 .as3 .clip{overflow:hidden;border-radius:13px}
+@media (min-width:861px){
+  #ausentismos-y-permisos{grid-template-columns:minmax(0,7.5fr) minmax(260px,2.5fr);gap:clamp(20px,2vw,30px)}
+  #ausentismos-y-permisos .rp-stage{padding-inline:0}
+}
 /* Ausentismos y kardex de vacaciones */
 .kv3{font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
 .kv3 *{box-sizing:border-box}
-.kv3 .stage{position:relative;width:1000px;padding:28px 24px 0;
+.kv3 .stage{position:relative;width:960px;padding:28px 24px 0;
  background:transparent}
 .kv3 .win{position:relative;width:732px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
 .kv3 .tabs{display:flex;gap:2px;padding:8px 6px 0;border-bottom:1px solid #d2d2d2}
@@ -324,7 +328,7 @@
         <article class="mod-fn" id="ausentismos-y-permisos">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Vacaciones y ausentismos</h3><p>Permisos, vacaciones y licencias en un kardex claro, como un estado de cuenta: días ganados, días usados y saldo por periodo. Crea los tipos de permiso que tu empresa necesite. Tus colaboradores solicitan sus vacaciones desde el autoservicio, viendo antes cuántos días tienen disponibles, y el jefe las aprueba desde su correo.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="ausentismos-y-permisos">
-            <div class="kv3" id="kv3" style="width:1000px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
+            <div class="kv3" id="kv3" style="width:960px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
 <div class="stage" data-el="s">
  <div class="win" data-el="w">
   <div class="tabs"><span>Ausentismo</span><span class="on">Vacaciones</span></div>
@@ -608,7 +612,7 @@ root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} 
 s.style.height=Math.max(mr.b,k3.b,routeBottom)+20+'px';
 
 const stage=root.firstElementChild,media=root.parentElement;
-function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/1000));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1000)+'px';}
+function fit(){const k=Math.max(0,Math.min(1,media.clientWidth/960));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*960)+'px';}
 fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
 })();
 </script>
