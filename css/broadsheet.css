@@ -977,16 +977,14 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
   .mod-fn.is-shot .mod-fn-list { grid-column: 1; grid-row: auto; margin-top: var(--space-4); }
 }
 
-/* Reportes incluidos en tarjetas (.is-cards): grises en reposo; al pasar el mouse se encienden con su color (--rc) */
-.mod-reports.is-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
-.mod-reports.is-cards li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-4); border: 1px solid var(--color-divider); border-top: 3px solid var(--color-neutral-300, #c9c6c3); border-radius: var(--radius-md); background: var(--color-surface); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-.mod-reports.is-cards li:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-top-color: var(--rc, var(--color-accent)); }
-.mod-reports.is-cards .rp-ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-md); background: #e3e1df; transition: background .25s ease; }
-.mod-reports.is-cards .rp-ic svg { width: 22px; height: 22px; margin: 0; stroke: #8a8785; transition: stroke .25s ease; }
-.mod-reports.is-cards li:hover .rp-ic { background: color-mix(in srgb, var(--rc, var(--color-accent)) 14%, #fff); }
-.mod-reports.is-cards li:hover .rp-ic svg { stroke: var(--rc, var(--color-accent)); }
-.mod-reports.is-cards b { font-size: 17px; }
-.mod-reports.is-cards span { font-size: 14.5px; }
+/* Reportes incluidos en tarjetas (.is-cards): mismo estilo que «Características importantes» de Plataforma (línea negra arriba, ícono que se rellena al pasar el mouse, sin movimiento) */
+.mod-reports.is-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.mod-reports.is-cards li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); padding: var(--space-6) var(--space-6) var(--space-4); border: 1px solid var(--color-divider); border-top: 3px solid #1a1a1a; border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-sm); }
+.mod-reports.is-cards .rp-ic { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: var(--radius-md); background: color-mix(in srgb, #1a1a1a 13%, #fff); color: #1a1a1a; transition: background .25s ease, color .25s ease; }
+.mod-reports.is-cards .rp-ic svg { width: 28px; height: 28px; margin: 0; stroke: currentColor; stroke-width: 1.5; }
+.mod-reports.is-cards li:hover .rp-ic { background: #1a1a1a; color: #fff; }
+.mod-reports.is-cards b { font-size: 23px; line-height: 1.2; margin-bottom: var(--space-2); }
+.mod-reports.is-cards span { font-size: 17px; line-height: 1.55; color: var(--color-neutral-800); }
+.mod-reports.is-cards .rp-ic { margin-bottom: 0; }
 @media (max-width: 1000px) { .mod-reports.is-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .mod-reports.is-cards { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .mod-reports.is-cards li { transition: none; } .mod-reports.is-cards li:hover { transform: none; } }
+@media (max-width: 640px) { .mod-reports.is-cards { grid-template-columns: 1fr; } .mod-reports.is-cards li { padding: var(--space-4); } .mod-reports.is-cards b { font-size: 20px; } .mod-reports.is-cards span { font-size: 16px; } }
