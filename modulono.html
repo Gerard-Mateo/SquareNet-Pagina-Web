@@ -104,6 +104,11 @@
 .ac2 .account-total span{height:34px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums}
 .ac2 .account-total .label{background:transparent;margin-right:auto;justify-content:flex-start;padding-left:10px}
 /* Vista fija de configuración de reportes */
+@media (min-width:861px){
+  #reportes-personalizados{grid-template-columns:minmax(0,7fr) minmax(240px,3fr);gap:clamp(20px,3vw,40px)}
+  #reportes-personalizados .rp-stage{padding-inline:0}
+}
+#rp3 .win{height:auto}
 .rp3 .up{display:flex;flex:none;border-bottom:1px solid #d2d2d2}
 .rp3 .rl{width:200px;border-right:1px solid #d2d2d2}
 .rp3 .cfg{flex:1;background:#f4f3f0;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -112,7 +117,7 @@
 .rp3 .cb{width:13px;height:13px;border:1.3px solid #a9a39b;border-radius:3px;background:#fff}
 .rp3 .cb:not(.on)::after{display:none}
 .rp3 .cb.on{border-color:#2f6fd6;background:#2f6fd6}
-.rp3 .cb.on::after{left:3.3px;top:.6px;width:3px;height:6.5px;border-width:0 1.6px 1.6px 0}
+.rp3 .cb.on::after{left:50%;top:45%;width:3px;height:6.5px;border-width:0 1.6px 1.6px 0;transform:translate(-50%,-50%) rotate(45deg)}
 .rp3 .lo{flex:1;display:flex;min-height:0}
 .rp3 .side{flex:1;display:flex;flex-direction:column;min-width:0}
 .rp3 .side .hd{display:flex;justify-content:space-between;align-items:center;height:28px;padding:0 8px;font-weight:700;font-size:12px;background:#fcfbf9;border-bottom:1px solid #e6e6e6}
@@ -381,36 +386,15 @@
      <tr><td><span class="sg eg">Egreso</span></td><td>6220</td><td>Fondo de cesantía</td></tr>
      <tr class="pick"><td><span class="sg eg">Egreso</span></td><td>6230</td><td>Seguro médico</td></tr>
      <tr><td><span class="sg inf">Informativo</span></td><td>8110</td><td>Base aportable IESS</td></tr>
-     <tr><td><span class="sg in">Ingreso</span></td><td>1120</td><td>Horas extra 50%</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8200</td><td>Base externa</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8020</td><td>Conteo de almuerzos</td></tr>
-     <tr><td><span class="sg in">Ingreso</span></td><td>1420</td><td>Ingreso en quincena</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8190</td><td>Aporte SECAP</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6330</td><td>Egreso en quincena</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8030</td><td>Conteo de horas extra</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6210</td><td>Aporte patronal asumido</td></tr>
-     <tr><td><span class="sg in">Ingreso</span></td><td>1130</td><td>Horas extra 100%</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8210</td><td>Base imponible anual</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6260</td><td>Seguro de vida</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8180</td><td>Aporte personal + patronal</td></tr></table></div>
+     </table></div>
    <div class="mid"><span class="btn go" data-el="go">&gt;</span><span class="btn">&lt;</span><span class="btn">&gt;&gt;</span><span class="btn">&lt;&lt;</span></div>
-   <div class="side"><div class="hd">Rubros Asignados<span>Fila 16 de 16</span></div>
+   <div class="side"><div class="hd">Rubros Asignados<span>Fila 6 de 6</span></div>
     <table class="g"><colgroup><col style="width:92px"><col style="width:60px"><col></colgroup><tr><th>Signo</th><th>Código</th><th>Rubro</th></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6200</td><td>Aporte personal IESS</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6240</td><td>Caja de ahorros</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6100</td><td>Descuento atrasos</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6250</td><td>Descuento celular</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6150</td><td>Otros egresos gravados</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6270</td><td>Préstamos empresa</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6310</td><td>Préstamos IESS</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6300</td><td>Quincena</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6120</td><td>Retención judicial</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6900</td><td>Impuesto a la renta</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6800</td><td>Cuotas pendientes</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6810</td><td>Descuentos liquidación</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6160</td><td>Otros egresos no gravados</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6280</td><td>Anticipo de sueldo</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6290</td><td>Pensión alimenticia</td></tr>
      <tr class="new"><td><span class="sg eg">Egreso</span></td><td>6230</td><td>Seguro médico</td></tr></table></div>
   </div>
               </div>
