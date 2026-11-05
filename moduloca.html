@@ -321,7 +321,7 @@
             </div>
           </div>
         </article>
-        <article class="mod-fn" id="ausentismos-y-permisos">
+        <article class="mod-fn is-shot" id="ausentismos-y-permisos">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Ausentismos y kardex de vacaciones</h3><p>Permisos, vacaciones y licencias en un kardex claro, como un estado de cuenta: días ganados, días usados y saldo por periodo. Crea los tipos de permiso que tu empresa necesite. Tus colaboradores solicitan sus vacaciones desde el autoservicio, viendo antes cuántos días tienen disponibles, y el jefe las aprueba desde su correo.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="ausentismos-y-permisos">
             <div class="kv3" id="kv3" style="width:1080px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
@@ -584,11 +584,11 @@ const P=[
 const cls=['','','','','n','n','n sg','n dt','n','n','n sm','n','n'];
 const colcls=[ 'n','n','','', 'n','n','n sg','n dt','n','n','n sm'];
 let h='';
-P.forEach(([per,y,rows,tot],pi)=>{rows.forEach((r,ri)=>{const first=pi===3&&ri===1;const last=pi===3&&ri===1;
+P.slice(2).forEach(([per,y,rows,tot],pi)=>{rows.forEach((r,ri)=>{const first=pi===1&&ri===1;const last=pi===1&&ri===1;
  h+=`<tr class="${first?'sel':''}" ${last?'data-el="lastv"':''}>${r.slice(0,8).map((v,i)=>`<td class="${colcls[i]}${first&&i===0?' bx':''}">${v}</td>`).join('')}</tr>`});
  h+=`<tr class="t"><td colspan="4">${tot[0]}</td>${tot.slice(1,5).map((v,i)=>`<td class="${colcls[i+4]}">${v}</td>`).join('')}</tr>`});
 root.querySelector('[data-el="t"]').insertAdjacentHTML('beforeend',h);
-const W=[50,56,94,210,80,80,80,0],SUM=['','','','','45.00','37.00','8.00','8.00'];
+const W=[50,56,94,210,80,80,80,0],SUM=['','','','','30.00','22.00','8.00','8.00'];
 const tw=root.querySelector('[data-el="t"]').getBoundingClientRect().width;const rest=tw-W.slice(0,7).reduce((a,b)=>a+b,0);W[7]=rest;
 root.querySelector('[data-el="sm"]').innerHTML=SUM.map((v,i)=>`<div style="width:${W[i]}px;${i<4?'background:#f0f0f0;':''}">${v}</div>`).join('');
 const s=root.querySelector('[data-el="s"]'),w=root.querySelector('[data-el="w"]'),c1=root.querySelector('[data-el="c1"]'),cm=root.querySelector('[data-el="cm"]'),cur=root.querySelector('[data-el="cur"]');
@@ -608,7 +608,7 @@ root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} 
 s.style.height=Math.max(mr.b,k3.b,routeBottom)+20+'px';
 
 const stage=root.firstElementChild,media=root.parentElement;
-function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/1080));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1080)+'px';}
+function fit(){const k=Math.max(0,Math.min(1.4,(media.clientWidth-40)/1080));root.style.transformOrigin='top left';root.style.marginLeft=Math.max(0,(media.clientWidth-40-1080*k)/2)+'px';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1080)+'px';}
 fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
 })();
 </script>
