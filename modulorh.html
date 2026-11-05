@@ -122,6 +122,31 @@
 .cg3 .cp u{display:flex;gap:3px;text-decoration:none}
 .cg3 .cp u i{width:22px;height:7px;border-radius:4px;background:#e1e8e1}
 .cg3 .cp u i.on{background:#2f8f3a}
+/* organigrama: pantalla del cliente, acotada a .og3 (se dibuja a 1060 px y se escala a la columna) */
+.og3 *{box-sizing:border-box}
+.og3{margin:0;color:#1d1b1a}
+.og3 .stage{position:relative;width:1060px;height:520px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif}
+.og3 .chart{position:absolute;left:300px;top:30px;width:700px;height:440px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.26),0 4px 12px rgba(36,60,100,.08)}
+.og3 .chart-content{position:absolute;inset:0;transform:scale(1.15);transform-origin:50% 45%}
+.og3 .nd{position:absolute;width:180px;height:46px;border:1px solid #b4c0d2;border-radius:6px;background:#fff;overflow:hidden;box-shadow:0 1px 2px rgba(30,60,100,.08)}
+.og3 .nd h6{margin:0;height:18px;background:linear-gradient(#3a78b3,#2c68a0);color:#fff;font:700 11.5px/18px "Segoe UI",sans-serif;padding:0 3px;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-transform:none}
+.og3 .nd .bd{height:26px;font-size:10.5px;display:flex;align-items:center;padding:0 3px;white-space:nowrap;position:relative}
+.og3 .nd .bd.p{font-size:10px;font-weight:600;color:#111;padding-left:6px;gap:8px}
+.og3 .nd .bd.p span{flex:1;text-align:center;margin-right:8px;white-space:nowrap}
+.og3 .nd .ar{position:absolute;right:4px;top:3px;width:8px;height:20px}
+.og3 .nd .ar::before,.og3 .nd .ar::after{content:"";position:absolute;left:0;border:4px solid transparent}
+.og3 .nd .ar::before{top:0;border-bottom:5px solid #aab2bf;border-top:0}.og3 .nd .ar::after{bottom:0;border-top:5px solid #aab2bf;border-bottom:0}
+.og3 svg.ln{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.og3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.98);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 40px 70px -18px rgba(30,70,130,.36),0 10px 24px -6px rgba(30,70,130,.15);overflow:hidden}
+.og3 .tr{left:20px;top:92px;width:310px;font-size:13.5px}
+.og3 .th{display:flex;align-items:center;gap:8px;height:34px;padding:0 14px;background:#d8e9f8;color:#1b3a5c;border-bottom:1px solid #c3d8ee}
+.og3 .ri{display:flex;align-items:center;height:28px;padding-right:12px;white-space:nowrap;color:#1c1c1c}
+.og3 .ri.sel{background:#dcebfa;box-shadow:inset 3px 0 0 #2f6fa8}
+.og3 .ex{width:12px;margin-right:9px;flex:none;display:flex;justify-content:center}
+.og3 .ex.r::before{content:"";border:4.5px solid transparent;border-left:6px solid #222;border-right:0}
+.og3 .ex.d::before{content:"";border:4.5px solid transparent;border-top:6px solid #222;border-bottom:0}
+.og3 .fo{width:17px;height:14px;margin-right:9px;flex:none;border-radius:2px 3px 3px 3px;background:linear-gradient(#ffe38a,#f6c445);position:relative;box-shadow:inset 0 0 0 1px #d9a826}
+.og3 .fo::before{content:"";position:absolute;left:0;top:-3px;width:8px;height:4px;border-radius:2px 2px 0 0;background:#f6c445;box-shadow:inset 0 0 0 1px #d9a826}
 </style>
 </head>
 <body>
@@ -226,8 +251,13 @@
           </div>
         </article>
         <article class="mod-fn" id="organigrama">
-          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16">Organigrama</h3><p>Organigrama empresarial con graficación automática.</p></div>
-          <div class="mod-fn-media" data-fn="organigrama"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16"><span>Organigrama</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16">Organigrama</h3><p>Arma la estructura de tu empresa y SquareNet dibuja el organigrama solo, con la persona que ocupa cada posición. Además, consulta el historial de quién ocupó cada puesto y cuándo.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="organigrama">
+          <div class="og3" id="og3" style="width:1060px" role="img" aria-label="Organigrama de SquareNet: árbol de departamentos a la izquierda y el gráfico de cargos con la persona de cada uno, generado solo">
+<div class="stage"><div class="chart"><div class="chart-content" data-el="ch"><svg class="ln" data-el="ln"></svg></div></div>
+<div class="card tr" data-el="tr"></div></div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="competencias">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-competencias.png" alt="" width="16" height="16">Competencias</h3><p>Las competencias que se evalúan en cada cargo, que usa el módulo de Evaluaciones.</p></div>
@@ -407,6 +437,40 @@ document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td
   const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
   q('lk').innerHTML=`<path d="M${ax} ${ay+6} V${ft+4}" ${Lc}/>${Dt(ax,ft+4)}<path d="M${mx} ${ay+10} V${lt+4}" ${Lc}/>${Dt(mx,lt+4)}`;
   function fit(){var k=Math.min(1,(media.clientWidth-40)/725);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*725)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+  var root=document.getElementById('og3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement;
+  var ch=root.querySelector('[data-el="ch"]'), ln=root.querySelector('[data-el="ln"]');
+  var uid=0;
+  const av=(c,h,f)=>{const id='og3c'+(++uid);return `<svg width="24" height="24" viewBox="0 0 24 24" style="flex:none"><circle cx="12" cy="12" r="12" fill="#e9eef5"/><clipPath id="${id}"><circle cx="12" cy="12" r="12"/></clipPath><g clip-path="url(#${id})"><path d="M2 26c1-8 5-9 10-9s9 1 10 9z" fill="${f}"/><circle cx="12" cy="10" r="5" fill="${c}"/><path d="M6.5 9.5a5.5 6 0 0 1 11 0c-2-3-9-3-11 0z" fill="${h}"/></g></svg>`};
+  const N=(x,y,t,b,p)=>{const d=document.createElement('div');d.className='nd';d.style.left=x+'px';d.style.top=y+'px';
+    d.innerHTML=`<h6>${t}</h6>`+(p?`<div class="bd p">${av(p[1],p[2],p[3])}<span>${p[0]}</span><i class="ar"></i></div>`:`<div class="bd">${b||''}</div>`);ch.appendChild(d);return d};
+  const W=180,X0=60,cx=i=>X0+i*(W+20),mid=i=>cx(i)+W/2;
+  const Y=[26,104,186,272,350,428,506];
+  const SK=['#f0c9a8','#e0b48c','#d9a679','#cf9a6c','#f3d2b8'],HR=['#2a2a2a','#4a2f1e','#1d1d1d','#6b4a2b','#222'],SH=['#2b3a55','#8a3a4a','#3a4a63','#2f4a3a','#6a4a8a','#555f73'];
+  let k=0;const Q=n=>{k++;return [n,SK[(k*3)%5],HR[(k*2)%5],SH[k%6]]};
+  N(mid(1)-W/2,Y[0],'Gerencia General',0,Q('LEDESMA CORONEL MARCO'));
+  N(mid(1)-W/2,Y[1],'Gerencia de Operaciones',0,Q('CEVALLOS ARIAS ROBERTO'));
+  const cols=[
+    ['Jefe de Mercadeo',Q('PAREDES LOOR VERÓNICA'),[['Auxiliar de mercadeo',0,Q('TORRES BENÍTEZ LUCÍA')]]],
+    ['Jefe de Abastecimiento',Q('VILLACÍS MERA HARRY'),[['Analista de abastecimiento',0,Q('JÁCOME HIDALGO JOSUÉ')],['Auxiliar de abastecimiento',0,Q('GUERRÓN QUISPE ANGIE')]]],
+    ['Supervisor de existencias',Q('RIVERA SUÁREZ OMAR'),[['Operador de montacargas',0,Q('YÁNEZ CHANGO LUIS')]]]];
+  const st='stroke="#7b8799" stroke-width="1" fill="none"';let L='';
+  const bus=Y[2]-28;
+  L+=`<path d="M${mid(1)} ${Y[0]+46} V${Y[1]}" ${st}/><path d="M${mid(1)} ${Y[1]+46} V${bus} M${mid(0)} ${bus} H${mid(2)}" ${st}/>`;
+  cols.forEach((c,i)=>{N(cx(i),Y[2],c[0],'',c[1]);
+    L+=`<path d="M${mid(i)} ${bus} V${Y[2]}" ${st}/>`;
+    const h=c[2];if(h.length){const lx=cx(i)-12;
+      L+=`<path d="M${mid(i)} ${Y[2]+46} V${Y[2]+56} H${lx} V${Y[3]+(h.length-1)*78+23}" ${st}/>`;
+      h.forEach((q,j)=>{const y=Y[3]+j*78;N(cx(i),y,q[0],'',q[2]);L+=`<path d="M${lx} ${y+23} H${cx(i)}" ${st}/>`})}});
+  ln.innerHTML=L;
+  const T=[[0,'d','Gerencia General'],[1,'r','Gerencia Administrativa'],[1,'r','Gerencia de Talento Humano'],[1,'r','Gerencia Comercial (Externo)'],[1,'d','Gerencia de Operaciones',1],[2,'r','Jefatura de Mercadeo'],[2,'r','Jefatura de Abastecimiento'],[2,'r','Supervisión de Existencias'],[1,'r','Gerencia de Planta']];
+  root.querySelector('[data-el="tr"]').innerHTML=`<div class="th"><svg width="18" height="22" viewBox="0 0 18 22"><ellipse cx="9" cy="5" rx="7.5" ry="3.5" fill="#cfd8e6" stroke="#6b7c95"/><path d="M1.5 5v12c0 2 3.4 3.5 7.5 3.5s7.5-1.5 7.5-3.5V5" fill="#e4eaf3" stroke="#6b7c95"/><path d="M1.5 11c0 2 3.4 3.5 7.5 3.5s7.5-1.5 7.5-3.5" fill="none" stroke="#6b7c95"/></svg><b style="font-weight:600">Organigrama</b></div><div style="padding:6px 0 8px">`+T.map(r=>`<div class="ri${r[3]?' sel':''}" style="padding-left:${14+r[0]*22}px"><i class="ex ${r[1]}"></i><i class="fo"></i>${r[2]}</div>`).join('')+'</div>';
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/1060);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1060)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
 </script>
