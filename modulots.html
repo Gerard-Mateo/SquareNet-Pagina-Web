@@ -21,12 +21,16 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
+@media (min-width:861px){
+  #fichas-socioeconomicas{grid-template-columns:minmax(240px,3fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+  #fichas-socioeconomicas .rp-stage{padding-inline:0}
+}
 /* fichas-socioeconomicas: pantalla del cliente, acotada a .fs3 */
 .fs3 *{box-sizing:border-box}
 .fs3{margin:0;color:#1d1b1a}
-.fs3 .stage{position:relative;width:900px;height:570px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;
+.fs3 .stage{position:relative;width:760px;height:530px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;
  background:transparent}
-.fs3 .win{position:absolute;left:14px;top:18px;width:540px;height:490px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden;z-index:2}
+.fs3 .win{position:absolute;left:14px;top:18px;width:450px;height:490px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden;z-index:2}
 .fs3 .tabs{display:flex;gap:4px;padding:8px 10px 0;background:#f4f6fa;border-bottom:1px solid #d8dde7}
 .fs3 .tab{display:flex;align-items:center;gap:6px;padding:6px 12px;color:#2f6fb3;border:1px solid transparent;border-bottom:0;border-radius:8px 8px 0 0}
 .fs3 .tab.on{background:#fff;color:#222;border-color:#d8dde7;margin-bottom:-1px}
@@ -126,7 +130,7 @@
         <article class="mod-fn" id="fichas-socioeconomicas">
           <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulots-fichas-socioeconomicas.png" alt="" width="16" height="16">Fichas socioeconómicas</h3><p>Arma tus propias fichas con plantillas, secciones y rubros, y lleva el estado de cada una.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="fichas-socioeconomicas">
-          <div class="fs3" id="fs3" style="width:900px" role="img" aria-label="Ficha socioeconómica con preguntas sobre salud y transporte, información familiar y economía del hogar">
+          <div class="fs3" id="fs3" style="width:760px" role="img" aria-label="Ficha socioeconómica con preguntas sobre salud y transporte, información familiar y economía del hogar">
 <div class="stage" id="fs3st">
 
 <div class="win">
@@ -148,19 +152,18 @@
  </div>
 </div>
 
-<div class="card" style="left:416px;top:34px;width:470px;z-index:5">
+<div class="card" style="left:320px;top:34px;width:420px;z-index:5">
  <div class="ct"><i style="background:#e8a14a"></i>Familia</div>
- <table><colgroup><col style="width:128px"><col style="width:84px"><col style="width:88px"><col style="width:84px"><col></colgroup>
+ <table><colgroup><col style="width:117px"><col style="width:60px"><col style="width:82px"><col style="width:85px"><col></colgroup>
  <thead><tr><th>Nombre<span class="bd"><b>2</b><i></i></span></th><th>Tipo</th><th>Parentesco</th><th>Instrucción</th><th>Trabajo</th></tr></thead>
  <tbody>
  <tr><td>Camila Ortega</td><td>Primario</td><td>Hija</td><td>Básico</td><td>Estudiante</td></tr>
  <tr><td>Rosa Vinueza</td><td>Primario</td><td>Cónyuge</td><td>Bachiller</td><td>E. Privada</td></tr>
- <tr><td>Tomás Ortega</td><td>Primario</td><td>Hijo</td><td>Inicial</td><td>Estudiante</td></tr>
  <tr class="sel"><td class="g">Elena Ortega</td><td class="g">Secundario</td><td>Hermanos</td><td class="g"></td><td class="g"></td></tr>
  </tbody></table>
 </div>
 
-<div class="card" style="left:430px;top:262px;width:450px;z-index:6">
+<div class="card" style="left:330px;top:222px;width:410px;z-index:6">
  <div class="ct"><i style="background:#2f9a4a"></i>Economía del hogar</div>
  <table class="ec"><colgroup><col style="width:190px"><col style="width:90px"><col></colgroup>
  <thead><tr><th>Rubro</th><th style="text-align:right">Valor</th><th>Observación</th></tr></thead>
@@ -168,10 +171,8 @@
  <tr><td>Sueldo Trabajador (+)</td><td class="v pos">720.00</td><td></td></tr>
  <tr><td>Sueldo Esposo(a) (+)</td><td class="v pos">410.00</td><td></td></tr>
  <tr><td>Alimentación (-)</td><td class="v neg">260.00</td><td></td></tr>
- <tr><td>Servicios Básicos (-)</td><td class="v neg">55.00</td><td></td></tr>
  <tr><td>Arriendo (-)</td><td class="v neg">180.00</td><td></td></tr>
- <tr><td>Préstamos (-)</td><td class="v neg">150.00</td><td>Cooperativa</td></tr>
- <tr class="tot"><td>Total</td><td class="v">485.00</td><td></td></tr>
+ <tr class="tot"><td>Total</td><td class="v">690.00</td><td></td></tr>
  </tbody></table>
 </div>
 </div>
@@ -332,7 +333,7 @@
 
 
   var root=document.getElementById('fs3'),stage=root.firstElementChild,media=root.parentElement;
-  function fit(){var k=Math.min(1,(media.clientWidth-40)/900);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*900)+'px';}
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/760);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*760)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
