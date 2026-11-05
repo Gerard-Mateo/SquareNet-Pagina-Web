@@ -916,6 +916,7 @@ footer.site-footer { background: var(--color-neutral-900); color: #fff; margin-t
 .mod-fn-n { display: block; font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--mc, var(--color-accent)); margin-bottom: var(--space-2); }
 .mod-fn h3 { font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 var(--space-3); }
 .mod-fn p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--color-neutral-700); max-width: 46ch; }
+.mod-fn p strong { font-weight: 700; color: var(--color-text); }   /* palabras clave en negrita: lectura rápida */
 .mod-fn-copy, .mod-fn-media { min-width: 0; }
 .mod-fn-media { position: relative; min-height: 340px; border-radius: var(--radius-lg); background: color-mix(in srgb, var(--mc, var(--color-accent)) 8%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--mc, var(--color-accent)) 18%, transparent); display: grid; place-items: center; overflow: hidden; }
 /* Hueco hasta que llegue la animación de la función (se reemplaza todo .mod-fn-ph) */

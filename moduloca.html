@@ -116,10 +116,14 @@
 .as3 .pop .gn{color:#4f9a4f}
 .as3 .pop tr.sel td{background:#e8f0fb}
 .as3 .clip{overflow:hidden;border-radius:13px}
+@media (min-width:861px){
+  #ausentismos-y-permisos{grid-template-columns:minmax(0,7.5fr) minmax(260px,2.5fr);gap:clamp(20px,2vw,30px)}
+  #ausentismos-y-permisos .rp-stage{padding-inline:0}
+}
 /* Ausentismos y kardex de vacaciones */
 .kv3{font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
 .kv3 *{box-sizing:border-box}
-.kv3 .stage{position:relative;width:1000px;padding:28px 24px 0;
+.kv3 .stage{position:relative;width:960px;padding:28px 24px 0;
  background:transparent}
 .kv3 .win{position:relative;width:732px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
 .kv3 .tabs{display:flex;gap:2px;padding:8px 6px 0;border-bottom:1px solid #d2d2d2}
@@ -240,7 +244,7 @@
       <h2 id="fn-title">Funciones de Asistencia</h2>
       <div class="mod-fn-rows">
         <article class="mod-fn" id="registros-de-asistencia">
-          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-registros-de-asistencia.png" alt="" width="16" height="16">Registros de asistencia</h3><p>Todas las marcaciones de todos tus relojes, en una sola pantalla. Llegan solas desde ZKTeco, HIKVision y otros sistemas de cada sucursal, y también desde el celular con la marcación web. Con un filtro encuentras al instante a quien marcó la entrada pero olvidó la salida, antes de que se convierta en un problema de nómina.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-registros-de-asistencia.png" alt="" width="16" height="16">Registros de asistencia</h3><p><strong>Todas las marcaciones de todos tus relojes</strong>, en una sola pantalla. Llegan solas desde ZKTeco, HIKVision y otros sistemas de cada sucursal, y también desde el celular con la marcación web. Con un filtro encuentras al instante a <strong>quien marcó la entrada pero olvidó la salida</strong>, antes de que se convierta en un problema de nómina.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="registros-de-asistencia">
             <div class="rg3" id="rg3" style="width:720px" role="img" aria-label="Registros de asistencia con marcaciones desde relojes biométricos y autoservicio">
 <div class="stage" data-el="s">
@@ -271,7 +275,7 @@
           </div>
         </article>
         <article class="mod-fn" id="resumen-por-horario">
-          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-resumen-por-horario.png" alt="" width="16" height="16">Cálculo de horas</h3><p>En unos 2 segundos, SquareNet cruza las marcaciones con el horario de cada persona y te dice exactamente qué horas trabajó: normales, nocturnas, suplementarias al 50 % o extraordinarias al 100 %. Una línea de tiempo muestra de dónde sale cada hora, para que nunca más tengas que discutir un cálculo.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-resumen-por-horario.png" alt="" width="16" height="16">Cálculo de horas</h3><p><strong>En unos 2 segundos</strong>, SquareNet cruza las marcaciones con el horario de cada persona y te dice exactamente <strong>qué horas trabajó</strong>: normales, nocturnas, suplementarias al 50 % o extraordinarias al 100 %. Una línea de tiempo muestra <strong>de dónde sale cada hora</strong>, para que nunca más tengas que discutir un cálculo.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="resumen-por-horario">
             <div class="rh3" id="rh3" style="width:800px" role="img" aria-label="Resumen por horario con horas cumplidas, línea de tiempo y marcaciones de entrada y salida">
 <div class="stage" data-el="s">
@@ -301,7 +305,7 @@
         </article>
 
         <article class="mod-fn" id="aprobacion-de-horas-extra">
-          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-aprobacion-de-horas-extra.png" alt="" width="16" height="16">Horas extra</h3><p>Solo se paga lo que se aprueba. Los supervisores revisan las horas extra de su equipo y las aprueban o rechazan con un clic. Las aprobadas pasan directo al rol de pagos con su valor calculado, sin digitar nada. Controlas el costo de horas extra antes de que llegue a la nómina.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-aprobacion-de-horas-extra.png" alt="" width="16" height="16">Horas extra</h3><p><strong>Solo se paga lo que se aprueba</strong>. Los supervisores revisan las horas extra de su equipo y las aprueban o rechazan <strong>con un clic</strong>. Las aprobadas pasan directo al rol de pagos con su valor calculado, <strong>sin digitar nada</strong>. Controlas el costo de horas extra antes de que llegue a la nómina.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="aprobacion-de-horas-extra">
             <div class="ah3" id="ah3" style="width:880px" role="img" aria-label="Aprobación de horas extra y ejemplo de valores calculados en nómina">
 <div class="stage" data-el="s">
@@ -322,9 +326,9 @@
           </div>
         </article>
         <article class="mod-fn" id="ausentismos-y-permisos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Vacaciones y ausentismos</h3><p>Permisos, vacaciones y licencias en un kardex claro, como un estado de cuenta: días ganados, días usados y saldo por periodo. Crea los tipos de permiso que tu empresa necesite. Tus colaboradores solicitan sus vacaciones desde el autoservicio, viendo antes cuántos días tienen disponibles, y el jefe las aprueba desde su correo.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Vacaciones y ausentismos</h3><p>Permisos, vacaciones y licencias en un <strong>kardex claro</strong>, como un estado de cuenta: días ganados, días usados y <strong>saldo por periodo</strong>. Crea los tipos de permiso que tu empresa necesite. Tus colaboradores solicitan sus vacaciones desde el autoservicio, viendo antes cuántos días tienen disponibles, y <strong>el jefe las aprueba desde su correo</strong>.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="ausentismos-y-permisos">
-            <div class="kv3" id="kv3" style="width:1000px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
+            <div class="kv3" id="kv3" style="width:960px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
 <div class="stage" data-el="s">
  <div class="win" data-el="w">
   <div class="tabs"><span>Ausentismo</span><span class="on">Vacaciones</span></div>
@@ -349,7 +353,7 @@
           </div>
         </article>
         <article class="mod-fn" id="asignacion-de-horarios">
-          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-asignacion-diaria-de-horarios.png" alt="" width="16" height="16">Turnos y horarios</h3><p>Organiza los turnos de toda la semana en un cuadro, como una hoja de cálculo. Cada supervisor asigna a su equipo por día y ve de un vistazo quién está de vacaciones o con permiso. Perfecto para plantas industriales y turnos rotativos.</p></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-asignacion-diaria-de-horarios.png" alt="" width="16" height="16">Turnos y horarios</h3><p>Organiza los <strong>turnos de toda la semana en un cuadro</strong>, como una hoja de cálculo. Cada supervisor asigna a su equipo por día y ve de un vistazo <strong>quién está de vacaciones o con permiso</strong>. Perfecto para plantas industriales y turnos rotativos.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="asignacion-de-horarios">
             <div class="as3" id="as3" style="width:792px" role="img" aria-label="Cuadro semanal de asignación de horarios por persona y centro de costo, con detalle de un turno">
 <div class="stage"><div class="win"><div class="clip">
@@ -608,7 +612,7 @@ root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} 
 s.style.height=Math.max(mr.b,k3.b,routeBottom)+20+'px';
 
 const stage=root.firstElementChild,media=root.parentElement;
-function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/1000));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1000)+'px';}
+function fit(){const k=Math.max(0,Math.min(1,media.clientWidth/960));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*960)+'px';}
 fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
 })();
 </script>
