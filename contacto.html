@@ -309,8 +309,8 @@
         if (c[0] === 'EC') {
           if (d.indexOf('593') === 0 && d.length >= 11) d = d.slice(3);
           n = d.replace(/^0/, '');
-          var cel = /^9\d{8}$/.test(n), fijo = /^[2-7]\d{7}$/.test(n);
-          if (!cel && !fijo) { if (show) sayPh('err', 'Revisa el número: en Ecuador un celular tiene 10 dígitos (09…) y un fijo 9, con el código de provincia (02…).'); return null; }
+          var cel = /^9[2-9]\d{7}$/.test(n), fijo = /^[2-7]\d{7}$/.test(n);
+          if (!cel && !fijo) { if (show) sayPh('err', 'Revisa el número: en Ecuador un celular tiene 10 dígitos (092… a 099…) y un fijo 9, con el código de provincia (02…).'); return null; }
           n = cel ? n.replace(/^(\d{2})(\d{3})(\d{4})$/, '$1 $2 $3') : n.replace(/^(\d)(\d{3})(\d{4})$/, '$1 $2 $3');
         } else {
           if (d.indexOf(c[2]) === 0 && d.length - c[2].length >= c[3]) d = d.slice(c[2].length);
