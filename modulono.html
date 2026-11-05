@@ -159,7 +159,7 @@
 /* Rol de pagos .rl3 (pantalla del cliente; se dibuja a 840 px y se escala a la columna) */
 .rl3 *{box-sizing:border-box}
 .rl3{margin:0;color:#1d1b1a}
-.rl3 .stage{position:relative;width:840px;height:410px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
+.rl3 .stage{position:relative;width:840px;height:350px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
 .rl3 .win{position:absolute;left:16px;top:14px;width:450px;height:382px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden}
 .rl3 .ph{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;background:#f8f9fb;border-bottom:1px solid #eceef2;color:#6b7488;font-size:11px}
 .rl3 .pr{display:flex;align-items:center;height:30px;padding:0 10px;gap:8px;background:#e9f1fb;border-bottom:1px solid #dbe3ee}
@@ -170,7 +170,7 @@
 .rl3 td.v,.rl3 th.v{text-align:right;padding-right:8px}
 .rl3 td.c{text-align:center;padding:0;color:#555}
 .rl3 tr.sec td{height:22px;font-size:10.5px;font-weight:700;letter-spacing:.07em;color:#8a8576;background:#f6f5f2;border-bottom:1px solid #eceae4}
-.rl3 td.g{background:#dff3d9}.rl3 td.r{background:#fbdcdc}
+.rl3 tr.sel td.v.g{background:#dff3d9}.rl3 td.g{background:#dff3d9}.rl3 td.r{background:#fbdcdc}
 .rl3 tr.sel td{background:#e1ecfa}
 .rl3 tr.sel td.cd{outline:1px solid #3b9be8;outline-offset:-1px}
 .rl3 tr.sel td.v{outline:1px solid #3b9be8;outline-offset:-1px;background:#fbdcdc}
@@ -242,17 +242,16 @@
           <div class="mod-fn-media rp-stage" data-fn="roles-de-pago">
           <div class="rl3" id="rl3" style="width:840px" role="img" aria-label="Rol de pagos en SquareNet: rubros informativos, ingresos y egresos de un colaborador, con el detalle del aporte al IESS y su distribución por centro de costo">
 <div class="stage">
-<div class="win"><div class="ph"><span style="flex:1;padding-left:26px">Apellidos y Nombres</span><span style="width:70px;text-align:right">Sueldo</span><span style="width:80px">Cargo</span></div>
- <div class="pr"><svg width="15" height="15" viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="7" fill="#2fa84f"/><path d="M4 7.8l2.4 2.4L11 5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nm">Salazar Vega Marco Antonio</span><span style="width:70px;text-align:right">1,250.00</span><span style="width:80px;padding-left:10px">Analista</span></div>
+<div class="win">
  <table><colgroup><col style="width:66px"><col style="width:48px"><col style="width:164px"><col style="width:84px"><col style="width:24px"><col style="width:30px"><col></colgroup>
  <thead><tr><th>Tipo</th><th>Código</th><th>Rubro</th><th class="v">Valor</th><th class="c">S</th><th class="c">I</th><th class="c">F</th></tr></thead><tbody data-el="b"></tbody></table>
  <div class="ft"><div class="lb">Quincena:<br>Total a Recibir:</div><div class="vl">500.00<br>788.85</div></div>
 </div>
-<div class="card" data-el="c1" style="left:494px;top:34px;width:324px"><div class="xtabs"><span class="xtab on">Detalle</span><span class="xtab">Distribución</span></div>
+<div class="card" data-el="c1" style="left:494px;top:6px;width:324px"><div class="xtabs"><span class="xtab on">Detalle</span><span class="xtab">Distribución</span></div>
  <table class="dt"><colgroup><col><col style="width:90px"></colgroup><thead><tr><th>Concepto</th><th class="v">Valor</th></tr></thead><tbody>
  <tr><td>(Proceso de Rol)</td><td class="v">126.73</td></tr><tr class="sel"><td>Ajuste manual</td><td class="v" style="outline:1px solid #3b9be8;outline-offset:-1px">10.00</td></tr></tbody></table>
  <div class="tot" style="--w:90px"><span>Total</span><span class="n">136.73</span></div></div>
-<div class="card" data-el="c2" style="left:494px;top:226px;width:324px"><div class="xtabs"><span class="xtab">Detalle</span><span class="xtab on">Distribución</span></div>
+<div class="card" data-el="c2" style="left:494px;top:190px;width:324px"><div class="xtabs"><span class="xtab">Detalle</span><span class="xtab on">Distribución</span></div>
  <table class="dt"><colgroup><col><col style="width:98px"><col style="width:60px"></colgroup><thead><tr><th>Centro de Costo</th><th>Fracción</th><th class="v">Valor</th></tr></thead><tbody>
  <tr class="sel"><td>UIO ADM Finanzas</td><td>20.00/100.00</td><td class="v">25.35</td></tr><tr><td>UIO ADM Mercadeo</td><td>10.00/100.00</td><td class="v">12.67</td></tr><tr><td>GYE ADM Cobranzas</td><td>70.00/100.00</td><td class="v">88.71</td></tr></tbody></table>
  <div class="tot" style="--w:60px"><span style="flex:none;width:130px">Total</span><span style="width:98px">100.00</span><span class="n" style="margin-left:auto">126.73</span></div></div>
@@ -717,8 +716,8 @@ c.style.left=(p.left-s.left+158)+'px'; c.style.top=(p.top-s.top+22)+'px';
   const pr='<svg width="14" height="13" viewBox="0 0 14 13"><rect x="3" y="1" width="8" height="4" fill="#fff" stroke="#888"/><rect x="1" y="4.5" width="12" height="5.5" rx="1" fill="#8a8f99"/><rect x="3" y="8" width="8" height="4" fill="#fff" stroke="#888"/></svg>';
   const fx='<svg width="14" height="13" viewBox="0 0 14 13"><rect x=".5" y=".5" width="13" height="12" rx="1" fill="#fff" stroke="#8a9ab0"/><path d="M.5 4.5h13M.5 8.5h13M5 .5v12M9.5 .5v12" stroke="#a8b4c6"/></svg>';
   const R=[['s','INFORMATIVOS'],['Normal','0010','Sueldo Base','1,250.00','','p'],['Normal','0500','Base Aportable IESS','1,446.88','','pf'],
-    ['s','INGRESOS'],['Normal','0120','Sueldo Devengado','1,250.00','+','p','g'],['Normal','0100','Valor Horas extra 50%','46.88','+','p','g'],['Normal','0235','Comisiones','150.00','+','p','g'],
-    ['s','EGRESOS'],['Quincena','0330','Quincena','500.00','-','pf','r'],['Normal','0510','Aporte personal IESS','136.73','-','pf','r',1],['Normal','0750','Impuesto a la renta','21.30','-','pf','r']];
+    ['s','INGRESOS'],['Normal','0120','Sueldo Devengado','1,250.00','+','p','g',1],['Normal','0100','Valor Horas extra 50%','46.88','+','p','g'],['Normal','0235','Comisiones','150.00','+','p','g'],
+    ['s','EGRESOS'],['Quincena','0330','Quincena','500.00','-','pf','r'],['Normal','0510','Aporte personal IESS','136.73','-','pf','r'],['Normal','0750','Impuesto a la renta','21.30','-','pf','r']];
   q('b').innerHTML=R.map(r=>r[0]=='s'?`<tr class="sec"><td colspan="7">${r[1]}</td></tr>`:`<tr${r[7]?' class="sel"':''}><td>${r[0]}</td><td class="cd">${r[1]}</td><td>${r[2]}</td><td class="v ${r[6]||''}">${r[3]}</td><td class="c">${r[4]}</td><td class="c">${pr}</td><td class="c">${r[5]=='pf'?fx:''}</td></tr>`).join('');
   // líneas punteadas medidas sin escala (antes de fit)
   const O=stage.getBoundingClientRect(),rl=e=>{const r=e.getBoundingClientRect();return{l:r.left-O.left,r:r.right-O.left,t:r.top-O.top,b:r.bottom-O.top}};
