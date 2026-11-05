@@ -20,6 +20,42 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<style>
+/* ficha-del-colaborador: pantalla del cliente, acotada a .pe3 */
+.pe3 *{box-sizing:border-box}
+.pe3{margin:0;color:#1d1b1a}
+.pe3 .stage{position:relative;width:1390px;height:700px;overflow:hidden;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;
+ background:radial-gradient(520px 360px at 90% 10%,rgba(59,127,196,.16),transparent 70%),radial-gradient(460px 320px at 8% 96%,rgba(120,170,230,.16),transparent 70%),#faf8f5}
+.pe3 .win{position:absolute;left:330px;top:80px;width:770px;height:470px;background:#f0f0f0;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);padding:10px}
+.pe3 .gb{position:absolute;border:1px solid #c8c8c8;border-radius:4px;background:linear-gradient(#f9f9f9,#ececec)}
+.pe3 .gb>b{position:absolute;left:6px;top:-9px;background:linear-gradient(#f4f4f4,#f4f4f4);padding:0 4px;font-weight:400;font-size:12px;color:#222}
+.pe3 .f{position:absolute;display:flex;align-items:center;height:22px}
+.pe3 .f label{width:148px;flex:none}
+.pe3 .in{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 4px;line-height:19px;white-space:nowrap;overflow:hidden;position:relative}
+.pe3 .in.d{background:#e3e3e3}
+.pe3 .in.dd::after{content:"";position:absolute;right:0;top:0;width:19px;height:19px;background:#f1f1f1;border-left:1px solid #ccc}
+.pe3 .in.dd::before{content:"";position:absolute;right:5px;top:7px;border:4px solid transparent;border-top:5px solid #888;z-index:1}
+.pe3 u{text-decoration:underline dotted}
+.pe3 .btn{position:absolute;width:30px;height:30px;border:1px solid #b9b9b9;border-radius:4px;background:linear-gradient(#fdfdfd,#dedede);display:grid;place-items:center}
+.pe3 .card{flex-direction:column;position:absolute;z-index:5;background:rgba(255,255,255,.98);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 40px 70px -18px rgba(30,70,130,.34),0 10px 24px -6px rgba(30,70,130,.14);overflow:hidden;display:flex}
+.pe3 .sb{width:150px;flex:none;background:#fff;border-right:1px solid #dcdcdc;padding:6px 0}
+.pe3 .sb div{height:26px;display:flex;align-items:center;gap:8px;padding:0 10px;color:#2f6fb3;white-space:nowrap}
+.pe3 .sb div.on{background:#fff;color:#222;border:1px solid #d5d5d5;border-right:0;margin-left:2px;border-radius:12px 0 0 12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.pe3 .sb i{width:15px;height:15px;border-radius:4px;flex:none}
+.pe3 .tw{flex:1;min-width:0}
+.pe3 table{border-collapse:collapse;table-layout:fixed;width:100%}
+.pe3 th{height:25px;text-align:left;font-weight:600;padding:0 5px;background:#f6f6f6;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;position:relative}
+.pe3 td{height:24px;padding:0 5px;border-bottom:1px solid #e4e4e4;border-right:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pe3 tr.sel td{background:#dcebfa}
+.pe3 tr.sel td:first-child{outline:1px solid #3b9be8;outline-offset:-1px}
+.pe3 td.c{text-align:center}
+.pe3 .bd{position:absolute;right:3px;top:2px;width:10px;height:20px}
+.pe3 .bd b{display:block;width:10px;height:10px;border-radius:50%;background:#4a8fd0;color:#fff;font:700 7px/10px "Segoe UI",sans-serif;text-align:center}
+.pe3 .bd i{display:block;margin:1px 0 0 1px;border:4px solid transparent;border-bottom:5px solid #8a8a8a;border-top:0}
+.pe3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+.pe3 .ct{display:flex;align-items:center;gap:8px;padding:11px 14px 9px;font-size:14px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
+.pe3 .ct i{width:16px;height:16px;border-radius:4px}
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -54,7 +90,68 @@
       <div class="mod-fn-rows">
         <article class="mod-fn" id="ficha-del-colaborador">
           <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-ficha-del-colaborador.png" alt="" width="16" height="16">Ficha del colaborador</h3><p>La ficha completa de cada persona: fotografía, residencia, teléfonos, seguro social, datos médicos, cuentas bancarias, experiencia, idiomas y familiares, con su carpeta virtual de documentos.</p></div>
-          <div class="mod-fn-media" data-fn="ficha-del-colaborador"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-ficha-del-colaborador.png" alt="" width="16" height="16"><span>Ficha del colaborador</span></div></div>
+          <div class="mod-fn-media rp-stage" data-fn="ficha-del-colaborador">
+          <div class="pe3" id="pe3" style="width:1390px">
+<div class="stage" id="pe3s">
+<div class="win" id="pe3w">
+ <div class="gb" style="left:8px;top:12px;width:368px;height:285px"><b>Información General</b>
+  <div class="f" style="left:8px;top:16px"><label>Código</label><span class="in d" style="width:200px">0004127</span></div>
+  <div class="f" style="left:8px;top:40px"><label>Apellidos</label><span class="in" style="width:200px">ROMERO VITERI</span></div>
+  <div class="f" style="left:8px;top:64px"><label>Nombres</label><span class="in" style="width:200px">ANDRÉS FELIPE</span></div>
+  <div class="f" style="left:8px;top:88px"><label>Identificación</label><span class="in" style="width:200px">0102030405-6</span></div>
+  <div class="f" style="left:8px;top:112px"><label><u>Código Alterno</u></label><span class="in" style="width:200px">0008100234</span></div>
+  <div class="f" style="left:8px;top:136px"><label>Código Alterno 2</label><span class="in" style="width:200px">04312</span></div>
+  <div class="f" style="left:8px;top:160px"><label>Fecha Creación</label><span class="in d dd" style="width:200px">12/03/2019</span></div>
+  <div class="f" style="left:8px;top:184px"><label><u>Estado Ficha</u></label><span class="in dd" style="width:200px">Habilitada</span></div>
+  <div class="f" style="left:8px;top:208px"><label>Sucursal</label><span class="in dd" style="width:200px">VALLE - Quito</span></div>
+ </div>
+ <div class="gb" style="left:384px;top:12px;width:368px;height:285px"><b>Imágenes</b>
+  <div class="f" style="left:8px;top:12px"><label style="width:140px"><u>Foto</u></label><span class="in" style="width:200px"></span></div>
+  <span class="btn" style="left:10px;top:42px"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="8" r="6" fill="#8a8f99"/><circle cx="10" cy="8" r="3" fill="#2b3040"/><path d="M4 18h12l-2-4H6z" fill="#6b7080"/></svg></span>
+  <span class="btn" style="left:50px;top:42px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="11" height="14" fill="#fff" stroke="#777"/><path d="M5 6h7M5 9h7" stroke="#aaa"/><path d="M10 17l4-5 4 5z" fill="#2fa84f"/></svg></span>
+  <div style="position:absolute;left:206px;top:40px;width:100px;height:130px;background:linear-gradient(#cfd8e6,#aab8cd);border:1px solid #9fb0c6;overflow:hidden"><svg width="100" height="130" viewBox="0 0 100 130"><circle cx="50" cy="52" r="22" fill="#7e8da6"/><path d="M6 130c2-34 20-46 44-46s42 12 44 46z" fill="#7e8da6"/></svg></div>
+  <div class="f" style="left:8px;top:192px"><label style="width:140px"><u>Firma</u></label><span class="in" style="width:200px"></span></div>
+  <span class="btn" style="left:10px;top:218px"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="8" r="6" fill="#8a8f99"/><circle cx="10" cy="8" r="3" fill="#2b3040"/><path d="M4 18h12l-2-4H6z" fill="#6b7080"/></svg></span>
+  <span class="btn" style="left:50px;top:218px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="11" height="14" fill="#fff" stroke="#777"/><path d="M5 6h7M5 9h7" stroke="#aaa"/><path d="M10 17l4-5 4 5z" fill="#2fa84f"/></svg></span>
+  <div style="position:absolute;left:166px;top:218px;width:180px;height:55px;background:#fff;border:1px solid #e5e5e5"></div>
+ </div>
+ <div class="gb" style="left:8px;top:308px;width:368px;height:152px"><b>Información Personal</b>
+  <div class="f" style="left:8px;top:14px"><label>Pasaporte</label><span class="in" style="width:200px"></span></div>
+  <div class="f" style="left:8px;top:38px"><label>Sexo</label><span class="in dd" style="width:200px">Masculino</span></div>
+  <div class="f" style="left:8px;top:62px"><label>Estado Civil</label><span class="in dd" style="width:200px">Casado(a)</span></div>
+  <div class="f" style="left:8px;top:86px"><label>Profesión</label><span class="in dd" style="width:200px"></span></div>
+  <div class="f" style="left:8px;top:110px"><label>Nivel de Educación</label><span class="in dd" style="width:200px"></span></div>
+ </div>
+ <div class="gb" style="left:384px;top:308px;width:368px;height:152px"><b>Teléfonos</b>
+  <div class="f" style="left:8px;top:14px"><label style="width:146px">Domicilio</label><span class="in" style="width:200px">09-8 123 456</span></div>
+  <div class="f" style="left:8px;top:38px"><label style="width:146px">Celular</label><span class="in" style="width:200px">09 99 000 111</span></div>
+  <div class="f" style="left:8px;top:62px"><label style="width:146px">Celular Empresa</label><span class="in" style="width:200px">__ __ ___ ___</span></div>
+  <div class="f" style="left:8px;top:86px"><label style="width:146px">Trabajo</label><span class="in" style="width:200px"></span></div>
+  <div class="f" style="left:8px;top:110px"><label style="width:146px">Extensión</label><span class="in" style="width:200px"></span></div>
+ </div>
+</div>
+
+<div class="card" id="pe3c1" style="left:18px;top:335px;width:400px;transform:rotate(-2deg)">
+ <div class="ct"><i style="background:#2fa84f"></i>Cuentas Bancarias</div>
+ <table><colgroup><col style="width:135px"><col style="width:75px"><col style="width:110px"><col></colgroup>
+ <thead><tr><th>Banco</th><th>Tipo</th><th>N.º de Cuenta</th><th>Nómina</th></tr></thead>
+ <tbody><tr class="sel"><td>BANCO DEL VALLE</td><td>Ahorros</td><td>2200123456</td><td class="c">✓</td></tr></tbody></table>
+</div>
+<div class="card" id="pe3c2" style="left:985px;top:262px;width:400px;transform:rotate(2deg)">
+ <div class="ct"><i style="background:#e0883a"></i>Familiares</div>
+ <table><colgroup><col style="width:150px"><col style="width:95px"><col style="width:85px"><col></colgroup>
+ <thead><tr><th>Familiar<span class="bd"><b>3</b><i></i></span></th><th>Identificación</th><th>Parentesco</th><th>Carga</th></tr></thead>
+ <tbody><tr class="sel"><td>ROMERO PAZ MATEO</td><td>0100000011-2</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO PAZ SOFÍA</td><td>0100000012-3</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO LUNA CARLOS</td><td></td><td>Referencia</td><td class="c">-</td></tr></tbody></table>
+</div>
+<div class="card" id="pe3c3" style="left:520px;top:500px;width:500px;transform:rotate(1deg)">
+ <div class="ct"><i style="background:#4a8fd0"></i>Documentos</div>
+ <table><colgroup><col style="width:170px"><col style="width:46px"><col style="width:60px"><col style="width:62px"><col></colgroup>
+ <thead><tr><th>Tipo</th><th>Ver</th><th>Cargar</th><th>Estado</th><th>Fecha</th></tr></thead>
+ <tbody id="pe3dt"></tbody></table>
+</div>
+</div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="contratos">
           <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-contratos.png" alt="" width="16" height="16">Contratos</h3><p>Registro de contratos e impresión directa desde plantillas en Word: temporal, indefinido, a prueba, nombramiento.</p></div>
@@ -207,6 +304,17 @@
       mainNav.setAttribute('data-open', String(!open));
       navToggle.setAttribute('aria-expanded', String(!open));
     });
+  </script>
+  <script>
+(function(){
+const up='<svg width="24" height="22" viewBox="0 0 24 22" style="vertical-align:middle"><path d="M2 9l3-3h14l3 3v11H2z" fill="#5fa8e0" stroke="#2f6fb3" stroke-width="1.200"/><path d="M12 18V3m-5.500 5.500L12 3l5.500 5.500" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 18V3m-5.500 5.500L12 3l5.500 5.500" fill="none" stroke="#2fa84f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const D=[['Cédula','05/10/2025 09:12:03'],['Certificado de estudios','05/10/2025 09:12:04'],['Curriculum','05/10/2025 09:11:58'],['Papeleta de votación','05/10/2025 09:12:04']];
+document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td></td><td></td><td>${r[1]}</td></tr>`).join('');
+
+  var root=document.getElementById('pe3'),stage=root.firstElementChild,media=root.parentElement;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/1390);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1390)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
   </script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
