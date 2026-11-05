@@ -21,11 +21,11 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-/* ficha-del-colaborador: pantalla del cliente, acotada a .pe3 */
+/* ficha-del-colaborador: pantalla del cliente, acotada a .pe3 (se dibuja a 1260 px y se escala a la columna) */
 .pe3 *{box-sizing:border-box}
 .pe3{margin:0;color:#1d1b1a}
-.pe3 .stage{position:relative;width:1390px;height:720px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;}
-.pe3 .win{position:absolute;left:330px;top:80px;width:770px;height:470px;background:#f0f0f0;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);padding:10px}
+.pe3 .stage{position:relative;width:1260px;height:580px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;}
+.pe3 .win{position:absolute;left:390px;top:70px;width:396px;height:272px;background:#f0f0f0;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);padding:10px;transform:scale(1.2);transform-origin:top left;z-index:6}
 .pe3 .gb{position:absolute;border:1px solid #c8c8c8;border-radius:4px;background:linear-gradient(#f9f9f9,#ececec)}
 .pe3 .gb>b{position:absolute;left:6px;top:-9px;background:linear-gradient(#f4f4f4,#f4f4f4);padding:0 4px;font-weight:400;font-size:12px;color:#222}
 .pe3 .f{position:absolute;display:flex;align-items:center;height:22px}
@@ -54,6 +54,10 @@
 .pe3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
 .pe3 .ct{display:flex;align-items:center;gap:8px;padding:11px 14px 9px;font-size:14px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
 .pe3 .ct i{width:16px;height:16px;border-radius:4px}
+.pe3 .im{display:flex;gap:16px;padding:14px 16px 16px}
+.pe3 .im label{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;text-transform:uppercase;margin-bottom:6px}
+.pe3 .ph{width:104px;height:128px;border-radius:8px;overflow:hidden;border:1px solid #c5d0e0;background:linear-gradient(#d4deec,#aebdd2)}
+.pe3 .fr{width:178px;height:84px;border:1px solid #dfe3ea;border-radius:8px;background:#fff}
 </style>
 </head>
 <body>
@@ -87,13 +91,13 @@
     <section class="mod-sec mod-fns" id="funciones" style="--mc:#2F9E44" aria-labelledby="fn-title">
       <h2 id="fn-title">Funciones de Recursos Humanos</h2>
       <div class="mod-fn-rows">
-        <article class="mod-fn is-shot" id="ficha-del-colaborador">
+        <article class="mod-fn" id="ficha-del-colaborador">
           <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-ficha-del-colaborador.png" alt="" width="16" height="16">Ficha del colaborador</h3><p>La ficha completa de cada persona: fotografía, residencia, teléfonos, seguro social, datos médicos, cuentas bancarias, experiencia, idiomas y familiares, con su carpeta virtual de documentos.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="ficha-del-colaborador">
-          <div class="pe3" id="pe3" style="width:1390px">
+          <div class="pe3" id="pe3" style="width:1260px">
 <div class="stage" id="pe3s">
 <div class="win" id="pe3w">
- <div class="gb" style="left:8px;top:12px;width:368px;height:285px"><b>Información General</b>
+ <div class="gb" style="left:8px;top:12px;width:378px;height:244px"><b>Información General</b>
   <div class="f" style="left:8px;top:16px"><label>Código</label><span class="in d" style="width:200px">0004127</span></div>
   <div class="f" style="left:8px;top:40px"><label>Apellidos</label><span class="in" style="width:200px">ROMERO VITERI</span></div>
   <div class="f" style="left:8px;top:64px"><label>Nombres</label><span class="in" style="width:200px">ANDRÉS FELIPE</span></div>
@@ -104,45 +108,25 @@
   <div class="f" style="left:8px;top:184px"><label><u>Estado Ficha</u></label><span class="in dd" style="width:200px">Habilitada</span></div>
   <div class="f" style="left:8px;top:208px"><label>Sucursal</label><span class="in dd" style="width:200px">VALLE - Quito</span></div>
  </div>
- <div class="gb" style="left:384px;top:12px;width:368px;height:285px"><b>Imágenes</b>
-  <div class="f" style="left:8px;top:12px"><label style="width:140px"><u>Foto</u></label><span class="in" style="width:200px"></span></div>
-  <span class="btn" style="left:10px;top:42px"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="8" r="6" fill="#8a8f99"/><circle cx="10" cy="8" r="3" fill="#2b3040"/><path d="M4 18h12l-2-4H6z" fill="#6b7080"/></svg></span>
-  <span class="btn" style="left:50px;top:42px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="11" height="14" fill="#fff" stroke="#777"/><path d="M5 6h7M5 9h7" stroke="#aaa"/><path d="M10 17l4-5 4 5z" fill="#2fa84f"/></svg></span>
-  <div style="position:absolute;left:206px;top:40px;width:100px;height:130px;background:linear-gradient(#cfd8e6,#aab8cd);border:1px solid #9fb0c6;overflow:hidden"><svg width="100" height="130" viewBox="0 0 100 130"><circle cx="50" cy="52" r="22" fill="#7e8da6"/><path d="M6 130c2-34 20-46 44-46s42 12 44 46z" fill="#7e8da6"/></svg></div>
-  <div class="f" style="left:8px;top:192px"><label style="width:140px"><u>Firma</u></label><span class="in" style="width:200px"></span></div>
-  <span class="btn" style="left:10px;top:218px"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="8" r="6" fill="#8a8f99"/><circle cx="10" cy="8" r="3" fill="#2b3040"/><path d="M4 18h12l-2-4H6z" fill="#6b7080"/></svg></span>
-  <span class="btn" style="left:50px;top:218px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="11" height="14" fill="#fff" stroke="#777"/><path d="M5 6h7M5 9h7" stroke="#aaa"/><path d="M10 17l4-5 4 5z" fill="#2fa84f"/></svg></span>
-  <div style="position:absolute;left:166px;top:218px;width:180px;height:55px;background:#fff;border:1px solid #e5e5e5"></div>
- </div>
- <div class="gb" style="left:8px;top:308px;width:368px;height:152px"><b>Información Personal</b>
-  <div class="f" style="left:8px;top:14px"><label>Pasaporte</label><span class="in" style="width:200px"></span></div>
-  <div class="f" style="left:8px;top:38px"><label>Sexo</label><span class="in dd" style="width:200px">Masculino</span></div>
-  <div class="f" style="left:8px;top:62px"><label>Estado Civil</label><span class="in dd" style="width:200px">Casado(a)</span></div>
-  <div class="f" style="left:8px;top:86px"><label>Profesión</label><span class="in dd" style="width:200px"></span></div>
-  <div class="f" style="left:8px;top:110px"><label>Nivel de Educación</label><span class="in dd" style="width:200px"></span></div>
- </div>
- <div class="gb" style="left:384px;top:308px;width:368px;height:152px"><b>Teléfonos</b>
-  <div class="f" style="left:8px;top:14px"><label style="width:146px">Domicilio</label><span class="in" style="width:200px">09-8 123 456</span></div>
-  <div class="f" style="left:8px;top:38px"><label style="width:146px">Celular</label><span class="in" style="width:200px">09 99 000 111</span></div>
-  <div class="f" style="left:8px;top:62px"><label style="width:146px">Celular Empresa</label><span class="in" style="width:200px">__ __ ___ ___</span></div>
-  <div class="f" style="left:8px;top:86px"><label style="width:146px">Trabajo</label><span class="in" style="width:200px"></span></div>
-  <div class="f" style="left:8px;top:110px"><label style="width:146px">Extensión</label><span class="in" style="width:200px"></span></div>
- </div>
 </div>
-
-<div class="card" id="pe3c1" style="left:18px;top:335px;width:400px;transform:rotate(-2deg)">
+<div class="card" id="pe3c4" style="left:46px;top:12px;width:352px">
+ <div class="ct"><i style="background:#8a63c9"></i>Imágenes</div>
+ <div class="im"><div><label>Foto</label><div class="ph"><svg width="104" height="128" viewBox="0 0 104 128"><circle cx="52" cy="50" r="23" fill="#8392ab"/><path d="M6 128c2-36 20-48 46-48s44 12 46 48z" fill="#8392ab"/></svg></div></div>
+ <div><label>Firma</label><div class="fr"><svg width="176" height="82" viewBox="0 0 176 82"><path d="M12 56C20 14 34 12 30 48c-2 14 8 10 16-10 4-10 10-10 8 2-2 12 6 12 14-4 4-8 10-6 8 4s6 10 14-2 8-8 6 2 6 8 14-6c8-12 14-12 12-2" fill="none" stroke="#1f2f6b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 66C50 58 110 62 160 54" fill="none" stroke="#1f2f6b" stroke-width="1.4" stroke-linecap="round"/></svg></div></div></div>
+</div>
+<div class="card" id="pe3c1" style="left:0;top:250px;width:400px">
  <div class="ct"><i style="background:#2fa84f"></i>Cuentas Bancarias</div>
  <table><colgroup><col style="width:135px"><col style="width:75px"><col style="width:110px"><col></colgroup>
  <thead><tr><th>Banco</th><th>Tipo</th><th>N.º de Cuenta</th><th>Nómina</th></tr></thead>
  <tbody><tr class="sel"><td>BANCO DEL VALLE</td><td>Ahorros</td><td>2200123456</td><td class="c">✓</td></tr></tbody></table>
 </div>
-<div class="card" id="pe3c2" style="left:985px;top:262px;width:400px;transform:rotate(2deg)">
+<div class="card" id="pe3c2" style="left:870px;top:120px;width:360px">
  <div class="ct"><i style="background:#e0883a"></i>Familiares</div>
  <table><colgroup><col style="width:150px"><col style="width:95px"><col style="width:85px"><col></colgroup>
  <thead><tr><th>Familiar<span class="bd"><b>3</b><i></i></span></th><th>Identificación</th><th>Parentesco</th><th>Carga</th></tr></thead>
  <tbody><tr class="sel"><td>ROMERO PAZ MATEO</td><td>0100000011-2</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO PAZ SOFÍA</td><td>0100000012-3</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO LUNA CARLOS</td><td></td><td>Referencia</td><td class="c">-</td></tr></tbody></table>
 </div>
-<div class="card" id="pe3c3" style="left:520px;top:500px;width:500px;transform:rotate(1deg)">
+<div class="card" id="pe3c3" style="left:380px;top:405px;width:500px">
  <div class="ct"><i style="background:#4a8fd0"></i>Documentos</div>
  <table><colgroup><col style="width:170px"><col style="width:46px"><col style="width:60px"><col style="width:62px"><col></colgroup>
  <thead><tr><th>Tipo</th><th>Ver</th><th>Cargar</th><th>Estado</th><th>Fecha</th></tr></thead>
@@ -311,7 +295,7 @@ const D=[['Cédula','05/10/2025 09:12:03'],['Certificado de estudios','05/10/202
 document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td></td><td></td><td>${r[1]}</td></tr>`).join('');
 
   var root=document.getElementById('pe3'),stage=root.firstElementChild,media=root.parentElement;
-  function fit(){var k=Math.min(1,(media.clientWidth-40)/1390);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1390)+'px';}
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/1260);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1260)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
