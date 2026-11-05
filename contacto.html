@@ -143,9 +143,8 @@
     <div class="ct-grid">
       <form class="lead-form" id="leadForm" novalidate data-reveal>
         <h2>Solicita una cotización</h2>
-        <div class="lead-row">
-          <div class="lead-f"><label for="lf-name">Nombre<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="given-name" required></div>
-          <div class="lead-f"><label for="lf-last">Apellido<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-last" name="last" autocomplete="family-name" required></div>
+        <div class="lead-row one">
+          <div class="lead-f"><label for="lf-name">Nombre y apellidos<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="name" required></div>
         </div>
         <div class="lead-row">
           <div class="lead-f"><label for="lf-company">Empresa<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-company" name="company" autocomplete="organization" placeholder="Razón social" required></div>
@@ -376,8 +375,8 @@
         var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
         var size = (form.querySelector('input[name=size]:checked') || {}).value;
         f.source.classList.toggle('is-bad', !v('source'));
-        if (!v('name') || !v('last') || !v('company') || !v('contact') || !v('phone') || !size || !v('source')) {
-          err.textContent = 'Completa los campos con *: nombre, apellido, empresa, correo, teléfono, país, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
+        if (!v('name') || !v('company') || !v('contact') || !v('phone') || !size || !v('source')) {
+          err.textContent = 'Completa los campos con *: nombre y apellidos, empresa, correo, teléfono, país, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
         }
         var contact = check(true), phone = checkPhone(true);
         if (!contact) { err.hidden = true; ct.focus(); return; }
@@ -386,7 +385,7 @@
         var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) {
           return c === otro && v('other') ? 'Otro: ' + v('other') : c.value;
         }).join(', ') || 'No indicado';
-        var body = 'Nombre: ' + v('name') + ' ' + v('last') + (v('role') ? '\nCargo: ' + v('role') : '') + '\nEmpresa: ' + v('company') + '\n' + contact + '\n' + phone +
+        var body = 'Nombre: ' + v('name') + (v('role') ? '\nCargo: ' + v('role') : '') + '\nEmpresa: ' + v('company') + '\n' + contact + '\n' + phone +
           '\nPaís: ' + v('country') + '\nNos conoció por: ' + v('source') + '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
           (v('msg') ? '\n\nComentarios:\n' + v('msg') : '');
         location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
