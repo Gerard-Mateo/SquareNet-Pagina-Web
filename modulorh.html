@@ -21,13 +21,17 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-/* ficha-del-colaborador: pantalla del cliente, acotada a .pe3 */
+/* ficha-del-colaborador: pantalla del cliente, acotada a .pe3 (se dibuja a 1260 px y se escala a la columna) */
+@media (min-width:861px){
+  #ficha-del-colaborador{grid-template-columns:minmax(240px,3fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+  #ficha-del-colaborador .rp-stage{padding-inline:0}
+}
 .pe3 *{box-sizing:border-box}
 .pe3{margin:0;color:#1d1b1a}
-.pe3 .stage{position:relative;width:1390px;height:720px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;}
-.pe3 .win{position:absolute;left:330px;top:80px;width:770px;height:470px;background:#f0f0f0;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);padding:10px}
-.pe3 .gb{position:absolute;border:1px solid #c8c8c8;border-radius:4px;background:linear-gradient(#f9f9f9,#ececec)}
-.pe3 .gb>b{position:absolute;left:6px;top:-9px;background:linear-gradient(#f4f4f4,#f4f4f4);padding:0 4px;font-weight:400;font-size:12px;color:#222}
+.pe3 .stage{position:relative;width:1260px;height:580px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;}
+.pe3 .win{position:absolute;left:390px;top:70px;width:396px;height:272px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);padding:10px;transform:scale(1.2);transform-origin:top left}
+.pe3 .gb{position:absolute;border:1px solid #c8c8c8;border-radius:4px;background:#fff}
+.pe3 .gb>b{position:absolute;left:6px;top:-9px;background:#fff;padding:0 4px;font-weight:400;font-size:12px;color:#222}
 .pe3 .f{position:absolute;display:flex;align-items:center;height:22px}
 .pe3 .f label{width:148px;flex:none}
 .pe3 .in{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 4px;line-height:19px;white-space:nowrap;overflow:hidden;position:relative}
@@ -54,6 +58,143 @@
 .pe3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
 .pe3 .ct{display:flex;align-items:center;gap:8px;padding:11px 14px 9px;font-size:14px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
 .pe3 .ct i{width:16px;height:16px;border-radius:4px}
+.pe3 .im{display:flex;gap:16px;padding:14px 16px 16px}
+.pe3 .im label{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;text-transform:uppercase;margin-bottom:6px}
+.pe3 .ph{position:relative;width:104px;height:128px;border-radius:8px;overflow:hidden;border:1px solid #c5d0e0;background:linear-gradient(#eef2f7,#dce4ef)}
+.pe3 .stick-head{position:absolute;left:38px;top:14px;width:27px;height:27px;border:3px solid #647a98;border-radius:50%}
+.pe3 .stick-body,.pe3 .stick-arm,.pe3 .stick-leg{position:absolute;background:#647a98;border-radius:4px;transform-origin:top center}
+.pe3 .stick-body{left:49px;top:40px;width:4px;height:38px}
+.pe3 .stick-arm{top:47px;width:4px;height:27px}
+.pe3 .stick-arm.left{left:49px;transform:rotate(48deg)}
+.pe3 .stick-arm.right{left:49px;transform:rotate(-48deg)}
+.pe3 .stick-leg{left:49px;top:76px;width:4px;height:33px}
+.pe3 .stick-leg.left{transform:rotate(30deg)}
+.pe3 .stick-leg.right{transform:rotate(-30deg)}
+.pe3 .fr{width:178px;height:84px;border:1px solid #dfe3ea;border-radius:8px;background:#fff}
+/* organigrama: pantalla del cliente, acotada a .og3 (se dibuja a 1060 px y se escala a la columna) */
+.og3 *{box-sizing:border-box}
+.og3{margin:0;color:#1d1b1a}
+.og3 .stage{position:relative;width:1060px;height:520px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif}
+.og3 .chart{position:absolute;left:300px;top:30px;width:700px;height:440px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.26),0 4px 12px rgba(36,60,100,.08)}
+.og3 .chart-content{position:absolute;inset:0;transform:scale(1.15);transform-origin:50% 45%}
+.og3 .nd{position:absolute;width:180px;height:46px;border:1px solid #b4c0d2;border-radius:6px;background:#fff;overflow:hidden;box-shadow:0 1px 2px rgba(30,60,100,.08)}
+.og3 .nd h6{margin:0;height:18px;background:linear-gradient(#3a78b3,#2c68a0);color:#fff;font:700 11.5px/18px "Segoe UI",sans-serif;padding:0 3px;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-transform:none}
+.og3 .nd .bd{height:26px;font-size:10.5px;display:flex;align-items:center;padding:0 3px;white-space:nowrap;position:relative}
+.og3 .nd .bd.p{font-size:10px;font-weight:600;color:#111;padding-left:6px;gap:8px}
+.og3 .nd .bd.p span{flex:1;text-align:center;margin-right:8px;white-space:nowrap}
+.og3 .nd .ar{position:absolute;right:4px;top:3px;width:8px;height:20px}
+.og3 .nd .ar::before,.og3 .nd .ar::after{content:"";position:absolute;left:0;border:4px solid transparent}
+.og3 .nd .ar::before{top:0;border-bottom:5px solid #aab2bf;border-top:0}.og3 .nd .ar::after{bottom:0;border-top:5px solid #aab2bf;border-bottom:0}
+.og3 svg.ln{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.og3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.98);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 40px 70px -18px rgba(30,70,130,.36),0 10px 24px -6px rgba(30,70,130,.15);overflow:hidden}
+.og3 .tr{left:20px;top:92px;width:310px;font-size:13.5px}
+.og3 .th{display:flex;align-items:center;gap:8px;height:34px;padding:0 14px;background:#d8e9f8;color:#1b3a5c;border-bottom:1px solid #c3d8ee}
+.og3 .ri{display:flex;align-items:center;height:28px;padding-right:12px;white-space:nowrap;color:#1c1c1c}
+.og3 .ri.sel{background:#dcebfa;box-shadow:inset 3px 0 0 #2f6fa8}
+.og3 .ex{width:12px;margin-right:9px;flex:none;display:flex;justify-content:center}
+.og3 .ex.r::before{content:"";border:4.5px solid transparent;border-left:6px solid #222;border-right:0}
+.og3 .ex.d::before{content:"";border:4.5px solid transparent;border-top:6px solid #222;border-bottom:0}
+.og3 .fo{width:17px;height:14px;margin-right:9px;flex:none;border-radius:2px 3px 3px 3px;background:linear-gradient(#ffe38a,#f6c445);position:relative;box-shadow:inset 0 0 0 1px #d9a826}
+.og3 .fo::before{content:"";position:absolute;left:0;top:-3px;width:8px;height:4px;border-radius:2px 2px 0 0;background:#f6c445;box-shadow:inset 0 0 0 1px #d9a826}
+/* procesos-de-salida: pantalla del cliente, acotada a .ps3 (se dibuja a 940 px y se escala a la columna) */
+.ps3 *{box-sizing:border-box}
+.ps3{margin:0;color:#1d1b1a}
+.ps3 .stage{position:relative;width:940px;height:420px;padding:20px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
+.ps3 .win{position:relative;width:900px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08)}
+.ps3 table{border-collapse:collapse;table-layout:fixed;width:100%;margin:0}
+.ps3 th{height:30px;text-align:left;font-weight:600;font-size:13px;padding:0 5px;background:#f6f6f6;border:0;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;position:relative;color:#1d1b1a}
+.ps3 td{height:25px;padding:0 5px;border:0;border-bottom:1px solid #e4e4e4;border-right:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;color:#1d1b1a}
+.ps3 td.c{text-align:center;padding:0}
+.ps3 tr.sel td{background:#dcebfa}
+.ps3 tr.sel td:first-child{outline:1px solid #3b9be8;outline-offset:-1px}
+.ps3 .pg{position:relative;height:17px;border-radius:3px;background:#e8ebf0;border:1px solid #cfd5df;overflow:hidden}
+.ps3 .pg i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(#52c26e,#2fa84f)}
+.ps3 .pg b{position:absolute;inset:0;text-align:center;font:600 11px/15px "Segoe UI",sans-serif;color:#111}
+.ps3 .bd{position:absolute;right:3px;top:3px;width:10px;height:22px}
+.ps3 .bd b{display:block;width:10px;height:10px;border-radius:50%;background:#4a8fd0;color:#fff;font:700 7px/10px "Segoe UI",sans-serif;text-align:center}
+.ps3 .bd i{display:block;margin:1px 0 0 1px;border:4px solid transparent;border-bottom:5px solid #8a8a8a;border-top:0}
+.ps3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.98);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 40px 70px -18px rgba(30,70,130,.34),0 10px 24px -6px rgba(30,70,130,.14);overflow:hidden}
+.ps3 .ct{padding:12px 16px 10px;border-bottom:1px solid #e3e8f2;background:#fafcff}
+.ps3 .ct b{display:block;font-size:14px;font-weight:600;color:#1f3a5f}
+.ps3 .ct small{font-size:11px;color:#8a93a6;letter-spacing:.04em}
+.ps3 .tk td{height:32px;font-size:13px}
+.ps3 .xst{display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 9px;border-radius:10px;font-size:11.5px;font-weight:600}
+.ps3 .ok{background:#e1f5e7;color:#1e7d3a}
+.ps3 .pe{background:#fdeaea;color:#c43030}
+/* contratos: pantalla del cliente, acotada a .co3 (se dibuja a 725 px y se escala a la columna) */
+.co3 *{box-sizing:border-box}
+.co3{margin:0;color:#1d1b1a}
+.co3 .stage{position:relative;width:725px;height:400px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
+.co3 .win{position:absolute;left:10px;top:10px;width:705px;height:215px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 24px 48px -20px rgba(36,60,100,.26),0 3px 10px rgba(36,60,100,.08);overflow:hidden}
+.co3 .win svg{position:absolute;left:0;top:0}
+.co3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.98);border:1px solid #e3e8f2;border-radius:16px;box-shadow:0 34px 60px -18px rgba(30,70,130,.36),0 8px 20px -6px rgba(30,70,130,.15);overflow:hidden}
+.co3 .gb{margin:10px;border:1px solid #c8c8c8;border-radius:4px;background:linear-gradient(#f9f9f9,#ececec);position:relative;padding:14px 10px 6px}
+.co3 .gb>b{position:absolute;left:8px;top:-9px;background:#fff;border:1px solid #c8c8c8;border-bottom:0;border-radius:4px 4px 0 0;padding:1px 8px;font-weight:600}
+.co3 .f{display:flex;align-items:center;height:25px}
+.co3 .f label{width:100px;flex:none;white-space:nowrap}
+.co3 .in{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 5px;line-height:19px;position:relative;white-space:nowrap;overflow:hidden;width:122px}
+.co3 .in.dd::after{content:"";position:absolute;right:0;top:0;width:19px;height:19px;background:#f1f1f1;border-left:1px solid #ccc}
+.co3 .in.dd::before{content:"";position:absolute;right:5px;top:7px;border:4px solid transparent;border-top:5px solid #888;z-index:1}
+.co3 .hl{box-shadow:0 0 0 2px rgba(59,155,232,.35)}
+.co3 .ct{display:flex;align-items:center;gap:8px;padding:9px 14px 8px;font-size:13px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
+.co3 .ct i{width:14px;height:14px;border-radius:4px;background:#e0883a}
+.co3 .lg{display:flex}
+.co3 table{border-collapse:collapse;table-layout:fixed;width:100%;margin:0}
+.co3 th{height:24px;text-align:left;font-weight:600;font-size:11.5px;padding:0 6px;background:#f6f6f6;border:0;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;color:#1d1b1a}
+.co3 td{height:24px;padding:0 6px;border:0;border-bottom:1px solid #e4e4e4;border-right:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;color:#1d1b1a}
+.co3 tr.sel td{background:#dcebfa}
+.co3 tr.sel td:first-child{outline:1px solid #3b9be8;outline-offset:-1px}
+.co3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+/* cargos: pantalla del cliente, acotada a .cg3 (se dibuja a 720 px y se escala a la columna) */
+.cg3 *{box-sizing:border-box}
+.cg3{margin:0;color:#1d1b1a}
+.cg3 .stage{position:relative;width:720px;height:760px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12.5px}
+.cg3 .card{position:absolute;background:#fff;border:1px solid #e3e8f2;border-radius:16px;box-shadow:0 34px 60px -20px rgba(30,70,130,.34),0 8px 20px -6px rgba(30,70,130,.14);overflow:hidden}
+.cg3 .pn{background:linear-gradient(#f8f8f8,#ececec);border-color:#dcdfe6}
+.cg3 .f{position:absolute;left:16px;right:16px;display:flex;align-items:center;height:22px}
+.cg3 .f label{width:118px;flex:none;white-space:nowrap}
+.cg3 .in{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 4px;line-height:19px;white-space:nowrap;overflow:hidden;position:relative;flex:1}
+.cg3 .in.d{background:#e3e3e3}
+.cg3 .in.dd::after{content:"";position:absolute;right:0;top:0;width:19px;height:19px;background:#f1f1f1;border-left:1px solid #ccc}
+.cg3 .in.dd::before{content:"";position:absolute;right:5px;top:7px;border:4px solid transparent;border-top:5px solid #888;z-index:1}
+.cg3 .ta{position:absolute;left:166px;right:16px;border:1px solid #bdbdbd;background:#fff;padding:2px 6px;font-size:13px;line-height:16px;overflow:hidden}
+.cg3 .ta::after{content:"";position:absolute;right:2px;top:2px;bottom:2px;width:12px;background:#f1f1f1}
+.cg3 .ta::before{content:"";position:absolute;right:4px;top:12px;width:8px;height:16px;border-radius:4px;background:#bdbdbd;z-index:1}
+.cg3 .lb{position:absolute;left:54px}
+.cg3 .dh{display:flex;align-items:center;justify-content:space-between;background:#0f4d14;color:#fff;padding:0 16px;height:46px}
+.cg3 .dh b{font-weight:500;font-size:13.5px;letter-spacing:.08em}
+.cg3 .dh small{font-size:10px;line-height:13px;text-align:right;opacity:.9}
+.cg3 .dt{padding:10px 16px 6px;display:flex;align-items:baseline;justify-content:space-between}
+.cg3 .dt b{font-size:18px;font-weight:600;color:#14301a}
+.cg3 .dt span{font-size:11px;color:#8a93a6}
+.cg3 .sc{margin:0 16px;padding:5px 0;border-top:1px solid #e6ece6}
+.cg3 .sc h6{margin:4px 0 6px;font-size:10.5px;letter-spacing:.1em;color:#0f4d14;font-weight:700;text-transform:none}
+.cg3 .kv{display:flex;gap:10px;font-size:12px;line-height:19px}
+.cg3 .kv i{font-style:normal;color:#8a93a6;width:92px;flex:none}
+.cg3 .og{display:flex;flex-direction:column;align-items:center}
+.cg3 .og div{border:1px solid #9bb09d;border-radius:4px;padding:2px 10px;font-size:11px;background:#fff}
+.cg3 .og div.me{background:#0f4d14;color:#fff;border-color:#0f4d14}
+.cg3 .og s{width:1px;height:8px;background:#9bb09d}
+.cg3 .cp{display:flex;align-items:center;gap:8px;font-size:11.5px;line-height:21px}
+.cg3 .cp span{width:128px;flex:none}
+.cg3 .cp u{display:flex;gap:3px;text-decoration:none}
+.cg3 .cp u i{width:22px;height:7px;border-radius:4px;background:#e1e8e1}
+.cg3 .cp u i.on{background:#2f8f3a}
+/* capacitacion: pantalla del cliente, acotada a .cp3 (se dibuja a 760 px y se escala a la columna) */
+.cp3 *{box-sizing:border-box}
+.cp3{margin:0;color:#1d1b1a}
+.cp3 .stage{position:relative;width:760px;height:340px;padding:20px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12.5px}
+.cp3 .win{display:block;width:720px;height:296px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 26px 50px -20px rgba(36,60,100,.28),0 3px 10px rgba(36,60,100,.08)}
+.cp3 .pi{width:15px;height:15px;flex:none}
+.cp3 .tw{min-width:0}
+.cp3 .hd{display:flex;align-items:center;gap:8px;height:38px;padding:0 14px;font-weight:600;font-size:13.5px;color:#1f3a5f;background:#fafbfd;border-bottom:1px solid #e3e6ec}
+.cp3 table{border-collapse:collapse;table-layout:fixed;width:100%;margin:0}
+.cp3 th{height:34px;text-align:left;font-weight:600;font-size:12.5px;padding:0 6px;background:#fff;border:0;border-bottom:1px solid #d9d9d9;white-space:nowrap;overflow:hidden;color:#1d1b1a}
+.cp3 td{height:27px;padding:0 6px;border:0;border-bottom:1px solid #eef0f4;border-right:1px solid #f1f2f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;color:#1d1b1a}
+.cp3 td.n,.cp3 th.n{text-align:right;padding-right:10px}
+.cp3 tr.sel td{background:#dcebfa}
+.cp3 tr.sel td:nth-child(3){outline:1px solid #3b9be8;outline-offset:-1px}
+.cp3 .srt{display:inline-block;margin-left:6px;border:4px solid transparent;border-bottom:5px solid #8a8a8a;border-top:0}
 </style>
 </head>
 <body>
@@ -87,13 +228,13 @@
     <section class="mod-sec mod-fns" id="funciones" style="--mc:#2F9E44" aria-labelledby="fn-title">
       <h2 id="fn-title">Funciones de Recursos Humanos</h2>
       <div class="mod-fn-rows">
-        <article class="mod-fn is-shot" id="ficha-del-colaborador">
-          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-ficha-del-colaborador.png" alt="" width="16" height="16">Ficha del colaborador</h3><p>La ficha completa de cada persona: fotografía, residencia, teléfonos, seguro social, datos médicos, cuentas bancarias, experiencia, idiomas y familiares, con su carpeta virtual de documentos.</p></div>
+        <article class="mod-fn" id="ficha-del-colaborador">
+          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-ficha-del-colaborador.png" alt="" width="16" height="16">Ficha del colaborador</h3><p>Toda la información de cada persona en un solo lugar: datos personales, foto y firma, familiares y cargas, cuentas bancarias y su carpeta digital de documentos. Se registra una sola vez y alimenta automáticamente la nómina, la asistencia y el autoservicio.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="ficha-del-colaborador">
-          <div class="pe3" id="pe3" style="width:1390px">
+          <div class="pe3" id="pe3" style="width:1260px">
 <div class="stage" id="pe3s">
 <div class="win" id="pe3w">
- <div class="gb" style="left:8px;top:12px;width:368px;height:285px"><b>Información General</b>
+ <div class="gb" style="left:8px;top:12px;width:378px;height:244px"><b>Información General</b>
   <div class="f" style="left:8px;top:16px"><label>Código</label><span class="in d" style="width:200px">0004127</span></div>
   <div class="f" style="left:8px;top:40px"><label>Apellidos</label><span class="in" style="width:200px">ROMERO VITERI</span></div>
   <div class="f" style="left:8px;top:64px"><label>Nombres</label><span class="in" style="width:200px">ANDRÉS FELIPE</span></div>
@@ -104,48 +245,28 @@
   <div class="f" style="left:8px;top:184px"><label><u>Estado Ficha</u></label><span class="in dd" style="width:200px">Habilitada</span></div>
   <div class="f" style="left:8px;top:208px"><label>Sucursal</label><span class="in dd" style="width:200px">VALLE - Quito</span></div>
  </div>
- <div class="gb" style="left:384px;top:12px;width:368px;height:285px"><b>Imágenes</b>
-  <div class="f" style="left:8px;top:12px"><label style="width:140px"><u>Foto</u></label><span class="in" style="width:200px"></span></div>
-  <span class="btn" style="left:10px;top:42px"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="8" r="6" fill="#8a8f99"/><circle cx="10" cy="8" r="3" fill="#2b3040"/><path d="M4 18h12l-2-4H6z" fill="#6b7080"/></svg></span>
-  <span class="btn" style="left:50px;top:42px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="11" height="14" fill="#fff" stroke="#777"/><path d="M5 6h7M5 9h7" stroke="#aaa"/><path d="M10 17l4-5 4 5z" fill="#2fa84f"/></svg></span>
-  <div style="position:absolute;left:206px;top:40px;width:100px;height:130px;background:linear-gradient(#cfd8e6,#aab8cd);border:1px solid #9fb0c6;overflow:hidden"><svg width="100" height="130" viewBox="0 0 100 130"><circle cx="50" cy="52" r="22" fill="#7e8da6"/><path d="M6 130c2-34 20-46 44-46s42 12 44 46z" fill="#7e8da6"/></svg></div>
-  <div class="f" style="left:8px;top:192px"><label style="width:140px"><u>Firma</u></label><span class="in" style="width:200px"></span></div>
-  <span class="btn" style="left:10px;top:218px"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="8" r="6" fill="#8a8f99"/><circle cx="10" cy="8" r="3" fill="#2b3040"/><path d="M4 18h12l-2-4H6z" fill="#6b7080"/></svg></span>
-  <span class="btn" style="left:50px;top:218px"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="11" height="14" fill="#fff" stroke="#777"/><path d="M5 6h7M5 9h7" stroke="#aaa"/><path d="M10 17l4-5 4 5z" fill="#2fa84f"/></svg></span>
-  <div style="position:absolute;left:166px;top:218px;width:180px;height:55px;background:#fff;border:1px solid #e5e5e5"></div>
- </div>
- <div class="gb" style="left:8px;top:308px;width:368px;height:152px"><b>Información Personal</b>
-  <div class="f" style="left:8px;top:14px"><label>Pasaporte</label><span class="in" style="width:200px"></span></div>
-  <div class="f" style="left:8px;top:38px"><label>Sexo</label><span class="in dd" style="width:200px">Masculino</span></div>
-  <div class="f" style="left:8px;top:62px"><label>Estado Civil</label><span class="in dd" style="width:200px">Casado(a)</span></div>
-  <div class="f" style="left:8px;top:86px"><label>Profesión</label><span class="in dd" style="width:200px"></span></div>
-  <div class="f" style="left:8px;top:110px"><label>Nivel de Educación</label><span class="in dd" style="width:200px"></span></div>
- </div>
- <div class="gb" style="left:384px;top:308px;width:368px;height:152px"><b>Teléfonos</b>
-  <div class="f" style="left:8px;top:14px"><label style="width:146px">Domicilio</label><span class="in" style="width:200px">09-8 123 456</span></div>
-  <div class="f" style="left:8px;top:38px"><label style="width:146px">Celular</label><span class="in" style="width:200px">09 99 000 111</span></div>
-  <div class="f" style="left:8px;top:62px"><label style="width:146px">Celular Empresa</label><span class="in" style="width:200px">__ __ ___ ___</span></div>
-  <div class="f" style="left:8px;top:86px"><label style="width:146px">Trabajo</label><span class="in" style="width:200px"></span></div>
-  <div class="f" style="left:8px;top:110px"><label style="width:146px">Extensión</label><span class="in" style="width:200px"></span></div>
- </div>
 </div>
-
-<div class="card" id="pe3c1" style="left:18px;top:335px;width:400px;transform:rotate(-2deg)">
+<div class="card" id="pe3c4" style="left:46px;top:12px;width:352px">
+ <div class="ct"><i style="background:#8a63c9"></i>Imágenes</div>
+ <div class="im"><div><label>Foto</label><div class="ph" role="img" aria-label="Ilustración de una persona"><span class="stick-head"></span><span class="stick-body"></span><span class="stick-arm left"></span><span class="stick-arm right"></span><span class="stick-leg left"></span><span class="stick-leg right"></span></div></div>
+ <div><label>Firma</label><div class="fr"><svg width="176" height="82" viewBox="0 0 176 82"><path d="M12 56C20 14 34 12 30 48c-2 14 8 10 16-10 4-10 10-10 8 2-2 12 6 12 14-4 4-8 10-6 8 4s6 10 14-2 8-8 6 2 6 8 14-6c8-12 14-12 12-2" fill="none" stroke="#1f2f6b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 66C50 58 110 62 160 54" fill="none" stroke="#1f2f6b" stroke-width="1.4" stroke-linecap="round"/></svg></div></div></div>
+</div>
+<div class="card" id="pe3c1" style="left:0;top:250px;width:400px">
  <div class="ct"><i style="background:#2fa84f"></i>Cuentas Bancarias</div>
  <table><colgroup><col style="width:135px"><col style="width:75px"><col style="width:110px"><col></colgroup>
  <thead><tr><th>Banco</th><th>Tipo</th><th>N.º de Cuenta</th><th>Nómina</th></tr></thead>
  <tbody><tr class="sel"><td>BANCO DEL VALLE</td><td>Ahorros</td><td>2200123456</td><td class="c">✓</td></tr></tbody></table>
 </div>
-<div class="card" id="pe3c2" style="left:985px;top:262px;width:400px;transform:rotate(2deg)">
+<div class="card" id="pe3c2" style="left:870px;top:120px;width:360px">
  <div class="ct"><i style="background:#e0883a"></i>Familiares</div>
- <table><colgroup><col style="width:150px"><col style="width:95px"><col style="width:85px"><col></colgroup>
- <thead><tr><th>Familiar<span class="bd"><b>3</b><i></i></span></th><th>Identificación</th><th>Parentesco</th><th>Carga</th></tr></thead>
- <tbody><tr class="sel"><td>ROMERO PAZ MATEO</td><td>0100000011-2</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO PAZ SOFÍA</td><td>0100000012-3</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO LUNA CARLOS</td><td></td><td>Referencia</td><td class="c">-</td></tr></tbody></table>
+ <table><colgroup><col style="width:135px"><col style="width:98px"><col style="width:75px"><col></colgroup>
+ <thead><tr><th>Familiar<span class="bd"><b>3</b><i></i></span></th><th>Identificación</th><th>Parentesco</th><th>Carga?</th></tr></thead>
+ <tbody><tr class="sel"><td>ROMERO PAZ MATEO</td><td>0100000011-2</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO PAZ SOFÍA</td><td>0100000012-3</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO LUNA CARLOS</td><td></td><td>Referencia</td><td class="c">No</td></tr></tbody></table>
 </div>
-<div class="card" id="pe3c3" style="left:520px;top:500px;width:500px;transform:rotate(1deg)">
+<div class="card" id="pe3c3" style="left:380px;top:405px;width:500px">
  <div class="ct"><i style="background:#4a8fd0"></i>Documentos</div>
- <table><colgroup><col style="width:170px"><col style="width:46px"><col style="width:60px"><col style="width:62px"><col></colgroup>
- <thead><tr><th>Tipo</th><th>Ver</th><th>Cargar</th><th>Estado</th><th>Fecha</th></tr></thead>
+ <table><colgroup><col style="width:250px"><col style="width:50px"><col></colgroup>
+ <thead><tr><th>Tipo</th><th>Ver</th><th>Fecha</th></tr></thead>
  <tbody id="pe3dt"></tbody></table>
 </div>
 </div>
@@ -153,28 +274,103 @@
           </div>
         </article>
         <article class="mod-fn" id="contratos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-contratos.png" alt="" width="16" height="16">Contratos</h3><p>Registro de contratos e impresión directa desde plantillas en Word: temporal, indefinido, a prueba, nombramiento.</p></div>
-          <div class="mod-fn-media" data-fn="contratos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-contratos.png" alt="" width="16" height="16"><span>Contratos</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-contratos.png" alt="" width="16" height="16">Contratos</h3><p>La historia laboral completa de cada colaborador: de eventual a plazo fijo, de plazo fijo a indefinido, con cada cambio de cargo y de sueldo, su fecha y su valor anterior. ¿Hay incremento salarial anual? Actualiza los sueldos de todos en un solo paso. Y el contrato se genera desde tus propias plantillas, que el colaborador puede ver y descargar desde el autoservicio.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="contratos">
+          <div class="co3" id="co3" style="width:725px" role="img" aria-label="Contratos en SquareNet: línea de tiempo de los contratos de una persona (eventual, plazo fijo, indefinido) con sus datos y los cambios de cargo y sueldo">
+<div class="stage">
+<div class="win"><svg data-el="tl" width="705" height="215" viewBox="0 0 705 215"></svg></div>
+<div class="card" data-el="fm" style="left:10px;top:188px;width:262px"><div class="gb"><b>General</b>
+ <div class="f"><label>Fecha Ingreso</label><span class="in dd">15/03/2019</span></div>
+ <div class="f"><label>Sueldo</label><span class="in hl">620.00</span></div>
+ <div class="f"><label>Tipo de Contrato</label><span class="in dd hl">Indefinido</span></div>
+ <div class="f"><label>Cargo</label><span class="in dd">Analista</span></div>
+ <div class="f"><label>Estado</label><span class="in dd">Contrato Válido</span></div>
+</div></div>
+<div class="card" data-el="lg" style="left:272px;top:228px;width:450px"><div class="ct"><i></i>Cambios de personal</div>
+ <div class="lg"><div style="width:204px;border-right:1px solid #e3e8f2"><table><colgroup><col style="width:118px"><col></colgroup>
+ <thead><tr><th>Tipo de Acción</th><th>Fecha</th></tr></thead><tbody>
+ <tr><td>Cambio de Cargo</td><td>10/01/2024</td></tr>
+ <tr class="sel"><td>Cambio de Sueldo</td><td>03/09/2025</td></tr></tbody></table></div>
+ <div style="flex:1"><table><colgroup><col style="width:78px"><col style="width:68px"><col></colgroup><thead><tr><th>Modificado</th><th>Anterior</th><th>Posterior</th></tr></thead>
+ <tbody><tr><td>Cargo</td><td>Analista</td><td>Jefe analista</td></tr><tr class="sel"><td>Sueldo</td><td>620.00</td><td>750.00</td></tr></tbody></table></div></div></div>
+<svg class="lk" data-el="lk"></svg>
+</div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="organigrama">
-          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16">Organigrama</h3><p>Organigrama empresarial con graficación automática.</p></div>
-          <div class="mod-fn-media" data-fn="organigrama"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16"><span>Organigrama</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-organigrama.png" alt="" width="16" height="16">Organigrama</h3><p>Arma la estructura de tu empresa y SquareNet dibuja el organigrama solo, con la persona que ocupa cada posición. Además, consulta el historial de quién ocupó cada puesto y cuándo.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="organigrama">
+          <div class="og3" id="og3" style="width:1060px" role="img" aria-label="Organigrama de SquareNet: árbol de departamentos a la izquierda y el gráfico de cargos con la persona de cada uno, generado solo">
+<div class="stage"><div class="chart"><div class="chart-content" data-el="ch"><svg class="ln" data-el="ln"></svg></div></div>
+<div class="card tr" data-el="tr"></div></div>
+          </div>
+          </div>
         </article>
-        <article class="mod-fn" id="competencias">
-          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-competencias.png" alt="" width="16" height="16">Competencias</h3><p>Las competencias que se evalúan en cada cargo, que usa el módulo de Evaluaciones.</p></div>
-          <div class="mod-fn-media" data-fn="competencias"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-competencias.png" alt="" width="16" height="16"><span>Competencias</span></div></div>
+        <article class="mod-fn" id="cargos">
+          <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-cargos.png" alt="" width="16" height="16">Cargos</h3><p>Define cada cargo una sola vez: misión, responsabilidades, a quién reporta, a quién supervisa y las competencias que exige. SquareNet arma la descripción de puesto lista para imprimir, para tus procesos de selección, evaluaciones y auditorías.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="cargos">
+          <div class="cg3" id="cg3" style="width:720px" role="img" aria-label="Cargos en SquareNet: la ficha del cargo Secretaria con misión y responsabilidades, y su descripción de puesto con organigrama y competencias">
+<div class="stage">
+ <div class="card pn" style="left:300px;top:70px;width:420px;height:240px">
+  <span class="lb" style="top:16px">Misión</span><div class="ta" style="top:12px;height:56px">Coordinar la agenda, la correspondencia y la atención a las gerencias.</div>
+  <span class="lb" style="top:104px">Responsabilidades</span><div class="ta" style="top:80px;height:68px">Organizar reuniones y viajes. Registrar y archivar la documentación.</div>
+  <span class="lb" style="top:178px">Descripción</span><div class="ta" style="top:160px;height:66px">Apoya a la gerencia general y comercial en la gestión administrativa diaria.</div>
+ </div>
+ <div class="card pn" style="left:0;top:0;width:350px;height:246px;z-index:2">
+  <div class="f" style="top:14px"><label>Código</label><span class="in d">QT0001</span></div>
+  <div class="f" style="top:40px"><label>Nombre</label><span class="in">Secretaria</span></div>
+  <div class="f" style="top:66px"><label>Estado</label><span class="in dd">Activo</span></div>
+  <div class="f" style="top:92px"><label>Código Sectorial</label><span class="in">1020000000002</span></div>
+  <div class="f" style="top:118px"><label>Código Alterno</label><span class="in">Secretary</span></div>
+  <div class="f" style="top:144px"><label>Nombre Alternativo</label><span class="in">Secretary</span></div>
+  <div class="f" style="top:170px"><label>Banda Salarial</label><span class="in dd"></span></div>
+  <div class="f" style="top:196px"><label>Tipo Cargo</label><span class="in dd">Mano de Obra Indirecta</span></div>
+ </div>
+ <div class="card" style="left:190px;top:268px;width:360px;z-index:3">
+  <div class="dh"><b>DESCRIPCIÓN DE PUESTO</b><small>QT0001<br>05/11/2026</small></div>
+  <div class="dt"><b>Secretaria</b><span>Versión 1.0</span></div>
+  <div class="sc"><h6>IDENTIFICACIÓN</h6>
+   <div class="kv"><i>Grupo</i>Mano de Obra Indirecta</div>
+   <div class="kv"><i>Supervisor</i>Gerente general</div>
+   <div class="kv"><i>Supervisa a</i>Vendedor</div></div>
+  <div class="sc"><h6>MISIÓN</h6><div style="font-size:12px;line-height:17px;color:#333">Coordinar la agenda, la correspondencia y la atención a las gerencias.</div></div>
+  <div class="sc"><h6>ORGANIGRAMA</h6><div class="og"><div>Gerente general</div><s></s><div class="me">Secretaria</div><s></s><div>Vendedor</div></div></div>
+  <div class="sc" style="padding-bottom:14px"><h6>COMPETENCIAS</h6>
+   <div class="cp"><span>Integridad</span><u><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></u></div>
+   <div class="cp"><span>Trabajo en equipo</span><u><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></u></div>
+   <div class="cp"><span>Orientación al logro</span><u><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></u></div></div>
+ </div>
+</div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="capacitacion">
-          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-capacitacion.png" alt="" width="16" height="16">Capacitación</h3><p>Registro de estudios y capacitación, con reportes de cursos devengados o por devengar.</p></div>
-          <div class="mod-fn-media" data-fn="capacitacion"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-capacitacion.png" alt="" width="16" height="16"><span>Capacitación</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">05</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-capacitacion.png" alt="" width="16" height="16">Capacitación</h3><p>El historial de formación de cada persona: cursos, fechas, horas, instituto y costo. Si la empresa paga un curso con tiempo de permanencia, define los meses a devengar y sabrás cuánto falta si alguien se va antes de cumplirlos.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="capacitacion">
+          <div class="cp3" id="cp3" style="width:760px" role="img" aria-label="Capacitaciones en SquareNet: historial de cursos de una persona con fechas, tipo, especialización, horas y centro">
+<div class="stage"><div class="win">
+ <div class="hd" data-el="hd"></div>
+ <div class="tw"><table><colgroup><col style="width:108px"><col style="width:94px"><col style="width:184px"><col style="width:136px"><col style="width:54px"><col></colgroup>
+ <thead><tr><th>Fecha inicial<i class="srt"></i></th><th>Fecha Final</th><th>Tipo de Capacitación</th><th>Especialización</th><th class="n">Horas</th><th>Centro</th></tr></thead><tbody data-el="b"></tbody></table></div>
+</div></div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="procesos-de-salida">
-          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-procesos-de-salida.png" alt="" width="16" height="16">Procesos de salida</h3><p>Registra la salida del colaborador, con los avisos al IESS en lote y las cartas desde tus plantillas.</p></div>
-          <div class="mod-fn-media" data-fn="procesos-de-salida"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-procesos-de-salida.png" alt="" width="16" height="16"><span>Procesos de salida</span></div></div>
-        </article>
-        <article class="mod-fn" id="cartas-y-documentos">
-          <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-cartas-y-documentos.png" alt="" width="16" height="16">Cartas y documentos</h3><p>Cartas desde los datos del contrato con plantillas en Word (certificados, evaluaciones, entrevistas) y carnets con diseño configurable.</p></div>
-          <div class="mod-fn-media" data-fn="cartas-y-documentos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulorh-cartas-y-documentos.png" alt="" width="16" height="16"><span>Cartas y documentos</span></div></div>
+          <div class="mod-fn-copy"><span class="mod-fn-n">06</span><h3><img class="mod-fn-ic" src="img/iconos/modulorh-procesos-de-salida.png" alt="" width="16" height="16">Procesos de salida</h3><p>Ninguna salida queda a medias. Cada persona que se va tiene su lista de tareas, como devolución de equipo, chequeo médico o entrega de credencial, con su estado y su avance. Marca las tareas obligatorias y registra los valores pendientes, para que todo esté claro antes de la liquidación.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="procesos-de-salida">
+          <div class="ps3" id="ps3" style="width:940px" role="img" aria-label="Procesos de salida en SquareNet: lista de personas que salen con su avance y las tareas de salida de una de ellas, realizadas y pendientes">
+<div class="stage"><div class="win"><table><colgroup><col style="width:290px"><col style="width:84px"><col style="width:28px"><col style="width:28px"><col style="width:106px"><col style="width:100px"><col></colgroup>
+<thead><tr><th>Apellidos y Nombres<span class="bd"><b>2</b><i></i></span></th><th></th><th><u style="text-decoration:underline dotted">P</u></th><th><u style="text-decoration:underline dotted">C</u></th><th>Fecha Ingreso</th><th>Fecha Salida<span class="bd"><b>1</b><i></i></span></th><th>Razón de salida</th></tr></thead>
+<tbody data-el="b"></tbody></table></div>
+<div class="card" data-el="cd" style="left:230px;top:196px;width:440px"><div class="ct"><b>Tareas de salida</b><small>LOZADA VEGA SORAYA MARIBEL</small></div>
+<table class="tk"><colgroup><col style="width:250px"><col></colgroup><thead><tr><th>Tarea de Salida<span class="bd"><b>2</b><i></i></span></th><th>Estado Tarea<span class="bd"><b>1</b><i></i></span></th></tr></thead>
+<tbody><tr><td>Devolución de equipo</td><td><span class="xst ok">✓ Realizada</span></td></tr><tr><td>Chequeo médico de salida</td><td><span class="xst pe">Pendiente</span></td></tr><tr><td>Entrega de credencial</td><td><span class="xst pe">Pendiente</span></td></tr></tbody></table></div>
+<svg data-el="lk" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible"></svg>
+</div>
+          </div>
+          </div>
         </article>
       </div>
     </section>
@@ -308,13 +504,111 @@
 (function(){
 const up='<svg width="24" height="22" viewBox="0 0 24 22" style="vertical-align:middle"><path d="M2 9l3-3h14l3 3v11H2z" fill="#5fa8e0" stroke="#2f6fb3" stroke-width="1.200"/><path d="M12 18V3m-5.500 5.500L12 3l5.500 5.500" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 18V3m-5.500 5.500L12 3l5.500 5.500" fill="none" stroke="#2fa84f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const D=[['Cédula','05/10/2025 09:12:03'],['Certificado de estudios','05/10/2025 09:12:04'],['Curriculum','05/10/2025 09:11:58'],['Papeleta de votación','05/10/2025 09:12:04']];
-document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td></td><td></td><td>${r[1]}</td></tr>`).join('');
+document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td>${r[1]}</td></tr>`).join('');
 
   var root=document.getElementById('pe3'),stage=root.firstElementChild,media=root.parentElement;
-  function fit(){var k=Math.min(1,(media.clientWidth-40)/1390);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1390)+'px';}
+  function fit(){var k=Math.max(0,Math.min(1,(media.clientWidth-16)/1260));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1260)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
   </script>
+  <script>
+(function(){
+  var root=document.getElementById('og3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement;
+  var ch=root.querySelector('[data-el="ch"]'), ln=root.querySelector('[data-el="ln"]');
+  var uid=0;
+  const av=(c,h,f)=>{const id='og3c'+(++uid);return `<svg width="24" height="24" viewBox="0 0 24 24" style="flex:none"><circle cx="12" cy="12" r="12" fill="#e9eef5"/><clipPath id="${id}"><circle cx="12" cy="12" r="12"/></clipPath><g clip-path="url(#${id})"><path d="M2 26c1-8 5-9 10-9s9 1 10 9z" fill="${f}"/><circle cx="12" cy="10" r="5" fill="${c}"/><path d="M6.5 9.5a5.5 6 0 0 1 11 0c-2-3-9-3-11 0z" fill="${h}"/></g></svg>`};
+  const N=(x,y,t,b,p)=>{const d=document.createElement('div');d.className='nd';d.style.left=x+'px';d.style.top=y+'px';
+    d.innerHTML=`<h6>${t}</h6>`+(p?`<div class="bd p">${av(p[1],p[2],p[3])}<span>${p[0]}</span><i class="ar"></i></div>`:`<div class="bd">${b||''}</div>`);ch.appendChild(d);return d};
+  const W=180,X0=60,cx=i=>X0+i*(W+20),mid=i=>cx(i)+W/2;
+  const Y=[26,104,186,272,350,428,506];
+  const SK=['#f0c9a8','#e0b48c','#d9a679','#cf9a6c','#f3d2b8'],HR=['#2a2a2a','#4a2f1e','#1d1d1d','#6b4a2b','#222'],SH=['#2b3a55','#8a3a4a','#3a4a63','#2f4a3a','#6a4a8a','#555f73'];
+  let k=0;const Q=n=>{k++;return [n,SK[(k*3)%5],HR[(k*2)%5],SH[k%6]]};
+  N(mid(1)-W/2,Y[0],'Gerencia General',0,Q('LEDESMA CORONEL MARCO'));
+  N(mid(1)-W/2,Y[1],'Gerencia de Operaciones',0,Q('CEVALLOS ARIAS ROBERTO'));
+  const cols=[
+    ['Jefe de Mercadeo',Q('PAREDES LOOR VERÓNICA'),[['Auxiliar de mercadeo',0,Q('TORRES BENÍTEZ LUCÍA')]]],
+    ['Jefe de Abastecimiento',Q('VILLACÍS MERA HARRY'),[['Analista de abastecimiento',0,Q('JÁCOME HIDALGO JOSUÉ')],['Auxiliar de abastecimiento',0,Q('GUERRÓN QUISPE ANGIE')]]],
+    ['Supervisor de existencias',Q('RIVERA SUÁREZ OMAR'),[['Operador de montacargas',0,Q('YÁNEZ CHANGO LUIS')]]]];
+  const st='stroke="#7b8799" stroke-width="1" fill="none"';let L='';
+  const bus=Y[2]-28;
+  L+=`<path d="M${mid(1)} ${Y[0]+46} V${Y[1]}" ${st}/><path d="M${mid(1)} ${Y[1]+46} V${bus} M${mid(0)} ${bus} H${mid(2)}" ${st}/>`;
+  cols.forEach((c,i)=>{N(cx(i),Y[2],c[0],'',c[1]);
+    L+=`<path d="M${mid(i)} ${bus} V${Y[2]}" ${st}/>`;
+    const h=c[2];if(h.length){const lx=cx(i)-12;
+      L+=`<path d="M${mid(i)} ${Y[2]+46} V${Y[2]+56} H${lx} V${Y[3]+(h.length-1)*78+23}" ${st}/>`;
+      h.forEach((q,j)=>{const y=Y[3]+j*78;N(cx(i),y,q[0],'',q[2]);L+=`<path d="M${lx} ${y+23} H${cx(i)}" ${st}/>`})}});
+  ln.innerHTML=L;
+  const T=[[0,'d','Gerencia General'],[1,'r','Gerencia Administrativa'],[1,'r','Gerencia de Talento Humano'],[1,'r','Gerencia Comercial (Externo)'],[1,'d','Gerencia de Operaciones',1],[2,'r','Jefatura de Mercadeo'],[2,'r','Jefatura de Abastecimiento'],[2,'r','Supervisión de Existencias'],[1,'r','Gerencia de Planta']];
+  root.querySelector('[data-el="tr"]').innerHTML=`<div class="th"><svg width="18" height="22" viewBox="0 0 18 22"><ellipse cx="9" cy="5" rx="7.5" ry="3.5" fill="#cfd8e6" stroke="#6b7c95"/><path d="M1.5 5v12c0 2 3.4 3.5 7.5 3.5s7.5-1.5 7.5-3.5V5" fill="#e4eaf3" stroke="#6b7c95"/><path d="M1.5 11c0 2 3.4 3.5 7.5 3.5s7.5-1.5 7.5-3.5" fill="none" stroke="#6b7c95"/></svg><b style="font-weight:600">Organigrama</b></div><div style="padding:6px 0 8px">`+T.map(r=>`<div class="ri${r[3]?' sel':''}" style="padding-left:${14+r[0]*22}px"><i class="ex ${r[1]}"></i><i class="fo"></i>${r[2]}</div>`).join('')+'</div>';
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/1060);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1060)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+  var root=document.getElementById('ps3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement, q=k=>root.querySelector('[data-el="'+k+'"]');
+  const P='<svg width="14" height="16" viewBox="0 0 14 16"><circle cx="7" cy="4.5" r="3.3" fill="#e98a1c" stroke="#a65f1d" stroke-width=".8"/><path d="M1.2 15c0-4.6 2.4-6 5.8-6s5.8 1.4 5.8 6z" fill="#e98a1c" stroke="#a65f1d" stroke-width=".8" stroke-linejoin="round"/></svg>';
+  const C='<svg width="13" height="16" viewBox="0 0 13 16"><path d="M1 1h8l3 3v11H1z" fill="#fff" stroke="#555"/><path d="M3 6h7M3 8.5h7M3 11h7" stroke="#777"/></svg>';
+  const E='<svg width="13" height="16" viewBox="0 0 13 16"><path d="M1 1h8l3 3v11H1z" fill="#fff" stroke="#3a6ea5"/><rect x="3" y="6" width="7" height="7" fill="#dcebfa" stroke="#3a6ea5" stroke-width=".8"/><text x="6.5" y="12" font-size="6.5" font-weight="700" fill="#3a6ea5" text-anchor="middle">E</text></svg>';
+  const D=[['VALLEJO ROSERO EDWIN JOEL',1,'13/01/2026','20/10/2026','Acuerdo entre las partes',C],['MONTENEGRO VILLA EDISON ARMANDO',3,'12/10/2026','20/10/2026','Acuerdo entre las partes',C],['CHAMORRO LUNA WILSON ORLANDO',2,'23/02/2026','21/10/2026','Acuerdo entre las partes',C],['TAPIA PAUCAR FRANKLIN EDUARDO',0,'25/01/2023','21/10/2026','Despido intempestivo',C],['LOZADA VEGA SORAYA MARIBEL',1,'19/01/2026','21/10/2026','Despido intempestivo',C],['RUALES SILVA JOSEPH JOHAO',3,'06/05/2026','30/10/2026','Terminación pasantía',C],['BARRERA MANOSALVAS BRYAN MARINO',2,'06/05/2026','30/10/2026','Terminación pasantía',C],['SEGOVIA YÉPEZ JENNIFER MARCELA',1,'02/10/2026','30/10/2026','Fin de contrato',E]];
+  q('b').innerHTML=D.map((r,i)=>`<tr${i==4?' class="sel"':''}><td>${r[0]}</td><td><div class="pg"><i style="width:${r[1]/3*100}%"></i><b>${r[1]}/3</b></div></td><td class="c">${P}</td><td class="c">${r[5]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+  // la línea punteada se mide sin escala (antes de fit), en coordenadas propias del escenario
+  const O=stage.getBoundingClientRect(),rel=e=>{const r=e.getBoundingClientRect();return{l:r.left-O.left,t:r.top-O.top,b:r.bottom-O.top}};
+  const sel=q('b').querySelector('tr.sel'),bar=rel(sel.querySelector('.pg')),cell=rel(sel.children[1]),cd=rel(q('cd'));
+  const x0=bar.l+6,y=(bar.t+bar.b)/2,xc=cell.l-62,Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(a,b)=>`<circle cx="${a}" cy="${b}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+  q('lk').innerHTML=`<path d="M${x0} ${y} H${xc} V${cd.t+4}" ${Lc}/>${Dt(x0,y)}${Dt(xc,cd.t+4)}`;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/940);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*940)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+  var root=document.getElementById('co3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement, q=k=>root.querySelector('[data-el="'+k+'"]');
+  const tl=q('tl');
+  const A=new Date(2016,6,1),B=new Date(2027,0,1),X0=34,X1=680,dx=d=>X0+(new Date(d)-A)/(B-A)*(X1-X0);
+  const f='font-family="Segoe UI,system-ui,sans-serif"';let h='';
+  [2018,2021,2024].forEach(y=>{const x=dx(y+'-01-01');h+=`<path d="M${x} 38V196" stroke="#f0f2f6"/><text x="${x}" y="28" ${f} font-size="11" fill="#a3abbb" text-anchor="middle">${y}</text>`});
+  const R=[{y:62,c:'#8aa4c8',n:'Eventual',a:'2017-03-15',b:'2018-03-14',v:'$520',m:['2017-09-06']},
+    {y:110,c:'#4a8fd0',n:'Plazo fijo',a:'2018-03-15',b:'2019-03-14',v:'$580',m:['2018-08-12']},
+    {y:158,c:'#2fa84f',n:'Indefinido',a:'2019-03-15',b:'2026-11-05',v:'$620',m:['2024-01-10','2025-09-03'],cur:1}];
+  R.forEach((r,i)=>{const a=dx(r.a),b=dx(r.b),labelShift=i>0?14:0;
+    if(i>0){const p=R[i-1],pb=dx(p.b);h+=`<path d="M${pb} ${p.y} C${pb+18} ${p.y},${a-18} ${r.y},${a} ${r.y}" stroke="${p.c}" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round" fill="none"/>`}
+    h+=`<path d="M${a} ${r.y}H${b}" stroke="${r.c}" stroke-width="8" stroke-linecap="round"/>`;
+    h+=`<text x="${a-4+labelShift}" y="${r.y-14}" ${f} font-size="12.5" font-weight="600" fill="#1f3a5f">${r.n}</text><text x="${a+(r.n.length*7.2)+6+labelShift}" y="${r.y-14}" ${f} font-size="11.5" fill="#7b8498">${r.v}</text>`;
+    if(r.cur)h+=`<circle cx="${b}" cy="${r.y}" r="9" fill="#2fa84f" opacity=".2"/><text x="${dx('2025-09-03')}" y="${r.y-16}" ${f} font-size="11.5" font-weight="700" fill="#1e7d3a" text-anchor="middle">$750</text><text x="${b+6}" y="${r.y-16}" ${f} font-size="11.5" font-weight="700" fill="#1e7d3a" text-anchor="end">Vigente</text>`;
+    r.m.forEach((d,j)=>{const x=dx(d),sel=r.cur&&j==1;h+=sel?`<circle cx="${x}" cy="${r.y}" r="11" fill="#3b9be8" opacity=".25"/><circle cx="${x}" cy="${r.y}" r="6.5" fill="#fff" stroke="#3b7fc4" stroke-width="3"/>`:`<circle cx="${x}" cy="${r.y}" r="5" fill="#fff" stroke="${r.c}" stroke-width="2.6"/>`})});
+  tl.innerHTML=h;
+  // líneas punteadas en coordenadas propias del escenario (offsetTop, no afectado por la escala)
+  const c3=R[2],ax=10+dx(c3.a),ay=10+c3.y,mx=10+dx('2025-09-03'),ft=q('fm').offsetTop,lt=q('lg').offsetTop;
+  const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+  q('lk').innerHTML=`<path d="M${ax} ${ay+6} V${ft+4}" ${Lc}/>${Dt(ax,ft+4)}<path d="M${mx} ${ay+10} V${lt+4}" ${Lc}/>${Dt(mx,lt+4)}`;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/725);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*725)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+  var root=document.getElementById('cg3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/720);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*720)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
+  <script>
+(function(){
+  var root=document.getElementById('cp3'); if(!root) return;
+  var stage=root.firstElementChild, media=root.parentElement, q=k=>root.querySelector('[data-el="'+k+'"]');
+  const pi=c=>`<svg class="pi" viewBox="0 0 15 15"><circle cx="7.5" cy="4.5" r="3.2" fill="${c}"/><path d="M1.5 14c0-4.5 2.5-5.8 6-5.8s6 1.3 6 5.8z" fill="${c}"/></svg>`;
+  q('hd').innerHTML=pi('#e9573f')+'Aguirre Mora Carlos';
+  const D=[['15/02/2018','20/02/2018','Seguridad industrial','Seguridad laboral',16,'Instituto Andino'],['01/09/2018','30/09/2018','Curso de ventas','Técnicas de venta',40,'Academia Sur'],['12/03/2019','14/03/2019','Primeros auxilios','Salud ocupacional',12,'Centro Vital'],['05/04/2019','05/04/2019','Excel avanzado','Ofimática',8,'Instituto Andino'],['17/04/2019','','Curso de Python','Análisis de datos',24,'Academia Sur',1],['07/04/2020','09/04/2020','Liderazgo de equipos','Gestión',16,'Escuela Norte'],['01/07/2021','02/07/2021','Curso de SQL','Bases de datos',16,'Escuela Norte'],['21/07/2021','21/07/2021','Normas NIIF','Contabilidad',12,'Instituto Andino']];
+  q('b').innerHTML=D.map(r=>`<tr${r[6]?' class="sel"':''}><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="n">${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/760);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*760)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+</script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>
