@@ -113,6 +113,8 @@
   @media (prefers-reduced-motion: reduce){
     .hero-copy h1,.hero-copy p,.hero-copy .cta-row{animation:none}
   }
+  /* «Ecuador» del H1 con los colores de la bandera (los mismos de Quiénes somos): Ecu amarillo · ad azul · or rojo */
+  .ec-flag{color:#d49b00}.ec-flag i{font-style:normal;color:#1760a9}.ec-flag b{font-weight:inherit;color:#c92e37}
   /* H1 con la palabra que rota: va en su propia línea para que «en Ecuador» no salte de lado */
   .hero-copy h1{container-type:inline-size}
   /* «Gestión de Personal» mide ~9,3 em: la línea que rota se achica lo justo para caber en el ancho del título */
@@ -406,7 +408,7 @@
   <div class="wrap hero">
     <div class="hero-copy">
       <!-- Google y los lectores de pantalla leen el texto completo (sr-only); la versión animada es solo visual -->
-      <h1><span class="sr-only">Software de Gestión de Personal en Ecuador: Nómina, Recursos Humanos (RRHH) y Asistencia</span><span class="h1-rot" aria-hidden="true">Software de <span class="rot-box" id="h1Rot"><span class="rot-w is-on">Gestión de Personal</span><span class="rot-w">Nómina</span><span class="rot-w">Recursos Humanos</span><span class="rot-w">Asistencia</span></span> en Ecuador</span></h1>
+      <h1><span class="sr-only">Software de Gestión de Personal en Ecuador: Nómina, Recursos Humanos (RRHH) y Asistencia</span><span class="h1-rot" aria-hidden="true">Software de <span class="rot-box" id="h1Rot"><span class="rot-w is-on">Gestión de Personal</span><span class="rot-w">Nómina</span><span class="rot-w">Recursos Humanos</span><span class="rot-w">Asistencia</span></span> en <span class="ec-flag">Ecu<i>ad</i><b>or</b></span></span></h1>
       <p>Más que un software, es una inversión. SquareNet unifica nómina, recursos humanos, control de asistencia, control de acceso y control de visitas en una sola plataforma, con cumplimiento legal ante IESS y SRI.</p>
       <div class="cta-row">
         <a href="prototipo-plataforma.html" class="btn btn-primary">Ver plataforma</a>
