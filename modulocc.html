@@ -149,6 +149,39 @@
 .co3 .msg{width:300px;padding:16px 18px;color:#d40000;font-size:22px;line-height:1.2}
 .co3 .msg small{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;margin-bottom:6px;text-transform:uppercase}
 .co3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+/* eventos: pantalla del cliente, acotada a .ev3 */
+.ev3 *{box-sizing:border-box}
+.ev3{margin:0;color:#1d1b1a}
+.ev3 .stage{position:relative;width:940px;height:500px;overflow:visible;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
+.ev3 .win{position:absolute;left:20px;top:24px;width:700px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden;z-index:2}
+.ev3 .fl{display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;background:#f4f5f8;border-bottom:1px solid #d8dde7}
+.ev3 .fl label{color:#333}
+.ev3 .dt{display:flex;align-items:center;height:24px;width:112px;border:1px solid #b9b9b9;background:#fff;padding:0 6px;position:relative}
+.ev3 .dt::after{content:"";position:absolute;right:0;top:0;width:20px;height:22px;background:#f0f0f0;border-left:1px solid #ccc}
+.ev3 .dt::before{content:"";position:absolute;right:6px;top:9px;border:4px solid transparent;border-top:5px solid #777;z-index:1}
+.ev3 .tw{overflow:hidden}
+.ev3 table{border-collapse:collapse;table-layout:fixed;width:790px}
+.ev3 th{height:28px;text-align:left;font-weight:600;padding:0 6px;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden}
+.ev3 td{height:27px;padding:0 6px;border-bottom:1px solid #ececec;border-right:1px solid #f0f0f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1d1b1a}
+.ev3 tr.ok td{color:#12991c}
+.ev3 tr.sel td{background:#dcebfa}
+.ev3 tr.sel td:nth-child(6){outline:1px solid #3b9be8;outline-offset:-1px}
+.ev3 td.n{text-align:right}
+.ev3 .sb{display:flex;justify-content:flex-start;align-items:center;height:26px;padding:0 14px;background:#f4f5f8;border-top:1px solid #d8dde7;color:#444;font-size:11.5px}
+.ev3 .card{position:absolute;left:606px;top:62px;width:310px;z-index:6;background:#fff;border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 40px 70px -18px rgba(30,70,130,.34),0 10px 24px -6px rgba(30,70,130,.14);overflow:hidden}
+.ev3 .ct{display:flex;align-items:center;gap:8px;padding:11px 16px 9px;font-size:14px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
+.ev3 .ct i{width:16px;height:16px;border-radius:5px;background:#e8a14a;flex:none}
+.ev3 .fm{padding:10px 16px 14px}
+.ev3 .f{display:flex;align-items:center;height:26px;margin-bottom:3px}
+.ev3 .f label{width:112px;flex:none;color:#222}
+.ev3 .in{flex:1;height:22px;border:1px solid #bdbdbd;background:#e9e9e9;padding:0 6px;line-height:20px;white-space:nowrap;overflow:hidden;position:relative}
+.ev3 .in.w{background:#fff}
+.ev3 .in.dd::after{content:"";position:absolute;right:0;top:0;width:20px;height:20px;background:#f1f1f1;border-left:1px solid #ccc}
+.ev3 .in.dd::before{content:"";position:absolute;right:6px;top:8px;border:4px solid transparent;border-top:5px solid #777;z-index:1}
+.ev3 .ta{height:50px;align-items:flex-start;margin-top:2px}
+.ev3 .ta label{line-height:22px}
+.ev3 .ta .in{height:50px;line-height:1.35;padding-top:2px;white-space:normal}
+.ev3 .ok2{color:#12991c}
 </style>
 </head>
 <body>
@@ -242,7 +275,37 @@
         </article>
         <article class="mod-fn" id="eventos">
           <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-eventos.png" alt="" width="16" height="16">Eventos</h3><p>Eventos especiales donde no se controla por persona sino por un número global de comidas.</p></div>
-          <div class="mod-fn-media" data-fn="eventos"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulocc-eventos.png" alt="" width="16" height="16"><span>Eventos</span></div></div>
+          <div class="mod-fn-media rp-stage" data-fn="eventos">
+          <div class="ev3" id="ev3" style="width:940px">
+<div class="stage">
+
+<div class="win">
+ <div class="fl"><label>Desde</label><div class="dt">01/10/2026</div><label style="margin-left:6px">Hasta</label><div class="dt">31/10/2026</div></div>
+ <div class="tw"><table><colgroup><col style="width:86px"><col style="width:170px"><col style="width:82px"><col style="width:64px"><col style="width:80px"><col style="width:128px"><col style="width:56px"><col style="width:134px"></colgroup>
+ <thead><tr><th>Código</th><th>Nombre Evento</th><th>Fecha</th><th>Lugar</th><th>Hora Inicial</th><th>Tipo de Comida</th><th>Cantidad</th><th>Aprobado Por</th></tr></thead>
+ <tbody id="ev3b"></tbody></table></div>
+ <div class="sb">Fila 4 de 9</div>
+</div>
+
+<div class="card">
+ <div class="ct"><i></i>Detalle del evento</div>
+ <div class="fm">
+  <div class="f"><label>Código</label><div class="in">0000014024</div></div>
+  <div class="f"><label>Nombre Evento</label><div class="in">Reunión de Directorio</div></div>
+  <div class="f"><label>Fecha</label><div class="in dd">14/10/2026</div></div>
+  <div class="f"><label>Lugar</label><div class="in">Oficina</div></div>
+  <div class="f"><label>Hora Inicial</label><div class="in">13:00</div></div>
+  <div class="f"><label>Hora Final</label><div class="in">14:30</div></div>
+  <div class="f"><label>Tipo de Comida</label><div class="in dd">Almuerzo Extra</div></div>
+  <div class="f"><label>Cantidad</label><div class="in">8</div></div>
+  <div class="f"><label>Aprobado Por</label><div class="in dd">JEFEPLA01</div></div>
+  <div class="f"><label>Fecha Aprobación</label><div class="in dd">10/10/2026 09:41</div></div>
+  <div class="f ta"><label>Observaciones</label><div class="in">Incluye jugo y postre para los asistentes</div></div>
+ </div>
+</div>
+</div>
+          </div>
+          </div>
         </article>
         <article class="mod-fn" id="consulta-de-consumo">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-consulta-de-consumo.png" alt="" width="16" height="16">Consulta de consumo</h3><p>Reportes completos sobre eventos y comidas servidas para cruzar con tu proveedor de catering.</p></div>
@@ -490,6 +553,25 @@ function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/1030));root.
 fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
 })();
 </script>
+  <script>
+(function(){
+const R=[
+['0000014021','Capacitación Seguridad','07/10/2026','Planta','13:00','Almuerzo Extra','12','JEFEPLA01 · 03/10/2026',1],
+['0000014022','Cierre Contable','09/10/2026','Oficina','18:30','Cena Turno','6','',0],
+['0000014023','Mantenimiento Línea 2','12/10/2026','Planta','06:00','Desayuno Extra','5','JEFEPLA01 · 08/10/2026',1],
+['0000014024','Reunión de Directorio','14/10/2026','Oficina','13:00','Almuerzo Extra','8','JEFEPLA01 · 10/10/2026',1],
+['0000014025','Taller de Inducción','15/10/2026','Sala 2','10:30','Refrigerio','15','JEFEPLA01 · 12/10/2026',1],
+['0000014026','Inventario General','19/10/2026','Bodega','19:00','Cena Turno','4','',0],
+['0000014027','Visita de Auditoría','21/10/2026','Oficina','13:00','Almuerzo Extra','7','JEFEPLA01 · 16/10/2026',1],
+['0000014028','Turno Extra Planta','24/10/2026','Planta','22:00','Cena Turno','18','JEFEPLA01 · 20/10/2026',1],
+['0000014029','Jornada Puertas Abiertas','30/10/2026','Planta','13:00','Almuerzo Extra','25','JEFEPLA01 · 26/10/2026',1]];
+document.getElementById('ev3b').innerHTML=R.map((r,i)=>`<tr class="${r[8]?'ok':''}${i===3?' sel':''}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td class="n">${r[6]}</td><td>${r[7]}</td></tr>`).join('');
+
+  var root=document.getElementById('ev3'),stage=root.firstElementChild,media=root.parentElement;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/940);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*940)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+  </script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>
