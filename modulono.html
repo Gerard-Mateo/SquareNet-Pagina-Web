@@ -104,6 +104,11 @@
 .ac2 .account-total span{height:34px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums}
 .ac2 .account-total .label{background:transparent;margin-right:auto;justify-content:flex-start;padding-left:10px}
 /* Vista fija de configuración de reportes */
+@media (min-width:861px){
+  #reportes-personalizados{grid-template-columns:minmax(0,7fr) minmax(240px,3fr);gap:clamp(20px,3vw,40px)}
+  #reportes-personalizados .rp-stage{padding-inline:0}
+}
+#rp3 .win{height:auto}
 .rp3 .up{display:flex;flex:none;border-bottom:1px solid #d2d2d2}
 .rp3 .rl{width:200px;border-right:1px solid #d2d2d2}
 .rp3 .cfg{flex:1;background:#f4f3f0;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -112,7 +117,7 @@
 .rp3 .cb{width:13px;height:13px;border:1.3px solid #a9a39b;border-radius:3px;background:#fff}
 .rp3 .cb:not(.on)::after{display:none}
 .rp3 .cb.on{border-color:#2f6fd6;background:#2f6fd6}
-.rp3 .cb.on::after{left:3.3px;top:.6px;width:3px;height:6.5px;border-width:0 1.6px 1.6px 0}
+.rp3 .cb.on::after{left:50%;top:45%;width:3px;height:6.5px;border-width:0 1.6px 1.6px 0;transform:translate(-50%,-50%) rotate(45deg)}
 .rp3 .lo{flex:1;display:flex;min-height:0}
 .rp3 .side{flex:1;display:flex;flex-direction:column;min-width:0}
 .rp3 .side .hd{display:flex;justify-content:space-between;align-items:center;height:28px;padding:0 8px;font-weight:700;font-size:12px;background:#fcfbf9;border-bottom:1px solid #e6e6e6}
@@ -195,6 +200,55 @@
 #roles-de-pago{grid-template-columns:minmax(0,2fr) minmax(0,.75fr)}
 @media (max-width:860px){#roles-de-pago{grid-template-columns:minmax(0,1fr)}}
 .rl3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+/* asientos-contables: pantalla del cliente, acotada a .as3 */
+.as3 *{box-sizing:border-box}
+.as3{margin:0;font:12.5px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.as3 .stage{position:relative;width:980px;height:456px;padding:40px 0 0 24px;display:block;overflow:visible}
+.as3 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
+.as3 .g{border-collapse:collapse;width:100%;table-layout:fixed}
+.as3 .g td,.as3 .g th{height:26px;padding:0 9px;border-bottom:1px solid #eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.as3 .g th{height:30px;font-weight:600;background:#f6f5f2;border-bottom:1px solid #dcd8d1}
+.as3 .g td.n{text-align:right;font-variant-numeric:tabular-nums}
+.as3 .g td.c{text-align:center;text-overflow:clip;padding:0 2px}
+.as3 .g tr.sel td{background:#e3eefb}
+.as3 .sec{border-bottom:1px solid #dcd8d1}
+.as3 #as3t td{height:25px}
+.as3 .cur{position:absolute;width:20px;height:28px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+.as3 .g{font-size:12px}
+.as3 .g td,.as3 .g th{height:22px;padding:0 6px;border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb}
+.as3 .g td+td,.as3 .g th+th{border-left:0}
+.as3 .g th{height:24px;font-weight:600;background:linear-gradient(#fff,#f0f0f0);border-bottom:1px solid #d2d2d2}
+.as3 .g tr:nth-child(odd) td{background:#fafafa}
+.as3 .g tr.sel td,.as3 .g tr.p.sel td{background:#e1ecfa}
+.as3 .g tr.sel td:nth-child(2){box-shadow:inset 0 0 0 1px #6f96c8}
+.as3 .g td.c{color:#222}
+.as3 .stage .win>.sec:nth-child(2){flex:1}
+.as3 .ttl{display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-bottom:1px solid #d2d2d2;background:#fff;font-weight:600;font-size:13px}
+.as3 .ttl .bk{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:5px;background:#1e4f8c;color:#fff}
+.as3 .ttl .bk svg{width:14px;height:14px}
+.as3 .g td.db{background:#dff5dc!important;text-align:right;font-variant-numeric:tabular-nums}
+.as3 .g td.hb{background:#fde3e3!important;text-align:right;font-variant-numeric:tabular-nums}
+.as3 .ttl,.as3 .ft2{flex:none}
+.as3 .ft2{display:flex;justify-content:flex-end;border-top:1px solid #d2d2d2;background:#f4f3f0}
+.as3 .ft2 span{height:34px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;font-weight:700;color:#24538c;background:#dedbd5;border-left:1px solid #f4f3f0;font-variant-numeric:tabular-nums}
+.as3 .ft2 .lb{background:transparent;margin-right:auto;justify-content:flex-start;padding-left:10px}
+.as3 .stage .win{width:736px;flex:none;display:flex;flex-direction:column}
+.as3 #as3t th:nth-child(5),.as3 #as3t th:nth-child(6){text-align:right}
+.as3 #as3t td:nth-child(7){background:#fff!important}
+.as3 .card{position:absolute;left:712px;top:140px;width:250px;z-index:6;background:#fff;border:1px solid #e3e8f2;border-radius:18px;overflow:hidden;box-shadow:0 40px 70px -18px rgba(30,70,130,.34),0 10px 24px -6px rgba(30,70,130,.14)}
+.as3 .ct{display:flex;align-items:center;gap:8px;padding:11px 16px 9px;font-size:14px;font-weight:600;color:#1f3a5f;border-bottom:1px solid #e3e8f2;background:#fafcff}
+.as3 .ct i{width:16px;height:16px;border-radius:5px;background:#2f6fd6;flex:none}
+.as3 .card .ttl{display:none}
+.as3 .g.lst{font-size:13px}
+.as3 .g.lst th{height:28px}
+.as3 .g.lst td{height:29px;padding:0 10px}
+.as3 .g.lst tr:nth-child(odd) td{background:#fff}
+.as3 .g.lst tr:nth-child(even) td{background:#fafafa}
+.as3 .g.lst th.fl{padding:0}
+.as3 .g.lst th.fl span{display:block;margin:0 auto;width:0;height:0;border:4px solid transparent;border-top:5px solid #777;border-bottom:0}
+.as3 .g.lst tr.pk td{background:#2f86e0;color:#fff}
+.as3 .g.lst tr.pk td:nth-child(2){box-shadow:inset 0 0 0 1.500px #d23b3b}
+.as3 .cur{z-index:7}
 </style>
 </head>
 <body>
@@ -348,15 +402,30 @@
         <article class="mod-fn" id="asientos-contables">
           <div class="mod-fn-copy"><span class="mod-fn-n">07</span><h3><img class="mod-fn-ic" src="img/iconos/modulono-asientos-contables.png" alt="" width="16" height="16">Asientos contables</h3><p>Cada rol termina en su asiento contable, sea agrupado o simple, cuadrado y listo para tu contabilidad. Cada rubro va a su cuenta y se separa por centro de costo. Configuras las cuentas una vez y cada mes el asiento sale solo.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="asientos-contables">
-            <div class="cu2 bk2 ac2" id="ac2" role="img" aria-label="Ejemplo de asiento contable de nómina, con valores de debe y haber por cuenta y centro de costo">
-              <div class="win">
-                <div class="ttl"><span class="bank-icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="1.5" width="10" height="11" rx="1.5"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3"/></svg></span>Asiento contable, Rol de Pago 2026-10 - Octubre</div>
-                <div class="xsec detail"><table class="g" data-el="rows"><colgroup><col style="width:112px"><col><col style="width:64px"><col style="width:116px"><col style="width:92px"><col style="width:92px"></colgroup>
-                  <tr><th>Cuenta</th><th>Concepto</th><th>Ceco</th><th>Empleado</th><th>Debe</th><th>Haber</th></tr></table></div>
-                <div class="account-total" data-el="totals"></div>
-              </div>
-              <svg class="cur" data-el="cur" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
-            </div>
+          <div class="as3" id="as3" style="width:980px">
+<div class="stage" id="as3s">
+ <div class="win">
+  <div class="ttl"><span class="bk"><svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="1.5" width="10" height="11" rx="1.5"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3"/></svg></span>Asiento contable, Rol de Pago 2026-10 - Octubre</div>
+  <div class="sec"><table class="g" id="as3t"><colgroup><col style="width:96px"><col><col style="width:60px"><col style="width:110px"><col style="width:92px"><col style="width:120px"><col style="width:56px"></colgroup>
+   <tr><th>Cuenta</th><th>Concepto</th><th>Ceco</th><th>Empleado</th><th>Debe</th><th>Haber</th><th></th></tr></table></div>
+  <div class="ft2" id="as3ft"></div>
+ </div>
+ <div class="card">
+  <div class="ct"><i></i>Tipos de asiento</div>
+  <table class="g lst"><colgroup><col style="width:26px"><col></colgroup>
+   <tr><th class="fl"><span></span></th><th>Nombre</th></tr>
+   <tr><td></td><td>Nómina Administración</td></tr>
+   <tr><td></td><td>MOD</td></tr>
+   <tr><td></td><td>MOI</td></tr>
+   <tr><td></td><td>Provisión Décimo Tercero</td></tr>
+   <tr><td></td><td>Provisión Décimo Cuarto</td></tr>
+   <tr><td></td><td>Liquidación Producción</td></tr>
+   <tr class="pk"><td></td><td><b>Pago Bancario de Nómina</b></td></tr>
+  </table>
+ </div>
+ <svg class="cur" id="as3cur" viewBox="0 0 14 20"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+</div>
+          </div>
           </div>
         </article>
         <article class="mod-fn" id="reportes-personalizados">
@@ -381,36 +450,15 @@
      <tr><td><span class="sg eg">Egreso</span></td><td>6220</td><td>Fondo de cesantía</td></tr>
      <tr class="pick"><td><span class="sg eg">Egreso</span></td><td>6230</td><td>Seguro médico</td></tr>
      <tr><td><span class="sg inf">Informativo</span></td><td>8110</td><td>Base aportable IESS</td></tr>
-     <tr><td><span class="sg in">Ingreso</span></td><td>1120</td><td>Horas extra 50%</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8200</td><td>Base externa</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8020</td><td>Conteo de almuerzos</td></tr>
-     <tr><td><span class="sg in">Ingreso</span></td><td>1420</td><td>Ingreso en quincena</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8190</td><td>Aporte SECAP</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6330</td><td>Egreso en quincena</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8030</td><td>Conteo de horas extra</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6210</td><td>Aporte patronal asumido</td></tr>
-     <tr><td><span class="sg in">Ingreso</span></td><td>1130</td><td>Horas extra 100%</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8210</td><td>Base imponible anual</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6260</td><td>Seguro de vida</td></tr>
-     <tr><td><span class="sg inf">Informativo</span></td><td>8180</td><td>Aporte personal + patronal</td></tr></table></div>
+     </table></div>
    <div class="mid"><span class="btn go" data-el="go">&gt;</span><span class="btn">&lt;</span><span class="btn">&gt;&gt;</span><span class="btn">&lt;&lt;</span></div>
-   <div class="side"><div class="hd">Rubros Asignados<span>Fila 16 de 16</span></div>
+   <div class="side"><div class="hd">Rubros Asignados<span>Fila 6 de 6</span></div>
     <table class="g"><colgroup><col style="width:92px"><col style="width:60px"><col></colgroup><tr><th>Signo</th><th>Código</th><th>Rubro</th></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6200</td><td>Aporte personal IESS</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6240</td><td>Caja de ahorros</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6100</td><td>Descuento atrasos</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6250</td><td>Descuento celular</td></tr>
      <tr><td><span class="sg eg">Egreso</span></td><td>6150</td><td>Otros egresos gravados</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6270</td><td>Préstamos empresa</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6310</td><td>Préstamos IESS</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6300</td><td>Quincena</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6120</td><td>Retención judicial</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6900</td><td>Impuesto a la renta</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6800</td><td>Cuotas pendientes</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6810</td><td>Descuentos liquidación</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6160</td><td>Otros egresos no gravados</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6280</td><td>Anticipo de sueldo</td></tr>
-     <tr><td><span class="sg eg">Egreso</span></td><td>6290</td><td>Pensión alimenticia</td></tr>
      <tr class="new"><td><span class="sg eg">Egreso</span></td><td>6230</td><td>Seguro médico</td></tr></table></div>
   </div>
               </div>
@@ -734,6 +782,36 @@ c.style.left=(p.left-s.left+158)+'px'; c.style.top=(p.top-s.top+22)+'px';
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
 </script>
+  <script>
+(function(){
+const f=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const D=[
+ ['5.2.01.01','Sueldo Devengado','ADM01','',9840.00],
+ ['5.2.01.01','Sueldo Devengado','OPE02','',12450.00],
+ ['5.2.01.02','Horas extra 50%','OPE02','',486.25],
+ ['5.2.01.06','Aporte Patronal IESS','ADM01','',1097.16],
+ ['5.2.01.06','Aporte Patronal IESS','OPE02','',1442.39]];
+const H=[
+ ['2.1.03.01','Aporte Personal IESS','','',2152.36],
+ ['2.1.03.01','Aporte Patronal IESS','','',2539.55],
+ ['2.1.04.01','Retención Impuesto a la Renta','ADM01','MSALGADOR',273.25],
+ ['1.1.02.05','Préstamos a Empleados','OPE02','EMORAVI',42.50]];
+const TD=D.reduce((a,r)=>a+r[4],0); const TH0=H.reduce((a,r)=>a+r[4],0);
+H.push(['2.1.01.01','Sueldos por Pagar','','',Math.round((TD-TH0)*100)/100]);
+let h='';
+D.forEach(r=>h+=`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="db">${f(r[4])}</td><td></td><td></td></tr>`);
+H.forEach(r=>h+=`<tr${r[1]==='Retención Impuesto a la Renta'?' class="sel"':''}><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td></td><td class="hb">${f(r[4])}</td><td></td></tr>`);
+document.getElementById('as3t').insertAdjacentHTML('beforeend',h);
+const th=[...document.querySelectorAll('#as3t th')], w=i=>th[i].getBoundingClientRect().width;
+document.getElementById('as3ft').innerHTML=`<span class="lb">Total (${D.length+H.length})</span><span style="width:${w(4)}px">${f(TD)}</span><span style="width:${w(5)}px">${f(TD)}</span><span style="width:${w(6)}px;background:transparent"></span>`;
+const r=document.querySelector('#as3t tr.sel td:nth-child(2)').getBoundingClientRect(), s=document.getElementById('as3s').getBoundingClientRect(), c=document.getElementById('as3cur');
+c.style.left=(r.left-s.left+176)+'px'; c.style.top=(r.top-s.top+14)+'px';
+
+  var root=document.getElementById('as3'),stage=root.firstElementChild,media=root.parentElement;
+  function fit(){var k=Math.min(1,(media.clientWidth-40)/980);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*980)+'px';}
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
+})();
+  </script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>
