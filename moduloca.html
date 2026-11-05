@@ -119,7 +119,7 @@
 /* Ausentismos y kardex de vacaciones */
 .kv3{font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
 .kv3 *{box-sizing:border-box}
-.kv3 .stage{position:relative;width:1080px;padding:28px 24px 0;
+.kv3 .stage{position:relative;width:1000px;padding:28px 24px 0;
  background:transparent}
 .kv3 .win{position:relative;width:732px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
 .kv3 .tabs{display:flex;gap:2px;padding:8px 6px 0;border-bottom:1px solid #d2d2d2}
@@ -321,10 +321,10 @@
             </div>
           </div>
         </article>
-        <article class="mod-fn is-shot" id="ausentismos-y-permisos">
+        <article class="mod-fn" id="ausentismos-y-permisos">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/moduloca-ausentismos-y-permisos.png" alt="" width="16" height="16">Ausentismos y kardex de vacaciones</h3><p>Permisos, vacaciones y licencias en un kardex claro, como un estado de cuenta: días ganados, días usados y saldo por periodo. Crea los tipos de permiso que tu empresa necesite. Tus colaboradores solicitan sus vacaciones desde el autoservicio, viendo antes cuántos días tienen disponibles, y el jefe las aprueba desde su correo.</p></div>
           <div class="mod-fn-media rp-stage" data-fn="ausentismos-y-permisos">
-            <div class="kv3" id="kv3" style="width:1080px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
+            <div class="kv3" id="kv3" style="width:1000px" role="img" aria-label="Kardex de vacaciones con saldos por periodo y solicitud de ausentismo">
 <div class="stage" data-el="s">
  <div class="win" data-el="w">
   <div class="tabs"><span>Ausentismo</span><span class="on">Vacaciones</span></div>
@@ -602,13 +602,13 @@ s.style.height=(mr.b+36)+'px';
 const lv=R(root.querySelector('[data-el="lastv"]').children[3]),cx=lv.r-30,L='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',D=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
 root.querySelector('[data-el="lk"]').innerHTML=`<path d="M${cx} ${lv.t+lv.h/2} V${k.t}" ${L}/>${D(cx,lv.t+lv.h/2)}${D(cx,k.t)}`;
 const c3=root.querySelector('[data-el="c3"]'),sc=R(root.querySelector('[data-el="lastv"]').nextElementSibling.children[3]);
-c3.style.left=(wr.r-70)+'px';c3.style.top=(wr.b-250)+'px';
+c3.style.left=(wr.r-110)+'px';c3.style.top=(wr.b-250)+'px';
 const k3=R(c3),sx=sc.l+sc.w/2,ex=k3.l+k3.w/2,routeBottom=Math.max(wr.b,k3.b)+55;
 root.querySelector('[data-el="lk"]').innerHTML+=`<path d="M${sx} ${sc.t+sc.h/2} V${routeBottom} H${ex} V${k3.b}" ${L}/>${D(sx,sc.t+sc.h/2)}${D(ex,k3.b)}`;
 s.style.height=Math.max(mr.b,k3.b,routeBottom)+20+'px';
 
 const stage=root.firstElementChild,media=root.parentElement;
-function fit(){const k=Math.max(0,Math.min(1.4,(media.clientWidth-40)/1080));root.style.transformOrigin='top left';root.style.marginLeft=Math.max(0,(media.clientWidth-40-1080*k)/2)+'px';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1080)+'px';}
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/1000));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1000)+'px';}
 fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
 })();
 </script>
