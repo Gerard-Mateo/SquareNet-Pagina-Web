@@ -120,6 +120,51 @@
   @media (prefers-reduced-motion:reduce){
     .reach-go,.reach-ico{transition:none!important}
   }
+  /* Desplegables con íconos («¿Cómo nos conociste?» y país del teléfono): la lista nativa queda escondida debajo
+     (el formulario y su JS la siguen leyendo) y encima va un botón + lista propia con ícono, negrita y un clic con rebote */
+  .dd-native{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+  .dd-host,.lead-ct{position:relative}
+  .dd-btn{display:flex;align-items:center;gap:10px;height:46px;padding:0 14px 0 8px;font:inherit;font-size:16px;font-weight:700;color:inherit;text-align:left;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);cursor:pointer;outline:none;transition:border-color .2s,box-shadow .2s}
+  .dd-btn:focus-visible,.dd-btn[aria-expanded=true],.lead-cc[aria-expanded=true],.lead-cc:focus-visible{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent);outline:none}
+  .dd-native.is-bad + .dd-btn{border-color:#b3261e}
+  .dd-btn .dd-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dd-btn .dd-ph{font-weight:400;opacity:.6;padding-left:4px}
+  .dd-chev{flex:none;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);opacity:.55;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+  .dd-btn[aria-expanded=true] .dd-chev{transform:translateY(2px) rotate(225deg)}
+  .lead-cc{cursor:pointer;gap:8px;font-weight:700}
+  .lead-cc::after{transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+  .lead-cc[aria-expanded=true]::after{transform:translateY(-20%) rotate(225deg)}
+  .dd-ic{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:color-mix(in srgb,var(--c) 13%,#fff);color:var(--c)}
+  .dd-ic svg{width:18px;height:18px}
+  .dd-flag{flex:none;display:block;width:24px;height:16px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.14)}
+  .dd-flag svg{display:block;width:100%;height:100%}
+  .dd-ic,.dd-flag{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .dd-pop{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;max-height:330px;overflow:auto;overscroll-behavior:contain;padding:6px;background:#fff;border:1px solid var(--color-divider);border-radius:10px;box-shadow:0 22px 44px -14px rgba(20,40,60,.3),0 4px 12px rgba(20,40,60,.08);transform-origin:top left}
+  .lead-ct .dd-pop{right:auto;width:min(320px,100%)}
+  .dd-pop.is-in{animation:ddIn .24s cubic-bezier(.2,.9,.3,1.25) both}
+  .dd-pop.is-out{animation:ddOut .16s ease both}
+  .dd-pop.is-in .dd-opt{animation:ddOpt .32s cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--k) * 22ms)}
+  .dd-opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:7px;font-weight:700;font-size:15.5px;line-height:1.2;cursor:pointer;user-select:none;transition:background-color .15s,transform .15s}
+  .dd-opt .dd-t{flex:1;min-width:0}
+  .dd-opt small{font-weight:600;font-size:13.5px;opacity:.5;font-variant-numeric:tabular-nums}
+  .dd-opt.is-act{background:color-mix(in srgb,var(--color-accent) 9%,#fff)}
+  .dd-opt.is-act .dd-ic,.dd-opt.is-act .dd-flag{transform:scale(1.12) rotate(-5deg)}
+  .dd-opt:active{transform:scale(.97)}
+  .dd-ck{flex:none;width:18px;height:18px;fill:none;stroke:var(--color-accent);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .35s ease .05s}
+  .dd-opt[aria-selected=true] .dd-ck{stroke-dashoffset:0}
+  .dd-opt.is-picked{background:color-mix(in srgb,var(--color-accent) 16%,#fff)}
+  .dd-opt.is-picked .dd-ic,.dd-opt.is-picked .dd-flag{animation:ddBoing .45s cubic-bezier(.3,1.6,.5,1)}
+  .dd-rip{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:color-mix(in srgb,var(--color-accent) 30%,transparent);pointer-events:none;animation:ddRip .6s ease-out forwards}
+  .dd-bump{animation:ddBump .45s cubic-bezier(.3,1.6,.5,1)}
+  .dd-bump .dd-ic,.dd-bump .dd-flag{animation:ddSpin .55s cubic-bezier(.3,1.6,.5,1)}
+  @keyframes ddIn{from{opacity:0;transform:translateY(-8px) scale(.96)}}
+  @keyframes ddOut{to{opacity:0;transform:translateY(-4px) scale(.98)}}
+  @keyframes ddOpt{from{opacity:0;transform:translateY(8px)}}
+  @keyframes ddBoing{40%{transform:scale(1.35) rotate(-10deg)}}
+  @keyframes ddRip{to{transform:scale(32);opacity:0}}
+  @keyframes ddBump{35%{transform:scale(1.04)}}
+  @keyframes ddSpin{from{transform:scale(.3) rotate(-120deg);opacity:0}}
+  @media (prefers-reduced-motion:reduce){.dd-pop.is-in,.dd-pop.is-out,.dd-pop .dd-opt,.dd-bump,.dd-bump *,.dd-opt.is-picked *,.dd-rip{animation:none!important}}
 </style>
 </head>
 <body>
@@ -148,7 +193,7 @@
       <form class="lead-form" id="leadForm" novalidate data-reveal>
         <h2>Solicita una cotización</h2>
         <div class="lead-row one">
-          <div class="lead-f"><label for="lf-name">Nombre y apellidos<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="name" required></div>
+          <div class="lead-f"><label for="lf-name">Nombre y apellidos<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="name" placeholder="John Doe" required></div>
         </div>
         <div class="lead-row">
           <div class="lead-f"><label for="lf-company">Empresa<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-company" name="company" autocomplete="organization" placeholder="Razón social" required></div>
@@ -294,7 +339,7 @@
       var ct = document.getElementById('lf-contact'), msg = document.getElementById('lf-contact-msg');
       var ph = document.getElementById('lf-phone'), phMsg = document.getElementById('lf-phone-msg');
       var cc = document.getElementById('lf-cc'), ccShow = document.getElementById('lf-cc-show');
-      COUNTRIES.forEach(function (c, i) { cc.add(new Option(c[1] + ' (+' + c[2] + ')', i)); });
+      COUNTRIES.forEach(function (c, i) { var o = new Option(c[1] + ' (+' + c[2] + ')', i); o.setAttribute('data-iso', c[0]); cc.add(o); });
       var country = function () { return COUNTRIES[+cc.value]; };
 
       function sayIn(input, box, kind, html) {
@@ -385,6 +430,152 @@
         location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
       });
     })();
+  </script>
+  <script>
+  // Desplegables con íconos sobre los <select> del formulario (ver CSS .dd-*): botón + lista propia, accesible con teclado
+  // (flechas, Enter, Esc, letra inicial). Al elegir: onda, check que se dibuja, el ícono rebota y el botón da un saltito.
+  (function () {
+    var src = document.getElementById('lf-source'), cc = document.getElementById('lf-cc');
+    if (!src || !cc) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var CK = '<svg class="dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+    var S = ' fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+    var SRC = {
+      'Google': ['#4285F4', '<svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>'],
+      'LinkedIn': ['#0A66C2', '<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.2 9.6H4.6V19h2.6zM5.9 5.2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM19.4 13.6c0-2.6-1.4-4.2-3.6-4.2-1.3 0-2.2.7-2.6 1.4V9.6h-2.5V19h2.6v-4.7c0-1.2.4-2.3 1.7-2.3s1.6 1.1 1.6 2.4V19h2.8z"/></svg>'],
+      'Recomendación de alguien': ['#E8890C', '<svg viewBox="0 0 24 24"' + S + '><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><path d="M16 4.9a3.2 3.2 0 0 1 0 6.2M17.6 14.6c1.8.8 3 2.5 3.4 4.9"/></svg>'],
+      'Evento o feria': ['#D6336C', '<svg viewBox="0 0 24 24"' + S + '><path d="M4 7.5V6h16v1.5a2.5 2.5 0 0 0 0 5V18H4v-5.5a2.5 2.5 0 0 0 0-5Z"/><path d="M14.5 6v2M14.5 11v2M14.5 16v2"/></svg>'],
+      'Redes sociales': ['#7048E8', '<svg viewBox="0 0 24 24"' + S + '><path d="M4 5h16v11H9.5L4 20Z"/><path d="M12 13.4s-3.2-1.9-3.2-3.8a1.7 1.7 0 0 1 3.2-.8 1.7 1.7 0 0 1 3.2.8c0 1.9-3.2 3.8-3.2 3.8Z" fill="currentColor" stroke="none"/></svg>'],
+      'Otro': ['#868E96', '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18.5" cy="12" r="2"/></svg>']
+    };
+    // banderas simplificadas (franjas): h = horizontales, v = verticales; [color, peso]
+    var F = {
+      EC: ['h', [['#FFD100', 2], ['#034EA2', 1], ['#ED1C24', 1]]], CO: ['h', [['#FCD116', 2], ['#003893', 1], ['#CE1126', 1]]],
+      VE: ['h', [['#FFCC00', 1], ['#00247D', 1], ['#CF142B', 1]]], AR: ['h', [['#74ACDF', 1], ['#fff', 1], ['#74ACDF', 1]], '<circle cx="15" cy="10" r="2.2" fill="#F6B40E"/>'],
+      BO: ['h', [['#D52B1E', 1], ['#F9E300', 1], ['#007934', 1]]], PY: ['h', [['#D52B1E', 1], ['#fff', 1], ['#0038A8', 1]]],
+      SV: ['h', [['#0F47AF', 1], ['#fff', 1], ['#0F47AF', 1]]], HN: ['h', [['#0073CF', 1], ['#fff', 1], ['#0073CF', 1]]],
+      NI: ['h', [['#0067C6', 1], ['#fff', 1], ['#0067C6', 1]]], CR: ['h', [['#002B7F', 1], ['#fff', 1], ['#CE1126', 2], ['#fff', 1], ['#002B7F', 1]]],
+      PE: ['v', [['#D91023', 1], ['#fff', 1], ['#D91023', 1]]], MX: ['v', [['#006847', 1], ['#fff', 1], ['#CE1126', 1]]],
+      GT: ['v', [['#4997D0', 1], ['#fff', 1], ['#4997D0', 1]]],
+      UY: ['h', [['#fff', 1], ['#0038A8', 1], ['#fff', 1], ['#0038A8', 1], ['#fff', 1]], '<rect width="11" height="11" fill="#fff"/><circle cx="5.5" cy="5.5" r="2.6" fill="#FCD116"/>'],
+      CU: ['h', [['#002A8F', 1], ['#fff', 1], ['#002A8F', 1], ['#fff', 1], ['#002A8F', 1]], '<path d="M0 0l13 10L0 20Z" fill="#CF142B"/><circle cx="4.5" cy="10" r="1.6" fill="#fff"/>'],
+      US: ['h', [['#B22234', 1], ['#fff', 1], ['#B22234', 1], ['#fff', 1], ['#B22234', 1], ['#fff', 1], ['#B22234', 1]], '<rect width="13" height="11" fill="#3C3B6E"/>'],
+      CL: ['h', [['#fff', 1], ['#D52B1E', 1]], '<rect width="10" height="10" fill="#0039A6"/><path d="m5 2.6.9 2.6h2.7L6.4 6.8l.8 2.6L5 7.8 2.8 9.4l.8-2.6-2.2-1.6h2.7Z" fill="#fff"/>'],
+      BR: ['h', [['#009C3B', 1]], '<path d="M15 2.5 27.5 10 15 17.5 2.5 10Z" fill="#FFDF00"/><circle cx="15" cy="10" r="4.2" fill="#002776"/>'],
+      PA: ['h', [['#fff', 1]], '<rect x="15" width="15" height="10" fill="#DA121A"/><rect y="10" width="15" height="10" fill="#072357"/>'],
+      DO: ['h', [['#fff', 1]], '<rect width="13" height="8" fill="#002D62"/><rect x="17" width="13" height="8" fill="#CE1126"/><rect y="12" width="13" height="8" fill="#CE1126"/><rect x="17" y="12" width="13" height="8" fill="#002D62"/>']
+    };
+    function flag(iso) {
+      var f = F[iso]; if (!f) return '';
+      var tot = f[1].reduce(function (a, b) { return a + b[1]; }, 0), at = 0, h = '';
+      f[1].forEach(function (b) {
+        var p = b[1] / tot;
+        h += f[0] === 'h' ? '<rect y="' + (at * 20) + '" width="30" height="' + (p * 20 + .05) + '" fill="' + b[0] + '"/>'
+                          : '<rect x="' + (at * 30) + '" width="' + (p * 30 + .05) + '" height="20" fill="' + b[0] + '"/>';
+        at += p;
+      });
+      return '<span class="dd-flag" aria-hidden="true"><svg viewBox="0 0 30 20" preserveAspectRatio="none">' + h + (f[2] || '') + '</svg></span>';
+    }
+    function chip(s) { return '<span class="dd-ic" style="--c:' + s[0] + '" aria-hidden="true">' + s[1] + '</span>'; }
+
+    function make(sel, trigger, host, item, render) {
+      var pop = document.createElement('div'), items = [], act = -1, open = false;
+      pop.className = 'dd-pop'; pop.id = sel.id + '-list'; pop.setAttribute('role', 'listbox'); pop.hidden = true;
+      Array.prototype.forEach.call(sel.options, function (o, i) {
+        if (o.disabled) return;
+        var d = document.createElement('div');
+        d.className = 'dd-opt'; d.id = sel.id + '-o' + i; d.setAttribute('role', 'option'); d.setAttribute('data-i', i);
+        d.style.setProperty('--k', items.length); d.innerHTML = item(o) + CK;
+        pop.appendChild(d); items.push(d);
+      });
+      host.classList.add('dd-host'); host.appendChild(pop);
+      sel.classList.add('dd-native'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute('aria-haspopup', 'listbox'); trigger.setAttribute('aria-expanded', 'false'); trigger.setAttribute('aria-controls', pop.id);
+      function setAct(k) {
+        act = k;
+        items.forEach(function (d, j) { d.classList.toggle('is-act', j === k); });
+        if (k >= 0) { trigger.setAttribute('aria-activedescendant', items[k].id); items[k].scrollIntoView({ block: 'nearest' }); }
+      }
+      function cur() { for (var j = 0; j < items.length; j++) if (+items[j].getAttribute('data-i') === sel.selectedIndex) return j; return -1; }
+      function show() {
+        if (open) return; open = true;
+        items.forEach(function (d, j) { d.setAttribute('aria-selected', String(j === cur())); d.classList.remove('is-picked'); });
+        pop.hidden = false; pop.classList.remove('is-out', 'is-in'); void pop.offsetWidth; pop.classList.add('is-in');
+        trigger.setAttribute('aria-expanded', 'true'); setAct(Math.max(0, cur()));
+        document.addEventListener('pointerdown', outside, true);
+      }
+      function hide(focus) {
+        if (!open) return; open = false;
+        trigger.setAttribute('aria-expanded', 'false'); trigger.removeAttribute('aria-activedescendant');
+        pop.classList.remove('is-in'); pop.classList.add('is-out');
+        setTimeout(function () { if (!open) { pop.hidden = true; pop.classList.remove('is-out'); } }, reduce ? 0 : 170);
+        document.removeEventListener('pointerdown', outside, true);
+        if (focus) trigger.focus();
+      }
+      function outside(e) { if (!pop.contains(e.target) && !trigger.contains(e.target)) hide(); }
+      function pick(k, e) {
+        var d = items[k];
+        sel.selectedIndex = +d.getAttribute('data-i');
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        items.forEach(function (o, j) { o.setAttribute('aria-selected', String(j === k)); });
+        if (reduce) { render(); hide(true); return; }
+        var r = d.getBoundingClientRect(), rp = document.createElement('span');
+        rp.className = 'dd-rip';
+        rp.style.left = (e && e.clientX ? e.clientX - r.left : r.width / 2) + 'px';
+        rp.style.top = (e && e.clientY ? e.clientY - r.top : r.height / 2) + 'px';
+        d.appendChild(rp); setTimeout(function () { rp.remove(); }, 650);
+        d.classList.add('is-picked');
+        setTimeout(function () {
+          render(); hide(true);
+          trigger.classList.remove('dd-bump'); void trigger.offsetWidth; trigger.classList.add('dd-bump');
+        }, 360);
+      }
+      trigger.addEventListener('click', function () { if (open) hide(); else show(); });
+      trigger.addEventListener('keydown', function (e) {
+        var k = e.key;
+        if (!open) { if (k === 'ArrowDown' || k === 'ArrowUp' || k === 'Enter' || k === ' ') { e.preventDefault(); show(); } return; }
+        if (k === 'ArrowDown') { e.preventDefault(); setAct(Math.min(items.length - 1, act + 1)); }
+        else if (k === 'ArrowUp') { e.preventDefault(); setAct(Math.max(0, act - 1)); }
+        else if (k === 'Home' || k === 'End') { e.preventDefault(); setAct(k === 'Home' ? 0 : items.length - 1); }
+        else if (k === 'Enter' || k === ' ') { e.preventDefault(); if (act >= 0) pick(act); }
+        else if (k === 'Escape') { e.preventDefault(); hide(true); }
+        else if (k === 'Tab') hide();
+        else if (k.length === 1) {
+          var q = k.toLowerCase(), j, n = items.length;
+          for (var m = 1; m <= n; m++) { j = (act + m) % n; if (items[j].textContent.trim().toLowerCase().indexOf(q) === 0) { setAct(j); break; } }
+        }
+      });
+      pop.addEventListener('mousedown', function (e) { e.preventDefault(); });  // el foco se queda en el botón
+      pop.addEventListener('pointermove', function (e) { var d = e.target.closest('.dd-opt'); if (d) setAct(items.indexOf(d)); });
+      pop.addEventListener('click', function (e) { var d = e.target.closest('.dd-opt'); if (d) pick(items.indexOf(d), e); });
+    }
+
+    // ¿Cómo nos conociste?
+    var btn = document.createElement('button'), lab = document.querySelector('label[for="lf-source"]');
+    btn.type = 'button'; btn.className = 'dd-btn'; btn.id = 'lf-source-btn';
+    src.parentNode.insertBefore(btn, src.nextSibling);
+    if (lab) lab.htmlFor = btn.id;
+    function itemSrc(o) { return chip(SRC[o.text] || SRC['Otro']) + '<span class="dd-t">' + o.text + '</span>'; }
+    function renderSrc() {
+      var o = src.options[src.selectedIndex];
+      btn.innerHTML = (o && !o.disabled ? itemSrc(o) : '<span class="dd-t dd-ph">' + (o ? o.text : 'Elige una opción') + '</span>') + '<i class="dd-chev" aria-hidden="true"></i>';
+    }
+    renderSrc();
+    make(src, btn, src.parentNode, itemSrc, renderSrc);
+
+    // país del teléfono: el recuadro «EC +593» hace de botón; su texto lo sigue poniendo el JS del formulario
+    var box = cc.parentNode, show = document.getElementById('lf-cc-show'), fl = document.createElement('span');
+    box.insertBefore(fl, show); box.tabIndex = 0; box.setAttribute('role', 'button'); box.setAttribute('aria-label', 'País del teléfono');
+    function renderCc() { var o = cc.options[cc.selectedIndex]; fl.innerHTML = o ? flag(o.getAttribute('data-iso')) : ''; }
+    fl.style.display = 'contents';
+    function itemCc(o) {
+      var m = o.text.match(/^(.*) \((\+\d+)\)$/) || [0, o.text, ''];
+      return flag(o.getAttribute('data-iso')) + '<span class="dd-t">' + m[1] + '</span><small>' + m[2] + '</small>';
+    }
+    renderCc();
+    if ('MutationObserver' in window) new MutationObserver(renderCc).observe(show, { childList: true, characterData: true, subtree: true });
+    make(cc, box, box.parentNode, itemCc, renderCc);
+  })();
   </script>
   <script src="js/fecha.js"></script>
   <script src="js/nav.js"></script>
