@@ -97,8 +97,8 @@
   .erp-band p strong{color:var(--color-text)}
   .erp-logos{display:flex;align-items:center;justify-content:center;gap:calc(var(--space-8) * 2);flex-wrap:wrap;margin-top:calc(var(--space-8) * 3)}
   .erp-logos img{height:48px;width:auto;object-fit:contain;transition:transform .35s cubic-bezier(.2,.8,.3,1.4)}
-  .erp-logos a{display:block}
-  .erp-logos a:hover img,.erp-logos a:focus-visible img{transform:scale(1.12)}
+  .erp-logos span{display:block}
+  .erp-logos span:hover img{transform:scale(1.12)}
   @media (max-width:860px){ .erp-band h2{font-size:26px} }
   @media (prefers-reduced-motion:reduce){ .erp-logos img{transition:none} }
   .feature-carousel{position:relative;overflow:hidden}
@@ -442,7 +442,6 @@
         <img src="img/Pesdel.png" class="mq-solid" alt="Pesdel" loading="lazy">
         <a href="https://www.linkedin.com/company/servifreno/" target="_blank" rel="noopener" aria-label="Servifreno en LinkedIn"><img src="img/Servifreno.jpg" alt="Servifreno" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/envasursa/" target="_blank" rel="noopener" aria-label="Envasur en LinkedIn"><img src="img/Envasur.png" alt="Envasur" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/enkador-s-a-/" target="_blank" rel="noopener" aria-label="Enkador en LinkedIn"><img src="img/Enkador.jpg" class="mq-solid" alt="Enkador" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/quimicaariston/" target="_blank" rel="noopener" aria-label="Química Ariston en LinkedIn"><img src="img/Quimica_Ariston.jpg" alt="Química Ariston" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/finca-los-nonnos/" target="_blank" rel="noopener" aria-label="Finca Los Ñoños en LinkedIn"><img src="img/FincaLosNonos.png" alt="Finca Los Ñoños" loading="lazy"></a>
         <img src="img/Toyota.png" alt="Toyotaservicios S.A." loading="lazy">
@@ -454,14 +453,12 @@
         <a href="https://www.linkedin.com/company/curtiduria-tungurahua/" target="_blank" rel="noopener" aria-label="Curtiduría Tungurahua en LinkedIn"><img src="img/Curtiduria_Tungurahua.jpg" alt="Curtiduría Tungurahua" loading="lazy"></a>
         <img src="img/Caves.jpg" alt="Caves" loading="lazy">
         <a href="https://www.linkedin.com/company/multicines-ecuador/" target="_blank" rel="noopener" aria-label="Multicines en LinkedIn"><img src="img/Multicines.png" class="mq-solid" alt="Multicines" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/incubandina/" target="_blank" rel="noopener" aria-label="Incubandina en LinkedIn"><img src="img/Incubandina.jpg" alt="Incubandina" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/ecuatran-s-a/" target="_blank" rel="noopener" aria-label="Ecuatran en LinkedIn"><img src="img/Ecuatran.png" alt="Ecuatran" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/ecuador-vita/" target="_blank" rel="noopener" aria-label="Pasteurizadora Quito en LinkedIn"><img src="img/Pasteurizadora_Quito.jpg" alt="Pasteurizadora Quito" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/delltex-s-a/" target="_blank" rel="noopener" aria-label="Deltex en LinkedIn"><img src="img/Deltex.jpg" alt="Deltex" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/assaecuador/" target="_blank" rel="noopener" aria-label="Assa en LinkedIn"><img src="img/Assa.jpg" alt="Assa" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/la-tablita-group/" target="_blank" rel="noopener" aria-label="Tablita del Tártaro en LinkedIn"><img src="img/Tablita_del_tartaro.svg" alt="Tablita del Tártaro" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/teimsa/" target="_blank" rel="noopener" aria-label="Teimsa en LinkedIn"><img src="img/Teimsa.jpg" alt="Teimsa" loading="lazy"></a>
-        <a href="https://www.linkedin.com/company/ekronac/" target="_blank" rel="noopener" aria-label="Ekron en LinkedIn"><img src="img/Ekron.jpg" class="mq-solid" alt="Ekron" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/puntonet-s.a./" target="_blank" rel="noopener" aria-label="PuntoNet en LinkedIn"><img src="img/PuntoNet.jpg" class="mq-solid" alt="PuntoNet" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/inverneg-sa/" target="_blank" rel="noopener" aria-label="Inverneg en LinkedIn"><img src="img/Inverneg.jpg" alt="Inverneg" loading="lazy"></a>
         <a href="https://www.linkedin.com/company/bioalimentarec/" target="_blank" rel="noopener" aria-label="Bioalimentar en LinkedIn"><img src="img/Bioalimentar.jpg" alt="Bioalimentar" loading="lazy"></a>
@@ -737,10 +734,10 @@
       <h2><span class="accent">Integra</span> SquareNet con tu <span class="accent">ecosistema empresarial</span></h2>
       <p>SquareNet se conecta con los <strong>sistemas ERP más usados.</strong> Menos reprocesos, más consistencia en tus datos.</p>
       <div class="erp-logos">
-        <a href="contacto.html" aria-label="Integración con SAP: contáctanos"><img src="img/sap-logo.svg" alt="SAP"></a>
-        <a href="contacto.html" aria-label="Integración con Microsoft Dynamics 365: contáctanos"><img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365"></a>
-        <a href="contacto.html" aria-label="Integración con JD Edwards: contáctanos"><img src="img/jdedwards-logo.svg" alt="JD Edwards"></a>
-        <a href="contacto.html" aria-label="Integración con Infor: contáctanos"><img src="img/infor-logo.svg" alt="Infor"></a>
+        <span><img src="img/sap-logo.svg" alt="SAP"></span>
+        <span><img src="img/dynamics365-logo.svg" alt="Microsoft Dynamics 365"></span>
+        <span><img src="img/jdedwards-logo.svg" alt="JD Edwards"></span>
+        <span><img src="img/infor-logo.svg" alt="Infor"></span>
       </div>
     </div>
   </div>
