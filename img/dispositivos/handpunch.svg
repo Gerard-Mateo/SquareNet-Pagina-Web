@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 92" role="img" aria-label="Schlage HandPunch"><title>Schlage HandPunch</title>
+<g fill="none" stroke="#474A4E">
+<rect x="63" y="4" width="104" height="32" rx="11" stroke-width="3.4"/>
+<rect x="68" y="9" width="94" height="22" rx="7" stroke-width="1.2"/>
+</g>
+<text x="115" y="26" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="13.5" letter-spacing="1.1" fill="#474A4E" transform="translate(3 0) skewX(-7)">SCHLAGE</text>
+<text x="115" y="80" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="400" font-size="29" letter-spacing="2" fill="#474A4E" textLength="214" lengthAdjust="spacing">HANDPUNCH</text>
+</svg>
