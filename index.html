@@ -124,6 +124,8 @@
   .carousel-dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:8px;z-index:2}
   .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
   .carousel-dot[aria-current="true"]{background:#fff}
+  /* en pantallas táctiles los puntos del carrusel y «Explorar los módulos» tienen zona de toque de ~40 px (el punto se ve igual de chico) */
+  @media (pointer:coarse){.carousel-dots{gap:16px}.carousel-dot{position:relative}.carousel-dot::after{content:"";position:absolute;inset:-9px}.showcase-more{min-height:44px}}
   .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;width:calc(var(--space-6) + 64px);height:70%;border-radius:0;border:none;background:none;backdrop-filter:none;color:#fff;cursor:pointer;font-size:64px;line-height:1;padding:0 calc(var(--space-4) + var(--space-2));text-shadow:0 2px 12px rgba(0,0,0,.35);opacity:.8;transition:opacity .2s ease}
   .carousel-arrow span{display:block;transition:transform .2s ease}
   .carousel-arrow:hover,.carousel-arrow:focus-visible{opacity:1}
@@ -268,7 +270,7 @@
   .clients h6{color:var(--color-neutral-700);margin-bottom:var(--space-4);text-align:center}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  .modules-teaser{scroll-margin-top:72px;padding:var(--space-8) 0;border-top:1px solid var(--color-divider);text-align:center}
+  .modules-teaser{scroll-margin-top:72px;padding-block:var(--space-8);border-top:1px solid var(--color-divider);text-align:center}
   .modules-teaser h2{margin-bottom:var(--space-3)}
   .modules-teaser-intro{max-width:620px;margin:0 auto var(--space-6);font-size:16px;opacity:.85}
   /* módulos con sus funciones, al estilo Humand: tarjetas suaves, chips blancos con ícono de color; cada chip lleva a su función (#ancla) en la página del módulo */
@@ -293,6 +295,7 @@
   .cta-band h2{color:#fff;margin-bottom:var(--space-2)}
   .cta-band p{color:#fff;opacity:.9;margin-bottom:var(--space-4)}
   .cta-band-btn{background:#fff;color:var(--color-accent-800)}
+  @media (max-width:400px){.cta-band{padding:var(--space-8) var(--space-4)}}   /* a 320 px «Simplifiquemos» no cabía en el recuadro */
   .cta-band:hover .cta-band-btn{background:var(--color-accent-100)}
   @media (max-width:860px){
     .hero h1{font-size:36px}
@@ -857,7 +860,29 @@
         Array.prototype.forEach.call(dotsWrap.children, function (dot, di) {
           dot.setAttribute('aria-current', di === index ? 'true' : 'false');
         });
+        schedule();
       }
+
+      // avanza solo cada 4 s (pedido del cliente); se pausa con el mouse o el foco dentro, al tocarlo,
+      // fuera de pantalla o con la pestaña oculta, y con prefers-reduced-motion no avanza
+      var timer = null, held = false, seen = false;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function schedule() {
+        clearTimeout(timer);
+        if (reduce || held || !seen || document.hidden) return;
+        timer = setTimeout(function () { go(index + 1); }, 4000);
+      }
+      function hold(v) { held = v; schedule(); }
+      carousel.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold(true); });
+      carousel.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hold(false); });
+      carousel.addEventListener('focusin', function (e) { try { if (e.target.matches(':focus-visible')) hold(true); } catch (x) {} });
+      carousel.addEventListener('focusout', function (e) { if (!carousel.contains(e.relatedTarget)) hold(false); });
+      carousel.addEventListener('touchstart', function () { hold(true); }, { passive: true });
+      carousel.addEventListener('touchend', function () { hold(false); }, { passive: true });
+      document.addEventListener('visibilitychange', schedule);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (en) { seen = en[0].isIntersecting; schedule(); }, { threshold: 0.5 }).observe(carousel);
+      } else { seen = true; }
 
       function go(i) {
         var newIndex = (i + slides.length) % slides.length;
