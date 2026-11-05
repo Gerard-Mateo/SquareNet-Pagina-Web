@@ -126,13 +126,17 @@
   .carousel-dot[aria-current="true"]{background:#fff}
   /* en pantallas táctiles los puntos del carrusel y «Explorar los módulos» tienen zona de toque de ~40 px (el punto se ve igual de chico) */
   @media (pointer:coarse){.carousel-dots{gap:16px}.carousel-dot{position:relative}.carousel-dot::after{content:"";position:absolute;inset:-9px}.showcase-more{min-height:44px}}
-  .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;width:calc(var(--space-6) + 64px);height:70%;border-radius:0;border:none;background:none;backdrop-filter:none;color:#fff;cursor:pointer;font-size:64px;line-height:1;padding:0 calc(var(--space-4) + var(--space-2));text-shadow:0 2px 12px rgba(0,0,0,.35);opacity:.8;transition:opacity .2s ease}
-  .carousel-arrow span{display:block;transition:transform .2s ease}
+  /* zona de clic de las flechas: todo el alto y --arw de ancho (pedido del cliente: «que el alcance sea mucho mayor»); puede pasar sobre el margen del texto porque las diapositivas no tienen enlaces */
+  .feature-carousel{--arw:clamp(140px,13vw,220px)}
+  .carousel-arrow{position:absolute;top:0;bottom:0;z-index:2;display:flex;align-items:center;width:var(--arw);height:auto;border-radius:0;border:none;background:none;backdrop-filter:none;color:#fff;cursor:pointer;font-size:64px;line-height:1;padding:0 calc(var(--space-4) + var(--space-2));text-shadow:0 2px 12px rgba(0,0,0,.35);opacity:.8;transition:opacity .2s ease,background-color .2s ease}
+  .carousel-arrow span{display:block;transition:transform .25s cubic-bezier(.2,.8,.3,1.3)}
   .carousel-arrow:hover,.carousel-arrow:focus-visible{opacity:1}
+  .carousel-arrow.prev:hover{background:linear-gradient(90deg,rgba(0,0,0,.18),transparent)}
+  .carousel-arrow.next:hover{background:linear-gradient(270deg,rgba(0,0,0,.18),transparent)}
   .carousel-arrow.prev{left:0;justify-content:flex-start}
-  .carousel-arrow.prev:hover span{transform:translateX(-4px)}
+  .carousel-arrow.prev:hover span{transform:translateX(-4px) scale(1.5)}
   .carousel-arrow.next{right:0;justify-content:flex-end}
-  .carousel-arrow.next:hover span{transform:translateX(4px)}
+  .carousel-arrow.next:hover span{transform:translateX(4px) scale(1.5)}
   .feature-slide-art{flex:none;align-self:center;width:min(26vw,340px);height:min(26vw,340px);z-index:0;opacity:0;pointer-events:none}
   .feature-slide-art svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 14px 30px rgba(6,10,14,.4));transform:translate3d(calc(var(--artPX, 0) * 1px),calc(var(--artPY, 0) * 1px),0);transition:transform .9s cubic-bezier(.16,1,.3,1)}
   .feature-slide-art .art-frame{stroke:rgba(255,255,255,.28);stroke-width:1}
@@ -308,7 +312,7 @@
     .feature-slide-copy h2{font-size:36px}
     .feature-slide-copy .feature-slide-lead{font-size:17px}
     .carousel-arrow{display:none}
-    .feature-slide > .wrap{padding-left:var(--space-6)}
+    .feature-slide > .wrap{padding-left:var(--space-6);padding-right:var(--space-6)}
   }
 
   /* Testimonios: tarjetas que se expanden (la activa muestra foto + cita) */
