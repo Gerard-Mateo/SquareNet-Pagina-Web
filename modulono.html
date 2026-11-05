@@ -21,8 +21,8 @@
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
 <style>
-/* Cuotas y préstamos .cu2 (pantalla fija del cliente; se dibuja a 840 px y se escala a la columna) */
-.cu2{position:relative;flex:0 0 auto;width:840px;transform-origin:top left;font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+/* Cuotas y préstamos .cu2 (pantalla fija del cliente; se dibuja a 680 px y se escala a la columna) */
+.cu2{position:relative;flex:0 0 auto;width:680px;transform-origin:top left;font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
 .cu2 *{box-sizing:border-box}
 .cu2 .win{background:#fff;border:1px solid #d6d0c7;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.32)}
 .cu2 .chk{display:flex;align-items:center;gap:9px;height:40px;padding:0 14px;border-bottom:1px solid #eee;font-size:12.5px}
@@ -176,8 +176,8 @@
 /* Rol de pagos .rl3 (pantalla del cliente; se dibuja a 840 px y se escala a la columna) */
 .rl3 *{box-sizing:border-box}
 .rl3{margin:0;color:#1d1b1a}
-.rl3 .stage{position:relative;width:840px;height:470px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
-.rl3 .win{position:absolute;left:16px;top:14px;width:450px;height:442px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden}
+.rl3 .stage{position:relative;width:840px;height:410px;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px}
+.rl3 .win{position:absolute;left:16px;top:14px;width:450px;height:382px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;box-shadow:0 30px 60px -20px rgba(36,60,100,.28),0 4px 12px rgba(36,60,100,.08);overflow:hidden}
 .rl3 .ph{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;background:#f8f9fb;border-bottom:1px solid #eceef2;color:#6b7488;font-size:11px}
 .rl3 .pr{display:flex;align-items:center;height:30px;padding:0 10px;gap:8px;background:#e9f1fb;border-bottom:1px solid #dbe3ee}
 .rl3 .pr .nm{flex:1;height:21px;border:1px solid #9db7d6;background:#e4eefb;padding:0 6px;line-height:19px}
@@ -204,6 +204,8 @@
 .rl3 .tot{display:flex;height:28px;background:#f1f1f1;border-top:1px solid #ddd;align-items:center;padding-left:10px;font-weight:600;color:#2d5d9c;font-size:12px}
 .rl3 .tot span:first-child{flex:1}
 .rl3 .tot span.n{background:#c9c9c9;width:var(--w);height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
+#roles-de-pago{grid-template-columns:minmax(0,2fr) minmax(0,.75fr)}
+@media (max-width:860px){#roles-de-pago{grid-template-columns:minmax(0,1fr)}}
 .rl3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
 </style>
 </head>
@@ -261,13 +263,13 @@
  <div class="pr"><svg width="15" height="15" viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="7" fill="#2fa84f"/><path d="M4 7.8l2.4 2.4L11 5.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nm">Salazar Vega Marco Antonio</span><span style="width:70px;text-align:right">1,250.00</span><span style="width:80px;padding-left:10px">Analista</span></div>
  <table><colgroup><col style="width:66px"><col style="width:48px"><col style="width:164px"><col style="width:84px"><col style="width:24px"><col style="width:30px"><col></colgroup>
  <thead><tr><th>Tipo</th><th>Código</th><th>Rubro</th><th class="v">Valor</th><th class="c">S</th><th class="c">I</th><th class="c">F</th></tr></thead><tbody data-el="b"></tbody></table>
- <div class="ft"><div class="lb">Quincena:<br>Total a Recibir:</div><div class="vl">500.00<br>786.35</div></div>
+ <div class="ft"><div class="lb">Quincena:<br>Total a Recibir:</div><div class="vl">500.00<br>788.85</div></div>
 </div>
-<div class="card" data-el="c1" style="left:494px;top:62px;width:324px"><div class="xtabs"><span class="xtab on">Detalle</span><span class="xtab">Distribución</span></div>
+<div class="card" data-el="c1" style="left:494px;top:34px;width:324px"><div class="xtabs"><span class="xtab on">Detalle</span><span class="xtab">Distribución</span></div>
  <table class="dt"><colgroup><col><col style="width:90px"></colgroup><thead><tr><th>Concepto</th><th class="v">Valor</th></tr></thead><tbody>
  <tr><td>(Proceso de Rol)</td><td class="v">126.73</td></tr><tr class="sel"><td>Ajuste manual</td><td class="v" style="outline:1px solid #3b9be8;outline-offset:-1px">10.00</td></tr></tbody></table>
  <div class="tot" style="--w:90px"><span>Total</span><span class="n">136.73</span></div></div>
-<div class="card" data-el="c2" style="left:494px;top:252px;width:324px"><div class="xtabs"><span class="xtab">Detalle</span><span class="xtab on">Distribución</span></div>
+<div class="card" data-el="c2" style="left:494px;top:226px;width:324px"><div class="xtabs"><span class="xtab">Detalle</span><span class="xtab on">Distribución</span></div>
  <table class="dt"><colgroup><col><col style="width:98px"><col style="width:60px"></colgroup><thead><tr><th>Centro de Costo</th><th>Fracción</th><th class="v">Valor</th></tr></thead><tbody>
  <tr class="sel"><td>UIO ADM Finanzas</td><td>20.00/100.00</td><td class="v">25.35</td></tr><tr><td>UIO ADM Mercadeo</td><td>10.00/100.00</td><td class="v">12.67</td></tr><tr><td>GYE ADM Cobranzas</td><td>70.00/100.00</td><td class="v">88.71</td></tr></tbody></table>
  <div class="tot" style="--w:60px"><span style="flex:none;width:130px">Total</span><span style="width:98px">100.00</span><span class="n" style="margin-left:auto">126.73</span></div></div>
@@ -282,12 +284,12 @@
           <div class="cu2" id="cu2" role="img" aria-label="Pantalla de cuotas de SquareNet: un préstamo de 24 cuotas de 42,50 con 21 pagadas y 3 por descontar en el rol">
            <div class="win">
             <div class="chk"><i class="cb"></i>Mostrar Solo cuotas Pendientes</div>
-            <div class="xsec tt"><table class="g"><colgroup><col style="width:86px"><col style="width:180px"><col style="width:110px"><col style="width:122px"><col style="width:130px"><col></colgroup>
+            <div class="xsec tt"><table class="g"><colgroup><col style="width:80px"><col style="width:170px"><col style="width:80px"><col style="width:112px"><col style="width:118px"><col></colgroup>
               <tr><th>Código</th><th>Rubro Relacionado</th><th>ID Referencia</th><th>Fecha Creación<span class="sort">▲</span></th><th>Usuario que creó</th><th>Observaciones</th></tr>
               <tr class="sel"><td>PR-00418</td><td>Préstamos empresa (−)</td><td></td><td>15/12/2024</td><td>Administrador</td><td>Préstamo 24 cuotas</td></tr>
               <tr><td>PR-00502</td><td>Caja de ahorros (−)</td><td></td><td>03/02/2026</td><td>Talento Humano</td><td></td></tr></table></div>
-            <div class="xsec"><table class="g" data-el="q"><colgroup><col style="width:36px"><col style="width:120px"><col style="width:72px"><col style="width:100px"><col><col style="width:38px"><col style="width:38px"><col style="width:124px"></colgroup>
-              <tr><th></th><th>Fecha de Pago<span class="sort">▲</span></th><th>Valor</th><th>Cancelado</th><th>Observación</th><th>B</th><th>R</th><th>Referencia</th></tr></table></div>
+            <div class="xsec"><table class="g" data-el="q"><colgroup><col style="width:36px"><col style="width:110px"><col style="width:70px"><col style="width:90px"><col style="width:38px"><col style="width:38px"><col></colgroup>
+              <tr><th></th><th>Fecha de Pago<span class="sort">▲</span></th><th>Valor</th><th>Cancelado</th><th>B</th><th>R</th><th>Referencia</th></tr></table></div>
             <div class="ft">
              <div class="lab">Pagado(21):<br>Por Pagar(3):<br>Total(24):</div>
              <div class="val">892.50<br>127.50<br>1,020.00</div>
@@ -617,10 +619,10 @@ root.querySelector('[data-el="t"]').insertAdjacentHTML('beforeend',D.map(d=>`<tr
   const rows=[]; let ref=612040;
   for(let m=12;m<=24;m++){ const y=2025+Math.floor((m-1)/12), mm=((m-1)%12)+1, pend=m>=22;
     rows.push({f:`01/${String(mm).padStart(2,'0')}/${y}`,pend,lock:[14,19,20].includes(m),obs:m===15?'Se pasa al siguiente mes por vacaciones':'',ref:pend?'':'RL'+(ref+=4113).toString().padStart(8,'0')}); }
-  q.insertAdjacentHTML('beforeend',rows.map(r=>`<tr class="${r.pend?'p':''}${r.f==='01/10/2026'?' sel':''}"><td class="c">${r.pend?'':LK}</td><td>${r.f}</td><td class="n">42.50</td><td class="c">${r.pend?'':'✓'}</td><td>${r.obs}</td><td class="c">${r.lock?LK:''}</td><td class="c">${r.pend?'':LK}</td><td>${r.ref}</td></tr>`).join(''));
+  q.insertAdjacentHTML('beforeend',rows.map(r=>`<tr class="${r.pend?'p':''}${r.f==='01/10/2026'?' sel':''}"><td class="c">${r.pend?'':LK}</td><td>${r.f}</td><td class="n">42.50</td><td class="c">${r.pend?'':'✓'}</td><td class="c">${r.lock?LK:''}</td><td class="c">${r.pend?'':LK}</td><td>${r.ref}</td></tr>`).join(''));
   const t=q.querySelector('tr.sel').children[1];
   cur.style.left=(t.offsetLeft+70)+'px'; cur.style.top=(t.offsetTop+q.parentElement.offsetTop+12)+'px';
-  const fit=()=>{ const h=root.offsetHeight, k=Math.min(1,(media.clientWidth-40)/840); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*840)+'px'; };
+  const fit=()=>{ const h=root.offsetHeight, k=Math.min(1,(media.clientWidth-40)/680); root.style.transform=`scale(${k})`; root.style.marginBottom=(-(1-k)*h)+'px'; root.style.marginRight=(-(1-k)*680)+'px'; };
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
 </script>
@@ -731,9 +733,9 @@ c.style.left=(p.left-s.left+150)+'px'; c.style.top=(p.top-s.top+10)+'px';
   var stage=root.firstElementChild, media=root.parentElement, q=k=>root.querySelector('[data-el="'+k+'"]');
   const pr='<svg width="14" height="13" viewBox="0 0 14 13"><rect x="3" y="1" width="8" height="4" fill="#fff" stroke="#888"/><rect x="1" y="4.5" width="12" height="5.5" rx="1" fill="#8a8f99"/><rect x="3" y="8" width="8" height="4" fill="#fff" stroke="#888"/></svg>';
   const fx='<svg width="14" height="13" viewBox="0 0 14 13"><rect x=".5" y=".5" width="13" height="12" rx="1" fill="#fff" stroke="#8a9ab0"/><path d="M.5 4.5h13M.5 8.5h13M5 .5v12M9.5 .5v12" stroke="#a8b4c6"/></svg>';
-  const R=[['s','INFORMATIVOS'],['Normal','0010','Sueldo Base','1,250.00','','p'],['Normal','0090','Días Laborados','30.00','','p'],['Normal','0500','Base Aportable IESS','1,446.88','','pf'],
-    ['s','INGRESOS'],['Normal','0120','Sueldo Devengado','1,250.00','+','p','g'],['Normal','0100','Valor Horas extra 50%','46.88','+','p','g'],['Normal','0235','Comisiones','150.00','+','p','g'],['Normal','0140','Bono de alimentación','40.00','+','p','g'],
-    ['s','EGRESOS'],['Quincena','0330','Quincena','500.00','-','pf','r'],['Normal','0510','Aporte personal IESS','136.73','-','pf','r',1],['Normal','0300','Préstamos Empresa','42.50','-','p','r'],['Normal','0750','Impuesto a la renta','21.30','-','pf','r']];
+  const R=[['s','INFORMATIVOS'],['Normal','0010','Sueldo Base','1,250.00','','p'],['Normal','0500','Base Aportable IESS','1,446.88','','pf'],
+    ['s','INGRESOS'],['Normal','0120','Sueldo Devengado','1,250.00','+','p','g'],['Normal','0100','Valor Horas extra 50%','46.88','+','p','g'],['Normal','0235','Comisiones','150.00','+','p','g'],
+    ['s','EGRESOS'],['Quincena','0330','Quincena','500.00','-','pf','r'],['Normal','0510','Aporte personal IESS','136.73','-','pf','r',1],['Normal','0750','Impuesto a la renta','21.30','-','pf','r']];
   q('b').innerHTML=R.map(r=>r[0]=='s'?`<tr class="sec"><td colspan="7">${r[1]}</td></tr>`:`<tr${r[7]?' class="sel"':''}><td>${r[0]}</td><td class="cd">${r[1]}</td><td>${r[2]}</td><td class="v ${r[6]||''}">${r[3]}</td><td class="c">${r[4]}</td><td class="c">${pr}</td><td class="c">${r[5]=='pf'?fx:''}</td></tr>`).join('');
   // líneas punteadas medidas sin escala (antes de fit)
   const O=stage.getBoundingClientRect(),rl=e=>{const r=e.getBoundingClientRect();return{l:r.left-O.left,r:r.right-O.left,t:r.top-O.top,b:r.bottom-O.top}};
@@ -741,7 +743,7 @@ c.style.left=(p.left-s.left+150)+'px'; c.style.top=(p.top-s.top+10)+'px';
   const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(x,yy)=>`<circle cx="${x}" cy="${yy}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
   const xt=a.l-18,ya=(a.t+a.b)/2,yb=(b.t+b.b)/2;
   q('lk').innerHTML=`<path d="M${v.r} ${v.b} H${xt} V${ya} H${a.l-1}" ${Lc}/><path d="M${xt} ${v.b} V${yb} H${b.l-1}" ${Lc}/><circle cx="${v.r}" cy="${v.b}" r="8" fill="#3b7fc4" stroke="#fff" stroke-width="2.5"/>${Dt(a.l-1,ya)}${Dt(b.l-1,yb)}`;
-  function fit(){var k=Math.min(1,(media.clientWidth-40)/840);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*840)+'px';}
+  function fit(){var k=Math.min(1,(media.clientWidth-(innerWidth<=860?0:40))/840);root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*840)+'px';}
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(media);
 })();
 </script>
