@@ -1029,10 +1029,15 @@
       var saveData = !!(navigator.connection && navigator.connection.saveData);
       var noAuto = reduce || saveData; // sin autoplay ni descarga hasta que el usuario pulse play
       var hasIO = 'IntersectionObserver' in window;
-      var loaded = false, inView = false, fullyVisible = false, started = false, userPaused = noAuto, opened = reduce || !hasIO;
+      var loaded = false, inView = false, fullyVisible = false, userPaused = noAuto, opened = reduce || !hasIO;
       var linked = false, closed = false, ticking = false;
       var full = document.getElementById('laptopFull'), screen = laptop.querySelector('.laptop-screen');
       function isFull() { return document.fullscreenElement === video || document.webkitFullscreenElement === video || video.webkitDisplayingFullscreen; }
+      function screenFullyVisible() {
+        var r = screen.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && r.top >= 0 && r.left >= 0 && r.bottom <= window.innerHeight && r.right <= window.innerWidth;
+      }
+      function canPlay() { return isFull() || (inView && fullyVisible && screenFullyVisible() && opened && !closed && !userPaused && !document.hidden); }
 
       function setPaused(paused) {
         laptop.classList.toggle('is-paused', paused);
@@ -1060,9 +1065,9 @@
       }
       function sync() {
         if (!video.getAttribute('src')) return;
-        if (isFull() || (inView && (fullyVisible || started) && opened && !closed && !userPaused && !document.hidden)) {
+        if (canPlay()) {
           var p = video.play();
-          if (p && p.catch) p.catch(function () { userPaused = true; setPaused(true); });
+          if (p && p.catch) p.catch(function (error) { if (error && error.name === 'AbortError') return; userPaused = true; setPaused(true); });
         } else {
           video.pause();
         }
@@ -1096,11 +1101,11 @@
         window.addEventListener('resize', onScroll);
       }
 
-      video.addEventListener('playing', function () { started = true; laptop.classList.add('is-playing'); });
+      video.addEventListener('playing', function () { if (!canPlay()) { video.pause(); return; } laptop.classList.add('is-playing'); });
       toggle.addEventListener('click', function () {
         userPaused = !userPaused;
         setPaused(userPaused);
-        if (!userPaused) { started = true; load(); opened = true; }
+        if (!userPaused) { load(); opened = true; }
         sync();
       });
       function goFull(e) {
@@ -1128,7 +1133,6 @@
           var visible = Math.max(0, Math.min(r.right, w) - Math.max(r.left, 0)) * Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0));
           inView = !!(r.width && r.height && visible / (r.width * r.height) >= 0.3);
           fullyVisible = inView && r.top >= 0 && r.left >= 0 && r.bottom <= h && r.right <= w;
-          if (!inView) started = false;
           sync();
         }
         window.addEventListener('scroll', checkView, { passive: true });
@@ -1148,7 +1152,6 @@
 
       new IntersectionObserver(function (entries) {
         inView = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.3;
-        if (!inView) started = false;
         if (inView && !opened) {
           laptop.classList.add('is-open');
           if (lidProgress() > 0.05) {
