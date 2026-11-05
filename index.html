@@ -865,7 +865,8 @@
       }
 
       // avanza solo cada 3 s, o 6 s después de que la persona cambió a mano (flechas, puntos, deslizar) para darle
-      // tiempo de leer (pedido del cliente); se pausa con el mouse o el foco dentro, al tocarlo,
+      // tiempo de leer (pedido del cliente). El mouse encima NO lo pausa (con la zona de flechas tan grande se quedaba
+      // detenido para siempre); se pausa con el foco de teclado dentro, al tocarlo,
       // fuera de pantalla o con la pestaña oculta, y con prefers-reduced-motion no avanza
       var timer = null, held = false, seen = false, manual = false;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -876,8 +877,6 @@
       }
       function hold(v) { held = v; schedule(); }
       function user(i) { manual = true; go(i); schedule(); }
-      carousel.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hold(true); });
-      carousel.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hold(false); });
       carousel.addEventListener('focusin', function (e) { try { if (e.target.matches(':focus-visible')) hold(true); } catch (x) {} });
       carousel.addEventListener('focusout', function (e) { if (!carousel.contains(e.relatedTarget)) hold(false); });
       carousel.addEventListener('touchstart', function () { manual = true; hold(true); }, { passive: true });
