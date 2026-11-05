@@ -186,14 +186,14 @@
 </div>
 <div class="card" id="pe3c2" style="left:870px;top:120px;width:360px">
  <div class="ct"><i style="background:#e0883a"></i>Familiares</div>
- <table><colgroup><col style="width:150px"><col style="width:95px"><col style="width:85px"><col></colgroup>
- <thead><tr><th>Familiar<span class="bd"><b>3</b><i></i></span></th><th>Identificación</th><th>Parentesco</th><th>Carga</th></tr></thead>
- <tbody><tr class="sel"><td>ROMERO PAZ MATEO</td><td>0100000011-2</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO PAZ SOFÍA</td><td>0100000012-3</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO LUNA CARLOS</td><td></td><td>Referencia</td><td class="c">-</td></tr></tbody></table>
+ <table><colgroup><col style="width:135px"><col style="width:98px"><col style="width:75px"><col></colgroup>
+ <thead><tr><th>Familiar<span class="bd"><b>3</b><i></i></span></th><th>Identificación</th><th>Parentesco</th><th>Carga?</th></tr></thead>
+ <tbody><tr class="sel"><td>ROMERO PAZ MATEO</td><td>0100000011-2</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO PAZ SOFÍA</td><td>0100000012-3</td><td>Hijo</td><td class="c">Sí</td></tr><tr><td>ROMERO LUNA CARLOS</td><td></td><td>Referencia</td><td class="c">No</td></tr></tbody></table>
 </div>
 <div class="card" id="pe3c3" style="left:380px;top:405px;width:500px">
  <div class="ct"><i style="background:#4a8fd0"></i>Documentos</div>
- <table><colgroup><col style="width:170px"><col style="width:46px"><col style="width:60px"><col style="width:62px"><col></colgroup>
- <thead><tr><th>Tipo</th><th>Ver</th><th>Cargar</th><th>Estado</th><th>Fecha</th></tr></thead>
+ <table><colgroup><col style="width:250px"><col style="width:50px"><col></colgroup>
+ <thead><tr><th>Tipo</th><th>Ver</th><th>Fecha</th></tr></thead>
  <tbody id="pe3dt"></tbody></table>
 </div>
 </div>
@@ -377,7 +377,7 @@
 (function(){
 const up='<svg width="24" height="22" viewBox="0 0 24 22" style="vertical-align:middle"><path d="M2 9l3-3h14l3 3v11H2z" fill="#5fa8e0" stroke="#2f6fb3" stroke-width="1.200"/><path d="M12 18V3m-5.500 5.500L12 3l5.500 5.500" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 18V3m-5.500 5.500L12 3l5.500 5.500" fill="none" stroke="#2fa84f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const D=[['Cédula','05/10/2025 09:12:03'],['Certificado de estudios','05/10/2025 09:12:04'],['Curriculum','05/10/2025 09:11:58'],['Papeleta de votación','05/10/2025 09:12:04']];
-document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td></td><td></td><td>${r[1]}</td></tr>`).join('');
+document.getElementById('pe3dt').innerHTML=D.map((r,i)=>`<tr><td>${r[0]}</td><td class="c">${up}</td><td>${r[1]}</td></tr>`).join('');
 
   var root=document.getElementById('pe3'),stage=root.firstElementChild,media=root.parentElement;
   function fit(){var k=Math.max(0,Math.min(1,(media.clientWidth-16)/1260));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1260)+'px';}
