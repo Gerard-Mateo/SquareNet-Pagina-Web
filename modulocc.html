@@ -20,6 +20,136 @@
 <meta name="twitter:image" content="https://www.squarenet.com.ec/img/squarenet_logo_hero.png">
 <link href="img/squarenet.ico" rel="shortcut icon">
 <link href="css/broadsheet.css" rel="stylesheet">
+<style>
+.cc3{font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.cc3 *{box-sizing:border-box}
+.cc3 .stage{position:relative;width:920px;height:700px;padding:20px;overflow:hidden;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;
+ background:transparent}
+.cc3 .win{position:relative;width:880px;height:660px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
+.cc3 .bar{height:30px;background:#ddd;display:flex;align-items:center;justify-content:space-between;padding:0 0 0 0}
+.cc3 .id{width:160px;height:24px;margin-left:0;background:#fff;border:1px solid #4a86c9;font-size:13px;display:flex;align-items:center;padding:0 3px;color:#8a8a8a;white-space:nowrap}
+.cc3 .id.f{color:#1d1b1a}
+.cc3 .id i{display:inline-block;width:1px;height:15px;background:#111;margin-right:1px;animation:cc3-bl 1s steps(1) infinite}
+.cc3 .tk{width:120px;height:22px;background:#fff;border:1px solid #bbb;font-size:12px;display:flex;align-items:center;padding:0 3px;margin-right:2px;position:relative}
+.cc3 .tk::after{content:"";position:absolute;right:4px;top:8px;border:4px solid transparent;border-top:5px solid #888}
+.cc3 .big{height:150px;padding:6px 8px;font-size:52px;line-height:1.06;font-weight:400;position:relative;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;letter-spacing:-.5px}
+.cc3 .big.on{opacity:1;transform:none}
+.cc3 .big.ok{color:#008a00}
+.cc3 .big.no{color:#d40000;font-size:34px;letter-spacing:0;line-height:1.15}
+.cc3 .sep{height:8px;background:#e8e8e8;margin-top:4px}
+.cc3 .pm{position:absolute;right:8px;width:14px;height:14px;border:1px solid #777;border-radius:50%;font-size:10px;line-height:11px;text-align:center;background:#fff}
+.cc3 .hist{padding-top:2px;font-size:21px;line-height:31px;height:360px;overflow:hidden}
+.cc3 .hist div{padding:0 0;white-space:normal}
+.cc3 .hist .ok{color:#008a00}
+.cc3 .hist .no{color:#d40000}
+.cc3 .hist div.in{animation:cc3-hin .4s ease-out}
+.cc3 .tkt{position:absolute;right:14px;bottom:14px;width:280px;height:230px;border:1px solid #777;background:#fff;padding:8px 10px;transform:translateY(40px);opacity:0;transition:all .5s cubic-bezier(.2,.8,.2,1);box-shadow:0 18px 40px -14px rgba(0,0,0,.4)}
+.cc3 .tkt.on{transform:none;opacity:1}
+.cc3 .tkt h4{margin:0;font-size:14px;font-weight:600;width:205px;white-space:nowrap}
+.cc3 .tkt .d{font-weight:700;font-size:12.5px;margin-top:4px}
+.cc3 .tkt .p{font-size:9.5px;margin-top:4px}
+.cc3 .tkt .nm{font-size:13.5px;margin-top:3px}
+.cc3 .tkt .cd{font-size:10px;margin-top:3px}
+.cc3 .lg{position:absolute;right:6px;top:6px;width:64px;text-align:center;font-size:10px;font-weight:800;line-height:1.05}
+.cc3 .lg b{display:block;color:#d6371e}
+.cc3 .lg small{font-size:7.5px;font-weight:800;color:#222}
+.cc3 .rd{position:absolute;left:70px;top:505px;width:176px;height:118px}
+.cc3 .dev{position:absolute;left:0;bottom:0;width:176px;height:96px;border-radius:22px;background:linear-gradient(#566176,#2c3442);box-shadow:0 26px 44px -14px rgba(20,40,80,.55),inset 0 2px 0 rgba(255,255,255,.25)}
+.cc3 .dev::before{content:"";position:absolute;left:18px;right:18px;top:16px;height:44px;border-radius:12px;background:linear-gradient(#1b212d,#242c3b);box-shadow:inset 0 2px 6px rgba(0,0,0,.6)}
+.cc3 .led{position:absolute;left:50%;bottom:14px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#3b7fc4;box-shadow:0 0 10px #3b7fc4;transition:all .2s}
+.cc3 .led.g{background:#2ee26a;box-shadow:0 0 16px #2ee26a}
+.cc3 .led.r{background:#ff4a3d;box-shadow:0 0 16px #ff4a3d}
+.cc3 .wv{position:absolute;left:50%;top:6px;width:0;height:0}
+.cc3 .wv i{position:absolute;left:-30px;top:-30px;width:60px;height:60px;border:2px solid #7fd0ff;border-radius:50%;opacity:0;transform:scale(.3)}
+.cc3 .wv.on i{animation:cc3-wave 1s ease-out infinite}
+.cc3 .wv.on i:nth-child(2){animation-delay:.25s}
+.cc3 .wv.on i:nth-child(3){animation-delay:.5s}
+.cc3 .card{position:absolute;left:51px;top:-46px;width:74px;height:108px;transform:translateX(-340px) rotate(-12deg);transition:transform .9s cubic-bezier(.25,.8,.3,1);z-index:3;filter:drop-shadow(0 14px 14px rgba(20,40,80,.35))}
+.cc3 .card.in{transform:translateX(0) rotate(0)}
+.cc3 .card.out{transform:translateX(-340px) rotate(-12deg)}
+.cc3 .card svg{position:absolute;overflow:visible}
+@keyframes cc3-bl{50%{opacity:0}}
+@keyframes cc3-hin{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes cc3-wave{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.7)}}
+.cc3 .win::after{content:"";position:absolute;inset:0;z-index:20;background:#000;opacity:0;pointer-events:none;transition:opacity .55s ease}
+.cc3 .win.sn-fade::after{opacity:1}
+@media (prefers-reduced-motion:reduce){.cc3 *{animation:none!important;transition:none!important}}
+/* Políticas de comida */
+.pc3{font:12.5px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.pc3 *{box-sizing:border-box}
+.pc3 .stage{position:relative;width:800px;height:700px;padding:20px;overflow:hidden;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12.5px;
+ background:transparent}
+.pc3 .win{position:relative;width:760px;height:660px;background:#f3f3f3;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25);padding:14px 14px 0}
+.pc3 .row{display:flex;align-items:center;margin-bottom:6px;gap:0}
+.pc3 .lb{width:80px;flex:none}
+.pc3 .inp{height:21px;border:1px solid #bdbdbd;background:#fff;padding:0 3px;line-height:19px;white-space:nowrap;overflow:hidden}
+.pc3 .inp.dis{background:#e3e3e3;width:100px}
+.pc3 .dd{position:relative}
+.pc3 .dd::after{content:"";position:absolute;right:0;top:0;width:19px;height:19px;background:#f1f1f1;border-left:1px solid #ccc}
+.pc3 .dd::before{content:"";position:absolute;right:5px;top:7px;border:4px solid transparent;border-top:5px solid #777;z-index:1}
+.pc3 .fl{margin:4px 0 4px 0}
+.pc3 .ed{display:flex;position:relative;height:446px;border:1px solid #bbb;background:#fff}
+.pc3 .gut{width:30px;background:#f0f0f0;border-right:1px solid #e0e0e0;padding-top:4px;flex:none}
+.pc3 .code{padding-top:4px;font:12px/17px Consolas,"Cascadia Mono",ui-monospace,Menlo,monospace;flex:1;position:relative}
+.pc3 .ln{height:17px;white-space:pre;position:relative;padding-left:6px}
+.pc3 .no{position:absolute;left:-30px;width:24px;text-align:right;color:#8aa2bd;font-size:11px}
+.pc3 .kw{color:#1515e0;font-weight:700}
+.pc3 .cm{color:#14a014}
+.pc3 .st{color:#a31515}
+.pc3 .nu{color:#b04fd6}
+.pc3 .ty{color:#2b91af}
+.pc3 .hit{background:rgba(214,55,30,.13)}
+.pc3 .hit::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#d6371e}
+.pc3 .scan{background:rgba(59,127,196,.16)}
+.pc3 .fx{position:absolute;left:4px;bottom:4px;width:24px;height:22px;border:1px solid #c4c4c4;border-radius:3px;background:linear-gradient(#fdfdfd,#e9e9e9);font:italic 700 10px "Times New Roman",serif;display:grid;place-items:center;color:#334}
+.pc3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.97);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
+.pc3 .msg{left:420px;top:210px;width:330px;padding:16px 18px;color:#d40000;font-size:25px;line-height:1.18;opacity:0;transform:translateY(12px) scale(.97);transition:opacity .4s,transform .4s}
+.pc3 .msg.on{opacity:1;transform:none}
+.pc3 .msg small{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;margin-bottom:6px;text-transform:uppercase}
+.pc3 .rd{position:absolute;left:560px;top:482px;width:176px;height:118px;z-index:6}
+.pc3 .dev{position:absolute;left:0;bottom:0;width:176px;height:96px;border-radius:22px;background:linear-gradient(#566176,#2c3442);box-shadow:0 26px 44px -14px rgba(20,40,80,.55),inset 0 2px 0 rgba(255,255,255,.25)}
+.pc3 .dev::before{content:"";position:absolute;left:18px;right:18px;top:16px;height:44px;border-radius:12px;background:linear-gradient(#1b212d,#242c3b);box-shadow:inset 0 2px 6px rgba(0,0,0,.6)}
+.pc3 .led{position:absolute;left:50%;bottom:14px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#3b7fc4;box-shadow:0 0 10px #3b7fc4;transition:all .2s}
+.pc3 .led.r{background:#ff4a3d;box-shadow:0 0 16px #ff4a3d}
+.pc3 .wv{position:absolute;left:50%;top:6px;width:0;height:0}
+.pc3 .wv i{position:absolute;left:-30px;top:-30px;width:60px;height:60px;border:2px solid #7fd0ff;border-radius:50%;opacity:0}
+.pc3 .wv.on i{animation:pc3-wave 1s ease-out infinite}
+.pc3 .wv.on i:nth-child(2){animation-delay:.25s}
+.pc3 .wv.on i:nth-child(3){animation-delay:.5s}
+.pc3 .bg{position:absolute;left:51px;top:-46px;width:74px;height:108px;transform:translateX(360px) rotate(12deg);transition:transform .9s cubic-bezier(.25,.8,.3,1);z-index:3;filter:drop-shadow(0 14px 14px rgba(20,40,80,.35))}
+.pc3 .bg.in{transform:none}
+.pc3 .bg.out{transform:translateX(360px) rotate(12deg)}
+.pc3 .bg svg{position:absolute;overflow:visible}
+.pc3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+.pc3 svg.lk path,.pc3 svg.lk circle{opacity:0;transition:opacity .35s}
+.pc3 svg.lk.on path,.pc3 svg.lk.on circle{opacity:1}
+@keyframes pc3-wave{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.7)}}
+.pc3 .stage::after{content:"";position:absolute;inset:0;z-index:30;background:#000;opacity:0;pointer-events:none;transition:opacity .55s ease}
+.pc3 .stage.sn-fade::after{opacity:1}
+@media (prefers-reduced-motion:reduce){.pc3 *{animation:none!important;transition:none!important}}
+/* Consulta de consumo */
+.co3{font:12px/1.25 "Segoe UI",ui-sans-serif,system-ui,sans-serif;color:#1d1b1a}
+.co3 *{box-sizing:border-box}
+.co3 .stage{position:relative;width:1030px;height:490px;padding:20px;overflow:hidden;font-family:"Segoe UI",ui-sans-serif,system-ui,sans-serif;font-size:12px;
+ background:transparent}
+.co3 .win{position:relative;width:930px;background:#fff;border:1px solid #e0e3ea;border-radius:16px;overflow:hidden;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
+.co3 .fb{height:34px;background:#f3f3f3;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid #e6e6e6}
+.co3 .fb .dt{height:22px;width:112px;border:1px solid #bdbdbd;background:#fff;padding:0 4px;line-height:20px;position:relative}
+.co3 .fb .dd{width:20px;height:22px;border:1px solid #bdbdbd;background:#f1f1f1;position:relative;margin-left:-8px}
+.co3 .fb .dd::after{content:"";position:absolute;left:5px;top:8px;border:4px solid transparent;border-top:5px solid #777}
+.co3 table{border-collapse:collapse;table-layout:fixed;width:100%}
+.co3 th{height:26px;text-align:left;font-weight:600;padding:0 4px;background:#f6f6f6;border-bottom:1px solid #cfcfcf;border-right:1px solid #e4e4e4;white-space:nowrap;overflow:hidden}
+.co3 td{height:23px;padding:0 4px;border-bottom:1px solid #e4e4e4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co3 td.n{text-align:right;padding-right:6px}
+.co3 td.c{text-align:center;padding:0}
+.co3 th u{text-decoration:underline dotted}
+.co3 .srt{display:inline-block;margin-left:6px;border:4px solid transparent;border-bottom:5px solid #8a8a8a;border-top:0}
+.co3 svg.i{vertical-align:middle}
+.co3 .card{position:absolute;z-index:5;background:rgba(255,255,255,.97);border:1px solid #e3e8f2;border-radius:18px;box-shadow:0 24px 48px -24px rgba(40,30,20,.25)}
+.co3 .msg{width:300px;padding:16px 18px;color:#d40000;font-size:22px;line-height:1.2}
+.co3 .msg small{display:block;font-size:11px;letter-spacing:.06em;font-weight:700;color:#8a93a6;margin-bottom:6px;text-transform:uppercase}
+.co3 svg.lk{position:absolute;left:0;top:0;width:100%;height:100%;z-index:7;pointer-events:none;overflow:visible}
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -52,13 +182,63 @@
     <section class="mod-sec mod-fns" id="funciones" style="--mc:#C88A04" aria-labelledby="fn-title">
       <h2 id="fn-title">Funciones de Comedor</h2>
       <div class="mod-fn-rows">
-        <article class="mod-fn" id="horarios-de-atencion">
-          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-horarios-de-atencion.png" alt="" width="16" height="16">Horarios de atención</h3><p>Define en qué horarios se atiende cada tipo de comida.</p></div>
-          <div class="mod-fn-media" data-fn="horarios-de-atencion"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulocc-horarios-de-atencion.png" alt="" width="16" height="16"><span>Horarios de atención</span></div></div>
+        <article class="mod-fn" id="consumo-comedor">
+          <div class="mod-fn-copy"><span class="mod-fn-n">01</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-consulta-de-consumo.png" alt="" width="16" height="16">Consumo Comedor</h3><p>Registra el consumo al identificar al colaborador, comprueba su autorización y emite un ticket de la comida.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="consumo-comedor">
+            <div class="cc3" id="cc3" style="width:920px" role="img" aria-label="Animación de registro de consumo en comedor con una credencial, validación y emisión de ticket">
+<div class="stage"><div class="win" data-el="w">
+ <div class="bar"><div class="id" data-el="id"><i></i><span data-el="idt">Ingrese identificación</span></div><div class="tk">Ticket</div></div>
+ <div class="big" data-el="big"></div><span class="pm" style="top:38px">+</span><span class="pm" style="top:58px">−</span>
+ <div class="sep"></div>
+ <span class="pm" style="top:204px">+</span><span class="pm" style="top:224px">−</span>
+ <div class="hist" data-el="hist"></div>
+ <div class="tkt" data-el="tkt"><h4 data-el="th">Almuerzo Completo- ELE Cam</h4>
+  <div class="lg"><svg width="30" height="28" viewBox="0 0 30 28"><circle cx="13" cy="12" r="10" fill="#3b86d8"/><path d="M6 9c3-3 6-1 8-3 1 2 4 2 5 5-2 0-3 2-5 1-2 2-4 3-3 6-3-1-5-5-5-9Z" fill="#59b85a"/><rect x="17" y="13" width="11" height="9" rx="1.500" fill="#cfd8e6" stroke="#667"/></svg><b>EmpresaX</b><small>Logo Demo</small></div>
+  <div class="d" data-el="td">04/11/2026 12:41:08</div><div class="p">Planta</div><div class="nm" data-el="tn"></div><div class="cd" data-el="tc"></div></div>
+ <div class="rd"><div class="wv" data-el="wv"><i></i><i></i><i></i></div><div class="dev"><div class="led" data-el="led"></div></div>
+  <div class="card" data-el="card">
+   <svg style="left:-34px;top:-78px" width="142" height="90" viewBox="0 0 142 90"><path d="M34 90 L68 12 L72 12 L40 90Z" fill="#d6371e"/><path d="M108 90 L74 12 L70 12 L102 90Z" fill="#e8523a"/><path d="M34 90 L68 12 L72 12 L40 90Z" fill="none"/><rect x="66" y="6" width="10" height="12" rx="2.500" fill="#c9ced8" stroke="#8b94a5"/><path d="M69 18v7h4v-7" fill="#aeb6c4" stroke="#8b94a5"/></svg>
+   <svg width="74" height="108" viewBox="0 0 74 108"><defs><linearGradient id="cc3-hb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6cb0"/><stop offset="1" stop-color="#24538c"/></linearGradient><linearGradient id="cc3-av" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9eef6"/><stop offset="1" stop-color="#c3cddd"/></linearGradient></defs>
+    <rect x=".5" y=".5" width="73" height="107" rx="9" fill="#fff" stroke="#cdd5e2"/>
+    <path d="M.5 9.500a9 9 0 0 1 9-9h55a9 9 0 0 1 9 9V30H.5Z" fill="url(#cc3-hb)"/>
+    <rect x="27" y="6" width="20" height="5" rx="2.500" fill="#fff" opacity=".9"/>
+    <circle cx="37" cy="40" r="17" fill="url(#cc3-av)" stroke="#fff" stroke-width="3"/>
+    <circle cx="37" cy="35" r="6" fill="#8f9db3"/><path d="M25 52c1-8 6-10 12-10s11 2 12 10a17 17 0 0 1-24 0Z" fill="#8f9db3"/>
+    <rect x="14" y="64" width="46" height="5" rx="2.500" fill="#2b3547"/><rect x="21" y="73" width="32" height="3.500" rx="1.800" fill="#9aa6b8"/>
+    <path d="M.5 92h73v6.500a9 9 0 0 1-9 9h-55a9 9 0 0 1-9-9Z" fill="#d6371e"/>
+    <g fill="none" stroke="#fff" stroke-width="1.400" stroke-linecap="round"><path d="M30 101a7 7 0 0 1 7-7M33 101a4 4 0 0 1 4-4"/></g>
+    <rect x="42" y="97" width="18" height="3" rx="1.500" fill="#fff" opacity=".8"/></svg>
+  </div></div>
+</div></div>
+            </div>
+          </div>
         </article>
-        <article class="mod-fn" id="autorizaciones-de-comida">
-          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-autorizaciones-de-comida.png" alt="" width="16" height="16">Autorizaciones de comida</h3><p>Excepciones para que el sistema otorgue comidas fuera de las reglas estándar.</p></div>
-          <div class="mod-fn-media" data-fn="autorizaciones-de-comida"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulocc-autorizaciones-de-comida.png" alt="" width="16" height="16"><span>Autorizaciones de comida</span></div></div>
+        <article class="mod-fn" id="politicas-de-comida">
+          <div class="mod-fn-copy"><span class="mod-fn-n">02</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-autorizaciones-de-comida.png" alt="" width="16" height="16">Políticas de comida</h3><p>Configura las reglas que determinan qué comidas corresponden a cada colaborador.</p></div>
+          <div class="mod-fn-media rp-stage" data-fn="politicas-de-comida">
+            <div class="pc3" id="pc3" style="width:800px" role="img" aria-label="Ejemplo de una política de comida que verifica si el refrigerio ya fue consumido">
+<div class="stage" data-el="s"><div class="win" data-el="w">
+ <div class="row"><span class="lb">Código</span><span class="inp dis">00035</span></div>
+ <div class="row"><span class="lb">Nombre</span><span class="inp" style="flex:1">REFRIGERIO COMPLEMENTARIO</span></div>
+ <div class="row"><span class="lb">Estado</span><span class="inp dd" style="width:402px">Activo</span><span style="width:12px"></span><span style="width:78px">Prioridad</span><span class="inp" style="flex:1">160</span></div>
+ <div class="row"><span class="lb">Costo Empresa</span><span class="inp" style="width:412px">3.28</span><span style="width:2px"></span><span style="width:88px;margin-left:10px">Costo Empleado</span><span class="inp" style="flex:1">0.00</span></div>
+ <div class="row"><span class="lb">Observaciones</span><span class="inp" style="flex:1">Se sirve cuando el trabajador supera las 4 horas extra, a pasantes y a empleados en su primer día de trabajo. PAGA EMPRESA</span></div>
+ <div class="fl">Fórmula</div>
+ <div class="ed"><div class="gut"></div><div class="code" data-el="code"></div><span class="fx">f(x)</span></div>
+ <div class="card msg" data-el="msg"><small>Comedor</small>Granda Ruiz Pablo no tiene derecho: Refrigerio Complementario ya comió</div>
+</div>
+<div class="rd" data-el="rd"><div class="wv" data-el="wv"><i></i><i></i><i></i></div><div class="dev"><div class="led" data-el="led"></div></div>
+ <div class="bg" data-el="bg">
+   <svg style="left:-34px;top:-78px" width="142" height="90" viewBox="0 0 142 90"><path d="M34 90 L68 12 L72 12 L40 90Z" fill="#d6371e"/><path d="M108 90 L74 12 L70 12 L102 90Z" fill="#e8523a"/><rect x="66" y="6" width="10" height="12" rx="2.500" fill="#c9ced8" stroke="#8b94a5"/><path d="M69 18v7h4v-7" fill="#aeb6c4" stroke="#8b94a5"/></svg>
+   <svg width="74" height="108" viewBox="0 0 74 108"><defs><linearGradient id="pc3-hb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6cb0"/><stop offset="1" stop-color="#24538c"/></linearGradient><linearGradient id="pc3-av" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9eef6"/><stop offset="1" stop-color="#c3cddd"/></linearGradient></defs>
+    <rect x=".5" y=".5" width="73" height="107" rx="9" fill="#fff" stroke="#cdd5e2"/><path d="M.5 9.500a9 9 0 0 1 9-9h55a9 9 0 0 1 9 9V30H.5Z" fill="url(#pc3-hb)"/><rect x="27" y="6" width="20" height="5" rx="2.500" fill="#fff" opacity=".9"/>
+    <circle cx="37" cy="40" r="17" fill="url(#pc3-av)" stroke="#fff" stroke-width="3"/><circle cx="37" cy="35" r="6" fill="#8f9db3"/><path d="M25 52c1-8 6-10 12-10s11 2 12 10a17 17 0 0 1-24 0Z" fill="#8f9db3"/>
+    <rect x="14" y="64" width="46" height="5" rx="2.500" fill="#2b3547"/><rect x="21" y="73" width="32" height="3.500" rx="1.800" fill="#9aa6b8"/><path d="M.5 92h73v6.500a9 9 0 0 1-9 9h-55a9 9 0 0 1-9-9Z" fill="#d6371e"/>
+    <g fill="none" stroke="#fff" stroke-width="1.400" stroke-linecap="round"><path d="M30 101a7 7 0 0 1 7-7M33 101a4 4 0 0 1 4-4"/></g><rect x="42" y="97" width="18" height="3" rx="1.500" fill="#fff" opacity=".8"/></svg></div></div>
+<svg class="lk" data-el="lk"></svg>
+</div>
+            </div>
+          </div>
         </article>
         <article class="mod-fn" id="eventos">
           <div class="mod-fn-copy"><span class="mod-fn-n">03</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-eventos.png" alt="" width="16" height="16">Eventos</h3><p>Eventos especiales donde no se controla por persona sino por un número global de comidas.</p></div>
@@ -66,8 +246,21 @@
         </article>
         <article class="mod-fn" id="consulta-de-consumo">
           <div class="mod-fn-copy"><span class="mod-fn-n">04</span><h3><img class="mod-fn-ic" src="img/iconos/modulocc-consulta-de-consumo.png" alt="" width="16" height="16">Consulta de consumo</h3><p>Reportes completos sobre eventos y comidas servidas para cruzar con tu proveedor de catering.</p></div>
-          <div class="mod-fn-media" data-fn="consulta-de-consumo"><div class="mod-fn-ph" aria-hidden="true"><img src="img/iconos/modulocc-consulta-de-consumo.png" alt="" width="16" height="16"><span>Consulta de consumo</span></div></div>
+          <div class="mod-fn-media rp-stage" data-fn="consulta-de-consumo">
+            <div class="co3" id="co3" style="width:1030px" role="img" aria-label="Consulta de consumos del comedor con un ejemplo de registro rechazado">
+<div class="stage" data-el="s"><div class="win" data-el="w">
+ <div class="fb"><span>Desde</span><span class="dt">04/11/2026</span><span class="dd"></span><span style="margin-left:6px">Hasta</span><span class="dt">04/11/2026</span><span class="dd"></span></div>
+ <table data-el="t"><colgroup><col style="width:250px"><col style="width:150px"><col style="width:110px"><col style="width:48px"><col style="width:28px"><col style="width:28px"><col style="width:26px"><col></colgroup>
+ <thead><tr><th>Persona</th><th>Fecha Consumo<i class="srt"></i></th><th>Comedor</th><th>Cant…</th><th><u>R</u></th><th><u>A</u></th><th></th><th>Resultado</th></tr></thead>
+ <tbody data-el="b"></tbody></table>
+</div>
+<div class="card msg" data-el="msg"><small>Comedor</small>Granda Ruiz Pablo no tiene derecho: MENÚ JORNADA ÚNICA horario incorrecto</div>
+<svg class="lk" data-el="lk"></svg>
+</div>
+            </div>
+          </div>
         </article>
+
       </div>
     </section>
 
@@ -165,6 +358,138 @@
       navToggle.setAttribute('aria-expanded', String(!open));
     });
   </script>
+  <script>
+(function(){
+const root=document.getElementById('cc3');if(!root)return;
+const stage=root.firstElementChild,media=root.parentElement;
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/920));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*920)+'px';}
+fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
+
+const $=id=>root.querySelector('[data-el="'+id+'"]');
+let live=true;
+if('IntersectionObserver' in window){live=false;new IntersectionObserver(entries=>{live=entries[0].isIntersecting}).observe(root);}
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)).then(()=>new Promise(resolve=>{
+  function check(){if(live&&!document.hidden)resolve();else setTimeout(check,250);}
+  check();
+}));
+const BASE=[['ok','OK, Carrillo Martina, Almuerzo Completo'],['ok','OK, Calderón Cristina, Almuerzo Completo'],['ok','OK, Borja Estevez Jorge Alberto, Almuerzo Completo'],['ok','OK, Alvarado Andrade Ileana Andrea, Almuerzo Completo']];
+const EV=[{id:'0912457881',ok:true,name:'VEGA MORENO ANA LUCÍA',code:'QT0000000412 - QT05187',time:'12:41:08'},
+ {id:'0923318406',ok:false,name:'Granda Ruiz Pablo',msg:'Granda Ruiz Pablo no tiene derecho: Almuerzo Completo ya comió, Refrigerio No se permite en este comedor, Especial denegado'}];
+let hist=[];
+const draw=(fresh)=>{$('hist').innerHTML=hist.map((h,i)=>`<div class="${h[0]}${fresh&&i===0?' in':''}">${h[1]}</div>`).join('')};
+const reset=()=>{hist=BASE.slice();draw(false);$('big').className='big';$('tkt').className='tkt';$('idt').textContent='Ingrese identificación';$('id').classList.remove('f');$('led').className='led';$('wv').className='wv'};
+async function run(e){
+ $('card').className='card';await sleep(60);$('card').className='card in';await sleep(700);
+ $('wv').classList.add('on');$('led').className='led '+(e.ok?'g':'r');
+ $('id').classList.add('f');$('idt').textContent='';
+ for(const ch of e.id){$('idt').textContent+=ch;await sleep(55)}
+ await sleep(350);
+ const txt=e.ok?`OK, ${e.name}, Almuerzo Completo`:e.msg;
+ $('big').textContent=txt;$('big').className='big '+(e.ok?'ok':'no')+' on';
+ hist.unshift([e.ok?'ok':'no',e.ok?`OK, ${e.name.toLowerCase().replace(/(^|\s)\S/g,c=>c.toUpperCase())}, Almuerzo Completo`:e.msg]);hist=hist.slice(0,5);draw(true);
+ $('idt').textContent='';$('id').classList.remove('f');$('idt').textContent='Ingrese identificación';
+ if(e.ok){$('tn').textContent=e.name;$('tc').textContent=e.code;$('td').textContent='04/11/2026 '+e.time;$('tkt').className='tkt on'}else{$('tkt').className='tkt'}
+ await sleep(500);$('wv').className='wv';
+ await sleep(600);$('card').className='card out';$('led').className='led';
+ await sleep(2300);
+}
+reset();
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+  $('big').textContent='OK, VEGA MORENO ANA LUCÍA, Almuerzo Completo';
+  $('big').className='big ok on';
+}else{
+  (async()=>{while(true){reset();await sleep(900);for(const e of EV)await run(e);await sleep(400);$('w').classList.add('sn-fade');await sleep(900);$('w').classList.remove('sn-fade')}})();
+}
+
+})();
+</script>
+  <script>
+(function(){
+const root=document.getElementById('pc3');if(!root)return;
+const stage=root.firstElementChild,media=root.parentElement;
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/800));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*800)+'px';}
+fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
+
+const $=id=>root.querySelector('[data-el="'+id+'"]');
+let live=true;
+if('IntersectionObserver' in window){live=false;new IntersectionObserver(entries=>{live=entries[0].isIntersecting}).observe(root);}
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)).then(()=>new Promise(resolve=>{
+ function check(){if(live&&!document.hidden)resolve();else setTimeout(check,250);}
+ check();
+}));
+const esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const L=['if( [00035] > 0 )','{','  // el trabajador ya recibió su refrigerio hoy','  return "ya comió";','}','',
+'if( CODIGO_EMPRESA( ) == "22" )','{','  // si es pasante de la empresa 22, se le otorga este refrigerio','  return "";','}','',
+'if( DateTime.Today == FECHA_ENTRADA_CONTRATO( ) )','{','  // primer día de contrato: se le otorga el refrigerio','  return "";','}','',
+'if( ASISTENCIA_CODIGO_PERFIL_HORARIO( ) == "000185" )','{','  // perfil de horario con jornada extendida','  return "";','}','','return "no";'];
+function hl(src){const ci=src.indexOf('//');const a=ci>=0?src.slice(0,ci):src,c=ci>=0?src.slice(ci):'';
+ return esc(a).replace(/"[^"]*"/g,m=>`<span class="st">${m}</span>`).replace(/\b(if|return)\b/g,'<span class="kw">$1</span>').replace(/\[(\d+)\]/g,'[<span class="nu">$1</span>]').replace(/\bDateTime\b/g,'<span class="ty">DateTime</span>').replace(/(&gt;)\s(0)\b/g,'$1 <span class="nu">$2</span>')+(c?`<span class="cm">${esc(c)}</span>`:'')}
+$('code').innerHTML=L.map((l,i)=>`<div class="ln" data-el="l${i+1}"><span class="no">${i+1}</span>${hl(l)}</div>`).join('');
+const S=$('s'),K=()=>S.getBoundingClientRect().width/S.offsetWidth||1,R=e=>{const r=e.getBoundingClientRect(),o=S.getBoundingClientRect(),k=K();return{l:(r.left-o.left)/k,r:(r.right-o.left)/k,t:(r.top-o.top)/k,b:(r.bottom-o.top)/k,w:r.width/k,h:r.height/k}};
+function link(){const t=document.createRange();const el=$('l4');t.selectNodeContents(el);const rr=t.getBoundingClientRect(),o=S.getBoundingClientRect();
+ const x1=(rr.right-o.left)/K()+8,y=R(el).t+R(el).h/2,m=R($('msg'));
+ const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',D=(x,yy)=>`<circle cx="${x}" cy="${yy}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+ const my=Math.min(Math.max(y,m.t+30),m.b-30);
+ $('lk').innerHTML=`<path d="M${x1} ${y} H${m.l-30} V${my} H${m.l}" ${Lc}/>${D(x1,y)}${D(m.l,my)}`}
+async function run(){
+ const lines=[...root.querySelectorAll('.ln')];
+ lines.forEach(l=>l.classList.remove('hit','scan'));$('msg').classList.remove('on');$('lk').classList.remove('on');$('led').className='led';$('wv').className='wv';$('bg').className='bg';
+ await sleep(900);
+ $('bg').className='bg in';await sleep(900);
+ $('wv').className='wv on';
+ for(let i=1;i<=4;i++){lines.forEach(l=>l.classList.remove('scan'));$('l'+i).classList.add('scan');await sleep(260)}
+ lines.forEach(l=>l.classList.remove('scan'));
+ [1,2,3,4,5].forEach(i=>$('l'+i).classList.add('hit'));$('led').className='led r';
+ await sleep(250);$('msg').classList.add('on');link();$('lk').classList.add('on');
+ await sleep(900);$('wv').className='wv';
+ await sleep(500);$('bg').className='bg out';
+ await sleep(3600);
+}
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+ [1,2,3,4,5].forEach(i=>$('l'+i).classList.add('hit'));$('led').className='led r';$('bg').className='bg in';$('msg').classList.add('on');link();$('lk').classList.add('on');
+}else{
+ (async()=>{while(true){await run();S.classList.add('sn-fade');await sleep(900);S.classList.remove('sn-fade')}})();
+}
+
+})();
+</script>
+  <script>
+(function(){
+const root=document.getElementById('co3');if(!root)return;
+
+const ok='<svg class="i" width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.500" fill="#2fa84f"/><path d="M3.800 7.200l2.200 2.200 4.200-4.400" fill="none" stroke="#fff" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const no='<svg class="i" width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.500" fill="#d8362a"/><path d="M4.500 4.500l5 5M9.500 4.500l-5 5" stroke="#fff" stroke-width="1.800" stroke-linecap="round"/></svg>';
+const ap='<svg class="i" width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="2" width="9" height="11" rx="1" fill="#fff" stroke="#7a8a6a"/><path d="M4 5h5M4 7.500h5" stroke="#9bb08a" stroke-width="1.200"/><path d="M3.500 10.500l2 2 4-4.500" fill="none" stroke="#2fa84f" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 13l5-6" stroke="#e8a21a" stroke-width="2" stroke-linecap="round"/></svg>';
+const lp='<svg class="i" width="17" height="17" viewBox="0 0 17 17"><circle cx="7" cy="7" r="4.800" fill="#dcecf9" stroke="#6d8fb3" stroke-width="1.600"/><path d="M10.500 10.500l4.500 4.500" stroke="#6d8fb3" stroke-width="2.200" stroke-linecap="round"/></svg>';
+const M='MENÚ JORNADA ÚNICA',H='JORNADA ÚNICA';
+const D=[
+['VALLEJO MORA CARLOS ANDRÉS','14:00:28',M,1],
+['NARANJO PAZMIÑO LUIS ALBERTO','14:00:41',M,1],
+['CHICAIZA ROMERO KAREN SOFÍA','14:00:55',M,1],
+['BENAVIDES LARA PEDRO JAVIER','14:01:00',M,1],
+['SANDOVAL CEVALLOS ISAÍAS DAVID','14:01:04',M,1],
+['ORTEGA NIETO IVÁN MARCELO','14:01:10',M,1],
+['FIERRO CAIZA DENNIS ALEJANDRO','14:03:45','REFRIGERIO COMPLEMENTARIO',1,1],
+['GRANDA RUIZ PABLO','14:03:48','',0],
+['GRANDA RUIZ PABLO','14:03:52','',0],
+['MENA SALTOS MANUEL DAMIÁN','14:03:56','REFRIGERIO COMPLEMENTARIO',1,1]];
+root.querySelector('[data-el="b"]').innerHTML=D.map((r,i)=>`<tr data-el="r${i}"><td>${r[0]}</td><td>04/11/2026 ${r[1]}</td><td>COMEDOR A</td><td class="n">${r[3]}</td><td class="c">${r[3]?ok:no}</td><td class="c">${r[4]?ap:''}</td><td class="c">${lp}</td><td data-el="x${i}">${r[3]?'':M+' horario incorrecto'}</td></tr>`).join('');
+const S=root.querySelector('[data-el="s"]'),R=e=>{const r=e.getBoundingClientRect(),o=S.getBoundingClientRect();return{l:r.left-o.left,r:r.right-o.left,t:r.top-o.top,b:r.bottom-o.top,w:r.width,h:r.height}};
+function txtEnd(el){const t=document.createRange();t.selectNodeContents(el);const r=t.getBoundingClientRect();return r.right-S.getBoundingClientRect().left}
+const msg=root.querySelector('[data-el="msg"]');
+const r9=R(root.querySelector('[data-el="r9"]'));
+msg.style.left=(R(root.querySelector('[data-el="x7"]')).l+28)+'px';msg.style.top=(r9.t+4)+'px';
+const m=R(msg),a=R(root.querySelector('[data-el="x7"]')),b=R(root.querySelector('[data-el="x8"]'));
+const xe=Math.max(txtEnd(root.querySelector('[data-el="x7"]')),txtEnd(root.querySelector('[data-el="x8"]'))),xr=Math.min(xe+34,m.r-60);
+const Lc='stroke="#3b7fc4" stroke-width="2" stroke-dasharray="5 4" fill="none"',Dt=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#3b7fc4" stroke="#fff" stroke-width="2"/>`;
+const y7=a.t+a.h/2,y8=b.t+b.h/2,x7=txtEnd(root.querySelector('[data-el="x7"]'))+8,x8=txtEnd(root.querySelector('[data-el="x8"]'))+8;
+root.querySelector('[data-el="lk"]').innerHTML=`<path d="M${x7} ${y7} H${xr} V${m.t}" ${Lc}/><path d="M${x8} ${y8} H${xr}" ${Lc}/>${Dt(x7,y7)}${Dt(x8,y8)}${Dt(xr,m.t)}`;
+
+const stage=root.firstElementChild,media=root.parentElement;
+function fit(){const k=Math.max(0,Math.min(1,(media.clientWidth-40)/1030));root.style.transformOrigin='top left';root.style.transform='scale('+k+')';root.style.marginBottom=(-(1-k)*stage.offsetHeight)+'px';root.style.marginRight=(-(1-k)*1030)+'px';}
+fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(media);
+})();
+</script>
   <script src="js/fecha.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/nav.js"></script>
