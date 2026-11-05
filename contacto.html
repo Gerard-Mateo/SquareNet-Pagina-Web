@@ -47,7 +47,8 @@
   .lead-other{display:flex;flex-direction:column;gap:6px;margin-top:4px}
   .lead-other[hidden]{display:none}
   .lead-other label{font-family:var(--font-body);font-weight:400;font-size:14px;opacity:.8}
-  .lead-f input[type=text],.lead-f input[type=tel]{height:46px;padding:0 12px;font:inherit;font-size:16px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
+  .lead-f input[type=text],.lead-f input[type=tel],.lead-f output{height:46px;padding:0 12px;font:inherit;font-size:16px;background:#fff;border:1px solid var(--color-divider);border-radius:var(--radius-md);outline:none}
+  .lead-f output{display:flex;align-items:center}
   .lead-f input[type=text]:focus,.lead-f input[type=tel]:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--color-accent) 18%,transparent)}
   .lead-opts{display:flex;flex-wrap:wrap;gap:8px}
   .lead-opts label{position:relative;font-family:var(--font-body);font-weight:400;font-size:14.5px}
@@ -164,7 +165,7 @@
           </div>
         </div>
         <div class="lead-row">
-          <div class="lead-f"><label for="lf-country">País<span class="req" aria-hidden="true">*</span></label><select id="lf-country" name="country" autocomplete="country-name" required><option selected>Ecuador</option><option>Colombia</option><option>Perú</option><option>Chile</option><option>Bolivia</option><option>Argentina</option><option>México</option><option>Panamá</option><option>Costa Rica</option><option>Guatemala</option><option>Venezuela</option><option>Estados Unidos</option><option>España</option><option>Otro</option></select></div>
+          <div class="lead-f"><label for="lf-country-display">País</label><output id="lf-country-display">Ecuador</output><input type="hidden" name="country" value="Ecuador"></div>
           <div class="lead-f"><label for="lf-source">¿Cómo nos conociste?<span class="req" aria-hidden="true">*</span></label><select id="lf-source" name="source" required><option value="" selected disabled>Elige una opción</option><option>Google</option><option>LinkedIn</option><option>Recomendación de alguien</option><option>Evento o feria</option><option>Redes sociales</option><option>Otro</option></select></div>
         </div>
         <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?<span class="req" aria-hidden="true">*</span></legend><div class="lead-opts"><label><input type="radio" name="size" value="50–100"><span>50–100</span></label><label><input type="radio" name="size" value="100–250"><span>100–250</span></label><label><input type="radio" name="size" value="250–500"><span>250–500</span></label><label><input type="radio" name="size" value="500–1000"><span>500–1000</span></label><label><input type="radio" name="size" value="1000–2000"><span>1000–2000</span></label><label><input type="radio" name="size" value="2000+"><span>2000+</span></label></div></fieldset>
@@ -358,12 +359,6 @@
       ph.addEventListener('input', function () { syncCc(); if (ph.classList.contains('is-bad')) checkPhone(true); else if (!phMsg.hidden) sayPh(); });
       ph.addEventListener('blur', function () { setTimeout(function () { checkPhone(true); }, 250); });
       cc.addEventListener('change', function () { syncCc(); if (ph.value.trim()) checkPhone(true); });
-      // el país del formulario elige también el código del teléfono
-      document.getElementById('lf-country').addEventListener('change', function () {
-        var name = this.value;
-        COUNTRIES.forEach(function (c, i) { if (c[1] === name) cc.value = i; });
-        syncCc(); if (ph.value.trim()) checkPhone(true);
-      });
       msg.addEventListener('click', function (e) {
         var b = e.target.closest('[data-fix]'); if (!b) return;
         ct.value = b.getAttribute('data-fix'); check(true); ct.focus();
@@ -376,7 +371,7 @@
         var size = (form.querySelector('input[name=size]:checked') || {}).value;
         f.source.classList.toggle('is-bad', !v('source'));
         if (!v('name') || !v('company') || !v('contact') || !v('phone') || !size || !v('source')) {
-          err.textContent = 'Completa los campos con *: nombre y apellidos, empresa, correo, teléfono, país, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
+          err.textContent = 'Completa los campos con *: nombre y apellidos, empresa, correo, teléfono, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
         }
         var contact = check(true), phone = checkPhone(true);
         if (!contact) { err.hidden = true; ct.focus(); return; }
