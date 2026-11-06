@@ -139,9 +139,9 @@
   .lead-cc[aria-expanded=true]::after{transform:translateY(-20%) rotate(225deg)}
   .dd-ic{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:color-mix(in srgb,var(--c) 13%,#fff);color:var(--c)}
   .dd-ic svg{width:18px;height:18px}
-  .dd-ic.is-multi{display:flex;align-items:center;justify-content:center;width:auto;gap:3px;padding:0 6px}
-  .dd-ic.is-multi svg{width:18px;height:18px}
-  .dd-ic.is-multi{min-width:70px}
+  .dd-ic.is-multi{display:flex;align-items:center;justify-content:center;width:auto;min-width:62px;padding:0 6px}
+  .dd-ic.is-multi svg{box-sizing:border-box;width:24px;height:24px;padding:3px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 13%,#fff)}
+  .dd-ic.is-multi svg+svg{margin-left:-6px}
   .dd-flag{flex:none;display:block;width:24px;height:16px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.14)}
   .dd-flag svg{display:block;width:100%;height:100%}
   .dd-ic,.dd-flag{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
