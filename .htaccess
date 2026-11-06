@@ -1,0 +1,20 @@
+# SquareNet · cPanel / Apache (sin Cloudflare)
+# Va en public_html. Si el servidor ya tiene un .htaccess, fusionar y no sobrescribir.
+
+# Página de error propia (usa <base href="/"> para que cargue bien desde cualquier ruta)
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1) Páginas del sitio anterior que ya no existen: 301 directo a la versión principal (un solo salto)
+RewriteRule ^clientes\.html$ https://www.squarenet.com.ec/#clientes [NC,NE,R=301,L]
+RewriteRule ^lector(es|ZK|HandPunch)\.html$ https://www.squarenet.com.ec/moduloac.html#dispositivos [NC,NE,R=301,L]
+
+# 2) Versión principal: https://www.squarenet.com.ec
+#    Solo actúa sobre squarenet.com.ec; la URL temporal del cPanel sigue sirviendo para probar.
+RewriteCond %{HTTP_HOST} ^(www\.)?squarenet\.com\.ec$ [NC]
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.squarenet.com.ec%{REQUEST_URI} [L,R=301]
+</IfModule>
