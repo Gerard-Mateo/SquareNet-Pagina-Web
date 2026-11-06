@@ -61,6 +61,8 @@
   .lead-opts input:checked+span{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-800);font-weight:600}
   .lead-opts input:focus-visible+span{outline:2px solid var(--color-accent);outline-offset:2px}
   .lead-err{margin:0;font-size:13px;color:#b3261e}
+  .lead-success{margin:0;font-size:14px;color:#176431}
+  .lead-actions button:disabled{opacity:.65;cursor:wait}
   /* correo o teléfono: si escribe un número aparece el selector de país */
   .lead-ct{display:flex;gap:8px}
   .lead-ct input{flex:1;min-width:0}
@@ -191,7 +193,7 @@
       <p>Pide tu cotización con el formulario o escríbenos y llámanos directo.</p>
     </div>
     <div class="ct-grid">
-      <form class="lead-form" id="leadForm" novalidate data-reveal>
+      <form class="lead-form" id="leadForm" action="https://formspree.io/f/mpppezwg" method="POST" novalidate data-reveal>
         <h2>Solicita una cotización</h2>
         <div class="lead-row one">
           <div class="lead-f"><label for="lf-name">Nombre y apellidos<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="name" placeholder="John Doe" required></div>
@@ -202,7 +204,7 @@
         </div>
         <div class="lead-row">
           <div class="lead-f"><label for="lf-contact">Correo<span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="lf-contact" name="contact" inputmode="email" autocomplete="email" placeholder="nombre@tuempresa.com" aria-describedby="lf-contact-msg" required>
+            <input type="text" id="lf-contact" name="email" inputmode="email" autocomplete="email" placeholder="nombre@tuempresa.com" aria-describedby="lf-contact-msg" required>
             <p class="lead-msg" id="lf-contact-msg" aria-live="polite" hidden></p>
           </div>
           <div class="lead-f"><label for="lf-phone">Teléfono<span class="req" aria-hidden="true">*</span></label>
@@ -221,10 +223,11 @@
         <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia"><span>Asistencia</span></label><label><input type="checkbox" name="need" value="Recursos Humanos"><span>Recursos Humanos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div><div class="lead-other" id="lf-other-wrap" hidden><label for="lf-other">¿Qué le gustaría mejorar?</label><input type="text" id="lf-other" name="other" maxlength="200" placeholder="Ej.: control de horas extras"></div></fieldset>
         <div class="lead-f"><label for="lf-msg">Comentarios <small>(opcional)</small></label><textarea id="lf-msg" name="msg" rows="3" maxlength="600" placeholder="Cualquier cosa que quieras contarnos"></textarea></div>
         <p class="lead-err" id="leadErr" role="alert" hidden></p>
+        <p class="lead-success" id="leadSuccess" role="status" aria-live="polite" hidden></p>
         <div class="lead-actions">
           <button type="submit" class="btn btn-primary">Enviar a ventas</button>
         </div>
-        <p class="lead-note">Se abrirá tu programa de correo con los datos listos para enviar a ventas@squarenet.com.ec.</p>
+        <p class="lead-note">Tu solicitud se enviará directamente a nuestro equipo de ventas.</p>
       </form>
 
       <div class="reach band-dark" data-reveal>
@@ -318,6 +321,7 @@
   <script>
     (function () {
       var form = document.getElementById('leadForm'), err = document.getElementById('leadErr');
+      var success = document.getElementById('leadSuccess'), submit = form.querySelector('button[type=submit]'), sending = false;
       var otro = form.querySelector('input[name=need][value=Otro]'), otherWrap = document.getElementById('lf-other-wrap');
       otro.addEventListener('change', function () {
         otherWrap.hidden = !otro.checked;
@@ -410,12 +414,14 @@
       });
 
       document.getElementById('lf-source').addEventListener('change', function () { this.classList.remove('is-bad'); });
-      form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        if (sending) return;
+        success.hidden = true;
         var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
         var size = (form.querySelector('input[name=size]:checked') || {}).value;
         f.source.classList.toggle('is-bad', !v('source'));
-        if (!v('name') || !v('company') || !v('contact') || !v('phone') || !size || !v('source')) {
+        if (!v('name') || !v('company') || !v('email') || !v('phone') || !size || !v('source')) {
           err.textContent = 'Completa los campos con *: nombre y apellidos, empresa, correo, teléfono, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
         }
         var contact = check(true), phone = checkPhone(true);
@@ -425,10 +431,41 @@
         var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) {
           return c === otro && v('other') ? 'Otro: ' + v('other') : c.value;
         }).join(', ') || 'No indicado';
-        var body = 'Nombre: ' + v('name') + (v('role') ? '\nCargo: ' + v('role') : '') + '\nEmpresa: ' + v('company') + '\n' + contact + '\n' + phone +
-          '\nPaís: ' + v('country') + '\nNos conoció por: ' + v('source') + '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
-          (v('msg') ? '\n\nComentarios:\n' + v('msg') : '');
-        location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
+        var data = new FormData();
+        data.append('Nombre y apellidos', v('name'));
+        data.append('Empresa', v('company'));
+        if (v('role')) data.append('Cargo', v('role'));
+        data.append('email', v('email'));
+        data.append('Telefono', phone.slice('Teléfono: '.length));
+        data.append('Pais', v('country'));
+        data.append('Como nos conociste', v('source'));
+        data.append('Colaboradores', size);
+        data.append('Intereses', needs);
+        if (v('msg')) data.append('Comentarios', v('msg'));
+        data.append('subject', 'Cotización SquareNet - ' + v('company'));
+
+        sending = true;
+        submit.disabled = true;
+        submit.textContent = 'Enviando…';
+        try {
+          var response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (!response.ok) {
+            err.textContent = response.status === 429
+              ? 'Hay demasiados envíos en este momento. Espera un momento y vuelve a intentarlo.'
+              : 'No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos a ventas@squarenet.com.ec.';
+            err.hidden = false;
+            return;
+          }
+          success.textContent = 'Tu solicitud fue enviada. Gracias por contactarnos.';
+          success.hidden = false;
+        } catch (error) {
+          err.textContent = 'No pudimos enviar tu solicitud. Revisa tu conexión e inténtalo de nuevo, o escríbenos a ventas@squarenet.com.ec.';
+          err.hidden = false;
+        } finally {
+          sending = false;
+          submit.disabled = false;
+          submit.textContent = 'Enviar a ventas';
+        }
       });
     })();
   </script>
