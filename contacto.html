@@ -418,6 +418,27 @@
       });
 
       document.getElementById('lf-source').addEventListener('change', function () { this.classList.remove('is-bad'); });
+      // Solo la p?gina inmediatamente anterior de este sitio; no se guarda historial ni se env?an par?metros.
+      function previousSitePage(referrer, currentHref) {
+        if (!referrer) return '';
+        try {
+          var previous = new URL(referrer), current = new URL(currentHref);
+          var base = current.pathname.slice(0, current.pathname.lastIndexOf('/') + 1);
+          if (previous.origin !== current.origin || previous.pathname.indexOf(base) !== 0) return '';
+          var pages = {
+            '': 'Inicio', 'index.html': 'Inicio', 'somos.html': 'Qui?nes somos',
+            'plataforma.html': 'Plataforma SquareNet', 'modulos.html': 'M?dulos',
+            'modulono.html': 'N?mina', 'moduloca.html': 'Asistencia',
+            'modulorh.html': 'Recursos Humanos', 'moduloas.html': 'Autoservicio',
+            'moduloac.html': 'Acceso', 'modulocc.html': 'Comedor',
+            'modulocv.html': 'Visitas', 'modulots.html': 'Trabajo Social',
+            'blog/': 'Blog', 'blog/index.html': 'Blog'
+          };
+          var page = previous.pathname.slice(base.length);
+          return Object.prototype.hasOwnProperty.call(pages, page) ? pages[page] : '';
+        } catch (error) { return ''; }
+      }
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         if (sending) return;
@@ -445,6 +466,8 @@
         data.append('Como nos conociste', v('source'));
         data.append('Colaboradores', size);
         data.append('Intereses', needs);
+        var previousPage = previousSitePage(document.referrer, window.location.href);
+        if (previousPage) data.append('P?gina anterior en SquareNet', previousPage);
         if (v('msg')) data.append('Comentarios', v('msg'));
         data.append('_subject', 'Cotización SquareNet - ' + v('company'));   // Formspree usa _subject como asunto del correo
         data.append('_gotcha', f._gotcha.value);   // trampa anti-spam de Formspree: si un robot la llena, el envío se descarta
