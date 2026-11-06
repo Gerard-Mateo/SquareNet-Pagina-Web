@@ -664,17 +664,17 @@
         </ul>
       </div>
       <div class="show-media" data-reveal>
-        <div class="mf2" id="mf2" role="img" aria-label="Animación de una tabla de nómina: se ordena con doble clic, se busca dentro de un filtro, se desmarcan departamentos, se agrupa arrastrando la columna Departamento con subtotales por grupo, se oculta una columna reduciendo su ancho y se exporta la tabla a Excel">
+        <div class="mf2" id="mf2" role="img" aria-label="Animación de una tabla de nómina: se ordena con doble clic, se busca dentro de un filtro, se desmarcan centros de costo, se agrupa arrastrando la columna Centro de Costo con subtotales por grupo, se oculta una columna reduciendo su ancho y se exporta la tabla a Excel">
           <div class="gw">
             <div class="gw-bar"><i></i><i></i><i></i><span class="gw-title">Empleados · Nómina · Oct 2026</span>
               <div class="gw-tools"><span>Columnas</span><span class="mf-dlb" data-el="dlb"><svg viewBox="0 0 16 16"><path d="M8 2v8M4.8 7 8 10.2 11.2 7M3 13.5h10"/></svg></span></div></div>
             <div class="mf-body">
               <div class="mf-group" data-el="group">
                 <span class="mf-gph">Arrastre columnas aquí para agrupar</span>
-                <span class="mf-gchip">Departamento <svg viewBox="0 0 12 12"><path d="M6 10V2M3 5l3-3 3 3"/></svg><span class="x">✕</span></span>
+                <span class="mf-gchip">Centro de Costo <svg viewBox="0 0 12 12"><path d="M6 10V2M3 5l3-3 3 3"/></svg><span class="x">✕</span></span>
               </div>
               <div class="mf-t">
-                <div class="mf-r mf-band"><span></span><span class="b">Centro de costo</span><span></span></div>
+                <div class="mf-r mf-band"><span></span><span class="b">Centro de Costo</span><span></span></div>
                 <div class="mf-r mf-head" data-el="head"></div>
                 <div class="mf-view">
                   <div class="mf-flat" data-el="flat"></div>
@@ -708,14 +708,14 @@
             <div class="mf-fly" data-el="fly"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7 10l5 5 5-5M5 20h14"/></svg></div>
             <div class="mf-tray" data-el="tray">
               <svg class="ic" viewBox="0 0 26 30" aria-hidden="true"><path d="M3 1.5h14l7 7v19a1.5 1.5 0 0 1-1.5 1.5h-19A1.5 1.5 0 0 1 2 27.5v-25A1 1 0 0 1 3 1.5Z" fill="#fff"/><path d="M17 1.5v7h7" fill="#d7e8dd"/><rect x="0" y="11" width="15" height="14" rx="2" fill="#1e7a46"/><path d="M4.2 14.5l6.6 7M10.8 14.5l-6.6 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 14h5M16.5 17.5h5M16.5 21h5" stroke="#1e7a46" stroke-width="1.4"/></svg>
-              <div><div class="nm">Nómina por departamento · 2026-10 Octubre.xlsx</div>
+              <div><div class="nm">Nómina por centro de costo · 2026-10 Octubre.xlsx</div>
               <div class="mt"><span class="bar"><i data-el="bar"></i></span><span data-el="dlmeta">Descargando…</span></div></div>
             </div>
             <div class="mf-cur" data-el="cur">
               <svg class="ptr" viewBox="0 0 14 20" aria-hidden="true"><path d="M1 1v15.2l3.9-3.7 2.7 6 2.6-1.2-2.7-5.9H13L1 1Z" fill="#fff" stroke="#1d1b1a" stroke-width="1.2" stroke-linejoin="round"/></svg>
               <svg class="rsz" viewBox="0 0 20 16" aria-hidden="true"><path d="M8.2 1.5v13M11.8 1.5v13M1.5 8h5M13.5 8h5M4 5.3 1.3 8 4 10.7M16 5.3 18.7 8 16 10.7" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.2 1.5v13M11.8 1.5v13M1.5 8h5M13.5 8h5M4 5.3 1.3 8 4 10.7M16 5.3 18.7 8 16 10.7" fill="none" stroke="#1d1b1a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span class="ring"></span>
-              <span class="mf-ghost" data-el="ghost"><span data-el="ghosttx">Departamento</span></span>
+              <span class="mf-ghost" data-el="ghost"><span data-el="ghosttx">Centro de Costo</span></span>
             </div>
           </div>
           <div class="mf-steps" aria-hidden="true"><ol data-el="dots"><li></li><li></li><li></li><li></li><li></li><li></li></ol><span class="mf-cap" data-el="cap"></span></div>
@@ -1066,7 +1066,7 @@
       const sum = (rows,k) => rows.reduce((a,r)=>a+r[k],0);
       const funnel = '<svg viewBox="0 0 16 16"><path d="M1.5 2.5h13L9.6 8.4v5l-3.2-1.7V8.4Z"/></svg>';
 
-      const COLS = [['emp','Apellidos y nombres',''],['cod','Código',''],['dep','Departamento',''],
+      const COLS = [['emp','Apellidos y nombres',''],['cod','Código',''],['dep','Centro de Costo',''],
                     ['sue','Sueldo devengado','n h-sue'],['pat','Aporte patronal','n h-pat'],['per','Aporte personal','n h-per']];
       $('head').innerHTML = COLS.map(([k,t,c]) =>
         `<span class="${c}" data-col="${k}"><span class="lbl">${t}</span><i class="mf-sort">▲</i><span class="mf-fb" data-fb="${k}">${funnel}</span></span>`).join('');
@@ -1091,7 +1091,7 @@
         const deps = [...new Set(rows.map(r=>r.dep))].sort((a,b)=>a.localeCompare(b,'es'));
         $('grp').innerHTML = deps.map(d=>{
           const g = rows.filter(r=>r.dep===d).sort((a,b)=>a.name.localeCompare(b.name,'es'));
-          return `<div class="mf-gh"><svg viewBox="0 0 10 10"><path d="M1 3h8L5 8z"/></svg><i class="dot" style="background:${DEPS[d]}"></i>Departamento: ${d} <em>(${g.length})</em></div>`
+          return `<div class="mf-gh"><svg viewBox="0 0 10 10"><path d="M1 3h8L5 8z"/></svg><i class="dot" style="background:${DEPS[d]}"></i>Centro de Costo: ${d} <em>(${g.length})</em></div>`
             + g.map(r=>`<div class="mf-r mf-row"><span class="ind">${r.name}</span><span>${r.code}</span><span></span><span class="n">${fmt(r.sue)}</span><span class="n">${fmt(r.pat)}</span><span class="n">${fmt(r.per)}</span></div>`).join('')
             + `<div class="mf-r mf-tot"><span class="ind">Total ${d} (${g.length})</span><span></span><span></span><span class="n">${fmt(sum(g,'sue'))}</span><span class="n">${fmt(sum(g,'pat'))}</span><span class="n">${fmt(sum(g,'per'))}</span></div>`;
         }).join('');
@@ -1207,7 +1207,7 @@
         sortFlat((a,b)=>b.sue-a.sue); markSort('sue',-1); status('12 registros · Sueldo devengado: de mayor a menor');
         await sleep(1700);
 
-        // 2 · filtro por valores en Departamento
+        // 2 · filtro por valores en Centro de Costo
         await stage(2);
         await move(fb('dep'),850); await click(fb('dep')); openPop('dep'); await sleep(450);
         for (const d of ['Finanzas','Ventas']){
@@ -1217,21 +1217,21 @@
         await move(pm('ok'),650); await click(pm('ok')); closePop();
         visible = D.map(r=>!['Finanzas','Ventas'].includes(r.dep)); applyVisible();
         fb('dep').classList.add('is-on');
-        status(`${visible.filter(Boolean).length} de 12 registros`,'Departamento: 3 de 5');
+        status(`${visible.filter(Boolean).length} de 12 registros`,'Centro de Costo: 3 de 5');
         await sleep(1700);
 
-        // 3 · agrupar arrastrando Departamento al panel
+        // 3 · agrupar arrastrando Centro de Costo al panel
         await stage(3);
         const hd = head('dep'); await move(hd.querySelector('.lbl'),800,.4,.5);
         cur.classList.add('is-down'); await sleep(150);
-        $('ghosttx').textContent='Departamento'; $('ghost').classList.add('is-on'); hd.classList.add('is-lift');
+        $('ghosttx').textContent='Centro de Costo'; $('ghost').classList.add('is-on'); hd.classList.add('is-lift');
         const gp = $('group'); const [gx,gy] = pt(gp,.12,.5);
         await moveXY(cx-30, cy-30, 350);
         gp.classList.add('is-over');
         await moveXY(gx, gy, 650); await sleep(250);
         cur.classList.remove('is-down'); $('ghost').classList.remove('is-on'); gp.classList.remove('is-over'); hd.classList.remove('is-lift');
         const groups = buildGroups(); root.classList.add('is-grouped');
-        status(`Agrupado por Departamento · ${groups} grupos · ${visible.filter(Boolean).length} registros`,'Departamento: 3 de 5');
+        status(`Agrupado por Centro de Costo · ${groups} grupos · ${visible.filter(Boolean).length} registros`,'Centro de Costo: 3 de 5');
         await sleep(1300);
         const g = $('grp'), over = g.scrollHeight - g.parentElement.clientHeight;
         await moveXY(W*.55, cy+150, 700);
@@ -1318,7 +1318,7 @@
       if (matchMedia('(prefers-reduced-motion: reduce)').matches){
         visible = D.map(r=>!['Finanzas','Ventas'].includes(r.dep)); applyVisible(); buildGroups();
         root.classList.add('is-grouped'); fb('dep').classList.add('is-on'); cur.style.display='none';
-        status('Agrupado por Departamento · 3 grupos · 8 registros','Departamento: 3 de 5');
+        status('Agrupado por Centro de Costo · 3 grupos · 8 registros','Centro de Costo: 3 de 5');
         $('cap').textContent = caps[5]; $('dots').children[5].classList.add('is-on');
         root.classList.add('no-pat');
         return;
