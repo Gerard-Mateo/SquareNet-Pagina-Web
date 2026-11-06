@@ -61,6 +61,8 @@
   .lead-opts input:checked+span{background:var(--color-accent-100);border-color:var(--color-accent);color:var(--color-accent-800);font-weight:600}
   .lead-opts input:focus-visible+span{outline:2px solid var(--color-accent);outline-offset:2px}
   .lead-err{margin:0;font-size:13px;color:#b3261e}
+  .lead-success{margin:0;font-size:14px;color:#176431}
+  .lead-actions button:disabled{opacity:.65;cursor:wait}
   /* correo o teléfono: si escribe un número aparece el selector de país */
   .lead-ct{display:flex;gap:8px}
   .lead-ct input{flex:1;min-width:0}
@@ -137,6 +139,9 @@
   .lead-cc[aria-expanded=true]::after{transform:translateY(-20%) rotate(225deg)}
   .dd-ic{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:color-mix(in srgb,var(--c) 13%,#fff);color:var(--c)}
   .dd-ic svg{width:18px;height:18px}
+  .dd-ic.is-multi{display:flex;align-items:center;justify-content:center;width:auto;gap:3px;padding:0 6px}
+  .dd-ic.is-multi svg{width:18px;height:18px}
+  .dd-ic.is-multi{min-width:70px}
   .dd-flag{flex:none;display:block;width:24px;height:16px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.14)}
   .dd-flag svg{display:block;width:100%;height:100%}
   .dd-ic,.dd-flag{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
@@ -191,7 +196,7 @@
       <p>Pide tu cotización con el formulario o escríbenos y llámanos directo.</p>
     </div>
     <div class="ct-grid">
-      <form class="lead-form" id="leadForm" novalidate data-reveal>
+      <form class="lead-form" id="leadForm" action="https://formspree.io/f/maeezyao" method="POST" novalidate data-reveal>
         <h2>Solicita una cotización</h2>
         <div class="lead-row one">
           <div class="lead-f"><label for="lf-name">Nombre y apellidos<span class="req" aria-hidden="true">*</span></label><input type="text" id="lf-name" name="name" autocomplete="name" placeholder="John Doe" required></div>
@@ -202,7 +207,7 @@
         </div>
         <div class="lead-row">
           <div class="lead-f"><label for="lf-contact">Correo<span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="lf-contact" name="contact" inputmode="email" autocomplete="email" placeholder="nombre@tuempresa.com" aria-describedby="lf-contact-msg" required>
+            <input type="text" id="lf-contact" name="email" inputmode="email" autocomplete="email" placeholder="nombre@tuempresa.com" aria-describedby="lf-contact-msg" required>
             <p class="lead-msg" id="lf-contact-msg" aria-live="polite" hidden></p>
           </div>
           <div class="lead-f"><label for="lf-phone">Teléfono<span class="req" aria-hidden="true">*</span></label>
@@ -215,16 +220,17 @@
         </div>
         <div class="lead-row">
           <div class="lead-f"><label for="lf-country-display">País</label><output id="lf-country-display">Ecuador</output><input type="hidden" name="country" value="Ecuador"></div>
-          <div class="lead-f"><label for="lf-source">¿Cómo nos conociste?<span class="req" aria-hidden="true">*</span></label><select id="lf-source" name="source" required><option value="" selected disabled>Elige una opción</option><option>Google</option><option>LinkedIn</option><option>Recomendación de alguien</option><option>Evento o feria</option><option>Redes sociales</option><option>Otro</option></select></div>
+          <div class="lead-f"><label for="lf-source">¿Cómo nos conociste?<span class="req" aria-hidden="true">*</span></label><select id="lf-source" name="source" required><option value="" selected disabled>Elige una opción</option><option>Google</option><option>LinkedIn</option><option>Recomendación de alguien</option><option>Evento o feria</option><option>Instagram o Facebook</option><option>ChatGPT, Claude u otra IA</option><option>Otro</option></select></div>
         </div>
         <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?<span class="req" aria-hidden="true">*</span></legend><div class="lead-opts"><label><input type="radio" name="size" value="50–100"><span>50–100</span></label><label><input type="radio" name="size" value="100–250"><span>100–250</span></label><label><input type="radio" name="size" value="250–500"><span>250–500</span></label><label><input type="radio" name="size" value="500–1000"><span>500–1000</span></label><label><input type="radio" name="size" value="1000–2000"><span>1000–2000</span></label><label><input type="radio" name="size" value="2000+"><span>2000+</span></label></div></fieldset>
         <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia"><span>Asistencia</span></label><label><input type="checkbox" name="need" value="Recursos Humanos"><span>Recursos Humanos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div><div class="lead-other" id="lf-other-wrap" hidden><label for="lf-other">¿Qué le gustaría mejorar?</label><input type="text" id="lf-other" name="other" maxlength="200" placeholder="Ej.: control de horas extras"></div></fieldset>
         <div class="lead-f"><label for="lf-msg">Comentarios <small>(opcional)</small></label><textarea id="lf-msg" name="msg" rows="3" maxlength="600" placeholder="Cualquier cosa que quieras contarnos"></textarea></div>
         <p class="lead-err" id="leadErr" role="alert" hidden></p>
+        <p class="lead-success" id="leadSuccess" role="status" aria-live="polite" hidden></p>
         <div class="lead-actions">
           <button type="submit" class="btn btn-primary">Enviar a ventas</button>
         </div>
-        <p class="lead-note">Se abrirá tu programa de correo con los datos listos para enviar a ventas@squarenet.com.ec.</p>
+        <p class="lead-note">Tu solicitud se enviará directamente a nuestro equipo de ventas.</p>
       </form>
 
       <div class="reach band-dark" data-reveal>
@@ -318,6 +324,7 @@
   <script>
     (function () {
       var form = document.getElementById('leadForm'), err = document.getElementById('leadErr');
+      var success = document.getElementById('leadSuccess'), submit = form.querySelector('button[type=submit]'), sending = false;
       var otro = form.querySelector('input[name=need][value=Otro]'), otherWrap = document.getElementById('lf-other-wrap');
       otro.addEventListener('change', function () {
         otherWrap.hidden = !otro.checked;
@@ -410,12 +417,14 @@
       });
 
       document.getElementById('lf-source').addEventListener('change', function () { this.classList.remove('is-bad'); });
-      form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        if (sending) return;
+        success.hidden = true;
         var f = form.elements, v = function (n) { return (f[n].value || '').trim(); };
         var size = (form.querySelector('input[name=size]:checked') || {}).value;
         f.source.classList.toggle('is-bad', !v('source'));
-        if (!v('name') || !v('company') || !v('contact') || !v('phone') || !size || !v('source')) {
+        if (!v('name') || !v('company') || !v('email') || !v('phone') || !size || !v('source')) {
           err.textContent = 'Completa los campos con *: nombre y apellidos, empresa, correo, teléfono, cómo nos conociste y cuántos colaboradores tiene.'; err.hidden = false; return;
         }
         var contact = check(true), phone = checkPhone(true);
@@ -425,10 +434,41 @@
         var needs = Array.prototype.map.call(form.querySelectorAll('input[name=need]:checked'), function (c) {
           return c === otro && v('other') ? 'Otro: ' + v('other') : c.value;
         }).join(', ') || 'No indicado';
-        var body = 'Nombre: ' + v('name') + (v('role') ? '\nCargo: ' + v('role') : '') + '\nEmpresa: ' + v('company') + '\n' + contact + '\n' + phone +
-          '\nPaís: ' + v('country') + '\nNos conoció por: ' + v('source') + '\nColaboradores: ' + size + '\nLe interesa: ' + needs +
-          (v('msg') ? '\n\nComentarios:\n' + v('msg') : '');
-        location.href = 'mailto:ventas@squarenet.com.ec?subject=' + encodeURIComponent('Cotización SquareNet - ' + v('company')) + '&body=' + encodeURIComponent(body);
+        var data = new FormData();
+        data.append('Nombre y apellidos', v('name'));
+        data.append('Empresa', v('company'));
+        if (v('role')) data.append('Cargo', v('role'));
+        data.append('email', v('email'));
+        data.append('Telefono', phone.slice('Teléfono: '.length));
+        data.append('Pais', v('country'));
+        data.append('Como nos conociste', v('source'));
+        data.append('Colaboradores', size);
+        data.append('Intereses', needs);
+        if (v('msg')) data.append('Comentarios', v('msg'));
+        data.append('subject', 'Cotización SquareNet - ' + v('company'));
+
+        sending = true;
+        submit.disabled = true;
+        submit.textContent = 'Enviando…';
+        try {
+          var response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (!response.ok) {
+            err.textContent = response.status === 429
+              ? 'Hay demasiados envíos en este momento. Espera un momento y vuelve a intentarlo.'
+              : 'No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos a ventas@squarenet.com.ec.';
+            err.hidden = false;
+            return;
+          }
+          success.textContent = 'Tu solicitud fue enviada. Gracias por contactarnos.';
+          success.hidden = false;
+        } catch (error) {
+          err.textContent = 'No pudimos enviar tu solicitud. Revisa tu conexión e inténtalo de nuevo, o escríbenos a ventas@squarenet.com.ec.';
+          err.hidden = false;
+        } finally {
+          sending = false;
+          submit.disabled = false;
+          submit.textContent = 'Enviar a ventas';
+        }
       });
     })();
   </script>
@@ -446,7 +486,8 @@
       'LinkedIn': ['#0A66C2', '<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.2 9.6H4.6V19h2.6zM5.9 5.2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM19.4 13.6c0-2.6-1.4-4.2-3.6-4.2-1.3 0-2.2.7-2.6 1.4V9.6h-2.5V19h2.6v-4.7c0-1.2.4-2.3 1.7-2.3s1.6 1.1 1.6 2.4V19h2.8z"/></svg>'],
       'Recomendación de alguien': ['#E8890C', '<svg viewBox="0 0 24 24"' + S + '><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><path d="M16 4.9a3.2 3.2 0 0 1 0 6.2M17.6 14.6c1.8.8 3 2.5 3.4 4.9"/></svg>'],
       'Evento o feria': ['#D6336C', '<svg viewBox="0 0 24 24"' + S + '><path d="M4 7.5V6h16v1.5a2.5 2.5 0 0 0 0 5V18H4v-5.5a2.5 2.5 0 0 0 0-5Z"/><path d="M14.5 6v2M14.5 11v2M14.5 16v2"/></svg>'],
-      'Redes sociales': ['#7048E8', '<svg viewBox="0 0 24 24"' + S + '><path d="M4 5h16v11H9.5L4 20Z"/><path d="M12 13.4s-3.2-1.9-3.2-3.8a1.7 1.7 0 0 1 3.2-.8 1.7 1.7 0 0 1 3.2.8c0 1.9-3.2 3.8-3.2 3.8Z" fill="currentColor" stroke="none"/></svg>'],
+      'Instagram o Facebook': ['#E1306C', '<svg viewBox="0 0 24 24"><defs><linearGradient id="ig-g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".35" stop-color="#FA7E1E"/><stop offset=".65" stop-color="#D62976"/><stop offset="1" stop-color="#4F5BD5"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5.2" fill="none" stroke="url(#ig-g)" stroke-width="2"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="url(#ig-g)" stroke-width="2"/><circle cx="17.1" cy="6.9" r="1.2" fill="#D62976"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1877F2"/><path fill="#fff" d="M13.2 21.5v-7.3h2.4l.4-2.8h-2.8V9.6c0-.8.3-1.4 1.4-1.4H16V5.7c-.3 0-1.1-.1-2.1-.1-2.1 0-3.5 1.3-3.5 3.6v2.2H8v2.8h2.4v7.3z"/></svg>', 'multi'],
+      'ChatGPT, Claude u otra IA': ['#10A37F', '<svg viewBox="0 0 24 24" fill="none" stroke="#10A37F" stroke-width="1.7" stroke-linejoin="round"><rect x="7.6" y="2.6" width="8.8" height="18.8" rx="4.4"/><rect x="7.6" y="2.6" width="8.8" height="18.8" rx="4.4" transform="rotate(60 12 12)"/><rect x="7.6" y="2.6" width="8.8" height="18.8" rx="4.4" transform="rotate(120 12 12)"/></svg><svg viewBox="0 0 24 24" fill="#D97757"><path d="M12 2.2l1.6 6.2 4.6-4.5-2.1 6.1 6.3-1.5-5.5 3.5 5.5 3.5-6.3-1.5 2.1 6.1-4.6-4.5L12 21.8l-1.6-6.2-4.6 4.5 2.1-6.1-6.3 1.5 5.5-3.5-5.5-3.5 6.3 1.5-2.1-6.1 4.6 4.5z"/></svg><svg viewBox="0 0 24 24"><defs><linearGradient id="gm-g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4285F4"/><stop offset=".55" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/></linearGradient></defs><path fill="url(#gm-g)" d="M12 1.8C12.6 7.7 16.3 11.4 22.2 12 16.3 12.6 12.6 16.3 12 22.2 11.4 16.3 7.7 12.6 1.8 12 7.7 11.4 11.4 7.7 12 1.8z"/></svg>', 'multi'],
       'Otro': ['#868E96', '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18.5" cy="12" r="2"/></svg>']
     };
     // banderas simplificadas (franjas): h = horizontales, v = verticales; [color, peso]
@@ -477,7 +518,7 @@
       });
       return '<span class="dd-flag" aria-hidden="true"><svg viewBox="0 0 30 20" preserveAspectRatio="none">' + h + (f[2] || '') + '</svg></span>';
     }
-    function chip(s) { return '<span class="dd-ic" style="--c:' + s[0] + '" aria-hidden="true">' + s[1] + '</span>'; }
+    function chip(s) { return '<span class="dd-ic' + (s[2] ? ' is-multi' : '') + '" style="--c:' + s[0] + '" aria-hidden="true">' + s[1] + '</span>'; }
 
     function make(sel, trigger, host, item, render) {
       var pop = document.createElement('div'), items = [], act = -1, open = false;
