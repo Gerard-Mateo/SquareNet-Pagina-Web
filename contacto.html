@@ -446,12 +446,8 @@
         data.append('Colaboradores', size);
         data.append('Intereses', needs);
         if (v('msg')) data.append('Comentarios', v('msg'));
-<<<<<<< HEAD
-        data.append('subject', 'Cotización SquareNet - ' + v('company'));
-=======
         data.append('_subject', 'Cotización SquareNet - ' + v('company'));   // Formspree usa _subject como asunto del correo
         data.append('_gotcha', f._gotcha.value);   // trampa anti-spam de Formspree: si un robot la llena, el envío se descarta
->>>>>>> 3eb4d81119972472cadb5f17ed00373f2771869c
 
         sending = true;
         submit.disabled = true;
@@ -465,10 +461,7 @@
             err.hidden = false;
             return;
           }
-<<<<<<< HEAD
-=======
           form.reset(); otherWrap.hidden = true;   // vaciar para que un segundo clic no mande la misma solicitud
->>>>>>> 3eb4d81119972472cadb5f17ed00373f2771869c
           success.textContent = 'Tu solicitud fue enviada. Gracias por contactarnos.';
           success.hidden = false;
         } catch (error) {
