@@ -96,7 +96,7 @@
             </div>
           </div>
           <div class="cf">
-            <label class="cf-label" for="l-causal">¿Cómo terminó la relación laboral?</label>
+            <label class="cf-label" for="l-causal">¿Cómo terminó la relación laboral? <a class="cf-help" href="#causales" aria-label="¿Qué significa cada causal? Ir a la explicación" title="¿Qué significa cada causal?">?</a></label>
             <p class="cf-hint">Cada causal tiene efectos distintos. Abajo te explicamos cuál paga qué.</p>
             <div class="cf-select"><select id="l-causal" name="causal"><option value="renuncia" selected>Renuncia voluntaria (con aviso de desahucio)</option><option value="acuerdo">Acuerdo entre las partes</option><option value="despido">Despido intempestivo</option><option value="vb_trabajador">Visto bueno pedido por el trabajador</option><option value="vb_empleador">Visto bueno pedido por el empleador</option><option value="prueba">Terminación en el período de prueba</option><option value="obra">Fin de obra, contrato eventual o de temporada</option></select></div>
           </div>
@@ -186,7 +186,7 @@
         </ul>
       </aside>
 
-      <h2>Qué te toca según cómo terminó</h2>
+      <h2 id="causales">Qué te toca según cómo terminó</h2>
       <p>Hay rubros que te pagan siempre, salgas como salgas: lo que te deben del último mes, la parte de los décimos que no cobraste, las vacaciones que no tomaste y los fondos de reserva pendientes. Lo que cambia según la causal son la bonificación por desahucio y la indemnización por despido.</p>
       <div class="table-scroll">
         <table class="table liq-tabla">
@@ -202,6 +202,16 @@
           </tbody>
         </table>
       </div>
+      <h3>¿Qué significa cada causal?</h3>
+      <ul class="liq-causales">
+        <li><strong>Renuncia con desahucio:</strong> tú decides irte y avisas por escrito al empleador con 15 días de anticipación.</li>
+        <li><strong>Acuerdo entre las partes:</strong> los dos se ponen de acuerdo en terminar y lo firman en un acta de finiquito.</li>
+        <li><strong>Despido intempestivo:</strong> el empleador te saca sin una causa legal y sin visto bueno del Ministerio de Trabajo.</li>
+        <li><strong>Visto bueno pedido por el trabajador:</strong> tú pides al Ministerio de Trabajo terminar el contrato porque el empleador incumplió, por ejemplo no pagarte el sueldo o maltratarte.</li>
+        <li><strong>Visto bueno pedido por el empleador:</strong> la empresa pide al Ministerio de Trabajo terminar el contrato por una falta tuya grave, como faltar sin justificación o abandonar el trabajo.</li>
+        <li><strong>Período de prueba:</strong> en los primeros 90 días cualquiera de los dos puede terminar el contrato sin indemnización.</li>
+        <li><strong>Fin de obra, eventual o temporada:</strong> el contrato era solo por una obra, una necesidad puntual o una temporada, y termina cuando se cumple.</li>
+      </ul>
 
       <h2>Los rubros, uno por uno</h2>
       <h3>Remuneración pendiente</h3>
@@ -226,6 +236,8 @@
         <li>Las utilidades pendientes, que se pagan hasta el 15 de abril aunque ya no trabajes ahí.</li>
         <li>El impuesto a la renta sobre la liquidación.</li>
       </ul>
+      <p><strong>Con SquareNet sí te calculamos todo eso.</strong> La liquidación completa sale de los datos que ya tienes en la nómina.</p>
+      <p><a href="#contactanos" class="btn btn-primary">Quiero que me lo calculen</a></p>
 
       <h2>Preguntas frecuentes</h2>
       <h3>¿Me pagan desahucio si renuncio?</h3>
@@ -247,7 +259,7 @@
       </ul>
 
       <p class="article-disclaimer">Guía informativa. Una liquidación depende de tu contrato y de los hechos del caso: antes de firmar el acta de finiquito, revísala con el Ministerio del Trabajo o con un abogado laboral.</p>
-      <div class="article-cta">
+      <div class="article-cta" id="contactanos">
         <h3>¿Procesas liquidaciones de trabajadores?</h3>
         <p>SquareNet automatiza el cálculo y los documentos de salida, con los datos que ya tienes en la nómina.</p>
         <div class="cta-row">
