@@ -6,7 +6,7 @@
 // cada bloque de anuncios en el data-ad-slot de su <aside class="ad-slot"> en la página. Los espacios
 // quedan ocultos hasta que el visitante acepta las cookies y Google sirve un anuncio.
 (function () {
-  var GA_ID = '';
+  var GA_ID = 'G-YXFQYPL4PF';
   var ADSENSE_CLIENT = '';
   var KEY = 'sqn-consent'; // 'granted' | 'denied'
 
