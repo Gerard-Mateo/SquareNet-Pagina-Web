@@ -25,6 +25,12 @@
   .blog-intro{margin-top:var(--space-6);max-width:720px}
   .blog-intro p{font-size:17px;opacity:.85}
 
+  .news-strip{display:flex;align-items:center;gap:var(--space-4);margin-top:var(--space-6);padding:var(--space-4) var(--space-6);background:var(--color-accent-100);border-left:3px solid var(--color-accent);border-radius:var(--radius-sm);color:var(--color-text);text-decoration:none;transition:background .2s ease}
+  .news-strip:hover{background:var(--color-accent-200,#cdeeff)}
+  .ns-k{font-family:var(--font-heading);font-weight:700;color:var(--color-accent-700);white-space:nowrap}
+  .ns-t{flex:1;font-size:15px;color:var(--color-neutral-700)}
+  .news-strip i{font-style:normal;color:var(--color-accent-700)}
+  @media (max-width:640px){.news-strip{flex-wrap:wrap;gap:var(--space-2)}.news-strip i{display:none}}
   .blog-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-6)}
   .chip{font:inherit;font-size:14px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;
     color:var(--color-text);background:transparent;border:1px solid var(--color-divider);border-radius:var(--radius-md);
@@ -167,6 +173,8 @@
       <li><a href="utilidades-15-por-ciento-ecuador.html#calculadora"><span class="tl-n">07</span><span class="tl-b"><strong>Utilidades</strong><span>Cuánto te toca del 15 % y cuánto te llega después de descuentos.</span></span><i aria-hidden="true">→</i></a></li>
       </ol>
     </section>
+
+    <a class="news-strip" href="novedades.html"><span class="ns-k">Novedades</span><span class="ns-t">Cambios del SRI, el IESS y el Ministerio del Trabajo, explicados en corto</span><i aria-hidden="true">→</i></a>
 
     <div class="blog-filters" role="group" aria-label="Filtrar artículos por tema">
       <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">Todos <span>12</span></button>
