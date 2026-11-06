@@ -222,6 +222,7 @@
         <fieldset class="lead-f"><legend>¿Cuántos colaboradores tiene?<span class="req" aria-hidden="true">*</span></legend><div class="lead-opts"><label><input type="radio" name="size" value="50–100"><span>50–100</span></label><label><input type="radio" name="size" value="100–250"><span>100–250</span></label><label><input type="radio" name="size" value="250–500"><span>250–500</span></label><label><input type="radio" name="size" value="500–1000"><span>500–1000</span></label><label><input type="radio" name="size" value="1000–2000"><span>1000–2000</span></label><label><input type="radio" name="size" value="2000+"><span>2000+</span></label></div></fieldset>
         <fieldset class="lead-f"><legend>¿Qué le interesa? <small>(opcional)</small></legend><div class="lead-opts"><label><input type="checkbox" name="need" value="Nómina"><span>Nómina</span></label><label><input type="checkbox" name="need" value="Asistencia"><span>Asistencia</span></label><label><input type="checkbox" name="need" value="Recursos Humanos"><span>Recursos Humanos</span></label><label><input type="checkbox" name="need" value="Autoservicio"><span>Autoservicio</span></label><label><input type="checkbox" name="need" value="Otro"><span>Otro</span></label></div><div class="lead-other" id="lf-other-wrap" hidden><label for="lf-other">¿Qué le gustaría mejorar?</label><input type="text" id="lf-other" name="other" maxlength="200" placeholder="Ej.: control de horas extras"></div></fieldset>
         <div class="lead-f"><label for="lf-msg">Comentarios <small>(opcional)</small></label><textarea id="lf-msg" name="msg" rows="3" maxlength="600" placeholder="Cualquier cosa que quieras contarnos"></textarea></div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <p class="lead-err" id="leadErr" role="alert" hidden></p>
         <p class="lead-success" id="leadSuccess" role="status" aria-live="polite" hidden></p>
         <div class="lead-actions">
@@ -442,7 +443,8 @@
         data.append('Colaboradores', size);
         data.append('Intereses', needs);
         if (v('msg')) data.append('Comentarios', v('msg'));
-        data.append('subject', 'Cotización SquareNet - ' + v('company'));
+        data.append('_subject', 'Cotización SquareNet - ' + v('company'));   // Formspree usa _subject como asunto del correo
+        data.append('_gotcha', f._gotcha.value);   // trampa anti-spam de Formspree: si un robot la llena, el envío se descarta
 
         sending = true;
         submit.disabled = true;
@@ -456,6 +458,7 @@
             err.hidden = false;
             return;
           }
+          form.reset(); otherWrap.hidden = true;   // vaciar para que un segundo clic no mande la misma solicitud
           success.textContent = 'Tu solicitud fue enviada. Gracias por contactarnos.';
           success.hidden = false;
         } catch (error) {
