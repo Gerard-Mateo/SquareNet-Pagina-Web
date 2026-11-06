@@ -7,6 +7,9 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
+# 0) AutoSSL valida el certificado por http en /.well-known/: que ninguna regla de abajo lo toque
+RewriteRule ^\.well-known/ - [L]
+
 # 1) Páginas del sitio anterior que ya no existen: 301 directo a la versión principal (un solo salto)
 RewriteRule ^clientes\.html$ https://www.squarenet.com.ec/#clientes [NC,NE,R=301,L]
 RewriteRule ^lector(es|ZK|HandPunch)\.html$ https://www.squarenet.com.ec/moduloac.html#dispositivos [NC,NE,R=301,L]

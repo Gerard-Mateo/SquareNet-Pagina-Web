@@ -70,7 +70,7 @@ Cada página nueva o rediseñada debe reusar estos tokens/componentes en vez de 
 
 ## Servidor (.htaccess)
 
-`.htaccess` (cPanel/Apache, sin Cloudflare; nov 2026) en la raíz: fuerza **https://www.squarenet.com.ec** (solo para ese dominio, así la URL temporal del cPanel sigue sirviendo para probar), `ErrorDocument 404 /404.html` (por eso `404.html` lleva `<base href="/">`) y 301 de las páginas del sitio anterior que ya no existen: `clientes.html` → `/#clientes`, `lectores.html`/`lectorZK.html`/`lectorHandPunch.html` → `moduloac.html#dispositivos`. **No está probado en un servidor real**: al subirlo, revisar con `curl -I` (http→https, sin www→www, las 4 viejas y una URL inexistente) y que no pise un `.htaccess` que ya tenga el hosting. `.gitattributes` lo mantiene con saltos de línea LF. El sitio anterior no tenía `robots.txt` ni `sitemap.xml`.
+`.htaccess` (cPanel/Apache, sin Cloudflare; nov 2026) en la raíz: fuerza **https://www.squarenet.com.ec** (solo para ese dominio, así la URL temporal del cPanel sigue sirviendo para probar), `ErrorDocument 404 /404.html` (por eso `404.html` lleva `<base href="/">`) una excepción para `/.well-known/` antes de todo (AutoSSL valida por http y fallaría al renovar el certificado) y 301 de las páginas del sitio anterior que ya no existen: `clientes.html` → `/#clientes`, `lectores.html`/`lectorZK.html`/`lectorHandPunch.html` → `moduloac.html#dispositivos`. **No está probado en un servidor real**: al subirlo, revisar con `curl -I` (http→https, sin www→www, las 4 viejas y una URL inexistente) y que no pise un `.htaccess` que ya tenga el hosting. `.gitattributes` lo mantiene con saltos de línea LF. El sitio anterior no tenía `robots.txt` ni `sitemap.xml`.
 
 ## Cookies y analítica
 
