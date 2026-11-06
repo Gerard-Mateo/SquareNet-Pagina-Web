@@ -122,8 +122,8 @@
     .feature-slide-kicker,.feature-slide-copy h2,.feature-slide-copy .feature-slide-lead{opacity:1!important}
   }
   .carousel-dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:8px;z-index:2}
-  .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
-  .carousel-dot[aria-current="true"]{background:#fff}
+  .carousel-dot{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer;transition:transform .35s cubic-bezier(.3,1.6,.5,1),background-color .2s}
+  .carousel-dot[aria-current="true"]{background:#fff;transform:translateY(-6px)}  /* el punto activo sube (pedido del cliente) */
   /* en pantallas táctiles los puntos del carrusel y «Explorar los módulos» tienen zona de toque de ~40 px (el punto se ve igual de chico) */
   @media (pointer:coarse){.carousel-dots{gap:16px}.carousel-dot{position:relative}.carousel-dot::after{content:"";position:absolute;inset:-9px}.showcase-more{min-height:44px}}
   /* zona de clic de las flechas: todo el alto y --arw de ancho (pedido del cliente: «que el alcance sea mucho mayor»); puede pasar sobre el margen del texto porque las diapositivas no tienen enlaces */
